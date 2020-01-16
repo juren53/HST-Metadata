@@ -1,8 +1,8 @@
 # HST-Metadata
 HST metadata project
 
-This project is about embedding medtadata in media files at the Harry S. Truman Presidental Library.
+The purpose of this project is adapt and build tools that can embed medtadata in media files at the Harry S. Truman Presidental Library.
 
-Media files include photos, audio and video files.
+Media files consist of photos, audio and video files. 
 
-Developing proceudres and photos are the initial target
+The initial focus of the project is the photo collection to be followed by audio files and finally video files. 
