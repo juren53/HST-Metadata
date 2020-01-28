@@ -5,4 +5,4 @@ The purpose of this project is adapt and build tools that can embed metadata in 
 
 The initial focus of the project is the photo collection to be followed by audio files and finally video files. 
 
-This work is being under the direction of Laurie Austin, Audiovisual Archives, Harry S. Truman Presidential Library.
+This work is under the direction of Laurie Austin, Audiovisual Archives, Harry S. Truman Presidential Library.
