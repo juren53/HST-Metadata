@@ -1,0 +1,27 @@
+Jim U'Ren <jim.uren@gmail.com>
+	
+Nov 26, 2019, 12:02 PM
+	
+to Laurie, bcc: me
+Hi Laurie - - 
+
+Below is my response the questions raised by Kevin McCarthy at NARA.  This is from my point of view which may or may not be on point.
+
+The general requirement of  :
+
+    To automate the process of embedding metadata in AV digital assets.  
+    Initial work on digital photos but eventually, digital audio and video files.
+
+Specific requirement:
+
+    Be able to develop and run scripts/programs to automate the metadata embedding process.
+
+Rational for Windows Subsystem for Linux (WSL) request:
+
+    Some open source metadata tools are available only for Linux platform 
+
+    In testing metadata tools available in both Linux and Windows formats,  Linux bash shell (WSL)  out performed exiftool in Windows 10 command window.   This would likely impact performance on large batch jobs.
+
+Bottom line is we are making progress using Windows 10.  There is an opportunity to make additional progress using WSL with some possible long term benefits.  
+
+I could go into more detail if you like.  Let me know if you have any questions
