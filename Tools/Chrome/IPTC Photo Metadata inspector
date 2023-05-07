@@ -1,0 +1,8 @@
+Overview
+
+Right-click on any image and select "View IPTC Photo Metadata". IPTC's GetPMD tool shows all metadata embedded in the image.
+Many images on the web contain embedded metadata such as creator, location, copyright and licensing information, even people and products depicted.
+
+IPTC's Photo Metadata Inspector tool lets you see embedded metadata in many image files. For eligible images, a context menu will appear when you right-click on the image. Select "View IPTC Photo Metadata" and you will be taken to IPTC's Get Photo Metadata (GetPMD) tool which will display all metadata embedded in the image file.
+
+Free tool - - available in Chrome online store
