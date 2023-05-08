@@ -1,0 +1,33 @@
+#!/bin/bash
+# print IPTC "all" tags for a files
+
+cd /home/juren/Projects/HST-Metadata/
+exiftool $1
+
+==========================================================
+#!/bin/bash
+# print IPTC "all" tags for a files
+
+cd /home/juren/Projects/HST-Metadata/
+exiftool -IPTC:all *.tif
+
+==========================================================
+
+List Location tags for all TIF files in a directory:
+
+exiftool -Sub-location *.tif
+
+Write Location tags for all TIF files in a directory:
+
+exiftool -Sub-location="Harry S. Truman Library & Museum" -City="Independence" -Province-State="Missouri" -Country-PrimaryLocationName="USA" *.tif
+
+=========================================================
+
+
+List Copyright Notice to all TIF files in a directory:
+
+exiftool -CopyrightNotice *.tif
+
+Write Copyright Notice to all TIF files in a directory:
+
+exiftool -CopyrightNotice="Public Domain - This item is in the public domain and can be used freely without further permission.  Please credit the photographer and Library in publication." *.tif
