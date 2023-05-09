@@ -1,0 +1,22 @@
+from https://smarnach.github.io/pyexiftool/
+
+<h2>PyExifTool – A Python wrapper for Phil Harvey’s ExifTool</h2>
+PyExifTool is a Python library to communicate with an instance of Phil Harvey’s excellent ExifTool command-line application. The library provides the class ExifTool that runs the command-line tool in batch mode and features methods to send commands to that program, including methods to extract meta-information from one or more image files. Since exiftool is run in batch mode, only a single instance needs to be launched and can be reused for many queries. This is much more efficient than launching a separate process for every single query.
+
+The source code can be checked out from the github repository with
+
+git clone git://github.com/smarnach/pyexiftool.git
+Alternatively, you can download a tarball. There haven’t been any releases yet.
+
+PyExifTool is licenced under GNU GPL version 3 or later.
+
+Example usage:
+
+import exiftool
+
+files = ["a.jpg", "b.png", "c.tif"]
+with exiftool.ExifTool() as et:
+    metadata = et.get_metadata_batch(files)
+for d in metadata:
+    print("{:20.20} {:20.20}".format(d["SourceFile"],
+                                     d["EXIF:DateTimeOriginal"]))
