@@ -1,4 +1,4 @@
-HST Photo Metadata Process
+...HST Photo Metadata Process...
 
 
  - Create IPTC metadata set for HST photos
