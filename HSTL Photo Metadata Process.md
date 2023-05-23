@@ -2,6 +2,7 @@
 
 
  - <h4>Create IPTC metadata set for HST photos</h4>
+   HSTL's IPTC tag set
   ```
      - Caption-Abstract                : {description} Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
      - Writer-Editor                   : {archivist/editor} J. U'Ren
