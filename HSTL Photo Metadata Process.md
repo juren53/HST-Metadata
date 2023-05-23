@@ -18,7 +18,7 @@
        Province-State                  : Missouri
        Country-Primary Location Name   : USA
        Copyright Notice                : Public Domain - This item is in the public domain and can be used freely without further permission.
-       ```
+```
 
  - Add IPTC metadata tags to TIFF images
 
