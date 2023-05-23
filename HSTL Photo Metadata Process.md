@@ -3,14 +3,14 @@
 
  - <h4>Create IPTC metadata set for HST photos</h4>
   ```
-     - Caption-Abstract                : Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
-     - Writer-Editor                   : J. U'Ren
-     - Headline                        : 2018 Harry's Hop n' Hunt
-     - By-line                         : Ed Autry
-     - By-line Title                   : NARA
-     - Credit                          : Ed Autry, NARA, Harry S. Truman
-     - Source                          : RG 64
-     - Object Name                     : 2010-365
+     - Caption-Abstract                : {description} Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
+     - Writer-Editor                   : {archivist/editor} J. U'Ren
+     - Headline                        : {title} 2018 Harry's Hop n' Hunt
+     - By-line                         : {photographer} Ed Autry
+     - By-line Title                   : {   } NARA
+     - Credit                          : {   } Ed Autry, NARA, Harry S. Truman
+     - Source                          : {   } RG 64
+     - Object Name                     : {Accession No} 2010-365
      - Date Created                    : 2018:06:14
      - Time Created                    : 17:50:32+00:00
      - City                            : Independence
