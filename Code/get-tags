@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+#---------------------get-tags.py-------------------------------
+#This code reads specific IPTC metadata tags from an image file
+# provided as a command link argument.
+# e.g. python3 get-tags.py {path/filename} 
+#  
+# 
+#----------------------------------------------------------------
+
+
+import subprocess
+import sys
+
+
+# Get the file name from the command line
+input_file = sys.argv[1]
+
+
+def get_exif_data(image_path):
+    # Execute exiftool command to extract metadata
+    result = subprocess.run(['exiftool', '-Title', '-Headline','-Description', '-Instructions', '-Source', '-Credit',  '-Writer-Editor', '-Creator', image_path], capture_output=True, text=True)
+
+    # Check if exiftool executed successfully
+    if result.returncode == 0:
+        # Extract and print the output
+        output = result.stdout
+        print(output)
+    else:
+        print("Error retrieving metadata")
+
+# Path to the JPG file
+image_file = input_file
+
+# Call the function to extract and print the EXIF data
+get_exif_data(image_file)
+
