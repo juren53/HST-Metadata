@@ -1,0 +1,26 @@
+# copies metadata tags from TIFF files to similarly named JPEG files
+exiftool -ext tif -overwrite_original -TagsFromFile %d%f.tif "-all:all>all:all" -r -ext jpg /path/to/images
+
+
+==========================================================================================================================
+
+
+# command that converts a TIFF image to JPEG while modifying the JPEG to 800x600 format and maintaining the aspect ratio:
+ffmpeg -i input.tif -vf "scale=w=800:h=600:force_original_aspect_ratio=decrease,pad=800:600:(ow-iw)/2:(oh-ih)/2" output.jpg
+
+
+ffmpeg -i 2022-747.tif -vf "scale=w=800:h=600:force_original_aspect_ratio=decrease,pad=800:600:(ow-iw)/2:(oh-ih)/2" 2022-747.jpg
+
+
+==========================================================================================================================
+
+
+ffmpeg -i input.jpg -i watermark.png -filter_complex "overlay=10:10" output.jpg
+
+
+ffmpeg -i 2022-747.jpg -i watermark.png -filter_complex "overlay=10:10" 2022-747-wm.jpg
+
+
+
+
+
