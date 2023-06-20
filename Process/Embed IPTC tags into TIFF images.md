@@ -14,7 +14,7 @@ Note: the top row [column headers] of the CSV file needs to be edited to reflect
 - Source
 - Caption-Abstract
 
-Once the CSV file headers have been edited, execute the following command from the Windows CMD window in the directory with all the TIFF images and the edited CSV file:
+Once the CSV file headers have been edited, execute the following command from the Windows CMD window in the directory with all the TIFF images and the edited CSV file and the Python program, *write-tags-from-csv.py* :
 
 ```
 python3 write-tags-from-csv.py
