@@ -19,7 +19,7 @@ JPGs to the NARA catalog for public use.
 ### Process steps:
 
 1. Export metadata as CSV.
-2. Gather relevant TIFF files and embed them with CSV metadata. Save TIFFs.
-3. Downsize the TIFF files to 800 x 800 pixel JPGs, retaining the metadata. Save JPGs.
+2. Gather relevant TIFF files and embed them with CSV metadata
+3. Scale TIFF images to 800 x 800 pixel JPGs, retaining the metadata
 4. Upload the JPGs to NARA catalog.
 
