@@ -15,4 +15,4 @@ Process steps:
 - convert TIFFS to JPEGs
 - overlay copyright watermarks onto JPEGs as needed
 - copy EXIF tags from TIFFs to JPEGs
-- upload TIFFs to NARA system
+- upload JEGSs to NARA system
