@@ -2,9 +2,9 @@
 
 This command takes all TiFFs in the current directory 
 
-scales the image to 800x800
-maintains the aspect ratio
-converts and saves the file as a JPEG image
+- scales the image to 800x800
+- maintains the aspect ratio
+- converts and saves the file as a JPEG image
 
 Using a Windows for loop,  this command executes against every .tif file in the current directory. 
 
