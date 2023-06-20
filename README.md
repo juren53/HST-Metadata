@@ -18,8 +18,8 @@ JPGs to the NARA catalog for public use.
 
 ### Process steps:
 
-1. Export metadata as CSV.
+1. Export HST PDB metadata in CSV file.
 2. Gather relevant TIFF files and embed them with CSV metadata
 3. Scale TIFF images to 800 x 800 pixel JPGs, retaining the metadata
-4. Upload the JPGs to NARA catalog.
+4. Upload the JPGs to NARA Catalog.
 
