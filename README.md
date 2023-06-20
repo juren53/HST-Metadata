@@ -11,7 +11,7 @@ This work is under the direction of Laurie Austin, Audiovisual Archives, Harry S
 
 Process steps:
 - create CSV file from HST PDB 
-- embedded IPTC tags to TIFFs extracting IPTC info from HST PDB CSV file
+- embed IPTC tags to TIFFs extracting IPTC info from HST PDB CSV file
 - convert TIFFS to JPEGs
 - overlay copyright watermarks onto JPEGs as needed
 - copy EXIF tags from TIFFs to JPEGs
