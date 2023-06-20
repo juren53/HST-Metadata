@@ -4,7 +4,7 @@ Using the CSV file output from HST PDB, run the Python3 program, write-tags-from
 ```
 python3 write-tags-from-csv.py
 ```
-The program list each file found in the CSV file to the screen
+The program lists each file found in the CSV file to the screen
 
 Note: the top row [the column headers] of the CSV file needs to be edited to reflect the corresponding IPTC tag names:
 
