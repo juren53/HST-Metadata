@@ -9,10 +9,17 @@ This work is under the direction of Laurie Austin, Audiovisual Archives, Harry S
 
 ## Phase 1  -  Photo Metadata and Uploads to NARA
 
-Process steps:
-- create CSV file from HST PDB 
-- embed IPTC tags to TIFFs extracting IPTC info from HST PDB CSV file
-- convert TIFFS to JPEGs
-- overlay copyright watermarks onto JPEGs as needed
-- copy EXIF tags from TIFFs to JPEGs
-- upload JEGSs to NARA system
+### Project Overview:
+
+The goal of this project is to find an automated way to use pre-existing metadata from the
+Truman Library photo database, embed certain metadata into fields of the high resolution TIFFs,
+downsize the images to 800x800 pixel JPGs (retaining the metadata), and then upload the
+JPGs to the NARA catalog for public use.
+
+### Process steps:
+
+1. Export metadata as CSV.
+2. Gather relevant TIFF files and embed them with CSV metadata. Save TIFFs.
+3. Downsize the TIFF files to 800 x 800 pixel JPGs, retaining the metadata. Save JPGs.
+4. Upload the JPGs to NARA catalog.
+
