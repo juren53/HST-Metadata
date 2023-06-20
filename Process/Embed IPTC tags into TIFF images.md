@@ -6,7 +6,7 @@ python3 write-tags-from-csv.py
 ```
 The program lists each file found in the CSV file to the screen
 
-Note: the top row [the column headers] of the CSV file needs to be edited to reflect the corresponding IPTC tag names:
+Note: the top row [column headers] of the CSV file needs to be edited to reflect the corresponding IPTC tag names:
 
 - ObjectName
 - Headline
