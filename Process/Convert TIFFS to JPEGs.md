@@ -6,7 +6,7 @@ This command takes all TiFFs in the current directory
 - maintains the aspect ratio
 - converts and saves the file as a JPEG image
 
-Using a Windows for loop,  this command executes against every .tif file in the current directory. 
+Using a Windows for loop,  this command executes against every TIFF file in the current directory. 
 
 ```
 for %i in (*.tif) do ffmpeg -i "%i" -vf "scale=w=800:h=800:force_original_aspect_ratio=decrease,pad=800:600:(ow-iw)/2:(oh-ih)/2" "converted_%~ni.jpg"
