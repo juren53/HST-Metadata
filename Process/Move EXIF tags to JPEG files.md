@@ -5,5 +5,5 @@ The following command copies all EXIF tags, which includes IPTC tags, from TIFF 
 This assumes the TIFF and corresponding JPEG files are in the current directory.
 
 ```
-exiftool -ext tif -overwrite_original -TagsFromFile %d%f.tif "-all:all>all:all" -r -ext jpg /path/to/images
+exiftool -ext tif -overwrite_original -TagsFromFile %d%f.tif "-all:all>all:all" -r -ext jpg .
 ```
