@@ -7,7 +7,7 @@ The project consists of three phases. The initial focus is the photo collection 
 
 This work is under the direction of Laurie Austin, Audiovisual Archives, Harry S. Truman Presidential Library.
 
-## Phase 1  -  Photo Metadata and Uploads to NARA
+## Phase 1  -  Photo Metadata and Uploads to NARA Catalogue
 
 ### Project Overview:
 
