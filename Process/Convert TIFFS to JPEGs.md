@@ -18,6 +18,6 @@ The output filename is prefixed with "converted_" to prevent overwriting the ori
 
 Note:
 
-# Bash command to convert all TIFFs in a directory to JPEGs with max 800 pixels in either X or Y axis
+#### Bash command to convert all TIFFs in a directory to JPEGs with max 800 pixels in either X or Y axis
 for %i in (*.tif) do ffmpeg -i "%i" -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" "converted_%~ni.jpg"
 
