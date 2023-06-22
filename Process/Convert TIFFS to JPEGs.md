@@ -1,10 +1,10 @@
 # Convert TIFFs to JPEGs 
 
-This command takes all TiFFs in the current directory 
+This command runs against all TiFFs in the current directory 
 
-- scales the image to 800 pixels is the maximum dimension
-- maintains the aspect ratio
-- converts and saves the file as a JPEG image
+- scales the original TIFF image ensuring 800 pixels is the maximum dimension, horizontal or vertical
+- maintains the aspect ratio of the original image
+- converts and saves the image as a JPEG file
 
 Using a Windows for loop,  this command executes against every TIFF file in the current directory. 
 
