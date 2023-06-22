@@ -16,8 +16,3 @@ This loop iterates over all files in the current directory with the .tif extensi
 
 The output filename is prefixed with "converted_" to prevent overwriting the original file, and the %~ni parameter expands to the filename without the extension.
 
-Note:
-
-#### Bash command to convert all TIFFs in a directory to JPEGs with max 800 pixels in either X or Y axis
-for %i in (*.tif) do ffmpeg -i "%i" -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" "converted_%~ni.jpg"
-
