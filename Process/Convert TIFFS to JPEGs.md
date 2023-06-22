@@ -9,7 +9,8 @@ This command takes all TiFFs in the current directory
 Using a Windows for loop,  this command executes against every TIFF file in the current directory. 
 
 ```
-for %i in (*.tif) do ffmpeg -i "%i" -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" "converted_%~ni.jpg"
+for %%i in (*.tif) do ffmpeg -i "%%i" -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" "converted_%%~ni.jpg"
+
 ```
 
 This loop iterates over all files in the current directory with the .tif extension ((*.tif)), and then runs the ffmpeg command with the corresponding input/output filenames.
