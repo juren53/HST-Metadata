@@ -27,7 +27,7 @@
  - Convert TIFF images to JPEG format
 
 
- - Scale JPEG images to  800x600
+ - Scale JPEG images to  max 800 pixels on X or Y axis
 
 
  - Add IPTC metadata tags to JPEG images
