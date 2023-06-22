@@ -2,14 +2,14 @@
 
 This command takes all TiFFs in the current directory 
 
-- scales the image to 800x800
+- scales the image to 800 pixels is the maximum dimension
 - maintains the aspect ratio
 - converts and saves the file as a JPEG image
 
 Using a Windows for loop,  this command executes against every TIFF file in the current directory. 
 
 ```
-for %i in (*.tif) do ffmpeg -i "%i" -vf "scale=w=800:h=800:force_original_aspect_ratio=decrease,pad=800:600:(ow-iw)/2:(oh-ih)/2" "converted_%~ni.jpg"
+for %i in (*.tif) do ffmpeg -i "%i" -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" "converted_%~ni.jpg"
 ```
 
 This loop iterates over all files in the current directory with the .tif extension ((*.tif)), and then runs the ffmpeg command with the corresponding input/output filenames.
