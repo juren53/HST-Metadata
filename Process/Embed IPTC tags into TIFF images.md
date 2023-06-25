@@ -12,6 +12,8 @@ Note: the first row of your CSV file must include the exact column headers liste
 - Writer-Editor
 - Source
 - Caption-Abstract
+- By-line
+- By-lineTitle
 
 Once the CSV file headers have been edited, execute the following command from the Windows CMD window in the directory with (1) all the TIFF images, (2) the edited CSV file, and (3) the Python program, *write-tags-from-csv.py* :
 
