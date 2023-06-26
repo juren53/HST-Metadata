@@ -3,7 +3,8 @@
 
  - <h4>Create IPTC metadata set for HST photos</h4>
    HSTL's IPTC tag set
-  ```    IPTC Tag Names                   HSTL PDB Labels
+  ```
+           IPTC Tag Names                   HSTL PDB Labels
      - Caption-Abstract                : {description} e.g. Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
      - Writer-Editor                   : {archivist/editor} e.g. LAA
      - Headline                        : {title} e.g. 2018 Harry's Hop n' Hunt
