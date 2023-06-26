@@ -8,24 +8,49 @@
 # 
 #
 # Created Sat 17 Jun 2023 03:34:20 AM CDT by JAU
+# Updated Mon 26 Jun 2023 12:30:58 PM CDT  Added error trap for missing TIFF from CSV file
 #----------------------------------------------------------------
 
 import csv
 import exiftool
+import os
 
-with open("OriginalTIFs.csv", newline='') as csvfile:
+cwd = os.getcwd()     # Gets current working directory
+
+directory = os.getcwd() # Sets the working directory
+
+# Clear the screen
+os.system('cls' if os.name == 'nt' else 'clear')
+
+# Print a message
+print("write-tags-from-csv.py ver 0.2  updated Mon 26 Jun 2023 12:30:58 PM CDT")
+print(" ")
+print("This program embeds IPTC tags into TIFF files listed in a CSV file generated from the HST PDB.")
+print("It requires this Python program to be in the same directory with CSV file and all the TIFFs ")
+print("listed in the CSV file.")
+print(" ")
+print("Press Enter to continue...")
+
+# Wait for the space bar to be pressed
+input()
+
+
+with open("sample-tiffs.csv", newline='') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-
         filename = f"{row['ObjectName']}.tif"
+        file_path = os.path.join(directory, filename)  # Construct the full file path
+        if not os.path.isfile(file_path):
+            print(f"***** File {filename} not found in directory {directory} ********")
+            continue
         print(filename)
         with exiftool.ExifTool() as et:
-            et.execute(b"-Headline=" + row["Headline"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-Credit=" + row["Credit"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-By-line=" + row["By-line"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-SpecialInstructions=" + row["SpecialInstructions"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-ObjectName=" + row["ObjectName"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-Writer-Editor=" + row["Writer-Editor"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-Source=" + row["Source"].encode('utf-8'), filename.encode('utf-8'))
-            et.execute(b"-Caption-Abstract=" + row["Caption-Abstract"].encode('utf-8'), filename.encode('utf-8'))
+            et.execute(b"-Headline=" + row["Headline"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-Credit=" + row["Credit"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-By-line=" + row["By-line"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-SpecialInstructions=" + row["SpecialInstructions"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-ObjectName=" + row["ObjectName"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-Writer-Editor=" + row["Writer-Editor"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-Source=" + row["Source"].encode('utf-8'), file_path.encode('utf-8'))
+            et.execute(b"-Caption-Abstract=" + row["Caption-Abstract"].encode('utf-8'), file_path.encode('utf-8'))
 
