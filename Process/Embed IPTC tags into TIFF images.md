@@ -1,4 +1,4 @@
-# Embed IPTC tags into TIFF images
+# Embed IPTC tags into TIFFs using CSV file
 
 Using the CSV file output from HST PDB, the Python3 program, *write-tags-from-csv.py*, extracts IPTC tags from the CSV file and embeds the IPTC tags into each TIFF file in the current directory
 
