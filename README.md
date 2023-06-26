@@ -24,3 +24,5 @@ JPGs to the NARA catalog for public use.
 4. Add copyright overlay to JPEGs as required
 5. Upload the JPGs to NARA Catalog.
 
+More detail in LAA's Project Overview at:
+https://docs.google.com/document/d/1aHGan-E0419TIMq5b5rE3CMicFPkbD7ik_PmYKqgG6I/edit
