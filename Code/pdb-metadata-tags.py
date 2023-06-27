@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
+# ############   pdb-metadata-tags.py  ################
 #  Extracts metadata from HST Photo Database for the AN 
 #  provided as the first argument on the command line and
 #  embeds the IPTC tags into the corresponding TIFF file.
@@ -7,7 +8,9 @@
 #  Note: The file 72-3113.tif needs to bin the current directory
 #  Created  Wed 27 Nov 2019 03:58:49 PM CST	
 #  Updated	Mon 26 Jun 2023 09:44:14 PM CDT  added section 
-#         embed IPTC tags to the corresponding TIFF file													 
+#         embed IPTC tags to the corresponding TIFF file
+#  Updated  Tues 27 Jun 2023 07:11:32 AM CDT added Byline 
+#         Source tags 													 
 #-----------------------------------------------------------
 
 import requests
@@ -120,6 +123,10 @@ WriterEditor = "LAA"
 print("Writer-Editor :" + WriterEditor)
 print(" ")
 
+By_line = "Photographers name goes here "
+Source = " Name of collection goes here "
+#By-lineTitle = 'Name of Institutional Creator goes here'
+
 with exiftool.ExifTool() as et:
     et.execute(b"-Headline=" + Headline.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Credit=" + Credit.encode('utf-8'), filename.encode('utf-8'))
@@ -127,8 +134,10 @@ with exiftool.ExifTool() as et:
     et.execute(b"-ObjectName=" + ObjectName.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Caption-Abstract=" + CaptionAbstract.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Writer-Editor=" + WriterEditor.encode('utf-8'), filename.encode('utf-8'))
-'''
     et.execute(b"-By-line=" + By_line.encode('utf-8'), filename.encode('utf-8'))
+    et.execute(b"-Source=" + Source.encode('utf-8'), filename.encode('utf-8'))
+'''
+    et.execute(b"-By-lineTitle=" + By-lineTitle.encode('utf-8'), filename.encode('utf-8'))
 
 
     et.execute(b"-Source=" + Source.encode('utf-8'), filename.encode('utf-8'))
