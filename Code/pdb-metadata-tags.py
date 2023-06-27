@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
 #  Extracts metadata from HST Photo Database for the AN 
-#  provided as the first argument on the command line.
+#  provided as the first argument on the command line and
+#  embeds the IPTC tags into the corresponding TIFF file.
 #  Example: python(3) pdb-metadata-2.py 72-3113
 #  Note: The file 72-3113.tif needs to bin the current directory
 #  Created  Wed 27 Nov 2019 03:58:49 PM CST	
