@@ -1,0 +1,7 @@
+
+    alias exif-all='exiftool * | less'
+    alias exif='exiftool $1 | less'
+    alias iptc-all='exiftool -iptc:all * | less'
+    alias iptc='exiftool -iptc:all $1'
+    alias write-iptc='/home/juren/Projects/HST-Metadata/Code/pdb-metadata-tags.py $1'
+
