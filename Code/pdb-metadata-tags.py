@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
-# ############   pdb-metadata-tags.py  ################
+# ############   pdb-metadata-tags.py  v0.3 ################
 #  Extracts metadata from HST Photo Database for the AN 
 #  provided as the first argument on the command line and
 #  embeds the IPTC tags into the corresponding TIFF file.
 #  Example: python(3) pdb-metadata-2.py 72-3113
 #  Note: The file 72-3113.tif needs to bin the current directory
 #  Created  Wed 27 Nov 2019 03:58:49 PM CST	
-#  Updated	Mon 26 Jun 2023 09:44:14 PM CDT  added section 
-#         embed IPTC tags to the corresponding TIFF file
-#  Updated  Tues 27 Jun 2023 07:11:32 AM CDT added Byline 
-#         Source tags 													 
+#  Updated	Mon 26 Jun 2023 09:44:14 PM CDT  added section embed IPTC tags to the corresponding TIFF file
+#  Updated  Tues 27 Jun 2023 07:11:32 AM CDT added Byline Source tags 	
+#  Updated  Fri 30 June 2023 08:45:15 AM CDT added date conversions	 v0.2
+#  Updated 	Sat 01 Jul 2023 07:37:56 AM CDT changed date tag to Date Created [IPTC]										 
 #-----------------------------------------------------------
 
 import requests
@@ -26,21 +26,10 @@ import re
 #from datetime import datetime
 
 
-# et = exiftool.ExifTool()
+filename = sys.argv[1]       # file to be tagged entered as a commandline argument
 
-#accno = "72-3113"   # - entry with three element date
-#accno = "95-22-87"  # - entry with two element date
-#accno = "2009-1504" # - entry with single element date
-#accno = "2006-487"  # - entry with no date 
-#accno = "80-16"     # - entry with no date or rights statement
+ObjectName = os.path.splitext(filename)[0]   # Objectname extracted from filename
 
-#ObjectName = sys.argv[1]
-
-filename = sys.argv[1]
-
-ObjectName = os.path.splitext(filename)[0]
-
-#filename = ObjectName + ".tif"
 
 url = 'https://www.trumanlibrary.gov/photograph-records/' + ObjectName
 
@@ -55,8 +44,9 @@ print(" ")
 #### Extract Title #####
 
 Headline = str(soup.h1.text).strip()
-#print("HeadLine: " + str(soup.h1.text).strip())
-#print("HeadLine: " + Headine)
+
+print("HeadLine: " + Headline)
+print(" ")
 
 alltext = soup.get_text()
 
@@ -66,7 +56,7 @@ left = (alltext.find("Description"))
 right = (alltext.find("Date(s)"))
 
 CaptionAbstract = (alltext[left+11:right].strip())
-print(" ")
+
 print("Caption-Abstract: " + CaptionAbstract)
 
 #### Extracts Date #####
@@ -75,7 +65,7 @@ x = (alltext.find("Date(s)"))     # extracts text only
 
 D1=(alltext[x+12:x+30].rstrip())  # extracts date string as D1
 
-D2 = dateparser.parse(D1)   # parses D1 date string into date variable D2
+D2 = dateparser.parse(D1)   # parses D1 date string into date variable D2 (old method)
 
 try:
     D2 = dt.datetime(D2.year, D2.month, D2.day)
@@ -110,8 +100,11 @@ def convert_date(date_str):
 
     if date_str == 'None':  # convert NONE to 0000-00-00
         return "0000-00-00"
+  
+    if date_str == '\n\n\n\n\n\n\n\n\n\n \n\nHarry':  # convert NONE to 0000-00-00
+        return "0000-00-00"
 
-    if re.match(r'\d{4}-\d{4}', date_str):     # test for 'thru date' - YYYY - YYYY 
+    elif re.match(r'\d{4}-\d{4}', date_str):     # test for 'thru date' - YYYY - YYYY 
         year_range = date_str.split('-')
         return f"{year_range[1]}-00-00"
 
@@ -160,7 +153,7 @@ def convert_date(date_str):
         except ValueError:
             return date_str
 
-    if re.match(r'[A-Za-z]+ \d{4}', date_str):  # test for Month YYYY to YYYY-DD-00 eg. July 1948
+    elif re.match(r'[A-Za-z]+ \d{4}', date_str):  # test for Month YYYY to YYYY-DD-00 eg. July 1948
         try:
             date_object = dt.datetime.strptime(date_str, "%B %Y")
             formatted_date = date_object.strftime("%Y-%m-00")
@@ -168,7 +161,7 @@ def convert_date(date_str):
         except ValueError:
             return date_str
 
-    if re.match(r'[A-Za-z]+, \d{4}', date_str):  # test for July, 1948
+    elif re.match(r'[A-Za-z]+, \d{4}', date_str):  # test for July, 1948
         try:
             date_object = dt.datetime.strptime(date_str, "%B, %Y")
             formatted_date = date_object.strftime("%Y-%d-00")
@@ -177,7 +170,7 @@ def convert_date(date_str):
             return date_str
 
 
-    if re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
+    elif re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
         try:
             date_object = dt.datetime.strptime(date_str, "%B %d, %Y")
             formatted_date = date_object.strftime("%Y-%m-%d")
@@ -188,7 +181,7 @@ def convert_date(date_str):
     return date_str
 
 
-print(convert_date(D1))
+print("Date Created: ",convert_date(D1))
 
 Date = (convert_date(D1))
 
@@ -217,7 +210,7 @@ print("Credit: "+Credit)
 print(" ")
 #### Writer-Editor Statement #####
 
-WriterEditor = "LAA"
+WriterEditor = "  "
 
 print("Writer-Editor :" + WriterEditor)
 print(" ")
@@ -226,25 +219,19 @@ By_line = "Photographers name goes here "
 Source = " Name of collection goes here "
 #By-lineTitle = 'Name of Institutional Creator goes here'
 
-#Date = "2023-07-04"
 
 with exiftool.ExifTool() as et:
     et.execute(b"-Headline=" + Headline.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Credit=" + Credit.encode('utf-8'), filename.encode('utf-8'))
-    et.execute(b"-SpecialInstructions=" + SpecialInstructions.encode('utf-8'), filename.encode('utf-8'))
+    #et.execute(b"-SpecialInstructions=" + SpecialInstructions.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-ObjectName=" + ObjectName.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Caption-Abstract=" + CaptionAbstract.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Writer-Editor=" + WriterEditor.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-By-line=" + By_line.encode('utf-8'), filename.encode('utf-8'))
     et.execute(b"-Source=" + Source.encode('utf-8'), filename.encode('utf-8'))
-    et.execute(b"-ReleaseDate=" + Date.encode('utf-8'), filename.encode('utf-8'))
-'''
-    et.execute(b"-By-lineTitle=" + By-lineTitle.encode('utf-8'), filename.encode('utf-8'))
-
-
-    et.execute(b"-Source=" + Source.encode('utf-8'), filename.encode('utf-8'))
-
-'''
+    et.execute(b"-DateCreated=" + Date.encode('utf-8'), filename.encode('utf-8'))
+ 
+print("Metadata tags written to "+filename)
 print("Processing complete!!!")
 
 
