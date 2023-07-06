@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #---------------------date-conversion.py-------------------------------
-# This code converts dates from HST PDB to the IPTC Date format of YYY-MM-DD.
+# This code converts dates from HST PDB to the IPTC Date format of YYYY-MM-DD.
 # HST PDB has a _WIDE_ variety of date formats that this code tests for
 # in order for it to output a date that fits the YYY-MM-DD format
 # 
