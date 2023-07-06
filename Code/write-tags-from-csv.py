@@ -8,12 +8,16 @@
 # 
 #
 # Created Sat 17 Jun 2023 03:34:20 AM CDT by JAU
-# Updated Mon 26 Jun 2023 12:30:58 PM CDT  Added error trap for missing TIFF from CSV file
+# Updated Mon 26 Jun 2023 12:30:58 PM CDT  Added error trap for missing TIFF from CSV file\
+# Updated Wed 05 Jul 2023 20:20:58 PM CDT  Added date conversion routine and Date-Created tag
 #----------------------------------------------------------------
 
 import csv
 import exiftool
 import os
+import re
+import datetime as dt 
+
 
 cwd = os.getcwd()     # Gets current working directory
 
@@ -23,7 +27,7 @@ directory = os.getcwd() # Sets the working directory
 os.system('cls' if os.name == 'nt' else 'clear')
 
 # Print a message
-print("write-tags-from-csv.py ver 0.2  updated Mon 26 Jun 2023 12:30:58 PM CDT")
+print("write-tags-from-csv.py ver 0.3  updated Wed 05 Jul 2023 20:20:58 PM CDT")
 print(" ")
 print("This program embeds IPTC tags into TIFF files listed in a CSV file generated from the HST PDB.")
 print("It requires this Python program to be in the same directory with CSV file and all the TIFFs ")
@@ -44,6 +48,105 @@ with open("sample-tiffs.csv", newline='') as csvfile:
             print(f"***** File {filename} not found in directory {directory} ********")
             continue
         print(filename)
+
+        #Date = "2023-07-05"
+
+        #### Date Conversion Routine #####
+
+
+        def convert_date(date_str):
+
+            if date_str == 'None':  # convert NONE to 0000-00-00
+                return "0000-00-00"
+  
+            if date_str == '\n\n\n\n\n\n\n\n\n\n \n\nHarry':  # convert NONE to 0000-00-00
+                return "0000-00-00"
+
+            elif re.match(r'\d{4}-\d{4}', date_str):     # test for 'thru date' - YYYY - YYYY 
+                year_range = date_str.split('-')
+                return f"{year_range[1]}-00-00"
+
+            elif re.match(r'\d{1,2}/\d{1,2}/\d{2}', date_str):
+                components = date_str.split('/')
+                return f"20{components[2]}-{components[0]:0>2}-{components[1]:0>2}"
+
+            elif re.match(r'c\. ?\d{4}', date_str):            # test for circa date eg. c.1939
+                year = re.findall(r'\d{4}', date_str)[0]
+                return f"{year}-00-00"
+
+            elif re.match(r"ca\. ?\d{4}", date_str):            # test for circa date ca.1939
+                year = date_str.split(".")[1].strip()
+                return f"{year}-00-00"
+
+            elif re.match(r'\d{1,2}-[A-Za-z]{3}-\d{2}', date_str):   # test for DD-MMM-YY date
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%d-%b-%y")
+                    year = date_object.year
+                    if year > 2021:  # assuming 2021 as the cutoff year for 19xx vs. 20xx
+                        year -= 100   # Subtract 100 years if the year is greater than 2021
+                    formatted_date = date_object.strftime("%Y-%m-%d")
+                    return f"{year:0>4}-{formatted_date[5:]}"
+                except ValueError:
+                    return date_str
+
+            elif re.match(r'\d{4}', date_str):  # 1939
+                return f"{date_str}-00-00"
+
+            elif re.match(r'[A-Za-z]+, \d{2}/\d{2}/\d{4}', date_str):   #test for Monday, 03/23/1964
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%A, %m/%d/%Y")
+                    formatted_date = date_object.strftime("%Y-%m-%d")
+                    return formatted_date
+                except ValueError:
+                    return date_str
+
+            elif re.match(r'[A-Za-z]{3}-\d{2}', date_str):   # test for MMM-YY date e.g. May-62
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%b-%y")
+                    year = date_object.year
+                    if year > 2021:  # assuming 2021 as the cutoff year for 19xx vs. 20xx
+                        year -= 100   # Subtract 100 years if the year is greater than 2021
+                    formatted_date = date_object.strftime("19%y-%m-00")
+                    return formatted_date
+                except ValueError:
+                    return date_str
+
+            elif re.match(r'[A-Za-z]+ \d{4}', date_str):  # test for Month YYYY to YYYY-DD-00 eg. July 1948
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%B %Y")
+                    formatted_date = date_object.strftime("%Y-%m-00")
+                    return formatted_date
+                except ValueError:
+                    return date_str
+
+            elif re.match(r'[A-Za-z]+, \d{4}', date_str):  # test for July, 1948
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%B, %Y")
+                    formatted_date = date_object.strftime("%Y-%d-00")
+                    return formatted_date
+                except ValueError:
+                   return date_str
+
+
+            elif re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
+                try:
+                    date_object = dt.datetime.strptime(date_str, "%B %d, %Y")
+                    formatted_date = date_object.strftime("%Y-%m-%d")
+                    return formatted_date
+                except ValueError:
+                    return date_str
+
+            return date_str
+
+
+        date_str = row["SpecialInstructions"]
+
+        print("Date Created: ",convert_date(date_str))
+
+        Date = (convert_date(date_str))
+
+
+
         with exiftool.ExifTool() as et:
             et.execute(b"-Headline=" + row["Headline"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-Credit=" + row["Credit"].encode('utf-8'), file_path.encode('utf-8'))
@@ -53,4 +156,9 @@ with open("sample-tiffs.csv", newline='') as csvfile:
             et.execute(b"-Writer-Editor=" + row["Writer-Editor"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-Source=" + row["Source"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-Caption-Abstract=" + row["Caption-Abstract"].encode('utf-8'), file_path.encode('utf-8'))
+
+            et.execute(b"-DateCreated=" + Date.encode('utf-8'), file_path.encode('utf-8'))
+
+            #et.execute(b"-DateCreated=" + Date.encode('utf-8'), filename.encode('utf-8'))
+
 
