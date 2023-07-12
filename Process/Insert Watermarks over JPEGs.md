@@ -11,3 +11,18 @@ This loop iterates over all files in the current directory with the .jpg extensi
 runs the ffmpeg command with the appropriate input/output filenames.
  
 The output filename is prefixed with "watermarked_" to prevent overwriting the original file.
+
+============================================================================
+Another method of watermarking JPEGS is:
+
+1. Sort the CSV file on the CopyRightNotice column.
+
+2. Copy the list of Restricted accession numbers and paste them into a new spreadsheet.
+
+3.  With the pasted list in column A, enter the following formula: into B1
+
+         =A1 & ".jpg"
+
+4. Copy the formula in B1 for each entry in column A.
+
+5. You now have a list of JPEG filenames that you can COPY & PASTE into the IrfanView batch window and you can apply watermarks to.
