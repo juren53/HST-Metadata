@@ -13,6 +13,7 @@ runs the ffmpeg command with the appropriate input/output filenames.
 The output filename is prefixed with "watermarked_" to prevent overwriting the original file.
 
 ============================================================================
+
 Another method of watermarking JPEGS is:
 
 1. Sort the CSV file on the CopyRightNotice column.
