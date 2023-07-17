@@ -80,7 +80,7 @@ with open("sample-tiffs.csv", "r") as file:
 
 
 # Print a message
-print("write-tags-from-csv.py ver 0.62  updated Mon 17 Jul 2023 04:53:54 PM CDT ")
+print("write-tags-from-csv.py ver 0.63  updated Mon 17 Jul 2023 05:23:54 PM CDT ")
 print(" ")
 print("This Python program embeds IPTC metadata tags into TIFF files listed in a CSV file generated from the HST PDB.")
 print(" ")
