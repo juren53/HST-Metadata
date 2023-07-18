@@ -81,7 +81,7 @@ def convert_date(date_str):
         except ValueError:
             return date_str
 
-    if re.match(r'[A-Za-z]+ \d{4}', date_str):  # test for Month YYYY to YYYY-DD-00 eg. July 1948
+    elif re.match(r'[A-Za-z]+ \d{4}', date_str):  # test for Month YYYY to YYYY-DD-00 eg. July 1948
         try:
             date_object = datetime.strptime(date_str, "%B %Y")
             formatted_date = date_object.strftime("%Y-%m-00")
@@ -89,7 +89,7 @@ def convert_date(date_str):
         except ValueError:
             return date_str
 
-    if re.match(r'[A-Za-z]+, \d{4}', date_str):  # test for July, 1948
+    elif re.match(r'[A-Za-z]+, \d{4}', date_str):  # test for July, 1948
         try:
             date_object = datetime.strptime(date_str, "%B, %Y")
             formatted_date = date_object.strftime("%Y-%d-00")
@@ -98,7 +98,7 @@ def convert_date(date_str):
             return date_str
 
 
-    if re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
+    elif re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
         try:
             date_object = datetime.strptime(date_str, "%B %d, %Y")
             formatted_date = date_object.strftime("%Y-%m-%d")
