@@ -14,7 +14,7 @@
 # Updated Sun 16 Jul 2023 07:08:23 AM CDT  Removed file backups Added disk info upfront and time info on backend v0.6
 # Updated Sun 16 Jul 2023 13:32:45 PM CDT  Added lines in CSV file and TIFFs in working directory message on frontend v.061
 # Updated Mon 17 Jul 2023 04:53:54 PM CDT  Added traps for 'Ca.' dates v 0.62
-# Updated Mon 17 Jul 2023 05:25:54 PM CDT  Added logging  v 0.63
+# Updated Mon 17 Jul 2023 08:05:42 PM CDT  Added logging  v 0.63
 #----------------------------------------------------------------
 
 import csv
@@ -38,31 +38,31 @@ directory = os.getcwd() # Sets the working directory
 os.system('cls' if os.name == 'nt' else 'clear')
 
 ####################################################
+# logging screen prints to output.txt file
 
-# Configure the logging settings
-logging.basicConfig(filename='output.log', level=logging.INFO)
+os.remove("output.txt")
 
-# Create a logger instance
-logger = logging.getLogger()
+class OutputLogger:
+    def __init__(self, filename):
+        self.filename = filename
+        self.original_stdout = sys.stdout
 
-# Create a handler to log messages to the file
-file_handler = logging.FileHandler('output.log')
-file_handler.setLevel(logging.INFO)
+    def start_logging(self):
+        sys.stdout = self
 
-# Create a handler to print messages to the screen
-screen_handler = logging.StreamHandler()
-screen_handler.setLevel(logging.INFO)
+    def stop_logging(self):
+        sys.stdout = self.original_stdout
 
-# Create a formatter to specify an empty log message format (no prefix)
-empty_formatter = logging.Formatter('')
+    def write(self, text):
+        with open(self.filename, 'a') as file:
+            file.write(text)
+        self.original_stdout.write(text)
 
-# Set the empty formatter for both handlers
-file_handler.setFormatter(empty_formatter)
-screen_handler.setFormatter(empty_formatter)
+    def flush(self):
+        self.original_stdout.flush()
 
-# Add both handlers to the logger
-logger.addHandler(file_handler)
-logger.addHandler(screen_handler)
+logger = OutputLogger('output.txt')
+logger.start_logging()
 
 ####################################################
 
@@ -80,7 +80,7 @@ with open("sample-tiffs.csv", "r") as file:
 
 
 # Print a message
-print("write-tags-from-csv.py ver 0.63  updated Mon 17 Jul 2023 05:23:54 PM CDT ")
+print("write-tags-from-csv.py ver 0.63  updated Mon 17 Jul 2023 08:05:42 PM CDT ")
 print(" ")
 print("This Python program embeds IPTC metadata tags into TIFF files listed in a CSV file generated from the HST PDB.")
 print(" ")
@@ -108,6 +108,8 @@ print(" ")
 input()
 
 # Start the clock
+current_date = datetime.now(None)
+print("Processing started at ",current_date.strftime("%Y-%m-%d %H:%M:%S"))
 start_time = time.time()
 
 
@@ -292,3 +294,4 @@ print("Processing time for each image: ", round(elapsed_time/read_counter, 2), "
 
 
 print("======================================================================")
+logger.stop_logging()
