@@ -40,7 +40,10 @@ os.system('cls' if os.name == 'nt' else 'clear')
 ####################################################
 # logging screen prints to output.txt file
 
-os.remove("output.txt")
+try:
+    os.remove("output.txt")   # delete old output.txt 
+except FileNotFoundError:     # continue if output.txt not found
+    pass 
 
 class OutputLogger:
     def __init__(self, filename):
