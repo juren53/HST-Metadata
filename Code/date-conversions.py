@@ -7,6 +7,7 @@
 #
 # Created Tue 27 Jun 2023 06:01:35 PM CDT by JAU
 # Updated Fri 30 Jun 2023 07:37:31 AM CDT added tests for circa dates and many others
+# Updated Mon 17 Jul 2023 04:43:58 PM CDT added test for Ca.1939 & Ca. 10/1911
 #----------------------------------------------------------------
 
 import re
@@ -33,6 +34,19 @@ def convert_date(date_str):
     elif re.match(r"ca\. ?\d{4}", date_str):            # test for circa date ca.1939
         year = date_str.split(".")[1].strip()
         return f"{year}-00-00"
+
+#########################
+
+    elif re.match(r"Ca\. ?\d{4}", date_str):            # test for circa date Ca.1939
+        year = date_str.split(".")[1].strip()
+        return f"{year}-00-00"
+
+    elif re.match(r"Ca\.  ?\d{2}/\d{4}$", date_str):  # test for circa date Ca. 10/1911
+        year_month = date_str.split(".")[1].strip()
+        month, year = year_month.split("/")
+        return f"{year}-{month:0>2}-00"
+
+#########################
 
     elif re.match(r'\d{1,2}-[A-Za-z]{3}-\d{2}', date_str):   # test for DD-MMM-YY date
         try:
@@ -114,6 +128,10 @@ dates = [
     '2-Nov-59',
     '30-Sep-53',
     '1939',
+    'Ca. 1895',
+    'Ca.  10/1911',
+    'Ca.  08/1913',
+    'Ca. 1950',
     'Monday, 03/23/1964',
     'Feb-64',
     'Thursday, 07/19/1962',
