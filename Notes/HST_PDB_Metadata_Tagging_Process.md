@@ -4,7 +4,11 @@ The following describes the steps to apply metadata tags to photos from the Trum
 
 ### Steps required before the tagging process
 
-There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will probably happen in batches of 3,000 - 5,000 photos.  Prior to the tagging process, a CSV file will be generated from the PDB that contains the metadata to be embedded in the TIFF images to be processed. JPEG images will be generated from the TIFF images and the JPEG images will be resized to 800 pixel max on either the X or Y axis.
+There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will probably happen in batches of 3,000 - 5,000 photos.  Prior to the tagging process
+
+    - a CSV file will be generated from the PDB that contains the metadata to be embedded in the TIFF images to be processed. 
+    - JPEG images will be generated from the TIFF images and the 
+    - JPEG images will be resized to 800 pixel max on either the X or Y axis.
 
 ### Tagging process
 
