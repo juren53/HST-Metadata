@@ -1,4 +1,4 @@
-Truman Library PDB Metadata Tagging
+##Truman Library PDB Metadata Tagging
 
 The following will describe the steps to apply metadata tags to photos from the Truman Library Photo Database.
 
