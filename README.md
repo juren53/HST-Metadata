@@ -19,9 +19,9 @@ JPGs to the NARA catalog for public use.
 ### Process steps:
 
 1. Export HST PDB metadata to a CSV file.
-2. Gather relevant TIFF files and embed them with CSV metadata
-3. Scale TIFF images to 800 x 800 pixel JPGs, retaining the aspect ratio
-4. Add copyright watermark to JPEGs as required
+2. Scale TIFF images to 800 x 800 pixel JPGs, retaining the aspect ratio
+3. Add copyright watermark to JPEGs as required
+4. Gather relevant TIFF files and embed them with CSV metadata
 5. Upload the JPGs to NARA Catalog.
 
 More detail in LAA's Project Overview at:
