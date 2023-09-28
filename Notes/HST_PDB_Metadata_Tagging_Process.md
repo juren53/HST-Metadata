@@ -26,11 +26,14 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will prob
 4. Tag TIFF images
     - run ``` python write-tags-from-csv.py``` from the current working directory
 
-6. Tag JPEG images
+5. Tag JPEG images
     - run ``` python write-tags-from-csv.py``` from the current working directory
 
-8. Check images
-    Things to spot check in TIFF and JPEG images
+6. Check images using nomacs
+
+    <p>Click here for how to configure nomac's 3-panel view</p>
+     
+    <p>Things to spot check in TIFF and JPEG images</p>
     - JPEG images have a max 800 pixels on either the X or Y axis
     - metadata tags have been applied to both JPEG and TIFF images
       
