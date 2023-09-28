@@ -9,6 +9,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will prob
 <p> - a CSV file will be generated from the PDB that contains the metadata to be embedded in the TIFF images to be processed </p>
 <p> - JPEG images will be generated from the TIFF images </p>
 <p> - JPEG images will be resized to 800 pixel max on either the X or Y axis.</p>
+<p> - Copyright watermarks will be added to restricted JPEG images </p>
 
 ### Tagging process
 
@@ -19,7 +20,8 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will prob
 2. Check for valid dates in CSV file
     - open a Command Prompt Window from the Windows Start Menu
     - switch to the current working directory
-    - run ```python check-csv-file.py``` from the current working directory
+    - run ```python check-csv-file.py | more``` from the current working directory
+    - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
 
 4. Tag TIFF images
     - run ``` python write-tags-from-csv.py``` from the current working directory
