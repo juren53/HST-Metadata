@@ -1,12 +1,14 @@
 ## Truman Library PDB Metadata Tagging
 
+<p align="justify"> 2023-10-10 </p>
+
 [Preliminary - work in progress]
 
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database and to prepare JPEG images to be tagged and transmitted to NARA.
 
 ### Steps required before the tagging process
 
-There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will probably happen in batches of 3,000 - 5,000 photos.  Prior to the tagging process
+There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadata tags will probably occurr in batches of 3,000 - 5,000 photos.  Prior to the tagging process
 
 <p> - a CSV file will be generated from the PDB that contains the metadata to be embedded in the TIFF images to be processed </p>
 <p> - JPEG images will be generated from the TIFF images </p>
