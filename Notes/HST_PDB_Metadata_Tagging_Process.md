@@ -31,7 +31,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  This will prob
 
 6. Check images using nomacs
 
-    <p>Click here for how to configure nomac's 3-panel view</p>
+    <p>Click [here](https://github.com/juren53/HST-Metadata/blob/master/Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
     <p>Things to spot check in TIFF and JPEG images</p>
     - JPEG images have a max 800 pixels on either the X or Y axis
