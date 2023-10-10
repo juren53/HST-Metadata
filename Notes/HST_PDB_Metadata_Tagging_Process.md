@@ -1,5 +1,7 @@
 ## Truman Library PDB Metadata Tagging
 
+[Preliminary - work in progress]
+
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database and to prepare JPEG images to be tagged and transmitted to NARA.
 
 ### Steps required before the tagging process
