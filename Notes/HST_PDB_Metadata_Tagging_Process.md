@@ -17,25 +17,36 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
 ### Tagging process
 
-1. The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the working directory for the metadata tagging process. Copy the the following required files to this directory:
+1. Begin by starting in the 'working directory. The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the working directory for the metadata tagging process.
+
+To begin, open a Command Window by pressing Control + t.  The following should appear:
+
+
+[insert a CMD window image here]
+
+Enter:
+
+cd C:\Temp\Metadata-tagging
+
+2. Copy the the following required files to this directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     - the required python programs
-2. Check for valid dates in CSV file
+4. Check for valid dates in CSV file
     - open a Command Prompt Window from the Windows Start Menu
     - switch to the current working directory [C:\Temp\Metadata-tagging]
     - run ```python check-csv-file.py | more``` from the current working directory
     - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
 
-4. Tag TIFF images
+5. Tag TIFF images
     - run ``` python write-tags-from-csv.py``` from the current working directory
 
-5. Tag JPEG images
+6. Tag JPEG images
     - run ``` python write-tags-from-csv.py``` from the current working directory
 
-6. Check images using nomacs
+7. Check images using nomacs
 
-    <p>Click [here](https://github.com/juren53/HST-Metadata/blob/master/Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
+    <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
     <p>Things to spot check in TIFF and JPEG images</p>
 
