@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging
 
-<p align="justify"> 2023-10-10 </p>
+<p align="justify"> 2023-10-16 1850 </p>
 
 [Preliminary - work in progress]
 
@@ -40,11 +40,13 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
 5. Tag TIFF images
     - run ``` python write-tags-from-csv.py``` from the current working directory
+      
+      [insert the opening screen from write-tags-from-csv.py]
 
 6. Tag JPEG images
     - run ``` python write-tags-from-csv.py``` from the current working directory
 
-7. Check images using nomacs
+7. Post-processing spot checks using nomacs
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
