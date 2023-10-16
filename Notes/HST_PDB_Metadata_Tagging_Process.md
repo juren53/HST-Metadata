@@ -19,14 +19,14 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
 1. Begin by starting in the 'working directory. The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the working directory for the metadata tagging process.
 
-To begin, open a Command Window by pressing Control + t.  The following should appear:
+    Open a Command Window by pressing Control + t.  The following should appear:
 
 
-[insert a CMD window image here]
+     [insert a CMD window image here]
 
-Enter:
+     At the CLI prompt, enter:
 
-cd C:\Temp\Metadata-tagging
+     cd C:\Temp\Metadata-tagging
 
 2. Copy the the following required files to this directory:
     - CSV metadata file generated from the PDB
