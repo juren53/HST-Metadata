@@ -26,7 +26,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
      At the CLI prompt, enter:
 
-     cd C:\Temp\Metadata-tagging
+     ```cd C:\Temp\Metadata-tagging```
 
 2. Copy the the following required files to this directory:
     - CSV metadata file generated from the PDB
