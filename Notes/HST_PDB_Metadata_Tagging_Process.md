@@ -2,7 +2,7 @@
 
 <p align="justify"> last update: 2023-10-16 1850 </p>
 
-[Preliminary - work in progress]
+[this documentation is preliminary - work in progress]
 
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database and to prepare JPEG images to be tagged and transmitted to NARA.
 
