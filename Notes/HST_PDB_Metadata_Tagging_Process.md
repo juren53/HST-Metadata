@@ -1,4 +1,4 @@
-## Truman Library PDB Metadata Tagging
+## Truman Library PDB Metadata Tagging Process
 
 <p align="justify"> last update: 2023-10-16 1850 </p>
 
