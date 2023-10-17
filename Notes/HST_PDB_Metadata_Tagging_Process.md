@@ -17,10 +17,14 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
 ### Tagging process
 
-1. Begin by starting in the 'working directory. The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the working directory for the metadata tagging process.
+The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the working directory for the metadata tagging process.
 
-    Open a Command Window by pressing Control + t.  The following should appear:
+1. Begin by copying he following required files to C:\Temp\Metadata-tagging:
+    - CSV metadata file generated from the PDB
+    - all the photos listed in the CSV metadata file
+    - the required python programs [ check-csv-file.py & write-tags-from-csv.py ]
 
+2. Open a Command Window by pressing Control + t.  The following should appear
 
      [insert a CMD window image here]
 
@@ -28,11 +32,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
      ```cd C:\Temp\Metadata-tagging```
 
-2. Copy the the following required files to C:\Temp\Metadata-tagging:
-    - CSV metadata file generated from the PDB
-    - all the photos listed in the CSV metadata file
-    - the required python programs [ check-csv-file.py & write-tags-from-csv.py ]
-4. Check for valid dates in CSV file
+3. Check for valid dates in CSV file
     - open a Command Prompt Window from the Windows Start Menu
     - switch to the current working directory [C:\Temp\Metadata-tagging]
     - from the current working directory, run:
@@ -42,7 +42,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
  
      - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
 
-5. Tag TIFF images
+6. Tag TIFF images
 
     - from the current working directory, run:
 
