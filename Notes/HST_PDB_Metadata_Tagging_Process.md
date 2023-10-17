@@ -33,8 +33,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
      ```cd C:\Temp\Metadata-tagging```
 
 3. Check for valid dates in CSV file
-    - open a Command Prompt Window from the Windows Start Menu
-    - switch to the current working directory [C:\Temp\Metadata-tagging]
+    
     - from the current working directory, run:
       
       ```python check-csv-file.py | more```
