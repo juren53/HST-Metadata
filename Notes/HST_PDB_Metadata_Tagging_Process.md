@@ -19,7 +19,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 
 The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the <i>working directory</i> for the metadata tagging process.
 
-1. Begin by copying he following required files to C:\Temp\Metadata-tagging:
+1. Begin by copying he following required files to the C:\Temp\Metadata-tagging directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     - the required python programs [ check-csv-file.py & write-tags-from-csv.py ]
