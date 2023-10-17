@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging Process
 
-<p align="justify"> last update: 2023-10-16 1850 </p>
+<p align="justify"> last update: 2023-10-16 1920 </p>
 
 ##### <i>[this documentation is preliminary - work in progress]</i>
 
