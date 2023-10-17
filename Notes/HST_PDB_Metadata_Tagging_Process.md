@@ -41,22 +41,22 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
  
      - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
 
-6. Tag TIFF images
+4. Tag TIFF images
 
     - from the current working directory, run:
 
-      ``` python write-tags-from-csv.py``` from the current working directory
+      ``` python write-tags-from-csv.py``` 
       
       [insert the opening screen from write-tags-from-csv.py]
 
-7. Tag JPEG images
+5. Tag JPEG images
     - from the current working directory, run:
     
       ``` python write-tags-from-csv.py``` from the current working directory
       
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-8. Post-processing spot checks using nomacs
+6. Post-processing spot checks using nomacs
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
