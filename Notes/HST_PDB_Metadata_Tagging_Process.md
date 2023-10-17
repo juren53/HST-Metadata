@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging
 
-<p align="justify"> lat update: 2023-10-16 1850 </p>
+<p align="justify"> last update: 2023-10-16 1850 </p>
 
 [Preliminary - work in progress]
 
