@@ -31,7 +31,7 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 2. Copy the the following required files to C:\Temp\Metadata-tagging:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
-    - the required python programs
+    - the required python programs [ check-csv-file.py & write-tags-from-csv.py ]
 4. Check for valid dates in CSV file
     - open a Command Prompt Window from the Windows Start Menu
     - switch to the current working directory [C:\Temp\Metadata-tagging]
