@@ -35,18 +35,29 @@ There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadat
 4. Check for valid dates in CSV file
     - open a Command Prompt Window from the Windows Start Menu
     - switch to the current working directory [C:\Temp\Metadata-tagging]
-    - run ```python check-csv-file.py | more``` from the current working directory
-    - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
+    - from the current working directory, run:
+      
+      ```python check-csv-file.py | more```
+      
+ 
+     - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
 
 5. Tag TIFF images
-    - run ``` python write-tags-from-csv.py``` from the current working directory
+
+    - from the current working directory, run:
+
+      ``` python write-tags-from-csv.py``` from the current working directory
       
       [insert the opening screen from write-tags-from-csv.py]
 
-6. Tag JPEG images
-    - run ``` python write-tags-from-csv.py``` from the current working directory
+7. Tag JPEG images
+    - from the current working directory, run:
+    
+      ``` python write-tags-from-csv.py``` from the current working directory
+      
+    - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-7. Post-processing spot checks using nomacs
+8. Post-processing spot checks using nomacs
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
