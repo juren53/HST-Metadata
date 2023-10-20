@@ -68,3 +68,6 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
     - copyright watermarks have been added to appropriate JPEG images
     - metadata tags have been applied to both JPEG and TIFF images
       
+7. Post-processing file handling
+
+    - move tagged TIFF and JPEF images to the S: drive to clear space for the next batch of images to be processed.
