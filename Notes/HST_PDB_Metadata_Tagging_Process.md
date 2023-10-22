@@ -8,23 +8,23 @@ The following describes the steps to apply metadata tags to photos from the Trum
 
 ### Steps required before the tagging process
 
-There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadata tags will probably occurr in batches of 3,000 - 5,000 photos.  
+There are ~ 54,000 photos in the HST PDB that need to be tagged.  Adding metadata tags will probably occur in batches of 3,000 - 5,000 photos.  
 
 Prior to the tagging process
 
 <p> - a CSV file will be generated from the PDB that contains the metadata to be embedded in the TIFF images to be processed </p>
 <p> - JPEG images will be generated from the TIFF images </p>
-<p> - JPEG images will be resized to 800 pixel max on either the X or Y axis.</p>
+<p> - JPEG images will be resized to 800 pixels max on either the X or Y axis.</p>
 <p> - Copyright watermarks will be added to restricted JPEG images </p>
 
 ### Tagging process
 
 The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the <i>working directory</i> for the metadata tagging process.
 
-1. Begin by copying he following required files to the C:\Temp\Metadata-tagging directory:
+1. Begin by copying the following required files to the C:\Temp\Metadata-tagging directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
-    - the required python programs [ check-csv-file.py & write-tags-from-csv.py. They can be found on GitHub at:
+    - the required Python programs [ check-csv-file.py & write-tags-from-csv.py. They can be found on GitHub at:
        https://github.com/juren53/HST-Metadata/edit/master/Code]
 
 2. Open a Command Window by pressing Control + t.  The following should appear
@@ -35,7 +35,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 
      ```cd C:\Temp\Metadata-tagging```
 
-3. Check for valid dates in CSV file
+3. Check for valid dates in the CSV file
     
     - from the current working directory, run:
       
@@ -63,7 +63,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
-    <p>Things to spot check in TIFF and JPEG images</p>
+    <p>Things to spot-check in TIFF and JPEG images</p>
 
     - JPEG images have a max 800 pixels on either the X or Y axis
     - copyright watermarks have been added to appropriate JPEG images
