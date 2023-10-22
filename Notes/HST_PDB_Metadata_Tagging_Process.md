@@ -24,7 +24,8 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 1. Begin by copying he following required files to the C:\Temp\Metadata-tagging directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
-    - the required python programs [ check-csv-file.py & write-tags-from-csv.py ]
+    - the required python programs [ check-csv-file.py & write-tags-from-csv.py. They can be found on GitHub at:
+       https://github.com/juren53/HST-Metadata/edit/master/Code]
 
 2. Open a Command Window by pressing Control + t.  The following should appear
 
