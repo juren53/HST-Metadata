@@ -323,7 +323,7 @@ with open("export.csv", newline='') as csvfile:
             et.execute(b"-By-line=" + row["By-line"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-SpecialInstructions=" + row["SpecialInstructions"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-ObjectName=" + row["ObjectName"].encode('utf-8'), file_path.encode('utf-8'))
-            et.execute(b"-Writer-Editor=" + row["Writer-Editor"].encode('utf-8'), file_path.encode('utf-8'))
+            #et.execute(b"-Writer-Editor=" + row["Writer-Editor"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-Source=" + row["Source"].encode('utf-8'), file_path.encode('utf-8'))
             et.execute(b"-Caption-Abstract=" + row["Caption-Abstract"].encode('utf-8'), file_path.encode('utf-8'))
 
