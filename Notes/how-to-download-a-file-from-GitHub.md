@@ -7,3 +7,4 @@ The following describes the steps to dowload individual files located in the HST
 3. On the file page, click the Raw button. This opens the raw code in your browser.
 4. Right-click the page and select Save as…, then name the file and choose where to save it on your device.
 
+A more detailed description of downloading a file from GitHub is located at https://blog.hubspot.com/website/download-from-github#file.
