@@ -16,7 +16,7 @@ ans = True
 while ans:
     print ("""  
     1. Install Python Files
-	2. Create export.csv file 
+    2. Create export.csv file 
     3. Check for valid dates
     4. Tag TIFF or JPEG files
     5. Move Processed TIFF and JPEG files to S: drive
@@ -27,8 +27,8 @@ while ans:
 
     if ans == "1":
         subprocess.call("python install-files.py ", shell=True)
-	elif ans == "2":	
-		subprocess.call("python replace_headers.py ", shell=True)
+    elif ans == "2":	
+        subprocess.call("python replace_headers.py ", shell=True)
     elif ans == "3":
         subprocess.call("python check-dates-from-csv.py | more", shell=True)
     elif ans == "4":
