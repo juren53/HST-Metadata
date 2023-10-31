@@ -1,4 +1,4 @@
-### How To Download a File from GitHub
+### How To Download a File from the HST Metadata GitHub Repository
 
 The following describes the steps to dowload individual files located in the HST-Medtadata GitHub Repository.
 
