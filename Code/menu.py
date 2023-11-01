@@ -20,7 +20,7 @@ while ans:
     3. Check for valid dates
     4. Tag TIFF or JPEG files
     5. Move Processed TIFF and JPEG files to S: drive
-	6. Quit 
+    6. Quit 
     """)
 
     ans = input("What would you like to do? ")
