@@ -160,7 +160,7 @@ print(" ")
 
 tiff_files = glob.glob('*.'+ext)
 num_tiff_files = len(tiff_files)
-print(f"Number of {ext} files in the diretory:  {num_tiff_files}")
+print(f"Number of {ext} files in the directory:  {num_tiff_files}")
 print(" ")
 print("=========================================================================")
 print(" ")
