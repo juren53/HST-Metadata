@@ -10,7 +10,7 @@ import subprocess
 import os
 
 os.system('cls')
-print("  HST Metadata Tagging Process")
+print("  HST Metadata Tagging Process   [2023-11-14]")
 ans = True
 
 while ans:
@@ -33,6 +33,8 @@ while ans:
         subprocess.call("python check-dates-from-csv.py | more", shell=True)
     elif ans == "4":
         subprocess.call("python write-tags-from-csv.py", shell=True)
+    elif ans == "5":
+        subprocess.call("copy-files.bat", shell=True)	
     elif ans == "6":
         quit()
     else:
