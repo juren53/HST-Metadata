@@ -4,6 +4,7 @@
 #    Front End Menu for HST-Metadata Tagging Process
 #    Updated:  Sun 22 Oct 2023 09:55:51 AM CDT 
 #    Updated:  Sun 29 Oct 2023 13:23:05 PM CDT - added replace_headers.py to menu
+#    Updated:  Tue 14 Nov 2023 10:15_01 AM CST - added copy-files.bat to "5."
 #----------------------------------------------------------------------------
 
 import subprocess
