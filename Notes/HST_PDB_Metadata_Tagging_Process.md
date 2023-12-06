@@ -40,22 +40,19 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
   
 4. Check for valid dates
 
-5. Tag TIFF images
+     - select Check for valid dates
 
-    - from the current working directory, run:
+6. Tag TIFF images
 
-      ``` python write-tags-from-csv.py``` 
-      
-      [insert the opening screen from write-tags-from-csv.py]
-
-6. Tag JPEG images
-    - from the current working directory, run:
+    - select Tag TIFF and JPEG files
     
-      ``` python write-tags-from-csv.py``` from the current working directory
-      
+7. Tag JPEG images
+
+    - select Tag TIFF and JPEG files
+          
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-7. Post-processing spot checks using nomacs
+9. Post-processing spot checks using nomacs
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
@@ -65,6 +62,6 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
     - copyright watermarks have been added to appropriate JPEG images
     - metadata tags have been applied to both JPEG and TIFF images
       
-8. Post-processing file handling
+10. Post-processing file handling
 
     - move tagged TIFF and JPEF images to the S: drive to clear space for the next batch of images to be processed.
