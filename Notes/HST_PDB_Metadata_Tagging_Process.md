@@ -17,32 +17,30 @@ Prior to the tagging process
 
 ### Tagging process
 
-The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the <i>working directory</i> for the metadata tagging process.
+The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the <i>working directory</i> where work associated with the metadata tagging process is performed.
 
 1. Begin by copying the following required files to the C:\Temp\Metadata-tagging directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
-    - the required Python programs [ check-csv-file.py & write-tags-from-csv.py. They can be found on GitHub at:
-       https://github.com/juren53/HST-Metadata/edit/master/Code]
-
+    
 2. Open a Command Window by pressing Control + t.  The following should appear
 
      [insert a CMD window image here]
 
-     At the CLI prompt, enter:
+     At the CMD prompt, enter:
 
      ```cd C:\Temp\Metadata-tagging```
 
-3. Check for valid dates in the CSV file
-    
-    - from the current working directory, run:
+3. From the current working directory, enter:
       
-      ```python check-csv-file.py | more```
+      ```menu```
       
  
-     - edit dates in the CSV file that do not conform to the YYYY-MM-DD format
+     - from this menu, all activities associated with metadata tagging can be performed
+  
+4. Check for valid dates
 
-4. Tag TIFF images
+5. Tag TIFF images
 
     - from the current working directory, run:
 
@@ -50,14 +48,14 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
       
       [insert the opening screen from write-tags-from-csv.py]
 
-5. Tag JPEG images
+6. Tag JPEG images
     - from the current working directory, run:
     
       ``` python write-tags-from-csv.py``` from the current working directory
       
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-6. Post-processing spot checks using nomacs
+7. Post-processing spot checks using nomacs
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
@@ -67,6 +65,6 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
     - copyright watermarks have been added to appropriate JPEG images
     - metadata tags have been applied to both JPEG and TIFF images
       
-7. Post-processing file handling
+8. Post-processing file handling
 
     - move tagged TIFF and JPEF images to the S: drive to clear space for the next batch of images to be processed.
