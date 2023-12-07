@@ -52,7 +52,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-9. Post-processing spot checks using nomacs
+9. Post-processing spot checks
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
