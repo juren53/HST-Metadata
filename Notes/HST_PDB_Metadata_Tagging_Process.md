@@ -64,4 +64,5 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
       
 10. Post-processing file handling
 
-    - move tagged TIFF and JPEF images to the S: drive to clear space for the next batch of images to be processed.
+    - move/save tagged TIFF and JPEF images to the S: drive to clear space for the next batch of images to be processed.
+    - move/save the REPORT files to an appropriate directory
