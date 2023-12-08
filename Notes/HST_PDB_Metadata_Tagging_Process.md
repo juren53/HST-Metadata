@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging Process
 
-<p align="justify"> last update: 2023-12-06 1934 </p>
+<p align="justify"> last update: 2023-12-08 1245 </p>
 
 ##### <i>[this documentation is preliminary - a work in progress]</i>
 
@@ -29,16 +29,15 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 
      At the CMD prompt, enter:
 
-     ```cd C:\Temp\Metadata-tagging```
-
-3. From the current working directory, enter:
-      
-      ```menu```
-      
+     ```menu```
  
      - from this menu, all activities associated with metadata tagging can be performed
   
-4. Check for valid dates
+3. Check that all necessary Python files are installed
+
+     - select ```1 <cr>```
+
+5. Check for valid dates
 
      - select Check for valid dates
 
