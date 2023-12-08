@@ -23,10 +23,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
     
 2. Open a Command Window by pressing the Windows Key + R, then type "cmd.".  The following should appear
 
-     [insert a CMD window image here]
-
      ![CMD Window](cmd-window.png)
-
 
      A the CMD prompt, enter:
 
