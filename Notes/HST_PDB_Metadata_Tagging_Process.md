@@ -2,8 +2,6 @@
 
 <p align="justify"> last update: 2023-12-08 1245 </p>
 
-##### <i>[this documentation is preliminary - a work in progress]</i>
-
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database.
 
 ### Steps required before the tagging process
