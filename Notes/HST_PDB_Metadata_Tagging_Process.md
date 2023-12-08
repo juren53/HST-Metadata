@@ -25,6 +25,9 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 
      [insert a CMD window image here]
 
+     ![CMD Window](cmd-window.png)
+
+
      A the CMD prompt, enter:
 
      ``` cd c:\Temp\Metadata-tagging```     [ changes to the working directory ]
