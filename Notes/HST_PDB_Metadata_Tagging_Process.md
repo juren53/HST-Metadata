@@ -35,19 +35,23 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
   
 3. Check that all necessary Python files are installed
 
-     - select ```1 <cr>```
+     - select ```1 <cr>```  
 
-5. Check for valid dates
+4.  Update headers on CSV file
 
-     - select Check for valid dates
+     - select ```2 <cr>```  
 
-6. Tag TIFF images
+6. Check for valid dates
 
-    - select Tag TIFF and JPEG files
+     - select ```3 <cr>``` Check for valid dates
+
+7. Tag TIFF images
+
+    - select ```4 <cr>``` Tag TIFF and JPEG files
     
-7. Tag JPEG images
+8. Tag JPEG images
 
-    - select Tag TIFF and JPEG files
+    - select ```4 <cr>``` Tag TIFF and JPEG files
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
