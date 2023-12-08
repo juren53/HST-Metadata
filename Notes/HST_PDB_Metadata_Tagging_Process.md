@@ -27,17 +27,21 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
 
      [insert a CMD window image here]
 
-     At the CMD prompt, enter:
+     A the CMD prompt, enter:
+
+     ``` cd c:\Temp\Metadata-tagging```     [ changes to the working directory ]
+
+     Next enter:
 
      ```menu```
  
      - from this menu, all activities associated with metadata tagging can be performed
   
-3. Check that all necessary Python files are installed
+4. Check that all necessary Python files are installed
 
      - select ```1 <cr>```  
 
-4.  Update headers on CSV file
+5.  Update headers on CSV file
 
      - select ```2 <cr>```  
 
