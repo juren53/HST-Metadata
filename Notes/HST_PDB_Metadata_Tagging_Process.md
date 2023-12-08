@@ -32,6 +32,8 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
      Next enter:
 
      ```menu```
+
+    ![menu](menu.png)
  
      - from this menu, all activities associated with metadata tagging can be performed
   
