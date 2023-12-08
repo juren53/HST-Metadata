@@ -21,7 +21,7 @@ The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been se
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
-2. Open a Command Window by pressing Control + t.  The following should appear
+2. Open a Command Window by pressing the Windows Key + R, then type "cmd.".  The following should appear
 
      [insert a CMD window image here]
 
