@@ -50,18 +50,20 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
      - select <b>```3 <cr>```</b> Check for valid dates
     
      ![date](date-check.png)
-      
-7. Tag TIFF images
+
+     Press the ```space bar``` to page through the output.  In the above case, line 5 has an invalid date.  You can use MS Excell to edit the date in the <b>export.csv</b> file
+   
+8. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
-8. Tag JPEG images
+9. Tag JPEG images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-9. Post-processing spot checks
+10. Post-processing spot checks
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
@@ -71,7 +73,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
     - copyright watermarks have been added to appropriate JPEG images
     - metadata tags have been applied to both JPEG and TIFF images
       
-10. Post-processing file handling
+11. Post-processing file handling
 
     - move/save tagged TIFF and JPEF images to a 'shared drive' to clear space for the next batch of images to be processed.
     - move/save the REPORT files to an appropriate directory
