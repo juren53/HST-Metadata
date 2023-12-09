@@ -15,7 +15,7 @@ Prior to the tagging process
 
 ### Tagging process
 
-The directory 'C:\Temp\Metadata-tagging' on the Scanning Workstation has been set aside as the <i>working directory</i> where work associated with the metadata tagging process is performed.
+The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has been set aside as the <i>working directory</i> where work associated with the metadata tagging process is performed.
 
 1. Begin by copying the following required files to the C:\Temp\Metadata-tagging directory:
     - CSV metadata file generated from the PDB
