@@ -49,6 +49,8 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
          
       this is not good - - better call Jim :-)
 
+      or you can try running ```python   ```
+
 6.  Update headers on CSV file
 
      - select <b>```2 <cr>``` </b> 
