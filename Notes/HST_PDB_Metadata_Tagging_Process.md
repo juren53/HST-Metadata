@@ -59,6 +59,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
+     ![date](tagging.png)
+
+    Note: ```Number of lines in the CSV file``` should equal  ```Number of tif files in the diretory```
+
+    
 9. Tag JPEG images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
