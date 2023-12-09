@@ -67,7 +67,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
    When the processing is complete the following appears and a report is printed to the current working directory.
 
-  ![date](tagging.png)
+  ![date](post.png)
    
 9. Tag JPEG images
 
