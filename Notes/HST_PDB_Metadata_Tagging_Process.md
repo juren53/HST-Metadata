@@ -31,7 +31,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      Next enter:
 
-     ```menu```
+     <b>```menu```</b>
 
     ![menu](menu.png)
  
