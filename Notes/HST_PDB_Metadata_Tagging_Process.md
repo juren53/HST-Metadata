@@ -44,9 +44,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
      The message: ```All files exist in the current directory. You are good to proceed to the next step.```  speaks for itself.
 
      If a message like appears:
+   
       ```The following file(s) do not exist in the current directory:
           - write-tags-from-csv.py```
-     this is not good - - better call Jim :-)
+
+      this is not good - - better call Jim :-)
 
 6.  Update headers on CSV file
 
