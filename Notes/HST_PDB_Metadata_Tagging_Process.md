@@ -55,15 +55,20 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
    In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.  
    
-8. Tag TIFF images
+7. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
      ![date](tagging.png)
 
-    Note: ```Number of lines in the CSV file``` should equal  ```Number of tif files in the diretory```
+    Note: ```Number of lines in the CSV file``` should equal  ```Number of tif files in the directory```
 
-    
+   Once you press ```Enter``` and start the processing, each image takes 1-2 seconds.
+
+   When the processing is complete the following appears and a report is printed to the current working directory.
+
+  ![date](tagging.png)
+   
 9. Tag JPEG images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
