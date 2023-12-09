@@ -17,7 +17,7 @@ Prior to the tagging process
 
 The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has been set aside as the <i>working directory</i> where work associated with the metadata tagging process is performed.
 
-1. Begin by copying the following required files to the C:\Temp\Metadata-tagging directory:
+1. Begin by copying the following required files to the ```C:\Temp\Metadata-tagging``` directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
@@ -39,15 +39,22 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
   
 4. Check that all necessary Python files are installed
 
-     - select <b>```1 <cr>``` </b> 
+     - select <b>```1 <cr>``` </b>
 
-5.  Update headers on CSV file
+     The message: ```All files exist in the current directory. You are good to proceed to the next step.```  speaks for itself.
+
+     If a message like appears:
+      ```The following file(s) do not exist in the current directory:
+          - write-tags-from-csv.py```
+     this is not good - - better call Jim :-)
+
+6.  Update headers on CSV file
 
      - select <b>```2 <cr>``` </b> 
 
-6. Check for valid dates
+7. Check for valid dates
 
-     - select <b>```3 <cr>```</b> Check for valid dates
+     - select <b>```3 <cr>```</b> checks for valid dates
     
      ![date](date-check.png)
 
@@ -55,7 +62,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
    In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.  
    
-7. Tag TIFF images
+8. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
