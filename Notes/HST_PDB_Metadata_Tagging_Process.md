@@ -51,7 +51,9 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
     
      ![date](date-check.png)
 
-     Press the ```space bar``` to page through the output.  In the above case, line 5 has an invalid date.  You can use MS Excell to edit the date in the <b>export.csv</b> file
+     Press the ```space bar``` to page through the output.  You are looking for any date in the Converted Date column that does not follow the YYYY-MM--DD format.
+
+   In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.  
    
 8. Tag TIFF images
 
