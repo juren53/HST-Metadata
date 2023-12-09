@@ -48,7 +48,9 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 6. Check for valid dates
 
      - select <b>```3 <cr>```</b> Check for valid dates
-
+    
+     ![date](date-check.png)
+      
 7. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
