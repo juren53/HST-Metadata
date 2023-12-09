@@ -47,9 +47,9 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      ```The following file(s) do not exist in the current directory:```
          
-      this is not good - - better call Jim :-)
+      this is not good!!!! better call Jim :-)
 
-      or you can try running ```python   ```
+      or you can try downloading ```install-files.py``` and running ```python install-files.py ```
 
 6.  Update headers on CSV file
 
