@@ -27,7 +27,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      A the CMD prompt, enter:
 
-     ``` cd c:\Temp\Metadata-tagging```     [ changes to the working directory ]
+     <b>``` cd c:\Temp\Metadata-tagging``` </b>    [ changes to the working directory ]
 
      Next enter:
 
@@ -39,23 +39,23 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
   
 4. Check that all necessary Python files are installed
 
-     - select ```1 <cr>```  
+     - select <b>```1 <cr>``` </b> 
 
 5.  Update headers on CSV file
 
-     - select ```2 <cr>```  
+     - select <b>```2 <cr>``` </b> 
 
 6. Check for valid dates
 
-     - select ```3 <cr>``` Check for valid dates
+     - select <b>```3 <cr>```</b> Check for valid dates
 
 7. Tag TIFF images
 
-    - select ```4 <cr>``` Tag TIFF and JPEG files
+    - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
 8. Tag JPEG images
 
-    - select ```4 <cr>``` Tag TIFF and JPEG files
+    - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
