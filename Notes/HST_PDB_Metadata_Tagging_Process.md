@@ -27,11 +27,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      A the CMD prompt, enter:
 
-     <b>``` cd c:\Temp\Metadata-tagging``` </b>    [ changes to the working directory ]
+     <b>``` cd c:\Temp\Metadata-tagging <cr>``` </b>    [ changes to the working directory ]
 
      Next enter:
 
-     <b>```menu```</b>
+     <b>```menu <cr>```</b>
 
     ![menu](menu.png)
  
