@@ -6,7 +6,7 @@ The following describes the steps to apply metadata tags to photos from the Trum
 
 ### Steps required before the tagging process
 
-Prior to the tagging process
+Before the tagging process can begin, the following steps must be completed:
 
 <p> - a CSV file must be generated from the PDB that contains the metadata to be embedded in the TIFF and JPEG images to be processed </p>
 <p> - JPEG images must be generated from the TIFF images </p>
@@ -25,11 +25,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      ![CMD Window](cmd-window.png)
 
-     A the CMD prompt, enter:
+     At the CMD prompt, enter:
 
      <b>``` cd c:\Temp\Metadata-tagging <cr>``` </b>    [ changes to the working directory ]
 
-     Next enter:
+     Next, enter:
 
      <b>```menu <cr>```</b>
 
@@ -37,11 +37,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
  
      - from this menu, all activities associated with metadata tagging can be performed
   
-4. Check that all necessary Python files are installed
+3. Check that all necessary Python files are installed
 
      - select <b>```1 <cr>``` </b>
 
-     The message: ```All files exist in the current directory. You are good to proceed to the next step.```  speaks for itself.
+     The message: ``` All files exist in the current directory. You are good to proceed to the next step.```  speaks for itself.
 
      If a message like this appears:
 
@@ -51,11 +51,13 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
       ... or you can try downloading ```install-files.py``` from the HST GitHub repository and run the command ```python install-files.py ``` in the current working directory
 
-6.  Update headers on CSV file
+4.  Update headers on CSV file
 
-     - select <b>```2 <cr>``` </b> 
+     - select <b>```2 <cr>``` </b>
+  
+    This step creates a file ``` export.csv ``` with the header names the tagging process is expecting
 
-7. Check for valid dates
+5. Check for valid dates
 
      - select <b>```3 <cr>```</b> checks for valid dates
     
@@ -65,7 +67,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
    In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.  
    
-8. Tag TIFF images
+6. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
@@ -79,13 +81,13 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
   ![date](post.png)
    
-9. Tag JPEG images
+7. Tag JPEG images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
-10. Post-processing spot checks
+ 8. Post-processing spot checks
 
     <p>Click [here](../Tools/nomacs/Configuring-nomacs.md) for how to configure nomac's 3-panel view</p>
      
