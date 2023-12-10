@@ -49,7 +49,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
          
       this is not good!!!! better call Jim :-) . . . [it's his fault]
 
-      ... or you can try downloading ```install-files.py``` from the HST GitHub repository and runn```python install-files.py ``` in the current working directory
+      ... or you can try downloading ```install-files.py``` from the HST GitHub repository and run the command ```python install-files.py ``` in the current working directory
 
 6.  Update headers on CSV file
 
