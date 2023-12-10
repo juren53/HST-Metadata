@@ -4,7 +4,7 @@
 
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database.
 
-### Steps required before the tagging process
+### Steps required before the tagging process can begin
 
 Before the tagging process can begin, the following steps must be completed:
 
