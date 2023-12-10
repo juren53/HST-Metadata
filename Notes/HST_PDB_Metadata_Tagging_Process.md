@@ -17,7 +17,7 @@ Before the tagging process can begin, the following steps must be completed:
 
 The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has been set aside as the <i>working directory</i> where work associated with the metadata tagging process is performed.
 
-1. Begin by copying the following required files to the ```C:\Temp\Metadata-tagging``` directory:
+1. Begin by copying the following required files to the <b>```C:\Temp\Metadata-tagging```</b> directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
