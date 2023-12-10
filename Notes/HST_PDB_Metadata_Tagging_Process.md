@@ -25,7 +25,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      ![CMD Window](cmd-window.png)
 
-     At the CMD prompt, enter:
+     Change to the Current Working Directory by entering: 
 
      <b>``` cd c:\Temp\Metadata-tagging <cr>``` </b>    [ changes to the working directory ]
 
