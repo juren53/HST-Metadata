@@ -21,7 +21,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
-2. Open a Command Window by pressing the Windows Key + R, then type <b>```cmd```</b>  The following should appear
+2. Open a Command Window by pressing the Windows Key + R, then type <b>```cmd```</b>.  The following should appear
 
      ![CMD Window](cmd-window.png)
 
