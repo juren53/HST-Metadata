@@ -17,7 +17,7 @@ file_urls = [
     "https://github.com/juren53/HST-Metadata/raw/master/Code/check-dates-from-csv.py",	
     "https://github.com/juren53/HST-Metadata/raw/master/Code/menu.py",
     "https://github.com/juren53/HST-Metadata/raw/master/Code/menu.bat",
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/replace-headers.py",
+    "https://github.com/juren53/HST-Metadata/raw/master/Code/replace_headers.py",
     "https://github.com/juren53/HST-Metadata/raw/master/Code/check-for-files.py",
 
 
