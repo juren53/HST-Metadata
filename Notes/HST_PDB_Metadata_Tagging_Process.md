@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging Process
 
-<p align="justify"> last update: 2023-12-09 2210 </p>
+<p align="justify"> last update: 2023-12-12 0015 </p>
 
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database (PDB).
 
@@ -101,3 +101,4 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
     - move/save tagged TIFF and JPEF images to a 'shared drive' to clear space for the next batch of images to be processed.
     - move/save the REPORT files to an appropriate directory
+    - move/save the PDB CSV file 
