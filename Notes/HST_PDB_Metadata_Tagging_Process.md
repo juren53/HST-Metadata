@@ -89,12 +89,10 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
  8. Post-processing spot checks
 
-    <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image.  To configure nomacs, select Panel from the top menu and then File Explorer and Metadata Info.  This will create 3-panel view that allows you to move through TIFF and JPEG images.</p>
+    <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image.  To configure nomacs, select <b>Panels</b> from the top menu and then tick <b>File Explorer</b> and <b>Metadata Info</b>.  This will create 3-panel view that allows you to review TIFF and JPEG images as shown below.</p>
 
-    ![image](https://github.com/juren53/HST-Metadata/assets/28789748/6958129d-a353-4e10-8313-96957a8bd6df)
     ![menu](nomacs-panels.png)
 
-     
     <p>Things to spot-check in processed TIFF and JPEG images:</p>
 
     - JPEG images have a max 800 pixels on either the X or Y axis
