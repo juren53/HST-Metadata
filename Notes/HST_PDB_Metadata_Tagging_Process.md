@@ -93,11 +93,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
     ![menu](nomacs-panels.png)
 
-    <p>Things to spot-check in processed TIFF and JPEG images:</p>
+    <p>Some things to spot-check in processed TIFF and JPEG images:</p>
 
-    - JPEG images have a max 800 pixels on either the X or Y axis
-    - copyright watermarks have been added to appropriate JPEG images
-    - metadata tags have been applied to both JPEG and TIFF images
+    - JPEG images should have a max 800 pixels on either the X or Y axis
+    - copyright watermarks should have been added to appropriate JPEG images
+    - IPTC metadata tags should have been applied to both JPEG and TIFF images
       
 11. Post-processing file handling
 
