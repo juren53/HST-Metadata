@@ -55,7 +55,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      - select <b>```2 <cr>``` </b>
   
-     - This step creates a ``` export.csv ``` file with the corrected header names the tagging process is expecting
+     - This step creates an ``` export.csv ``` file with the corrected header names that the tagging process requires.
 
 5. Check for valid dates
 
