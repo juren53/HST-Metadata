@@ -91,7 +91,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
     <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image.  To configure nomacs, select Panel from the top menu and then File Explorer and Metadata Info.  This will create 3-panel view that allows you to move through TIFF and JPEG images.</p>
      
-    <p>Things to spot-check in processed TIFF and JPEG images</p>
+    <p>Things to spot-check in processed TIFF and JPEG images:</p>
 
     - JPEG images have a max 800 pixels on either the X or Y axis
     - copyright watermarks have been added to appropriate JPEG images
@@ -99,6 +99,6 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
       
 11. Post-processing file handling
 
-    - move/save tagged TIFF and JPEF images to a 'shared drive' to clear space for the next batch of images to be processed.
+    - move/save tagged TIFF and JPEG images to a 'shared drive' to clear space for the next batch of images to be processed.
     - move/save the REPORT files to an appropriate directory
     - move/save the PDB CSV file 
