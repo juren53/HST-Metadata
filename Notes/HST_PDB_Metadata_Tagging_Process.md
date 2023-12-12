@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging Process
 
-<p align="justify"> last update: 2023-12-11 0015 </p>
+<p align="justify"> last update: 2023-12-11 1830 </p>
 
 The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database (PDB).
 
