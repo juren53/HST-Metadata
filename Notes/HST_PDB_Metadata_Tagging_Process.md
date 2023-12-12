@@ -8,7 +8,7 @@ The following describes the steps to apply metadata tags to photos from the Trum
 
 Before the tagging process can begin, the following steps must be completed:
 
-<p> - a CSV file must be generated from the PDB that contains the metadata to be embedded in the TIFF and JPEG images to be processed </p>
+<p> - a CSV file must be generated from the PDB that contains the metadata to be embedded in the TIFF and JPEG images </p>
 <p> - JPEG images must be generated from the TIFF images </p>
 <p> - JPEG images must be resized to 800 pixels max on either the X or Y axis.</p>
 <p> - Copyright watermarks must be added to restricted JPEG images </p>
