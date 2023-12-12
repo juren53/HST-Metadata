@@ -81,13 +81,13 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
   ![date](post.png)
 
-   This report obviously contains some errors i.e. missing images - - here's hoping your run does not :-).
+   Note: This report obviously contains some errors i.e. missing images - - here's hoping your run does not :-).
    
 7. Tag JPEG images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
-    - Note:  this should work exactly like the TIFF processing except you select JPEG on the opening menu
+    - this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
  8. Post-processing spot checks
 
