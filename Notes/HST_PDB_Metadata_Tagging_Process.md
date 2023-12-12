@@ -31,7 +31,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      - Next, enter:
 
-     <b>```menu <cr>```</b>
+     <b>```menu <cr>```</b> and the following should appear:
 
     ![menu](menu.png)
  
