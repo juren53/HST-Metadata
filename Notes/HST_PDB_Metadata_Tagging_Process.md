@@ -91,7 +91,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
  8. Post-processing spot checks
 
-    <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image.  To configure nomacs, select <b>Panels</b> from the top menu and then tick <b>File Explorer</b> and <b>Metadata Info</b>.  This will create 3-panel view that allows you to review TIFF and JPEG images as shown below.</p>
+    <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image. Nomacs is installed on the Scanning Workstation but you will need to configure nomacs.  You can do so by selecting <b>Panels</b> from the top menu and then tick <b>File Explorer</b> and <b>Metadata Info</b> options.  This will create a 3-panel view that allows you to review TIFF and JPEG images as shown below.</p>
 
     ![menu](nomacs-panels.png)
 
