@@ -87,7 +87,7 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
-    - this should work exactly like the TIFF processing except you select JPEG on the opening menu
+    - Note:  this should work exactly like the TIFF processing except you select JPEG on the opening menu
 
  8. Post-processing spot checks
 
