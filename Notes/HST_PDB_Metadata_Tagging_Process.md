@@ -2,7 +2,7 @@
 
 <p align="justify"> last update: 2023-12-11 1830 </p>
 
-The following describes the steps to apply metadata tags to photos from the Truman Library Photo Database (PDB).
+The following describes the steps to apply IPTC metadata tags to photos from the Truman Library Photo Database (PDB).
 
 ### Steps required before the tagging process can begin
 
