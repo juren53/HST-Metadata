@@ -30,3 +30,6 @@ https://docs.google.com/document/d/1aHGan-E0419TIMq5b5rE3CMicFPkbD7ik_PmYKqgG6I/
 ## Phase 2  - Audio Metadata and Uploads to the NARA Catalogue
 
 This portion of the Project will embed metadata from the Truman Library archives into approximately 2,000 audio files (WAV and MP3).
+
+Detail in LAA's spreadsheet at:  
+https://docs.google.com/spreadsheets/d/1az1lfPcJaxykMZcZc-NhdrHSoM4wtenxdqeaGfeFPaE/edit?usp=sharing
