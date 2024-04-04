@@ -124,7 +124,7 @@ This command will copy both the audio and the album art into the output file wit
 Once you run this command, the album art should be embedded in the output MP3 file and should display correctly when played in Windows Media Player, VidoLan VLC, Apple iTunes, and WinAmp.
 
 
-Here is the same command parsed to make it readable and still executable from a command line:
+Here is the same command parsed into descrete commands to make it readable and still executable from a command line:
 
 ```
 ffmpeg -i "SR59-12 BlackHawkWaltz_tagged.mp3"
@@ -134,12 +134,13 @@ ffmpeg -i "SR59-12 BlackHawkWaltz_tagged.mp3"
 output.mp3
 ```
 
-#### Adding AMs to thembnails
+#### Adding Accession Numbers to thembnails
 
 To make each thumbnail unique before embedding in an mp3 file, the Accession Number can be embedded in a copy of the 'standard thumbnail' so that users/researchers 
 who may have a collection of Truman Library audio files can differentiate the files by the thumbnail.
 ```
-ffmpeg -i output.jpg 
+ffmpeg -i HST-thumbnail.jpg 
 -vf "drawtext=text='SR59-12':x=10:y=10:fontsize=24:fontcolor=white:box=1:boxcolor=black@0.5" 
 output.jpg
 ```
+Then the 'temporary' output.jpg thumbnail can be used to embed in the mp3 file.
