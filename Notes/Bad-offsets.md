@@ -1,9 +1,8 @@
 ### Discovery of Bad Offsets and other Malformed Metadata in JPEG images
 
-The following are a collection of bash scripts that reveal bad offsets and other malformed metadata 
-in JPEG images using exiftool and various bash utilities 
-that create problems when uploaded
-to the Catalog
+The following are a collection of bash scripts using ExifTool and various bash utilities that assist in revealing bad offsets and other malformed metadata
+in JPEG and TIFF images that create problems when uploaded to the Catalog. 
+<br>
 
 ```
 for file in *.jpg; do
