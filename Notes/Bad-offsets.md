@@ -1,4 +1,4 @@
-### Discovery of Bad Offsets and other Bad Actors in JPEG images
+### Discovery of Bad Offsets and other Malformed Metadata in JPEG images
 
 The following are a collection of bash scripts that reveal bad offsets and other malformed metadata 
 in JPEG images using exiftool and various bash utilities 
