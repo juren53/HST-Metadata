@@ -54,9 +54,9 @@ done
 ```
 
 Loops through all the JPEGs in the current directory printing the filename, number of tags, Modify Date [if it finds one] and the Warning tag [if it finds one].
-```
-72-1883.jpg
-Number of tags:     89
-Modify Date                     : 2023:04:28 09:56:58
-Warning : Bad ExifOffset SubDirectory start
-```
+
+  72-1883.jpg  <br>
+  Number of tags:     89 <br>
+  Modify Date                     : 2023:04:28 09:56:58 <br>
+  Warning : Bad ExifOffset SubDirectory start <br>
+
