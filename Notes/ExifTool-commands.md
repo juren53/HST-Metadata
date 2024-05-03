@@ -1,8 +1,10 @@
 ### ExifTool Commands
 
-ExifTool Validation/Error Checking Command:
+##### ExifTool Validation/Error Checking Command:
+
+ExifTool can list just the error and warning messages for each file in a directory
 ```
-exiftool -validate -warning -error -a *.jpg | less
+exiftool -validate -warning -error -a *.jpg 
 ```
 produces a report that look like:
 ```
@@ -35,7 +37,9 @@ Warning                         : [minor] Missing required JPEG IFD0 tag 0x0213 
 ```
 
 
-ExifTool Detailed Listing:
+##### ExifTool Detailed Listing:
+
+ExifTool can report a detailed list of all tags, pesudo tags and waring or error messages. 
 ```
 exiftool -a -G0:1 -s *.jpg|more
 ```
