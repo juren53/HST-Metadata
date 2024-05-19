@@ -36,10 +36,46 @@ Warning                         : [minor] IFD0 tag 0x011c PlanarConfiguration is
 Warning                         : [minor] Missing required JPEG IFD0 tag 0x0213 YCbCrPositioning
 ```
 
+##### exiv2 Error & Warning Listing:
+
+The following command lists all the errors and warnings for an image file
+
+```
+exiv2 -pa -k "warning" -k "error" <path_to_your_image.jpg>
+```
+
+```
+error" 72-88.jpg
+warning: Failed to open the file
+-k: Failed to open the file
+error: Failed to open the file
+Warning: Directory Image, entry 0x0111: Strip 0 is outside of the data area; ignored.
+Error: Directory Image, entry 0x8769 Sub-IFD pointer 0 is out of bounds; ignoring it.
+Warning: Ignoring XMP information encoded in the Exif data.
+72-88.jpg             Exif.Image.NewSubfileType                    Long        1  Primary image
+72-88.jpg             Exif.Image.ImageWidth                        Long        1  645
+72-88.jpg             Exif.Image.ImageLength                       Long        1  800
+72-88.jpg             Exif.Image.BitsPerSample                     Short       1  8
+72-88.jpg             Exif.Image.Compression                       Short       1  Uncompressed
+72-88.jpg             Exif.Image.PhotometricInterpretation         Short       1  Black Is Zero
+72-88.jpg             Exif.Image.StripOffsets                      Long        1  11442
+72-88.jpg             Exif.Image.SamplesPerPixel                   Short       1  1
+72-88.jpg             Exif.Image.RowsPerStrip                      Short       1  2925
+72-88.jpg             Exif.Image.StripByteCounts                   Long        1  6894225
+72-88.jpg             Exif.Image.XResolution                       Rational    1  100
+72-88.jpg             Exif.Image.YResolution                       Rational    1  100
+72-88.jpg             Exif.Image.ResolutionUnit                    Short       1  inch
+72-88.jpg             Exif.Image.Software                          Ascii      29  Adobe Photoshop Elements 2.0
+72-88.jpg             Exif.Image.DateTime                          Ascii      20  2012:05:14 08:31:32
+72-88.jpg             Exif.Image.XMLPacket                         Byte      5036  60 63 120 112 97 99 107 101 116 32 98 101 103 105 110 61 39 239 187 191 39 32 105 100 61 39 87 53 77 .
+72-88.jpg             Exif.Image.ImageResources                    Byte      6110  56 66 73 77 4 37 0 0 0 0 0 16 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 56 66 73 77 3 237 0 0 0 0 0 16 1 44 0  
+72-88.jpg             Exif.Image.ExifTag                           Long        1  6905668
+
+```
 
 ##### ExifTool Detailed Listing:
 
-ExifTool can report a detailed list of all tags, pesudo tags and waring or error messages. 
+ExifTool can report a detailed list of all tags, pesudo tags and waring or error messages showing which group each tag belongs too. 
 ```
 exiftool -a -G0:1 -s *.jpg|more
 ```
