@@ -7,10 +7,13 @@ The following is a list of CLI comands with brief descriptions to aid in diagnos
 |:------|---------------|
 |       |ExifTool commands|
 | exiftool -a -G0:1 -s *.jpg | Detail metadata listing  (ExifTool)           |
+| exiftool -iptc:all *.jpg|  List just IPTC tags (ExifTool)             |
 | exiftool -validate -warning -error -a *.jpg | Detailed metadata error/warning listing  (ExifTool)              |
 |       |exiv2 commands|
 | exiv2 -pt *.jpg    |   Detail metadata listing  (exiv2)              |
 | exiv2 -pa -k "warning" -k "error" *.jpg|  Detailed metadata error/warning listing  (exiv2)             |
-|     3|               |
-|     3|               |
+|     -|               |
+|     -|               |
 
+
+2024-05-24
