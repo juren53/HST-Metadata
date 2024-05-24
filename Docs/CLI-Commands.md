@@ -5,6 +5,6 @@ The following is a list of CLI comands with brief descriptions to aid in diagnos
 
 | Commands | Description |
 |:------|---------------|
-| exiftool -a -G0:1 -s *.jpg | Detail metadata listing  (ExifTool)           |
+|       exiftool -a -G0:1 -s *.jpg | Detail metadata listing  (ExifTool)           |
 | exiftool -validate -warning -error -a *.jpg | Detailed metadata error/warning listing  (ExifTool)              |
 |     3|               |
