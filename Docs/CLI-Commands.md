@@ -14,7 +14,7 @@ CLI - Commands Line Interface i.e. terminal commands.
 | exiv2 -pt *.jpg    |   Detail metadata listing  (exiv2)              |
 | exiv2 -pa -k "warning" -k "error" *.jpg|  Detailed metadata error/warning listing  (exiv2)             |
 |     -|               |
-|     -|               |
+| exiftool -tagsfromfile input.jpg -IPTC:all output.jpg | Extracts just IPTC tags from input.jpg and embeds them in output.jpg   |
 
 
 Fri 24 May 2024 03:17:35 PM CDT
