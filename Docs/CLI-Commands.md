@@ -1,4 +1,6 @@
-CLI Commands
+CLI Image Metadata Commands
+
+The following is a list of CLI comands with brief descriptions to aid in diagnosing metadata issues.  CLI - Commands Line Interface i.e. terminal commands.
 
 | Commands | Description |
 |:------|---------------|
