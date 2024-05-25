@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
-# ############   fix-offsets.py  v0.1  ################
+# ############   fix-offsets.py  v0.2  ################
 # THis program offset and warning errors that cause
 # JPEG images uploaded to NARA Catalog for fail.
 # I uses ExifTool and FFjpeg to fix the JPEG image file.
 #    
 #  Created 	Sat 25 May 2024 02:37:51 PM CDT
+#  Updated  Sat 25 May 2024 02:57:22 PM CDT   added ExifTool validation at end
 #-----------------------------------------------------------
 
 
@@ -54,5 +55,9 @@ shutil.copy(output_file,source_file)
 
 # Delete temp input and output files
 command = f'rm *put.jpg*'
+subprocess.run(command, shell=True, check=True)
+
+# ExifTool validation checker
+command = f'exiftool -validate -warning -error -a '+ source_file
 subprocess.run(command, shell=True, check=True)
 
