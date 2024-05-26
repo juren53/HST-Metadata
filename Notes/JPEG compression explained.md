@@ -1,6 +1,6 @@
-#### JPEG compression explained
+## JPEG compression explained
 
-# and why applicaltions can take the same image and create widely differing file sizes
+##### and why applicaltions can take the same image and create widely differing file sizes
           
 JPEG (Joint Photographic Experts Group) compression is a method used to reduce the size of digital images without significantly degrading their quality. It achieves this through  a process called "discrete cosine transform" (DCT), which transforms the image data from spatial domain to frequency domain. This transformation allows the algorithm to identify and remove high-frequency components that contribute less to the visual appearance of the image, thus reducing the amount of data needed to represent it.
 
