@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
-# ############   fix-offsets.py  v0.3  ################
+# ############   fix-offsets.py  v0.4  ################
 # THis program offset and warning errors that cause
 # JPEG images uploaded to NARA Catalog for fail.
 # I uses ExifTool and FFjpeg to fix the JPEG image file.
@@ -8,6 +8,7 @@
 #  Created 	Sat 25 May 2024 02:37:51 PM CDT
 #  Updated  Sat 25 May 2024 02:57:22 PM CDT   added ExifTool validation to end 
 #  Updated  Sun 26 May 2024 01:55:28 AM CDT   added argparse messages & comments
+#  Updated  Sun 26 May 2024 01:55:28 AM CDT   added ExifTool detailed listing
 #-----------------------------------------------------------
 
 
@@ -19,7 +20,7 @@ import subprocess # Import subprocess library
 parser = argparse.ArgumentParser(
     prog='fix-offsets.py',
     description='This program fixes the offset errors and warning messages in JPEG files',
-    epilog='Ver 0.3'
+    epilog='Ver 0.4'
 )
 
 # Add filename argument
@@ -51,8 +52,6 @@ subprocess.run(command, shell=True, check=True)
 
 # Copy tempory fixed output.jpg to original {accession-no).jpg filename
 shutil.copy(output_file,source_file)
-#command = f'cp output.jpg filename'
-#subprocess.run(command, shell=True, check=True)
 
 # Delete temp input and output files
 command = f'rm *put.jpg*'
@@ -61,4 +60,9 @@ subprocess.run(command, shell=True, check=True)
 # ExifTool validation checker
 command = f'exiftool -validate -warning -error -a '+ source_file
 subprocess.run(command, shell=True, check=True)
+
+# ExifTool detailed listing
+command = f'exiftool -a -G0:1 -s '+ source_file
+subprocess.run(command, shell=True, check=True)
+
 
