@@ -1,27 +1,28 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
-# ############   fix-offsets.py  v0.2  ################
+# ############   fix-offsets.py  v0.3  ################
 # THis program offset and warning errors that cause
 # JPEG images uploaded to NARA Catalog for fail.
 # I uses ExifTool and FFjpeg to fix the JPEG image file.
 #    
 #  Created 	Sat 25 May 2024 02:37:51 PM CDT
-#  Updated  Sat 25 May 2024 02:57:22 PM CDT   added ExifTool validation at end
+#  Updated  Sat 25 May 2024 02:57:22 PM CDT   added ExifTool validation to end 
+#  Updated  Sun 26 May 2024 01:55:28 AM CDT   added argparse messages & comments
 #-----------------------------------------------------------
 
 
 import argparse
-import shutil     # Python file copy 
-import subprocess # Import subprocess
+import shutil     # Import file copy library
+import subprocess # Import subprocess library
 
 # Create argument parser
 parser = argparse.ArgumentParser(
-    prog='ProgramName',
-    description='What the program does',
-    epilog='Text at the bottom of help'
+    prog='fix-offsets.py',
+    description='This program fixes the offset errors and warning messages in JPEG files',
+    epilog='Ver 0.3'
 )
 
-# Add arguments
+# Add filename argument
 parser.add_argument('filename') # Source file path
 
 # Parse arguments
