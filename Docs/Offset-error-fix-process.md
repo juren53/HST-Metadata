@@ -4,11 +4,11 @@ The following steps fix the offset errors and warning messages reported by
 ExifTool and exiv2 metadata utilities. These steps outline how a program would automate the process and 
 make the JPEG images viewable in the NARA Catalog.
 
-Remove all meta-tags and fix offset errors in post-processed JPEG using FFmpeg
+1. Remove all meta-tags and fix offset errors in post-processed JPEG using FFmpeg
 ```
     ffmpeg -i {accession-no}.jpg output.jpg
 ```
-copy post-processed.jpg to temporary input file using copy command
+2. copy post-processed.jpg to temporary input file using copy command
 ```
     cp {accession-no}.jpg input.jpg
 ```
