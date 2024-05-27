@@ -1,5 +1,7 @@
 ### Description of Process to Fix Offset Errors and Warnings in JPEG images
 
+The following steps fixthe offset errors and warning messages reported by
+ExifTool and exiv2 metadata utilities and outlines how a Python program should work
 
 Remove all meta-tags and fix offset errors in post-processed JPEG using FFmpeg
 ```
