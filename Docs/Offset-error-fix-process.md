@@ -1,6 +1,6 @@
 ### Description of Process to Fix Offset Errors and Warnings in JPEG images
 
-The following steps fix the offset errors and warning messages reported by
+The following steps fix the offset errors and warning messages associated with JPEG image files reported by
 ExifTool and exiv2 metadata utilities. These steps outline how a program would automate the process and 
 make the JPEG images viewable in the NARA Catalog.
 
