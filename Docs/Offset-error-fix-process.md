@@ -28,3 +28,4 @@ make the JPEG images viewable in the NARA Catalog.
 ```
     exiftool -a -G0:1 -s {accession-no}.jpg
 ```
+Mon 27 May 2024 05:46:42 PM CDT
