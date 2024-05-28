@@ -12,7 +12,7 @@ make the JPEG images viewable in the NARA Catalog.
 ```
     cp {accession-no}.jpg input.jpg
 ```
-3. extract IPTC tags from post-processed.jpg and embedd tags into output.jpg using ExifTool
+3. extract IPTC tags from post-processed.jpg and embed tags into output.jpg using ExifTool
 ```
     exiftool -tagsfromfile input.jpg -IPTC:all output.jpg
 ```
