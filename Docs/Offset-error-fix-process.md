@@ -2,9 +2,10 @@
 
 The following steps fix the offset errors and warning messages associated with JPEG image files reported by
 ExifTool and exiv2 metadata utilities. These steps outline how a program would automate the process and 
-make the JPEG images viewable in the NARA Catalog.
+make the JPEG images viewable in the NARA Catalog. This process assumes that HSTL compressed JPEG images are 
+intended for efficient Web access and the larger TIFF master files are off-line, available on request from HSTL A/V Archives.
 
-1. Remove all metadata tags in 'post-processed.jpg' file using FFmpeg
+1. Remove all metadata tags in 'post-processed.jpg' file using FFmpeg. Note: all EXIF and XMP meta will be available in the TIFF master file.
 ```
     ffmpeg -i {accession-no}.jpg output.jpg
 ```
