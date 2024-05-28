@@ -4,7 +4,7 @@ The following steps fix the offset errors and warning messages associated with J
 ExifTool and exiv2 metadata utilities. These steps outline how a program would automate the process and 
 make the JPEG images viewable in the NARA Catalog.
 
-1. Remove all metadata tags in post-processed JPEG using FFmpeg
+1. Remove all metadata tags in 'post-processed.jpg' file using FFmpeg
 ```
     ffmpeg -i {accession-no}.jpg output.jpg
 ```
