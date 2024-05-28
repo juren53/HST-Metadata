@@ -8,23 +8,23 @@ make the JPEG images viewable in the NARA Catalog.
 ```
     ffmpeg -i {accession-no}.jpg output.jpg
 ```
-2. copy post-processed.jpg to temporary input file using copy command
+2. Copy 'post-processed.jpg' to temporary input file using a copy command.
 ```
     cp {accession-no}.jpg input.jpg
 ```
-3. extract IPTC tags from post-processed.jpg and embed tags into output.jpg using ExifTool
+3. Extract IPTC metadata from 'post-processed.jpg' and then embed it into 'output.jpg' using ExifTool.
 ```
     exiftool -tagsfromfile input.jpg -IPTC:all output.jpg
 ```
-4. copy output.jpg to original filename {accession-no}.jpg using copy command
+4. Copy output.jpg to original filename {accession-no}.jpg using copy command
 ```
     cp output.jp {accession-no}.jpg
 ```
-5. confirm 0 errors/warnings in new JPEG file using ExifTool
+5. Confirm 0 errors/warnings in new JPEG file using ExifTool
 ```
     exiftool -validate -warning -error -a {accession-no}.jpg
 ```
-6. list IPTC metadata in new JPEG file using ExifTool
+6. List IPTC metadata in new JPEG file using ExifTool
 ```
     exiftool -a -G0:1 -s {accession-no}.jpg
 ```
