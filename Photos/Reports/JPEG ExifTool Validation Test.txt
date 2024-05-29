@@ -1,0 +1,29 @@
+
+JPEG ExifTool Validation Test
+
+
+
+59 Series       2621 images    0 Oks    6189 offset errors
+
+72 Series        587 images    O Oks    1600 offset errors   545  StripOffsets+StripByteCounts
+
+96 Series       1405 images    0 Oks    4082 offset errors
+99 Series        833 images    0 Oks    2322 offset errors  
+2000 Series      161 images    0 Oks     466 offset errors   
+2001 Series      162 images    0 Oks     469 offset errors  
+2002 Series      327 images    0 Oks     954 offset errors
+
+
+
+
+Bad Boy errors:
+
+Validate                        : 17 Warnings (11 minor)
+Warning                         : Bad offset for IFD0 StripByteCounts
+Warning                         : Bad offset for IFD0 XResolution
+Warning                         : Bad offset for IFD0 YResolution
+Warning                         : Bad offset for IFD0 PhotoshopSettings
+Warning                         : Bad offset for IFD0 ICC_Profile
+Warning                         : IFD0:StripOffsets is missing the corresponding size tag
+
+41 of 72 Series show these errors
