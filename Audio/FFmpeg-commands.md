@@ -134,7 +134,7 @@ ffmpeg -i "SR59-12 BlackHawkWaltz_tagged.mp3"
 output.mp3
 ```
 
-#### Adding Accession Numbers to thembnails
+#### Adding Accession Numbers to thumbnails
 
 To make each thumbnail unique before embedding in an mp3 file, the Accession Number can be embedded in a copy of the 'standard thumbnail' so that users/researchers 
 who may have a collection of Truman Library audio files can differentiate the files by the thumbnail.
