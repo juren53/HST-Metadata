@@ -88,7 +88,6 @@ When you run this command, ffmpeg will output metadata information for the speci
 You can also use the following command to display metadata in a more human-readable format:
 ```
 bash
-Copy code
 ffprobe -i input.mp3 -show_format -show_streams
 ```
 
