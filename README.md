@@ -33,3 +33,9 @@ This portion of the Project will embed metadata from the Truman Library archives
 
 Detail in LAA's spreadsheet at:  
 https://docs.google.com/spreadsheets/d/1az1lfPcJaxykMZcZc-NhdrHSoM4wtenxdqeaGfeFPaE/edit?usp=sharing
+
+## Phase 3  - Video Metadata and Uploads to the NARA Catalog
+
+This portion of the Project will embed metadata from the Truman Library archives into video files currently in the HSTL archives
+
+
