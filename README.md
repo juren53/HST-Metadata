@@ -1,4 +1,4 @@
-# Truman Library Metadata Project
+# Truman Library Audio Visual Metadata Project
 
 
 The purpose of this project is to adapt and develop tools that can embed metadata in media files at the Harry S. Truman Presidential Library i.e. photos, audio, and video files. 
