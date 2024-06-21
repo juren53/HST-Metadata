@@ -27,7 +27,7 @@ JPGs to the NARA catalog for public use.
 More detail in LAA's Project Overview at:
 https://docs.google.com/document/d/1aHGan-E0419TIMq5b5rE3CMicFPkbD7ik_PmYKqgG6I/edit
 
-## Phase 2  - Audio Metadata and Uploads to the NARA Catalogue
+## Phase 2  - Audio Metadata and Uploads to the NARA Catalog
 
 This portion of the Project will embed metadata from the Truman Library archives into approximately 2,000 audio files (WAV and MP3).
 
