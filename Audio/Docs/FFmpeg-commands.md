@@ -62,7 +62,7 @@ IPRD="Name [could be used for an Accession Number?]"
 
 
 ffmpeg -i \
-"SR59-12 BlackHawkWaltz.mp3" \
+input.mp3 \
 -metadata ICOP="Copyright" \
 -metadata ISRC="Source" \
 -metadata ICRD="Date" \
