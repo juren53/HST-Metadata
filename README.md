@@ -31,6 +31,13 @@ https://docs.google.com/document/d/1aHGan-E0419TIMq5b5rE3CMicFPkbD7ik_PmYKqgG6I/
 
 This portion of the Project will embed metadata from the Truman Library archives into approximately 2,000 audio files (WAV and MP3).
 
+### Process steps:
+
+1. Export HST Audio DB metadata to a CSV file.
+2. Create HST thumbnail with accession number
+3. Embed thumbnail and metadate in MP3 file
+4. Upload the MP3s to the NARA Catalog
+
 Detail in LAA's spreadsheet at:  
 https://docs.google.com/spreadsheets/d/1az1lfPcJaxykMZcZc-NhdrHSoM4wtenxdqeaGfeFPaE/edit?usp=sharing
 
