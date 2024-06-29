@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#---------------------audio-read-csv.py  v0.04   --------------------------
+#---------------------audio-read-csv.py  v0.05   --------------------------
 # This code reads from HSTL audio data output from a CSV file.
 # It converts dates from HSTL audio db in DD-MMM-YY format
 # into ISO 8701 standard date formate YYYY-MM-DD and reads 
@@ -9,6 +9,7 @@
 # Updated Wed 25 Jun 2024 01:33:55 AM CDT  Read data from CSV file  ver 0.02
 # Updated Thu 26 Jun 2024 05:43:22 AM CDT  Write tags to MP3 files  ver 0.03
 # Updated Sat 29 Jun 2024 02:13:43 AM CDT  Embed custom thumbnails into MP3 files ver 0.04
+# Updated Sat 29 Jun 2024 09:02:38 AM CDT  Writes tagged MP3s to a processed directory ver 0.05
 
 # ----------------------------------------------------------------
 
@@ -83,6 +84,7 @@ with open('short.csv', 'r') as csvfile:
             'TALB': 'Title: '+an,
             'TCON': 'Genre: speech',
             'TCOP':  restrictions,
+            'TEXT': 'Location: '+place,
             'TIT3': 'Description: '+description,
             'ISRC': 'Source: Harry S. Truman Library',
             'TPE1': 'Artist: Harry S. Truman Library',
@@ -125,7 +127,7 @@ with open('short.csv', 'r') as csvfile:
             'ffmpeg',
             '-i', 'HST-thumbnail-c.png',
             '-y',
-            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=24:fontcolor=yellow:box=1:boxcolor=black@0.5',
+            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=32:fontcolor=yellow:box=1:boxcolor=black@0.5',
             'temp.jpg'
         ]
 
@@ -135,11 +137,12 @@ with open('short.csv', 'r') as csvfile:
         # Constructing the ffmpeg command to add thumbnail to MP3 file
         input_file = an+'-output.mp3'
         thumbnail_file = 'temp.jpg'
-        output_file = an+'output2.mp3'
+        output_file = "processed/"+an+'.mp3'
 
         thumbnail_command = [
             'ffmpeg',
             '-i', input_file,
+            '-y',
             '-i', thumbnail_file,
             '-map', '0',
             '-map', '1',
@@ -148,6 +151,7 @@ with open('short.csv', 'r') as csvfile:
             '-metadata:s:v', 'title="Album cover"',
             '-metadata:s:v', 'comment="Cover (Front)"',
             output_file
+
         ]
 
         # Execute the ffmpeg command to add thumbnail to MP3 file
