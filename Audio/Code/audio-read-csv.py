@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-#---------------------audio-read-csv.py  v0.03--------------------------
-# This code reads from HSTL audio data output to a CSV file.
+#---------------------audio-read-csv.py  v0.04   --------------------------
+# This code reads from HSTL audio data output from a CSV file.
 # It converts dates from HSTL audio db in DD-MMM-YY format
 # into ISO 8701 standard date formate YYYY-MM-DD and reads 
 # column headings in the CSV file as variable names
 # 
 # Created Tue 24 Jun 2024 04:22:44 PM CDT  Reads dates from LIST_Audio-Dates.txt   ver 0.01
-#
+# Updated Wed 25 Jun 2024 01:33:55 AM CDT  Read data from CSV file  ver 0.02
+# Updated Thu 26 Jun 2024 05:43:22 AM CDT  Write tags to MP3 files  ver 0.03
+# Updated Sat 29 Jun 2024 02:13:43 AM CDT  Embed custom thumbnails into MP3 files ver 0.04
 
 # ----------------------------------------------------------------
 
@@ -130,10 +132,22 @@ with open('short.csv', 'r') as csvfile:
         # Run the FFmpeg command that creates the custom thumbnail
         subprocess.run(cmd)
 
-        
         # Constructing the ffmpeg command to add thumbnail to MP3 file
+        input_file = an+'-output.mp3'
+        thumbnail_file = 'temp.jpg'
+        output_file = an+'output2.mp3'
+
         thumbnail_command = [
-            'ffmpeg -i {an+"-output.mp3"} -i output.jpg -map 0 -map 1 -c copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (Front)" output-2.mp3'
+            'ffmpeg',
+            '-i', input_file,
+            '-i', thumbnail_file,
+            '-map', '0',
+            '-map', '1',
+            '-c', 'copy',
+            '-id3v2_version', '3',
+            '-metadata:s:v', 'title="Album cover"',
+            '-metadata:s:v', 'comment="Cover (Front)"',
+            output_file
         ]
 
         # Execute the ffmpeg command to add thumbnail to MP3 file
