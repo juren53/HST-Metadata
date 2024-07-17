@@ -109,7 +109,7 @@ with open(csv_filename, 'r') as csvfile:
         # Constructing the ffmpeg command
         ffmpeg_command = [
             'ffmpeg',
-            '-i', input_file,Only 
+            '-i', input_file,
             '-y',
         ]
 
