@@ -1,0 +1,7 @@
+dir %windir%\Fonts /s /b
+
+ffmpeg -i HST-thumbnail-c.png -vf "drawtext=text='Hello World':fontfile='C:/Windows/Fonts/Arial.ttf':fontsize=24:fontcolor=yellow" output.jpg
+
+ffmpeg -i HST-thumbnail-c.png -vf "drawtext=text='SR 59-4536-01':fontfile='C:/Windows/Fonts/Arialbd.ttf':fontsize=24:fontcolor=yellow:x=10:y=10" output.jpg
+
+ffmpeg -i HST-thumbnail-c.png -vf "drawtext=text='Hello World':fontfile='C:/Windows/Fonts/Arial.ttf':fontsize=24:fontcolor=yellow:x=100:y=200:boxcolor=black@0.5" output.jpg
