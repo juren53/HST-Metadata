@@ -143,3 +143,8 @@ ffmpeg -i HST-thumbnail.jpg
 output.jpg
 ```
 Then the 'temporary' output.jpg thumbnail can be used to embed in the mp3 file.
+
+#### Windows ffmpeg command to write ANs to JPEG album art
+```
+ ffmpeg -i HST-thumbnail-c.png -vf "drawtext=text='SR59-125-001':fontfile='C\:/Windows/Fonts/Arialbd.ttf':fontsize=24:fontcolor=yellow:x=10:y=25:boxcolor=black@0.5" output.jpg
+```
