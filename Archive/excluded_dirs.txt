@@ -1,0 +1,4 @@
+# Excluded drectories from recent listing
+C:\Users\jimur\local\bin\
+C:\Users\jimur\AppData\
+C:\Users\jimur\IntelGraphicsProfiles
