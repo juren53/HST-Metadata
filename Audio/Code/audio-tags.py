@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#---------------------audio-tags.py  v0.07   --------------------------
+#---------------------audio-tags.py  v0.09   --------------------------
 # Preliminarily named audio-read-csv.py v 0.01 - 0.06 now called audio-tags.py
 # This code reads from HSTL audio data output from a CSV file.
 # It converts dates from HSTL audio db in DD-MMM-YY format
@@ -13,13 +13,16 @@
 # Updated Sat 29 Jun 2024 09:02:38 AM CDT  Writes tagged MP3s to a processed directory ver 0.05
 # Updated Sun 30 Jun 2024 03:10:22 AM CDT  Writes temporary output files to 'tmp/' directory ver 0.06
 # Updated Mon 01 Jul 2024 01:09:29 PM CDT  Renamed to audio-tags.py & csv_filename variable created ver 0.07
+# Updated Wed 03 Jul 2024 08:15:58 AM CDT  Fixed single digit day problem - dt.isoformat()[:10][-2:] ver 0.08
+# Updated Sat 31 Aug 2024 07:02:14 PM CDT  Using updated tag list from LAA email of 2024-08-13 ver 0.09
 # ----------------------------------------------------------------
 
 import csv
 import datetime
 
-#csv_filename = "short.csv"
-csv_filename = "two.csv"
+# name of CSV file with metadata from HSTL database
+csv_filename = "short.csv"
+#csv_filename = "two.csv"
 
 # Define a dictionary to map month abbreviations to numbers
 month_map = {
@@ -43,7 +46,7 @@ with open(csv_filename, 'r') as csvfile:
         copyright = row['Production and Copyright']
         description = row['Description']
 
-        
+        ##### Date Conversion Section ##################
         # Split the date string into components
         components = date_str.split('-')
         if len(components) != 3:
@@ -62,7 +65,7 @@ with open(csv_filename, 'r') as csvfile:
         except ValueError:
             print(f"Invalid date: {date_str}")
             continue
-
+        ###############################################
 
         # Build filename variable from accession number variable + .mp3 extension
         filename = an+".mp3"
@@ -83,26 +86,35 @@ with open(csv_filename, 'r') as csvfile:
         metadata = {
             'COMM': 'Description: '+description,
             'ISBJ': 'Description: '+description,
-            'IPLS': 'Involved People: Harry Truman',
-            'IPRD': 'Accession Number: '+an,
+
             'TIT1': 'Grouping: NARA-HST-SRC Sound Recordings Collection',
-            'TIT2': 'Title: '+an,
-            'TALB': 'Title: '+an,
-            'TCON': 'Genre: speech',
-            'TCOP':  restrictions,
-            'TEXT': 'Location: '+place,
-            'TIT3': 'Description: '+description,
-            'ISRC': 'Source: Harry S. Truman Library',
+            'TIT2': 'Title: '+title,
+            'TIT3': 'Description: '+description, 
+            'TALB': 'Accession Number: '+an,
+            'IPRD': 'Accession Number: '+an,
             'TPE1': 'Artist: Harry S. Truman Library',
-            'TPUB': 'Publisher: '+copyright,
-            'TDAT': 'Date DDMM: '+str(day)+str(month_num),
+            'IPLS': 'Speakers: Harry Truman',
+            'TCOP': 'Restrictions: ' +restrictions,
+            'TPUB': 'Publisher: '+copyright,        
+            'ISRC': 'Source: Harry S. Truman Library',
+            'TLOC': 'Location: '+place,
+
+
+            'ICRD': 'Date String: '+date_str,
+            'TDAT': 'Date DDMM: '+dt.isoformat()[:10][-2:]+str(month_num),
             'TYER': 'Date YYYY: '+str(year),
-            'TOFN': 'Original File Name: '+filename,
             'TORY': 'Original Release Year: '+str(year),
             'TRDA': 'Recording Date: '+dt.isoformat()[:10],
-            'ICRD': 'Date String: '+date_str,
-            'WDAS': 'Source URL: https://www.trumanlibrary.gov/library/sound-recordings-collection',
+
+            'TOFN': 'Original File Name: '+filename,
+
+            'WOAS': 'Source URL: https://www.trumanlibrary.gov/library/sound-recordings-collection',
             'WXXX': 'NAC URL: https://catalog.archives.gov/',
+            'TEXT': 'HSTL Tagging Software: audio-tags-09.py using FFmpeg [2nd round of testing]'
+
+            #'TCON': 'Genre: speech',
+            #'TEXT': 'Location: '+place,
+            #'TIT3': 'Description: '+description, 
             # Add more metadata fields as needed
         }
 
@@ -155,7 +167,7 @@ with open(csv_filename, 'r') as csvfile:
             '-map', '1',
             '-c', 'copy',
             '-id3v2_version', '3',
-            '-metadata:s:v', 'title="Album cover"',
+            '-metadata:s:v', 'title="HST icon"',
             '-metadata:s:v', 'comment="Cover (Front)"',
             output_file
 
