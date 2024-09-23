@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#---------------------audio-tags.py  v0.09   --------------------------
+#---------------------audio-tags.py  v0.11   --------------------------
 # Preliminarily named audio-read-csv.py v 0.01 - 0.06 now called audio-tags.py
 # This code reads from HSTL audio data output from a CSV file.
 # It converts dates from HSTL audio db in DD-MMM-YY format
@@ -15,14 +15,15 @@
 # Updated Mon 01 Jul 2024 01:09:29 PM CDT  Renamed to audio-tags.py & csv_filename variable created ver 0.07
 # Updated Wed 03 Jul 2024 08:15:58 AM CDT  Fixed single digit day problem - dt.isoformat()[:10][-2:] ver 0.08
 # Updated Sat 31 Aug 2024 07:02:14 PM CDT  Using updated tag list from LAA email of 2024-08-13 ver 0.09
+# Updated Sat 21 Sep 2024 09:33:45 PM CDT  Code moved to Win11; removed tag prefixes; used updated album cover
 # ----------------------------------------------------------------
 
 import csv
 import datetime
 
 # name of CSV file with metadata from HSTL database
-csv_filename = "short.csv"
-#csv_filename = "two.csv"
+#csv_filename = "short.csv"
+csv_filename = "audio.csv"
 
 # Define a dictionary to map month abbreviations to numbers
 month_map = {
@@ -84,33 +85,34 @@ with open(csv_filename, 'r') as csvfile:
 
         # Metadata dictionary
         metadata = {
-            'COMM': 'Description: '+description,
-            'ISBJ': 'Description: '+description,
+            'COMM': description,                                            # 'Description: '+
+            'ISBJ': description,                                            # 'Description: '+
 
-            'TIT1': 'Grouping: NARA-HST-SRC Sound Recordings Collection',
-            'TIT2': 'Title: '+title,
-            'TIT3': 'Description: '+description, 
-            'TALB': 'Accession Number: '+an,
-            'IPRD': 'Accession Number: '+an,
-            'TPE1': 'Artist: Harry S. Truman Library',
-            'IPLS': 'Speakers: Harry Truman',
-            'TCOP': 'Restrictions: ' +restrictions,
-            'TPUB': 'Publisher: '+copyright,        
-            'ISRC': 'Source: Harry S. Truman Library',
-            'TLOC': 'Location: '+place,
+            'TIT1': 'NARA-HST-SRC Sound Recordings Collection',             # Grouping: 
+            'TIT2': title,                                                  # 'Title: '+
+            'TIT3': description,                                            # 'Description: '+ 
+            'TALB': an,                                                     # 'Accession Number: '+
+            'IPRD': an,                                                     # 'Accession Number: '+
+            'TPE1': 'Harry S. Truman Library',
+            'IPLS': 'Harry Truman',
+            'TCOP': restrictions,                                           # 'Restrictions: ' +
+            'TPUB': copyright,                                              # 'Publisher: '+
+            'ISRC': 'Harry S. Truman Library',                              # Source: 
+            'TLOC': place,                                                  # 'Location: '+
 
+            'ICRD': date_str,                                               # 'Date String: '+
+            'TDAT': dt.isoformat()[:10][-2:]+str(month_num),                # 'Date DDMM: '+
+            'TYER': str(year),                                              # 'Date YYYY: '+
+            'TORY': str(year),                                              # 'Original Release Year: '+
+            'TRDA': dt.isoformat()[:10],                                    # 'Recording Date: '+
 
-            'ICRD': 'Date String: '+date_str,
-            'TDAT': 'Date DDMM: '+dt.isoformat()[:10][-2:]+str(month_num),
-            'TYER': 'Date YYYY: '+str(year),
-            'TORY': 'Original Release Year: '+str(year),
-            'TRDA': 'Recording Date: '+dt.isoformat()[:10],
+            'TOFN': filename,                                               # 'Original File Name: '+
+            'TCON': 'speech',                                               # Genre: 
 
-            'TOFN': 'Original File Name: '+filename,
 
             'WOAS': 'Source URL: https://www.trumanlibrary.gov/library/sound-recordings-collection',
             'WXXX': 'NAC URL: https://catalog.archives.gov/',
-            'TEXT': 'HSTL Tagging Software: audio-tags-09.py using FFmpeg [2nd round of testing]'
+            'TEXT': 'HSTL Tagging Software: audio-tags-11.py using FFmpeg [3rd round of testing]'
 
             #'TCON': 'Genre: speech',
             #'TEXT': 'Location: '+place,
@@ -145,8 +147,7 @@ with open(csv_filename, 'r') as csvfile:
             'ffmpeg',
             '-i', 'HST-thumbnail-c.png',
             '-y',
-            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=32:fontcolor=yellow:box=1:boxcolor=black@0.5',
-            'temp.jpg'
+            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=32:fontcolor=yellow:box=1:boxcolor=black@0.5:fontfile=C:/Windows/Fonts/arial.ttf',            'temp.jpg'
         ]
 
         # Run the FFmpeg command that creates the custom thumbnail
