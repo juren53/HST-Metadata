@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#---------------------audio-tags.py  v0.11   --------------------------
+#---------------------audio-tags.py  v0.12d   --------------------------
 # Preliminarily named audio-read-csv.py v 0.01 - 0.06 now called audio-tags.py
 # This code reads from HSTL audio data output from a CSV file.
 # It converts dates from HSTL audio db in DD-MMM-YY format
@@ -15,7 +15,8 @@
 # Updated Mon 01 Jul 2024 01:09:29 PM CDT  Renamed to audio-tags.py & csv_filename variable created ver 0.07
 # Updated Wed 03 Jul 2024 08:15:58 AM CDT  Fixed single digit day problem - dt.isoformat()[:10][-2:] ver 0.08
 # Updated Sat 31 Aug 2024 07:02:14 PM CDT  Using updated tag list from LAA email of 2024-08-13 ver 0.09
-# Updated Sat 21 Sep 2024 09:33:45 PM CDT  Code moved to Win11; removed tag prefixes; used updated album cover
+# Updated Sat 21 Sep 2024 09:33:45 PM CDT  Code moved to Win11; removed tag prefixes; used updated album cover ver 0.11
+# Updated Sat 05 Oct 2024 22:31:23 PM CDT  Added additional description tags and date appended to desc for Rnd 4 testing ver 0.12d
 # ----------------------------------------------------------------
 
 import csv
@@ -85,18 +86,24 @@ with open(csv_filename, 'r') as csvfile:
 
         # Metadata dictionary
         metadata = {
-            'COMM': description,                                            # 'Description: '+
-            'ISBJ': description,                                            # 'Description: '+
+            'COMM': description+" "+date_str,                                            # 'Description: '+
+            'ISBJ': description+" "+date_str,                                            # 'Description: '+
 
+            'dc:description': description+" "+date_str,                                            # 'Description: '+
+            'xmpDM:logComment': description+" "+date_str,                                          # 'Description: '+
+            '©cmt': description+" "+date_str,                                                      # 'Description: '+
+            
             'TIT1': 'NARA-HST-SRC Sound Recordings Collection',             # Grouping: 
             'TIT2': title,                                                  # 'Title: '+
-            'TIT3': description,                                            # 'Description: '+ 
+            'TIT3': description+" "+date_str,                               # 'Description: '+ 
             'TALB': an,                                                     # 'Accession Number: '+
             'IPRD': an,                                                     # 'Accession Number: '+
             'TPE1': 'Harry S. Truman Library',
             'IPLS': 'Harry Truman',
             'TCOP': restrictions,                                           # 'Restrictions: ' +
             'TPUB': copyright,                                              # 'Publisher: '+
+            '©pub': copyright,                                              # 'Publisher: '+
+                       
             'ISRC': 'Harry S. Truman Library',                              # Source: 
             'TLOC': place,                                                  # 'Location: '+
 
@@ -112,7 +119,7 @@ with open(csv_filename, 'r') as csvfile:
 
             'WOAS': 'Source URL: https://www.trumanlibrary.gov/library/sound-recordings-collection',
             'WXXX': 'NAC URL: https://catalog.archives.gov/',
-            'TEXT': 'HSTL Tagging Software: audio-tags-11.py using FFmpeg [3rd round of testing]'
+            'TEXT': 'HSTL Tagging Software: audio-tags-12d.py using FFmpeg [4th round of testing]'
 
             #'TCON': 'Genre: speech',
             #'TEXT': 'Location: '+place,
@@ -147,7 +154,7 @@ with open(csv_filename, 'r') as csvfile:
             'ffmpeg',
             '-i', 'HST-thumbnail-c.png',
             '-y',
-            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=32:fontcolor=yellow:box=1:boxcolor=black@0.5:fontfile=C:/Windows/Fonts/arial.ttf',            'temp.jpg'
+            '-vf', f'drawtext=text=\'{an}\':x=10:y=10:fontsize=32:fontcolor=yellow:box=1:boxcolor=black@0.5:fontfile=arial.ttf',            'temp.jpg'
         ]
 
         # Run the FFmpeg command that creates the custom thumbnail
