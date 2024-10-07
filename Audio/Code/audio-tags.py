@@ -103,7 +103,8 @@ with open(csv_filename, 'r') as csvfile:
             'TCOP': restrictions,                                           # 'Restrictions: ' +
             'TPUB': copyright,                                              # 'Publisher: '+
             '©pub': copyright,                                              # 'Publisher: '+
-                       
+            'dc:publisher': copyright,                                      # 'Publisher: '+
+                      
             'ISRC': 'Harry S. Truman Library',                              # Source: 
             'TLOC': place,                                                  # 'Location: '+
 
@@ -115,7 +116,6 @@ with open(csv_filename, 'r') as csvfile:
 
             'TOFN': filename,                                               # 'Original File Name: '+
             'TCON': 'speech',                                               # Genre: 
-
 
             'WOAS': 'Source URL: https://www.trumanlibrary.gov/library/sound-recordings-collection',
             'WXXX': 'NAC URL: https://catalog.archives.gov/',
