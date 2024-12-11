@@ -8,7 +8,7 @@ The following describes the steps to apply IPTC metadata tags to photos from the
 
 Before the tagging process can begin, the following steps must be completed:
 
-<p> - a CSV file must be generated from the PDB that contains the metadata to be embedded in the TIFF and JPEG images </p>
+<p> - a CSV data file must be generated from the PDB that contains the metadata to be embedded in the TIFF and JPEG images </p>
 <p> - JPEG images must be generated from the TIFF images </p>
 <p> - JPEG images must be resized to 800 pixels max on either the X or Y axis </p>
 <p> - Copyright watermarks must be added to restricted JPEG images </p>
@@ -53,7 +53,7 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
 
       ... or you can try downloading ```install-files.py``` from the HST GitHub repository and run the command ```python install-files.py ``` in the current working directory
 
-4.  Update headers on CSV file
+4.  Update headers on the CSV data file
 
      - select <b>```2 <cr>``` </b>
   
