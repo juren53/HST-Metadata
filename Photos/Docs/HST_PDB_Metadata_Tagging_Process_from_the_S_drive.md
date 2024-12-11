@@ -1,6 +1,6 @@
-## Truman Library PDB Metadata Tagging Process
+## Truman Library PDB Metadata Tagging Process from the shared S: Drive
 
-<p align="justify"> last update: 2023-12-11 1830 </p>
+<p align="justify"> last update: 2024-12-11 1640 </p>
 
 The following describes the steps to apply IPTC metadata tags to photos from the Truman Library Photo Database (PDB).
 
@@ -15,9 +15,9 @@ Before the tagging process can begin, the following steps must be completed:
 
 ### Tagging process
 
-The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has been set aside as the <b><i>working directory</i></b> where work associated with the metadata tagging process is performed.
+The directory <b>'S:\SCAN\HSTL-Meta-tagging\Photos'</b> on the shared S:drive has been set aside as the <b><i>working directory</i></b> where work associated with the HSTL photo metadata tagging process is performed.
 
-1. Begin by copying the following required files to the <b>```C:\Temp\Metadata-tagging```</b> directory:
+1. Begin by copying the following required files to the <b>```S:\SCAN\HSTL-Meta-tagging\Photos```</b> directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
@@ -25,9 +25,11 @@ The directory <b>'C:\Temp\Metadata-tagging'</b> on the Scanning Workstation has 
 
      ![CMD Window](cmd-window.png)
 
-     - Change to the Current Working Directory by entering: 
+     - Change to the Current Working Directory by entering:
+  
+     <b>``` S: <cr>``` </b>    [ changes to the S: drive ] 
 
-     <b>``` cd c:\Temp\Metadata-tagging <cr>``` </b>    [ changes to the working directory ]
+     <b>``` cd SCAN\HSTL-Meta-tagging\PhotosS:\SCAN\HSTL-Meta-tagging\Photos <cr>``` </b>    [ changes to the working directory ]
 
      - Next, enter:
 
