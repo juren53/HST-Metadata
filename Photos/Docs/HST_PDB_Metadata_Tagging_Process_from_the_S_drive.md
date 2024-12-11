@@ -1,6 +1,6 @@
 ## Truman Library PDB Metadata Tagging Process from the shared S: Drive
 
-<p align="justify"> last update: 2024-12-11 1640 </p>
+<p align="justify"> last update: 2024-12-11 1710 </p>
 
 The following describes the steps to apply IPTC metadata tags to photos from the Truman Library Photo Database (PDB).
 
