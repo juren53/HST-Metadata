@@ -15,9 +15,9 @@ Before the tagging process can begin, the following steps must be completed:
 
 ### Tagging process
 
-The directory <b>'S:\SCAN\HSTL-Meta-tagging\Photos'</b> on the shared S:drive has been set aside as the <b><i>working directory</i></b> where work associated with the HSTL photo metadata tagging process is performed.
+The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has been set aside as the <b><i>working directory</i></b> where work associated with the HSTL photo metadata tagging process is performed.
 
-1. Begin by copying the following required files to the <b>```S:\SCAN\HSTL-Meta-tagging\Photos```</b> directory:
+1. Begin by copying the following required files to the <b>```S:\SCAN\HSTL-Metatagging\Photo```</b> directory:
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
@@ -29,7 +29,7 @@ The directory <b>'S:\SCAN\HSTL-Meta-tagging\Photos'</b> on the shared S:drive ha
   
      <b>``` S: <cr>``` </b>    [ changes to the S: drive ] 
 
-     <b>``` cd SCAN\HSTL-Meta-tagging\PhotosS:\SCAN\HSTL-Meta-tagging\Photos <cr>``` </b>    [ changes to the working directory ]
+     <b>``` cd SCAN\HSTL-Metatagging\Photo <cr>``` </b>    [ changes to the working directory ]
 
      - Next, enter:
 
