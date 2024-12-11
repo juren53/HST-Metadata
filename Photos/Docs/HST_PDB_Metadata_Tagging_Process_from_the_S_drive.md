@@ -21,7 +21,7 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
     - CSV metadata file generated from the PDB
     - all the photos listed in the CSV metadata file
     
-2. Open a Command Window by pressing the Windows Key + R, then type <b>```cmd```</b>.  The following should appear
+2. Open a Command Window by pressing the Windows Key + R, then type <b>```cmd```</b>.  The following new window should appear
 
      ![CMD Window](cmd-window.png)
 
