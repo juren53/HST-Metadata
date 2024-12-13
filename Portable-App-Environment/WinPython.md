@@ -12,4 +12,10 @@ Features
     - Customizable: The integrated package manager (wppm, as WinPython Package Manager) helps installing, uninstalling or upgrading Python packages
     - As WPPM may not support some packages, it's also possible to install or upgrade packages using easy_install or pip from the WinPython command prompt
     - A configuration file allows to set environment variables at runtime
--  
+
+### Directories
+
+WinPython's root directory can be installed at any level of a logical file system.
+
+- Python executable is in the 
+- PIP executable is in the 
