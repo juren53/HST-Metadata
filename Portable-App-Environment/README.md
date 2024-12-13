@@ -5,7 +5,7 @@ This ection contains information and files associated with creating a 'portable 
 When an application is described as "portable," it means the software can run directly from a removable storage device like a USB drive without requiring installation on the host computer's operating system. Here are the key characteristics of a portable application:
 
 1. No Installation Required
-- The application can be run directly from its folder
+- The application can be run directly from its folder or thumb drive
 - No files are installed into system directories
 - No registry entries are created
 - No system-wide changes are made to the computer
