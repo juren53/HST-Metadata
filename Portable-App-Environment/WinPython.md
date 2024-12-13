@@ -25,5 +25,7 @@ Features
 
 WinPython's root directory can be installed at any level of a logical file system.
 
-- Python executable is in the 
-- PIP executable is in the 
+- Python executable is in the WPy64-31241\python-3.12.4.amd64
+- PIP executable is in the WPy64-31241\python-3.12.4.amd64\Scripts
+
+  
