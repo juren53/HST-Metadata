@@ -1,6 +1,7 @@
 ### Portable Application Environment
 
-This section contains information and files associated with creating a 'portable application environment' in MS Windows
+This section contains information and files associated with creating a 'portable application environment' in MS Windows 
+that has proven useful in the HSTL Metadata Project.
 
 When an application is described as "portable," it means the software can run directly from a removable storage device like a USB drive without requiring installation on the host computer's operating system. Here are the key characteristics of a portable application:
 
