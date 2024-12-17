@@ -92,8 +92,14 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
           
     - this should work exactly like the TIFF processing except you select JPEG on the opening menu
+  
+    Note: if at any time you need to interrupt the tagging process, you can do so by pressing <b>```CTRL + C```</b>.
 
- 8. Post-processing spot checks
+   A message ```<b>Terminate batch job (Y/N)?```</b> will appear.  Press Y and you will exit to a the command line prompt.  
+
+   Enter <b>``mneu```<cr></b> to restart the process.
+
+ 9. Post-processing spot checks
 
     <p> Post-processing review of TIFF and JPEG images can be easily accomplished using <b>nomacs</b>, an image viewer that allows metadata to be displayed next to the image. Nomacs is installed on the Scanning Workstation but you will need to configure nomacs.  You can do so by selecting <b>Panels</b> from the top menu and then tick <b>File Explorer</b> and <b>Metadata Info</b> options.  This will create a 3-panel view that allows you to review TIFF and JPEG images as shown below.</p>
 
