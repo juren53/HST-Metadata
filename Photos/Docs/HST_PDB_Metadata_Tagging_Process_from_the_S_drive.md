@@ -67,9 +67,11 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
 
      Press the ```space bar``` to page through the output.  You are looking for any date in the Converted Date column that does not follow the YYYY-MM-DD format.
 
-   In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.  
+   In the above case, line 5 has an invalid date.  You can use MS Excel to edit the date in the <b>export.csv</b> file.
+
+   When you are through reviewing the dates, press Q to exit this section and return to the menu.
    
-6. Tag TIFF images
+7. Tag TIFF images
 
     - select <b>```4 <cr>```</b> Tag TIFF and JPEG files
     
