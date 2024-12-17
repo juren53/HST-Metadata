@@ -97,7 +97,7 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
 
    A message <b>```Terminate batch job (Y/N)?```</b> will appear.  Press Y and you will exit to the command line prompt.  
 
-   Enter <b>``mneu```<cr></b> to restart the process.
+   Enter <b>```menu```<cr></b> to restart the process.
 
  9. Post-processing spot checks
 
