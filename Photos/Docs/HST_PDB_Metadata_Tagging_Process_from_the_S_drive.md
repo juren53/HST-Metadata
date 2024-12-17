@@ -95,7 +95,7 @@ The directory <b>'S:\SCAN\HSTL-Metatagging\Photo'</b> on the shared S:drive has 
   
     Note: if at any time you need to interrupt the tagging process, you can do so by pressing <b>```CTRL + C```</b>.
 
-   A message ```<b>Terminate batch job (Y/N)?```</b> will appear.  Press Y and you will exit to a the command line prompt.  
+   A message <b>```Terminate batch job (Y/N)?```</b> will appear.  Press Y and you will exit to the command line prompt.  
 
    Enter <b>``mneu```<cr></b> to restart the process.
 
