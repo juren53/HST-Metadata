@@ -1,6 +1,6 @@
 ### WinPython
 
-WinPython is a free open-source portable distribution of the Python programming language for Windows XP/7/8, designed for scientists, supporting both 32bit and 64bit versions of Python 2 and Python 3.
+WinPython is a free open-source portable distribution of the Python programming language for Windows XP/7/8, designed for scientists [and developers], supporting both 32bit and 64bit versions of Python 2 and Python 3.
 Since September 2014, Developpement has moved to https://winpython.github.io/
 
 Features
