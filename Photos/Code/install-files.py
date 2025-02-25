@@ -13,12 +13,12 @@ import os
 
 # Define your list of GitHub raw file URLs
 file_urls = [
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/write-tags-from-csv.py",
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/check-dates-from-csv.py",	
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/menu.py",
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/menu.bat",
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/replace_headers.py",
-    "https://github.com/juren53/HST-Metadata/raw/master/Code/check-for-files.py",
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/write-tags-from-csv.py",
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/check-dates-from-csv.py",	
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/menu.py",
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/menu.bat",
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/replace_headers.py",
+    "https://github.com/juren53/HST-Metadata/raw/master/Photos/Code/check-for-files.py",
 
 
     # Add more file URLs as needed
