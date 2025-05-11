@@ -1,7 +1,12 @@
 <h3>HST Photo Metadata Process - Version 2 </h3>
 
 - Save NARA/HSTL Google Worksheet as a Googlesheet
-- Create export.csv file from
+
+- Copy and Paste the Googlesheet URL when running
+
+  ```python google-to-csv.py  {Googlesheet URL}```
+  
+- Create export.csv file from the Googlesheet
 
 
 - Create IPTC metadata set for HST photos
