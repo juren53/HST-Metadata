@@ -1,4 +1,4 @@
-## List of Google Worksheets used in testing Version 2 code
+## List of Google Worksheets used in testing HSTL Photo Metatagging Version 2 code
 
 Test 1 - TestMetadataForJim   -  [106]
 - https://docs.google.com/spreadsheets/d/1hdpZK5TPU72nt6EdJRd9clCC81gE6J34/edit?gid=1418369420#gid=1418369420
