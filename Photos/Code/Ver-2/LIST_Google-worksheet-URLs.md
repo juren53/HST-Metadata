@@ -6,7 +6,7 @@ Test 1 - TestMetadataForJim
 Test 2  -  Copy of Copy for Jim TEST of New Photo Metadata (Brian)
 - https://docs.google.com/spreadsheets/d/1wGHtm5YoKjThE1amig9VcqWZMzYQ3kaB/edit?gid=1418369420#gid=1418369420
 
-Test3 of New Photo Metadata (Brian)
+Test3 of New Photo Metadata (Brian)  -   [293]
 - https://docs.google.com/spreadsheets/d/1mgxguKnNThYH8PspEge6xS2xxPwdU2Qv/edit?gid=1418369420#gid=1418369420
 
 Test4 Copy of Lindsay On- Demand Photo Cataloging
