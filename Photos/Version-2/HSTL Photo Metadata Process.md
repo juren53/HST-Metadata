@@ -4,7 +4,7 @@
 
 - Copy and Paste the Googlesheet URL when running
 
-             ```python google-to-csv.py  {Googlesheet URL}```
+      python google-to-csv.py  {Googlesheet URL}
   
 - Create export.csv file from the Googlesheet
 
