@@ -1,7 +1,11 @@
 <h3>HST Photo Metadata Process - Version 2 </h3>
 
+- Save NARA/HSTL Google Worksheet as a Googlesheet
+- Create export.csv file from
 
- - <h4>Create IPTC metadata set for HST photos</h4>
+
+- Create IPTC metadata set for HST photos
+   
    HSTL's IPTC tag set
   ```
            IPTC Tag Names                   HSTL PDB Labels
