@@ -3,7 +3,7 @@
 Test 1 - TestMetadataForJim   -  [106]
 - https://docs.google.com/spreadsheets/d/1hdpZK5TPU72nt6EdJRd9clCC81gE6J34/edit?gid=1418369420#gid=1418369420
 
-Test 2  -  Copy of Copy for Jim TEST of New Photo Metadata (Brian)
+Test 2  -  Copy of Copy for Jim TEST of New Photo Metadata (Brian)  -   [296]
 - https://docs.google.com/spreadsheets/d/1wGHtm5YoKjThE1amig9VcqWZMzYQ3kaB/edit?gid=1418369420#gid=1418369420
 
 Test3 of New Photo Metadata (Brian)  -   [293]
