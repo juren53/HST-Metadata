@@ -26,8 +26,8 @@
 
 - Add IPTC metadata tags to TIFF images
 
-- Convert TIFF images to JPEG format
-
+- Convert TIFF images to JPEG format  [ ffmeg ]
+- 
 - Scale JPEG images to  max 800 pixels on X or Y axis
 
 - Add Copyright watermark to 'restricted' photos
