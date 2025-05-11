@@ -2,7 +2,7 @@
 
 - Save NARA/HSTL Google Worksheet as a Googlesheet
 
-- Copy and Paste the Googlesheet URL when running
+- Copy and Paste the Googlesheet URL when running   [ Python code ]
 
       python google-to-csv.py  {Googlesheet URL}
   
@@ -24,12 +24,12 @@
      - Copyright Notice                : {Restrictions} Public Domain - This item is in the public domain and can be used freely without further permission.
 ```
 
-- Add IPTC metadata tags to TIFF images
+- Add IPTC metadata tags to TIFF images  [ Python code ]
 
 - Convert TIFF images to JPEG format  [ ffmeg ]
-- 
-- Scale JPEG images to  max 800 pixels on X or Y axis
+  
+- Scale JPEG images to  max 800 pixels on X or Y axis  [ ffmeg ]
 
-- Add Copyright watermark to 'restricted' photos
+- Add Copyright watermark to 'restricted' photos  [ ffmeg ]
 
 
