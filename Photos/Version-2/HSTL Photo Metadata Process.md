@@ -4,14 +4,14 @@
 
 - Copy and Paste the Googlesheet URL when running
 
-  ```python google-to-csv.py  {Googlesheet URL}```
+ ```python google-to-csv.py  {Googlesheet URL}```
   
 - Create export.csv file from the Googlesheet
 
 - Create IPTC metadata set for HST photos
    
    HSTL's IPTC tag set
-  ```
+ ```
            IPTC Tag Names                   HSTL PDB Labels
      - Caption-Abstract                : {description} e.g. Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
      - Writer-Editor                   : {archivist/editor} e.g. LAA
@@ -24,14 +24,13 @@
      - Copyright Notice                : {Restrictions} Public Domain - This item is in the public domain and can be used freely without further permission.
 ```
 
- - Add IPTC metadata tags to TIFF images
+- Add IPTC metadata tags to TIFF images
 
+- Convert TIFF images to JPEG format
 
- - Convert TIFF images to JPEG format
+- Scale JPEG images to  max 800 pixels on X or Y axis
 
+- Add Copyright watermakr to 'restricted' photos
 
- - Scale JPEG images to  max 800 pixels on X or Y axis
-
-
- - Add IPTC metadata tags to JPEG images
+- Add IPTC metadata tags to JPEG images
 
