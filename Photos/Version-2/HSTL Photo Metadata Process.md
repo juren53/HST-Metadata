@@ -6,7 +6,7 @@
 
       python google-to-csv.py  {Googlesheet URL}
   
-- Create export.csv file from the Googlesheet
+    this creates an export.csv file from the Googlesheet
 
 - Create IPTC metadata set for HST photos
    
