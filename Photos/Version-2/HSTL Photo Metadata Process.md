@@ -8,7 +8,6 @@
   
 - Create export.csv file from the Googlesheet
 
-
 - Create IPTC metadata set for HST photos
    
    HSTL's IPTC tag set
