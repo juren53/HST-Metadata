@@ -30,7 +30,6 @@
 
 - Scale JPEG images to  max 800 pixels on X or Y axis
 
-- Add Copyright watermakr to 'restricted' photos
+- Add Copyright watermark to 'restricted' photos
 
-- Add IPTC metadata tags to JPEG images
 
