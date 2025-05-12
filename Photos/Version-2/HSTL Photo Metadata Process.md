@@ -1,6 +1,6 @@
 <h3>HSTL Photo Metadata Process - Version 2 </h3>
 
-- Create a Google Sheet from the NARA/HSTL Google Worksheet using the File / Save as Google Sheet feature
+- Create a Google Sheet from the NARA/HSTL Google Worksheet using the `File / Save as Google Sheet` feature
 
 - Google Sheet URL used when running google-to-csv.py  [ Python code ]
 
