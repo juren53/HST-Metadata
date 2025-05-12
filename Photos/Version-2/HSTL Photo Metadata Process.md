@@ -19,7 +19,7 @@
      - By-line Title                   : {Institutional Creator}
      - Credit                          : {Credit} Harry S. Truman Library
      - Source                          : {collection} e.g. RG 64
-     - Object Name                     : {Accession No} e.g' 2010-365
+     - Object Name                     : {Accession No} e.g. 2010-365
      - Copyright Notice                : {Restrictions} Public Domain - This item is in the public domain and can be used freely without further permission.
 ```
 
