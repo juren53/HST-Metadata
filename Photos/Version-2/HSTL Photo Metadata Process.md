@@ -2,11 +2,11 @@
 
 - Create a Google Sheet from the NARA/HSTL Google Worksheet using the `File / Save as Google Sheet` feature
 
-- Google Sheet URL used when running google-to-csv.py  [ Python code ]
+- Convert Google Sheet to a format used to embed metadata  [ Python code ]
 
       python google-to-csv.py  {Google Sheet URL}
   
-    this step creates an `export.csv` file from the Googlesheet that contains the metadata to be embedded in each TIFF image
+    this step creates an `export.csv` a file containing the metadata to be embedded in TIFF images
 
 <!--- Create IPTC metadata set for HST photos -->
    
@@ -24,12 +24,14 @@
      - Copyright Notice                : {Restrictions} Public Domain - This item is in the public domain and can be used freely without further permission.
 ```
 
-- Add IPTC metadata tags to TIFF images  [ Python code ]
+- Embed IPTC metadata tags to TIFF images  [ Python code ]
 
-- Convert TIFF images to JPEG format  [ ffmpeg ]
+- Convert TIFF images to JPEG format [ ffmpeg ]
   
 - Scale JPEG images to  max 800 pixels on X or Y axis  [ ffmpeg ]
 
-- Add Copyright watermark to 'restricted' photos  [ ffmpeg ]
+- Add Copyright watermark to photos  [ ffmpeg ]
+       copyright status information obtained from `Copyright Notice` tag
+        
 
 
