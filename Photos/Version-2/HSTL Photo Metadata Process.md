@@ -6,9 +6,9 @@
 
       python google-to-csv.py  {Googlesheet URL}
   
-    this creates an export.csv file from the Googlesheet
+    this step creates an export.csv file from the Googlesheet that contains the metadata to be embedded in each TIFF image
 
-- Create IPTC metadata set for HST photos
+<!--- Create IPTC metadata set for HST photos -->
    
    HSTL's IPTC tag set
  ```
