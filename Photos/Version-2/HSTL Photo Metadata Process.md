@@ -9,12 +9,11 @@
     this step creates an `export.csv` a file containing the metadata to be embedded in TIFF images
 
 <!--- Create IPTC metadata set for HST photos -->
-   
-   HSTL's IPTC tag set
+ HSTL's IPTC tag set
  ```
            IPTC Tag Names                   HSTL PDB Labels
      - Caption-Abstract                : {description} e.g. Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
-     - ~~Writer-Editor~~                   ~~: {archivist/editor} e.g. LAA~~
+     _- Writer-Editor                   : {archivist/editor} e.g. LAA_
      - Headline                        : {title} e.g. 2018 Harry's Hop n' Hunt
      - By-line                         : {photographer}
      - By-line Title                   : {Institutional Creator}
