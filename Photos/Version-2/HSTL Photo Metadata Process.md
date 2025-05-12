@@ -14,7 +14,7 @@
  ```
            IPTC Tag Names                   HSTL PDB Labels
      - Caption-Abstract                : {description} e.g. Easter Egg Roll at the 2018 Harry's Hop'n Hunt.<br>
-     - Writer-Editor                   : {archivist/editor} e.g. LAA
+     - ~~Writer-Editor~~                   ~~: {archivist/editor} e.g. LAA~~
      - Headline                        : {title} e.g. 2018 Harry's Hop n' Hunt
      - By-line                         : {photographer}
      - By-line Title                   : {Institutional Creator}
