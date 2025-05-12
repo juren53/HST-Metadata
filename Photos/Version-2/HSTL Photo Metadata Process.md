@@ -30,7 +30,8 @@
 - Scale JPEG images to  max 800 pixels on X or Y axis  [ ffmpeg ]
 
 - Add Copyright watermark to photos  [ ffmpeg ]
-         copyright status information obtained from `Copyright Notice` tag
+
+  copyright status information obtained from `Copyright Notice` tag
 
 
   ###### Updated: Mon 12 May 2025 05:02:43 PM CDT
