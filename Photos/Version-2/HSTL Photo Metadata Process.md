@@ -26,10 +26,10 @@
 
 - Add IPTC metadata tags to TIFF images  [ Python code ]
 
-- Convert TIFF images to JPEG format  [ ffmeg ]
+- Convert TIFF images to JPEG format  [ ffmpeg ]
   
-- Scale JPEG images to  max 800 pixels on X or Y axis  [ ffmeg ]
+- Scale JPEG images to  max 800 pixels on X or Y axis  [ ffmpeg ]
 
-- Add Copyright watermark to 'restricted' photos  [ ffmeg ]
+- Add Copyright watermark to 'restricted' photos  [ ffmpeg ]
 
 
