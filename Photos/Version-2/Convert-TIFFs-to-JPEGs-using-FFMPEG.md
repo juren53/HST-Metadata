@@ -1,5 +1,5 @@
 
-# Convert TIFFs to JPEGs 
+# Scaling JPEGs to 800 pixels 
 
 This command runs against all TiFFs in the current directory 
 
