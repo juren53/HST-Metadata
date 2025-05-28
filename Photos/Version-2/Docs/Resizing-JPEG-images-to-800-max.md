@@ -22,4 +22,3 @@ for img in *.jpg; do
 done
 ```
 
-Would you like me to explain how the scaling filter works in more detail?
