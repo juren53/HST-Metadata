@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 #-----------------------------------------------------------
 # ############   fix-offsets.py  v0.4  ################
-# THis program offset and warning errors that cause
+# THis program finds offset and warning errors that causes
 # JPEG images uploaded to NARA Catalog for fail.
-# I uses ExifTool and FFjpeg to fix the JPEG image file.
+# It uses ExifTool and FFjpeg to fix the JPEG image file.
 #    
 #  Created 	Sat 25 May 2024 02:37:51 PM CDT
 #  Updated  Sat 25 May 2024 02:57:22 PM CDT   added ExifTool validation to end 
