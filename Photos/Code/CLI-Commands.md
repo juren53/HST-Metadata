@@ -6,7 +6,6 @@ CLI - Commands Line Interface i.e. terminal commands.
 
 | Commands | Description |
 |:------|---------------|
-|       |ExifTool commands|
 | exiftool -a -G0:1 -s *.jpg | Detail metadata listing  (ExifTool)           |
 | exiftool -iptc:all *.jpg|  List just IPTC tags (ExifTool)             |
 | exiftool -validate -warning -error -a *.jpg | Detailed metadata error/warning listing  (ExifTool)              |
