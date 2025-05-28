@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #---------------------get-tags.py-------------------------------
-#This code reads specific IPTC metadata tags from an image file
-# provided as a command link argument.
+#This Python code reads specific IPTC metadata tags from an image file
+# provided as a command line argument.
 # e.g. python3 get-tags.py {path/filename} 
 #  
 # 
