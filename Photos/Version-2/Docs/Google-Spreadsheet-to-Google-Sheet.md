@@ -27,6 +27,16 @@ Google Spreadsheets and Google Sheets, while often used interchangeably, have im
 - **API Access**: [Differences in how APIs can interact with each format]
 - **Programmatic Control**: [Differences in automation capabilities]
 
+Google’s modern spreadsheet application is called Google Sheets, and:
+
+- The file format is .gsheet
+- It's part of Google Drive
+- The associated API is called the Google Sheets API
+
+
+
+When writing Python code to interact with a spreadsheet from Google, you're using the Google Sheets API, which only works with Google Sheets, not old "Google Spreadsheets" if you're referring to:
+
 ## Visual Documentation
 
 The following screenshots demonstrate the conversion process and highlight the key interface differences:
