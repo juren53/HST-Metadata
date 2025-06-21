@@ -35,7 +35,7 @@ Google’s modern spreadsheet application is called Google Sheets, and:
 
 
 
-When writing Python code to interact with a spreadsheet from Google, you're using the Google Sheets API, which only works with Google Sheets, not old "Google Spreadsheets" if you're referring to:
+When writing Python code to interact with a spreadsheet from Google, you're using the Google Sheets API, which only works with Google Sheets, not old "Google Spreadsheets"
 
 ## Visual Documentation
 
