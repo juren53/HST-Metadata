@@ -31,17 +31,17 @@ Google Spreadsheets and Google Sheets, while often used interchangeably, have im
 
 The following screenshots demonstrate the conversion process and highlight the key interface differences:
 
-### Page 1: Initial Spreadsheet State
+### Page 1: Knowing when you are in the Google Spreadsheet State
 ![Page 1 - Initial State](Page-1.png)
 
 *Caption: Description of what is shown in Page-1.png - initial spreadsheet configuration or interface elements*
 
-### Page 2: Conversion Process
+### Page 2: Save as Google Sheets
 ![Page 2 - Conversion Process](Page-2.png)
 
 *Caption: Description of what is shown in Page-2.png - intermediate steps or conversion interface*
 
-### Page 3: Final Sheet Configuration
+### Page 3: How to know you are in the Google Sheet State
 ![Page 3 - Final Configuration](Page-3.png)
 
 *Caption: Description of what is shown in Page-3.png - final Google Sheet state or resulting interface*
