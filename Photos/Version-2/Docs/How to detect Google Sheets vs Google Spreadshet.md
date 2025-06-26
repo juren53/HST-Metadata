@@ -1,4 +1,4 @@
-## How to detect Google Sheets vs Google Spreadshet
+## How to detect Google Sheets vs Google Spreadsheet
 
 You can detect the type of Google Sheets URL (whether it's a native Google Sheet or an Excel file being viewed in Google Sheets) by leveraging the Google Drive API. The key is to inspect the `mimeType` of the file associated with the URL.
 
