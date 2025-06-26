@@ -1,8 +1,6 @@
-## How to detect Google Sheets vs Google Spreadsheet
+## How to detect a Google Sheet vs a Google Spreadsheet
 
-You can detect the type of Google Sheets URL (whether it's a native Google Sheet or an Excel file being viewed in Google Sheets) by leveraging the Google Drive API. The key is to inspect the `mimeType` of the file associated with the URL.
-
-Native Google Sheets have a `mimeType` of `application/vnd.google-apps.spreadsheet`. Excel files, even when uploaded to Google Drive and opened with Google Sheets, retain their original `mimeType` (e.g., `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` for `.xlsx` files).
+You can determine whether a Google Sheets URL points to a native Google Sheet or an uploaded Excel file by using the Google Drive API. The key is to check the file’s mimeType. Native Google Sheets use the mimeType application/vnd.google-apps.spreadsheet, while uploaded Excel files retain their original format—for example, .xlsx files have the mimeType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, even when viewed in Google Sheets.
 
 Here's a Python function that uses the Google Drive API to achieve this.
 
