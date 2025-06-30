@@ -27,9 +27,10 @@ from datetime import datetime
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, 
                             QWidget, QPushButton, QLabel, QLineEdit, QTextEdit, 
                             QProgressBar, QMessageBox, QTableWidget, QTableWidgetItem,
-                            QSplitter, QGroupBox, QCheckBox, QStatusBar)
+                            QSplitter, QGroupBox, QCheckBox, QStatusBar, QScrollArea)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont, QIcon
+from googleapiclient.discovery import build
 
 # Try to import clipboard functionality
 try:
@@ -166,6 +167,11 @@ class G2CMainWindow(QMainWindow):
         self.worker_thread = None
         self.export_thread = None
         
+        # Set application icon
+        icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ICON_g2c.ico")
+        if os.path.exists(icon_path):
+            self.setWindowIcon(QIcon(icon_path))
+        
         self.init_ui()
         self.auto_detect_clipboard_url()
         
@@ -184,9 +190,12 @@ class G2CMainWindow(QMainWindow):
         # Create central widget and main layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        main_layout = QHBoxLayout(central_widget)  # Changed to horizontal layout for side-by-side
+        main_layout = QVBoxLayout(central_widget)  # Main layout is vertical
         main_layout.setSpacing(15)
         main_layout.setContentsMargins(10, 10, 10, 10)
+        
+        # Create horizontal layout for top section
+        top_layout = QHBoxLayout()
         
         # Left side container for existing UI elements
         left_container = QWidget()
@@ -231,13 +240,22 @@ class G2CMainWindow(QMainWindow):
         self.url_status.setStyleSheet("color: gray;")
         url_layout.addWidget(self.url_status)
         
-        # Options Section
+        # Spreadsheet name label
+        self.spreadsheet_name_label = QLabel("[No Spreadsheet Loaded]")
+        self.spreadsheet_name_label.setStyleSheet("color: #666666;")
+        url_layout.addWidget(self.spreadsheet_name_label)
+        
+        # Options Section (de-emphasized)
         options_group = QGroupBox("⚙️ Options")
+        options_group.setStyleSheet("QGroupBox { color: #999999; } QGroupBox::title { color: #999999; }")
+        options_group.setToolTip("In development - Future enhancements planned")
         options_layout = QHBoxLayout(options_group)
         
         self.auto_convert_check = QCheckBox("Auto-convert Excel files")
         self.auto_convert_check.setChecked(False)
-        self.auto_convert_check.setToolTip("Automatically convert Excel files to Google Sheets (requires enhanced permissions)")
+        self.auto_convert_check.setEnabled(False)  # Disable the checkbox
+        self.auto_convert_check.setStyleSheet("color: #999999;")
+        self.auto_convert_check.setToolTip("In development - Feature coming soon")
         
         options_layout.addWidget(self.auto_convert_check)
         options_layout.addStretch()
@@ -287,23 +305,34 @@ class G2CMainWindow(QMainWindow):
         
         splitter.addWidget(status_group)
         
-        # Data preview area
+        # Status Messages area only in splitter
+        splitter.addWidget(status_group)
+        
+        # Set splitter proportions for status group only
+        splitter.setSizes([150, 0])  # Status messages get reasonable height
+        left_layout.addWidget(splitter)
+        
+        # Add top section (left and right containers) to main layout
+        top_layout.addWidget(left_container, stretch=2)  # Left side gets more space
+        top_layout.addWidget(right_container, stretch=1)  # Right side gets less space
+        main_layout.addLayout(top_layout)
+        
+        # Add Data Preview below as full width
         preview_group = QGroupBox("👁️ Data Preview")
         preview_layout = QVBoxLayout(preview_group)
         
         self.data_table = QTableWidget()
         self.data_table.setAlternatingRowColors(True)
-        # Make table font bigger
-        table_font = QFont()
-        table_font.setPointSize(11)  # Increased table font size
+        # Use same font as Status Messages (Consolas, 11pt)
+        table_font = QFont("Consolas", 11)
         self.data_table.setFont(table_font)
         preview_layout.addWidget(self.data_table)
         
-        splitter.addWidget(preview_group)
+        main_layout.addWidget(preview_group)
         
-        # Set splitter proportions
-        splitter.setSizes([150, 400])
-        main_layout.addWidget(splitter)
+        # Set stretch factors to give more space to Data Preview
+        main_layout.setStretchFactor(top_layout, 1)
+        main_layout.setStretchFactor(preview_group, 2)
         
         # Create status bar with version and timestamp
         self.status_bar = QStatusBar()
@@ -355,19 +384,38 @@ class G2CMainWindow(QMainWindow):
         mapping_desc.setWordWrap(True)
         mapping_layout.addWidget(mapping_desc)
         
+        # Add additional metadata information
+        mapping_layout.addSpacing(20)  # Add some space before the additional info
+        
+        
+        # Create a widget for the metadata details with indentation
+        meta_details = QWidget()
+        meta_layout = QVBoxLayout(meta_details)
+        meta_layout.setContentsMargins(20, 0, 0, 0)  # Add left margin for indentation
+        
+        # Create a single label for metadata info with precise monospace formatting
+        meta_info = (
+            "Additional 'generated' meta-tags:\n\n"
+            "- Date Created     Compiled from\n"
+            "                  yyyy-mm-dd in spreadsheet\n"
+            "\n"
+            "- Credit           Hard coded"
+        )
+        meta_info_label = QLabel(meta_info)
+        meta_info_label.setFont(QFont("Consolas", 9))  # Use monospace font for alignment
+        meta_info_label.setStyleSheet("color: #666666;")
+        meta_layout.addWidget(meta_info_label)
+        
+        mapping_layout.addWidget(meta_details)
+        
         right_layout.addWidget(mapping_group)
         right_layout.addStretch()
-        
-        # Add left and right containers to main layout
-        main_layout.addWidget(left_container, stretch=2)  # Left side gets more space
-        main_layout.addWidget(right_container, stretch=1)  # Right side gets less space
         
         # Move main UI elements to left layout
         left_layout.addWidget(url_group)
         left_layout.addWidget(options_group)
         left_layout.addLayout(button_layout)
         left_layout.addWidget(self.progress_bar)
-        left_layout.addWidget(splitter)
         
         # Initialize status
         self.log_message("🚀 G2C GUI ready! Enter a Google Sheets URL to get started.")
@@ -490,6 +538,13 @@ class G2CMainWindow(QMainWindow):
             self.update_data_preview(df)
             # Show mapping table when data is loaded
             self.update_mapping_table()
+            # Get spreadsheet ID from URL
+            try:
+                url = self.url_input.text().strip()
+                spreadsheet_id = extract_spreadsheet_id_from_url(url)
+                self.update_spreadsheet_name(spreadsheet_id)
+            except Exception as e:
+                self.log_message(f"❌ Error getting spreadsheet name: {e}")
         else:
             self.log_message("❌ No data received")
     
@@ -500,21 +555,45 @@ class G2CMainWindow(QMainWindow):
         self.log_message(f"❌ {error_msg}")
         QMessageBox.critical(self, "Load Error", error_msg)
     
+    def get_excel_column_label(self, index):
+        """Convert a column index to Excel-style column label (A, B, C, ..., Z, AA, AB, etc.)"""
+        result = ""
+        while index >= 0:
+            remainder = index % 26
+            result = chr(65 + remainder) + result  # 65 is ASCII for 'A'
+            index = (index // 26) - 1
+        return result
+
     def update_data_preview(self, df):
         """Update the data preview table with DataFrame contents"""
         if df is None or df.empty:
             self.data_table.clear()
             return
         
-        # Limit preview to first 100 rows and 20 columns for performance
+        # Limit preview to first 100 rows but show all columns
         preview_rows = min(100, len(df))
-        preview_cols = min(20, len(df.columns))
+        preview_cols = len(df.columns)  # Show all columns
         
         self.data_table.setRowCount(preview_rows)
         self.data_table.setColumnCount(preview_cols)
         
-        # Set column headers
-        self.data_table.setHorizontalHeaderLabels([str(col)[:50] for col in df.columns[:preview_cols]])
+        # Enable horizontal scrolling
+        self.data_table.setHorizontalScrollMode(QTableWidget.ScrollPerPixel)
+        
+        # Create combined headers with Excel-style column labels
+        headers = []
+        for i in range(preview_cols):
+            excel_label = self.get_excel_column_label(i)
+            col_name = str(df.columns[i])[:50]
+            headers.append(f"{excel_label}\n{col_name}")
+        
+        # Set column headers with same font
+        self.data_table.setHorizontalHeaderLabels(headers)
+        header = self.data_table.horizontalHeader()
+        header.setFont(QFont("Consolas", 11))
+        
+        # Adjust header height for two lines
+        header.setMinimumHeight(45)  # Increased height for two lines
         
         # Populate data
         for i in range(preview_rows):
@@ -575,6 +654,21 @@ class G2CMainWindow(QMainWindow):
         self.export_btn.setEnabled(True)
         self.log_message(f"❌ Export error: {error_msg}")
         QMessageBox.critical(self, "Export Error", error_msg)
+
+    def update_spreadsheet_name(self, spreadsheet_id):
+        """Update the label with the Google Spreadsheet name"""
+        try:
+            self.log_message("Fetching spreadsheet metadata...")
+            from g2c import get_credentials
+            creds = get_credentials()
+            service = build('sheets', 'v4', credentials=creds)
+            spreadsheet = service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
+            spreadsheet_name = spreadsheet.get('properties', {}).get('title', '[Unknown Name]')
+            self.spreadsheet_name_label.setText(f"📄 Spreadsheet: {spreadsheet_name}")
+            self.log_message(f"📄 Loaded Spreadsheet: {spreadsheet_name}")
+        except Exception as e:
+            self.spreadsheet_name_label.setText("[Error loading name]")
+            self.log_message(f"❌ Error fetching spreadsheet name: {e}")
     
     def update_mapping_table(self):
         """Update the mapping table with current mapping information"""
@@ -627,12 +721,26 @@ class G2CMainWindow(QMainWindow):
 
 def main():
     """Main function to run the GUI application"""
+    # Must set the AppUserModelID before creating QApplication
+    if os.name == 'nt':  # Windows only
+        import ctypes
+        myappid = u'HSTL.G2C.GUI.1'  # arbitrary string
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+    
     app = QApplication(sys.argv)
     
     # Set application properties
     app.setApplicationName("G2C GUI")
     app.setApplicationVersion("0.2")
     app.setOrganizationName("HST Metadata Tools")
+    
+    # Load and set the icon
+    icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ICON_g2c.ico")
+    if os.path.exists(icon_path):
+        icon = QIcon(icon_path)
+        app.setWindowIcon(icon)
+        # Also set it as the default icon for all windows
+        QApplication.setWindowIcon(icon)
     
     # Create and show main window
     window = G2CMainWindow()
