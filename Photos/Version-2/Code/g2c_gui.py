@@ -184,8 +184,19 @@ class G2CMainWindow(QMainWindow):
         # Create central widget and main layout
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        main_layout = QVBoxLayout(central_widget)
-        main_layout.setSpacing(15)  # Increased spacing between elements
+        main_layout = QHBoxLayout(central_widget)  # Changed to horizontal layout for side-by-side
+        main_layout.setSpacing(15)
+        main_layout.setContentsMargins(10, 10, 10, 10)
+        
+        # Left side container for existing UI elements
+        left_container = QWidget()
+        left_layout = QVBoxLayout(left_container)
+        left_layout.setSpacing(15)  # Increased spacing between elements
+        
+        # Right side container for mapping table
+        right_container = QWidget()
+        right_layout = QVBoxLayout(right_container)
+        right_layout.setSpacing(15)
         
         # URL Input Section
         url_group = QGroupBox("📋 Spreadsheet URL")
@@ -220,8 +231,6 @@ class G2CMainWindow(QMainWindow):
         self.url_status.setStyleSheet("color: gray;")
         url_layout.addWidget(self.url_status)
         
-        main_layout.addWidget(url_group)
-        
         # Options Section
         options_group = QGroupBox("⚙️ Options")
         options_layout = QHBoxLayout(options_group)
@@ -232,8 +241,6 @@ class G2CMainWindow(QMainWindow):
         
         options_layout.addWidget(self.auto_convert_check)
         options_layout.addStretch()
-        
-        main_layout.addWidget(options_group)
         
         # Action Buttons
         button_layout = QHBoxLayout()
@@ -256,12 +263,12 @@ class G2CMainWindow(QMainWindow):
         button_layout.addWidget(self.export_btn)
         button_layout.addStretch()
         
-        main_layout.addLayout(button_layout)
+        left_layout.addLayout(button_layout)
         
         # Progress Section
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
-        main_layout.addWidget(self.progress_bar)
+        left_layout.addWidget(self.progress_bar)
         
         # Status and Preview Section
         splitter = QSplitter(Qt.Vertical)
@@ -303,7 +310,7 @@ class G2CMainWindow(QMainWindow):
         self.setStatusBar(self.status_bar)
         
         # Add version and timestamp to status bar with smaller fonts
-        version_label = QLabel("Ver 0.1")
+        version_label = QLabel("Ver 0.2 - 2025-06-30")
         version_font = QFont()
         version_font.setPointSize(8)  # Small font size
         version_label.setFont(version_font)
@@ -326,6 +333,42 @@ class G2CMainWindow(QMainWindow):
         self.status_bar.addPermanentWidget(version_label)
         self.status_bar.addPermanentWidget(self.timestamp_label)
         
+        # Add mapping table to right side
+        mapping_group = QGroupBox("🔄 IPTC Field Mapping")
+        mapping_layout = QVBoxLayout(mapping_group)
+        
+        # Create mapping table
+        self.mapping_table = QTableWidget()
+        self.mapping_table.setAlternatingRowColors(True)
+        self.mapping_table.setColumnCount(2)
+        self.mapping_table.setHorizontalHeaderLabels(["Google Sheet Field", "IPTC Field"])
+        mapping_layout.addWidget(self.mapping_table)
+        
+        # Set font for mapping table
+        mapping_font = QFont()
+        mapping_font.setPointSize(11)  # Same size as data preview table
+        self.mapping_table.setFont(mapping_font)
+        
+        # Add explanation text
+        mapping_desc = QLabel("This table shows how fields from your Google Sheet\nwill be mapped to IPTC metadata fields.")
+        mapping_desc.setStyleSheet("color: #666666;")
+        mapping_desc.setWordWrap(True)
+        mapping_layout.addWidget(mapping_desc)
+        
+        right_layout.addWidget(mapping_group)
+        right_layout.addStretch()
+        
+        # Add left and right containers to main layout
+        main_layout.addWidget(left_container, stretch=2)  # Left side gets more space
+        main_layout.addWidget(right_container, stretch=1)  # Right side gets less space
+        
+        # Move main UI elements to left layout
+        left_layout.addWidget(url_group)
+        left_layout.addWidget(options_group)
+        left_layout.addLayout(button_layout)
+        left_layout.addWidget(self.progress_bar)
+        left_layout.addWidget(splitter)
+        
         # Initialize status
         self.log_message("🚀 G2C GUI ready! Enter a Google Sheets URL to get started.")
         if not CLIPBOARD_AVAILABLE:
@@ -333,6 +376,9 @@ class G2CMainWindow(QMainWindow):
         if not G2C_AVAILABLE:
             self.log_message("❌ G2C module not available. Please ensure g2c.py is in the same directory.")
             self.load_btn.setEnabled(False)
+            
+        # Initialize mapping table
+        self.update_mapping_table()
     
     def update_timestamp(self):
         """Update the timestamp in the status bar"""
@@ -442,6 +488,8 @@ class G2CMainWindow(QMainWindow):
         if df is not None:
             self.log_message(f"✅ Data loaded successfully! Shape: {df.shape}")
             self.update_data_preview(df)
+            # Show mapping table when data is loaded
+            self.update_mapping_table()
         else:
             self.log_message("❌ No data received")
     
@@ -528,6 +576,38 @@ class G2CMainWindow(QMainWindow):
         self.log_message(f"❌ Export error: {error_msg}")
         QMessageBox.critical(self, "Export Error", error_msg)
     
+    def update_mapping_table(self):
+        """Update the mapping table with current mapping information"""
+        # Mapping dictionary from map.py
+        row3_mapping = {
+            'Title': 'Headline',
+            'Accession Number': 'ObjectName',
+            'Restrictions': 'CopyrightNotice',
+            'Scopenote': 'Caption-Abstract',
+            'Related Collection': 'Source',
+            'Source Photographer': 'By-line',
+            'Institutional Creator': 'By-lineTitle'
+        }
+        
+        # Clear existing items
+        self.mapping_table.setRowCount(len(row3_mapping))
+        
+        # Add mapping entries
+        for row, (sheet_field, iptc_field) in enumerate(row3_mapping.items()):
+            # Google Sheet field
+            sheet_item = QTableWidgetItem(sheet_field)
+            sheet_item.setFlags(sheet_item.flags() & ~Qt.ItemIsEditable)  # Make read-only
+            self.mapping_table.setItem(row, 0, sheet_item)
+            
+            # IPTC field
+            iptc_item = QTableWidgetItem(iptc_field)
+            iptc_item.setFlags(iptc_item.flags() & ~Qt.ItemIsEditable)  # Make read-only
+            self.mapping_table.setItem(row, 1, iptc_item)
+        
+        # Resize columns to content
+        self.mapping_table.resizeColumnsToContents()
+        self.mapping_table.resizeRowsToContents()
+    
     def closeEvent(self, event):
         """Handle application close event"""
         # Stop the timestamp timer
@@ -551,7 +631,7 @@ def main():
     
     # Set application properties
     app.setApplicationName("G2C GUI")
-    app.setApplicationVersion("1.0")
+    app.setApplicationVersion("0.2")
     app.setOrganizationName("HST Metadata Tools")
     
     # Create and show main window
