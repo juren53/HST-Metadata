@@ -29,7 +29,8 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QHBoxLayout
                             QProgressBar, QMessageBox, QTableWidget, QTableWidgetItem,
                             QSplitter, QGroupBox, QCheckBox, QStatusBar, QScrollArea)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
-from PyQt5.QtGui import QFont, QIcon
+from PyQt5.QtGui import QFont, QIcon, QKeySequence
+from PyQt5.QtWidgets import QShortcut
 from googleapiclient.discovery import build
 
 # Try to import clipboard functionality
@@ -245,20 +246,6 @@ class G2CMainWindow(QMainWindow):
         self.spreadsheet_name_label.setStyleSheet("color: #666666;")
         url_layout.addWidget(self.spreadsheet_name_label)
         
-        # Options Section (de-emphasized)
-        options_group = QGroupBox("⚙️ Options")
-        options_group.setStyleSheet("QGroupBox { color: #999999; } QGroupBox::title { color: #999999; }")
-        options_group.setToolTip("In development - Future enhancements planned")
-        options_layout = QHBoxLayout(options_group)
-        
-        self.auto_convert_check = QCheckBox("Auto-convert Excel files")
-        self.auto_convert_check.setChecked(False)
-        self.auto_convert_check.setEnabled(False)  # Disable the checkbox
-        self.auto_convert_check.setStyleSheet("color: #999999;")
-        self.auto_convert_check.setToolTip("In development - Feature coming soon")
-        
-        options_layout.addWidget(self.auto_convert_check)
-        options_layout.addStretch()
         
         # Action Buttons
         button_layout = QHBoxLayout()
@@ -338,8 +325,8 @@ class G2CMainWindow(QMainWindow):
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         
-        # Add version and timestamp to status bar with smaller fonts
-        version_label = QLabel("Ver 0.2 - 2025-06-30")
+        # Add version to status bar with smaller fonts
+        version_label = QLabel("Ver 0.3")
         version_font = QFont()
         version_font.setPointSize(8)  # Small font size
         version_label.setFont(version_font)
@@ -366,17 +353,22 @@ class G2CMainWindow(QMainWindow):
         mapping_group = QGroupBox("🔄 IPTC Field Mapping")
         mapping_layout = QVBoxLayout(mapping_group)
         
-        # Create mapping table
-        self.mapping_table = QTableWidget()
-        self.mapping_table.setAlternatingRowColors(True)
-        self.mapping_table.setColumnCount(2)
-        self.mapping_table.setHorizontalHeaderLabels(["Google Sheet Field", "IPTC Field"])
-        mapping_layout.addWidget(self.mapping_table)
-        
-        # Set font for mapping table
-        mapping_font = QFont()
-        mapping_font.setPointSize(11)  # Same size as data preview table
-        self.mapping_table.setFont(mapping_font)
+        # Create simple label for mapping information with columnar format
+        mapping_info = (
+            "Google Sheet Field       IPTC Field\n"
+            "==================       ==========\n"
+            "Title                    Headline\n"
+            "Accession Number         ObjectName\n"
+            "Restrictions             CopyrightNotice\n"
+            "Scopenote                Caption-Abstract\n"
+            "Related Collection       Source\n"
+            "Source Photographer      By-line\n"
+            "Institutional Creator    By-lineTitle"
+        )
+        mapping_label = QLabel(mapping_info)
+        mapping_label.setFont(QFont("Consolas", 9))  # Monospace font required for alignment
+        mapping_label.setStyleSheet("color: #666666;")  # Consistent style
+        mapping_layout.addWidget(mapping_label)
         
         # Add explanation text
         mapping_desc = QLabel("This table shows how fields from your Google Sheet\nwill be mapped to IPTC metadata fields.")
@@ -413,7 +405,6 @@ class G2CMainWindow(QMainWindow):
         
         # Move main UI elements to left layout
         left_layout.addWidget(url_group)
-        left_layout.addWidget(options_group)
         left_layout.addLayout(button_layout)
         left_layout.addWidget(self.progress_bar)
         
@@ -425,8 +416,11 @@ class G2CMainWindow(QMainWindow):
             self.log_message("❌ G2C module not available. Please ensure g2c.py is in the same directory.")
             self.load_btn.setEnabled(False)
             
-        # Initialize mapping table
-        self.update_mapping_table()
+        
+        # Add Ctrl+Q shortcut to exit
+        self.quit_shortcut = QShortcut(QKeySequence('Ctrl+Q'), self)
+        self.quit_shortcut.activated.connect(self.close)
+        self.log_message("💡 Tip: Press Ctrl+Q to exit the application")
     
     def update_timestamp(self):
         """Update the timestamp in the status bar"""
@@ -520,7 +514,7 @@ class G2CMainWindow(QMainWindow):
         self.log_message(f"🔄 Starting data load from: {url}")
         
         # Start worker thread
-        self.worker_thread = G2CWorkerThread(url, self.auto_convert_check.isChecked())
+        self.worker_thread = G2CWorkerThread(url, False)
         self.worker_thread.progress.connect(self.log_message)
         self.worker_thread.finished.connect(self.on_data_loaded)
         self.worker_thread.error.connect(self.on_load_error)
@@ -536,8 +530,6 @@ class G2CMainWindow(QMainWindow):
         if df is not None:
             self.log_message(f"✅ Data loaded successfully! Shape: {df.shape}")
             self.update_data_preview(df)
-            # Show mapping table when data is loaded
-            self.update_mapping_table()
             # Get spreadsheet ID from URL
             try:
                 url = self.url_input.text().strip()
@@ -670,37 +662,6 @@ class G2CMainWindow(QMainWindow):
             self.spreadsheet_name_label.setText("[Error loading name]")
             self.log_message(f"❌ Error fetching spreadsheet name: {e}")
     
-    def update_mapping_table(self):
-        """Update the mapping table with current mapping information"""
-        # Mapping dictionary from map.py
-        row3_mapping = {
-            'Title': 'Headline',
-            'Accession Number': 'ObjectName',
-            'Restrictions': 'CopyrightNotice',
-            'Scopenote': 'Caption-Abstract',
-            'Related Collection': 'Source',
-            'Source Photographer': 'By-line',
-            'Institutional Creator': 'By-lineTitle'
-        }
-        
-        # Clear existing items
-        self.mapping_table.setRowCount(len(row3_mapping))
-        
-        # Add mapping entries
-        for row, (sheet_field, iptc_field) in enumerate(row3_mapping.items()):
-            # Google Sheet field
-            sheet_item = QTableWidgetItem(sheet_field)
-            sheet_item.setFlags(sheet_item.flags() & ~Qt.ItemIsEditable)  # Make read-only
-            self.mapping_table.setItem(row, 0, sheet_item)
-            
-            # IPTC field
-            iptc_item = QTableWidgetItem(iptc_field)
-            iptc_item.setFlags(iptc_item.flags() & ~Qt.ItemIsEditable)  # Make read-only
-            self.mapping_table.setItem(row, 1, iptc_item)
-        
-        # Resize columns to content
-        self.mapping_table.resizeColumnsToContents()
-        self.mapping_table.resizeRowsToContents()
     
     def closeEvent(self, event):
         """Handle application close event"""
@@ -724,14 +685,14 @@ def main():
     # Must set the AppUserModelID before creating QApplication
     if os.name == 'nt':  # Windows only
         import ctypes
-        myappid = u'HSTL.G2C.GUI.1'  # arbitrary string
+        myappid = u'HSTL.G2C.GUI.3'  # arbitrary string
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     
     app = QApplication(sys.argv)
     
     # Set application properties
     app.setApplicationName("G2C GUI")
-    app.setApplicationVersion("0.2")
+    app.setApplicationVersion("0.3")
     app.setOrganizationName("HST Metadata Tools")
     
     # Load and set the icon
