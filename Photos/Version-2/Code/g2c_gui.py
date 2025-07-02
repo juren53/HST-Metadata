@@ -178,12 +178,21 @@ class G2CMainWindow(QMainWindow):
         
     def init_ui(self):
         """Initialize the user interface"""
-        self.setWindowTitle("G2C - Google Drive to CSV Converter")
+        self.setWindowTitle("HSTL Data Converter - Google Worksheet to CSV")
         
         # Set application-wide larger font
         app_font = QFont()
         app_font.setPointSize(14)  # Doubled from typical 7pt to 14pt
         self.setFont(app_font)
+        
+        # Add title label at the top
+        title_label = QLabel("HSTL Data Converter - Google Worksheet to CSV")
+        title_font = QFont()
+        title_font.setPointSize(16)
+        title_font.setBold(True)
+        title_label.setFont(title_font)
+        title_label.setAlignment(Qt.AlignCenter)
+        title_label.setStyleSheet("color: #333333; margin: 10px;")
         
         # Start maximized/full screen
         self.setWindowState(Qt.WindowMaximized)
@@ -197,6 +206,9 @@ class G2CMainWindow(QMainWindow):
         
         # Create horizontal layout for top section
         top_layout = QHBoxLayout()
+        
+        # Add title to main layout first
+        main_layout.addWidget(title_label)
         
         # Left side container for existing UI elements
         left_container = QWidget()
@@ -246,6 +258,7 @@ class G2CMainWindow(QMainWindow):
         self.spreadsheet_name_label.setStyleSheet("color: #666666;")
         url_layout.addWidget(self.spreadsheet_name_label)
         
+        left_layout.addWidget(url_group)
         
         # Action Buttons
         button_layout = QHBoxLayout()
@@ -292,10 +305,7 @@ class G2CMainWindow(QMainWindow):
         
         splitter.addWidget(status_group)
         
-        # Status Messages area only in splitter
-        splitter.addWidget(status_group)
-        
-        # Set splitter proportions for status group only
+        # Set splitter proportions
         splitter.setSizes([150, 0])  # Status messages get reasonable height
         left_layout.addWidget(splitter)
         
@@ -326,7 +336,7 @@ class G2CMainWindow(QMainWindow):
         self.setStatusBar(self.status_bar)
         
         # Add version to status bar with smaller fonts
-        version_label = QLabel("Ver 0.3")
+        version_label = QLabel("Ver 0.4")
         version_font = QFont()
         version_font.setPointSize(8)  # Small font size
         version_label.setFont(version_font)
@@ -367,12 +377,12 @@ class G2CMainWindow(QMainWindow):
         )
         mapping_label = QLabel(mapping_info)
         mapping_label.setFont(QFont("Consolas", 9))  # Monospace font required for alignment
-        mapping_label.setStyleSheet("color: #666666;")  # Consistent style
+        mapping_label.setStyleSheet("color: #333333;")  # Darker, more readable color
         mapping_layout.addWidget(mapping_label)
         
         # Add explanation text
         mapping_desc = QLabel("This table shows how fields from your Google Sheet\nwill be mapped to IPTC metadata fields.")
-        mapping_desc.setStyleSheet("color: #666666;")
+        mapping_desc.setStyleSheet("color: #333333;")
         mapping_desc.setWordWrap(True)
         mapping_layout.addWidget(mapping_desc)
         
@@ -395,7 +405,7 @@ class G2CMainWindow(QMainWindow):
         )
         meta_info_label = QLabel(meta_info)
         meta_info_label.setFont(QFont("Consolas", 9))  # Use monospace font for alignment
-        meta_info_label.setStyleSheet("color: #666666;")
+        meta_info_label.setStyleSheet("color: #333333;")
         meta_layout.addWidget(meta_info_label)
         
         mapping_layout.addWidget(meta_details)
@@ -403,9 +413,7 @@ class G2CMainWindow(QMainWindow):
         right_layout.addWidget(mapping_group)
         right_layout.addStretch()
         
-        # Move main UI elements to left layout
-        left_layout.addWidget(url_group)
-        left_layout.addLayout(button_layout)
+        # Move progress bar to left layout
         left_layout.addWidget(self.progress_bar)
         
         # Initialize status
@@ -685,14 +693,14 @@ def main():
     # Must set the AppUserModelID before creating QApplication
     if os.name == 'nt':  # Windows only
         import ctypes
-        myappid = u'HSTL.G2C.GUI.3'  # arbitrary string
+        myappid = u'HSTL.G2C.GUI.4'  # arbitrary string
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     
     app = QApplication(sys.argv)
     
     # Set application properties
     app.setApplicationName("G2C GUI")
-    app.setApplicationVersion("0.3")
+    app.setApplicationVersion("0.4")
     app.setOrganizationName("HST Metadata Tools")
     
     # Load and set the icon
