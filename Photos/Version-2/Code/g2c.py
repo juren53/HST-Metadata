@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+Ver 0.3 updated  2025-07-21 1415
+
 Google Drive to CSV Converter with IPTC Mapping
 
 This script combines functionality from gc.py and map.py to:
@@ -15,6 +17,7 @@ Features:
 - Specialized IPTC metadata field mapping
 - ISO date formatting
 - Detailed data validation and reporting
+- Windows-1252 to UTF-8 double-encoding artifacts
 
 Usage:
     python g2c.py [--sheet-url URL] [--export-csv [FILENAME]] [--auto-convert]
@@ -365,9 +368,88 @@ def print_first_10_rows(df):
         print("Displaying simplified view:")
         print(df.head(10).to_string(max_cols=10, max_rows=10))
 
+def clean_encoding_artifacts(text):
+    """
+    Clean common UTF-8 encoding artifacts that appear when UTF-8 text is 
+    misinterpreted as Windows-1252 or ISO-8859-1.
+    
+    Args:
+        text: String that may contain encoding artifacts
+        
+    Returns:
+        str: Cleaned text with artifacts removed
+    """
+    if not isinstance(text, str) or not text:
+        return text
+    
+    # Common UTF-8 to Windows-1252 misinterpretation artifacts
+    # These are the byte sequences that result from double-encoding
+    artifacts = {
+        'Ã±': 'ñ',    # Spanish ñ
+        'Ã¡': 'á',    # Spanish á
+        'Ã©': 'é',    # Spanish é
+        'Ã­': 'í',    # Spanish í
+        'Ã³': 'ó',    # Spanish ó
+        'Ãº': 'ú',    # Spanish ú
+        'Ã¼': 'ü',    # German ü
+        'Ã¤': 'ä',    # German ä
+        'Ã¶': 'ö',    # German ö
+        'Ã ': 'à',    # French à
+        'Ã¨': 'è',    # French è
+        'Ã§': 'ç',    # French ç
+        'Ã¢': 'â',    # French â
+        'Ã™': 'Ù',    # Capital U with grave
+        'Â': '',      # Often appears as stray character
+        '┬á': ' ',    # Non-breaking space encoding artifact
+        '\u00a0': ' ',  # Non-breaking space (NBSP)
+        'â€™': "'",   # Right single quotation mark
+        'â€œ': '"',   # Left double quotation mark  
+        'â€\u009d': '"',   # Right double quotation mark
+        'â€“': '–',   # En dash
+        'â€”': '—',   # Em dash
+        'â€¦': '...',  # Horizontal ellipsis
+    }
+    
+    # Apply artifact replacements
+    cleaned_text = text
+    for artifact, replacement in artifacts.items():
+        cleaned_text = cleaned_text.replace(artifact, replacement)
+    
+    # Remove other common non-printable artifacts
+    # Remove null bytes and other control characters except newlines and tabs
+    cleaned_text = ''.join(char for char in cleaned_text 
+                          if ord(char) >= 32 or char in '\n\t')
+    
+    return cleaned_text
+
+def clean_dataframe_encoding(df):
+    """
+    Clean encoding artifacts from all string columns in a DataFrame.
+    
+    Args:
+        df: pandas DataFrame to clean
+        
+    Returns:
+        pandas.DataFrame: DataFrame with cleaned text
+    """
+    if df is None or df.empty:
+        return df
+    
+    df_cleaned = df.copy()
+    
+    for column in df_cleaned.columns:
+        # Check if column contains string data
+        if df_cleaned[column].dtype == 'object':
+            # Apply cleaning to each cell in the column
+            df_cleaned[column] = df_cleaned[column].astype(str).apply(
+                lambda x: clean_encoding_artifacts(x) if x != 'nan' else x
+            )
+    
+    return df_cleaned
+
 def export_to_csv(df, output_file='export.csv'):
     """
-    Export DataFrame to CSV with mapped column names.
+    Export DataFrame to CSV with mapped column names and cleaned encoding.
     
     Args:
         df: pandas DataFrame to export
@@ -431,19 +513,23 @@ def export_to_csv(df, output_file='export.csv'):
             if proceed.lower() != 'y':
                 return False
         
+        # Clean encoding artifacts from the original DataFrame before processing
+        print("\n🧹 Cleaning encoding artifacts...")
+        df_cleaned = clean_dataframe_encoding(df)
+        
         # Create new DataFrame with mapped columns
         new_df = pd.DataFrame()
         renamed_columns = []
         
         for src_col, dst_col in column_to_export_header.items():
-            # Copy the column data
-            new_df[dst_col] = df[src_col]
+            # Copy the column data from cleaned DataFrame
+            new_df[dst_col] = df_cleaned[src_col]
             renamed_columns.append(f"'{src_col}' (row 3: '{df.loc[row3_index, src_col]}') -> '{dst_col}'")
             print(f"Mapped: '{src_col}' (row 3: '{df.loc[row3_index, src_col]}') -> '{dst_col}'")
         
         # Add DateCreated column in ISO format (YYYY-MM-DD) from productionDateMonth, productionDateDay, productionDateYear columns
         try:
-            if all(col in df.columns for col in ['productionDateMonth', 'productionDateDay', 'productionDateYear']):
+            if all(col in df_cleaned.columns for col in ['productionDateMonth', 'productionDateDay', 'productionDateYear']):
                 print("Creating 'DateCreated' column in ISO format (YYYY-MM-DD)...")
                 
                 # Initialize an empty date column the same length as the DataFrame
@@ -451,12 +537,12 @@ def export_to_csv(df, output_file='export.csv'):
                 
                 # Skip the first 3 rows which contain header information
                 # Start processing from index 3 (4th row) onwards
-                for idx in range(3, len(df)):
+                for idx in range(3, len(df_cleaned)):
                     try:
-                        # Get date components and convert to string, handling None values
-                        month_str = str(df.loc[idx, 'productionDateMonth']).strip() if df.loc[idx, 'productionDateMonth'] is not None else ''
-                        day_str = str(df.loc[idx, 'productionDateDay']).strip() if df.loc[idx, 'productionDateDay'] is not None else ''
-                        year_str = str(df.loc[idx, 'productionDateYear']).strip() if df.loc[idx, 'productionDateYear'] is not None else ''
+                        # Get date components from cleaned DataFrame
+                        month_str = str(df_cleaned.loc[idx, 'productionDateMonth']).strip() if df_cleaned.loc[idx, 'productionDateMonth'] is not None else ''
+                        day_str = str(df_cleaned.loc[idx, 'productionDateDay']).strip() if df_cleaned.loc[idx, 'productionDateDay'] is not None else ''
+                        year_str = str(df_cleaned.loc[idx, 'productionDateYear']).strip() if df_cleaned.loc[idx, 'productionDateYear'] is not None else ''
                         
                         # Replace 'nan', 'None', or 'NaN' strings with empty string
                         month_str = '' if month_str.lower() in ['nan', 'none', 'null'] else month_str
