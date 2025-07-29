@@ -1,9 +1,9 @@
 
 ## The Hierarchy: Character Sets vs. Encodings
 
-Think of it this way:
-- **Character Sets** = "What characters exist and what numbers represent them"
-- **Encodings** = "How those numbers get stored as bytes"
+To solve the 'special character' problem in HSTL metadata comming from Google Sheets, it is important to break down the problem into two parts:
+- **Character Sets** = "WHAT characters exist and what numbers represent them"
+- **Encodings** = "HOW those numbers get stored as bytes"
 
 ## The Historical Layers
 
@@ -115,4 +115,3 @@ This is why UTF-8 became dominant - it can represent any Unicode character, and 
 
 The fix is usually identifying the correct source encoding and converting properly, but sometimes data gets corrupted beyond repair through multiple incorrect conversions (called "mojibake" - a Japanese term that's perfect for this phenomenon!).
 
-Have you encountered this in a specific context? The solution often depends on where the encoding mismatch is happening.
