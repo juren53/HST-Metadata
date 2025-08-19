@@ -1,6 +1,7 @@
-Done. The script now:
+The script now:
 •  Prints Version 0.4.1 in the header
 •  Writes a timestamped report file mirroring the console output
+- 
 
 Saved report:
 C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\testing-data\Test-6-Files\REPORT_UTF8-2025-08-13_14-16-30.txt
@@ -102,3 +103,4 @@ Would you like me to also show you how different programming languages (Python, 
 
 
 ChatGPT can make mistakes. Check important info.
+
