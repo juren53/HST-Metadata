@@ -1,0 +1,104 @@
+Done. The script now:
+•  Prints Version 0.4.1 in the header
+•  Writes a timestamped report file mirroring the console output
+
+Saved report:
+C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\testing-data\Test-6-Files\REPORT_UTF8-2025-08-13_14-16-30.txt
+
+Suggestions to refine “special characters”:
+•  Whitelist approach by field:
+•  Title/Description fields: allow standard punctuation and letters with diacritics (Latin-1 supplement) but flag control characters, replacement char  , and private-use.
+•  Accession/ObjectName fields: restrict to [A-Za-z0-9_-] and flag everything else.
+•  Unicode categories:
+•  Flag characters in categories: Cc (control), Cf (format, e.g., zero-width joiner), Co (private use), Cs (surrogates).
+•  Optionally flag Pd/Po that are outside a small set (e.g., only accept - , . ; : ' " ( ) / &).
+•  Normalize first:
+•  Apply Unicode normalization (NFC) and flag if normalization changes the string (detect decomposed vs composed sequences).
+•  Known mojibake patterns:
+•  Keep your current high-bit 128–255 catch, but add checks for typical UTF-8->Windows-1252 corruption sequences and sequences like â€™, Ã©, etc., as multi-char patterns.
+•  Zero-width and whitespace:
+•  Explicitly flag ZERO WIDTH SPACE (U+200B), NO-BREAK SPACE (U+00A0), EM/EN SPACE (U+2002–U+2003), and other U+2000–U+200A spaces unless in an allowed list.
+•  Smart quotes and dashes:
+•  Decide policy: either allow “ ” ‘ ’ – — or auto-normalize them to ASCII equivalents and report.
+•  Confusable/spoofing chars:
+•  Optionally flag characters outside Latin scripts (Greek, Cyrillic) that visually resemble Latin letters in fields expected to be English.
+•  Configurable policy:
+•  Move the character policy into a config at the top (allowed ranges per column) so you can tune without changing code.
+
+If you’d like, I can implement:
+•  A column-aware validator with allowlists/regex per column
+•  Unicode normalization (NFC) with “changed by normalization” indicator
+•  Explicit detection of zero-width and non-breaking spaces
+•  A switch like --strict or --loose to control sensitivity
+
+
+------------------------------------------------
+
+Apply Unicode normalization (NF
+
+Skip to content
+You said:
+Apply Unicode normalization (NFC)  what is
+ChatGPT said:
+
+Unicode normalization is a process that makes sure text is represented in a consistent way in memory, even if there are multiple possible encodings of the same characters.
+Why normalization exists
+
+Some Unicode characters can be represented in more than one way:
+
+    Precomposed form: a single code point for a character with an accent.
+    Example:
+
+        "é" → U+00E9 (Latin small letter e with acute)
+
+    Decomposed form: a base letter plus a separate "combining" accent mark.
+    Example:
+
+        "é" → U+0065 (e) + U+0301 (combining acute accent)
+
+Visually, both look the same → é, but internally, they are different byte sequences.
+Unicode Normalization Forms
+
+Unicode defines four standard forms:
+
+    NFC (Normalization Form C – Canonical Composition)
+
+        Prefers the composed form when available.
+
+        "e" + "◌́" → "é" (U+00E9)
+
+    NFD (Normalization Form D – Canonical Decomposition)
+
+        Prefers the decomposed form.
+
+        "é" (U+00E9) → "e" + "◌́"
+
+    NFKC (Compatibility Composition)
+
+        Like NFC, but also converts characters with "compatibility equivalents".
+
+        "①" (circled 1) → "1"
+
+    NFKD (Compatibility Decomposition)
+
+        Like NFD, but also expands compatibility forms.
+
+Example of NFC
+
+import unicodedata
+
+s1 = "e\u0301"        # decomposed form: 'e' + combining acute
+s2 = "é"              # composed form: single code point
+
+print(s1 == s2)       # False, different binary representation
+
+s1_nfc = unicodedata.normalize("NFC", s1)
+print(s1_nfc == s2)   # True, both now NFC-composed
+
+✅ In short:
+NFC normalization converts Unicode text into a consistent, composed form where possible, so that visually identical text has the same binary representation.
+
+Would you like me to also show you how different programming languages (Python, JavaScript, etc.) apply NFC normalization in practice?
+
+
+ChatGPT can make mistakes. Check important info.
