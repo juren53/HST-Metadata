@@ -1,0 +1,53 @@
+
+In using the Python3 programs that converts Google sheet data into csv format [ g2c_gui.py which calls g2c.py ], some “non-standard” characters  — like Ã± and Â - are appearing in the export.csv output file, probably invisible artifacts generated in the Google Sheets import file.  Help me fix this.
+
+
+    NiÃ±os → should be Niños
+
+    HÃ©roes → should be Héroes
+
+    MexicanÂ Foreign → should be Mexican Foreign
+	
+2023-4274
+2023-4277
+
+as a car approaches.Ã‚Â This photoas a car approaches.Ã‚Â This photo
+
+
+This none standard was output to export.csv:   ┬á
+
+in this section:
+
+Medical Staff with King Ibn Saud,,2023-4274,"King of Saudi Arabia, Abdul Aziz bin Abdul Rahman al Faisal Al Saud, sits between medical staff visiting his palace in Riyadh. Standing left to right: unidentified, Dr. Wallace H. Graham, Dr. Darrell Crain, Jr., and unidentified.┬áThis photo was taken during a medical trip to treat King Ibn Saud and other members of the Saudi Arabian royal family.
+
+
+================================================================
+
+
+    # Common UTF-8 to Windows-1252 misinterpretation artifacts
+    # These are the byte sequences that result from double-encoding
+    artifacts = {
+        '├â┬▒': '├▒',    # Spanish ├▒
+        '├â┬í': '├í',    # Spanish ├í
+        '├â┬⌐': '├⌐',    # Spanish ├⌐
+        '├â┬¡': '├¡',    # Spanish ├¡
+        '├â┬│': '├│',    # Spanish ├│
+        '├â┬║': '├║',    # Spanish ├║
+        '├â┬╝': '├╝',    # German ├╝
+        '├â┬ñ': '├ñ',    # German ├ñ
+        '├â┬╢': '├╢',    # German ├╢
+        '├â ': '├á',    # French ├á
+        '├â┬¿': '├¿',    # French ├¿
+        '├â┬º': '├º',    # French ├º
+        '├â┬ó': '├ó',    # French ├ó
+        '├âΓäó': '├Ö',    # Capital U with grave
+        '├é': '',      # Often appears as stray character
+        'Γö¼├í': ' ',    # Non-breaking space encoding artifact
+        '\u00a0': ' ',  # Non-breaking space (NBSP)
+        '├óΓé¼Γäó': "'",   # Right single quotation mark
+        '├óΓé¼┼ô': '"',   # Left double quotation mark
+        '├óΓé¼\u009d': '"',   # Right double quotation mark
+        '├óΓé¼ΓÇ£': 'ΓÇô',   # En dash
+        '├óΓé¼ΓÇ<9D>': 'ΓÇö',   # Em dash
+        '├óΓé¼┬ª': '...',  # Horizontal ellipsis
+    }
