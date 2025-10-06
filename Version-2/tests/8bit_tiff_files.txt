@@ -1,0 +1,12 @@
+2020-1732_verso.tif	8	3955	2793	-	Uncompressed
+2020-1744_verso.tif	8	3967	3169	-	Uncompressed
+2023-1743_8bit.tif	8	3195	4006	-	PackBits
+2023-1743_verso.tif	8	3315	4059	-	Uncompressed
+2023-86.tif	8	3832	2617	-	Uncompressed
+2023-86_verso.tif	8	4016	2918	-	Uncompressed
+67-1338.tif	8	3476	2708	Uncalibrated	Uncompressed
+70-3959.tif	8	3801	3108	Uncalibrated	Uncompressed
+70-3959A.tif	8	3150	3722	Uncalibrated	Uncompressed
+70-3959_Verso.tif	8	3987	3041	Uncalibrated	Uncompressed
+70-3982.tif	8	3940	4801	Uncalibrated	Uncompressed
+83-04-02B.tif	8	4095	2662	Uncalibrated	Uncompressed

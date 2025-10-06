@@ -1,0 +1,61 @@
+Analyze UTF-8 Report - Version 0.4.2
+==================================================
+Analyzing file: export.csv
+Total 'special characters' found: 20
+
+Successfully read 299 lines as UTF-8
+Found ObjectName column at index 2
+
+Line 17: Found 1 suspicious character(s)
+ObjectName: 66-1681
+Content: "President Harry S. Truman meets with McCloy and Acheson at Blair House in Washington, D.C.",Unrestricted,66-1681,"President Harry S. Truman meets with American High Commissioner for Occupied Germany, John M. McCloy (center), and Secretary of State, Dean Acheson (right), at Blair House in Washington, D.C. John Jay McCloy (March 31, 1895 <–> March 11, 1989) was an American lawyer, diplomat, banker, and high-ranking bureaucrat. He served as Assistant Secretary of War during World War II under Henry Stimson. In this capacity he dealt with German sabotage and political tensions in the North Africa Campaign. He was both the prime mover of Japanese internment as well as a high-ranking Federal bureaucrat who opposed the atomic bombings of Hiroshima and Nagasaki. After the war, he served as the president of the World Bank, U.S. High Commissioner for Germany, chairman of Chase Manhattan Bank, chairman of the Council on Foreign Relations, a member of the Warren Commission, and a prominent adviser to all presidents from Franklin D. Roosevelt to Ronald Reagan. McCloy was a member of a foreign policy group called ""The Wise Men"". 306-NT-354B-32",Test Photographer 13,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1950-01-23
+Suspicious characters:
+  Position 339: '–' (Unicode: U+2013, Decimal: 8211) - En Dash
+----------------------------------------
+Line 20: Found 1 suspicious character(s)
+ObjectName: 66-1688
+Content: "Leon Blum and Georges-<É>tienne Bonnet, a French politician",Unrestricted,66-1688,"Leon Blum, ex-Premier of France and Ambassador Extraordinary, arrived in Washington by air tonight. Mr. Blum will take part in negotiations to obtain a loan for France. Mr. Blum, left, is shown here with Ambassador to the United States from France Henri Bonnet. 306-NT-354C-2",Test Photographer 16,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1946-05-22
+Suspicious characters:
+  Position 23: 'É' (Unicode: U+00C9, Decimal: 201) - Latin Capital Letter E With Acute
+----------------------------------------
+Line 22: Found 5 suspicious character(s)
+ObjectName: 66-1691
+Content: "Spanish Example Title, El Valle de los Ca<í>dos",Unrestricted,66-1691,"Test with Spanish accents. Monumento a la Revoluci<ó>n. En su dise<ñ>o participaron los arquitectos Pedro Muguruza y Diego M<é>ndez; las esculturas corresponden a Juan de <Á>valos y Taborda, entre otros. 306-NT-354C-5",Test Photographer 22,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1945-07-17
+Suspicious characters:
+  Position 42: 'í' (Unicode: U+00ED, Decimal: 237) - Latin Small Letter I With Acute
+  Position 120: 'ó' (Unicode: U+00F3, Decimal: 243) - Latin Small Letter O With Acute
+  Position 134: 'ñ' (Unicode: U+00F1, Decimal: 241) - Latin Small Letter N With Tilde
+  Position 190: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 235: 'Á' (Unicode: U+00C1, Decimal: 193) - Latin Capital Letter A With Acute
+----------------------------------------
+Line 23: Found 5 suspicious character(s)
+ObjectName: 66-1692
+Content: "French Example Title, M<é>morial de la France combattante",Unrestricted,66-1692,Test with French accents. Fran<ç>ais louisianais; Louisiana Creole: fran<ç><é> Lalwizy<à>n. 306-NT-354C-6,Test Photographer 23,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1948-07-01
+Suspicious characters:
+  Position 24: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 109: 'ç' (Unicode: U+00E7, Decimal: 231) - Latin Small Letter C With Cedilla
+  Position 149: 'ç' (Unicode: U+00E7, Decimal: 231) - Latin Small Letter C With Cedilla
+  Position 150: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 159: 'à' (Unicode: U+00E0, Decimal: 224) - Latin Small Letter A With Grave
+----------------------------------------
+Line 24: Found 8 suspicious character(s)
+ObjectName: 66-1694
+Content: "German Example Title, Denkmal f<ü>r die ermordeten Juden Europas",Unrestricted,66-1694,"Test with German accents. Man kann das Sonnenlicht, das durch die langen G<ä>nge des Berliner Holocaust-Mahnmals blitzt, als Symbol der Hoffnung interpretieren. Doch errichtet wurde das Denkmal f<ü>r die ermordeten Juden Europas, wie es offiziell hei<ß>t, um an ein einzigartiges Verbrechen zu erinnern: die <ü>berwiegend industriem<ä><ß>ige T<ö>tung von mehr als sechs Millionen Menschen auf Befehl der nationalsozialistischen Machthaber in Deutschland. 306-NT-354C-8",Test Photographer 24,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1946-11-07
+Suspicious characters:
+  Position 32: 'ü' (Unicode: U+00FC, Decimal: 252) - Latin Small Letter U With Diaeresis
+  Position 161: 'ä' (Unicode: U+00E4, Decimal: 228) - Latin Small Letter A With Diaeresis
+  Position 280: 'ü' (Unicode: U+00FC, Decimal: 252) - Latin Small Letter U With Diaeresis
+  Position 333: 'ß' (Unicode: U+00DF, Decimal: 223) - Latin Small Letter Sharp S
+  Position 389: 'ü' (Unicode: U+00FC, Decimal: 252) - Latin Small Letter U With Diaeresis
+  Position 411: 'ä' (Unicode: U+00E4, Decimal: 228) - Latin Small Letter A With Diaeresis
+  Position 412: 'ß' (Unicode: U+00DF, Decimal: 223) - Latin Small Letter Sharp S
+  Position 418: 'ö' (Unicode: U+00F6, Decimal: 246) - Latin Small Letter O With Diaeresis
+----------------------------------------
+
+==================================================
+SUMMARY
+==================================================
+Analyze UTF-8 Report - Version 0.4.2
+Analyzing file: export.csv
+Total 'special characters' found: 20
+==================================================

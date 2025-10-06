@@ -1,0 +1,17 @@
+Analyze UTF-8 Report - Version 0.4.2
+==================================================
+Analyzing file: .\test_export2.csv
+Total 'special characters' found: 0
+
+Successfully read 300 lines as UTF-8
+Found ObjectName column at index 1
+
+[OK] No suspicious encoding issues found!
+
+==================================================
+SUMMARY
+==================================================
+Analyze UTF-8 Report - Version 0.4.2
+Analyzing file: .\test_export2.csv
+Total 'special characters' found: 0
+==================================================
