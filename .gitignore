@@ -1,0 +1,89 @@
+# HSTL Photo Framework .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyQt
+*.ui~
+*.qrc~
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+*.log
+*.tmp
+temp/
+tmp/
+
+# Data directories (these should be separate from code)
+data/
+images/
+input/
+output/
+test-data/
+testing-data/
+
+# Configuration with sensitive data
+*config_local.yaml
+*secrets.yaml
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Framework specific
+Photos/Version-2/testing-data/
+Photos/Version-2/small-testset/
+Photos/Version-2/tests/resulsts/
+Photos/Version-2/dev/__pycache__/
+Photos/Version-2/dev/build/
+Photos/Version-2/dev/dist/
+Photos/Version-2/archive/
+
+# Audio files and processing
+Audio/
+
+# Tools that may contain binaries
+Tools/
