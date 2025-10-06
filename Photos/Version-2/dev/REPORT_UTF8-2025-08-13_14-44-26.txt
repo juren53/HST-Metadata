@@ -1,0 +1,67 @@
+Analyze UTF-8 Report - Version 0.4.1
+==================================================
+Analyzing file: export.csv
+Total 'special characters' found: 14
+
+Successfully read 105 lines as UTF-8
+Found ObjectName column at index 2
+
+Line 6: Found 6 suspicious character(s)
+ObjectName: 59-72-43
+Content: President Truman Visits Ni<ñ>os H<é>roes Monument in Mexico,Undetermined,59-72-43,"President Harry S. Truman shakes hands with an unidentified Mexican General as Mexican< >Foreign Minister Torres Bodet looks on. President Truman made an unscheduled stop at< >the Ni<ñ>os H<é>roes Monument, honoring the youthful heroes of the Battle of Chapultepec in the US/Mexican War of 1847. The monument is in Chapultepec Park in Mexico City, Mexico. [From an album of photos of President Truman's trip to Mexico]",Sample Photographer,Sample Institutional Creator,Sample Related Collection 5,1947-03-04
+Suspicious characters:
+  Position 26: 'ñ' (Unicode: U+00F1, Decimal: 241)
+  Position 31: 'é' (Unicode: U+00E9, Decimal: 233)
+  Position 165: ' ' (Unicode: U+00A0, Decimal: 160)
+  Position 250: ' ' (Unicode: U+00A0, Decimal: 160)
+  Position 257: 'ñ' (Unicode: U+00F1, Decimal: 241)
+  Position 262: 'é' (Unicode: U+00E9, Decimal: 233)
+----------------------------------------
+Line 7: Found 1 suspicious character(s)
+ObjectName: 66-1950
+Content: President Truman Speaks at NATO Signing Ceremony,Unrestricted,66-1950,"President Harry S. Truman< >speaks at the North Atlantic Treaty Organization signing ceremony in the State Department Auditorium in Washington, D.C. Seated in a semi-circle behind him are the foreign ministers of all the NATO signatory nations, front row, left to right: Ernest Bevin, United Kingdom; Halvard M. Lange, Norway; Joseph Bech, Luxembourg; Bjarni Benediktsson, Iceland; Gustav Rasmussen, Denmark; Paul-Henri Spaak, Belgium; Dean Acheson, United States; Lester Pearson, Canada; Robert Schuman, France; Count Carlo Sforza, Italy; Dirk U. Stikker, the Netherlands; and Jose Caeiro da Mata, Portugal. [National Archives number 306-NT-355C-24]",Sample Photographer,New York Times Paris Bureau,Sample Related Collection 6,1949-04-04
+Suspicious characters:
+  Position 96: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 11: Found 1 suspicious character(s)
+ObjectName: 67-7850A
+Content: President Truman Signs Federal Enforcement Agents Retirement Bill,Undetermined,67-7850A,"President Harry S. Truman signs H.R. 6454, the Federal Enforcement Agents Retirement bill at his desk in the Oval Office of the White House. The bill became Public Law 879 during the 80th Congress. Pictured left to right: Assistant Commissioner of Immigration and Naturalization Service Willard F. Kelly; unidentified; Director of the Bureau of Prisons James V. Bennett; unidentified (mostly obscured); unidentified; Commissioner of Narcotics Harry J. Anslinger; unidentified; Commissioner of Immigration and Naturalization Service Watson B. Miller; President Truman; Assistant General Counsel Stephen J. Spingarn; Treasury Secretary John Snyder; unidentified; Assistant Treasury Secretary Edward H. Foley; and unidentified. [The photo has handwritten notations by Spingarn with ""SJS"" pointing to himself; and ""Sec'y Snyder"" pointing to Snyder.< >The back is inscribed by Spingarn: ""I was Treasury legislative counsel at this time (1948) and was in legislative charge of this bill. Steve Spingarn.""]",Sample Photographer,Sample Institutional Creator,Sample Related Collection 10,1948-07-02
+Suspicious characters:
+  Position 937: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 13: Found 1 suspicious character(s)
+ObjectName: 68-1578
+Content: President Truman Receives Award from Harlem Ministers,Restricted - Fully,68-1578,"President Harry S. Truman receives the< >Franklin D. Roosevelt Memorial Brotherhood Medal from Dr. C. Asapansa-Johnson, president of the Interdenominational Ministers Alliance. The award was presented in Dorrance Brooks Square in Harlem, New York. [From: New York Herald Tribune]",Sample Photographer,Acme Newspictures,Sample Related Collection 12,1948-10-29
+Suspicious characters:
+  Position 120: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 15: Found 1 suspicious character(s)
+ObjectName: 68-1788
+Content: President Truman Salutes 442nd Regimental Combat Team,Restricted - Fully,68-1788,"President Harry S. Truman (left) salutes after decorating the colors of the 442nd Regimental Combat Team, composed of Japanese-American soldiers who fought in the European Campaign. Soldiers are (left to right): Conrad Kurahara, Sacramento, California; Mitsuomi Tanaka, Honokaa, Hawaii; Thomas Harimoto, Honolulu, HI; Hiroshi Yamamoto, Brigham, Utah; and Laverne Kurahara, twin brother of Conrad, Sacramento, CA. Visitors, photographers, and other members of the press observe in the background. This event was held on the White House grounds< >at the Ellipse.",Sample Photographer,Associated Press,Sample Related Collection 14,1946-07-15
+Suspicious characters:
+  Position 624: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 21: Found 1 suspicious character(s)
+ObjectName: 72-1847
+Content: President Truman Receives Award from Harlem Ministers,Restricted - Fully,72-1847,"Dr. C. Asapansa-Johnson, president of the Interdenominational Ministers Alliance, presents President Harry S. Truman with the< >Franklin D. Roosevelt Memorial Brotherhood Medal. The award was presented in Dorrance Brooks Square in Harlem. New York Mayor William O'Dwyer stands in the background between Truman and Asapansa-Johnson. Others are unidentified.",Sample Photographer,"A. Hansen Studio, New York (N.Y.)",Sample Related Collection 20,1948-10-29
+Suspicious characters:
+  Position 207: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 42: Found 1 suspicious character(s)
+ObjectName: 2023-4274
+Content: Medical Staff with King Ibn Saud,Unrestricted,2023-4274,"King of Saudi Arabia, Abdul Aziz bin Abdul Rahman al Faisal Al Saud, sits between medical staff visiting his palace in Riyadh. Standing left to right: unidentified, Dr. Wallace H. Graham, Dr. Darrell Crain, Jr., and unidentified.< >This photo was taken during a medical trip to treat King Ibn Saud and other members of the Saudi Arabian royal family. [Originally called slide SA 53]","Darrell Crain, Jr.",Sample Institutional Creator,"Crain, Darrell, Jr. Papers",
+Suspicious characters:
+  Position 286: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 44: Found 1 suspicious character(s)
+ObjectName: 2023-4277
+Content: Crown Prince Saud with Children,Unrestricted,2023-4277,Crown Prince Saud of Saudi Arabia sits with two unidentified children.< >This photo was taken in Riyadh during a medical trip to treat King Ibn Saud and other members of the Saudi Arabian royal family. [Originally called slide SA 56],"Darrell Crain, Jr.",Sample Institutional Creator,"Crain, Darrell, Jr. Papers",
+Suspicious characters:
+  Position 125: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------
+Line 45: Found 1 suspicious character(s)
+ObjectName: 2023-4294
+Content: Street Scene in Riyadh,Unrestricted,2023-4294,"Street scene in Riyadh, Saudi Arabia, with unidentified people lined in front of buildings as a car approaches.< >This photo was taken during a medical trip to treat King Ibn Saud and other members of the Saudi Arabian royal family. [Originally called slide SA 82]","Darrell Crain, Jr.",Sample Institutional Creator,"Crain, Darrell, Jr. Papers",
+Suspicious characters:
+  Position 158: ' ' (Unicode: U+00A0, Decimal: 160)
+----------------------------------------

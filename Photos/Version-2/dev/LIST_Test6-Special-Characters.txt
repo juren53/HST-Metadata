@@ -1,0 +1,67 @@
+Analyzing file: ../testing-data/Test-6-Files/export.csv
+==================================================
+Successfully read 299 lines as UTF-8
+
+Line 17: Found 1 special character(s)
+Content: "President Harry S. Truman meets with McCloy and Acheson at Blair House in Washington, D.C.",Unrestricted,66-1681,"President Harry S. Truman meets with American High Commissioner for Occupied Germany, John M. McCloy (center), and Secretary of State, Dean Acheson (right), at Blair House in Washington, D.C. John Jay McCloy (March 31, 1895 [–] March 11, 1989) was an American lawyer, diplomat, banker, and high-ranking bureaucrat. He served as Assistant Secretary of War during World War II under Henry Stimson. In this capacity he dealt with German sabotage and political tensions in the North Africa Campaign. He was both the prime mover of Japanese internment as well as a high-ranking Federal bureaucrat who opposed the atomic bombings of Hiroshima and Nagasaki. After the war, he served as the president of the World Bank, U.S. High Commissioner for Germany, chairman of Chase Manhattan Bank, chairman of the Council on Foreign Relations, a member of the Warren Commission, and a prominent adviser to all presidents from Franklin D. Roosevelt to Ronald Reagan. McCloy was a member of a foreign policy group called ""The Wise Men"". 306-NT-354B-32",Test Photographer 13,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1950-01-23
+Special characters:
+  Position 339: '–' (Unicode: U+2013, Decimal: 8211)
+----------------------------------------
+Line 20: Found 1 special character(s)
+Content: "Leon Blum and Georges-[É]tienne Bonnet, a French politician",Unrestricted,66-1688,"Leon Blum, ex-Premier of France and Ambassador Extraordinary, arrived in Washington by air tonight. Mr. Blum will take part in negotiations to obtain a loan for France. Mr. Blum, left, is shown here with Ambassador to the United States from France Henri Bonnet. 306-NT-354C-2",Test Photographer 16,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1946-05-22
+Special characters:
+  Position 23: 'É' (Unicode: U+00C9, Decimal: 201)
+----------------------------------------
+Line 22: Found 5 special character(s)
+Content: "Spanish Example Title, El Valle de los Ca[í]dos",Unrestricted,66-1691,"Test with Spanish accents. Monumento a la Revoluci[ó]n. En su dise[ñ]o participaron los arquitectos Pedro Muguruza y Diego M[é]ndez; las esculturas corresponden a Juan de [Á]valos y Taborda, entre otros. 306-NT-354C-5",Test Photographer 22,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1945-07-17
+Special characters:
+  Position 42: 'í' (Unicode: U+00ED, Decimal: 237)
+  Position 120: 'ó' (Unicode: U+00F3, Decimal: 243)
+  Position 134: 'ñ' (Unicode: U+00F1, Decimal: 241)
+  Position 190: 'é' (Unicode: U+00E9, Decimal: 233)
+  Position 235: 'Á' (Unicode: U+00C1, Decimal: 193)
+----------------------------------------
+Line 23: Found 3 special character(s)
+Content: "French Example Title, M[é]morial de la France combattante",Unrestricted,66-1692,Test with French accents. Fran[ç]ais louisianais; Louisiana Creole: fran[ç]ais Lalwizyan. 306-NT-354C-6,Test Photographer 23,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1948-07-01
+Special characters:
+  Position 24: 'é' (Unicode: U+00E9, Decimal: 233)
+  Position 109: 'ç' (Unicode: U+00E7, Decimal: 231)
+  Position 149: 'ç' (Unicode: U+00E7, Decimal: 231)
+----------------------------------------
+Line 24: Found 8 special character(s)
+Content: "German Example Title, Denkmal f[ü]r die ermordeten Juden Europas",Unrestricted,66-1694,"Test with German accents. Man kann das Sonnenlicht, das durch die langen G[ä]nge des Berliner Holocaust-Mahnmals blitzt, als Symbol der Hoffnung interpretieren. Doch errichtet wurde das Denkmal f[ü]r die ermordeten Juden Europas, wie es offiziell hei[ß]t, um an ein einzigartiges Verbrechen zu erinnern: die [ü]berwiegend industriem[ä][ß]ige T[ö]tung von mehr als sechs Millionen Menschen auf Befehl der nationalsozialistischen Machthaber in Deutschland. 306-NT-354C-8",Test Photographer 24,New York Times Paris Bureau,Records of the U.S. Information Agency (Record Group 306),1946-11-07
+Special characters:
+  Position 32: 'ü' (Unicode: U+00FC, Decimal: 252)
+  Position 161: 'ä' (Unicode: U+00E4, Decimal: 228)
+  Position 280: 'ü' (Unicode: U+00FC, Decimal: 252)
+  Position 333: 'ß' (Unicode: U+00DF, Decimal: 223)
+  Position 389: 'ü' (Unicode: U+00FC, Decimal: 252)
+  Position 411: 'ä' (Unicode: U+00E4, Decimal: 228)
+  Position 412: 'ß' (Unicode: U+00DF, Decimal: 223)
+  Position 418: 'ö' (Unicode: U+00F6, Decimal: 246)
+----------------------------------------
+Line 252: Found 1 special character(s)
+Content: This is Title 252,Unrestricted,66-2628,208-PU-203[í]6,Test photog,Harris & Ewing,Records of the Office of War Information (Record Group 208),1949-01-20
+Special characters:
+  Position 49: 'í' (Unicode: U+00ED, Decimal: 237)
+----------------------------------------
+Line 253: Found 1 special character(s)
+Content: This is Title 253,Unrestricted,66-2629,208-PU-203[í]7,Test photog,Harris & Ewing,Records of the Office of War Information (Record Group 208),1949-01-20
+Special characters:
+  Position 49: 'í' (Unicode: U+00ED, Decimal: 237)
+----------------------------------------
+Line 261: Found 1 special character(s)
+Content: This is Title 261,Unrestricted,66-2721,208-PU-202[í]G,Test photog,Test Institutional Creator,Records of the Office of War Information (Record Group 208),
+Special characters:
+  Position 49: 'í' (Unicode: U+00ED, Decimal: 237)
+----------------------------------------
+Line 262: Found 1 special character(s)
+Content: This is Title 262,Unrestricted,66-2724,"208-PU-202[í]9 (PHE) [""PHE"" is in parenthesis here. Needed?]",Test photog,Harris & Ewing,Records of the Office of War Information (Record Group 208),1946-05-27
+Special characters:
+  Position 50: 'í' (Unicode: U+00ED, Decimal: 237)
+----------------------------------------
+Line 263: Found 1 special character(s)
+Content: This is Title 263,Unrestricted,66-2725,208-PU-202[í]10 ,Test photog,Harris & Ewing,Records of the Office of War Information (Record Group 208),1945-10-30
+Special characters:
+  Position 49: 'í' (Unicode: U+00ED, Decimal: 237)
+----------------------------------------
