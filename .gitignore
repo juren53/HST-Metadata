@@ -82,6 +82,16 @@ Photos/Version-2/dev/build/
 Photos/Version-2/dev/dist/
 Photos/Version-2/archive/
 
+# Large binary files
+*.exe
+*.pkg
+*.tif
+*.tiff
+*.pickle
+*.jpg
+*.jpeg
+*.png
+
 # Audio files and processing
 Audio/
 
