@@ -1,0 +1,24 @@
+Analyze UTF-8 Report - Version 0.4.2
+==================================================
+Analyzing file: test_footer.csv
+Total 'special characters' found: 3
+
+Successfully read 2 lines as UTF-8
+Found ObjectName column at index 0
+
+Line 2: Found 3 suspicious character(s)
+ObjectName: photo1.jpg
+Content: photo1.jpg,A caf<é> with r<é>sum<é>
+Suspicious characters:
+  Position 16: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 24: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 28: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+----------------------------------------
+
+==================================================
+SUMMARY
+==================================================
+Analyze UTF-8 Report - Version 0.4.2
+Analyzing file: test_footer.csv
+Total 'special characters' found: 3
+==================================================

@@ -1,0 +1,335 @@
+=========================================================================
+write-tags-from-csv.py ver 0.67  updated Mon 21 Jul 2025 12:08:53 PM 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 272233 MB
+ 
+Number of lines in the CSV file: 106
+ 
+Number of tif files in the directory:  32
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2025-07-21 12:08:53
+DEBUG: Headers loaded: ['Headline', 'CopyrightNotice', 'ObjectName', 'Caption-Abstract', 'By-line', 'By-lineTitle', 'Source', 'DateCreated']
+DEBUG: Found Source at index 6
+DEBUG: Found ObjectName at index 2
+***** File record.localIdentifier.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File Local Identifier.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File Accession Number.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 59-72-43.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 66-1950.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 66-2223.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 66-3093.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+67-1338.tif
+Using ISO date from DateCreated column: 1948-07-12
+Date Created:  1948-07-12       1
+DEBUG: Source value: 'McGrath, J. Howard Papers'
+Setting IPTC:Source tag to: McGrath, J. Howard Papers
+Setting IPTC DateCreated to: 1948:07:12
+***** File 67-7850A.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 67-7850B.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 68-1578.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 68-1596.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 68-1788.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 70-570.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 70-1054.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 70-1062.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+70-3959.tif
+Using ISO date from DateCreated column: 1951-06-25
+Date Created:  1951-06-25       2
+DEBUG: Source value: 'Harry S. Truman Papers Post-Presidential Papers'
+Setting IPTC:Source tag to: Harry S. Truman Papers Post-Presidential Papers
+Setting IPTC DateCreated to: 1951:06:25
+70-3982.tif
+Using ISO date from DateCreated column: 1949-10-27
+Date Created:  1949-10-27       3
+DEBUG: Source value: 'Harry S. Truman Papers Post-Presidential Papers'
+Setting IPTC:Source tag to: Harry S. Truman Papers Post-Presidential Papers
+Setting IPTC DateCreated to: 1949:10:27
+***** File 72-1847.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 72-1848.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+74-267.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       4
+DEBUG: Source value: 'O'Gara, John E. Papers'
+Setting IPTC:Source tag to: O'Gara, John E. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+74-268.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       5
+DEBUG: Source value: 'O'Gara, John E. Papers'
+Setting IPTC:Source tag to: O'Gara, John E. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+74-269.tif
+Using ISO date from DateCreated column: 1950-05-24
+Date Created:  1950-05-24       6
+DEBUG: Source value: 'O'Gara, John E. Papers'
+Setting IPTC:Source tag to: O'Gara, John E. Papers
+Setting IPTC DateCreated to: 1950:05:24
+74-270.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       7
+DEBUG: Source value: 'O'Gara, John E. Papers'
+Setting IPTC:Source tag to: O'Gara, John E. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+***** File 76-582.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 77-3549.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 78-670.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+83-04-02B.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       8
+DEBUG: Source value: 'Papers of Harry S. Truman Pertaining to Family, Business, and Personal Affairs'
+Setting IPTC:Source tag to: Papers of Harry S. Truman Pertaining to Family, Business, and Personal Affairs
+Using default date for IPTC DateCreated: 0000-00-00
+***** File 2020-1246.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+2020-1732.tif
+Using ISO date from DateCreated column: 1955-05-08
+Date Created:  1955-05-08       9
+DEBUG: Source value: 'Harry S. Truman Papers Post-Presidential Papers'
+Setting IPTC:Source tag to: Harry S. Truman Papers Post-Presidential Papers
+Setting IPTC DateCreated to: 1955:05:08
+2020-1744.tif
+Using ISO date from DateCreated column: 1955-04-15
+Date Created:  1955-04-15       10
+DEBUG: Source value: 'Harry S. Truman Papers Post-Presidential Papers'
+Setting IPTC:Source tag to: Harry S. Truman Papers Post-Presidential Papers
+Setting IPTC DateCreated to: 1955:04:15
+***** File 2020-1758.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 2020-1926.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+2023-86.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       11
+DEBUG: Source value: 'Harry S. Truman Papers Post-Presidential Papers'
+Setting IPTC:Source tag to: Harry S. Truman Papers Post-Presidential Papers
+Using default date for IPTC DateCreated: 0000-00-00
+***** File 2023-142.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 2023-149.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+2023-1742.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       12
+DEBUG: Source value: 'Kempton, Greta Papers'
+Setting IPTC:Source tag to: Kempton, Greta Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-1743.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       13
+DEBUG: Source value: 'Kempton, Greta Papers'
+Setting IPTC:Source tag to: Kempton, Greta Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4234.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       14
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4240.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       15
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4272.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       16
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4273.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       17
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4274.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       18
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4276.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       19
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4277.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       20
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+2023-4294.tif
+Using fallback date (no DateCreated column): 0000-00-00
+Date Created:  0000-00-00       21
+DEBUG: Source value: 'Crain, Darrell, Jr. Papers'
+Setting IPTC:Source tag to: Crain, Darrell, Jr. Papers
+Using default date for IPTC DateCreated: 0000-00-00
+***** File 2023-4391.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File 2024-27.tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+***** File .tif not found in directory C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests ********
+======================================================================
+Processing complete at  2025-07-21 12:09:12
+106 records read from the CSV file
+21 images processed
+85 missing images
+*** Missing images not processed:
+record.localIdentifier.tif missing
+Local Identifier.tif missing
+Accession Number.tif missing
+59-72-43.tif missing
+66-1950.tif missing
+66-2223.tif missing
+66-3093.tif missing
+67-7850A.tif missing
+67-7850B.tif missing
+68-1578.tif missing
+68-1596.tif missing
+68-1788.tif missing
+70-570.tif missing
+70-1054.tif missing
+70-1062.tif missing
+72-1847.tif missing
+72-1848.tif missing
+76-582.tif missing
+77-3549.tif missing
+78-670.tif missing
+2020-1246.tif missing
+2020-1758.tif missing
+2020-1926.tif missing
+2023-142.tif missing
+2023-149.tif missing
+2023-4391.tif missing
+2024-27.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+.tif missing
+
+___________________________
+Elapsed time: 0:19  MM:SS
+Processing time for each image:  0.18  seconds
+REPORT_TIFF-2025-07-21_12-08-53.txt log file printed to C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\tests
+======================================================================

@@ -1,0 +1,41 @@
+Analyze UTF-8 Report - Version 0.4.2
+==================================================
+Analyzing file: test_special_chars.csv
+Total 'special characters' found: 13
+
+Successfully read 5 lines as UTF-8
+Found ObjectName column at index 0
+
+Line 2: Found 3 suspicious character(s)
+ObjectName: photo1.jpg
+Content: photo1.jpg,A caf<é> in Z<ü>rich,travel caf<é>
+Suspicious characters:
+  Position 16: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 22: 'ü' (Unicode: U+00FC, Decimal: 252) - Latin Small Letter U With Diaeresis
+  Position 38: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+----------------------------------------
+Line 3: Found 6 suspicious character(s)
+ObjectName: photo2.jpg
+Content: photo2.jpg,Na<ï>ve approach to r<é>sum<é> writing,na<ï>ve r<é>sum<é> 
+Suspicious characters:
+  Position 13: 'ï' (Unicode: U+00EF, Decimal: 239) - Latin Small Letter I With Diaeresis
+  Position 30: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 34: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 46: 'ï' (Unicode: U+00EF, Decimal: 239) - Latin Small Letter I With Diaeresis
+  Position 51: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 55: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+----------------------------------------
+Line 4: Found 2 suspicious character(s)
+ObjectName: photo3.jpg
+Content: photo3.jpg,The en<–>dash character test,punctuation<–>marks
+Suspicious characters:
+  Position 17: '–' (Unicode: U+2013, Decimal: 8211) - En Dash
+  Position 49: '–' (Unicode: U+2013, Decimal: 8211) - En Dash
+----------------------------------------
+Line 5: Found 2 suspicious character(s)
+ObjectName: photo4.jpg
+Content: photo4.jpg,Temperature was 25<°>C today,weather 25<°>C
+Suspicious characters:
+  Position 29: '°' (Unicode: U+00B0, Decimal: 176) - Degree Sign
+  Position 48: '°' (Unicode: U+00B0, Decimal: 176) - Degree Sign
+----------------------------------------

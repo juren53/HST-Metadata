@@ -1,0 +1,552 @@
+======== 2020-1732.tif
+ExifTool Version Number         : 13.29
+File Name                       : 2020-1732.tif
+Directory                       : .
+File Size                       : 23 MB
+File Modification Date/Time     : 2025:07:21 12:21:03-05:00
+File Access Date/Time           : 2025:07:29 14:26:05-05:00
+File Creation Date/Time         : 2025:07:03 12:41:04-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Image Width                     : 2851
+Image Height                    : 4088
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : (Binary data 34861 bytes, use -b option to extract)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 1
+Strip Byte Counts               : (Binary data 20439 bytes, use -b option to extract)
+X Resolution                    : 950
+Y Resolution                    : 950
+Planar Configuration            : Chunky
+Current IPTC Digest             : 6d65e49af77f9a1d3f68cb8a10d3a0bc
+Headline                        : Harry S. Truman and Family at Truman Library Groundbreaking Ceremony
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 2020-1732
+Source                          : Harry S. Truman Papers Post-Pres
+Caption-Abstract                : Robert P. Weatherford, Mayor of Independence, Missouri, stands behind the lectern during the Groundbreaking Ceremony of the Truman Library and Museum. Former President Harry S. Truman, former First Lady Bess Truman, Margaret Truman, and Mary Jane Truman stand to Weatherford's left. The future home of the Truman Library is located in Slover Park in Independence, Missouri. [Donor: Dr. Elliot S. Berkley]
+Date Created                    : 1955:05:08
+Profile CMM Type                : Apple Computer Inc.
+Profile Version                 : 2.2.0
+Profile Class                   : Display Device Profile
+Color Space Data                : GRAY
+Profile Connection Space        : XYZ
+Profile Date Time               : 2007:01:24 01:00:00
+Profile File Signature          : acsp
+Primary Platform                : Apple Computer Inc.
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : Epson
+Device Model                    : 
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Epson
+Profile ID                      : 0
+Profile Copyright               : Copyright (C) SEIKO EPSON CORPORATION 2007. All rights reserved.
+Profile Description             : EPSON  Gray - Gamma 2.2
+Media White Point               : 0.95045 1 1.08905
+Media Black Point               : 0 0 0
+Gray Tone Reproduction Curve    : (Binary data 16 bytes, use -b option to extract)
+Image Size                      : 2851x4088
+Megapixels                      : 11.7
+======== 2020-1744.tif
+ExifTool Version Number         : 13.29
+File Name                       : 2020-1744.tif
+Directory                       : .
+File Size                       : 24 MB
+File Modification Date/Time     : 2025:07:21 12:21:04-05:00
+File Access Date/Time           : 2025:07:29 14:06:57-05:00
+File Creation Date/Time         : 2025:07:03 12:41:04-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Image Width                     : 3916
+Image Height                    : 3079
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : (Binary data 26301 bytes, use -b option to extract)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 1
+Strip Byte Counts               : (Binary data 15394 bytes, use -b option to extract)
+X Resolution                    : 400
+Y Resolution                    : 400
+Planar Configuration            : Chunky
+Current IPTC Digest             : 15a5147f14eadec6e177679794017d44
+Headline                        : Harry S. Truman and Bess Truman at Jefferson Islands Club Dinner
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 2020-1744
+Source                          : Harry S. Truman Papers Post-Pres
+Caption-Abstract                : Former President Harry S. Truman and Former First Lady Bess Truman attend the Jefferson Islands Club Dinner at the Shoreham Hotel in Washington, D.C. The individual to the left of Mr. Truman, and the two men to the right of Bess Truman are unidentified. [Donor: Leslie Biffle]
+Date Created                    : 1955:04:15
+Profile CMM Type                : Apple Computer Inc.
+Profile Version                 : 2.2.0
+Profile Class                   : Display Device Profile
+Color Space Data                : GRAY
+Profile Connection Space        : XYZ
+Profile Date Time               : 2007:01:24 01:00:00
+Profile File Signature          : acsp
+Primary Platform                : Apple Computer Inc.
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : Epson
+Device Model                    : 
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Epson
+Profile ID                      : 0
+Profile Copyright               : Copyright (C) SEIKO EPSON CORPORATION 2007. All rights reserved.
+Profile Description             : EPSON  Gray - Gamma 2.2
+Media White Point               : 0.95045 1 1.08905
+Media Black Point               : 0 0 0
+Gray Tone Reproduction Curve    : (Binary data 16 bytes, use -b option to extract)
+Image Size                      : 3916x3079
+Megapixels                      : 12.1
+======== 2023-1742.tif
+ExifTool Version Number         : 13.29
+File Name                       : 2023-1742.tif
+Directory                       : .
+File Size                       : 25 MB
+File Modification Date/Time     : 2025:07:21 12:21:06-05:00
+File Access Date/Time           : 2025:07:29 14:06:57-05:00
+File Creation Date/Time         : 2025:07:03 12:41:04-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Image Width                     : 3164
+Image Height                    : 3918
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : (Binary data 33521 bytes, use -b option to extract)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 1
+Strip Byte Counts               : (Binary data 19589 bytes, use -b option to extract)
+X Resolution                    : 400
+Y Resolution                    : 400
+Planar Configuration            : Chunky
+Current IPTC Digest             : 53e85dc2b127932c2f1298fd65590018
+Headline                        : Bess Truman Poses for Kempton Portrait
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 2023-1742
+Source                          : Kempton, Greta Papers
+Caption-Abstract                : First Lady Bess Truman poses seated in pearls and a flowered dress for her Greta Kempton portrait. [A seated pose, dress, and pearls were used in Kempton's resulting portrait, but the First Lady was ultimately painted facing the opposite direction. See photo 2023-1743 for a counterpart study and 68-714 for the final portrait.]
+Date Created                    : 0000:00:00
+Profile CMM Type                : Apple Computer Inc.
+Profile Version                 : 2.2.0
+Profile Class                   : Display Device Profile
+Color Space Data                : GRAY
+Profile Connection Space        : XYZ
+Profile Date Time               : 2007:01:24 01:00:00
+Profile File Signature          : acsp
+Primary Platform                : Apple Computer Inc.
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : Epson
+Device Model                    : 
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Epson
+Profile ID                      : 0
+Profile Copyright               : Copyright (C) SEIKO EPSON CORPORATION 2007. All rights reserved.
+Profile Description             : EPSON  Gray - Gamma 2.2
+Media White Point               : 0.95045 1 1.08905
+Media Black Point               : 0 0 0
+Gray Tone Reproduction Curve    : (Binary data 16 bytes, use -b option to extract)
+Image Size                      : 3164x3918
+Megapixels                      : 12.4
+======== 2023-1743.tif
+ExifTool Version Number         : 13.29
+File Name                       : 2023-1743.tif
+Directory                       : .
+File Size                       : 26 MB
+File Modification Date/Time     : 2025:07:21 12:21:07-05:00
+File Access Date/Time           : 2025:07:29 14:06:59-05:00
+File Creation Date/Time         : 2025:07:03 12:50:43-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Image Width                     : 3195
+Image Height                    : 4006
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : (Binary data 270 bytes, use -b option to extract)
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 128
+Strip Byte Counts               : (Binary data 223 bytes, use -b option to extract)
+X Resolution                    : 410
+Y Resolution                    : 410
+Planar Configuration            : Chunky
+Page Name                       : 2023-1743.tif
+Resolution Unit                 : inches
+Software                        : GIMP 2.10.38
+Modify Date                     : 2025:07:03 12:50:34
+Sample Format                   : Unsigned
+XMP Toolkit                     : XMP Core 4.4.0-Exiv2
+Document ID                     : gimp:docid:gimp:5451563f-1b7a-4ced-964b-8e44ea4c5c51
+Instance ID                     : xmp.iid:1225f66b-e7bf-4dd2-8414-448b3aff4ff0
+Original Document ID            : xmp.did:f24564e5-306a-4ebd-95e5-bd0c81f517f3
+Format                          : image/tiff
+Api                             : 2.0
+Platform                        : Windows
+Time Stamp                      : 1751565043641664
+Version                         : 2.10.38
+Date/Time Modified              : 2025:07:03T12:50:34:05:00
+Creator Tool                    : GIMP 2.10
+Metadata Date                   : 2025:07:03T12:50:34:05:00
+History Action                  : saved
+History Changed                 : /
+History Instance ID             : xmp.iid:59c821bb-1508-4fb1-b6fa-c82c34fbb1f1
+History Software Agent          : Gimp 2.10 (Windows)
+History When                    : 2025:07:03 12:50:43
+Current IPTC Digest             : e9ef806a34e7069534ffc602c099b853
+Caption-Abstract                : First Lady Bess Truman poses in a dark dress and pearls for Greta Kempton's portrait. [There is visible damage on this print where tape was used, presumably to hang it up for the artist's reference. This pose and hairstyle were used in the final portrait, but the dress was not. See also 2023-1742 for another study, and 68-714 for the final portrait.]
+Credit                          : Harry S. Truman Library
+Date Created                    : 0000:00:00
+Headline                        : Bess Truman Poses for Kempton Portrait
+Object Name                     : 2023-1743
+Application Record Version      : 4
+Source                          : Kempton, Greta Papers
+Special Instructions            : None
+Color Space                     : sRGB
+Profile CMM Type                : Little CMS
+Profile Version                 : 4.4.0
+Profile Class                   : Display Device Profile
+Color Space Data                : GRAY
+Profile Connection Space        : XYZ
+Profile Date Time               : 2025:07:03 17:48:43
+Profile File Signature          : acsp
+Primary Platform                : Microsoft Corporation
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : 
+Device Model                    : 
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Little CMS
+Profile ID                      : 0
+Profile Description             : GIMP built-in D65 Grayscale with sRGB TRC
+Profile Copyright               : Public Domain
+Media White Point               : 0.95045 1 1.08905
+Gray Tone Reproduction Curve    : (Binary data 32 bytes, use -b option to extract)
+Device Mfg Desc                 : GIMP
+Device Model Desc               : D65 Grayscale with sRGB TRC
+Image Size                      : 3195x4006
+Megapixels                      : 12.8
+======== 74-267.tif
+ExifTool Version Number         : 13.29
+File Name                       : 74-267.tif
+Directory                       : .
+File Size                       : 26 MB
+File Modification Date/Time     : 2025:07:21 12:21:00-05:00
+File Access Date/Time           : 2025:07:29 14:06:59-05:00
+File Creation Date/Time         : 2025:07:03 12:41:05-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 3170
+Image Height                    : 4026
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : 21310
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 4026
+Strip Byte Counts               : 25524840
+X Resolution                    : 400
+Y Resolution                    : 400
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop 25.0 (Windows)
+Modify Date                     : 2024:03:20 13:46:46
+XMP Toolkit                     : Adobe XMP Core 9.1-c001 79.1462899, 2023/06/25-20:01:55
+Creator Tool                    : Adobe Photoshop 25.0 (Windows)
+Create Date                     : 2024:03:20 13:05:42-05:00
+Metadata Date                   : 2024:03:20 13:46:46-05:00
+Format                          : image/tiff
+Color Mode                      : Grayscale
+Instance ID                     : xmp.iid:1617fd05-b63a-414f-b938-734d69e04c65
+Document ID                     : xmp.did:1617fd05-b63a-414f-b938-734d69e04c65
+Original Document ID            : xmp.did:1617fd05-b63a-414f-b938-734d69e04c65
+History Action                  : created
+History Instance ID             : xmp.iid:1617fd05-b63a-414f-b938-734d69e04c65
+History When                    : 2024:03:20 13:05:42-05:00
+History Software Agent          : Adobe Photoshop 25.0 (Windows)
+Planar Configuration            : Chunky
+Current IPTC Digest             : 37e8cca480be0622026562f9c642c606
+Headline                        : Portrait of John O'Gara
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 74-267
+Source                          : O'Gara, John E. Papers
+Caption-Abstract                : Portrait of John O'Gara in his Army uniform.
+Date Created                    : 0000:00:00
+By-line Title                   : Bachrach Photographers
+IPTC Digest                     : 00000000000000000000000000000000
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+URL List                        : 
+Slices Group Name               : 74-267
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 3756 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop 2024
+Warning                         : IPTCDigest is not current. XMP may be out of sync
+Color Space                     : Uncalibrated
+Exif Image Width                : 3170
+Exif Image Height               : 4026
+Image Size                      : 3170x4026
+Megapixels                      : 12.8
+======== 74-268.tif
+ExifTool Version Number         : 13.29
+File Name                       : 74-268.tif
+Directory                       : .
+File Size                       : 24 MB
+File Modification Date/Time     : 2025:07:21 12:21:00-05:00
+File Access Date/Time           : 2025:07:29 14:06:58-05:00
+File Creation Date/Time         : 2025:07:03 12:41:05-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 2996
+Image Height                    : 4005
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : 22118
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 4005
+Strip Byte Counts               : 23997960
+X Resolution                    : 400
+Y Resolution                    : 400
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop 25.0 (Windows)
+Modify Date                     : 2024:03:20 13:47:21
+XMP Toolkit                     : Adobe XMP Core 9.1-c001 79.1462899, 2023/06/25-20:01:55
+Creator Tool                    : Adobe Photoshop 25.0 (Windows)
+Create Date                     : 2024:03:20 13:13:35-05:00
+Metadata Date                   : 2024:03:20 13:47:21-05:00
+Format                          : image/tiff
+Color Mode                      : Grayscale
+Instance ID                     : xmp.iid:2711a8fe-472b-e14d-a085-e7f4264083bf
+Document ID                     : xmp.did:2711a8fe-472b-e14d-a085-e7f4264083bf
+Original Document ID            : xmp.did:2711a8fe-472b-e14d-a085-e7f4264083bf
+History Action                  : created
+History Instance ID             : xmp.iid:2711a8fe-472b-e14d-a085-e7f4264083bf
+History When                    : 2024:03:20 13:13:35-05:00
+History Software Agent          : Adobe Photoshop 25.0 (Windows)
+Planar Configuration            : Chunky
+Current IPTC Digest             : cb9540ba896292bab515d4e8fcc99869
+Headline                        : Portrait of John O'Gara
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 74-268
+Source                          : O'Gara, John E. Papers
+Caption-Abstract                : Portrait of John O'Gara in his Army uniform.
+Date Created                    : 0000:00:00
+IPTC Digest                     : 00000000000000000000000000000000
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+URL List                        : 
+Slices Group Name               : 74-268
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 4591 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop 2024
+Warning                         : IPTCDigest is not current. XMP may be out of sync
+Color Space                     : Uncalibrated
+Exif Image Width                : 2996
+Exif Image Height               : 4005
+Image Size                      : 2996x4005
+Megapixels                      : 12.0
+======== 74-269.tif
+ExifTool Version Number         : 13.29
+File Name                       : 74-269.tif
+Directory                       : .
+File Size                       : 24 MB
+File Modification Date/Time     : 2025:07:21 12:21:01-05:00
+File Access Date/Time           : 2025:07:29 14:06:58-05:00
+File Creation Date/Time         : 2025:07:03 12:41:05-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 2995
+Image Height                    : 4005
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : 23106
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 4005
+Strip Byte Counts               : 23989950
+X Resolution                    : 400
+Y Resolution                    : 400
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop 25.0 (Windows)
+Modify Date                     : 2024:03:20 13:47:39
+XMP Toolkit                     : Adobe XMP Core 9.1-c001 79.1462899, 2023/06/25-20:01:55
+Creator Tool                    : Adobe Photoshop 25.0 (Windows)
+Create Date                     : 2024:03:20 13:20:49-05:00
+Metadata Date                   : 2024:03:20 13:47:39-05:00
+Format                          : image/tiff
+Color Mode                      : Grayscale
+Instance ID                     : xmp.iid:f129b5eb-4fce-d141-93e7-1eeb91ab4cfa
+Document ID                     : xmp.did:f129b5eb-4fce-d141-93e7-1eeb91ab4cfa
+Original Document ID            : xmp.did:f129b5eb-4fce-d141-93e7-1eeb91ab4cfa
+History Action                  : created
+History Instance ID             : xmp.iid:f129b5eb-4fce-d141-93e7-1eeb91ab4cfa
+History When                    : 2024:03:20 13:20:49-05:00
+History Software Agent          : Adobe Photoshop 25.0 (Windows)
+Planar Configuration            : Chunky
+Current IPTC Digest             : 9ada098a0749ec15d5e17d1d815d6b6b
+Headline                        : Portrait of John O'Gara
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 74-269
+Source                          : O'Gara, John E. Papers
+Caption-Abstract                : Portrait of John O'Gara seated at a desk.
+Date Created                    : 1950:05:24
+By-line Title                   : Department of State
+IPTC Digest                     : 00000000000000000000000000000000
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+URL List                        : 
+Slices Group Name               : 74-269
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 5556 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop 2024
+Warning                         : IPTCDigest is not current. XMP may be out of sync
+Color Space                     : Uncalibrated
+Exif Image Width                : 2995
+Exif Image Height               : 4005
+Image Size                      : 2995x4005
+Megapixels                      : 12.0
+======== 74-270.tif
+ExifTool Version Number         : 13.29
+File Name                       : 74-270.tif
+Directory                       : .
+File Size                       : 22 MB
+File Modification Date/Time     : 2025:07:21 12:21:02-05:00
+File Access Date/Time           : 2025:07:29 14:06:57-05:00
+File Creation Date/Time         : 2025:07:03 12:41:05-05:00
+File Permissions                : -rw-rw-rw-
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 3717
+Image Height                    : 2945
+Bits Per Sample                 : 16
+Compression                     : Uncompressed
+Photometric Interpretation      : BlackIsZero
+Strip Offsets                   : 23412
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 1
+Rows Per Strip                  : 2945
+Strip Byte Counts               : 21893130
+X Resolution                    : 400
+Y Resolution                    : 400
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop 25.0 (Windows)
+Modify Date                     : 2024:03:20 13:47:59
+XMP Toolkit                     : Adobe XMP Core 9.1-c001 79.1462899, 2023/06/25-20:01:55
+Creator Tool                    : Adobe Photoshop 25.0 (Windows)
+Create Date                     : 2024:03:20 13:24:41-05:00
+Metadata Date                   : 2024:03:20 13:47:59-05:00
+Format                          : image/tiff
+Color Mode                      : Grayscale
+Instance ID                     : xmp.iid:813379cd-a0e9-c648-b987-c3265c63671a
+Document ID                     : xmp.did:813379cd-a0e9-c648-b987-c3265c63671a
+Original Document ID            : xmp.did:813379cd-a0e9-c648-b987-c3265c63671a
+History Action                  : created
+History Instance ID             : xmp.iid:813379cd-a0e9-c648-b987-c3265c63671a
+History When                    : 2024:03:20 13:24:41-05:00
+History Software Agent          : Adobe Photoshop 25.0 (Windows)
+Planar Configuration            : Chunky
+Current IPTC Digest             : 61e4ebda58a0d5d9f4feed3ce8df990d
+Headline                        : John O'Gara Delivers Remarks
+Application Record Version      : 4
+Credit                          : Harry S. Truman Library
+Special Instructions            : None
+Object Name                     : 74-270
+Source                          : O'Gara, John E. Papers
+Caption-Abstract                : John O'Gara speaks from the podium at an event for the Central Intelligence Agency.
+Date Created                    : 0000:00:00
+IPTC Digest                     : 00000000000000000000000000000000
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+URL List                        : 
+Slices Group Name               : 74-270
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 5842 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop 2024
+Warning                         : IPTCDigest is not current. XMP may be out of sync
+Color Space                     : Uncalibrated
+Exif Image Width                : 3717
+Exif Image Height               : 2945
+Image Size                      : 3717x2945
+Megapixels                      : 10.9
+    8 image files read
