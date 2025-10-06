@@ -3,6 +3,13 @@
 ## Project Overview
 The HSTL Photo Framework is an umbrella application that orchestrates all components of the HSTL Photo Metadata Project. It manages the complete 8-step process from Google Spreadsheet preparation through final watermarked JPEG creation.
 
+## Repository Information
+- **GitHub Repository**: https://github.com/juren53/HST-Metadata
+- **Framework Branch**: `framework-setup` (development branch)
+- **Local Repository**: `C:\Users\jimur\Projects\HST-Metadata`
+- **Framework Path**: `Photos/Version-2/Framework/`
+- **Current Status**: Initial framework structure committed and pushed
+
 ## Project Structure
 ```
 C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework\
@@ -33,6 +40,68 @@ C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework\
 ├── DEVELOPMENT_PLAN.md        # This file
 └── README.md                  # Usage documentation
 ```
+
+## Architecture & Best Practices
+
+### Core Architecture Patterns
+
+#### Plugin/Extension Architecture
+- **Modular Design**: Each step (1-8) is a separate, self-contained module
+- **Common Interface**: All step implementations inherit from a base `StepProcessor` class
+- **Extensibility**: Easy to add, remove, or replace individual steps without affecting others
+- **Isolation**: Each step operates independently with clear input/output contracts
+
+#### Pipeline/Workflow Pattern
+- **Data Flow**: Model the 8-step process as a pipeline where data flows through stages
+- **Stage Validation**: Each stage validates its inputs before execution
+- **Checkpoints**: Validation points between stages (matching "Checking and Validation" requirements)
+- **State Tracking**: Maintain processing state throughout the pipeline
+
+#### Configuration-Driven Design
+- **External Configuration**: Store all settings in YAML/TOML config files
+- **Path Management**: Keep data directory paths separate from code
+- **Step Parameters**: Configurable validation rules and processing parameters
+- **Environment Flexibility**: Easy deployment across different environments
+
+### Key Technical Practices
+
+#### State Management
+- **Progress Tracking**: Track completion status of each step for each photo collection
+- **Resume Capability**: Store processing state to resume interrupted workflows
+- **History Logging**: Maintain detailed logs of processing history, timestamps, and errors
+- **Rollback Support**: Ability to revert to previous states when needed
+
+#### Path Management System
+```python
+class PathManager:
+    - framework_root: Framework installation directory
+    - input_tiff_dir: Source TIFF image directory
+    - output_jpeg_dir: Processed JPEG output directory
+    - working_dir: Temporary processing directory
+    - logs_dir: Log file storage location
+    - config_dir: Configuration file directory
+    - reports_dir: Validation and summary reports
+```
+
+#### Context Object Pattern
+- **Pipeline Context**: Pass a context object through all processing stages
+- **Shared Resources**: Contains paths, configuration, and shared utilities
+- **Error Handling**: Centralized error collection and reporting
+- **Progress Reporting**: Real-time status updates throughout the pipeline
+
+#### Validation & Error Handling
+- **Pre-flight Checks**: Validate inputs and environment before each step
+- **Clear Error Messages**: Actionable guidance for error resolution
+- **Summary Reports**: Detailed reports after each step completion
+- **Dry-run Mode**: Validation without making changes (--dry-run flag)
+- **Graceful Degradation**: Continue processing when non-critical errors occur
+
+#### Quality Assurance
+- **File Count Validation**: Ensure expected number of files at each stage
+- **Metadata Verification**: Validate embedded metadata against source data
+- **Image Quality Checks**: Verify dimensions, bit depth, and format correctness
+- **Automated Testing**: Unit tests for each step module
+- **Integration Testing**: End-to-end workflow validation
 
 ## Process Steps Overview
 
@@ -92,6 +161,57 @@ C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework\
 - Integrated file browser
 - Real-time validation feedback
 
+## Framework Implementation Architecture
+
+### Core Classes Structure
+```python
+class StepProcessor(ABC):
+    """Base class for all step implementations"""
+    @abstractmethod
+    def validate_inputs(self, context: ProcessingContext) -> ValidationResult
+    @abstractmethod
+    def execute(self, context: ProcessingContext) -> StepResult
+    @abstractmethod
+    def validate_outputs(self, context: ProcessingContext) -> ValidationResult
+
+class ProcessingContext:
+    """Shared context passed through the pipeline"""
+    paths: PathManager
+    config: ConfigManager
+    logger: Logger
+    state: StateManager
+    current_step: int
+    
+class Pipeline:
+    """Main pipeline orchestrator"""
+    def __init__(self, steps: List[StepProcessor], context: ProcessingContext)
+    def run(self, start_step: int = 1, end_step: int = 8) -> PipelineResult
+    def validate_all(self) -> ValidationReport
+    def resume_from_checkpoint(self) -> PipelineResult
+```
+
+### Step Implementation Pattern
+```python
+class Step2_CSVConversion(StepProcessor):
+    """CSV conversion step integrating existing g2c.py"""
+    
+    def validate_inputs(self, context):
+        # Check for Google Spreadsheet files
+        # Validate spreadsheet format and accessibility
+        return ValidationResult()
+    
+    def execute(self, context):
+        # Integrate existing g2c.py functionality
+        # Convert spreadsheet to CSV
+        # Generate processing report
+        return StepResult()
+    
+    def validate_outputs(self, context):
+        # Verify CSV file creation
+        # Check row count matches expectations
+        return ValidationResult()
+```
+
 ## CLI Interface Design
 
 ### Core Commands
@@ -119,6 +239,18 @@ hstl_framework.py validate --all            # Validate all completed steps
 hstl_framework.py report --step 3           # Generate step report
 hstl_framework.py report --summary          # Overall project summary
 hstl_framework.py report --export csv       # Export report to CSV
+
+# Pipeline Management (Best Practices)
+hstl_framework.py pipeline --dry-run        # Validate entire pipeline without execution
+hstl_framework.py pipeline --resume         # Resume from last checkpoint
+hstl_framework.py pipeline --rollback 5     # Rollback to state before step 5
+hstl_framework.py state --checkpoint         # Create manual checkpoint
+hstl_framework.py state --history           # Show processing history
+
+# Advanced Validation
+hstl_framework.py validate --pre-flight     # Check all requirements before starting
+hstl_framework.py validate --paths          # Validate all directory paths
+hstl_framework.py validate --dependencies   # Check external tool dependencies
 ```
 
 ### Configuration Options
@@ -205,12 +337,15 @@ validation:
    - CLI help system enhancement
 
 ### Key Design Principles
-- **Modularity**: Each step is independent and can be run separately
-- **Configurability**: All settings can be customized per project
-- **Reliability**: Comprehensive validation and error handling
-- **Transparency**: Detailed logging and reporting at each step
-- **Extensibility**: Easy to add new steps or modify existing ones
+- **Modularity**: Each step is independent and can be run separately (Plugin Architecture)
+- **Configurability**: All settings can be customized per project (Configuration-Driven Design)
+- **Reliability**: Comprehensive validation and error handling (Quality Assurance)
+- **Transparency**: Detailed logging and reporting at each step (State Management)
+- **Extensibility**: Easy to add new steps or modify existing ones (Plugin Architecture)
 - **Data Safety**: Automatic backups and non-destructive operations where possible
+- **Pipeline Flow**: Sequential data processing with validation checkpoints
+- **Context-Aware**: Centralized resource and state management throughout processing
+- **Resume-able**: Ability to restart from any step without losing progress
 
 ## Dependencies
 - Python 3.8+
