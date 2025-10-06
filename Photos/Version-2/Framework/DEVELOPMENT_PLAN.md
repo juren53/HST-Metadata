@@ -5,40 +5,45 @@ The HSTL Photo Framework is an umbrella application that orchestrates all compon
 
 ## Repository Information
 - **GitHub Repository**: https://github.com/juren53/HST-Metadata
-- **Framework Branch**: `framework-setup` (development branch)
+- **Framework Branch**: `master` (main branch)
+- **Development Branch**: `framework-setup` (development work)
 - **Local Repository**: `C:\Users\jimur\Projects\HST-Metadata`
 - **Framework Path**: `Photos/Version-2/Framework/`
-- **Current Status**: Initial framework structure committed and pushed
+- **GitHub URL**: https://github.com/juren53/HST-Metadata/tree/master/Photos/Version-2/Framework
+- **Current Status**: Core framework implemented and deployed to master branch
 
 ## Project Structure
 ```
-C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework\
-├── hstl_framework.py          # Main CLI entry point
+C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\
+├── hstl_framework.py              # Main CLI entry point
 ├── config/
 │   ├── __init__.py
-│   ├── config_manager.py      # Configuration management
-│   └── settings.py            # Default settings
+│   ├── config_manager.py          # Configuration management
+│   └── settings.py                # Default settings
 ├── steps/
 │   ├── __init__.py
-│   ├── base_step.py           # Base class for all steps
-│   ├── step1_google_sheet.py  # Google Spreadsheet preparation
-│   ├── step2_csv_conversion.py # Google WS to CSV conversion
-│   ├── step3_unicode_filter.py # Unicode text filtering
-│   ├── step4_tiff_conversion.py # TIFF bit depth conversion
-│   ├── step5_metadata_embed.py # Metadata embedding
-│   ├── step6_jpeg_conversion.py # TIFF to JPEG conversion
-│   ├── step7_jpeg_resize.py   # JPEG resizing
-│   └── step8_watermark.py     # Watermark addition
+│   ├── base_step.py               # Base class for all steps
+│   ├── step1_google_sheet.py      # Google Spreadsheet preparation
+│   ├── step2_csv_conversion.py    # Google WS to CSV conversion
+│   ├── step3_unicode_filter.py    # Unicode text filtering
+│   ├── step4_tiff_conversion.py   # TIFF bit depth conversion
+│   ├── step5_metadata_embed.py    # Metadata embedding
+│   ├── step6_jpeg_conversion.py   # TIFF to JPEG conversion
+│   ├── step7_jpeg_resize.py       # JPEG resizing
+│   └── step8_watermark.py         # Watermark addition
 ├── utils/
 │   ├── __init__.py
-│   ├── logger.py              # Logging utilities
-│   ├── validator.py           # Validation utilities
-│   └── file_utils.py          # File operation utilities
-├── gui/                       # Future PyQt6 GUI (Phase 2)
+│   ├── logger.py                  # Logging utilities
+│   ├── validator.py               # Validation utilities
+│   └── file_utils.py              # File operation utilities
+├── core/
+│   ├── __init__.py
+│   └── pipeline.py                # Pipeline orchestration system
+├── gui/                           # Future PyQt6 GUI (Phase 2)
 │   └── __init__.py
-├── requirements.txt           # Python dependencies
-├── DEVELOPMENT_PLAN.md        # This file
-└── README.md                  # Usage documentation
+├── requirements.txt               # Python dependencies
+├── DEVELOPMENT_PLAN.md            # This file
+└── README.md                      # Usage documentation
 ```
 
 ## Architecture & Best Practices
