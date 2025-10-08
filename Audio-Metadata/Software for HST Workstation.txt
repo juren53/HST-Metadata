@@ -1,0 +1,23 @@
+Software for HST Workstation
+
+
+BWF MetaEdit            WAV metadata editor     https://mediaarea.net/BWFMetaEdit/Download            
+Python 3.xx             Programming interpreter
+Pip3                    Python library
+Notepad++               ASCII Text Editor
+Hex Editor Neo          Binary file viewer  
+Exiftool                Metadata editor/viewer
+Ex falso                                        https://quodlibet.readthedocs.io/en/latest/downloads.html#windows                   
+
+
+BWF MetaEdit            WAV file metadata editor 
+Audacity                Audio editor               
+Python 3.xx             Programming interpreter
+pip3                    Python library manager
+Notepad++               ASCII Text Editor
+Hex Editor Neo          Binary file viewer  
+Exiftool                Metadata editor/viewer
+Ex falso                Audio file metadata editor                                                  
+
+BWF MetaEdit is the newest and most exciting tool on this list.  It reads and writes just WAV file metadata but it does it very well and provides all sorts of guidances regarding metadata information and examples.  Here's a clip from its help files:
+

@@ -1,0 +1,172 @@
+=== ALL LARGE FILES BLOCKING GITHUB PUSH ===
+Generated: $(date)
+
+SUMMARY:
+- Files over 100MB (GitHub's hard limit): 36 files
+- Files 50-100MB (contributing to size): 26 files  
+- Total large files (>50MB): 62 files
+- Total size of large files: ~29GB
+- Total repository size: ~61GB
+
+=== FILES OVER 100MB (CANNOT BE PUSHED TO GITHUB) ===
+
+  9953.6MB  ./Audio-Metadata/U'ren 1-17-24-SoundExamples.zip
+  3505.4MB  ./Photos/Version-2/testing/Test 3 Files.zip
+  1521.9MB  ./Photos/Test Data/65.zip
+  1356.2MB  ./Photos/Version-2/testing/Test 5 Files.zip
+   807.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-1.wav
+   762.3MB  ./Photos/Version-2/testing/U'Ren 7-1-25.zip
+   688.2MB  ./Photos/Test Data/3rd-PDB-Test-Set_7-12-23.zip
+   596.7MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-47-5_-_65-48-5.wav
+   584.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-45.wav
+   577.7MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-47_1-5.wav
+   546.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-21.wav
+   544.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-18.wav
+   534.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-11.wav
+   519.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-33.wav
+   512.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-51-52.wav
+   487.8MB  ./Photos/Test Data/2nd-PDB-Test-Set-Piano.zip
+   487.8MB  ./Photos/test2/x/2nd-PDB-Test-Set-Piano.zip
+   479.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-2.wav
+   478.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-1.wav
+   383.8MB  ./Photos/58 JPGS resaved with Bridge.zip
+   349.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-34.wav
+   328.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-2.wav
+   160.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR70-57-1.wav
+   146.0MB  ./Photos/tmp/U'Ren 4-19-24.zip
+   125.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-114.wav
+   122.2MB  ./Photos/Test Data/1st-PDB-Test-Set-Billy.zip
+   122.2MB  ./Photos/test1/1st-PDB-Test-Set-Billy.zip
+   115.4MB  ./Audio-Metadata/test-set/audio-test-set.tar.gz
+   113.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-88.wav
+   109.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-1.mp3
+   109.6MB  ./Audio-Metadata/Testing/temp/SR2018-1-2-1.mp3
+   109.6MB  ./Audio-Metadata/Testing/SR2018-1-2-1.mp3
+   104.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-98-2.wav
+   104.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-98-1.wav
+   104.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-61-1.wav
+   103.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-186.wav
+
+=== FILES 50-100MB (CONTRIBUTING TO SIZE PROBLEM) ===
+
+    94.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-21-4.wav
+    91.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-2.wav
+    89.8MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-61-2.wav
+    82.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-65.wav
+    77.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-48-2.wav
+    76.8MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-1.wav
+    69.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-3.wav
+    69.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-197.wav
+    67.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-185.wav
+    65.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-59.wav
+    65.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-2.mp3
+    65.2MB  ./Audio-Metadata/Testing/temp/SR2018-1-1-2.mp3
+    65.2MB  ./Audio-Metadata/Testing/SR2018-1-1-2.mp3
+    65.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-1.mp3
+    65.0MB  ./Audio-Metadata/Testing/temp/SR2018-1-1-1.mp3
+    65.0MB  ./Audio-Metadata/Testing/SR2018-1-1-1.mp3
+    64.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-201.wav
+    60.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-52-2.wav
+    55.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-45-3.wav
+    54.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-47-5.wav
+    53.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-200.wav
+    53.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-108.wav
+    52.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR87-1-2.wav
+    52.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/outputfile.wav
+    51.3MB  ./Photos/2010-367.tif
+    51.3MB  ./Photos/2010-340.tif
+
+=== ANALYSIS BY FILE TYPE ===
+
+ZIP archives (>50MB):
+  9953.6MB  ./Audio-Metadata/U'ren 1-17-24-SoundExamples.zip
+  3505.4MB  ./Photos/Version-2/testing/Test 3 Files.zip
+  1521.9MB  ./Photos/Test Data/65.zip
+  1356.2MB  ./Photos/Version-2/testing/Test 5 Files.zip
+   762.3MB  ./Photos/Version-2/testing/U'Ren 7-1-25.zip
+   688.2MB  ./Photos/Test Data/3rd-PDB-Test-Set_7-12-23.zip
+   487.8MB  ./Photos/Test Data/2nd-PDB-Test-Set-Piano.zip
+   487.8MB  ./Photos/test2/x/2nd-PDB-Test-Set-Piano.zip
+   383.8MB  ./Photos/58 JPGS resaved with Bridge.zip
+   146.0MB  ./Photos/tmp/U'Ren 4-19-24.zip
+   122.2MB  ./Photos/Test Data/1st-PDB-Test-Set-Billy.zip
+   122.2MB  ./Photos/test1/1st-PDB-Test-Set-Billy.zip
+
+WAV files (>50MB):
+   807.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-1.wav
+   596.7MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-47-5_-_65-48-5.wav
+   584.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-45.wav
+   577.7MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-47_1-5.wav
+   546.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-21.wav
+   544.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-18.wav
+   534.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-11.wav
+   519.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-33.wav
+   512.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-51-52.wav
+   479.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-2.wav
+   478.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-1.wav
+   349.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/33-HST-SR65-34.wav
+   328.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-2.wav
+   160.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR70-57-1.wav
+   125.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-114.wav
+   113.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-88.wav
+   104.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-98-2.wav
+   104.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-98-1.wav
+   104.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-61-1.wav
+   103.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-186.wav
+    94.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-21-4.wav
+    91.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-2.wav
+    89.8MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-61-2.wav
+    82.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-65.wav
+    77.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-48-2.wav
+    76.8MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-1.wav
+    69.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-51-3.wav
+    69.3MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-197.wav
+    67.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-185.wav
+    65.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR60-59.wav
+    64.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-201.wav
+    60.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-52-2.wav
+    55.1MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-45-3.wav
+    54.5MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR65-47-5.wav
+    53.9MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-200.wav
+    53.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR59-108.wav
+    52.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR87-1-2.wav
+    52.4MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/outputfile.wav
+
+MP3 files (>50MB):
+   109.6MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-2-1.mp3
+   109.6MB  ./Audio-Metadata/Testing/temp/SR2018-1-2-1.mp3
+   109.6MB  ./Audio-Metadata/Testing/SR2018-1-2-1.mp3
+    65.2MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-2.mp3
+    65.2MB  ./Audio-Metadata/Testing/temp/SR2018-1-1-2.mp3
+    65.2MB  ./Audio-Metadata/Testing/SR2018-1-1-2.mp3
+    65.0MB  ./Audio-Metadata/Testing/temp/URen 1-17-24-SoundExamples/SR2018-1-1-1.mp3
+    65.0MB  ./Audio-Metadata/Testing/temp/SR2018-1-1-1.mp3
+    65.0MB  ./Audio-Metadata/Testing/SR2018-1-1-1.mp3
+
+TIF files (>50MB):
+    51.3MB  ./Photos/2010-367.tif
+    51.3MB  ./Photos/2010-340.tif
+
+=== RECOMMENDATIONS ===
+
+1. IMMEDIATE ACTION NEEDED:
+   - These 62 files MUST be excluded from git before GitHub push will work
+   - Total of ~29GB in large files blocking the push
+
+2. FILE CATEGORIES TO HANDLE:
+   - ZIP archives: Mostly test data and backups - consider excluding
+   - WAV files: Uncompressed audio - consider using Git LFS or exclude
+   - MP3/TIF files: Some large media files - evaluate case by case
+
+3. SUGGESTED APPROACH:
+   - Add large files to .gitignore to exclude them
+   - Use Git LFS for essential large files that must be shared  
+   - Keep large archives local-only for your personal use
+   - Push code and documentation first, handle media separately
+
+4. NEXT STEPS:
+   - Review this list to decide which files are essential vs expendable
+   - Create .gitignore entries for files to exclude
+   - Configure Git LFS for essential large files
+   - Retry GitHub push with reduced file set
+

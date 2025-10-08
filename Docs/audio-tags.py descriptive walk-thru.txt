@@ -1,0 +1,79 @@
+audio-tags.py descriptive walk-thru
+
+This script processes audio metadata from a CSV file, applies tags to MP3 files, and embeds custom thumbnails into the audio files. Let's break it down step by step:
+
+---
+
+### **1. Overview**
+- **Purpose:** 
+  - Convert dates in a custom format (`DD-MMM-YY`) to ISO 8601 (`YYYY-MM-DD`).
+  - Tag MP3 files with metadata (e.g., title, description, speakers, location).
+  - Add custom thumbnails to the tagged MP3 files.
+  - The output is saved in a "processed" directory.
+
+---
+
+### **2. Key Variables**
+- `csv_filename`: Name of the input CSV file containing metadata.
+  - Initially set to `"short.csv"` but can be changed.
+- `month_map`: Maps abbreviated month names (e.g., `Jan`, `Feb`) to their numeric values for date conversion.
+
+---
+
+### **3. Reading the CSV File**
+The script reads metadata from a CSV file using `csv.DictReader`. Each row of the CSV is treated as a dictionary with column names as keys.
+
+---
+
+### **4. Date Conversion**
+- The script extracts the date string from the `'Date'` column and splits it into `day`, `month`, and `year`.
+- It uses the `month_map` to convert the month abbreviation into a numeric value.
+- If the year is two digits, it's converted to four digits (e.g., `24` becomes `1924`).
+- A `datetime.date` object is created for validation, and the date is formatted as `YYYY-MM-DD`.
+
+---
+
+### **5. Metadata Tagging**
+- **MP3 Filename:** Based on the `'Accession Number'` column (`an`).
+- **Metadata Fields:**
+  - Includes tags like title, description, artist, speakers, restrictions, and more.
+  - Metadata is passed to FFmpeg via the `-metadata` option.
+- **Command Execution:**
+  - The `subprocess.run()` function executes FFmpeg commands to embed metadata into MP3 files.
+
+---
+
+### **6. Adding a Custom Thumbnail**
+- A temporary JPEG thumbnail (`temp.jpg`) is generated with the accession number (`an`) overlaid in yellow text.
+- This thumbnail is embedded into the MP3 file using FFmpeg.
+- **Steps:**
+  - Overlay text on a base thumbnail image (`HST-thumbnail-c.png`) using FFmpeg.
+  - Embed the custom thumbnail into the MP3 file with additional FFmpeg commands.
+
+---
+
+### **7. Directory Structure**
+- Temporary files are saved in a `tmp` directory.
+- Final MP3 files with metadata and thumbnails are saved in a `processed` directory.
+
+---
+
+### **8. Error Handling**
+- Invalid dates or rows are skipped with appropriate error messages.
+
+---
+
+### **Sample Workflow**
+1. **Input:**
+   - A CSV file with columns like `Date`, `title`, `Accession Number`, etc.
+   - A base thumbnail image (`HST-thumbnail-c.png`).
+2. **Processing:**
+   - Dates are converted.
+   - MP3 files are tagged with metadata and saved in `tmp`.
+   - Custom thumbnails are added to the MP3 files.
+3. **Output:**
+   - Final MP3 files with metadata and thumbnails in the `processed` directory.
+
+---
+
+Would you like a detailed explanation of any specific section or modifications to the code?

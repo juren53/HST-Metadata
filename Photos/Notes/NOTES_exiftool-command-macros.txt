@@ -1,0 +1,158 @@
+$ exiftool -d "%f (%f/%d)" -s -a -G1 *.jpg      ########## three column report ############
+
+======== 72-109.jpg
+[ExifTool]      ExifToolVersion                 : 12.70
+[ExifTool]      Warning                         : Bad ExifOffset SubDirectory start
+[ExifTool]      Warning                         : IPTCDigest is not current. XMP may be out of sync
+[System]        FileName                        : 72-109.jpg
+[System]        Directory                       : .
+[System]        FileSize                        : 219 kB
+[System]        FileModifyDate                  :  (/12)
+[System]        FileAccessDate                  :  (/18)
+[System]        FileInodeChangeDate             :  (/16)
+[System]        FilePermissions                 : -rw-r--r--
+[File]          FileType                        : JPEG
+[File]          FileTypeExtension               : jpg
+[File]          MIMEType                        : image/jpeg
+[File]          ExifByteOrder                   : Little-endian (Intel, II)
+[File]          CurrentIPTCDigest               : fa2b5966bcde8246994b4cb94fa6cf48
+[File]          ImageWidth                      : 800
+[File]          ImageHeight                     : 657
+[File]          EncodingProcess                 : Baseline DCT, Huffman coding
+[File]          BitsPerSample                   : 8
+[File]          ColorComponents                 : 1
+[JFIF]          JFIFVersion                     : 1.01
+[JFIF]          ResolutionUnit                  : inches
+[JFIF]          XResolution                     : 100
+[JFIF]          YResolution                     : 100
+[IFD0]          SubfileType                     : Full-resolution image
+[IFD0]          ImageWidth                      : 800
+[IFD0]          ImageHeight                     : 657
+[IFD0]          BitsPerSample                   : 8
+[IFD0]          Compression                     : Uncompressed
+[IFD0]          PhotometricInterpretation       : BlackIsZero
+[IFD0]          StripOffsets                    : 11596
+[IFD0]          SamplesPerPixel                 : 1
+[IFD0]          RowsPerStrip                    : 2392
+[IFD0]          StripByteCounts                 : 6963112
+[IFD0]          XResolution                     : 100
+[IFD0]          YResolution                     : 100
+[IFD0]          ResolutionUnit                  : inches
+[IFD0]          Software                        : Adobe Photoshop Elements 2.0
+[IFD0]          ModifyDate                      :  (/14)
+[XMP-x]         XMPToolkit                      : XMP toolkit 2.8.2-33, framework 1.5
+[XMP-rdf]       About                           : uuid:efe9133c-9dc8-11e1-9138-8b55e4c0a
+
+########################################################################################
+
+for file in *.jpg; do
+  echo "################"
+  echo $file
+  exiftool -s3 -G1 -n "$file" | wc -l
+done
+less
+
+
+################
+72-3263.jpg
+66
+################
+72-3264.jpg
+66
+################
+72-3265.jpg
+66
+################
+72-3266.jpg
+66
+################
+72-3267.jpg
+66
+################
+72-3268.jpg
+66
+################
+72-3269.jpg
+66
+################
+72-3270.jpg
+66
+################
+72-3271.jpg
+41
+################
+72-3272.jpg
+41
+################
+72-3273.jpg
+41
+################
+72-3274.jpg
+41
+################
+72-3275.jpg
+41
+################
+72-3276.jpg
+41
+################
+72-3277.jpg
+
+
+
+
+
+for file in *.jpg; do
+  echo "################"
+  echo $file
+  echo -n "Number of tags:     "; exiftool -s3 -G1 -n "$file" | wc -l
+  exiftool "$file" | grep Modify
+done
+less
+
+
+for file in *.jpg; do
+  echo -n "Number of tags for $file: "; exiftool -s3 -G1 -n "$file" | wc -l
+  echo
+done
+
+
+
+################
+72-3387.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 09:14:51
+################
+72-3388.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 09:19:00
+################
+72-3389.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 09:22:43
+################
+72-3390.jpg
+Number of tags: 66
+################
+72-3391.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 09:29:25
+################
+72-3392.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 09:32:58
+################
+72-3393.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 10:49:27
+################
+72-3394.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 10:51:43
+################
+72-3395.jpg
+Number of tags: 68
+Modify Date                     : 2007:08:01 10:53:30
+
+
+

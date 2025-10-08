@@ -1,0 +1,2572 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14068 MB
+ 
+Number of lines in the CSV file: 1268
+ 
+Number of jpg files in the diretory:  1268
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-28 16:40:48
+2007-1.jpg
+Date Created:  1958-09-27       1
+2007-10.jpg
+Date Created:  0000-00-00       2
+2007-100.jpg
+Date Created:  1964-02-07       3
+2007-1000.jpg
+Date Created:  1919-03-00       4
+2007-1001.jpg
+Date Created:  1919-03-00       5
+2007-1002.jpg
+Date Created:  1919-03-00       6
+2007-1003.jpg
+Date Created:  0000-00-00       7
+2007-1004.jpg
+Date Created:  1918-07-04       8
+2007-1005.jpg
+Date Created:  1919-02-17       9
+2007-1006.jpg
+Date Created:  1919-02-17       10
+2007-1007.jpg
+Date Created:  1919-03-31       11
+2007-1008.jpg
+Date Created:  1917-00-00       12
+2007-1009.jpg
+Date Created:  1918-11-25       13
+2007-101.jpg
+Date Created:  1964-02-07       14
+2007-1010.jpg
+Date Created:  1918-11-01       15
+2007-1011.jpg
+Date Created:  1918-04-14       16
+2007-1012.jpg
+Date Created:  1917-00-00       17
+2007-1013.jpg
+Date Created:  1917-00-00       18
+2007-1014.jpg
+Date Created:  1919-00-00       19
+2007-1015.jpg
+Date Created:  1917-00-00       20
+2007-1016.jpg
+Date Created:  1917-00-00       21
+2007-1017.jpg
+Date Created:  1917-00-00       22
+2007-1018.jpg
+Date Created:  1917-00-00       23
+2007-1019.jpg
+Date Created:  1917-00-00       24
+2007-102.jpg
+Date Created:  1964-02-07       25
+2007-1020.jpg
+Date Created:  1917-00-00       26
+2007-1021.jpg
+Date Created:  1917-00-00       27
+2007-1022.jpg
+Date Created:  1919-00-00       28
+2007-1023.jpg
+Date Created:  1917-00-00       29
+2007-1024.jpg
+Date Created:  1918-00-00       30
+2007-1025.jpg
+Date Created:  0000-00-00       31
+2007-1026.jpg
+Date Created:  1919-00-00       32
+2007-1027.jpg
+Date Created:  1919-00-00       33
+2007-1028.jpg
+Date Created:  1917-00-00       34
+2007-1029.jpg
+Date Created:  1917-00-00       35
+2007-103.jpg
+Date Created:  1964-02-07       36
+2007-1030.jpg
+Date Created:  1919-00-00       37
+2007-1031.jpg
+Date Created:  1917-00-00       38
+2007-1032.jpg
+Date Created:  1919-00-00       39
+2007-1033.jpg
+Date Created:  1919-00-00       40
+2007-1034.jpg
+Date Created:  1919-00-00       41
+2007-1035.jpg
+Date Created:  1919-00-00       42
+2007-1036.jpg
+Date Created:  1917-00-00       43
+2007-1037.jpg
+Date Created:  1917-00-00       44
+2007-1038.jpg
+Date Created:  1917-00-00       45
+2007-1039.jpg
+Date Created:  1919-00-00       46
+2007-104.jpg
+Date Created:  1964-02-07       47
+2007-1040.jpg
+Date Created:  1917-00-00       48
+2007-1041.jpg
+Date Created:  1918-00-00       49
+2007-1042.jpg
+Date Created:  1917-00-00       50
+2007-1043.jpg
+Date Created:  1918-12-02       51
+2007-1044.jpg
+Date Created:  1918-12-02       52
+2007-1045.jpg
+Date Created:  1918-12-00       53
+2007-1046.jpg
+Date Created:  1918-12-00       54
+2007-1047.jpg
+Date Created:  1918-12-00       55
+2007-1048.jpg
+Date Created:  0000-00-00       56
+2007-1049.jpg
+Date Created:  1918-11-00       57
+2007-105.jpg
+Date Created:  1964-02-07       58
+2007-1050.jpg
+Date Created:  1919-00-00       59
+2007-1051.jpg
+Date Created:  1919-05-00       60
+2007-1052.jpg
+Date Created:  1919-05-03       61
+2007-1053.jpg
+Date Created:  1919-05-00       62
+2007-1054.jpg
+Date Created:  1919-05-00       63
+2007-1055.jpg
+Date Created:  1919-05-00       64
+2007-1056.jpg
+Date Created:  1919-05-00       65
+2007-1057.jpg
+Date Created:  1919-04-20       66
+2007-1058.jpg
+Date Created:  1919-04-20       67
+2007-1059.jpg
+Date Created:  1919-04-20       68
+2007-106.jpg
+Date Created:  1964-02-07       69
+2007-1060.jpg
+Date Created:  1919-04-20       70
+2007-1061.jpg
+Date Created:  1919-04-00       71
+2007-1062.jpg
+Date Created:  1919-04-20       72
+2007-1063.jpg
+Date Created:  1919-04-00       73
+2007-1064.jpg
+Date Created:  1919-04-00       74
+2007-1065.jpg
+Date Created:  1919-04-00       75
+2007-1066.jpg
+Date Created:  1919-04-00       76
+2007-1067.jpg
+Date Created:  1919-04-20       77
+2007-1068.jpg
+Date Created:  1919-05-00       78
+2007-1069.jpg
+Date Created:  1919-04-20       79
+2007-107.jpg
+Date Created:  1964-02-07       80
+2007-1070.jpg
+Date Created:  1919-05-00       81
+2007-1071.jpg
+Date Created:  1918-10-00       82
+2007-1072.jpg
+Date Created:  1918-10-00       83
+2007-1073.jpg
+Date Created:  1918-00-00       84
+2007-1074.jpg
+Date Created:  1918-00-00       85
+2007-1075.jpg
+Date Created:  1918-00-00       86
+2007-1076.jpg
+Date Created:  1918-00-00       87
+2007-1077.jpg
+Date Created:  1919-04-19       88
+2007-1078.jpg
+Date Created:  1919-04-19       89
+2007-1079.jpg
+Date Created:  1919-04-19       90
+2007-108.jpg
+Date Created:  1963-08-03       91
+2007-1080.jpg
+Date Created:  1919-04-19       92
+2007-1081.jpg
+Date Created:  1919-04-19       93
+2007-1082.jpg
+Date Created:  1918-12-00       94
+2007-1083.jpg
+Date Created:  1918-12-00       95
+2007-1084.jpg
+Date Created:  1918-12-00       96
+2007-1085.jpg
+Date Created:  1918-12-00       97
+2007-1086.jpg
+Date Created:  1918-12-00       98
+2007-1087.jpg
+Date Created:  1918-12-00       99
+2007-1088.jpg
+Date Created:  1918-12-00       100
+2007-1089.jpg
+Date Created:  1918-12-00       101
+2007-109.jpg
+Date Created:  0000-00-00       102
+2007-1090.jpg
+Date Created:  1918-10-00       103
+2007-1091.jpg
+Date Created:  1918-10-00       104
+2007-1092.jpg
+Date Created:  1918-10-00       105
+2007-1093.jpg
+Date Created:  1918-10-00       106
+2007-1094.jpg
+Date Created:  1918-10-00       107
+2007-1095.jpg
+Date Created:  1918-10-00       108
+2007-1096.jpg
+Date Created:  1918-06-15       109
+2007-1097.jpg
+Date Created:  1918-06-15       110
+2007-1098.jpg
+Date Created:  1918-06-15       111
+2007-1099.jpg
+Date Created:  1918-06-15       112
+2007-11.jpg
+Date Created:  1960-03-30       113
+2007-110.jpg
+Date Created:  0000-00-00       114
+2007-1100.jpg
+Date Created:  1918-06-15       115
+2007-1101.jpg
+Date Created:  1918-06-15       116
+2007-1102.jpg
+Date Created:  1918-00-00       117
+2007-1103.jpg
+Date Created:  1918-00-00       118
+2007-1104.jpg
+Date Created:  1918-00-00       119
+2007-1105.jpg
+Date Created:  1918-00-00       120
+2007-1106.jpg
+Date Created:  1918-00-00       121
+2007-1107.jpg
+Date Created:  1918-00-00       122
+2007-1108.jpg
+Date Created:  1918-00-00       123
+2007-1109.jpg
+Date Created:  1918-00-00       124
+2007-111.jpg
+Date Created:  0000-00-00       125
+2007-1110.jpg
+Date Created:  1918-06-30       126
+2007-1111.jpg
+Date Created:  1918-00-00       127
+2007-1112.jpg
+Date Created:  1918-00-00       128
+2007-1113.jpg
+Date Created:  1918-00-00       129
+2007-1114.jpg
+Date Created:  1918-00-00       130
+2007-1115.jpg
+Date Created:  1918-00-00       131
+2007-1116.jpg
+Date Created:  1918-00-00       132
+2007-1117.jpg
+Date Created:  1918-00-00       133
+2007-1118.jpg
+Date Created:  1919-00-00       134
+2007-1119.jpg
+Date Created:  1919-04-15       135
+2007-112.jpg
+Date Created:  1963-00-00       136
+2007-1120.jpg
+Date Created:  1919-00-00       137
+2007-1121.jpg
+Date Created:  1918-00-00       138
+2007-1122.jpg
+Date Created:  1918-12-00       139
+2007-1123.jpg
+Date Created:  1918-12-00       140
+2007-1124.jpg
+Date Created:  1918-00-00       141
+2007-1125.jpg
+Date Created:  1918-12-00       142
+2007-1126.jpg
+Date Created:  1918-00-00       143
+2007-1127.jpg
+Date Created:  1918-12-00       144
+2007-1128.jpg
+Date Created:  1918-12-00       145
+2007-1129.jpg
+Date Created:  1918-12-00       146
+2007-113.jpg
+Date Created:  1963-00-00       147
+2007-1130.jpg
+Date Created:  1918-12-00       148
+2007-1131.jpg
+Date Created:  1930-00-00       149
+2007-1132.jpg
+Date Created:  1930-00-00       150
+2007-1133.jpg
+Date Created:  1930-00-00       151
+2007-1134.jpg
+Date Created:  1919-03-00       152
+2007-1135.jpg
+Date Created:  1919-03-00       153
+2007-1136.jpg
+Date Created:  1919-03-00       154
+2007-1137.jpg
+Date Created:  1919-03-00       155
+2007-1138.jpg
+Date Created:  1919-03-00       156
+2007-1139.jpg
+Date Created:  1919-03-00       157
+2007-114.jpg
+Date Created:  1963-00-00       158
+2007-1140.jpg
+Date Created:  1919-03-25       159
+2007-1141.jpg
+Date Created:  1919-03-25       160
+2007-1142.jpg
+Date Created:  1919-03-25       161
+2007-1143.jpg
+Date Created:  1919-03-25       162
+2007-1144.jpg
+Date Created:  1919-03-25       163
+2007-1145.jpg
+Date Created:  1919-03-25       164
+2007-1146.jpg
+Date Created:  1919-03-28       165
+2007-1147.jpg
+Date Created:  1919-03-25       166
+2007-1148.jpg
+Date Created:  1919-03-25       167
+2007-1149.jpg
+Date Created:  1919-03-25       168
+2007-115.jpg
+Date Created:  1963-00-00       169
+2007-1150.jpg
+Date Created:  1919-03-25       170
+2007-1151.jpg
+Date Created:  1919-03-25       171
+2007-1152.jpg
+Date Created:  1919-03-23       172
+2007-1153.jpg
+Date Created:  1919-03-23       173
+2007-1154.jpg
+Date Created:  1919-03-23       174
+2007-1155.jpg
+Date Created:  1919-03-23       175
+2007-1156.jpg
+Date Created:  1919-03-23       176
+2007-1157.jpg
+Date Created:  1919-03-23       177
+2007-1158.jpg
+Date Created:  1919-03-23       178
+2007-1159.jpg
+Date Created:  1919-03-23       179
+2007-116.jpg
+Date Created:  1963-00-00       180
+2007-1160.jpg
+Date Created:  1919-03-23       181
+2007-1161.jpg
+Date Created:  1919-03-23       182
+2007-1162.jpg
+Date Created:  1919-03-23       183
+2007-1163.jpg
+Date Created:  1919-03-23       184
+2007-1164.jpg
+Date Created:  1919-03-23       185
+2007-1165.jpg
+Date Created:  1918-03-23       186
+2007-1166.jpg
+Date Created:  1919-03-23       187
+2007-1167.jpg
+Date Created:  1919-03-23       188
+2007-1168.jpg
+Date Created:  1919-03-23       189
+2007-1169.jpg
+Date Created:  1919-03-00       190
+2007-117.jpg
+Date Created:  1963-00-00       191
+2007-1170.jpg
+Date Created:  1919-03-00       192
+2007-1171.jpg
+Date Created:  1919-03-00       193
+2007-1172.jpg
+Date Created:  1919-03-00       194
+2007-1173.jpg
+Date Created:  1919-03-00       195
+2007-1174.jpg
+Date Created:  1919-03-00       196
+2007-1175.jpg
+Date Created:  1919-03-00       197
+2007-1176.jpg
+Date Created:  1919-03-00       198
+2007-1177.jpg
+Date Created:  1919-03-00       199
+2007-1178.jpg
+Date Created:  1919-03-00       200
+2007-1179.jpg
+Date Created:  1919-03-00       201
+2007-118.jpg
+Date Created:  1963-00-00       202
+2007-1180.jpg
+Date Created:  1919-03-00       203
+2007-1181.jpg
+Date Created:  1919-03-00       204
+2007-1182.jpg
+Date Created:  1919-03-00       205
+2007-1183.jpg
+Date Created:  1918-12-18       206
+2007-1184.jpg
+Date Created:  1918-12-18       207
+2007-1185.jpg
+Date Created:  1918-12-18       208
+2007-1186.jpg
+Date Created:  1918-07-04       209
+2007-1187.jpg
+Date Created:  1918-07-04       210
+2007-1188.jpg
+Date Created:  1918-07-04       211
+2007-1189.jpg
+Date Created:  1918-12-19       212
+2007-119.jpg
+Date Created:  1963-00-00       213
+2007-1190.jpg
+Date Created:  1918-12-19       214
+2007-1191.jpg
+Date Created:  1918-12-19       215
+2007-1192.jpg
+Date Created:  1918-12-19       216
+2007-1193.jpg
+Date Created:  1918-12-19       217
+2007-1194.jpg
+Date Created:  1918-12-19       218
+2007-1195.jpg
+Date Created:  1919-03-02       219
+2007-1196.jpg
+Date Created:  1919-03-02       220
+2007-1197.jpg
+Date Created:  1919-03-02       221
+2007-1198.jpg
+Date Created:  1919-03-02       222
+2007-1199.jpg
+Date Created:  1919-03-02       223
+2007-12.jpg
+Date Created:  0000-00-00       224
+2007-120.jpg
+Date Created:  1964-00-00       225
+2007-1200.jpg
+Date Created:  1919-03-15       226
+2007-1201.jpg
+Date Created:  1919-03-15       227
+2007-1202.jpg
+Date Created:  1919-03-15       228
+2007-1203.jpg
+Date Created:  1919-03-15       229
+2007-1204.jpg
+Date Created:  1919-03-15       230
+2007-1205.jpg
+Date Created:  1919-03-15       231
+2007-1206.jpg
+Date Created:  1919-03-10       232
+2007-1207.jpg
+Date Created:  1919-03-10       233
+2007-1208.jpg
+Date Created:  1919-03-10       234
+2007-1209.jpg
+Date Created:  1919-03-10       235
+2007-121.jpg
+Date Created:  1961-00-00       236
+2007-1210.jpg
+Date Created:  1919-03-10       237
+2007-1211.jpg
+Date Created:  1919-03-10       238
+2007-1212.jpg
+Date Created:  1918-00-00       239
+2007-1213.jpg
+Date Created:  1918-12-00       240
+2007-1214.jpg
+Date Created:  1918-12-00       241
+2007-1215.jpg
+Date Created:  1918-12-00       242
+2007-1216.jpg
+Date Created:  1918-12-00       243
+2007-1217.jpg
+Date Created:  1918-12-00       244
+2007-1218.jpg
+Date Created:  1918-12-00       245
+2007-1219.jpg
+Date Created:  1918-12-02       246
+2007-122.jpg
+Date Created:  0000-00-00       247
+2007-1220.jpg
+Date Created:  1918-12-00       248
+2007-1221.jpg
+Date Created:  1918-12-09       249
+2007-1222.jpg
+Date Created:  1918-12-09       250
+2007-1223.jpg
+Date Created:  1918-12-09       251
+2007-1224.jpg
+Date Created:  1918-12-09       252
+2007-1225.jpg
+Date Created:  1918-12-09       253
+2007-1226.jpg
+Date Created:  1918-12-09       254
+2007-1227.jpg
+Date Created:  1918-12-09       255
+2007-1228.jpg
+Date Created:  1918-12-10       256
+2007-1229.jpg
+Date Created:  1918-12-10       257
+2007-123.jpg
+Date Created:  1961-00-00       258
+2007-1230.jpg
+Date Created:  1918-12-10       259
+2007-1231.jpg
+Date Created:  1918-12-10       260
+2007-1232.jpg
+Date Created:  1918-12-10       261
+2007-1233.jpg
+Date Created:  1918-12-10       262
+2007-1234.jpg
+Date Created:  1918-12-10       263
+2007-1235.jpg
+Date Created:  1918-12-00       264
+2007-1236.jpg
+Date Created:  1918-12-00       265
+2007-1237.jpg
+Date Created:  1918-12-00       266
+2007-1238.jpg
+Date Created:  1918-12-00       267
+2007-1239.jpg
+Date Created:  1918-12-00       268
+2007-124.jpg
+Date Created:  1961-00-00       269
+2007-1240.jpg
+Date Created:  1918-12-00       270
+2007-1241.jpg
+Date Created:  1918-12-00       271
+2007-1242.jpg
+Date Created:  1917-12-00       272
+2007-1243.jpg
+Date Created:  1918-12-00       273
+2007-1244.jpg
+Date Created:  1918-12-00       274
+2007-1245.jpg
+Date Created:  1918-12-09       275
+2007-1246.jpg
+Date Created:  1918-12-09       276
+2007-1247.jpg
+Date Created:  1919-03-27       277
+2007-1248.jpg
+Date Created:  1919-03-26       278
+2007-1249.jpg
+Date Created:  1919-03-26       279
+2007-125.jpg
+Date Created:  1961-00-00       280
+2007-1250.jpg
+Date Created:  1919-03-26       281
+2007-1251.jpg
+Date Created:  1919-03-26       282
+2007-1252.jpg
+Date Created:  1918-03-26       283
+2007-1253.jpg
+Date Created:  1919-03-26       284
+2007-1254.jpg
+Date Created:  1919-03-27       285
+2007-1255.jpg
+Date Created:  1919-03-27       286
+2007-1256.jpg
+Date Created:  1919-03-27       287
+2007-1257.jpg
+Date Created:  1919-03-27       288
+2007-1258.jpg
+Date Created:  1919-03-27       289
+2007-1259.jpg
+Date Created:  1919-03-27       290
+2007-126.jpg
+Date Created:  0000-00-00       291
+2007-1260.jpg
+Date Created:  1919-03-27       292
+2007-1261.jpg
+Date Created:  1919-03-27       293
+2007-1262.jpg
+Date Created:  1919-03-27       294
+2007-1263.jpg
+Date Created:  1919-03-27       295
+2007-1264.jpg
+Date Created:  1919-03-27       296
+2007-1265.jpg
+Date Created:  1919-03-27       297
+2007-1266.jpg
+Date Created:  1919-03-26       298
+2007-1267.jpg
+Date Created:  1919-03-26       299
+2007-1268.jpg
+Date Created:  1919-03-26       300
+2007-1269.jpg
+Date Created:  1919-03-26       301
+2007-127.jpg
+Date Created:  0000-00-00       302
+2007-1270.jpg
+Date Created:  1919-03-26       303
+2007-1271.jpg
+Date Created:  1919-03-26       304
+2007-1272.jpg
+Date Created:  1919-04-00       305
+2007-1273.jpg
+Date Created:  1919-04-00       306
+2007-1274.jpg
+Date Created:  1949-01-20       307
+2007-128.jpg
+Date Created:  1964-00-00       308
+2007-129.jpg
+Date Created:  1964-00-00       309
+2007-13.jpg
+Date Created:  1943-00-00       310
+2007-130.jpg
+Date Created:  1964-00-00       311
+2007-131.jpg
+Date Created:  0000-00-00       312
+2007-132.jpg
+Date Created:  0000-00-00       313
+2007-133.jpg
+Date Created:  0000-00-00       314
+2007-134.jpg
+Date Created:  1964-00-00       315
+2007-135.jpg
+Date Created:  0000-00-00       316
+2007-136.jpg
+Date Created:  0000-00-00       317
+2007-137.jpg
+Date Created:  1960-00-00       318
+2007-138.jpg
+Date Created:  0000-00-00       319
+2007-139.jpg
+Date Created:  0000-00-00       320
+2007-14.jpg
+Date Created:  1962-11-00       321
+2007-140.jpg
+Date Created:  0000-00-00       322
+2007-141.jpg
+Date Created:  1949-01-00       323
+2007-142.jpg
+Date Created:  1955-05-08       324
+2007-143.jpg
+Date Created:  1955-05-08       325
+2007-144.jpg
+Date Created:  1955-04-08       326
+2007-145.jpg
+Date Created:  1955-05-08       327
+2007-146.jpg
+Date Created:  1955-05-08       328
+2007-147.jpg
+Date Created:  1957-07-06       329
+2007-148.jpg
+Date Created:  1957-07-06       330
+2007-149.jpg
+Date Created:  1957-07-06       331
+2007-15.jpg
+Date Created:  1962-11-00       332
+2007-150.jpg
+Date Created:  1957-07-06       333
+2007-151.jpg
+Date Created:  1957-07-06       334
+2007-152.jpg
+Date Created:  1957-07-06       335
+2007-153.jpg
+Date Created:  1965-00-00       336
+2007-154.jpg
+Date Created:  1948-09-27       337
+2007-155.jpg
+Date Created:  1946-00-00       338
+2007-156.jpg
+Date Created:  1966-06-06       339
+2007-157.jpg
+Date Created:  1966-06-06       340
+2007-158.jpg
+Date Created:  1956-08-16       341
+2007-159.jpg
+Date Created:  1947-10-07       342
+2007-16.jpg
+Date Created:  1962-11-00       343
+2007-160.jpg
+Date Created:  1948-11-02       344
+2007-161.jpg
+Date Created:  1959-00-00       345
+2007-162.jpg
+Date Created:  1956-08-06       346
+2007-163.jpg
+Date Created:  1953-00-00       347
+2007-164.jpg
+Date Created:  1948-11-07       348
+2007-165.jpg
+Date Created:  1950-04-01       349
+2007-166.jpg
+Date Created:  1932-00-00       350
+2007-167.jpg
+Date Created:  1930-00-00       351
+2007-168.jpg
+Date Created:  1955-11-00       352
+2007-169.jpg
+Date Created:  1947-00-00       353
+2007-17.jpg
+Date Created:  1962-11-00       354
+2007-170.jpg
+Date Created:  1947-00-00       355
+2007-171.jpg
+Date Created:  1947-00-00       356
+2007-172.jpg
+Date Created:  1947-00-00       357
+2007-173.jpg
+Date Created:  1947-00-00       358
+2007-174.jpg
+Date Created:  1958-00-00       359
+2007-175.jpg
+Date Created:  1950-04-01       360
+2007-176.jpg
+Date Created:  1945-07-20       361
+2007-177.jpg
+Date Created:  1945-07-20       362
+2007-178.jpg
+Date Created:  1945-07-20       363
+2007-18.jpg
+Date Created:  1962-11-00       364
+2007-180.jpg
+Date Created:  1947-09-17       365
+2007-181.jpg
+Date Created:  1947-06-12       366
+2007-182.jpg
+Date Created:  1947-06-12       367
+2007-183.jpg
+Date Created:  1947-06-12       368
+2007-184.jpg
+Date Created:  1947-06-12       369
+2007-185.jpg
+Date Created:  1947-06-12       370
+2007-186.jpg
+Date Created:  1947-06-12       371
+2007-187.jpg
+Date Created:  1947-06-12       372
+2007-188.jpg
+Date Created:  1947-06-12       373
+2007-189.jpg
+Date Created:  1947-06-12       374
+2007-19.jpg
+Date Created:  1962-11-00       375
+2007-190.jpg
+Date Created:  1947-06-12       376
+2007-191.jpg
+Date Created:  1947-06-12       377
+2007-192.jpg
+Date Created:  1947-06-12       378
+2007-193.jpg
+Date Created:  1947-06-12       379
+2007-194.jpg
+Date Created:  1947-06-12       380
+2007-195.jpg
+Date Created:  1947-06-12       381
+2007-196.jpg
+Date Created:  1947-06-13       382
+2007-197.jpg
+Date Created:  1947-06-12       383
+2007-198.jpg
+Date Created:  1947-06-12       384
+2007-199.jpg
+Date Created:  1947-06-12       385
+2007-2.jpg
+Date Created:  1958-09-27       386
+2007-20.jpg
+Date Created:  1946-00-00       387
+2007-200.jpg
+Date Created:  1947-06-13       388
+2007-201.jpg
+Date Created:  1947-05-13       389
+2007-202.jpg
+Date Created:  1947-06-13       390
+2007-203.jpg
+Date Created:  1947-06-00       391
+2007-204.jpg
+Date Created:  1947-06-00       392
+2007-205.jpg
+Date Created:  1960-06-04       393
+2007-206.jpg
+Date Created:  1949-00-00       394
+2007-207.jpg
+Date Created:  1968-03-20       395
+2007-208.jpg
+Date Created:  1968-03-20       396
+2007-209.jpg
+Date Created:  1957-02-04       397
+2007-21.jpg
+Date Created:  1945-11-05       398
+2007-210.jpg
+Date Created:  1956-03-21       399
+2007-211.jpg
+Date Created:  1956-03-21       400
+2007-212.jpg
+Date Created:  0000-00-00       401
+2007-213.jpg
+Date Created:  0000-00-00       402
+2007-214.jpg
+Date Created:  0000-00-00       403
+2007-215.jpg
+Date Created:  1940-00-00       404
+2007-216.jpg
+Date Created:  1963-09-18       405
+2007-217.jpg
+Date Created:  1963-09-18       406
+2007-218.jpg
+Date Created:  0000-00-00       407
+2007-219.jpg
+Date Created:  1959-10-10       408
+2007-22.jpg
+Date Created:  1956-07-10       409
+2007-220.jpg
+Date Created:  1959-10-10       410
+2007-221.jpg
+Date Created:  1959-10-10       411
+2007-222.jpg
+Date Created:  1959-10-10       412
+2007-223.jpg
+Date Created:  1959-10-10       413
+2007-224.jpg
+Date Created:  1959-10-10       414
+2007-225.jpg
+Date Created:  1959-10-10       415
+2007-226.jpg
+Date Created:  1959-10-10       416
+2007-227.jpg
+Date Created:  1959-10-10       417
+2007-228.jpg
+Date Created:  1959-10-10       418
+2007-229.jpg
+Date Created:  1959-10-10       419
+2007-23.jpg
+Date Created:  1956-07-10       420
+2007-230.jpg
+Date Created:  1959-10-10       421
+2007-231.jpg
+Date Created:  1959-10-10       422
+2007-232.jpg
+Date Created:  1959-10-10       423
+2007-233.jpg
+Date Created:  1959-09-10       424
+2007-234.jpg
+Date Created:  1959-10-10       425
+2007-235.jpg
+Date Created:  1959-10-10       426
+2007-236.jpg
+Date Created:  1959-10-10       427
+2007-237.jpg
+Date Created:  1959-09-10       428
+2007-238.jpg
+Date Created:  1959-10-10       429
+2007-239.jpg
+Date Created:  1959-00-00       430
+2007-24.jpg
+Date Created:  1956-07-10       431
+2007-240.jpg
+Date Created:  1956-00-00       432
+2007-241.jpg
+Date Created:  1957-00-00       433
+2007-242.jpg
+Date Created:  1961-05-08       434
+2007-243.jpg
+Date Created:  1955-06-28       435
+2007-244.jpg
+Date Created:  1955-06-28       436
+2007-245.jpg
+Date Created:  1952-10-00       437
+2007-246.jpg
+Date Created:  1969-00-00       438
+2007-247.jpg
+Date Created:  1969-00-00       439
+2007-248.jpg
+Date Created:  1970-00-00       440
+2007-249.jpg
+Date Created:  1960-11-08       441
+2007-25.jpg
+Date Created:  1955-00-00       442
+2007-250.jpg
+Date Created:  1955-00-00       443
+2007-251.jpg
+Date Created:  0000-00-00       444
+2007-252.jpg
+Date Created:  1945-00-00       445
+2007-253.jpg
+Date Created:  1947-00-00       446
+2007-254.jpg
+Date Created:  1955-02-10       447
+2007-255.jpg
+Date Created:  1967-06-21       448
+2007-256.jpg
+Date Created:  0000-00-00       449
+2007-259.jpg
+Date Created:  0000-00-00       450
+2007-26.jpg
+Date Created:  1953-02-23       451
+2007-260.jpg
+Date Created:  1951-09-06       452
+2007-261.jpg
+Date Created:  1951-09-06       453
+2007-262.jpg
+Date Created:  1951-09-06       454
+2007-263.jpg
+Date Created:  1951-09-06       455
+2007-264.jpg
+Date Created:  1951-09-06       456
+2007-265.jpg
+Date Created:  1951-09-06       457
+2007-266.jpg
+Date Created:  1951-09-06       458
+2007-267.jpg
+Date Created:  1951-09-06       459
+2007-268.jpg
+Date Created:  1959-12-00       460
+2007-269.jpg
+Date Created:  1959-12-00       461
+2007-27.jpg
+Date Created:  1955-06-03       462
+2007-270.jpg
+Date Created:  1959-12-00       463
+2007-271.jpg
+Date Created:  1959-12-00       464
+2007-272.jpg
+Date Created:  1959-12-00       465
+2007-273.jpg
+Date Created:  1959-12-00       466
+2007-274.jpg
+Date Created:  1959-12-00       467
+2007-275.jpg
+Date Created:  1959-12-00       468
+2007-276.jpg
+Date Created:  1959-12-00       469
+2007-277.jpg
+Date Created:  1959-12-00       470
+2007-278.jpg
+Date Created:  1959-12-00       471
+2007-279.jpg
+Date Created:  1959-12-00       472
+2007-28.jpg
+Date Created:  1955-06-03       473
+2007-280.jpg
+Date Created:  1959-12-00       474
+2007-281.jpg
+Date Created:  1959-12-00       475
+2007-282.jpg
+Date Created:  1959-12-00       476
+2007-283.jpg
+Date Created:  1959-12-00       477
+2007-284.jpg
+Date Created:  0000-00-00       478
+2007-285.jpg
+Date Created:  0000-00-00       479
+2007-286.jpg
+Date Created:  1962-08-03       480
+2007-287.jpg
+Date Created:  1958-00-00       481
+2007-288.jpg
+Date Created:  0000-00-00       482
+2007-289.jpg
+Date Created:  0000-00-00       483
+2007-29.jpg
+Date Created:  1955-10-00       484
+2007-290.jpg
+Date Created:  1964-00-00       485
+2007-291.jpg
+Date Created:  1952-06-03       486
+2007-292.jpg
+Date Created:  0000-00-00       487
+2007-293.jpg
+Date Created:  0000-00-00       488
+2007-294.jpg
+Date Created:  0000-00-00       489
+2007-295.jpg
+Date Created:  0000-00-00       490
+2007-296.jpg
+Date Created:  1959-00-00       491
+2007-297.jpg
+Date Created:  0000-00-00       492
+2007-298.jpg
+Date Created:  1953-08-00       493
+2007-299.jpg
+Date Created:  1959-00-00       494
+2007-3.jpg
+Date Created:  1958-09-27       495
+2007-30.jpg
+Date Created:  1955-10-00       496
+2007-300.jpg
+Date Created:  1954-00-00       497
+2007-301.jpg
+Date Created:  1958-00-00       498
+2007-302.jpg
+Date Created:  0000-00-00       499
+2007-303.jpg
+Date Created:  0000-00-00       500
+2007-304.jpg
+Date Created:  0000-00-00       501
+2007-305.jpg
+Date Created:  0000-00-00       502
+2007-306.jpg
+Date Created:  0000-00-00       503
+2007-307.jpg
+Date Created:  0000-00-00       504
+2007-308.jpg
+Date Created:  0000-00-00       505
+2007-309.jpg
+Date Created:  0000-00-00       506
+2007-31.jpg
+Date Created:  1955-10-00       507
+2007-310.jpg
+Date Created:  0000-00-00       508
+2007-311.jpg
+Date Created:  1959-00-00       509
+2007-312.jpg
+Date Created:  0000-00-00       510
+2007-313.jpg
+Date Created:  1944-00-00       511
+2007-314.jpg
+Date Created:  0000-00-00       512
+2007-315.jpg
+Date Created:  0000-00-00       513
+2007-316.jpg
+Date Created:  0000-00-00       514
+2007-317.jpg
+Date Created:  1955-11-19       515
+2007-318.jpg
+Date Created:  0000-00-00       516
+2007-319.jpg
+Date Created:  0000-00-00       517
+2007-32.jpg
+Date Created:  1955-10-00       518
+2007-320.jpg
+Date Created:  1896-00-00       519
+2007-321.jpg
+Date Created:  1893-10-18       520
+2007-322.jpg
+Date Created:  0000-00-00       521
+2007-323.jpg
+Date Created:  0000-00-00       522
+2007-324.jpg
+Date Created:  1880-00-00       523
+2007-325.jpg
+Date Created:  1880-00-00       524
+2007-326.jpg
+Date Created:  1880-00-00       525
+2007-327.jpg
+Date Created:  1880-00-00       526
+2007-328.jpg
+Date Created:  1880-00-00       527
+2007-329.jpg
+Date Created:  1900-00-00       528
+2007-33.jpg
+Date Created:  1955-10-00       529
+2007-330.jpg
+Date Created:  0000-00-00       530
+2007-331.jpg
+Date Created:  1909-00-00       531
+2007-332.jpg
+Date Created:  1865-00-00       532
+2007-333.jpg
+Date Created:  1905-00-00       533
+2007-334.jpg
+Date Created:  1884-00-00       534
+2007-335.jpg
+Date Created:  0000-00-00       535
+2007-336.jpg
+Date Created:  1860-00-00       536
+2007-337.jpg
+Date Created:  1900-00-00       537
+2007-338.jpg
+Date Created:  1890-00-00       538
+2007-339.jpg
+Date Created:  0000-00-00       539
+2007-34.jpg
+Date Created:  1955-10-00       540
+2007-340.jpg
+Date Created:  1903-00-00       541
+2007-341.jpg
+Date Created:  1917-00-00       542
+2007-342.jpg
+Date Created:  1924-00-00       543
+2007-343.jpg
+Date Created:  0000-00-00       544
+2007-344.jpg
+Date Created:  1957-00-00       545
+2007-346.jpg
+Date Created:  0000-00-00       546
+2007-347.jpg
+Date Created:  0000-00-00       547
+2007-348.jpg
+Date Created:  1918-00-00       548
+2007-349.jpg
+Date Created:  0000-00-00       549
+2007-35.jpg
+Date Created:  1955-10-00       550
+2007-350.jpg
+Date Created:  0000-00-00       551
+2007-351.jpg
+Date Created:  1952-10-00       552
+2007-352.jpg
+Date Created:  1952-11-04       553
+2007-353.jpg
+Date Created:  1952-11-04       554
+2007-354.jpg
+Date Created:  1954-05-00       555
+2007-355.jpg
+Date Created:  1954-09-17       556
+2007-356.jpg
+Date Created:  1954-09-17       557
+2007-357.jpg
+Date Created:  1954-11-02       558
+2007-358.jpg
+Date Created:  1954-11-02       559
+2007-359.jpg
+Date Created:  1954-11-00       560
+2007-36.jpg
+Date Created:  1955-10-00       561
+2007-360.jpg
+Date Created:  1954-11-18       562
+2007-361.jpg
+Date Created:  1954-11-18       563
+2007-362.jpg
+Date Created:  1954-11-18       564
+2007-363.jpg
+Date Created:  1954-12-08       565
+2007-364.jpg
+Date Created:  1954-12-09       566
+2007-365.jpg
+Date Created:  1954-12-09       567
+2007-366.jpg
+Date Created:  1955-01-20       568
+2007-367.jpg
+Date Created:  1955-02-13       569
+2007-368.jpg
+Date Created:  1955-02-13       570
+2007-369.jpg
+Date Created:  1955-02-13       571
+2007-37.jpg
+Date Created:  1955-10-00       572
+2007-370.jpg
+Date Created:  1955-02-13       573
+2007-371.jpg
+Date Created:  1955-02-13       574
+2007-372.jpg
+Date Created:  1955-02-13       575
+2007-373.jpg
+Date Created:  1955-02-17       576
+2007-374.jpg
+Date Created:  1955-02-17       577
+2007-375.jpg
+Date Created:  1955-04-08       578
+2007-376.jpg
+Date Created:  1955-04-00       579
+2007-377.jpg
+Date Created:  1955-04-00       580
+2007-378.jpg
+Date Created:  1955-04-12       581
+2007-379.jpg
+Date Created:  1955-04-12       582
+2007-38.jpg
+Date Created:  1955-10-00       583
+2007-380.jpg
+Date Created:  1955-04-12       584
+2007-381.jpg
+Date Created:  1955-04-12       585
+2007-382.jpg
+Date Created:  1955-04-23       586
+2007-383.jpg
+Date Created:  1955-05-06       587
+2007-384.jpg
+Date Created:  1955-05-08       588
+2007-385.jpg
+Date Created:  1955-05-08       589
+2007-386.jpg
+Date Created:  1955-05-08       590
+2007-387.jpg
+Date Created:  1955-05-08       591
+2007-388.jpg
+Date Created:  1955-05-08       592
+2007-389.jpg
+Date Created:  1955-05-08       593
+2007-39.jpg
+Date Created:  1955-10-00       594
+2007-390.jpg
+Date Created:  1955-05-08       595
+2007-391.jpg
+Date Created:  1955-05-08       596
+2007-392.jpg
+Date Created:  1955-09-20       597
+2007-393.jpg
+Date Created:  1955-11-06       598
+2007-394.jpg
+Date Created:  1956-04-16       599
+2007-395.jpg
+Date Created:  1956-04-16       600
+2007-396.jpg
+Date Created:  1957-05-08       601
+2007-397.jpg
+Date Created:  1957-05-08       602
+2007-398.jpg
+Date Created:  1957-05-08       603
+2007-399.jpg
+Date Created:  1957-05-08       604
+2007-4.jpg
+Date Created:  1958-09-27       605
+2007-40.jpg
+Date Created:  1961-04-15       606
+2007-400.jpg
+Date Created:  1957-05-08       607
+2007-401.jpg
+Date Created:  1957-05-08       608
+2007-402.jpg
+Date Created:  1957-05-08       609
+2007-403.jpg
+Date Created:  1957-05-08       610
+2007-404.jpg
+Date Created:  1957-06-05       611
+2007-405.jpg
+Date Created:  1957-06-05       612
+2007-406.jpg
+Date Created:  1957-06-05       613
+2007-407.jpg
+Date Created:  1957-06-05       614
+2007-408.jpg
+Date Created:  1966-07-22       615
+2007-409.jpg
+Date Created:  1976-05-08       616
+2007-41.jpg
+Date Created:  1959-03-28       617
+2007-410.jpg
+Date Created:  1955-00-00       618
+2007-411.jpg
+Date Created:  0000-00-00       619
+2007-412.jpg
+Date Created:  0000-00-00       620
+2007-413.jpg
+Date Created:  1955-00-00       621
+2007-414.jpg
+Date Created:  0000-00-00       622
+2007-415.jpg
+Date Created:  1954-00-00       623
+2007-416.jpg
+Date Created:  0000-00-00       624
+2007-417.jpg
+Date Created:  0000-00-00       625
+2007-418.jpg
+Date Created:  1985-09-02       626
+2007-419.jpg
+Date Created:  1985-09-02       627
+2007-42.jpg
+Date Created:  1945-07-00       628
+2007-420.jpg
+Date Created:  1944-00-00       629
+2007-421.jpg
+Date Created:  1954-00-00       630
+2007-422.jpg
+Date Created:  1954-00-00       631
+2007-423.jpg
+Date Created:  1954-00-00       632
+2007-424.jpg
+Date Created:  1954-00-00       633
+2007-425.jpg
+Date Created:  1954-00-00       634
+2007-426.jpg
+Date Created:  1954-00-00       635
+2007-427.jpg
+Date Created:  1954-00-00       636
+2007-428.jpg
+Date Created:  1950-10-11       637
+2007-429.jpg
+Date Created:  1950-10-04       638
+2007-43.jpg
+Date Created:  1945-07-00       639
+2007-430.jpg
+Date Created:  1950-06-28       640
+2007-431.jpg
+Date Created:  1950-06-29       641
+2007-432.jpg
+Date Created:  1950-07-01       642
+2007-433.jpg
+Date Created:  1950-07-05       643
+2007-434.jpg
+Date Created:  1950-07-08       644
+2007-435.jpg
+Date Created:  1950-07-10       645
+2007-436.jpg
+Date Created:  1950-07-10       646
+2007-437.jpg
+Date Created:  1950-07-17       647
+2007-438.jpg
+Date Created:  1950-07-18       648
+2007-439.jpg
+Date Created:  1950-07-29       649
+2007-44.jpg
+Date Created:  1945-07-00       650
+2007-440.jpg
+Date Created:  1950-08-04       651
+2007-441.jpg
+Date Created:  1950-08-09       652
+2007-442.jpg
+Date Created:  1950-08-29       653
+2007-443.jpg
+Date Created:  1950-08-28       654
+2007-444.jpg
+Date Created:  1950-08-30       655
+2007-445.jpg
+Date Created:  1950-09-10       656
+2007-446.jpg
+Date Created:  1950-09-07       657
+2007-447.jpg
+Date Created:  1950-09-15       658
+2007-448.jpg
+Date Created:  1950-09-15       659
+2007-449.jpg
+Date Created:  1950-09-17       660
+2007-45.jpg
+Date Created:  1945-07-00       661
+2007-450.jpg
+Date Created:  1950-09-17       662
+2007-451.jpg
+Date Created:  1950-09-17       663
+2007-452.jpg
+Date Created:  1950-09-17       664
+2007-453.jpg
+Date Created:  1950-09-18       665
+2007-454.jpg
+Date Created:  1950-09-20       666
+2007-455.jpg
+Date Created:  1950-09-20       667
+2007-456.jpg
+Date Created:  1950-09-20       668
+2007-457.jpg
+Date Created:  1950-09-20       669
+2007-458.jpg
+Date Created:  1950-09-21       670
+2007-459.jpg
+Date Created:  1950-09-22       671
+2007-46.jpg
+Date Created:  1945-07-00       672
+2007-460.jpg
+Date Created:  1950-09-29       673
+2007-461.jpg
+Date Created:  1950-10-12       674
+2007-462.jpg
+Date Created:  1950-10-30       675
+2007-463.jpg
+Date Created:  1950-11-23       676
+2007-464.jpg
+Date Created:  1950-12-11       677
+2007-465.jpg
+Date Created:  1950-12-24       678
+2007-466.jpg
+Date Created:  1951-01-22       679
+2007-467.jpg
+Date Created:  1951-01-22       680
+2007-468.jpg
+Date Created:  1951-01-26       681
+2007-469.jpg
+Date Created:  1951-01-31       682
+2007-47.jpg
+Date Created:  1945-07-00       683
+2007-470.jpg
+Date Created:  1951-02-04       684
+2007-471.jpg
+Date Created:  1951-05-05       685
+2007-472.jpg
+Date Created:  1951-02-07       686
+2007-473.jpg
+Date Created:  1951-02-10       687
+2007-474.jpg
+Date Created:  1951-03-05       688
+2007-475.jpg
+Date Created:  1951-03-07       689
+2007-476.jpg
+Date Created:  1951-03-12       690
+2007-477.jpg
+Date Created:  1950-09-02       691
+2007-478.jpg
+Date Created:  1950-09-07       692
+2007-479.jpg
+Date Created:  1950-09-07       693
+2007-48.jpg
+Date Created:  1945-07-00       694
+2007-480.jpg
+Date Created:  1950-00-00       695
+2007-481.jpg
+Date Created:  1951-00-00       696
+2007-482.jpg
+Date Created:  1951-03-31       697
+2007-483.jpg
+Date Created:  1951-03-31       698
+2007-484.jpg
+Date Created:  1949-08-15       699
+2007-485.jpg
+Date Created:  1951-04-06       700
+2007-486.jpg
+Date Created:  1949-09-20       701
+2007-487.jpg
+Date Created:  1951-04-06       702
+2007-488.jpg
+Date Created:  1949-08-15       703
+2007-489.jpg
+Date Created:  1951-03-03       704
+2007-49.jpg
+Date Created:  1945-07-00       705
+2007-490.jpg
+Date Created:  1951-03-03       706
+2007-491.jpg
+Date Created:  1951-03-14       707
+2007-492.jpg
+Date Created:  1949-10-14       708
+2007-493.jpg
+Date Created:  1951-03-14       709
+2007-494.jpg
+Date Created:  1950-06-08       710
+2007-495.jpg
+Date Created:  1949-10-14       711
+2007-496.jpg
+Date Created:  1951-02-27       712
+2007-497.jpg
+Date Created:  1949-10-14       713
+2007-498.jpg
+Date Created:  1949-10-14       714
+2007-499.jpg
+Date Created:  1951-03-14       715
+2007-5.jpg
+Date Created:  1958-09-27       716
+2007-50.jpg
+Date Created:  1945-07-00       717
+2007-500.jpg
+Date Created:  1949-10-14       718
+2007-501.jpg
+Date Created:  1949-10-14       719
+2007-502.jpg
+Date Created:  1949-10-14       720
+2007-503.jpg
+Date Created:  1950-08-17       721
+2007-504.jpg
+Date Created:  1950-08-17       722
+2007-505.jpg
+Date Created:  1950-08-17       723
+2007-506.jpg
+Date Created:  1950-08-17       724
+2007-507.jpg
+Date Created:  1951-04-00       725
+2007-508.jpg
+Date Created:  1951-04-00       726
+2007-509.jpg
+Date Created:  1951-04-00       727
+2007-51.jpg
+Date Created:  1945-06-00       728
+2007-510.jpg
+Date Created:  1951-04-00       729
+2007-511.jpg
+Date Created:  1951-04-00       730
+2007-512.jpg
+Date Created:  1951-04-00       731
+2007-513.jpg
+Date Created:  1950-04-00       732
+2007-514.jpg
+Date Created:  1951-04-00       733
+2007-515.jpg
+Date Created:  1951-04-00       734
+2007-516.jpg
+Date Created:  1951-04-00       735
+2007-517.jpg
+Date Created:  1951-04-00       736
+2007-518.jpg
+Date Created:  1951-04-00       737
+2007-519.jpg
+Date Created:  1951-03-00       738
+2007-52.jpg
+Date Created:  1945-07-00       739
+2007-520.jpg
+Date Created:  1951-03-00       740
+2007-521.jpg
+Date Created:  1951-03-00       741
+2007-522.jpg
+Date Created:  1951-03-00       742
+2007-523.jpg
+Date Created:  1951-03-00       743
+2007-524.jpg
+Date Created:  1951-03-00       744
+2007-525.jpg
+Date Created:  1951-03-00       745
+2007-526.jpg
+Date Created:  1951-03-00       746
+2007-527.jpg
+Date Created:  1951-03-00       747
+2007-528.jpg
+Date Created:  1951-03-00       748
+2007-529.jpg
+Date Created:  1950-08-03       749
+2007-53.jpg
+Date Created:  1945-07-00       750
+2007-530.jpg
+Date Created:  1950-03-30       751
+2007-531.jpg
+Date Created:  1950-03-30       752
+2007-532.jpg
+Date Created:  1950-03-30       753
+2007-533.jpg
+Date Created:  1950-09-27       754
+2007-534.jpg
+Date Created:  1950-10-05       755
+2007-535.jpg
+Date Created:  1951-02-22       756
+2007-536.jpg
+Date Created:  1950-10-25       757
+2007-537.jpg
+Date Created:  1951-02-22       758
+2007-538.jpg
+Date Created:  1950-09-22       759
+2007-539.jpg
+Date Created:  1950-09-00       760
+2007-54.jpg
+Date Created:  1945-07-00       761
+2007-540.jpg
+Date Created:  1950-09-19       762
+2007-541.jpg
+Date Created:  1950-09-22       763
+2007-542.jpg
+Date Created:  1950-09-25       764
+2007-543.jpg
+Date Created:  1950-09-00       765
+2007-544.jpg
+Date Created:  1950-09-00       766
+2007-545.jpg
+Date Created:  1950-09-00       767
+2007-546.jpg
+Date Created:  1950-10-31       768
+2007-547.jpg
+Date Created:  1950-09-22       769
+2007-548.jpg
+Date Created:  1950-10-26       770
+2007-549.jpg
+Date Created:  1950-10-02       771
+2007-55.jpg
+Date Created:  1945-07-00       772
+2007-550.jpg
+Date Created:  1950-12-15       773
+2007-551.jpg
+Date Created:  1950-11-03       774
+2007-552.jpg
+Date Created:  1950-12-16       775
+2007-553.jpg
+Date Created:  1950-12-09       776
+2007-554.jpg
+Date Created:  1950-09-30       777
+2007-555.jpg
+Date Created:  1950-10-30       778
+2007-556.jpg
+Date Created:  1950-12-16       779
+2007-557.jpg
+Date Created:  1951-02-23       780
+2007-558.jpg
+Date Created:  1950-10-31       781
+2007-559.jpg
+Date Created:  1950-10-31       782
+2007-56.jpg
+Date Created:  1945-07-00       783
+2007-560.jpg
+Date Created:  1950-10-00       784
+2007-561.jpg
+Date Created:  1950-10-00       785
+2007-562.jpg
+Date Created:  1950-10-00       786
+2007-563.jpg
+Date Created:  1950-11-02       787
+2007-564.jpg
+Date Created:  1950-02-03       788
+2007-565.jpg
+Date Created:  1951-02-00       789
+2007-566.jpg
+Date Created:  1951-00-00       790
+2007-567.jpg
+Date Created:  1950-00-00       791
+2007-568.jpg
+Date Created:  1950-00-00       792
+2007-569.jpg
+Date Created:  1950-00-00       793
+2007-57.jpg
+Date Created:  1945-07-00       794
+2007-570.jpg
+Date Created:  1950-00-00       795
+2007-571.jpg
+Date Created:  1950-00-00       796
+2007-572.jpg
+Date Created:  1950-00-00       797
+2007-573.jpg
+Date Created:  1950-09-02       798
+2007-574.jpg
+Date Created:  1950-09-02       799
+2007-575.jpg
+Date Created:  1950-09-02       800
+2007-576.jpg
+Date Created:  1950-09-02       801
+2007-577.jpg
+Date Created:  1950-09-02       802
+2007-578.jpg
+Date Created:  1950-09-03       803
+2007-579.jpg
+Date Created:  1950-09-03       804
+2007-58.jpg
+Date Created:  1945-07-00       805
+2007-580.jpg
+Date Created:  1950-09-03       806
+2007-581.jpg
+Date Created:  1950-09-03       807
+2007-583.jpg
+Date Created:  1950-09-03       808
+2007-584.jpg
+Date Created:  1950-09-03       809
+2007-585.jpg
+Date Created:  1950-09-03       810
+2007-586.jpg
+Date Created:  1950-09-04       811
+2007-587.jpg
+Date Created:  1950-09-04       812
+2007-589.jpg
+Date Created:  1950-09-04       813
+2007-59.jpg
+Date Created:  1945-07-00       814
+2007-590.jpg
+Date Created:  1950-09-04       815
+2007-591.jpg
+Date Created:  1950-09-04       816
+2007-592.jpg
+Date Created:  1950-09-04       817
+2007-593.jpg
+Date Created:  1950-09-04       818
+2007-594.jpg
+Date Created:  1950-09-04       819
+2007-595.jpg
+Date Created:  1950-09-04       820
+2007-596.jpg
+Date Created:  1950-09-04       821
+2007-597.jpg
+Date Created:  1950-09-04       822
+2007-598.jpg
+Date Created:  1950-09-05       823
+2007-599.jpg
+Date Created:  1950-09-05       824
+2007-6.jpg
+Date Created:  1958-09-27       825
+2007-60.jpg
+Date Created:  1945-07-00       826
+2007-600.jpg
+Date Created:  1950-09-05       827
+2007-601.jpg
+Date Created:  1950-09-06       828
+2007-602.jpg
+Date Created:  1950-09-06       829
+2007-603.jpg
+Date Created:  1950-09-06       830
+2007-604.jpg
+Date Created:  1950-09-06       831
+2007-605.jpg
+Date Created:  1950-09-06       832
+2007-606.jpg
+Date Created:  1950-09-06       833
+2007-607.jpg
+Date Created:  1950-09-06       834
+2007-608.jpg
+Date Created:  1950-09-06       835
+2007-609.jpg
+Date Created:  1950-09-06       836
+2007-61.jpg
+Date Created:  1945-07-00       837
+2007-610.jpg
+Date Created:  1950-09-06       838
+2007-611.jpg
+Date Created:  1950-09-06       839
+2007-612.jpg
+Date Created:  1950-09-06       840
+2007-613.jpg
+Date Created:  1950-09-06       841
+2007-614.jpg
+Date Created:  1950-09-06       842
+2007-615.jpg
+Date Created:  1950-09-06       843
+2007-616.jpg
+Date Created:  1950-09-06       844
+2007-617.jpg
+Date Created:  1950-09-09       845
+2007-618.jpg
+Date Created:  1950-09-09       846
+2007-619.jpg
+Date Created:  1950-09-09       847
+2007-62.jpg
+Date Created:  1945-07-00       848
+2007-620.jpg
+Date Created:  1950-09-09       849
+2007-621.jpg
+Date Created:  1950-09-09       850
+2007-622.jpg
+Date Created:  1950-09-09       851
+2007-623.jpg
+Date Created:  1950-09-09       852
+2007-624.jpg
+Date Created:  1950-09-09       853
+2007-625.jpg
+Date Created:  1950-09-11       854
+2007-626.jpg
+Date Created:  1950-09-11       855
+2007-627.jpg
+Date Created:  1950-09-11       856
+2007-628.jpg
+Date Created:  1950-09-11       857
+2007-629.jpg
+Date Created:  1950-09-11       858
+2007-63.jpg
+Date Created:  1945-07-00       859
+2007-630.jpg
+Date Created:  1950-09-11       860
+2007-631.jpg
+Date Created:  1950-09-12       861
+2007-632.jpg
+Date Created:  1950-09-12       862
+2007-633.jpg
+Date Created:  1950-09-12       863
+2007-634.jpg
+Date Created:  1950-09-12       864
+2007-635.jpg
+Date Created:  1950-09-12       865
+2007-636.jpg
+Date Created:  1950-09-12       866
+2007-637.jpg
+Date Created:  1950-09-12       867
+2007-638.jpg
+Date Created:  1950-09-11       868
+2007-639.jpg
+Date Created:  1950-09-11       869
+2007-64.jpg
+Date Created:  0000-00-00       870
+2007-640.jpg
+Date Created:  1950-09-11       871
+2007-641.jpg
+Date Created:  1950-09-11       872
+2007-642.jpg
+Date Created:  1950-09-11       873
+2007-643.jpg
+Date Created:  1950-09-11       874
+2007-644.jpg
+Date Created:  1950-09-11       875
+2007-645.jpg
+Date Created:  1950-09-11       876
+2007-646.jpg
+Date Created:  1950-09-11       877
+2007-647.jpg
+Date Created:  1950-09-11       878
+2007-648.jpg
+Date Created:  1950-09-11       879
+2007-649.jpg
+Date Created:  1950-09-11       880
+2007-65.jpg
+Date Created:  0000-00-00       881
+2007-650.jpg
+Date Created:  1950-09-12       882
+2007-651.jpg
+Date Created:  1950-09-12       883
+2007-652.jpg
+Date Created:  1950-09-12       884
+2007-653.jpg
+Date Created:  1950-09-12       885
+2007-654.jpg
+Date Created:  1950-09-12       886
+2007-655.jpg
+Date Created:  1950-09-12       887
+2007-656.jpg
+Date Created:  1950-09-12       888
+2007-657.jpg
+Date Created:  1950-09-13       889
+2007-658.jpg
+Date Created:  1950-09-13       890
+2007-659.jpg
+Date Created:  1950-09-13       891
+2007-66.jpg
+Date Created:  0000-00-00       892
+2007-660.jpg
+Date Created:  1950-09-13       893
+2007-661.jpg
+Date Created:  1950-09-13       894
+2007-662.jpg
+Date Created:  1950-09-14       895
+2007-663.jpg
+Date Created:  1950-09-14       896
+2007-664.jpg
+Date Created:  1950-09-14       897
+2007-665.jpg
+Date Created:  1950-09-14       898
+2007-666.jpg
+Date Created:  1950-09-14       899
+2007-667.jpg
+Date Created:  1950-09-15       900
+2007-668.jpg
+Date Created:  1950-09-15       901
+2007-669.jpg
+Date Created:  1950-09-15       902
+2007-67.jpg
+Date Created:  0000-00-00       903
+2007-670.jpg
+Date Created:  1950-09-15       904
+2007-671.jpg
+Date Created:  1950-09-15       905
+2007-672.jpg
+Date Created:  1950-09-15       906
+2007-673.jpg
+Date Created:  1950-09-15       907
+2007-674.jpg
+Date Created:  1950-09-15       908
+2007-675.jpg
+Date Created:  1950-09-15       909
+2007-676.jpg
+Date Created:  1950-09-15       910
+2007-677.jpg
+Date Created:  1950-09-15       911
+2007-678.jpg
+Date Created:  1950-09-15       912
+2007-679.jpg
+Date Created:  1950-09-15       913
+2007-68.jpg
+Date Created:  0000-00-00       914
+2007-680.jpg
+Date Created:  1950-09-15       915
+2007-681.jpg
+Date Created:  1950-09-15       916
+2007-682.jpg
+Date Created:  1950-09-15       917
+2007-683.jpg
+Date Created:  1950-09-15       918
+2007-684.jpg
+Date Created:  1950-09-17       919
+2007-685.jpg
+Date Created:  1950-09-17       920
+2007-686.jpg
+Date Created:  1950-09-17       921
+2007-687.jpg
+Date Created:  1950-09-17       922
+2007-688.jpg
+Date Created:  1950-09-17       923
+2007-689.jpg
+Date Created:  1950-09-17       924
+2007-69.jpg
+Date Created:  0000-00-00       925
+2007-690.jpg
+Date Created:  1950-09-17       926
+2007-691.jpg
+Date Created:  1950-09-17       927
+2007-692.jpg
+Date Created:  1950-09-17       928
+2007-693.jpg
+Date Created:  1950-09-17       929
+2007-694.jpg
+Date Created:  1950-09-18       930
+2007-695.jpg
+Date Created:  1950-09-18       931
+2007-696.jpg
+Date Created:  1950-09-18       932
+2007-697.jpg
+Date Created:  1950-09-18       933
+2007-698.jpg
+Date Created:  1950-09-18       934
+2007-699.jpg
+Date Created:  1950-09-18       935
+2007-7.jpg
+Date Created:  1958-09-27       936
+2007-70.jpg
+Date Created:  0000-00-00       937
+2007-700.jpg
+Date Created:  1950-09-18       938
+2007-701.jpg
+Date Created:  1950-09-18       939
+2007-702.jpg
+Date Created:  1950-09-18       940
+2007-703.jpg
+Date Created:  1950-09-18       941
+2007-704.jpg
+Date Created:  1950-09-18       942
+2007-705.jpg
+Date Created:  1950-00-00       943
+2007-706.jpg
+Date Created:  1950-00-00       944
+2007-707.jpg
+Date Created:  1950-00-00       945
+2007-708.jpg
+Date Created:  1950-00-00       946
+2007-709.jpg
+Date Created:  1950-07-21       947
+2007-71.jpg
+Date Created:  0000-00-00       948
+2007-710.jpg
+Date Created:  1950-00-00       949
+2007-711.jpg
+Date Created:  1950-00-00       950
+2007-712.jpg
+Date Created:  1950-00-00       951
+2007-713.jpg
+Date Created:  1950-00-00       952
+2007-714.jpg
+Date Created:  1950-00-00       953
+2007-715.jpg
+Date Created:  1950-00-00       954
+2007-716.jpg
+Date Created:  1950-00-00       955
+2007-717.jpg
+Date Created:  1950-00-00       956
+2007-718.jpg
+Date Created:  1950-00-00       957
+2007-719.jpg
+Date Created:  1950-09-28       958
+2007-72.jpg
+Date Created:  0000-00-00       959
+2007-720.jpg
+Date Created:  1950-09-28       960
+2007-721.jpg
+Date Created:  1950-00-00       961
+2007-722.jpg
+Date Created:  1950-10-15       962
+2007-723.jpg
+Date Created:  1950-00-00       963
+2007-724.jpg
+Date Created:  1950-00-00       964
+2007-725.jpg
+Date Created:  1950-08-02       965
+2007-726.jpg
+Date Created:  1950-00-00       966
+2007-727.jpg
+Date Created:  1950-00-00       967
+2007-728.jpg
+Date Created:  1950-00-00       968
+2007-729.jpg
+Date Created:  1950-00-00       969
+2007-73.jpg
+Date Created:  0000-00-00       970
+2007-730.jpg
+Date Created:  1950-00-00       971
+2007-731.jpg
+Date Created:  1950-00-00       972
+2007-732.jpg
+Date Created:  1950-00-00       973
+2007-733.jpg
+Date Created:  1950-00-00       974
+2007-734.jpg
+Date Created:  1950-00-00       975
+2007-735.jpg
+Date Created:  1950-00-00       976
+2007-736.jpg
+Date Created:  1950-00-00       977
+2007-737.jpg
+Date Created:  1950-00-00       978
+2007-738.jpg
+Date Created:  1950-00-00       979
+2007-739.jpg
+Date Created:  1950-00-00       980
+2007-74.jpg
+Date Created:  1952-06-07       981
+2007-740.jpg
+Date Created:  1950-11-21       982
+2007-741.jpg
+Date Created:  1950-00-00       983
+2007-742.jpg
+Date Created:  1950-00-00       984
+2007-743.jpg
+Date Created:  1950-00-00       985
+2007-744.jpg
+Date Created:  1950-00-00       986
+2007-745.jpg
+Date Created:  1950-00-00       987
+2007-746.jpg
+Date Created:  1950-07-18       988
+2007-747.jpg
+Date Created:  1950-00-00       989
+2007-748.jpg
+Date Created:  1950-00-00       990
+2007-749.jpg
+Date Created:  1950-00-00       991
+2007-75.jpg
+Date Created:  1952-06-07       992
+2007-750.jpg
+Date Created:  1949-01-20       993
+2007-751.jpg
+Date Created:  1949-01-20       994
+2007-752.jpg
+Date Created:  0000-00-00       995
+2007-753.jpg
+Date Created:  1917-00-00       996
+2007-754.jpg
+Date Created:  1917-00-00       997
+2007-755.jpg
+Date Created:  1917-00-00       998
+2007-756.jpg
+Date Created:  1917-00-00       999
+2007-757.jpg
+Date Created:  1917-06-00       1000
+2007-758.jpg
+Date Created:  1917-06-03       1001
+2007-759.jpg
+Date Created:  1917-00-00       1002
+2007-76.jpg
+Date Created:  1952-06-07       1003
+2007-760.jpg
+Date Created:  1917-00-00       1004
+2007-761.jpg
+Date Created:  1917-00-00       1005
+2007-762.jpg
+Date Created:  1917-00-00       1006
+2007-763.jpg
+Date Created:  1917-00-00       1007
+2007-764.jpg
+Date Created:  1917-00-00       1008
+2007-765.jpg
+Date Created:  1917-00-00       1009
+2007-766.jpg
+Date Created:  1917-00-00       1010
+2007-767.jpg
+Date Created:  1917-00-00       1011
+2007-768.jpg
+Date Created:  1917-00-00       1012
+2007-769.jpg
+Date Created:  1917-00-00       1013
+2007-77.jpg
+Date Created:  1952-06-07       1014
+2007-770.jpg
+Date Created:  1917-00-00       1015
+2007-771.jpg
+Date Created:  1917-00-00       1016
+2007-772.jpg
+Date Created:  1917-10-00       1017
+2007-773.jpg
+Date Created:  1917-00-00       1018
+2007-774.jpg
+Date Created:  1917-00-00       1019
+2007-775.jpg
+Date Created:  1917-00-00       1020
+2007-776.jpg
+Date Created:  1917-10-00       1021
+2007-777.jpg
+Date Created:  1917-10-00       1022
+2007-778.jpg
+Date Created:  1917-10-00       1023
+2007-779.jpg
+Date Created:  1917-09-00       1024
+2007-78.jpg
+Date Created:  1981-09-19       1025
+2007-780.jpg
+Date Created:  1917-09-00       1026
+2007-781.jpg
+Date Created:  1917-09-00       1027
+2007-782.jpg
+Date Created:  1917-10-00       1028
+2007-783.jpg
+Date Created:  1917-10-00       1029
+2007-784.jpg
+Date Created:  1917-10-00       1030
+2007-785.jpg
+Date Created:  1917-10-00       1031
+2007-786.jpg
+Date Created:  1917-10-00       1032
+2007-787.jpg
+Date Created:  1917-09-30       1033
+2007-788.jpg
+Date Created:  1917-09-30       1034
+2007-789.jpg
+Date Created:  1917-09-30       1035
+2007-79.jpg
+Date Created:  1981-09-19       1036
+2007-790.jpg
+Date Created:  1917-09-30       1037
+2007-791.jpg
+Date Created:  1917-10-00       1038
+2007-792.jpg
+Date Created:  1917-10-00       1039
+2007-793.jpg
+Date Created:  1917-10-00       1040
+2007-794.jpg
+Date Created:  1917-10-00       1041
+2007-795.jpg
+Date Created:  1917-10-00       1042
+2007-796.jpg
+Date Created:  1917-10-00       1043
+2007-797.jpg
+Date Created:  1917-09-00       1044
+2007-798.jpg
+Date Created:  1917-09-00       1045
+2007-799.jpg
+Date Created:  1917-09-00       1046
+2007-8.jpg
+Date Created:  1948-05-02       1047
+2007-80.jpg
+Date Created:  1981-08-19       1048
+2007-800.jpg
+Date Created:  1917-09-00       1049
+2007-801.jpg
+Date Created:  1917-09-00       1050
+2007-802.jpg
+Date Created:  1917-09-00       1051
+2007-803.jpg
+Date Created:  1917-08-30       1052
+2007-804.jpg
+Date Created:  1917-10-00       1053
+2007-805.jpg
+Date Created:  1917-10-00       1054
+2007-806.jpg
+Date Created:  1917-10-00       1055
+2007-807.jpg
+Date Created:  1917-10-00       1056
+2007-808.jpg
+Date Created:  1917-10-00       1057
+2007-809.jpg
+Date Created:  1917-10-00       1058
+2007-81.jpg
+Date Created:  1953-04-00       1059
+2007-810.jpg
+Date Created:  1917-00-00       1060
+2007-811.jpg
+Date Created:  1917-00-00       1061
+2007-812.jpg
+Date Created:  1917-00-00       1062
+2007-813.jpg
+Date Created:  1917-00-00       1063
+2007-814.jpg
+Date Created:  1918-03-00       1064
+2007-815.jpg
+Date Created:  1918-00-00       1065
+2007-816.jpg
+Date Created:  1918-03-15       1066
+2007-817.jpg
+Date Created:  1918-00-00       1067
+2007-818.jpg
+Date Created:  1918-12-08       1068
+2007-819.jpg
+Date Created:  1918-05-00       1069
+2007-82.jpg
+Date Created:  1953-04-00       1070
+2007-820.jpg
+Date Created:  1919-03-00       1071
+2007-821.jpg
+Date Created:  1919-03-00       1072
+2007-822.jpg
+Date Created:  1917-00-00       1073
+2007-823.jpg
+Date Created:  1919-01-23       1074
+2007-824.jpg
+Date Created:  1919-00-00       1075
+2007-825.jpg
+Date Created:  1918-03-15       1076
+2007-826.jpg
+Date Created:  1917-00-00       1077
+2007-827.jpg
+Date Created:  1917-00-00       1078
+2007-828.jpg
+Date Created:  1917-00-00       1079
+2007-829.jpg
+Date Created:  1917-00-00       1080
+2007-83.jpg
+Date Created:  1971-05-08       1081
+2007-830.jpg
+Date Created:  1917-00-00       1082
+2007-831.jpg
+Date Created:  1917-00-00       1083
+2007-832.jpg
+Date Created:  1917-00-00       1084
+2007-833.jpg
+Date Created:  1917-00-00       1085
+2007-834.jpg
+Date Created:  1918-00-00       1086
+2007-835.jpg
+Date Created:  1917-00-00       1087
+2007-836.jpg
+Date Created:  1917-00-00       1088
+2007-837.jpg
+Date Created:  1917-00-00       1089
+2007-838.jpg
+Date Created:  1917-00-00       1090
+2007-839.jpg
+Date Created:  1917-11-00       1091
+2007-84.jpg
+Date Created:  1971-05-08       1092
+2007-840.jpg
+Date Created:  1917-11-00       1093
+2007-841.jpg
+Date Created:  1918-00-00       1094
+2007-842.jpg
+Date Created:  1918-00-00       1095
+2007-843.jpg
+Date Created:  1918-00-00       1096
+2007-844.jpg
+Date Created:  1917-00-00       1097
+2007-845.jpg
+Date Created:  1917-00-00       1098
+2007-846.jpg
+Date Created:  1918-00-00       1099
+2007-847.jpg
+Date Created:  1917-00-00       1100
+2007-848.jpg
+Date Created:  1917-00-00       1101
+2007-849.jpg
+Date Created:  0000-00-00       1102
+2007-85.jpg
+Date Created:  1971-05-08       1103
+2007-850.jpg
+Date Created:  1918-12-00       1104
+2007-851.jpg
+Date Created:  1918-12-00       1105
+2007-852.jpg
+Date Created:  1918-10-00       1106
+2007-853.jpg
+Date Created:  1918-00-00       1107
+2007-854.jpg
+Date Created:  1919-00-00       1108
+2007-855.jpg
+Date Created:  1919-00-00       1109
+2007-856.jpg
+Date Created:  1918-10-00       1110
+2007-857.jpg
+Date Created:  1919-00-00       1111
+2007-858.jpg
+Date Created:  1919-00-00       1112
+2007-859.jpg
+Date Created:  1919-00-00       1113
+2007-86.jpg
+Date Created:  1971-05-08       1114
+2007-860.jpg
+Date Created:  1918-00-00       1115
+2007-861.jpg
+Date Created:  1918-00-00       1116
+2007-862.jpg
+Date Created:  1918-00-00       1117
+2007-863.jpg
+Date Created:  1918-00-00       1118
+2007-864.jpg
+Date Created:  1918-00-00       1119
+2007-865.jpg
+Date Created:  1918-10-00       1120
+2007-866.jpg
+Date Created:  1918-11-00       1121
+2007-867.jpg
+Date Created:  1918-11-13       1122
+2007-868.jpg
+Date Created:  1918-11-00       1123
+2007-869.jpg
+Date Created:  1918-09-00       1124
+2007-87.jpg
+Date Created:  0000-00-00       1125
+2007-870.jpg
+Date Created:  1918-09-00       1126
+2007-871.jpg
+Date Created:  1918-09-27       1127
+2007-872.jpg
+Date Created:  1918-09-00       1128
+2007-873.jpg
+Date Created:  1918-12-00       1129
+2007-874.jpg
+Date Created:  1918-12-00       1130
+2007-875.jpg
+Date Created:  1918-12-00       1131
+2007-876.jpg
+Date Created:  1918-12-00       1132
+2007-877.jpg
+Date Created:  1918-12-00       1133
+2007-878.jpg
+Date Created:  1918-12-00       1134
+2007-879.jpg
+Date Created:  1919-00-00       1135
+2007-88.jpg
+Date Created:  0000-00-00       1136
+2007-880.jpg
+Date Created:  1919-00-00       1137
+2007-881.jpg
+Date Created:  1919-00-00       1138
+2007-882.jpg
+Date Created:  1919-00-00       1139
+2007-883.jpg
+Date Created:  1919-00-00       1140
+2007-884.jpg
+Date Created:  1919-00-00       1141
+2007-885.jpg
+Date Created:  1919-00-00       1142
+2007-886.jpg
+Date Created:  1919-00-00       1143
+2007-887.jpg
+Date Created:  1919-00-00       1144
+2007-888.jpg
+Date Created:  1919-00-00       1145
+2007-889.jpg
+Date Created:  1919-00-00       1146
+2007-89.jpg
+Date Created:  0000-00-00       1147
+2007-890.jpg
+Date Created:  1919-00-00       1148
+2007-891.jpg
+Date Created:  1919-00-00       1149
+2007-892.jpg
+Date Created:  1919-00-00       1150
+2007-893.jpg
+Date Created:  1919-00-00       1151
+2007-894.jpg
+Date Created:  1919-00-00       1152
+2007-895.jpg
+Date Created:  1919-00-00       1153
+2007-896.jpg
+Date Created:  1919-00-00       1154
+2007-897.jpg
+Date Created:  1918-00-00       1155
+2007-898.jpg
+Date Created:  1918-00-00       1156
+2007-899.jpg
+Date Created:  1918-00-00       1157
+2007-9.jpg
+Date Created:  0000-00-00       1158
+2007-90.jpg
+Date Created:  0000-00-00       1159
+2007-900.jpg
+Date Created:  1918-09-00       1160
+2007-901.jpg
+Date Created:  1918-00-00       1161
+2007-902.jpg
+Date Created:  1918-00-00       1162
+2007-903.jpg
+Date Created:  1918-10-00       1163
+2007-904.jpg
+Date Created:  1918-10-00       1164
+2007-905.jpg
+Date Created:  1918-10-00       1165
+2007-906.jpg
+Date Created:  1918-00-00       1166
+2007-907.jpg
+Date Created:  1918-00-00       1167
+2007-908.jpg
+Date Created:  1918-00-00       1168
+2007-909.jpg
+Date Created:  1918-00-00       1169
+2007-91.jpg
+Date Created:  1963-08-03       1170
+2007-910.jpg
+Date Created:  1918-10-00       1171
+2007-911.jpg
+Date Created:  1918-10-00       1172
+2007-912.jpg
+Date Created:  1918-00-00       1173
+2007-913.jpg
+Date Created:  1918-10-00       1174
+2007-914.jpg
+Date Created:  1918-10-00       1175
+2007-915.jpg
+Date Created:  1918-10-00       1176
+2007-916.jpg
+Date Created:  1918-10-00       1177
+2007-917.jpg
+Date Created:  1918-10-00       1178
+2007-918.jpg
+Date Created:  1918-10-00       1179
+2007-919.jpg
+Date Created:  1918-10-00       1180
+2007-92.jpg
+Date Created:  1963-08-03       1181
+2007-920.jpg
+Date Created:  1918-10-00       1182
+2007-921.jpg
+Date Created:  1918-10-00       1183
+2007-922.jpg
+Date Created:  1918-10-00       1184
+2007-923.jpg
+Date Created:  1918-10-00       1185
+2007-924.jpg
+Date Created:  1918-10-00       1186
+2007-925.jpg
+Date Created:  1918-11-00       1187
+2007-926.jpg
+Date Created:  1918-11-00       1188
+2007-927.jpg
+Date Created:  1918-00-00       1189
+2007-928.jpg
+Date Created:  1918-00-00       1190
+2007-929.jpg
+Date Created:  1918-00-00       1191
+2007-93.jpg
+Date Created:  1963-00-00       1192
+2007-930.jpg
+Date Created:  1918-00-00       1193
+2007-931.jpg
+Date Created:  1918-00-00       1194
+2007-932.jpg
+Date Created:  1918-00-00       1195
+2007-933.jpg
+Date Created:  1918-00-00       1196
+2007-934.jpg
+Date Created:  1918-00-00       1197
+2007-935.jpg
+Date Created:  1918-00-00       1198
+2007-936.jpg
+Date Created:  1918-00-00       1199
+2007-937.jpg
+Date Created:  1918-00-00       1200
+2007-938.jpg
+Date Created:  1918-00-00       1201
+2007-939.jpg
+Date Created:  1918-00-00       1202
+2007-94.jpg
+Date Created:  1963-00-00       1203
+2007-940.jpg
+Date Created:  1919-00-00       1204
+2007-941.jpg
+Date Created:  1919-00-00       1205
+2007-942.jpg
+Date Created:  1919-00-00       1206
+2007-943.jpg
+Date Created:  1919-00-00       1207
+2007-944.jpg
+Date Created:  1919-00-00       1208
+2007-945.jpg
+Date Created:  1919-04-20       1209
+2007-946.jpg
+Date Created:  1919-00-00       1210
+2007-947.jpg
+Date Created:  1919-00-00       1211
+2007-948.jpg
+Date Created:  1919-00-00       1212
+2007-949.jpg
+Date Created:  1919-00-00       1213
+2007-95.jpg
+Date Created:  0000-00-00       1214
+2007-950.jpg
+Date Created:  1919-00-00       1215
+2007-951.jpg
+Date Created:  1919-00-00       1216
+2007-952.jpg
+Date Created:  1919-00-00       1217
+2007-953.jpg
+Date Created:  1919-00-00       1218
+2007-954.jpg
+Date Created:  1919-00-00       1219
+2007-955.jpg
+Date Created:  1919-00-00       1220
+2007-956.jpg
+Date Created:  1919-00-00       1221
+2007-957.jpg
+Date Created:  1919-00-00       1222
+2007-958.jpg
+Date Created:  1919-00-00       1223
+2007-959.jpg
+Date Created:  1919-00-00       1224
+2007-96.jpg
+Date Created:  1963-08-03       1225
+2007-960.jpg
+Date Created:  1919-00-00       1226
+2007-961.jpg
+Date Created:  1919-00-00       1227
+2007-962.jpg
+Date Created:  1919-00-00       1228
+2007-963.jpg
+Date Created:  1919-00-00       1229
+2007-964.jpg
+Date Created:  1919-00-00       1230
+2007-965.jpg
+Date Created:  1919-00-00       1231
+2007-966.jpg
+Date Created:  1919-00-00       1232
+2007-967.jpg
+Date Created:  1919-00-00       1233
+2007-968.jpg
+Date Created:  1919-00-00       1234
+2007-969.jpg
+Date Created:  1919-00-00       1235
+2007-97.jpg
+Date Created:  1963-08-03       1236
+2007-970.jpg
+Date Created:  1919-00-00       1237
+2007-971.jpg
+Date Created:  1919-00-00       1238
+2007-972.jpg
+Date Created:  1919-00-00       1239
+2007-973.jpg
+Date Created:  1919-00-00       1240
+2007-974.jpg
+Date Created:  1919-00-00       1241
+2007-975.jpg
+Date Created:  1919-00-00       1242
+2007-976.jpg
+Date Created:  1919-00-00       1243
+2007-977.jpg
+Date Created:  1919-00-00       1244
+2007-978.jpg
+Date Created:  1919-00-00       1245
+2007-979.jpg
+Date Created:  1919-00-00       1246
+2007-98.jpg
+Date Created:  1963-08-03       1247
+2007-980.jpg
+Date Created:  1919-00-00       1248
+2007-981.jpg
+Date Created:  1919-00-00       1249
+2007-982.jpg
+Date Created:  1919-00-00       1250
+2007-983.jpg
+Date Created:  1919-00-00       1251
+2007-984.jpg
+Date Created:  1919-00-00       1252
+2007-985.jpg
+Date Created:  1919-00-00       1253
+2007-986.jpg
+Date Created:  1919-00-00       1254
+2007-987.jpg
+Date Created:  1919-00-00       1255
+2007-988.jpg
+Date Created:  1919-00-00       1256
+2007-989.jpg
+Date Created:  1919-00-00       1257
+2007-99.jpg
+Date Created:  1964-02-07       1258
+2007-990.jpg
+Date Created:  1919-00-00       1259
+2007-991.jpg
+Date Created:  1919-00-00       1260
+2007-992.jpg
+Date Created:  1919-00-00       1261
+2007-993.jpg
+Date Created:  1919-00-00       1262
+2007-994.jpg
+Date Created:  1919-00-00       1263
+2007-995.jpg
+Date Created:  1919-00-00       1264
+2007-996.jpg
+Date Created:  0000-00-00       1265
+2007-997.jpg
+Date Created:  1919-03-30       1266
+2007-998.jpg
+Date Created:  1919-03-30       1267
+2007-999.jpg
+Date Created:  1919-03-30       1268
+======================================================================
+Processing complete at  2023-12-28 17:06:27
+1268 records read from the CSV file
+1268 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 25:39  MM:SS
+Processing time for each image:  1.21  seconds
+REPORT_JPEG-2023-12-28_16-40-46.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

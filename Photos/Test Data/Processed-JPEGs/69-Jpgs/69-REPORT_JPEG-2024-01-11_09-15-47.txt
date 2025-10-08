@@ -1,0 +1,166 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14002 MB
+ 
+Number of lines in the CSV file: 65
+ 
+Number of jpg files in the diretory:  65
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2024-01-11 09:15:48
+69-1197.jpg
+Date Created:  1944-08-18       1
+69-1746.jpg
+Date Created:  1945-02-12       2
+69-179.jpg
+Date Created:  1945-08-08       3
+69-149.jpg
+Date Created:  1945-09-13       4
+69-113.jpg
+Date Created:  1945-10-20       5
+69-468.jpg
+Date Created:  1945-10-23       6
+69-148.jpg
+Date Created:  1945-11-09       7
+69-109.jpg
+Date Created:  1945-12-20       8
+69-635.jpg
+Date Created:  1945-12-26       9
+69-644.jpg
+Date Created:  1945-12-27       10
+69-1712.jpg
+Date Created:  1946-00-00       11
+69-93.jpg
+Date Created:  1946-04-12       12
+69-96.jpg
+Date Created:  1946-04-12       13
+69-92.jpg
+Date Created:  1946-04-12       14
+69-94.jpg
+Date Created:  1946-04-12       15
+69-91.jpg
+Date Created:  1946-04-12       16
+69-95.jpg
+Date Created:  1946-05-17       17
+69-466.jpg
+Date Created:  1946-05-25       18
+69-140.jpg
+Date Created:  1946-08-15       19
+69-162.jpg
+Date Created:  1947-06-00       20
+69-163.jpg
+Date Created:  1947-06-00       21
+69-157.jpg
+Date Created:  1947-06-00       22
+69-159.jpg
+Date Created:  1947-06-00       23
+69-161.jpg
+Date Created:  1947-06-00       24
+69-324.jpg
+Date Created:  1947-09-11       25
+69-323.jpg
+Date Created:  1947-09-11       26
+69-326.jpg
+Date Created:  1947-09-17       27
+69-385.jpg
+Date Created:  1948-02-21       28
+69-371.jpg
+Date Created:  1948-02-22       29
+69-443.jpg
+Date Created:  1948-10-14       30
+69-409.jpg
+Date Created:  1949-03-18       31
+69-153.jpg
+Date Created:  1949-06-07       32
+69-574.jpg
+Date Created:  1949-11-30       33
+69-124.jpg
+Date Created:  1950-02-13       34
+69-1199.jpg
+Date Created:  1950-10-14       35
+69-395.jpg
+Date Created:  1951-03-21       36
+69-116.jpg
+Date Created:  1952-02-08       37
+69-121.jpg
+Date Created:  1952-02-08       38
+69-117.jpg
+Date Created:  1952-02-08       39
+69-509.jpg
+Date Created:  1956-08-03       40
+69-106.jpg
+Date Created:  1957-09-11       41
+69-1713.jpg
+Date Created:  1961-10-17       42
+69-44.jpg
+Date Created:  1968-04-18       43
+69-35.jpg
+Date Created:  1968-04-18       44
+69-40.jpg
+Date Created:  1968-04-18       45
+69-33.jpg
+Date Created:  1968-04-18       46
+69-37.jpg
+Date Created:  1968-04-18       47
+69-39.jpg
+Date Created:  1968-04-18       48
+69-48.jpg
+Date Created:  1968-04-18       49
+69-43.jpg
+Date Created:  1968-04-18       50
+69-42.jpg
+Date Created:  1968-04-18       51
+69-45.jpg
+Date Created:  1968-04-18       52
+69-36.jpg
+Date Created:  1968-04-18       53
+69-47.jpg
+Date Created:  1968-04-18       54
+69-34.jpg
+Date Created:  1968-04-18       55
+69-32.jpg
+Date Created:  1968-04-18       56
+69-38.jpg
+Date Created:  1968-04-18       57
+69-41.jpg
+Date Created:  1968-04-18       58
+69-1048.jpg
+Date Created:  1969-03-21       59
+69-1042.jpg
+Date Created:  1969-03-21       60
+69-1196A.jpg
+Date Created:  1969-03-21       61
+69-1189.jpg
+Date Created:  1969-03-21       62
+69-1051.jpg
+Date Created:  1969-03-21       63
+69-776.jpg
+Date Created:  1969-11-00       64
+69-785.jpg
+Date Created:  1969-11-00       65
+======================================================================
+Processing complete at  2024-01-11 09:17:06
+65 records read from the CSV file
+65 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 1:17  MM:SS
+Processing time for each image:  1.19  seconds
+REPORT_JPEG-2024-01-11_09-15-47.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

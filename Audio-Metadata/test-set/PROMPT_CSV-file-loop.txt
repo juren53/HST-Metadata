@@ -1,0 +1,1 @@
+Add a loop to this Python code to apply the metatags specified to each mp3 file named in each line of the CSV file.

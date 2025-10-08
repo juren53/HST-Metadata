@@ -1,0 +1,21 @@
+```
+ffmpeg -i input.tif -vf "scale='min(800\, iw)':'min(800\, ih)':force_original_aspect_ratio=decrease" output.jpg
+```
+
+This ffmpeg command processes a TIFF image file called "input.tif" and creates a JPEG image file named "output.jpg". This is how it works:
+
+ffmpeg: This is the program name.
+
+-i input.tif: This option specifies the input file "input.tif". It tells ffmpeg to use this file as the source for processing.
+
+-vf "scale='min(800\, iw)':'min(800\, ih)'": This option specifies a filtergraph, denoted by -vf, which allows for various image filtering operations. In this case, the filtergraph is used to apply a scaling operation to the input image.
+
+"scale='min(800\, iw)':'min(800\, ih)'": This is the actual filter applied to the input image. It uses the scale filter, which resizes the image while maintaining its aspect ratio. The expression 'min(800\, iw)' calculates the width of the output image to be the minimum value between 800 and the input image's width (iw). Similarly, 'min(800\, ih)' calculates the height of the output image as the minimum value between 800 and the input image's height (ih). This ensures that the output image's dimensions do not exceed 800 pixels while preserving the aspect ratio.
+
+output.tif: This specifies the output file name "output.tif" where the processed image will be saved.
+
+To summarize, the ffmpeg command resizes the input TIFF image to have a maximum width or height of 800 pixels while maintaining the aspect ratio and saves the resulting image as a JPEG file.
+
+
+
+

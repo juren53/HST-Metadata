@@ -1,0 +1,100 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14546 MB
+ 
+Number of lines in the CSV file: 32
+ 
+Number of jpg files in the diretory:  32
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2024-01-17 09:59:41
+2023-54.jpg
+Date Created:  0000-00-00       1
+2023-1766.jpg
+Date Created:  0000-00-00       2
+2023-132.jpg
+Date Created:  0000-00-00       3
+2023-52.jpg
+Date Created:  0000-00-00       4
+2023-83.jpg
+Date Created:  0000-00-00       5
+2023-1478.jpg
+Date Created:  0000-00-00       6
+2023-1826.jpg
+Date Created:  0000-00-00       7
+2023-79.jpg
+Date Created:  0000-00-00       8
+2023-359.jpg
+Date Created:  1930-00-00       9
+2023-1898.jpg
+Date Created:  1944-04-12       10
+2023-510.jpg
+Date Created:  1945-00-00       11
+2023-509.jpg
+Date Created:  1945-00-00       12
+2023-524.jpg
+Date Created:  1945-00-00       13
+2023-88.jpg
+Date Created:  1945-06-26       14
+2023-424.jpg
+Date Created:  1945-07-26       15
+2023-507.jpg
+Date Created:  1946-00-00       16
+2023-520.jpg
+Date Created:  1947-00-00       17
+2023-56.jpg
+Date Created:  1947-03-04       18
+2023-1761.jpg
+Date Created:  1948-00-00       19
+2023-147.jpg
+Date Created:  1948-06-10       20
+2023-428.jpg
+Date Created:  1949-07-00       21
+2023-701.jpg
+Date Created:  1949-09-05       22
+2023-700.jpg
+Date Created:  1949-09-05       23
+2023-1157.jpg
+Date Created:  1950-03-09       24
+2023-450.jpg
+Date Created:  1951-00-00       25
+2023-1428.jpg
+Date Created:  1951-11-05       26
+2023-640.jpg
+Date Created:  1952-05-13       27
+2023-637.jpg
+Date Created:  1952-09-29       28
+2023-638.jpg
+Date Created:  1952-09-29       29
+2023-143.jpg
+Date Created:  1959-02-18       30
+2023-901.jpg
+Date Created:  1960-05-11       31
+2023-58.jpg
+Date Created:  1966-00-00       32
+======================================================================
+Processing complete at  2024-01-17 10:00:19
+32 records read from the CSV file
+32 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 0:38  MM:SS
+Processing time for each image:  1.21  seconds
+REPORT_JPEG-2024-01-17_09-59-38.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

@@ -1,0 +1,10 @@
+ffmpeg -i SR59-108.mp3 \
+  -metadata title="My Awesome Song" \
+  -metadata artist="Awesome Artist" \
+  -metadata album="Greatest Hits" \
+  -metadata genre="Alternative" \
+  -metadata year="2025" \
+  -metadata track="2/12" \
+  -metadata composer="Famous Composer" \
+  -metadata comments="These are comments . . . . ." \
+  output.mp3

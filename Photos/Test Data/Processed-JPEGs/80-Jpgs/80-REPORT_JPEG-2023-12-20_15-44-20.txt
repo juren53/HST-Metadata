@@ -1,0 +1,106 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 15206 MB
+ 
+Number of lines in the CSV file: 35
+ 
+Number of jpg files in the diretory:  35
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-20 15:44:22
+80-16.jpg
+Date Created:  0000-00-00       1
+80-15.jpg
+Date Created:  0000-00-00       2
+80-66.jpg
+Date Created:  0000-00-00       3
+80-4.jpg
+Date Created:  1880-00-00       4
+80-03.jpg
+Date Created:  1899-00-00       5
+80-74.jpg
+Date Created:  1913-00-00       6
+80-07.jpg
+Date Created:  1915-00-00       7
+80-26.jpg
+Date Created:  1925-12-06       8
+80-133.jpg
+Date Created:  1945-07-00       9
+80-110.jpg
+Date Created:  1945-08-26       10
+80-87.jpg
+Date Created:  1947-00-00       11
+80-44.jpg
+Date Created:  1949-00-00       12
+80-21.jpg
+Date Created:  1949-00-00       13
+80-86.jpg
+Date Created:  1950-00-00       14
+80-20.jpg
+Date Created:  1952-00-00       15
+80-17.jpg
+Date Created:  1952-00-00       16
+80-89.jpg
+Date Created:  1960-00-00       17
+80-81.jpg
+Date Created:  1960-00-00       18
+80-90.jpg
+Date Created:  1960-00-00       19
+80-132.jpg
+Date Created:  1962-00-00       20
+80-33.jpg
+Date Created:  1965-00-00       21
+80-85.jpg
+Date Created:  1965-00-00       22
+80-34.jpg
+Date Created:  1969-00-00       23
+80-83.jpg
+Date Created:  1970-00-00       24
+80-80.jpg
+Date Created:  1970-00-00       25
+80-121.jpg
+Date Created:  1970-00-00       26
+80-125.jpg
+Date Created:  1970-00-00       27
+80-36.jpg
+Date Created:  1970-00-00       28
+80-37.jpg
+Date Created:  1970-00-00       29
+80-84.jpg
+Date Created:  1970-00-00       30
+80-128.jpg
+Date Created:  1971-00-00       31
+80-118.jpg
+Date Created:  1975-00-00       32
+80-32.jpg
+Date Created:  1975-00-00       33
+80-55.jpg
+Date Created:  1975-00-00       34
+80-42.jpg
+Date Created:  1979-00-00       35
+======================================================================
+Processing complete at  2023-12-20 15:45:01
+35 records read from the CSV file
+35 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 0:38  MM:SS
+Processing time for each image:  1.11  seconds
+REPORT_JPEG-2023-12-20_15-44-20.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

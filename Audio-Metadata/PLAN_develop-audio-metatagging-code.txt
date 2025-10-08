@@ -1,0 +1,27 @@
+PLAN_to develop-audio-metatagging-code
+-----------------------------------
+
+1 read audio csv file into Python dataframe - DONE
+
+  remove the URL prefixes on mp3 filenames in dataframe - DONE
+
+2 analyze/compare mp3 files in CSV to mp3 files in the directory
+
+    build list of mp3 files in CSV - DONE
+    build list of mp3 files in directory - DONE
+
+    build a test set CSV file and MP3 files in the current working directory (CWD)
+
+    list mataches between files in CSV file and in the CWD
+    list files in the CSV file and NOT in the CWD
+    list files in the CWD and NOT in the CSV file
+
+3 add metatags to all matching files
+
+    read the CSV file into a Python dataframe with rows and columns matching the CSV file
+    loop through the MP3 file list
+    for each MP3 file in the list, determine what row in the dataframe the file is found
+    then pull the metadata found in that row and embed it in the MP3 file
+
+
+

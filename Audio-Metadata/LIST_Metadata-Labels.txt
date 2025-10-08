@@ -1,0 +1,11 @@
+Headline
+ObjectName
+Date_Created
+Copyright_Notice
+Caption-Abstract
+Source
+By-line
+By-lineTitle
+Institutional_Creator
+Credit
+

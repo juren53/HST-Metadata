@@ -1,0 +1,10 @@
+Using python, I would like to use the metadata contained a CSV file OriginalTIFs.csv listed here:
+
+Title,Headline,SpecialInstructions,CopyrightNotice,Caption-Abstract,Source,By-line,Institutional Creator,Credit,Writer-Editor
+2008-901,Group Photo of Almy and Slichter Families,None,Unrestricted,"Exterior view of family group lined up at unknown location.  Identified on back left to right:  Charles Almy, Curtis Thayer Almy, John Almy, Ma, Sumner, Pop, Nini and Billy Slichter, Dawn, Bill, Jr., Bill III, Chris, Joyce, and Charlie Slichter.","Thayer, Charles W. Papers",,,Harry S. Truman Library,LAA
+2008-899,Children with Toy Guns,None,Unrestricted,"Exterior group of five young boys each with a toy gun in their hand.  Back of the photograph identified as left to right:  Billy Slichter, Curtis Almy, Bill III, Chris and Sumner.  Also says:  ""You can see how mothers ban on weapons has finally ended up.""","Thayer, Charles W. Papers",,,Harry S. Truman Library,LAA
+2008-900,Slichter Brothers as Children,None,Undetermined,"Interior view of two children identified as left to right:  Sumner, the Policeman, and Billy Slichter.","Thayer, Charles W. Papers",,,Harry S. Truman Library,LAA
+2013-3393,Billy M. Wall and Mrs. W. M. McMillan,None,Undetermined,Billy M. Wall talking with Mrs. W. M. McMillan.,"Osthagen, Clarence H. Papers",,,Harry S. Truman Library,LAA
+62-203,Three men at Old Jackson County Court House,1900-1901,Undetermined,"From left to right, John G. McCurdy, James Peacock, and Billy Staples stand in front of the Old Jackson County Court House in Independence, Missouri.  Printed in the photo: ""Old Jackson County Court House, showing three old residents, Indep., MO.""  From: Jackson County Historical Society.",,,,Harry S. Truman Library,LAA
+
+I would like to add this metadata as tags embedded in TIFF files that correspond to the Title column using the exiv2 python library.

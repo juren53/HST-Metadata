@@ -1,0 +1,84 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 6755 MB
+ 
+Number of lines in the CSV file: 24
+ 
+Number of jpg files in the diretory:  0
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-08-11 01:52:29
+***** File 2008-901.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2008-899.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2008-900.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2013-3393.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 62-203.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2006-314.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2269.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2268.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2265.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2311.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2312.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2017-2991.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2016-3315.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 59-783.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 99-484.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2006-186.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2001-19.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 60-398-03.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2008-315.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2014-80.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2002-322.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2014-217.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 2016-3577.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+***** File 93-357.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test1 ********
+======================================================================
+Processing complete at  2023-08-11 01:52:29
+24 records read from the CSV file
+0 images processed
+24 missing images
+*** Missing images not processed:
+2008-901.jpg missing
+2008-899.jpg missing
+2008-900.jpg missing
+2013-3393.jpg missing
+62-203.jpg missing
+2006-314.jpg missing
+2017-2269.jpg missing
+2017-2268.jpg missing
+2017-2265.jpg missing
+2017-2311.jpg missing
+2017-2312.jpg missing
+2017-2991.jpg missing
+2016-3315.jpg missing
+59-783.jpg missing
+99-484.jpg missing
+2006-186.jpg missing
+2001-19.jpg missing
+60-398-03.jpg missing
+2008-315.jpg missing
+2014-80.jpg missing
+2002-322.jpg missing
+2014-217.jpg missing
+2016-3577.jpg missing
+93-357.jpg missing
+
+___________________________
+Elapsed time: 0:0  MM:SS
+Processing time for each image:  0.0  seconds
+REPORT_JPEG-2023-08-11_01-52-28.txt log file printed to /home/juren/Projects/HST-Metadata/Photos/test1
+======================================================================

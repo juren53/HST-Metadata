@@ -1,0 +1,69 @@
+juren@jaus-e6410-141:~/Projects/HST-Metadata/Audio-Metadata/Test$ tgpt "how do I control all the information FFmpeg outputs to the screen as it is processing files?"
+          
+To control the verbosity and type of information that FFmpeg outputs to the screen while processing files, you can use various command-line
+ options. These options allow you to suppress unwanted messages, increase the level of detail in the output, or direct the output to specific
+ places (like a log file instead of the console).
+
+### Basic Options
+
+1. **-loglevel**: This option sets the logging level. The default value is 0, which means "info". Lower values produce more detailed logs.
+
+   Example: To reduce the amount of output, you can set the log level to 32 (which corresponds to "error").
+   bash
+   ffmpeg -i nput.mp4 -loglevel 32 output.avi
+   ```
+
+2. **-hide_banner**: By default, FFmpeg prints copyright notices and configuration information when it starts. Use this option to hide this
+ information.
+   bash
+   ffmpeg -i nput.mp4 -hide_banner output.avi
+   ```
+
+3. **-show_streams**: This option forces FFmpeg to print information about each stream in the input file(s).
+   bash
+   ffmpeg -i nput.mp4 -show_streams output.avi
+   ```
+
+4. **-report**: Generates a report file named ffmpeg-YYYYMMDD-HHMMSS.log in the current directory. This report includes detailed information
+ about the encoding process.
+   bash
+   ffmpeg -i nput.mp4 -report output.avi
+   ```
+
+5. **-stats**: Shows a summary of the encoding progress, including time elapsed, frame rate, bitrate, etc., but less frequently than the full
+ log.
+   bash
+   ffmpeg -i nput.mp4 -stats output.avi
+   ```
+
+6. **-quiet**: Suppresses almost all non-essential messages.
+   bash
+   ffmpeg -i nput.mp4 -quiet output.avi
+   ```
+
+7. **-debug**: Enables debug-level logging. This is very verbose and useful for debugging issues.
+   bash
+   ffmpeg -i nput.mp4 -debug output.avi
+   ```
+
+8. **-vcodec**, -acodec, -scodec: These options allow you to select the codec explicitly, which can affect the output format and thus the
+ information displayed during processing.
+
+### Directing Output
+
+If you want to redirect the output to a file instead of the console, you can simply append > output.txt to your command:
+
+```bash
+ffmpeg -i nput.mp4 > output.txt
+```
+
+This will save all FFmpeg output to output.txt.
+
+### Conclusion
+
+By combining these options, you can tailor the output of FFmpeg to suit your needs, whether you need detailed logs for debugging or minimal
+ output for quick checks. Remember to consult the FFmpeg documentation (man ffmpeg or ffmpeg -h) for a complete list of available options
+ and their descriptions.
+
+juren@jaus-e6410-141:~/Projects/HST-Metadata/Audio-Metadata/Test$ 
+

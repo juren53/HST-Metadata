@@ -1,0 +1,76 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 13578 MB
+ 
+Number of lines in the CSV file: 20
+ 
+Number of jpg files in the diretory:  19
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2024-01-12 15:15:55
+81-76-07.jpg
+Date Created:  1904-00-00       1
+81-154-04.jpg
+Date Created:  1949-07-04       2
+81-154-03.jpg
+Date Created:  1949-07-04       3
+81-114-04.jpg
+Date Created:  1949-11-29       4
+81-114-3.jpg
+Date Created:  1949-11-29       5
+81-114-2.jpg
+Date Created:  1949-11-29       6
+***** File 81-114-1.jpg not found in directory C:\Temp\Metadata-tagging ********
+81-29.jpg
+Date Created:  1965-00-00       7
+81-158-04.jpg
+Date Created:  1968-04-18       8
+81-28.jpg
+Date Created:  1970-00-00       9
+81-33.jpg
+Date Created:  1970-00-00       10
+81-31.jpg
+Date Created:  1970-00-00       11
+81-27.jpg
+Date Created:  1971-00-00       12
+81-30.jpg
+Date Created:  1975-00-00       13
+81-37.jpg
+Date Created:  1975-00-00       14
+81-34.jpg
+Date Created:  1975-00-00       15
+81-24-1.jpg
+Date Created:  1976-05-08       16
+81-24-2.jpg
+Date Created:  1976-05-08       17
+81-36.jpg
+Date Created:  1978-00-00       18
+81-40-9.jpg
+Date Created:  1980-11-00       19
+======================================================================
+Processing complete at  2024-01-12 15:16:16
+20 records read from the CSV file
+19 images processed
+1 missing images
+*** Missing images not processed:
+81-114-1.jpg missing
+
+___________________________
+Elapsed time: 0:21  MM:SS
+Processing time for each image:  1.07  seconds
+REPORT_JPEG-2024-01-12_15-15-54.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

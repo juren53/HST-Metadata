@@ -1,0 +1,28 @@
+
+
+for file in *.jpg; do
+  echo "################"
+  echo $file
+  echo -n "Number of tags:     "; exiftool -s3 -G1 -n "$file" | wc -l
+  exiftool "$file" | grep Modify
+done
+less
+
+
+for file in *.jpg; do
+  echo -n "Number of tags for $file: "; exiftool -s3 -G1 -n "$file" | wc -l
+  echo
+done
+
+Bad offset for IFD0 ICC_Profile
+
+
+
+for file in *.jpg; do
+  echo "################"
+  echo $file
+  exiftool "$file" | grep "Bad offset for IFD0 ICC_Profile"
+done
+less
+
+

@@ -1,0 +1,91 @@
+JAU prompt:
+-------------------------------------
+Evaluate the following date string
+```
+"Ca.   Saturday, 07/01/1950"
+
+```
+using a pattern like this:
+
+```
+
+   elif re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
+        try:
+            date_object = datetime.strptime(date_str, "%B %d, %Y")
+            formatted_date = date_object.strftime("%Y-%m-%d")
+            return formatted_date
+        except ValueError:
+            return date_str
+```
+
+to produce an ISO standard date of
+
+1950-07-01
+
+-------------------------------------
+
+ChatGPT response:
+
+-------------------------------------
+Evaluate the following date string
+```
+"Ca.   Saturday, 07/01/1950"
+
+```
+using a pattern like this:
+
+```
+
+   elif re.match(r"([A-Za-z]+) (\d{1,2}), (\d{4})", date_str):  # test for September 18, 1945
+        try:
+            date_object = datetime.strptime(date_str, "%B %d, %Y")
+            formatted_date = date_object.strftime("%Y-%m-%d")
+            return formatted_date
+        except ValueError:
+            return date_str
+```
+
+to produce an ISO standard date of
+
+1950-07-01
+ChatGPT
+It seems like you want to use the provided pattern to extract and format the date from the given date string. However, the date string you provided doesn't exactly match the pattern you provided. The pattern expects a month name in the format like "September," but your date string has "Ca." before the day name "Saturday." Also, the month in your date string is in the format "07," but the pattern expects the month name.
+
+To achieve your desired result, you should modify the pattern and code accordingly. Here's the corrected version of the code:
+
+python
+Copy code
+
+```
+import re
+from datetime import datetime
+
+date_str = "Ca.   Saturday, 07/01/1950"
+
+# Check for the pattern with a day name and a numeric month/day/year
+if re.match(r"Ca\.\s+([A-Za-z]+), (\d{2})/(\d{2})/(\d{4})", date_str):
+    try:
+        match = re.match(r"Ca\.\s+([A-Za-z]+), (\d{2})/(\d{2})/(\d{4})", date_str)
+        day_name = match.group(1)
+        month = int(match.group(2))
+        day = int(match.group(3))
+        year = int(match.group(4))
+
+        date_object = datetime(year, month, day)
+        formatted_date = date_object.strftime("%Y-%m-%d")
+        print(formatted_date)
+    except ValueError:
+        print(date_str)  # In case of parsing error, return the original date string
+else:
+    print(date_str)  # If the pattern doesn't match, return the original date string
+
+```
+
+Running this code will output:
+
+yaml
+Copy code
+1950-07-01
+This code should work for the provided date string by correctly matching the elements of the date and formatting them into the desired ISO standard format.
+
+-------------------------------------

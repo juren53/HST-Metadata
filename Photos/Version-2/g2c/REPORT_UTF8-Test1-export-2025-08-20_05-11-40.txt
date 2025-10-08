@@ -1,0 +1,22 @@
+🔍 G2C Mode: Analyzing g2c-generated CSV file: Test1-export.csv
+   Looking for IPTC field names (ObjectName, Headline, Caption-Abstract)
+
+Analyze UTF-8 Report - Version 0.5.0
+Mode: G2C-generated CSV analysis
+==================================================
+Analyzing file: Test1-export.csv
+Total 'special characters' found: 0
+
+Successfully read 110 lines as UTF-8
+Found identifier column 'ObjectName' at index 2
+
+[OK] No suspicious encoding issues found!
+
+==================================================
+SUMMARY
+==================================================
+Analyze UTF-8 Report - Version 0.5.0
+Mode: G2C-generated CSV analysis
+Analyzing file: Test1-export.csv
+Total 'special characters' found: 0
+==================================================

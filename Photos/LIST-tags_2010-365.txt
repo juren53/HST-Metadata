@@ -1,0 +1,146 @@
+ExifTool Version Number         : 11.88
+File Name                       : 2010-365.tif
+Directory                       : .
+File Size                       : 832 kB
+File Modification Date/Time     : 2023:05:05 09:12:32-05:00
+File Access Date/Time           : 2023:05:05 09:15:11-05:00
+File Inode Change Date/Time     : 2023:05:05 09:12:59-05:00
+File Permissions                : rw-rw-r--
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 640
+Image Height                    : 427
+Bits Per Sample                 : 8 8 8
+Compression                     : Uncompressed
+Photometric Interpretation      : RGB
+Image Description               : Easter Egg Roll at the 2018 Harry's Hop'n Hunt.
+Strip Offsets                   : 31982
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 3
+Rows Per Strip                  : 427
+Strip Byte Counts               : 819840
+X Resolution                    : 72
+Y Resolution                    : 72
+Planar Configuration            : Chunky
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop CC 2018 (Windows)
+Modify Date                     : 2018:10:25 13:36:50
+Artist                          : Ed Autry
+XMP Toolkit                     : Adobe XMP Core 5.6-c142 79.160924, 2017/07/13-01:06:39
+Document ID                     : adobe:docid:photoshop:a8c84b1a-e0a1-7a4e-bb02-9969448945fa
+Original Document ID            : EB20FEC7EF2A3E76799969927D9B2869
+Instance ID                     : xmp.iid:dfae3725-80c9-af40-b460-e71d2ea5b9ee
+History Action                  : saved, saved, saved, converted, derived, saved, saved
+History Instance ID             : xmp.iid:981d5ab5-c15c-cc45-aa2a-f1554af144ee, xmp.iid:6ee00a69-e13e-bb46-a8d7-35eb6af04050, xmp.iid:06a8a06c-a2ec-a945-83ce-d55ec3f038cc, xmp.iid:930eb5df-2abe-2047-8ef8-80de9a068ef2, xmp.iid:dfae3725-80c9-af40-b460-e71d2ea5b9ee
+History When                    : 2018:10:18 14:23:44-05:00, 2018:10:18 14:45:47-05:00, 2018:10:18 14:55:35-05:00, 2018:10:18 14:55:35-05:00, 2018:10:25 13:36:50-05:00
+History Software Agent          : Adobe Bridge CC 2018 (Windows), Adobe Bridge CC 2018 (Windows), Adobe Photoshop CC 2018 (Windows), Adobe Photoshop CC 2018 (Windows), Adobe Photoshop CC 2018 (Windows)
+History Changed                 : /metadata, /metadata, /, /, /
+History Parameters              : from image/png to image/tiff, converted from image/png to image/tiff
+Derived From Instance ID        : xmp.iid:06a8a06c-a2ec-a945-83ce-d55ec3f038cc
+Derived From Document ID        : EB20FEC7EF2A3E76799969927D9B2869
+Derived From Original Document ID: EB20FEC7EF2A3E76799969927D9B2869
+Format                          : image/tiff
+Creator                         : Ed Autry
+Rights                          : Public Domain - This item is in the public domain and can be used freely without further permission.
+Title                           : 2010-
+Description                     : Easter Egg Roll at the 2018 Harry's Hop'n Hunt.
+Color Mode                      : RGB
+ICC Profile Name                : sRGB IEC61966-2.1
+State                           : Missouri
+Country                         : USA
+Legacy IPTC Digest              : C4FF86E5D2BE6EE0A347A27E0A1B1AC7
+Authors Position                : NARA
+Caption Writer                  : J. U'Ren
+Rating                          : 0
+Create Date                     : 2018:06:14 17:50:32
+Metadata Date                   : 2018:10:25 13:36:50-05:00
+Creator Tool                    : Adobe Photoshop CC 2018 (Windows)
+Marked                          : False
+Location                        : Harry S. Truman Presidental Library
+Copyright                       : Public Domain - This item is in the public domain and can be used freely without further permission.
+Current IPTC Digest             : d7214975187542246b3c5a5d273b35db
+Coded Character Set             : UTF8
+Envelope Record Version         : 4
+Application Record Version      : 0
+Caption-Abstract                : Easter Egg Roll at the 2018 Harry's Hop'n Hunt.
+Writer-Editor                   : J. U'Ren
+Headline                        : 2018 Harry's Hop n' Hunt
+By-line                         : Ed Autry
+By-line Title                   : NARA
+Credit                          : Ed Autry, NARA, Harry S. Truman
+Source                          : RG 64
+Object Name                     : 2010-365
+Date Created                    : 2018:06:14
+Time Created                    : 17:50:32+00:00
+City                            : Independence
+Sub-location                    : Harry S. Truman Library
+Province-State                  : Missouri
+Country-Primary Location Name   : USA
+Copyright Notice                : Public Domain - This item is in the public domain and can be used freely without further permission.
+IPTC Digest                     : 9be94764b81eabad03448fa0038e86a9
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+Copyright Flag                  : False
+URL List                        : 
+Slices Group Name               : 
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 7079 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop CC 2018
+Exif Version                    : 0221
+Color Space                     : sRGB
+Exif Image Width                : 640
+Exif Image Height               : 427
+Profile CMM Type                : Linotronic
+Profile Version                 : 2.1.0
+Profile Class                   : Display Device Profile
+Color Space Data                : RGB
+Profile Connection Space        : XYZ
+Profile Date Time               : 1998:02:09 06:49:00
+Profile File Signature          : acsp
+Primary Platform                : Microsoft Corporation
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : Hewlett-Packard
+Device Model                    : sRGB
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Hewlett-Packard
+Profile ID                      : 0
+Profile Copyright               : Copyright (c) 1998 Hewlett-Packard Company
+Profile Description             : sRGB IEC61966-2.1
+Media White Point               : 0.95045 1 1.08905
+Media Black Point               : 0 0 0
+Red Matrix Column               : 0.43607 0.22249 0.01392
+Green Matrix Column             : 0.38515 0.71687 0.09708
+Blue Matrix Column              : 0.14307 0.06061 0.7141
+Device Mfg Desc                 : IEC http://www.iec.ch
+Device Model Desc               : IEC 61966-2.1 Default RGB colour space - sRGB
+Viewing Cond Desc               : Reference Viewing Condition in IEC61966-2.1
+Viewing Cond Illuminant         : 19.6445 20.3718 16.8089
+Viewing Cond Surround           : 3.92889 4.07439 3.36179
+Viewing Cond Illuminant Type    : D50
+Luminance                       : 76.03647 80 87.12462
+Measurement Observer            : CIE 1931
+Measurement Backing             : 0 0 0
+Measurement Geometry            : Unknown
+Measurement Flare               : 0.999%
+Measurement Illuminant          : D65
+Technology                      : Cathode Ray Tube Display
+Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
+Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
+Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)
+Image Size                      : 640x427
+Megapixels                      : 0.273
+Date/Time Created               : 2018:06:14 17:50:32+00:00
+Date/Time Original              : 2018:06:14 17:50:32+00:00

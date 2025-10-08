@@ -1,0 +1,50 @@
+Notes/questions on MP3 tagging tests 2024-06-30
+
+Six sample MP3s have been generated in this test case:
+
+SR59-108.mp3  SR59-114.mp3  SR59-185.mp3  SR59-201.mp3	SR59-88.mp3  SR60-59.mp3
+
+These MP3s have a 'first cut' a a collection of tags that are aimed a visibility in our seven target apps:
+
+Windows File Info
+Windows Media Player
+Apple File Info
+Apple iTunes
+Adobe Audition
+Audacity
+VLC
+
+They also include a custom thumbnail with the accession number overlayed on the thumbnail.
+
+Questions and comments:
+
+- Addition of a descriptive meta tag label (preface) as part of the tag - - too much?
+
+e.g.
+    TPE1            : Artist: Harry S. Truman Library
+    TPUB            : Publisher: U.S. Army Signal Corps
+    TDAT            : Date DDMM: 2110
+    TYER            : Date YYYY: 1952
+    TEXT            : Location: Bridgeport, PA
+    TOFN            : Original File Name: SR59-201.mp3
+    TORY            : Original Release Year: 1952
+    TRDA            : Recording Date: 1952-10-21
+    ICRD            : Date String: 21-Oct-52
+
+- Overlayed AN labels on HST thumbnails with 32 pt font - - is this the right size? 
+  
+
+- Location is already identified in 'most' descriptions in CSV file but not all.
+   This test included a Location tag in the examples using the unoccupied TEXT tag.
+   TEXT is the BWF author/writer tag.
+
+    TEXT   : Location: Bridgeport, PA
+
+   automtically appending location to the description or title would appear redundant
+
+- Need to develop method for handling the scenario when there are two or more files for one accession number.
+   Could rows be added to the CSV file for each file? The code currently processes one file 
+   for each line in the CSV file - - assumes unique accession numbers for each line in the CSV file
+
+
+

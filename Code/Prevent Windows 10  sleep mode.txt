@@ -1,0 +1,46 @@
+
+To prevent Windows 10 from going to sleep while your Python program is running,
+ you can utilize the ctypes module to call the required Windows API functions.
+ Here's an example code snippet that demonstrates how you can achieve this:
+
+```python
+import ctypes
+
+# Prevent Windows from entering sleep mode
+def prevent_sleep():
+    kernel32 = ctypes.WinDLL('kernel32')
+    # Set the thread execution state to prevent sleep mode
+    kernel32.SetThreadExecutionState(0x80000002)  # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
+
+# Allow Windows to enter sleep mode
+def allow_sleep():
+    kernel32 = ctypes.WinDLL('kernel32')
+    # Reset the previous thread execution state
+    kernel32.SetThreadExecutionState(0x80000000)  # ES_CONTINUOUS
+
+# Usage example
+if __name__ == '__main__':
+    print("Preventing Windows from going to sleep...")
+    prevent_sleep()
+
+    # Add your processing code here
+    # ...
+
+    print("Processing completed. Allowing Windows to sleep...")
+    allow_sleep()
+```
+
+In this code, the prevent_sleep() function uses the SetThreadExecutionState
+ function from the Windows API to set the thread execution state to ES_CONTINU
+OUS | ES_SYSTEM_REQUIRED. This prevents the system from initiating the sleep
+ mode due to inactivity.
+
+The allow_sleep() function resets the thread execution state to its default
+ value (ES_CONTINUOUS) after your processing is completed, allowing Windows to
+ enter sleep mode normally again.
+
+Please note that this code only prevents the sleep mode while the Python program
+ is running. Once the program exits, the sleep behavior of the system will
+ revert to its usual settings.
+
+

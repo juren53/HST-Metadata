@@ -1,0 +1,256 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14633 MB
+ 
+Number of lines in the CSV file: 110
+ 
+Number of jpg files in the diretory:  110
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-26 15:25:39
+92-56.jpg
+Date Created:  0000-00-00       1
+92-13.jpg
+Date Created:  1947-00-00       2
+92-17.jpg
+Date Created:  1947-06-08       3
+92-01.jpg
+Date Created:  1947-09-03       4
+92-02.jpg
+Date Created:  1947-09-15       5
+92-04.jpg
+Date Created:  1947-09-18       6
+92-03.jpg
+Date Created:  1947-09-18       7
+92-05.jpg
+Date Created:  1947-09-26       8
+92-06.jpg
+Date Created:  1947-09-29       9
+92-07.jpg
+Date Created:  1947-10-01       10
+92-08.jpg
+Date Created:  1947-10-05       11
+92-09.jpg
+Date Created:  1947-10-15       12
+92-10.jpg
+Date Created:  1947-10-24       13
+92-11.jpg
+Date Created:  1947-11-01       14
+92-15.jpg
+Date Created:  1947-11-17       15
+92-14.jpg
+Date Created:  1947-11-17       16
+92-16.jpg
+Date Created:  1947-11-19       17
+92-18.jpg
+Date Created:  1947-12-06       18
+92-20.jpg
+Date Created:  1947-12-19       19
+92-67.jpg
+Date Created:  1948-00-00       20
+92-21.jpg
+Date Created:  1948-00-00       21
+92-97.jpg
+Date Created:  1948-00-00       22
+92-66.jpg
+Date Created:  1948-00-00       23
+92-26.jpg
+Date Created:  1948-01-06       24
+92-25.jpg
+Date Created:  1948-01-06       25
+92-27.jpg
+Date Created:  1948-01-07       26
+92-28.jpg
+Date Created:  1948-01-09       27
+92-30.jpg
+Date Created:  1948-01-14       28
+92-31.jpg
+Date Created:  1948-01-30       29
+92-34.jpg
+Date Created:  1948-02-07       30
+92-35.jpg
+Date Created:  1948-02-11       31
+92-36.jpg
+Date Created:  1948-02-17       32
+92-37.jpg
+Date Created:  1948-02-18       33
+92-42.jpg
+Date Created:  1948-02-19       34
+92-39.jpg
+Date Created:  1948-02-19       35
+92-38.jpg
+Date Created:  1948-02-19       36
+92-40.jpg
+Date Created:  1948-02-20       37
+92-43.jpg
+Date Created:  1948-02-20       38
+92-41.jpg
+Date Created:  1948-02-20       39
+92-44.jpg
+Date Created:  1948-02-21       40
+92-50.jpg
+Date Created:  1948-02-21       41
+92-46.jpg
+Date Created:  1948-02-22       42
+92-45.jpg
+Date Created:  1948-02-22       43
+92-47.jpg
+Date Created:  1948-02-22       44
+92-48.jpg
+Date Created:  1948-02-29       45
+92-49.jpg
+Date Created:  1948-02-29       46
+92-51.jpg
+Date Created:  1948-03-01       47
+92-52.jpg
+Date Created:  1948-03-05       48
+92-53.jpg
+Date Created:  1948-03-06       49
+92-54.jpg
+Date Created:  1948-03-15       50
+92-55.jpg
+Date Created:  1948-03-17       51
+92-58.jpg
+Date Created:  1948-04-03       52
+92-57.jpg
+Date Created:  1948-04-03       53
+92-59.jpg
+Date Created:  1948-04-12       54
+92-60.jpg
+Date Created:  1948-04-14       55
+92-61.jpg
+Date Created:  1948-05-07       56
+92-62.jpg
+Date Created:  1948-05-09       57
+92-63.jpg
+Date Created:  1948-06-06       58
+92-65.jpg
+Date Created:  1948-06-17       59
+92-68.jpg
+Date Created:  1948-07-01       60
+92-69.jpg
+Date Created:  1948-07-06       61
+92-70.jpg
+Date Created:  1948-07-09       62
+92-71.jpg
+Date Created:  1948-07-14       63
+92-74.jpg
+Date Created:  1948-07-15       64
+92-75.jpg
+Date Created:  1948-07-15       65
+92-72-02.jpg
+Date Created:  1948-07-15       66
+92-72-01.jpg
+Date Created:  1948-07-15       67
+92-76.jpg
+Date Created:  1948-07-15       68
+92-73.jpg
+Date Created:  1948-07-15       69
+92-78.jpg
+Date Created:  1948-07-20       70
+92-79-03.jpg
+Date Created:  1948-07-27       71
+92-79-01.jpg
+Date Created:  1948-07-27       72
+92-79-02.jpg
+Date Created:  1948-07-27       73
+92-79-04.jpg
+Date Created:  1948-07-27       74
+92-80-03.jpg
+Date Created:  1948-07-31       75
+92-81.jpg
+Date Created:  1948-07-31       76
+92-80-01.jpg
+Date Created:  1948-07-31       77
+92-82.jpg
+Date Created:  1948-08-02       78
+92-88.jpg
+Date Created:  1948-08-11       79
+92-90.jpg
+Date Created:  1948-08-13       80
+92-91.jpg
+Date Created:  1948-08-26       81
+92-92.jpg
+Date Created:  1948-08-29       82
+92-93.jpg
+Date Created:  1948-09-06       83
+92-95.jpg
+Date Created:  1948-09-20       84
+92-96.jpg
+Date Created:  1948-09-23       85
+92-99.jpg
+Date Created:  1948-10-06       86
+92-98.jpg
+Date Created:  1948-10-06       87
+92-23.jpg
+Date Created:  1948-10-12       88
+92-100.jpg
+Date Created:  1948-10-16       89
+92-101.jpg
+Date Created:  1948-10-22       90
+92-102.jpg
+Date Created:  1948-10-28       91
+92-103.jpg
+Date Created:  1948-10-29       92
+92-104.jpg
+Date Created:  1948-11-01       93
+92-106.jpg
+Date Created:  1948-11-03       94
+92-105.jpg
+Date Created:  1948-11-03       95
+92-107.jpg
+Date Created:  1948-11-03       96
+92-108.jpg
+Date Created:  1948-11-05       97
+92-109.jpg
+Date Created:  1948-11-07       98
+92-110.jpg
+Date Created:  1948-11-09       99
+92-112.jpg
+Date Created:  1948-11-21       100
+92-111.jpg
+Date Created:  1948-11-21       101
+92-113.jpg
+Date Created:  1948-11-27       102
+92-114.jpg
+Date Created:  1948-11-29       103
+92-115.jpg
+Date Created:  1948-12-19       104
+92-116.jpg
+Date Created:  1948-12-21       105
+92-118.jpg
+Date Created:  1949-01-05       106
+92-119.jpg
+Date Created:  1949-01-05       107
+92-129.jpg
+Date Created:  1949-01-17       108
+92-358.jpg
+Date Created:  1952-05-14       109
+92-117.jpg
+Date Created:  1948-00-00       110
+======================================================================
+Processing complete at  2023-12-26 15:27:55
+110 records read from the CSV file
+110 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 2:15  MM:SS
+Processing time for each image:  1.24  seconds
+REPORT_JPEG-2023-12-26_15-25-37.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

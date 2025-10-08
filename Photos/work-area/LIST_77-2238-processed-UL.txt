@@ -1,0 +1,94 @@
+[ExifTool]      ExifTool Version Number         : 12.70
+[ExifTool]      Warning                         : Bad ExifOffset SubDirectory start
+[File]          File Name                       : 77-2238.jpg
+[File]          Directory                       : /home/juren/Projects/HST-Metadata/Test Data/Processed-JPEGs/77-Jpgs
+[File]          File Size                       : 164 kB
+[File]          File Modification Date/Time     : 2024:01:12 09:33:30-06:00
+[File]          File Access Date/Time           : 2024:06:06 18:12:45-05:00
+[File]          File Inode Change Date/Time     : 2024:06:04 15:50:26-05:00
+[File]          File Permissions                : -rw-r--r--
+[File]          File Type                       : JPEG
+[File]          File Type Extension             : jpg
+[File]          MIME Type                       : image/jpeg
+[File]          Exif Byte Order                 : Little-endian (Intel, II)
+[File]          Current IPTC Digest             : 8e26c358bebcad7ce094f11cc63d8e97
+[File]          Image Width                     : 800
+[File]          Image Height                    : 563
+[File]          Encoding Process                : Baseline DCT, Huffman coding
+[File]          Bits Per Sample                 : 8
+[File]          Color Components                : 1
+[JFIF]          JFIF Version                    : 1.01
+[EXIF]          Subfile Type                    : Full-resolution image
+[EXIF]          Compression                     : Uncompressed
+[EXIF]          Photometric Interpretation      : BlackIsZero
+[EXIF]          Strip Offsets                   : 22078
+[EXIF]          Orientation                     : Horizontal (normal)
+[EXIF]          Samples Per Pixel               : 1
+[EXIF]          Rows Per Strip                  : 2913
+[EXIF]          Strip Byte Counts               : 12065646
+[EXIF]          X Resolution                    : 100
+[EXIF]          Y Resolution                    : 100
+[EXIF]          Resolution Unit                 : inches
+[EXIF]          Software                        : Adobe Photoshop CS6 (Windows)
+[EXIF]          Modify Date                     : 2014:06:20 08:21:54
+[XMP]           XMP Toolkit                     : Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27
+[XMP]           Creator Tool                    : Adobe Photoshop CS6 (Windows)
+[XMP]           Create Date                     : 2014:06:20 08:21:54-05:00
+[XMP]           Metadata Date                   : 2014:06:20 08:21:54-05:00
+[XMP]           Format                          : image/tiff
+[XMP]           Instance ID                     : xmp.iid:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           Document ID                     : xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           Original Document ID            : xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           History Action                  : created
+[XMP]           History Instance ID             : xmp.iid:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           History When                    : 2014:06:20 08:21:54-05:00
+[XMP]           History Software Agent          : Adobe Photoshop CS6 (Windows)
+[XMP]           Color Mode                      : Grayscale
+[XMP]           ICC Profile Name                : Dot Gain 20%
+[Photoshop]     IPTC Digest                     : 00000000000000000000000000000000
+[Photoshop]     Displayed Units X               : inches
+[Photoshop]     Displayed Units Y               : inches
+[Photoshop]     Print Style                     : Centered
+[Photoshop]     Print Position                  : 0 0
+[Photoshop]     Print Scale                     : 1
+[Photoshop]     Global Angle                    : 120
+[Photoshop]     Global Altitude                 : 30
+[Photoshop]     URL List                        : 
+[Photoshop]     Slices Group Name               : 
+[Photoshop]     Num Slices                      : 1
+[Photoshop]     Pixel Aspect Ratio              : 1
+[Photoshop]     Photoshop Thumbnail             : (Binary data 4634 bytes, use -b option to extract)
+[Photoshop]     Has Real Merged Data            : Yes
+[Photoshop]     Writer Name                     : Adobe Photoshop
+[Photoshop]     Reader Name                     : Adobe Photoshop CS6
+[ICC_Profile]   Profile CMM Type                : Adobe Systems Inc.
+[ICC_Profile]   Profile Version                 : 2.1.0
+[ICC_Profile]   Profile Class                   : Output Device Profile
+[ICC_Profile]   Color Space Data                : GRAY
+[ICC_Profile]   Profile Connection Space        : XYZ
+[ICC_Profile]   Profile Date Time               : 1999:06:03 00:00:00
+[ICC_Profile]   Profile File Signature          : acsp
+[ICC_Profile]   Primary Platform                : Apple Computer Inc.
+[ICC_Profile]   CMM Flags                       : Not Embedded, Independent
+[ICC_Profile]   Device Manufacturer             : none
+[ICC_Profile]   Device Model                    : 
+[ICC_Profile]   Device Attributes               : Reflective, Glossy, Positive, Color
+[ICC_Profile]   Rendering Intent                : Media-Relative Colorimetric
+[ICC_Profile]   Connection Space Illuminant     : 0.9642 1 0.82491
+[ICC_Profile]   Profile Creator                 : Adobe Systems Inc.
+[ICC_Profile]   Profile ID                      : 0
+[ICC_Profile]   Profile Copyright               : Copyright 1999 Adobe Systems Incorporated
+[ICC_Profile]   Profile Description             : Dot Gain 20%
+[ICC_Profile]   Media White Point               : 0.9642 1 0.82491
+[ICC_Profile]   Media Black Point               : 0 0 0
+[ICC_Profile]   Gray Tone Reproduction Curve    : (Binary data 524 bytes, use -b option to extract)
+[IPTC]          Headline                        : President Harry S. Truman Delivering his Farewell Address
+[IPTC]          Application Record Version      : 4
+[IPTC]          Credit                          : Harry S. Truman Library
+[IPTC]          Special Instructions            : Thursday, 01/15/1953
+[IPTC]          Object Name                     : 77-2238
+[IPTC]          Caption-Abstract                : President Harry S. Truman delivers his farewell address to the nation. This speech was televised, and the photographer took a photograph of the television screen.
+[IPTC]          Date Created                    : 1953:01:15
+[IPTC]          Copyright Notice                : Undetermined
+[Composite]     Image Size                      : 800x563
+[Composite]     Megapixels                      : 0.450

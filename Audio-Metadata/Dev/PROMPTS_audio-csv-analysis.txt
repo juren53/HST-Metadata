@@ -1,0 +1,10 @@
+Write some Python code that loads audio.csv file into a Panda data frame and then list records that have only one MP3 file listed in columns 8 through 18.
+
+
+Add the feature to output the records with a single MP3 link to a CSV file named single.csv
+
+
+I need just the mp3 file names in columns 8-18.  Remove the HTTP URL prefix information and output colums 1-18 into a files called output.csv.
+
+
+I need just the mp3 file names in columns 8-18.  Remove the HTTP URL prefix information and output colums 1-18 into a files called output.csv.

@@ -1,0 +1,15 @@
+A BEXT chunk, also known as Broadcast Extension chunk, is a specific type of chunk used in Broadcast Wave Format (BWF) files. BWF is a standard audio file format used primarily in broadcasting and professional audio applications. It's an extension of the standard WAV format.
+
+The BEXT chunk contains metadata or additional information about the audio file, such as:
+
+    Description: Descriptive text about the content of the audio file.
+    Originator: Information about the originator or creator of the audio file.
+    Originator Reference: A reference code or number provided by the originator.
+    Origination Date: The date when the audio file was created or recorded.
+    Origination Time: The time when the audio file was created or recorded.
+    Time Reference Low: Low part of the timecode for the start of the audio.
+    Time Reference High: High part of the timecode for the start of the audio.
+    Version: The version number of the BWF format used.
+
+These metadata fields provide valuable information about the audio file, facilitating its management and use in professional audio workflows, especially in broadcasting and post-production environments.
+

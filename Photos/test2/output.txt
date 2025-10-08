@@ -1,0 +1,225 @@
+=========================================================================
+write-tags-from-csv.py ver 0.64  updated Thu 27 Jul 2023 09:24:00 AM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 5987 MB
+ 
+Number of lines in the CSV file: 95
+ 
+Number of TIFF files in the diretory:  89
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-07-27 09:49:17
+2006-487.tif
+Date Created:  0000-00-00       1
+97-2049.tif
+Date Created:  1940-00-00       2
+59-1564.tif
+Date Created:  1940-00-00       3
+60-229-04.tif
+Date Created:  1942-04-00       4
+64-1869.tif
+Date Created:  1945-00-00       5
+89-45.tif
+Date Created:  1945-02-10       6
+64-13-02.tif
+Date Created:  1945-02-10       7
+69-1746.tif
+Date Created:  1945-02-12       8
+63-1333.tif
+Date Created:  1945-06-00       9
+59-1079.tif
+Date Created:  1946-01-04       10
+2009-1595.tif
+Date Created:  1946-01-30       11
+***** File 82-157.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+2012-203.tif
+Date Created:  1948-06-00       12
+2005-352.tif
+Date Created:  1948-09-20       13
+58-156.tif
+Date Created:  1949-00-00       14
+97-2036.tif
+Date Created:  1950-00-00       15
+97-1928.tif
+Date Created:  1951-05-09       16
+97-2218.tif
+Date Created:  1951-05-09       17
+73-3620.tif
+Date Created:  1951-05-09       18
+97-2280.tif
+Date Created:  1952-05-03       19
+82-57-72.tif
+Date Created:  1952-07-31       20
+2004-418.tif
+Date Created:  1952-10-16       21
+59-416.tif
+Date Created:  1952-11-03       22
+58-160.tif
+Date Created:  1954-06-15       23
+2002-200.tif
+Date Created:  1954-06-17       24
+93-145.tif
+Date Created:  1955-05-28       25
+2009-1519.tif
+Date Created:  1956-03-21       26
+***** File 93-158.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+95-22-68.tif
+Date Created:  1956-06-00       27
+95-24.tif
+Date Created:  1956-06-00       28
+95-22-64.tif
+Date Created:  1956-06-00       29
+2009-1504.tif
+Date Created:  1957-00-00       30
+2009-1506.tif
+Date Created:  1957-00-00       31
+2009-1508.tif
+Date Created:  1957-00-00       32
+2009-1507.tif
+Date Created:  1957-00-00       33
+59-397-1.tif
+Date Created:  1957-06-00       34
+59-397-5.tif
+Date Created:  1957-06-00       35
+2009-1505.tif
+Date Created:  1957-06-00       36
+59-397-2.tif
+Date Created:  1957-06-00       37
+60-398-04.tif
+Date Created:  1957-06-26       38
+59-398-7.tif
+Date Created:  1957-06-26       39
+97-2255.tif
+Date Created:  1957-06-26       40
+60-398-03.tif
+Date Created:  1957-06-26       41
+59-398-8.tif
+Date Created:  1957-06-26       42
+64-654-01.tif
+Date Created:  1957-06-26       43
+93-235.tif
+Date Created:  1958-03-22       44
+98-602.tif
+Date Created:  1958-03-22       45
+2009-2027.tif
+Date Created:  1959-00-00       46
+98-779.tif
+Date Created:  1959-04-00       47
+98-1057.tif
+Date Created:  1959-04-28       48
+60-1.tif
+Date Created:  1959-05-17       49
+60-245-01.tif
+Date Created:  1959-08-07       50
+60-243-05.tif
+Date Created:  1959-09-03       51
+60-43-59.tif
+Date Created:  1959-09-03       52
+60-43-60.tif
+Date Created:  1959-09-03       53
+2006-128.tif
+Date Created:  1959-09-03       54
+2002-501.tif
+Date Created:  1959-11-12       55
+60-279-01.tif
+Date Created:  1959-12-00       56
+72-3113.tif
+Date Created:  1960-08-20       57
+2017-1245.tif
+Date Created:  1961-00-00       58
+63-3-09.tif
+Date Created:  1961-03-00       59
+61-280-02.tif
+Date Created:  1961-04-05       60
+93-361-02.tif
+Date Created:  1961-04-26       61
+***** File 98-1800.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+95-140.tif
+Date Created:  1961-11-01       62
+2016-1836.tif
+Date Created:  1961-11-01       63
+2016-1835.tif
+Date Created:  1961-11-01       64
+62-718-03.tif
+Date Created:  1961-11-09       65
+62-735-05.tif
+Date Created:  1961-11-18       66
+***** File 62-772.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+63-1429.tif
+Date Created:  1962-00-00       67
+63-24-03.tif
+Date Created:  1962-05-00       68
+64-629-05.tif
+Date Created:  1962-07-19       69
+95-208-22.tif
+Date Created:  1962-10-10       70
+95-208-33.tif
+Date Created:  1962-10-10       71
+***** File 64-601.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+63-989-17.tif
+Date Created:  1963-01-06       72
+***** File 63-1487.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+63-1419-05.tif
+Date Created:  1963-03-15       73
+63-1419-03.tif
+Date Created:  1963-03-15       74
+63-1538-02.tif
+Date Created:  1963-03-30       75
+64-657.tif
+Date Created:  1963-10-01       76
+64-606-18.tif
+Date Created:  1963-10-02       77
+64-1082.tif
+Date Created:  1963-12-06       78
+64-1137.tif
+Date Created:  1964-01-02       79
+64-1322.tif
+Date Created:  1964-02-00       80
+64-1321.tif
+Date Created:  1964-02-00       81
+2006-129.tif
+Date Created:  1964-03-23       82
+64-2019.tif
+Date Created:  1964-06-19       83
+64-2022.tif
+Date Created:  1964-06-19       84
+65-86.tif
+Date Created:  1964-07-22       85
+95-291.tif
+Date Created:  1966-00-00       86
+2016-3094.tif
+Date Created:  1967-09-26       87
+69-1196A.tif
+Date Created:  1969-03-21       88
+73-326.tif
+Date Created:  1972-12-26       89
+======================================================================
+Processing complete at  2023-07-27 09:50:19
+95 records read from the CSV file
+89 images processed
+6 missing images
+*** Missing images not processed:
+82-157.tif missing
+93-158.tif missing
+98-1800.tif missing
+62-772.tif missing
+64-601.tif missing
+63-1487.tif missing
+
+___________________________
+Elapsed time: 1:1  MM:SS
+Processing time for each image:  0.65  seconds
+======================================================================

@@ -1,0 +1,2234 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14052 MB
+ 
+Number of lines in the CSV file: 1099
+ 
+Number of jpg files in the diretory:  153
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-29 14:45:35
+***** File 2016-01.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-02.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-03.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-04.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-05.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-06.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-07.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-08.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-09.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-10.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-100.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1000.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1001.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1002.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1003.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1004.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1005.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1006.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1007.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1008.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1009.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-101.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1010.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1011.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1012.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1013.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1014.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1015.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1016.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1017.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1018.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1019.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-102.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1020.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1021.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1022.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1023.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1024.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1025.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1026.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1027.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1028.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1029.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-103.jpg
+Date Created:  1961-02-15       1
+***** File 2016-1030.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1031.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1032.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1033.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1034.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1035.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1036.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1037.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1038.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1039.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-104.jpg
+Date Created:  1961-02-15       2
+***** File 2016-1040.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1041.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1042.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1043.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1044.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1045.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1046.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1047.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1048.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1049.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-105.jpg
+Date Created:  1961-02-15       3
+***** File 2016-1050.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1051.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1052.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1053.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1054.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1055.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1056.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1057.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1058.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1059.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-106.jpg
+Date Created:  1961-02-15       4
+2016-107.jpg
+Date Created:  1961-02-15       5
+2016-108.jpg
+Date Created:  1961-02-15       6
+***** File 2016-109.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-11.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-110.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-112.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-113.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-114.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-115.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-116.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-117.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-118.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-119.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-12.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-120.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-121.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-122.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-123.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-124.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-125.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-126.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1263.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1264.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1265.jpg
+Date Created:  1946-05-25       7
+2016-1266.jpg
+Date Created:  1946-05-25       8
+2016-1267.jpg
+Date Created:  1946-05-25       9
+2016-1268.jpg
+Date Created:  1946-05-29       10
+2016-1269.jpg
+Date Created:  1946-05-29       11
+***** File 2016-127.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1270.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1271.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1272.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1273.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1274.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1275.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1276.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1277.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-128.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-129.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1296.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1297.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-13.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-130.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-131.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-132.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1327.jpg
+Date Created:  1947-06-11       12
+***** File 2016-133.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1334.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1335.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-134.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-135.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-136.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-137.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-139.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-14.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-140.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-141.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-142.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-143.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-144.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-145.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-146.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-147.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-148.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-15.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-150.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-151.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-152.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-153.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-154.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-155.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-156.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-157.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-158.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-159.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1595.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1596.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-16.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-160.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-161.jpg
+Date Created:  1964-06-00       13
+2016-162.jpg
+Date Created:  1964-06-00       14
+***** File 2016-163.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-164.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-165.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-166.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-167.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1670.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1671.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-168.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-169.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-17.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-170.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-171.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-172.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-173.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-174.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-175.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-176.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1765.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-177.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-178.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1782.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1783.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1785.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1787.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1788.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1789.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-179.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1792.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1793.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1795.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1796.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1799.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-18.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-180.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1800.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-181.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1811.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-182.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1829.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-183.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1835.jpg
+Date Created:  1961-11-01       15
+2016-1836.jpg
+Date Created:  1961-11-01       16
+2016-1837.jpg
+Date Created:  1961-11-01       17
+***** File 2016-1839.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-184.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-185.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-186.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-187.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-188.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-189.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-19.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-190.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-191.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-192.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-193.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-194.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-195.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1953.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1954.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1955.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1956.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1957.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1958.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1959.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-196.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-197.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-198.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-199.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-20.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-200.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-2006.jpg
+Date Created:  1972-05-08       18
+***** File 2016-2008.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-2009.jpg
+Date Created:  1969-11-13       19
+***** File 2016-201.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2014.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-202.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-203.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-204.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-205.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-206.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-207.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-208.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-209.jpg
+Date Created:  1968-11-17       20
+***** File 2016-21.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-210.jpg
+Date Created:  1968-05-27       21
+2016-211.jpg
+Date Created:  1968-05-27       22
+2016-212.jpg
+Date Created:  1968-05-27       23
+***** File 2016-213.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-214.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-215.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-216.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-217.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-218.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-219.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-22.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-220.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-221.jpg
+Date Created:  1970-09-03       24
+***** File 2016-222.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-223.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-23.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-231.jpg
+Date Created:  1962-00-00       25
+***** File 2016-232.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-233.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-234.jpg
+Date Created:  1972-00-00       26
+2016-235.jpg
+Date Created:  1972-00-00       27
+2016-236.jpg
+Date Created:  1972-00-00       28
+***** File 2016-237.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-238.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2380.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-239.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2392.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2393.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2394.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-24.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-240.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-25.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-251.jpg
+Date Created:  1956-00-00       29
+***** File 2016-252.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-253.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-254.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-255.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-256.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-257.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-258.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-259.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-26.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-260.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-261.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-262.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-263.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-264.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-265.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-266.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-267.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-268.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-269.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-27.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-270.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-271.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-272.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-273.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-274.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-275.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-276.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-277.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-278.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-279.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-28.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-280.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-281.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-282.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-283.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-284.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-285.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-286.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-287.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-288.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-289.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-29.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-290.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-291.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-293.jpg
+Date Created:  1944-06-15       30
+2016-294.jpg
+Date Created:  1944-06-15       31
+***** File 2016-2946.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-295.jpg
+Date Created:  1944-00-00       32
+***** File 2016-296.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-297.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-2975.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-298.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-299.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-30.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-300.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-301.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-302.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-303.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-304.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-305.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-306.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-307.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-3072.jpg
+Date Created:  1965-02-06       33
+***** File 2016-308.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-309.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-3093.jpg
+Date Created:  1967-09-26       34
+2016-3094.jpg
+Date Created:  1967-09-26       35
+***** File 2016-31.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-310.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-311.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-312.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-313.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-314.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-315.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-316.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-317.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-318.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-319.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-32.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-320.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-321.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-322.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-323.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-324.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-325.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-326.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-327.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-328.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-329.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-33.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-330.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-331.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-332.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-333.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-334.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-335.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-336.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-337.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-338.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-339.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-34.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-340.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-341.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-3410.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-342.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-343.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-344.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-345.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-346.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-347.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-348.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-349.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-35.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-350.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-351.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-352.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-353.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-354.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-355.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-356.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-357.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-358.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-359.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-36.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-360.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-361.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-362.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-363.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-364.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-365.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-366.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-367.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-368.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-369.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-37.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-370.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-371.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-372.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-373.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-374.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-375.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-376.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-377.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-378.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-379.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-38.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-380.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-381.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-382.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-383.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-384.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-385.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-386.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-387.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-388.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-389.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-39.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-390.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-391.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-392.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-393.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-394.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-395.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-396.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-397.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-398.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-399.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-40.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-400.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-401.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-402.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-403.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-404.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-405.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-406.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-407.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-408.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-409.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-41.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-410.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-411.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-412.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-413.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-414.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-415.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-416.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-417.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-418.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-419.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-42.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-420.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-421.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-422.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-423.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-424.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-425.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-426.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-427.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-428.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-429.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-43.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-430.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-431.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-432.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-433.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-434.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-435.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-436.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-437.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-438.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-439.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-44.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-440.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-441.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-442.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-443.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-444.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-445.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-446.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-447.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-448.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-449.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-45.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-450.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-451.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-452.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-453.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-454.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-455.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-456.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-457.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-458.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-459.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-46.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-460.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-461.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-462.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-463.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-464.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-465.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-466.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-467.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-468.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-469.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-47.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-470.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-471.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-472.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-473.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-474.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-475.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-476.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-477.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-478.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-479.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-48.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-480.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-481.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-482.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-483.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-484.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-485.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-486.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-487.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-488.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-489.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-49.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-490.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-491.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-492.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-493.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-494.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-495.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-496.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-497.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-498.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-499.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-50.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-500.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-501.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-502.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-503.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-504.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-505.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-506.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-507.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-508.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-509.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-51.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-510.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-511.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-512.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-513.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-514.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-515.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-516.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-517.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-518.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-519.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-52.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-520.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-521.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-522.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-523.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-524.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-525.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-526.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-527.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-528.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-529.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-53.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-530.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-531.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-532.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-533.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-534.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-535.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-536.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-537.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-538.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-539.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-54.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-540.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-541.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-542.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-543.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-544.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-545.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-546.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-547.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-548.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-549.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-55.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-550.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-551.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-552.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-553.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-554.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-555.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-556.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-557.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-558.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-559.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-56.jpg
+Date Created:  1940-00-00       36
+***** File 2016-560.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-561.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-562.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-563.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-564.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-565.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-566.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-567.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-568.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-569.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-57.jpg
+Date Created:  1940-00-00       37
+***** File 2016-570.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-571.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-572.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-573.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-574.jpg
+Date Created:  1970-05-27       38
+***** File 2016-575.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-576.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-577.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-578.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-579.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-58.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-580.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-581.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-582.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-583.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-584.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-585.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-586.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-587.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-588.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-589.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-59.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-590.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-591.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-592.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-593.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-594.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-595.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-596.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-597.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-598.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-599.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-60.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-600.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-601.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-602.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-603.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-604.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-605.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-606.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-607.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-608.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-609.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-61.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-610.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-611.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-612.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-613.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-614.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-615.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-616.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-617.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-618.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-619.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-62.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-620.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-621.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-622.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-623.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-624.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-625.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-626.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-627.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-628.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-629.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-63.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-630.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-631.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-632.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-633.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-634.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-635.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-636.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-637.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-638.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-639.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-64.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-640.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-641.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-642.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-643.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-644.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-645.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-646.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-647.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-648.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-649.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-65.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-650.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-651.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-652.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-653.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-654.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-655.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-656.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-657.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-658.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-659.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-66.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-660.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-661.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-662.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-663.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-664.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-665.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-666.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-667.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-668.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-669.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-67.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-670.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-671.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-672.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-673.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-674.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-675.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-676.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-677.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-678.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-679.jpg
+Date Created:  1958-12-00       39
+***** File 2016-68.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-680.jpg
+Date Created:  1958-00-00       40
+2016-681.jpg
+Date Created:  1958-00-00       41
+2016-682.jpg
+Date Created:  1958-00-00       42
+2016-683.jpg
+Date Created:  1958-00-00       43
+2016-684.jpg
+Date Created:  1958-00-00       44
+***** File 2016-685.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-686.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-687.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-688.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-689.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-69.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-690.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-691.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-692.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-693.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-694.jpg
+Date Created:  1965-05-00       45
+***** File 2016-695.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-696.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-697.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-698.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-699.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-70.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-700.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-701.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-702.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-703.jpg
+Date Created:  1970-06-01       46
+2016-704.jpg
+Date Created:  1970-06-01       47
+***** File 2016-705.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-706.jpg
+Date Created:  1970-06-01       48
+2016-707.jpg
+Date Created:  1970-00-00       49
+***** File 2016-708.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-709.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-71.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-710.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-711.jpg
+Date Created:  1981-04-00       50
+***** File 2016-712.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-713.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-714.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-715.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-716.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-717.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-718.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-719.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-72.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-720.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-721.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-722.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-723.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-724.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-725.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-726.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-727.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-728.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-729.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-73.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-730.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-731.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-732.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-733.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-734.jpg
+Date Created:  1956-03-12       51
+2016-735.jpg
+Date Created:  1956-04-00       52
+2016-736.jpg
+Date Created:  1956-04-21       53
+***** File 2016-737.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-738.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-739.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-74.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-740.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-741.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-742.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-743.jpg
+Date Created:  1970-00-00       54
+***** File 2016-744.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-745.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-746.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-747.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-748.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-749.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-75.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-750.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-751.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-752.jpg
+Date Created:  1950-00-00       55
+2016-753.jpg
+Date Created:  1950-00-00       56
+2016-754.jpg
+Date Created:  1950-00-00       57
+2016-755.jpg
+Date Created:  1950-00-00       58
+2016-756.jpg
+Date Created:  1950-00-00       59
+2016-757.jpg
+Date Created:  1950-00-00       60
+2016-758.jpg
+Date Created:  1949-00-00       61
+***** File 2016-759.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-76.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-760.jpg
+Date Created:  1950-00-00       62
+2016-761.jpg
+Date Created:  1950-00-00       63
+2016-762.jpg
+Date Created:  1950-00-00       64
+2016-763.jpg
+Date Created:  1950-00-00       65
+2016-764.jpg
+Date Created:  1950-00-00       66
+2016-765.jpg
+Date Created:  1949-00-00       67
+2016-766.jpg
+Date Created:  1950-00-00       68
+2016-767.jpg
+Date Created:  1949-00-00       69
+2016-768.jpg
+Date Created:  1948-00-00       70
+2016-769.jpg
+Date Created:  1950-00-00       71
+***** File 2016-77.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-770.jpg
+Date Created:  1950-00-00       72
+2016-771.jpg
+Date Created:  1950-00-00       73
+2016-772.jpg
+Date Created:  1950-00-00       74
+2016-773.jpg
+Date Created:  1950-00-00       75
+2016-774.jpg
+Date Created:  1950-00-00       76
+2016-775.jpg
+Date Created:  1950-00-00       77
+2016-776.jpg
+Date Created:  1950-00-00       78
+2016-777.jpg
+Date Created:  1950-00-00       79
+2016-778.jpg
+Date Created:  1950-00-00       80
+2016-779.jpg
+Date Created:  1950-00-00       81
+***** File 2016-78.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-780.jpg
+Date Created:  1950-00-00       82
+2016-781.jpg
+Date Created:  1950-00-00       83
+2016-782.jpg
+Date Created:  1950-00-00       84
+2016-783.jpg
+Date Created:  1950-00-00       85
+2016-784.jpg
+Date Created:  1950-00-00       86
+2016-785.jpg
+Date Created:  1950-00-00       87
+2016-786.jpg
+Date Created:  1950-00-00       88
+2016-787.jpg
+Date Created:  1950-00-00       89
+2016-788.jpg
+Date Created:  1950-00-00       90
+2016-789.jpg
+Date Created:  1950-00-00       91
+***** File 2016-79.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-790.jpg
+Date Created:  1950-00-00       92
+2016-791.jpg
+Date Created:  1950-00-00       93
+2016-792.jpg
+Date Created:  1950-00-00       94
+2016-793.jpg
+Date Created:  1950-00-00       95
+2016-794.jpg
+Date Created:  1950-00-00       96
+2016-795.jpg
+Date Created:  1950-00-00       97
+2016-796.jpg
+Date Created:  1950-00-00       98
+2016-797.jpg
+Date Created:  1950-00-00       99
+2016-798.jpg
+Date Created:  1950-00-00       100
+2016-799.jpg
+Date Created:  1950-00-00       101
+***** File 2016-80.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-800.jpg
+Date Created:  1950-00-00       102
+2016-801.jpg
+Date Created:  1950-00-00       103
+2016-802.jpg
+Date Created:  1950-00-00       104
+2016-803.jpg
+Date Created:  1950-00-00       105
+2016-804.jpg
+Date Created:  1950-00-00       106
+2016-805.jpg
+Date Created:  1950-00-00       107
+2016-806.jpg
+Date Created:  1950-00-00       108
+2016-807.jpg
+Date Created:  1950-00-00       109
+2016-808.jpg
+Date Created:  1950-00-00       110
+2016-809.jpg
+Date Created:  1950-00-00       111
+***** File 2016-81.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-810.jpg
+Date Created:  1950-00-00       112
+2016-811.jpg
+Date Created:  1950-00-00       113
+2016-812.jpg
+Date Created:  1950-00-00       114
+2016-813.jpg
+Date Created:  1950-00-00       115
+2016-814.jpg
+Date Created:  1950-00-00       116
+2016-815.jpg
+Date Created:  1950-00-00       117
+2016-816.jpg
+Date Created:  1950-00-00       118
+2016-817.jpg
+Date Created:  1950-00-00       119
+2016-818.jpg
+Date Created:  1950-00-00       120
+2016-819.jpg
+Date Created:  1950-00-00       121
+***** File 2016-82.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-820.jpg
+Date Created:  1950-00-00       122
+2016-821.jpg
+Date Created:  1950-00-00       123
+2016-822.jpg
+Date Created:  1950-00-00       124
+2016-823.jpg
+Date Created:  1950-00-00       125
+2016-824.jpg
+Date Created:  1950-00-00       126
+2016-825.jpg
+Date Created:  1950-00-00       127
+2016-826.jpg
+Date Created:  1950-00-00       128
+2016-827.jpg
+Date Created:  1950-00-00       129
+2016-828.jpg
+Date Created:  1950-00-00       130
+2016-829.jpg
+Date Created:  1950-00-00       131
+***** File 2016-83.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-830.jpg
+Date Created:  1950-00-00       132
+2016-831.jpg
+Date Created:  1950-00-00       133
+***** File 2016-832.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-833.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-834.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-835.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-836.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-837.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-838.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-839.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-84.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-840.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-841.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-842.jpg
+Date Created:  1950-00-00       134
+2016-843.jpg
+Date Created:  1950-00-00       135
+2016-844.jpg
+Date Created:  1950-00-00       136
+2016-845.jpg
+Date Created:  1950-00-00       137
+2016-846.jpg
+Date Created:  1950-00-00       138
+2016-847.jpg
+Date Created:  1950-00-00       139
+2016-848.jpg
+Date Created:  1950-00-00       140
+2016-849.jpg
+Date Created:  1950-00-00       141
+***** File 2016-85.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-850.jpg
+Date Created:  1950-00-00       142
+2016-851.jpg
+Date Created:  1950-00-00       143
+2016-852.jpg
+Date Created:  1950-00-00       144
+2016-853.jpg
+Date Created:  1950-00-00       145
+2016-854.jpg
+Date Created:  1950-00-00       146
+2016-855.jpg
+Date Created:  1950-00-00       147
+2016-856.jpg
+Date Created:  1950-00-00       148
+2016-857.jpg
+Date Created:  1950-00-00       149
+2016-858.jpg
+Date Created:  1950-00-00       150
+***** File 2016-859.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-86.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-860.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-861.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-862.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-863.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-864.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-865.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-866.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-867.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-868.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-869.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-87.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-870.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-871.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-872.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-873.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-874.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-875.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-876.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-877.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-878.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-879.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-88.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-880.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-881.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-882.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-883.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-884.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-885.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-886.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-887.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-888.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-889.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-89.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-891.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-893.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-894.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-895.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-896.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-897.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-898.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-90.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-900.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-901.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-902.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-903.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-904.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-905.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-906.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-907.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-908.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-909.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-91.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-910.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-911.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-912.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-913.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-914.jpg
+Date Created:  1944-07-20       151
+***** File 2016-915.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-916.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-917.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-918.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-919.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-92.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-920.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-921.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-922.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-923.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-924.jpg
+Date Created:  1935-00-00       152
+2016-925.jpg
+Date Created:  1946-00-00       153
+***** File 2016-926.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-927.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-928.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-929.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-93.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-930.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-931.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-932.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-933.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-934.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-935.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-936.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-937.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-938.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-939.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-94.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-940.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-941.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-942.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-943.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-944.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-945.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-946.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-947.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-948.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-949.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-95.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-950.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-951.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-952.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-953.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-954.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-955.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-956.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-957.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-958.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-959.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-96.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-960.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-961.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-962.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-963.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-964.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-965.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-966.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-967.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-968.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-969.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-97.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-970.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-971.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-972.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-973.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-974.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-975.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-976.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-977.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-978.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-979.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-98.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-980.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-981.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-982.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-983.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-984.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-985.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-986.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-987.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-988.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-989.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-99.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-990.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-991.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-992.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-993.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-994.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-995.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-996.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-997.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-998.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-999.jpg not found in directory C:\Temp\Metadata-tagging ********
+======================================================================
+Processing complete at  2023-12-29 14:49:12
+1099 records read from the CSV file
+153 images processed
+946 missing images
+*** Missing images not processed:
+2016-01.jpg missing
+2016-02.jpg missing
+2016-03.jpg missing
+2016-04.jpg missing
+2016-05.jpg missing
+2016-06.jpg missing
+2016-07.jpg missing
+2016-08.jpg missing
+2016-09.jpg missing
+2016-10.jpg missing
+2016-100.jpg missing
+2016-1000.jpg missing
+2016-1001.jpg missing
+2016-1002.jpg missing
+2016-1003.jpg missing
+2016-1004.jpg missing
+2016-1005.jpg missing
+2016-1006.jpg missing
+2016-1007.jpg missing
+2016-1008.jpg missing
+2016-1009.jpg missing
+2016-101.jpg missing
+2016-1010.jpg missing
+2016-1011.jpg missing
+2016-1012.jpg missing
+2016-1013.jpg missing
+2016-1014.jpg missing
+2016-1015.jpg missing
+2016-1016.jpg missing
+2016-1017.jpg missing
+2016-1018.jpg missing
+2016-1019.jpg missing
+2016-102.jpg missing
+2016-1020.jpg missing
+2016-1021.jpg missing
+2016-1022.jpg missing
+2016-1023.jpg missing
+2016-1024.jpg missing
+2016-1025.jpg missing
+2016-1026.jpg missing
+2016-1027.jpg missing
+2016-1028.jpg missing
+2016-1029.jpg missing
+2016-1030.jpg missing
+2016-1031.jpg missing
+2016-1032.jpg missing
+2016-1033.jpg missing
+2016-1034.jpg missing
+2016-1035.jpg missing
+2016-1036.jpg missing
+2016-1037.jpg missing
+2016-1038.jpg missing
+2016-1039.jpg missing
+2016-1040.jpg missing
+2016-1041.jpg missing
+2016-1042.jpg missing
+2016-1043.jpg missing
+2016-1044.jpg missing
+2016-1045.jpg missing
+2016-1046.jpg missing
+2016-1047.jpg missing
+2016-1048.jpg missing
+2016-1049.jpg missing
+2016-1050.jpg missing
+2016-1051.jpg missing
+2016-1052.jpg missing
+2016-1053.jpg missing
+2016-1054.jpg missing
+2016-1055.jpg missing
+2016-1056.jpg missing
+2016-1057.jpg missing
+2016-1058.jpg missing
+2016-1059.jpg missing
+2016-109.jpg missing
+2016-11.jpg missing
+2016-110.jpg missing
+2016-112.jpg missing
+2016-113.jpg missing
+2016-114.jpg missing
+2016-115.jpg missing
+2016-116.jpg missing
+2016-117.jpg missing
+2016-118.jpg missing
+2016-119.jpg missing
+2016-12.jpg missing
+2016-120.jpg missing
+2016-121.jpg missing
+2016-122.jpg missing
+2016-123.jpg missing
+2016-124.jpg missing
+2016-125.jpg missing
+2016-126.jpg missing
+2016-1263.jpg missing
+2016-1264.jpg missing
+2016-127.jpg missing
+2016-1270.jpg missing
+2016-1271.jpg missing
+2016-1272.jpg missing
+2016-1273.jpg missing
+2016-1274.jpg missing
+2016-1275.jpg missing
+2016-1276.jpg missing
+2016-1277.jpg missing
+2016-128.jpg missing
+2016-129.jpg missing
+2016-1296.jpg missing
+2016-1297.jpg missing
+2016-13.jpg missing
+2016-130.jpg missing
+2016-131.jpg missing
+2016-132.jpg missing
+2016-133.jpg missing
+2016-1334.jpg missing
+2016-1335.jpg missing
+2016-134.jpg missing
+2016-135.jpg missing
+2016-136.jpg missing
+2016-137.jpg missing
+2016-139.jpg missing
+2016-14.jpg missing
+2016-140.jpg missing
+2016-141.jpg missing
+2016-142.jpg missing
+2016-143.jpg missing
+2016-144.jpg missing
+2016-145.jpg missing
+2016-146.jpg missing
+2016-147.jpg missing
+2016-148.jpg missing
+2016-15.jpg missing
+2016-150.jpg missing
+2016-151.jpg missing
+2016-152.jpg missing
+2016-153.jpg missing
+2016-154.jpg missing
+2016-155.jpg missing
+2016-156.jpg missing
+2016-157.jpg missing
+2016-158.jpg missing
+2016-159.jpg missing
+2016-1595.jpg missing
+2016-1596.jpg missing
+2016-16.jpg missing
+2016-160.jpg missing
+2016-163.jpg missing
+2016-164.jpg missing
+2016-165.jpg missing
+2016-166.jpg missing
+2016-167.jpg missing
+2016-1670.jpg missing
+2016-1671.jpg missing
+2016-168.jpg missing
+2016-169.jpg missing
+2016-17.jpg missing
+2016-170.jpg missing
+2016-171.jpg missing
+2016-172.jpg missing
+2016-173.jpg missing
+2016-174.jpg missing
+2016-175.jpg missing
+2016-176.jpg missing
+2016-1765.jpg missing
+2016-177.jpg missing
+2016-178.jpg missing
+2016-1782.jpg missing
+2016-1783.jpg missing
+2016-1785.jpg missing
+2016-1787.jpg missing
+2016-1788.jpg missing
+2016-1789.jpg missing
+2016-179.jpg missing
+2016-1792.jpg missing
+2016-1793.jpg missing
+2016-1795.jpg missing
+2016-1796.jpg missing
+2016-1799.jpg missing
+2016-18.jpg missing
+2016-180.jpg missing
+2016-1800.jpg missing
+2016-181.jpg missing
+2016-1811.jpg missing
+2016-182.jpg missing
+2016-1829.jpg missing
+2016-183.jpg missing
+2016-1839.jpg missing
+2016-184.jpg missing
+2016-185.jpg missing
+2016-186.jpg missing
+2016-187.jpg missing
+2016-188.jpg missing
+2016-189.jpg missing
+2016-19.jpg missing
+2016-190.jpg missing
+2016-191.jpg missing
+2016-192.jpg missing
+2016-193.jpg missing
+2016-194.jpg missing
+2016-195.jpg missing
+2016-1953.jpg missing
+2016-1954.jpg missing
+2016-1955.jpg missing
+2016-1956.jpg missing
+2016-1957.jpg missing
+2016-1958.jpg missing
+2016-1959.jpg missing
+2016-196.jpg missing
+2016-197.jpg missing
+2016-198.jpg missing
+2016-199.jpg missing
+2016-20.jpg missing
+2016-200.jpg missing
+2016-2008.jpg missing
+2016-201.jpg missing
+2016-2014.jpg missing
+2016-202.jpg missing
+2016-203.jpg missing
+2016-204.jpg missing
+2016-205.jpg missing
+2016-206.jpg missing
+2016-207.jpg missing
+2016-208.jpg missing
+2016-21.jpg missing
+2016-213.jpg missing
+2016-214.jpg missing
+2016-215.jpg missing
+2016-216.jpg missing
+2016-217.jpg missing
+2016-218.jpg missing
+2016-219.jpg missing
+2016-22.jpg missing
+2016-220.jpg missing
+2016-222.jpg missing
+2016-223.jpg missing
+2016-23.jpg missing
+2016-232.jpg missing
+2016-233.jpg missing
+2016-237.jpg missing
+2016-238.jpg missing
+2016-2380.jpg missing
+2016-239.jpg missing
+2016-2392.jpg missing
+2016-2393.jpg missing
+2016-2394.jpg missing
+2016-24.jpg missing
+2016-240.jpg missing
+2016-25.jpg missing
+2016-252.jpg missing
+2016-253.jpg missing
+2016-254.jpg missing
+2016-255.jpg missing
+2016-256.jpg missing
+2016-257.jpg missing
+2016-258.jpg missing
+2016-259.jpg missing
+2016-26.jpg missing
+2016-260.jpg missing
+2016-261.jpg missing
+2016-262.jpg missing
+2016-263.jpg missing
+2016-264.jpg missing
+2016-265.jpg missing
+2016-266.jpg missing
+2016-267.jpg missing
+2016-268.jpg missing
+2016-269.jpg missing
+2016-27.jpg missing
+2016-270.jpg missing
+2016-271.jpg missing
+2016-272.jpg missing
+2016-273.jpg missing
+2016-274.jpg missing
+2016-275.jpg missing
+2016-276.jpg missing
+2016-277.jpg missing
+2016-278.jpg missing
+2016-279.jpg missing
+2016-28.jpg missing
+2016-280.jpg missing
+2016-281.jpg missing
+2016-282.jpg missing
+2016-283.jpg missing
+2016-284.jpg missing
+2016-285.jpg missing
+2016-286.jpg missing
+2016-287.jpg missing
+2016-288.jpg missing
+2016-289.jpg missing
+2016-29.jpg missing
+2016-290.jpg missing
+2016-291.jpg missing
+2016-2946.jpg missing
+2016-296.jpg missing
+2016-297.jpg missing
+2016-2975.jpg missing
+2016-298.jpg missing
+2016-299.jpg missing
+2016-30.jpg missing
+2016-300.jpg missing
+2016-301.jpg missing
+2016-302.jpg missing
+2016-303.jpg missing
+2016-304.jpg missing
+2016-305.jpg missing
+2016-306.jpg missing
+2016-307.jpg missing
+2016-308.jpg missing
+2016-309.jpg missing
+2016-31.jpg missing
+2016-310.jpg missing
+2016-311.jpg missing
+2016-312.jpg missing
+2016-313.jpg missing
+2016-314.jpg missing
+2016-315.jpg missing
+2016-316.jpg missing
+2016-317.jpg missing
+2016-318.jpg missing
+2016-319.jpg missing
+2016-32.jpg missing
+2016-320.jpg missing
+2016-321.jpg missing
+2016-322.jpg missing
+2016-323.jpg missing
+2016-324.jpg missing
+2016-325.jpg missing
+2016-326.jpg missing
+2016-327.jpg missing
+2016-328.jpg missing
+2016-329.jpg missing
+2016-33.jpg missing
+2016-330.jpg missing
+2016-331.jpg missing
+2016-332.jpg missing
+2016-333.jpg missing
+2016-334.jpg missing
+2016-335.jpg missing
+2016-336.jpg missing
+2016-337.jpg missing
+2016-338.jpg missing
+2016-339.jpg missing
+2016-34.jpg missing
+2016-340.jpg missing
+2016-341.jpg missing
+2016-3410.jpg missing
+2016-342.jpg missing
+2016-343.jpg missing
+2016-344.jpg missing
+2016-345.jpg missing
+2016-346.jpg missing
+2016-347.jpg missing
+2016-348.jpg missing
+2016-349.jpg missing
+2016-35.jpg missing
+2016-350.jpg missing
+2016-351.jpg missing
+2016-352.jpg missing
+2016-353.jpg missing
+2016-354.jpg missing
+2016-355.jpg missing
+2016-356.jpg missing
+2016-357.jpg missing
+2016-358.jpg missing
+2016-359.jpg missing
+2016-36.jpg missing
+2016-360.jpg missing
+2016-361.jpg missing
+2016-362.jpg missing
+2016-363.jpg missing
+2016-364.jpg missing
+2016-365.jpg missing
+2016-366.jpg missing
+2016-367.jpg missing
+2016-368.jpg missing
+2016-369.jpg missing
+2016-37.jpg missing
+2016-370.jpg missing
+2016-371.jpg missing
+2016-372.jpg missing
+2016-373.jpg missing
+2016-374.jpg missing
+2016-375.jpg missing
+2016-376.jpg missing
+2016-377.jpg missing
+2016-378.jpg missing
+2016-379.jpg missing
+2016-38.jpg missing
+2016-380.jpg missing
+2016-381.jpg missing
+2016-382.jpg missing
+2016-383.jpg missing
+2016-384.jpg missing
+2016-385.jpg missing
+2016-386.jpg missing
+2016-387.jpg missing
+2016-388.jpg missing
+2016-389.jpg missing
+2016-39.jpg missing
+2016-390.jpg missing
+2016-391.jpg missing
+2016-392.jpg missing
+2016-393.jpg missing
+2016-394.jpg missing
+2016-395.jpg missing
+2016-396.jpg missing
+2016-397.jpg missing
+2016-398.jpg missing
+2016-399.jpg missing
+2016-40.jpg missing
+2016-400.jpg missing
+2016-401.jpg missing
+2016-402.jpg missing
+2016-403.jpg missing
+2016-404.jpg missing
+2016-405.jpg missing
+2016-406.jpg missing
+2016-407.jpg missing
+2016-408.jpg missing
+2016-409.jpg missing
+2016-41.jpg missing
+2016-410.jpg missing
+2016-411.jpg missing
+2016-412.jpg missing
+2016-413.jpg missing
+2016-414.jpg missing
+2016-415.jpg missing
+2016-416.jpg missing
+2016-417.jpg missing
+2016-418.jpg missing
+2016-419.jpg missing
+2016-42.jpg missing
+2016-420.jpg missing
+2016-421.jpg missing
+2016-422.jpg missing
+2016-423.jpg missing
+2016-424.jpg missing
+2016-425.jpg missing
+2016-426.jpg missing
+2016-427.jpg missing
+2016-428.jpg missing
+2016-429.jpg missing
+2016-43.jpg missing
+2016-430.jpg missing
+2016-431.jpg missing
+2016-432.jpg missing
+2016-433.jpg missing
+2016-434.jpg missing
+2016-435.jpg missing
+2016-436.jpg missing
+2016-437.jpg missing
+2016-438.jpg missing
+2016-439.jpg missing
+2016-44.jpg missing
+2016-440.jpg missing
+2016-441.jpg missing
+2016-442.jpg missing
+2016-443.jpg missing
+2016-444.jpg missing
+2016-445.jpg missing
+2016-446.jpg missing
+2016-447.jpg missing
+2016-448.jpg missing
+2016-449.jpg missing
+2016-45.jpg missing
+2016-450.jpg missing
+2016-451.jpg missing
+2016-452.jpg missing
+2016-453.jpg missing
+2016-454.jpg missing
+2016-455.jpg missing
+2016-456.jpg missing
+2016-457.jpg missing
+2016-458.jpg missing
+2016-459.jpg missing
+2016-46.jpg missing
+2016-460.jpg missing
+2016-461.jpg missing
+2016-462.jpg missing
+2016-463.jpg missing
+2016-464.jpg missing
+2016-465.jpg missing
+2016-466.jpg missing
+2016-467.jpg missing
+2016-468.jpg missing
+2016-469.jpg missing
+2016-47.jpg missing
+2016-470.jpg missing
+2016-471.jpg missing
+2016-472.jpg missing
+2016-473.jpg missing
+2016-474.jpg missing
+2016-475.jpg missing
+2016-476.jpg missing
+2016-477.jpg missing
+2016-478.jpg missing
+2016-479.jpg missing
+2016-48.jpg missing
+2016-480.jpg missing
+2016-481.jpg missing
+2016-482.jpg missing
+2016-483.jpg missing
+2016-484.jpg missing
+2016-485.jpg missing
+2016-486.jpg missing
+2016-487.jpg missing
+2016-488.jpg missing
+2016-489.jpg missing
+2016-49.jpg missing
+2016-490.jpg missing
+2016-491.jpg missing
+2016-492.jpg missing
+2016-493.jpg missing
+2016-494.jpg missing
+2016-495.jpg missing
+2016-496.jpg missing
+2016-497.jpg missing
+2016-498.jpg missing
+2016-499.jpg missing
+2016-50.jpg missing
+2016-500.jpg missing
+2016-501.jpg missing
+2016-502.jpg missing
+2016-503.jpg missing
+2016-504.jpg missing
+2016-505.jpg missing
+2016-506.jpg missing
+2016-507.jpg missing
+2016-508.jpg missing
+2016-509.jpg missing
+2016-51.jpg missing
+2016-510.jpg missing
+2016-511.jpg missing
+2016-512.jpg missing
+2016-513.jpg missing
+2016-514.jpg missing
+2016-515.jpg missing
+2016-516.jpg missing
+2016-517.jpg missing
+2016-518.jpg missing
+2016-519.jpg missing
+2016-52.jpg missing
+2016-520.jpg missing
+2016-521.jpg missing
+2016-522.jpg missing
+2016-523.jpg missing
+2016-524.jpg missing
+2016-525.jpg missing
+2016-526.jpg missing
+2016-527.jpg missing
+2016-528.jpg missing
+2016-529.jpg missing
+2016-53.jpg missing
+2016-530.jpg missing
+2016-531.jpg missing
+2016-532.jpg missing
+2016-533.jpg missing
+2016-534.jpg missing
+2016-535.jpg missing
+2016-536.jpg missing
+2016-537.jpg missing
+2016-538.jpg missing
+2016-539.jpg missing
+2016-54.jpg missing
+2016-540.jpg missing
+2016-541.jpg missing
+2016-542.jpg missing
+2016-543.jpg missing
+2016-544.jpg missing
+2016-545.jpg missing
+2016-546.jpg missing
+2016-547.jpg missing
+2016-548.jpg missing
+2016-549.jpg missing
+2016-55.jpg missing
+2016-550.jpg missing
+2016-551.jpg missing
+2016-552.jpg missing
+2016-553.jpg missing
+2016-554.jpg missing
+2016-555.jpg missing
+2016-556.jpg missing
+2016-557.jpg missing
+2016-558.jpg missing
+2016-559.jpg missing
+2016-560.jpg missing
+2016-561.jpg missing
+2016-562.jpg missing
+2016-563.jpg missing
+2016-564.jpg missing
+2016-565.jpg missing
+2016-566.jpg missing
+2016-567.jpg missing
+2016-568.jpg missing
+2016-569.jpg missing
+2016-570.jpg missing
+2016-571.jpg missing
+2016-572.jpg missing
+2016-573.jpg missing
+2016-575.jpg missing
+2016-576.jpg missing
+2016-577.jpg missing
+2016-578.jpg missing
+2016-579.jpg missing
+2016-58.jpg missing
+2016-580.jpg missing
+2016-581.jpg missing
+2016-582.jpg missing
+2016-583.jpg missing
+2016-584.jpg missing
+2016-585.jpg missing
+2016-586.jpg missing
+2016-587.jpg missing
+2016-588.jpg missing
+2016-589.jpg missing
+2016-59.jpg missing
+2016-590.jpg missing
+2016-591.jpg missing
+2016-592.jpg missing
+2016-593.jpg missing
+2016-594.jpg missing
+2016-595.jpg missing
+2016-596.jpg missing
+2016-597.jpg missing
+2016-598.jpg missing
+2016-599.jpg missing
+2016-60.jpg missing
+2016-600.jpg missing
+2016-601.jpg missing
+2016-602.jpg missing
+2016-603.jpg missing
+2016-604.jpg missing
+2016-605.jpg missing
+2016-606.jpg missing
+2016-607.jpg missing
+2016-608.jpg missing
+2016-609.jpg missing
+2016-61.jpg missing
+2016-610.jpg missing
+2016-611.jpg missing
+2016-612.jpg missing
+2016-613.jpg missing
+2016-614.jpg missing
+2016-615.jpg missing
+2016-616.jpg missing
+2016-617.jpg missing
+2016-618.jpg missing
+2016-619.jpg missing
+2016-62.jpg missing
+2016-620.jpg missing
+2016-621.jpg missing
+2016-622.jpg missing
+2016-623.jpg missing
+2016-624.jpg missing
+2016-625.jpg missing
+2016-626.jpg missing
+2016-627.jpg missing
+2016-628.jpg missing
+2016-629.jpg missing
+2016-63.jpg missing
+2016-630.jpg missing
+2016-631.jpg missing
+2016-632.jpg missing
+2016-633.jpg missing
+2016-634.jpg missing
+2016-635.jpg missing
+2016-636.jpg missing
+2016-637.jpg missing
+2016-638.jpg missing
+2016-639.jpg missing
+2016-64.jpg missing
+2016-640.jpg missing
+2016-641.jpg missing
+2016-642.jpg missing
+2016-643.jpg missing
+2016-644.jpg missing
+2016-645.jpg missing
+2016-646.jpg missing
+2016-647.jpg missing
+2016-648.jpg missing
+2016-649.jpg missing
+2016-65.jpg missing
+2016-650.jpg missing
+2016-651.jpg missing
+2016-652.jpg missing
+2016-653.jpg missing
+2016-654.jpg missing
+2016-655.jpg missing
+2016-656.jpg missing
+2016-657.jpg missing
+2016-658.jpg missing
+2016-659.jpg missing
+2016-66.jpg missing
+2016-660.jpg missing
+2016-661.jpg missing
+2016-662.jpg missing
+2016-663.jpg missing
+2016-664.jpg missing
+2016-665.jpg missing
+2016-666.jpg missing
+2016-667.jpg missing
+2016-668.jpg missing
+2016-669.jpg missing
+2016-67.jpg missing
+2016-670.jpg missing
+2016-671.jpg missing
+2016-672.jpg missing
+2016-673.jpg missing
+2016-674.jpg missing
+2016-675.jpg missing
+2016-676.jpg missing
+2016-677.jpg missing
+2016-678.jpg missing
+2016-68.jpg missing
+2016-685.jpg missing
+2016-686.jpg missing
+2016-687.jpg missing
+2016-688.jpg missing
+2016-689.jpg missing
+2016-69.jpg missing
+2016-690.jpg missing
+2016-691.jpg missing
+2016-692.jpg missing
+2016-693.jpg missing
+2016-695.jpg missing
+2016-696.jpg missing
+2016-697.jpg missing
+2016-698.jpg missing
+2016-699.jpg missing
+2016-70.jpg missing
+2016-700.jpg missing
+2016-701.jpg missing
+2016-702.jpg missing
+2016-705.jpg missing
+2016-708.jpg missing
+2016-709.jpg missing
+2016-71.jpg missing
+2016-710.jpg missing
+2016-712.jpg missing
+2016-713.jpg missing
+2016-714.jpg missing
+2016-715.jpg missing
+2016-716.jpg missing
+2016-717.jpg missing
+2016-718.jpg missing
+2016-719.jpg missing
+2016-72.jpg missing
+2016-720.jpg missing
+2016-721.jpg missing
+2016-722.jpg missing
+2016-723.jpg missing
+2016-724.jpg missing
+2016-725.jpg missing
+2016-726.jpg missing
+2016-727.jpg missing
+2016-728.jpg missing
+2016-729.jpg missing
+2016-73.jpg missing
+2016-730.jpg missing
+2016-731.jpg missing
+2016-732.jpg missing
+2016-733.jpg missing
+2016-737.jpg missing
+2016-738.jpg missing
+2016-739.jpg missing
+2016-74.jpg missing
+2016-740.jpg missing
+2016-741.jpg missing
+2016-742.jpg missing
+2016-744.jpg missing
+2016-745.jpg missing
+2016-746.jpg missing
+2016-747.jpg missing
+2016-748.jpg missing
+2016-749.jpg missing
+2016-75.jpg missing
+2016-750.jpg missing
+2016-751.jpg missing
+2016-759.jpg missing
+2016-76.jpg missing
+2016-77.jpg missing
+2016-78.jpg missing
+2016-79.jpg missing
+2016-80.jpg missing
+2016-81.jpg missing
+2016-82.jpg missing
+2016-83.jpg missing
+2016-832.jpg missing
+2016-833.jpg missing
+2016-834.jpg missing
+2016-835.jpg missing
+2016-836.jpg missing
+2016-837.jpg missing
+2016-838.jpg missing
+2016-839.jpg missing
+2016-84.jpg missing
+2016-840.jpg missing
+2016-841.jpg missing
+2016-85.jpg missing
+2016-859.jpg missing
+2016-86.jpg missing
+2016-860.jpg missing
+2016-861.jpg missing
+2016-862.jpg missing
+2016-863.jpg missing
+2016-864.jpg missing
+2016-865.jpg missing
+2016-866.jpg missing
+2016-867.jpg missing
+2016-868.jpg missing
+2016-869.jpg missing
+2016-87.jpg missing
+2016-870.jpg missing
+2016-871.jpg missing
+2016-872.jpg missing
+2016-873.jpg missing
+2016-874.jpg missing
+2016-875.jpg missing
+2016-876.jpg missing
+2016-877.jpg missing
+2016-878.jpg missing
+2016-879.jpg missing
+2016-88.jpg missing
+2016-880.jpg missing
+2016-881.jpg missing
+2016-882.jpg missing
+2016-883.jpg missing
+2016-884.jpg missing
+2016-885.jpg missing
+2016-886.jpg missing
+2016-887.jpg missing
+2016-888.jpg missing
+2016-889.jpg missing
+2016-89.jpg missing
+2016-891.jpg missing
+2016-893.jpg missing
+2016-894.jpg missing
+2016-895.jpg missing
+2016-896.jpg missing
+2016-897.jpg missing
+2016-898.jpg missing
+2016-90.jpg missing
+2016-900.jpg missing
+2016-901.jpg missing
+2016-902.jpg missing
+2016-903.jpg missing
+2016-904.jpg missing
+2016-905.jpg missing
+2016-906.jpg missing
+2016-907.jpg missing
+2016-908.jpg missing
+2016-909.jpg missing
+2016-91.jpg missing
+2016-910.jpg missing
+2016-911.jpg missing
+2016-912.jpg missing
+2016-913.jpg missing
+2016-915.jpg missing
+2016-916.jpg missing
+2016-917.jpg missing
+2016-918.jpg missing
+2016-919.jpg missing
+2016-92.jpg missing
+2016-920.jpg missing
+2016-921.jpg missing
+2016-922.jpg missing
+2016-923.jpg missing
+2016-926.jpg missing
+2016-927.jpg missing
+2016-928.jpg missing
+2016-929.jpg missing
+2016-93.jpg missing
+2016-930.jpg missing
+2016-931.jpg missing
+2016-932.jpg missing
+2016-933.jpg missing
+2016-934.jpg missing
+2016-935.jpg missing
+2016-936.jpg missing
+2016-937.jpg missing
+2016-938.jpg missing
+2016-939.jpg missing
+2016-94.jpg missing
+2016-940.jpg missing
+2016-941.jpg missing
+2016-942.jpg missing
+2016-943.jpg missing
+2016-944.jpg missing
+2016-945.jpg missing
+2016-946.jpg missing
+2016-947.jpg missing
+2016-948.jpg missing
+2016-949.jpg missing
+2016-95.jpg missing
+2016-950.jpg missing
+2016-951.jpg missing
+2016-952.jpg missing
+2016-953.jpg missing
+2016-954.jpg missing
+2016-955.jpg missing
+2016-956.jpg missing
+2016-957.jpg missing
+2016-958.jpg missing
+2016-959.jpg missing
+2016-96.jpg missing
+2016-960.jpg missing
+2016-961.jpg missing
+2016-962.jpg missing
+2016-963.jpg missing
+2016-964.jpg missing
+2016-965.jpg missing
+2016-966.jpg missing
+2016-967.jpg missing
+2016-968.jpg missing
+2016-969.jpg missing
+2016-97.jpg missing
+2016-970.jpg missing
+2016-971.jpg missing
+2016-972.jpg missing
+2016-973.jpg missing
+2016-974.jpg missing
+2016-975.jpg missing
+2016-976.jpg missing
+2016-977.jpg missing
+2016-978.jpg missing
+2016-979.jpg missing
+2016-98.jpg missing
+2016-980.jpg missing
+2016-981.jpg missing
+2016-982.jpg missing
+2016-983.jpg missing
+2016-984.jpg missing
+2016-985.jpg missing
+2016-986.jpg missing
+2016-987.jpg missing
+2016-988.jpg missing
+2016-989.jpg missing
+2016-99.jpg missing
+2016-990.jpg missing
+2016-991.jpg missing
+2016-992.jpg missing
+2016-993.jpg missing
+2016-994.jpg missing
+2016-995.jpg missing
+2016-996.jpg missing
+2016-997.jpg missing
+2016-998.jpg missing
+2016-999.jpg missing
+
+___________________________
+Elapsed time: 3:37  MM:SS
+Processing time for each image:  0.2  seconds
+REPORT_JPEG-2023-12-29_14-45-33.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

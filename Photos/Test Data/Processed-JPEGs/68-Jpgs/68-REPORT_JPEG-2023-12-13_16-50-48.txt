@@ -1,0 +1,122 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 13006 MB
+ 
+Number of lines in the CSV file: 43
+ 
+Number of jpg files in the diretory:  43
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-13 16:50:54
+68-1015.jpg
+Date Created:  1965-07-05       1
+68-1150.jpg
+Date Created:  1951-10-29       2
+68-1211.jpg
+Date Created:  1950-04-01       3
+68-1218.jpg
+Date Created:  1945-05-30       4
+68-1244.jpg
+Date Created:  1940-08-08       5
+68-1297.jpg
+Date Created:  1947-07-05       6
+68-1309.jpg
+Date Created:  1950-11-01       7
+68-1312.jpg
+Date Created:  1950-11-01       8
+68-1315.jpg
+Date Created:  1950-11-01       9
+68-1317.jpg
+Date Created:  1950-11-02       10
+68-1339.jpg
+Date Created:  1945-12-18       11
+68-1376.jpg
+Date Created:  1946-01-23       12
+68-1382.jpg
+Date Created:  1945-08-23       13
+68-1409.jpg
+Date Created:  1945-05-28       14
+68-1441.jpg
+Date Created:  1945-01-22       15
+68-1508.jpg
+Date Created:  1949-01-20       16
+68-1518.jpg
+Date Created:  1956-05-31       17
+68-1527.jpg
+Date Created:  1952-04-11       18
+68-1556.jpg
+Date Created:  1952-11-24       19
+68-1558.jpg
+Date Created:  1952-11-24       20
+68-1564.jpg
+Date Created:  1952-09-20       21
+68-1579.jpg
+Date Created:  1948-11-02       22
+68-1587.jpg
+Date Created:  1948-09-06       23
+68-1588.jpg
+Date Created:  1948-09-06       24
+68-1589.jpg
+Date Created:  1948-09-06       25
+68-1638.jpg
+Date Created:  1952-09-30       26
+68-1711.jpg
+Date Created:  1945-01-23       27
+68-1867.jpg
+Date Created:  1946-12-16       28
+68-1886.jpg
+Date Created:  1948-05-25       29
+68-1888.jpg
+Date Created:  1948-12-13       30
+68-1893.jpg
+Date Created:  1946-08-13       31
+68-1897.jpg
+Date Created:  1952-01-29       32
+68-22.jpg
+Date Created:  1967-07-04       33
+68-309.jpg
+Date Created:  1951-03-00       34
+68-347.jpg
+Date Created:  1924-04-23       35
+68-440.jpg
+Date Created:  1965-00-00       36
+68-498.jpg
+Date Created:  1960-00-00       37
+68-573.jpg
+Date Created:  1958-02-06       38
+68-643.jpg
+Date Created:  1960-00-00       39
+68-644.jpg
+Date Created:  1960-00-00       40
+68-714.jpg
+Date Created:  1952-00-00       41
+68-776.jpg
+Date Created:  1968-05-11       42
+68-777.jpg
+Date Created:  1968-05-11       43
+======================================================================
+Processing complete at  2023-12-13 16:51:45
+43 records read from the CSV file
+43 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 0:51  MM:SS
+Processing time for each image:  1.19  seconds
+REPORT_JPEG-2023-12-13_16-50-48.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

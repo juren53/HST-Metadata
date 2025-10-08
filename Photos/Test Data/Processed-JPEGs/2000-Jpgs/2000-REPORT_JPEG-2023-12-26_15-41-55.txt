@@ -1,0 +1,348 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 15167 MB
+ 
+Number of lines in the CSV file: 156
+ 
+Number of jpg files in the diretory:  156
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-26 15:41:57
+2000-202.jpg
+Date Created:  0000-00-00       1
+2000-5.jpg
+Date Created:  0000-00-00       2
+2000-47.jpg
+Date Created:  0000-00-00       3
+2000-121.jpg
+Date Created:  0000-00-00       4
+2000-60.jpg
+Date Created:  0000-00-00       5
+2000-238.jpg
+Date Created:  0000-00-00       6
+2000-459.jpg
+Date Created:  0000-00-00       7
+2000-486.jpg
+Date Created:  0000-00-00       8
+2000-487.jpg
+Date Created:  0000-00-00       9
+2000-496.jpg
+Date Created:  0000-00-00       10
+2000-498.jpg
+Date Created:  0000-00-00       11
+2000-505.jpg
+Date Created:  0000-00-00       12
+2000-516.jpg
+Date Created:  0000-00-00       13
+2000-400.jpg
+Date Created:  0000-00-00       14
+2000-107.jpg
+Date Created:  0000-00-00       15
+2000-374.jpg
+Date Created:  0000-00-00       16
+2000-489.jpg
+Date Created:  0000-00-00       17
+2000-497.jpg
+Date Created:  0000-00-00       18
+2000-499.jpg
+Date Created:  0000-00-00       19
+2000-507.jpg
+Date Created:  0000-00-00       20
+2000-515.jpg
+Date Created:  0000-00-00       21
+2000-237.jpg
+Date Created:  0000-00-00       22
+2000-144.jpg
+Date Created:  0000-00-00       23
+2000-150.jpg
+Date Created:  0000-00-00       24
+2000-484.jpg
+Date Created:  0000-00-00       25
+2000-485.jpg
+Date Created:  0000-00-00       26
+2000-398.jpg
+Date Created:  0000-00-00       27
+2000-206.jpg
+Date Created:  0000-00-00       28
+2000-82.jpg
+Date Created:  0000-00-00       29
+2000-205.jpg
+Date Created:  0000-00-00       30
+2000-126.jpg
+Date Created:  0000-00-00       31
+2000-500.jpg
+Date Created:  0000-00-00       32
+2000-504.jpg
+Date Created:  0000-00-00       33
+2000-513.jpg
+Date Created:  0000-00-00       34
+2000-399.jpg
+Date Created:  0000-00-00       35
+2000-89.jpg
+Date Created:  0000-00-00       36
+2000-243.jpg
+Date Created:  0000-00-00       37
+2000-203.jpg
+Date Created:  0000-00-00       38
+2000-481.jpg
+Date Created:  0000-00-00       39
+2000-488.jpg
+Date Created:  0000-00-00       40
+2000-506.jpg
+Date Created:  0000-00-00       41
+2000-514.jpg
+Date Created:  0000-00-00       42
+2000-520.jpg
+Date Created:  0000-00-00       43
+2000-219.jpg
+Date Created:  1924-00-00       44
+2000-10.jpg
+Date Created:  1930-00-00       45
+2000-207.jpg
+Date Created:  1933-00-00       46
+2000-51.jpg
+Date Created:  1936-00-00       47
+2000-52.jpg
+Date Created:  1936-00-00       48
+2000-53.jpg
+Date Created:  1936-00-00       49
+2000-32.jpg
+Date Created:  1939-05-11       50
+2000-34.jpg
+Date Created:  1939-05-11       51
+2000-35.jpg
+Date Created:  1939-05-11       52
+2000-39.jpg
+Date Created:  1939-05-11       53
+2000-40.jpg
+Date Created:  1939-05-11       54
+2000-41.jpg
+Date Created:  1939-05-11       55
+2000-37.jpg
+Date Created:  1939-05-11       56
+2000-44.jpg
+Date Created:  1939-05-11       57
+2000-31.jpg
+Date Created:  1939-05-11       58
+2000-46.jpg
+Date Created:  1939-05-11       59
+2000-33.jpg
+Date Created:  1939-05-11       60
+2000-43.jpg
+Date Created:  1939-05-11       61
+2000-45.jpg
+Date Created:  1939-05-11       62
+2000-30.jpg
+Date Created:  1939-05-11       63
+2000-36.jpg
+Date Created:  1939-05-11       64
+2000-38.jpg
+Date Created:  1939-05-11       65
+2000-42.jpg
+Date Created:  1939-05-11       66
+2000-54.jpg
+Date Created:  1940-00-00       67
+2000-11.jpg
+Date Created:  1943-01-00       68
+2000-503.jpg
+Date Created:  1943-03-00       69
+2000-502.jpg
+Date Created:  1943-05-01       70
+2000-501.jpg
+Date Created:  1943-05-01       71
+2000-490.jpg
+Date Created:  1943-06-19       72
+2000-491.jpg
+Date Created:  1943-06-19       73
+2000-492.jpg
+Date Created:  1943-06-19       74
+2000-493.jpg
+Date Created:  1943-06-19       75
+2000-494.jpg
+Date Created:  1943-06-19       76
+2000-495.jpg
+Date Created:  1943-06-19       77
+2000-508.jpg
+Date Created:  1944-00-00       78
+2000-511.jpg
+Date Created:  1944-00-00       79
+2000-509.jpg
+Date Created:  1944-00-00       80
+2000-510.jpg
+Date Created:  1944-00-00       81
+2000-512.jpg
+Date Created:  1944-00-00       82
+2000-3.jpg
+Date Created:  1945-00-00       83
+2000-462.jpg
+Date Created:  1945-00-00       84
+2000-463.jpg
+Date Created:  1945-00-00       85
+2000-218.jpg
+Date Created:  1945-04-28       86
+2000-6.jpg
+Date Created:  1945-07-00       87
+2000-1.jpg
+Date Created:  1945-07-16       88
+2000-4.jpg
+Date Created:  1945-07-23       89
+2000-2.jpg
+Date Created:  1945-07-28       90
+2000-7.jpg
+Date Created:  1945-11-00       91
+2000-216.jpg
+Date Created:  1946-02-28       92
+2000-217.jpg
+Date Created:  1946-02-28       93
+2000-215.jpg
+Date Created:  1946-02-28       94
+2000-209.jpg
+Date Created:  1946-05-00       95
+2000-111.jpg
+Date Created:  1946-12-23       96
+2000-119.jpg
+Date Created:  1947-00-00       97
+2000-114.jpg
+Date Created:  1947-11-28       98
+2000-115.jpg
+Date Created:  1947-11-28       99
+2000-113.jpg
+Date Created:  1947-12-00       100
+2000-86.jpg
+Date Created:  1947-12-11       101
+2000-8.jpg
+Date Created:  1948-00-00       102
+2000-59.jpg
+Date Created:  1948-00-00       103
+2000-109.jpg
+Date Created:  1948-01-09       104
+2000-143.jpg
+Date Created:  1948-02-16       105
+2000-340.jpg
+Date Created:  1948-05-06       106
+2000-12.jpg
+Date Created:  1948-06-17       107
+2000-15.jpg
+Date Created:  1948-11-02       108
+2000-377.jpg
+Date Created:  1948-12-00       109
+2000-152.jpg
+Date Created:  1949-01-20       110
+2000-81.jpg
+Date Created:  1949-02-05       111
+2000-83.jpg
+Date Created:  1949-02-05       112
+2000-84.jpg
+Date Created:  1949-02-05       113
+2000-85.jpg
+Date Created:  1949-02-25       114
+2000-80.jpg
+Date Created:  1949-02-25       115
+2000-146.jpg
+Date Created:  1949-03-18       116
+2000-153.jpg
+Date Created:  1949-04-12       117
+2000-90.jpg
+Date Created:  1949-05-24       118
+2000-518.jpg
+Date Created:  1949-09-14       119
+2000-74.jpg
+Date Created:  1949-12-00       120
+2000-408.jpg
+Date Created:  1950-00-00       121
+2000-224.jpg
+Date Created:  1950-06-24       122
+2000-410.jpg
+Date Created:  1950-06-28       123
+2000-384.jpg
+Date Created:  1950-08-07       124
+2000-128.jpg
+Date Created:  1950-08-17       125
+2000-208.jpg
+Date Created:  1950-11-05       126
+2000-430.jpg
+Date Created:  1951-09-08       127
+2000-360.jpg
+Date Created:  1951-09-28       128
+2000-357.jpg
+Date Created:  1951-09-28       129
+2000-454.jpg
+Date Created:  1951-11-07       130
+2000-361.jpg
+Date Created:  1951-12-00       131
+2000-437.jpg
+Date Created:  1952-00-00       132
+2000-271.jpg
+Date Created:  1952-02-19       133
+2000-272.jpg
+Date Created:  1952-02-19       134
+2000-333.jpg
+Date Created:  1952-03-28       135
+2000-334.jpg
+Date Created:  1952-04-08       136
+2000-338.jpg
+Date Created:  1952-04-24       137
+2000-327.jpg
+Date Created:  1952-07-30       138
+2000-365.jpg
+Date Created:  1952-10-17       139
+2000-232.jpg
+Date Created:  1952-10-17       140
+2000-370.jpg
+Date Created:  1952-12-00       141
+2000-414.jpg
+Date Created:  1952-12-00       142
+2000-413.jpg
+Date Created:  1952-12-00       143
+2000-406.jpg
+Date Created:  1953-01-14       144
+2000-249.jpg
+Date Created:  1953-04-22       145
+2000-250.jpg
+Date Created:  1953-04-22       146
+2000-212.jpg
+Date Created:  1953-10-12       147
+2000-29.jpg
+Date Created:  1959-02-18       148
+2000-26.jpg
+Date Created:  1959-03-28       149
+2000-16.jpg
+Date Created:  1960-00-00       150
+2000-210.jpg
+Date Created:  1960-04-14       151
+2000-214.jpg
+Date Created:  1960-04-16       152
+2000-17.jpg
+Date Created:  1960-09-20       153
+2000-19.jpg
+Date Created:  1962-10-00       154
+2000-213.jpg
+Date Created:  1969-00-00       155
+2000-211.jpg
+Date Created:  1975-06-12       156
+======================================================================
+Processing complete at  2023-12-26 15:44:54
+156 records read from the CSV file
+156 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 2:57  MM:SS
+Processing time for each image:  1.14  seconds
+REPORT_JPEG-2023-12-26_15-41-55.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

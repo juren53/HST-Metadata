@@ -1,0 +1,250 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 6548 MB
+ 
+Number of lines in the CSV file: 107
+ 
+Number of tif files in the diretory:  108
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-08-11 11:37:06
+84-1.tif
+Date Created:  1980-00-00       1
+84-10.tif
+Date Created:  1976-00-00       2
+84-11.tif
+Date Created:  1961-11-18       3
+84-2.tif
+Date Created:  1980-00-00       4
+84-69.tif
+Date Created:  1947-03-06       5
+84-71.tif
+Date Created:  1951-02-17       6
+84-73.tif
+Date Created:  1951-03-28       7
+84-12-08.tif
+Date Created:  1906-00-00       8
+84-4.tif
+Date Created:  1961-00-00       9
+84-59.tif
+Date Created:  1890-00-00       10
+84-62.tif
+Date Created:  1895-00-00       11
+84-67.tif
+Date Created:  1939-00-00       12
+84-7.tif
+Date Created:  1955-00-00       13
+84-70.tif
+Date Created:  1946-00-00       14
+84-72.tif
+Date Created:  1947-06-06       15
+84-06-02.tif
+Date Created:  0000-00-00       16
+84-06-04.tif
+Date Created:  0000-00-00       17
+84-12-01.tif
+Date Created:  1906-00-00       18
+84-12-02.tif
+Date Created:  1906-00-00       19
+84-12-03.tif
+Date Created:  1906-00-00       20
+84-12-04.tif
+Date Created:  1906-00-00       21
+84-12-05.tif
+Date Created:  1906-00-00       22
+84-12-06.tif
+Date Created:  1906-00-00       23
+84-12-07.tif
+Date Created:  1906-00-00       24
+84-12-09.tif
+Date Created:  1906-00-00       25
+84-12-10.tif
+Date Created:  1906-00-00       26
+84-12-11.tif
+Date Created:  1906-00-00       27
+84-12-12.tif
+Date Created:  1906-00-00       28
+84-12-13.tif
+Date Created:  1906-00-00       29
+84-12-14.tif
+Date Created:  1906-00-00       30
+84-12-15.tif
+Date Created:  1906-00-00       31
+84-12-16.tif
+Date Created:  1906-00-00       32
+84-12-17.tif
+Date Created:  1906-00-00       33
+84-12-18.tif
+Date Created:  1906-00-00       34
+84-12-19.tif
+Date Created:  1906-00-00       35
+84-12-20.tif
+Date Created:  1906-00-00       36
+84-12-21.tif
+Date Created:  1906-00-00       37
+84-12-22.tif
+Date Created:  1906-00-00       38
+84-12-23.tif
+Date Created:  1906-00-00       39
+84-12-24.tif
+Date Created:  1906-00-00       40
+84-13.tif
+Date Created:  1907-00-00       41
+84-14.tif
+Date Created:  1900-00-00       42
+84-15.tif
+Date Created:  1904-00-00       43
+84-16.tif
+Date Created:  1904-00-00       44
+84-17.tif
+Date Created:  1904-00-00       45
+84-18.tif
+Date Created:  1904-00-00       46
+84-20.tif
+Date Created:  1904-00-00       47
+84-21.tif
+Date Created:  1907-00-00       48
+84-22.tif
+Date Created:  1900-00-00       49
+84-24.tif
+Date Created:  1905-00-00       50
+84-25.tif
+Date Created:  1905-00-00       51
+84-26.tif
+Date Created:  1905-00-00       52
+84-27.tif
+Date Created:  1934-00-00       53
+84-28.tif
+Date Created:  1934-00-00       54
+84-29.tif
+Date Created:  1984-00-00       55
+84-3.tif
+Date Created:  1905-00-00       56
+84-30.tif
+Date Created:  1984-00-00       57
+84-31.tif
+Date Created:  1984-00-00       58
+84-32.tif
+Date Created:  1983-00-00       59
+84-33.tif
+Date Created:  1984-00-00       60
+84-34.tif
+Date Created:  1984-00-00       61
+84-35.tif
+Date Created:  1984-00-00       62
+84-36.tif
+Date Created:  1915-00-00       63
+84-37.tif
+Date Created:  1915-00-00       64
+84-38.tif
+Date Created:  1908-00-00       65
+84-39.tif
+Date Created:  1904-00-00       66
+84-40.tif
+Date Created:  1870-00-00       67
+84-41.tif
+Date Created:  1907-00-00       68
+84-42.tif
+Date Created:  1921-00-00       69
+84-43.tif
+Date Created:  1921-00-00       70
+84-44.tif
+Date Created:  1925-00-00       71
+84-45.tif
+Date Created:  0000-00-00       72
+84-46.tif
+Date Created:  0000-00-00       73
+84-47.tif
+Date Created:  0000-00-00       74
+84-48.tif
+Date Created:  0000-00-00       75
+84-49.tif
+Date Created:  1865-00-00       76
+84-5.tif
+Date Created:  1947-00-00       77
+84-50.tif
+Date Created:  1890-00-00       78
+84-51.tif
+Date Created:  1904-00-00       79
+84-52.tif
+Date Created:  1880-00-00       80
+84-53.tif
+Date Created:  1901-09-17       81
+84-54.tif
+Date Created:  0000-00-00       82
+84-56.tif
+Date Created:  1880-00-00       83
+84-57.tif
+Date Created:  0000-00-00       84
+84-58.tif
+Date Created:  0000-00-00       85
+84-6-01.tif
+Date Created:  1950-00-00       86
+***** File 84-6-02.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test3 ********
+84-6-03.tif
+Date Created:  1950-00-00       87
+***** File 84-6-04.tif not found in directory /home/juren/Projects/HST-Metadata/Photos/test3 ********
+84-61.tif
+Date Created:  1911-10-00       88
+84-63.tif
+Date Created:  0000-00-00       89
+84-64.tif
+Date Created:  0000-00-00       90
+84-65.tif
+Date Created:  1945-00-00       91
+84-66.tif
+Date Created:  1925-00-00       92
+84-68.tif
+Date Created:  1961-07-23       93
+84-74.tif
+Date Created:  1912-00-00       94
+84-75.tif
+Date Created:  1912-00-00       95
+84-76.tif
+Date Created:  1912-00-00       96
+84-77.tif
+Date Created:  1912-00-00       97
+84-78.tif
+Date Created:  1912-00-00       98
+84-79.tif
+Date Created:  1900-00-00       99
+84-8.tif
+Date Created:  1983-00-00       100
+84-80.tif
+Date Created:  1913-08-00       101
+84-81.tif
+Date Created:  1915-00-00       102
+84-82-02.tif
+Date Created:  0000-00-00       103
+84-82-1.tif
+Date Created:  0000-00-00       104
+84-9.tif
+Date Created:  0000-00-00       105
+======================================================================
+Processing complete at  2023-08-11 11:38:35
+107 records read from the CSV file
+105 images processed
+2 missing images
+*** Missing images not processed:
+84-6-02.tif missing
+84-6-04.tif missing
+
+___________________________
+Elapsed time: 1:28  MM:SS
+Processing time for each image:  0.82  seconds
+REPORT_TIFF-2023-08-11_11-35-23.txt log file printed to /home/juren/Projects/HST-Metadata/Photos/test3
+======================================================================

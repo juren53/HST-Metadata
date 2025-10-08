@@ -1,0 +1,28 @@
+🔍 G2C Mode: Analyzing g2c-generated CSV file: test_no_objectname.csv
+   Looking for IPTC field names (ObjectName, Headline, Caption-Abstract)
+
+Analyze UTF-8 Report - Version 0.5.0
+Mode: G2C-generated CSV analysis
+==================================================
+Analyzing file: test_no_objectname.csv
+Total 'special characters' found: 2
+
+Successfully read 3 lines as UTF-8
+Found identifier column 'Headline' at index 0
+
+Line 2: Found 2 suspicious character(s)
+ObjectName: Test Title with accent é
+Content: "Test Title with accent <é>","No Restrictions","Test description with <ñ> characters","Test Photographer","Institution Name","Test Source","2025-01-01"
+Suspicious characters:
+  Position 24: 'é' (Unicode: U+00E9, Decimal: 233) - Latin Small Letter E With Acute
+  Position 68: 'ñ' (Unicode: U+00F1, Decimal: 241) - Latin Small Letter N With Tilde
+----------------------------------------
+
+==================================================
+SUMMARY
+==================================================
+Analyze UTF-8 Report - Version 0.5.0
+Mode: G2C-generated CSV analysis
+Analyzing file: test_no_objectname.csv
+Total 'special characters' found: 2
+==================================================

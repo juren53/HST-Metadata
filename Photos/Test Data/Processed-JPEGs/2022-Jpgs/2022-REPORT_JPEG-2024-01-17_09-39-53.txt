@@ -1,0 +1,50 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 14801 MB
+ 
+Number of lines in the CSV file: 7
+ 
+Number of jpg files in the diretory:  7
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2024-01-17 09:39:55
+2022-747.jpg
+Date Created:  1944-00-00       1
+2022-786.jpg
+Date Created:  1945-07-16       2
+2022-764.jpg
+Date Created:  1945-08-14       3
+2022-275.jpg
+Date Created:  1949-12-26       4
+2022-353.jpg
+Date Created:  1955-05-08       5
+2022-299.jpg
+Date Created:  1955-11-02       6
+2022-284.jpg
+Date Created:  1957-04-17       7
+======================================================================
+Processing complete at  2024-01-17 09:40:05
+7 records read from the CSV file
+7 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 0:9  MM:SS
+Processing time for each image:  1.43  seconds
+REPORT_JPEG-2024-01-17_09-39-53.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

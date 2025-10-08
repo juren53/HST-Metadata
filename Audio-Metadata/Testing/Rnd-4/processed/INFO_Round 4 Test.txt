@@ -1,0 +1,31 @@
+HSTL Audio Metadata Tagging
+Round 4 Test
+
+Environment:
+- moved code over to Win11 
+- configured Win11 to run Python and all necessary utilities locally on D: thumbdrive
+
+Tagging features:
+
+- added a 'dc:description' that mirrors the 'COMM' description tag
+
+- added a 'xmpDM:logComment' that mirrors the 'COMM' description tag tag to test Adobe Audition compatibility
+
+- added a '©cmt' that mirrors the 'COMM' description tag to test Apple compatibility
+
+- added a '©pub' tag to mirror the  'TPUB: copyright' tag to test Apple compatibility
+
+- added a 'dc:publisher' tag to mirror the  'TPUB: copyright' tag to test Apple compatibility
+
+
+
+
+
+- appended date to the end of each 'description' tags
+
+            'TIT3': description+" "+date_str,                               # 'Description: '+ 
+            'COMM': description+" "+date_str,                               # 'Description: '+
+            'ISBJ': description+" "+date_str,                               # 'Description: '+
+            'dc:description': description+" "+date_str,                     # 'Description: '+
+            'xmpDM:logComment': description+" "+date_str,                   # 'Description: '+
+

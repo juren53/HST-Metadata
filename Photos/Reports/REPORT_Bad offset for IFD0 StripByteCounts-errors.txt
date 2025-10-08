@@ -1,0 +1,163 @@
+REPORT_Bad offset for IFD0 StripByteCounts-errors.txt
+
+juren@jaus-e6410-141:/media/juren/3179-36C1$ for dir in */; do
+    echo "Processing directory: $dir"
+    num_files=$(ls "$dir"/*.jpg 2>/dev/null | wc -l)
+    echo "Number of JPEG files: $num_files"
+    cd "$dir"
+    exiftool -validate -warning -error -a *.jpg | grep "Bad offset for IFD0 StripByteCounts" | wc -l
+    cd ..
+done
+Processing directory: 2000-Jpgs/
+Number of JPEG files: 156
+0
+Processing directory: 2001-Jpgs/
+Number of JPEG files: 157
+0
+Processing directory: 2002-Jpgs/
+Number of JPEG files: 321
+0
+Processing directory: 2009-TIFs/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: 59-Jpgs/
+Number of JPEG files: 2621
+0
+Processing directory: 60-Jpgs/
+Number of JPEG files: 1569
+0
+Processing directory: 61-Jpgs/
+Number of JPEG files: 993
+0
+Processing directory: 62-Jpgs/
+Number of JPEG files: 1082
+0
+Processing directory: 63-Jpgs/
+Number of JPEG files: 2511
+0
+Processing directory: 64-Jpgs/
+Number of JPEG files: 2715
+0
+Processing directory: 65-Jpgs/
+Number of JPEG files: 372
+0
+Processing directory: 66-Jpgs/
+Number of JPEG files: 451
+0
+Processing directory: 67-Jpgs/
+Number of JPEG files: 244
+0
+Processing directory: 68-Jpgs/
+Number of JPEG files: 43
+0
+Processing directory: 69-Jpgs/
+Number of JPEG files: 65
+0
+Processing directory: 70-Jpgs/
+Number of JPEG files: 270
+0
+Processing directory: 71-Jpgs/
+Number of JPEG files: 586
+0
+Processing directory: 72-Jpgs/
+Number of JPEG files: 587
+41
+Processing directory: 73-Jpgs/
+Number of JPEG files: 2481
+0
+Processing directory: 74-Jpgs/
+Number of JPEG files: 21
+0
+Processing directory: 75-Jpgs/
+Number of JPEG files: 5
+0
+Processing directory: 76-Jpgs/
+Number of JPEG files: 46
+0
+Processing directory: 77-Jpgs/
+Number of JPEG files: 380
+1
+Processing directory: 78-Jpgs/
+Number of JPEG files: 62
+0
+Processing directory: 79-Jpgs/
+Number of JPEG files: 11
+0
+Processing directory: 80-Jpgs/
+Number of JPEG files: 35
+0
+Processing directory: 81-Jpgs/
+Number of JPEG files: 19
+0
+Processing directory: 82-Jpgs/
+Number of JPEG files: 636
+0
+Processing directory: 83-Jpgs/
+Number of JPEG files: 54
+0
+Processing directory: 84-Jpgs/
+Number of JPEG files: 106
+0
+Processing directory: 85-Jpgs/
+Number of JPEG files: 19
+0
+Processing directory: 86-Jpgs/
+Number of JPEG files: 37
+0
+Processing directory: 87-Jpgs/
+Number of JPEG files: 13
+0
+Processing directory: 88-Jpgs/
+Number of JPEG files: 5
+0
+Processing directory: 89-Jpgs/
+Number of JPEG files: 12
+0
+Processing directory: 90-Jpg/
+Number of JPEG files: 1
+0
+Processing directory: 92-Jpgs/
+Number of JPEG files: 110
+0
+Processing directory: 93-Jpgs/
+Number of JPEG files: 221
+83
+Processing directory: 94-Jpgs/
+Number of JPEG files: 277
+0
+Processing directory: 95-Jpgs/
+Number of JPEG files: 1034
+0
+Processing directory: 96-Jpgs/
+Number of JPEG files: 1405
+0
+Processing directory: 99-Jpgs/
+Number of JPEG files: 833
+0
+Processing directory: CSV Files/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: Metadata-tagging/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: Post-Processed Tiffs/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: Pre-Processed Tiffs/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: System Volume Information/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+Processing directory: Unprocessed JPGS/
+Number of JPEG files: 0
+Error: File not found - *.jpg
+0
+juren@jaus-e6410-141:/media/juren/3179-36C1$ 
+

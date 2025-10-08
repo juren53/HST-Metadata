@@ -1,0 +1,74 @@
+tgpt "background on Phil Harvey, author of exiftool metadata library and program"
+          
+@web_search Phil Harvey exiftool metadata library background
+
+Phil Harvey is a well-known software developer who created the popular open-source tool called ExifTool. Here's a brief background on him:
+
+1. Professional Background: 
+   - Phil Harvey is primarily known as a software engineer and programmer.
+   - He has extensive experience in developing cross-platform applications.
+
+2. ExifTool Creation:
+   - In 2003, Harvey created ExifTool, which is a powerful command-line utility for reading, writing, and manipulating image, audio, and video
+ metadata.
+   - The tool supports over 400 different file formats and can extract, add, edit, and delete metadata from various types of media files.
+
+3. Open Source Contributions:
+   - ExifTool is released under the Perl Artistic License and is available for free use.
+   - It has become one of the most widely used tools for handling digital image metadata.
+
+4. Programming Skills:
+   - Harvey is proficient in several programming languages, including Perl, C++, and Python.
+   - His expertise extends to both low-level system programming and high-level application development.
+
+5. Community Involvement:
+   - As the creator of ExifTool, Harvey actively participates in the software community.
+   - He maintains the ExifTool website and provides support through forums and documentation.
+
+6. Other Projects:
+   - While ExifTool is his most prominent contribution, Harvey may have worked on other projects related to image processing or metadata
+ management.
+
+7. Continuous Development:
+   - ExifTool continues to evolve, with Harvey regularly updating and expanding its capabilities based on user feedback and emerging
+ technology trends.
+
+Phil Harvey's work on ExifTool has significantly impacted the field of digital image processing and metadata management, making it easier for
+ developers and photographers to handle and manipulate image data across various platforms.Here's a summary of the key points about Phil
+ Harvey and the development history of ExifTool:
+
+### Phil Harvey's Background
+
+- Phil Harvey has a master's degree in nuclear physics
+- He worked at Queen's University from 1990-2020 on the Sudbury Neutrino Observatory project
+- He developed ExifTool starting around 2001 as a utility to display metadata from images hosted on the SNO website
+- He is now officially retired from his university position and enjoys digital photography as a hobby
+
+### Development History of ExifTool
+
+- Started as a simple utility to display metadata from images in 2001
+- Quickly expanded in scope as Harvey became involved with digital photography
+- Evolved from routines Harvey wrote for an initial image cataloging utility
+- Released as open source software in 2003
+- Continuously updated and expanded capabilities based on user feedback and emerging technology trends
+
+### Impact on Digital Image Processing and Metadata Management
+
+- ExifTool has become one of the most widely used tools for handling digital image metadata
+- Supports over 400 different file formats
+- Provides deep insights into metadata like timestamps, creator information, file modification history, etc.
+- Used extensively in digital forensics to extract and analyze metadata from various file types
+- Offers wide format support including office documents, images, audio/video files
+- Available as both a Perl library and standalone command-line tool
+
+### Key Features
+
+- Free and open source
+- Highly flexible and customizable
+- Regular updates with new features and improved functionality
+- Active community and forum for support and discussion
+
+Overall, ExifTool has had a significant impact on the field of digital image processing and metadata management by providing a powerful,
+ flexible, and accessible tool for working with image metadata across a wide range of file formats. Its ongoing development and active
+ community have ensured its relevance and usefulness for photographers, developers, and forensic investigators alike.
+

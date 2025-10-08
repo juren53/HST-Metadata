@@ -1,0 +1,21 @@
+First order analysis of processed audio files
+wordcount (wc) reports number of lines, words and characters
+in each mediainfo listing
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-88.mp3 |wc
+     60     483    4788
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-108.mp3 | wc
+     60     474    4700
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-114.mp3 | wc
+     60     335    3752
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-185.mp3 | wc
+     60     400    4275
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-201.mp3 | wc
+     60     495    4944
+
+D:\Temp\Audio-Metadata\processed>mediainfo SR59-230.mp3 | wc
+     61     325    3747

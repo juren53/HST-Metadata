@@ -1,0 +1,95 @@
+<html>
+<head>
+<style type="text/css">
+body {}
+body {margin-left:0; margin-top:0}
+body {font-family:arial; font-size:10pt; color:#000000; background-color:#DDDDDD}
+
+a:link {color: #880088}
+a:visited {color: #888800}
+a:hover {color: #008800}
+a:active {color: #EE4444}
+
+h1 {color: #004488; font-size:16pt; font-weight: bold; margin-top:8px; margin-bottom:0px}
+h2 {color: #0000BB; font-size:14pt; font-weight: bold; margin-top:16px; margin-bottom:4px}
+h3 {color: #0044AA; font-size:12pt; font-weight: bold; margin-top:8px; margin-bottom:0px}
+h4 {color: #0044AA; font-size:11pt; font-weight: bold; margin-top:8px; margin-bottom:0px}
+
+ul {margin-left:16px; margin-top:0px; margin-bottom:0px}
+
+pre.code
+{color:#000000; font-size:10pt;
+ font-family:"lucida console","courier new";
+}
+
+code.code
+{color:#000000; font-size:10pt;
+ font-family:"lucida console","courier new";
+}
+
+font.red
+{color:#FF0000;
+}
+font.blue
+{color:#0000FF;
+}
+font.grey
+{color:#888888;
+}
+font.brown
+{color:#AA3300;
+}
+font.sz10pt
+{font-size:10pt;
+}
+
+table.code
+{table-layout:auto;
+ background-color:#FFFFFF;
+ width:90%;
+ border-left:1px #A0A0A0 solid;
+ border-right:2px #A0A0A0 solid;
+ margin-left:8px;
+ border-collapse: collapse;
+}
+table.hex
+{table-layout:auto;
+ background-color:#FFFFFF;
+ width:90%;
+ border-left:1px #A0A0A0 solid;
+ border-right:2px #A0A0A0 solid;
+ margin-left:8px;
+ border-collapse: collapse;
+ font-size:10pt;
+ font-family:"lucida console","courier new";
+}
+
+table
+{font-family:arial;
+ font-size:11pt;
+ color:#000000
+}
+
+table.A4
+{table-layout:auto;
+ width:800px;
+ height:100%;
+ border:0px #AA0000 solid;
+ margin-top:0px;
+ margin-left:0px;
+ border-spacing:4px;
+ border-collapse: collapse;
+ background-color:#F4F4F4;
+ font-family:arial;
+ font-size:11pt;
+ color:#000000
+}
+td.A4
+{width:100%;
+ vertical-align:top;
+ padding-left:4px}
+
+</style>
+<body>
+</body>
+</html>

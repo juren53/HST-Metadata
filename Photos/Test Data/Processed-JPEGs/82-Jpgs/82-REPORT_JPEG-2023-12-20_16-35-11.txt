@@ -1,0 +1,1308 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 15177 MB
+ 
+Number of lines in the CSV file: 636
+ 
+Number of jpg files in the diretory:  636
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-20 16:35:14
+82-170-33.jpg
+Date Created:  1850-00-00       1
+82-170-37.jpg
+Date Created:  1860-00-00       2
+82-170-20.jpg
+Date Created:  1860-00-00       3
+82-81.jpg
+Date Created:  1860-00-00       4
+82-170-38.jpg
+Date Created:  1860-00-00       5
+82-60-16.jpg
+Date Created:  1860-00-00       6
+82-60-13.jpg
+Date Created:  1860-00-00       7
+82-79.jpg
+Date Created:  1860-00-00       8
+82-170-34.jpg
+Date Created:  1860-00-00       9
+82-145.jpg
+Date Created:  1860-00-00       10
+82-60-34.jpg
+Date Created:  1865-00-00       11
+82-60-25.jpg
+Date Created:  1865-00-00       12
+82-170-21.jpg
+Date Created:  1865-00-00       13
+82-60-15.jpg
+Date Created:  1865-00-00       14
+82-60-14.jpg
+Date Created:  1865-00-00       15
+82-170-22.jpg
+Date Created:  1865-00-00       16
+82-170-23.jpg
+Date Created:  1865-00-00       17
+82-62-01.jpg
+Date Created:  1867-00-00       18
+82-60-33.jpg
+Date Created:  1867-00-00       19
+82-170-28.jpg
+Date Created:  1870-00-00       20
+82-170-24.jpg
+Date Created:  1870-00-00       21
+82-87.jpg
+Date Created:  1872-00-00       22
+82-62-02.jpg
+Date Created:  1872-09-00       23
+82-170-27.jpg
+Date Created:  1875-04-07       24
+82-62-03.jpg
+Date Created:  1876-07-11       25
+82-60-26.jpg
+Date Created:  1877-00-00       26
+82-62-04.jpg
+Date Created:  1877-04-06       27
+82-62-05.jpg
+Date Created:  1878-00-00       28
+82-170-19.jpg
+Date Created:  1880-00-00       29
+82-89.jpg
+Date Created:  1880-00-00       30
+82-60-6.jpg
+Date Created:  1880-00-00       31
+82-88.jpg
+Date Created:  1880-00-00       32
+82-83.jpg
+Date Created:  1880-08-00       33
+82-82.jpg
+Date Created:  1881-10-00       34
+82-146.jpg
+Date Created:  1883-00-00       35
+82-86.jpg
+Date Created:  1885-00-00       36
+82-111-02.jpg
+Date Created:  1887-00-00       37
+82-111-01.jpg
+Date Created:  1887-00-00       38
+82-85.jpg
+Date Created:  1887-11-00       39
+82-112.jpg
+Date Created:  1888-00-00       40
+82-84.jpg
+Date Created:  1890-00-00       41
+82-113.jpg
+Date Created:  1891-00-00       42
+82-116.jpg
+Date Created:  1895-00-00       43
+82-117.jpg
+Date Created:  1895-00-00       44
+82-63.jpg
+Date Created:  1895-00-00       45
+82-150.jpg
+Date Created:  1897-00-00       46
+82-149.jpg
+Date Created:  1897-00-00       47
+82-104.jpg
+Date Created:  1898-07-00       48
+82-59-108.jpg
+Date Created:  1900-00-00       49
+82-59-110.jpg
+Date Created:  1900-00-00       50
+82-58-12.jpg
+Date Created:  1900-00-00       51
+82-212-02.jpg
+Date Created:  1900-00-00       52
+82-59-114.jpg
+Date Created:  1900-00-00       53
+82-59-111.jpg
+Date Created:  1900-00-00       54
+82-59-112.jpg
+Date Created:  1900-00-00       55
+82-97-02.jpg
+Date Created:  1900-00-00       56
+82-97-01.jpg
+Date Created:  1900-00-00       57
+82-59-109.jpg
+Date Created:  1900-00-00       58
+82-59-113.jpg
+Date Created:  1900-00-00       59
+82-59-01.jpg
+Date Created:  1902-00-00       60
+82-261.jpg
+Date Created:  1903-00-00       61
+82-59-74.jpg
+Date Created:  1903-00-00       62
+82-59-23.jpg
+Date Created:  1903-00-00       63
+82-59-22.jpg
+Date Created:  1903-00-00       64
+82-59-27.jpg
+Date Created:  1903-00-00       65
+82-59-29.jpg
+Date Created:  1903-00-00       66
+82-151.jpg
+Date Created:  1903-00-00       67
+82-163-01.jpg
+Date Created:  1903-00-00       68
+82-59-21.jpg
+Date Created:  1903-00-00       69
+82-59-24.jpg
+Date Created:  1903-00-00       70
+82-59-26.jpg
+Date Created:  1903-00-00       71
+82-59-25.jpg
+Date Created:  1903-00-00       72
+82-59-28.jpg
+Date Created:  1903-00-00       73
+82-59-67.jpg
+Date Created:  1904-00-00       74
+82-59-68.jpg
+Date Created:  1904-00-00       75
+82-59-71.jpg
+Date Created:  1904-00-00       76
+82-59-70.jpg
+Date Created:  1904-00-00       77
+82-99.jpg
+Date Created:  1905-00-00       78
+82-259.jpg
+Date Created:  1905-00-00       79
+82-107.jpg
+Date Created:  1905-00-00       80
+82-59-72.jpg
+Date Created:  1905-00-00       81
+82-59-105.jpg
+Date Created:  1905-00-00       82
+82-58-53.jpg
+Date Created:  1905-00-00       83
+82-59-116.jpg
+Date Created:  1905-00-00       84
+82-59-104.jpg
+Date Created:  1905-00-00       85
+82-59-103.jpg
+Date Created:  1905-00-00       86
+82-59-100.jpg
+Date Created:  1905-00-00       87
+82-59-101.jpg
+Date Created:  1905-00-00       88
+82-59-115.jpg
+Date Created:  1905-00-00       89
+82-115.jpg
+Date Created:  1905-06-00       90
+82-114.jpg
+Date Created:  1905-06-00       91
+82-59-124.jpg
+Date Created:  1906-00-00       92
+82-59-123.jpg
+Date Created:  1906-00-00       93
+82-59-119.jpg
+Date Created:  1906-00-00       94
+82-59-107.jpg
+Date Created:  1906-00-00       95
+82-59-118.jpg
+Date Created:  1906-00-00       96
+82-59-120.jpg
+Date Created:  1906-00-00       97
+82-59-117.jpg
+Date Created:  1906-00-00       98
+82-59-122.jpg
+Date Created:  1906-00-00       99
+82-59-121.jpg
+Date Created:  1906-00-00       100
+82-59-102.jpg
+Date Created:  1906-00-00       101
+82-59-99.jpg
+Date Created:  1906-00-00       102
+82-59-106.jpg
+Date Created:  1906-00-00       103
+82-95-03.jpg
+Date Created:  1906-06-00       104
+82-95-01.jpg
+Date Created:  1906-06-00       105
+82-95-02.jpg
+Date Created:  1906-06-00       106
+82-59-73.jpg
+Date Created:  1907-00-00       107
+82-96.jpg
+Date Created:  1907-00-00       108
+82-106.jpg
+Date Created:  1908-00-00       109
+82-152.jpg
+Date Created:  1908-00-00       110
+82-292-03.jpg
+Date Created:  1908-00-00       111
+82-58-13.jpg
+Date Created:  1910-00-00       112
+82-338-1.jpg
+Date Created:  1911-00-00       113
+82-338-2.jpg
+Date Created:  1911-00-00       114
+82-286-1.jpg
+Date Created:  1911-00-00       115
+82-286-2.jpg
+Date Created:  1911-00-00       116
+82-58-14.jpg
+Date Created:  1913-10-00       117
+82-58-15.jpg
+Date Created:  1913-10-00       118
+82-58-36.jpg
+Date Created:  1914-00-00       119
+82-58-48.jpg
+Date Created:  1914-00-00       120
+82-262.jpg
+Date Created:  1915-00-00       121
+82-58-79.jpg
+Date Created:  1916-00-00       122
+82-58-68.jpg
+Date Created:  1916-07-00       123
+82-58-66.jpg
+Date Created:  1916-07-00       124
+82-58-69.jpg
+Date Created:  1916-07-00       125
+82-362-02.jpg
+Date Created:  1917-00-00       126
+82-59-75.jpg
+Date Created:  1917-00-00       127
+82-56.jpg
+Date Created:  1917-00-00       128
+82-362-05.jpg
+Date Created:  1917-00-00       129
+82-213-01A.jpg
+Date Created:  1918-00-00       130
+82-213-05.jpg
+Date Created:  1918-00-00       131
+82-213-06.jpg
+Date Created:  1918-00-00       132
+82-213-09.jpg
+Date Created:  1918-00-00       133
+82-213-12.jpg
+Date Created:  1918-00-00       134
+82-213-20.jpg
+Date Created:  1918-00-00       135
+82-213-22.jpg
+Date Created:  1918-00-00       136
+82-213-24.jpg
+Date Created:  1918-00-00       137
+82-213-27.jpg
+Date Created:  1918-00-00       138
+82-213-52.jpg
+Date Created:  1918-00-00       139
+82-213-55.jpg
+Date Created:  1918-00-00       140
+82-213-62.jpg
+Date Created:  1918-00-00       141
+82-213-65.jpg
+Date Created:  1918-00-00       142
+82-213-69.jpg
+Date Created:  1918-00-00       143
+82-213-71.jpg
+Date Created:  1918-00-00       144
+82-213-77.jpg
+Date Created:  1918-00-00       145
+82-213-79.jpg
+Date Created:  1918-00-00       146
+82-213-80.jpg
+Date Created:  1918-00-00       147
+82-213-82.jpg
+Date Created:  1918-00-00       148
+82-213-84.jpg
+Date Created:  1918-00-00       149
+82-213-85.jpg
+Date Created:  1918-00-00       150
+82-213-89.jpg
+Date Created:  1918-00-00       151
+82-213-92.jpg
+Date Created:  1918-00-00       152
+82-213-127.jpg
+Date Created:  1918-00-00       153
+82-213-50.jpg
+Date Created:  1918-00-00       154
+82-213-58.jpg
+Date Created:  1918-00-00       155
+82-213-63.jpg
+Date Created:  1918-00-00       156
+82-213-68.jpg
+Date Created:  1918-00-00       157
+82-213-73.jpg
+Date Created:  1918-00-00       158
+82-213-74.jpg
+Date Created:  1918-00-00       159
+82-213-81.jpg
+Date Created:  1918-00-00       160
+82-213-88.jpg
+Date Created:  1918-00-00       161
+82-213-90.jpg
+Date Created:  1918-00-00       162
+82-213-126.jpg
+Date Created:  1918-00-00       163
+82-213-160.jpg
+Date Created:  1918-00-00       164
+82-213-161.jpg
+Date Created:  1918-00-00       165
+82-213-162.jpg
+Date Created:  1918-00-00       166
+82-213-01.jpg
+Date Created:  1918-00-00       167
+82-213-10.jpg
+Date Created:  1918-00-00       168
+82-213-11.jpg
+Date Created:  1918-00-00       169
+82-213-18.jpg
+Date Created:  1918-00-00       170
+82-213-51.jpg
+Date Created:  1918-00-00       171
+82-213-53.jpg
+Date Created:  1918-00-00       172
+82-213-57.jpg
+Date Created:  1918-00-00       173
+82-213-59.jpg
+Date Created:  1918-00-00       174
+82-213-76.jpg
+Date Created:  1918-00-00       175
+82-213-78.jpg
+Date Created:  1918-00-00       176
+82-213-83.jpg
+Date Created:  1918-00-00       177
+82-213-87.jpg
+Date Created:  1918-00-00       178
+82-213-91.jpg
+Date Created:  1918-00-00       179
+82-213-93.jpg
+Date Created:  1918-00-00       180
+82-213-125.jpg
+Date Created:  1918-00-00       181
+82-213-03.jpg
+Date Created:  1918-00-00       182
+82-213-14.jpg
+Date Created:  1918-00-00       183
+82-213-19.jpg
+Date Created:  1918-00-00       184
+82-213-60.jpg
+Date Created:  1918-00-00       185
+82-213-72.jpg
+Date Created:  1918-00-00       186
+82-213-75.jpg
+Date Created:  1918-00-00       187
+82-213-94.jpg
+Date Created:  1918-00-00       188
+82-213-95.jpg
+Date Created:  1918-00-00       189
+82-213-122.jpg
+Date Created:  1918-00-00       190
+82-213-02.jpg
+Date Created:  1918-00-00       191
+82-213-04.jpg
+Date Created:  1918-00-00       192
+82-213-07.jpg
+Date Created:  1918-00-00       193
+82-213-08.jpg
+Date Created:  1918-00-00       194
+82-213-21.jpg
+Date Created:  1918-00-00       195
+82-213-23.jpg
+Date Created:  1918-00-00       196
+82-213-26.jpg
+Date Created:  1918-00-00       197
+82-213-56.jpg
+Date Created:  1918-00-00       198
+82-213-61.jpg
+Date Created:  1918-00-00       199
+82-213-64.jpg
+Date Created:  1918-00-00       200
+82-213-66.jpg
+Date Created:  1918-00-00       201
+82-213-67.jpg
+Date Created:  1918-00-00       202
+82-213-70.jpg
+Date Created:  1918-00-00       203
+82-213-86.jpg
+Date Created:  1918-00-00       204
+82-213-121.jpg
+Date Created:  1918-00-00       205
+82-213-123.jpg
+Date Created:  1918-00-00       206
+82-213-139.jpg
+Date Created:  1918-03-00       207
+82-58-78.jpg
+Date Created:  1918-06-00       208
+82-213-96.jpg
+Date Created:  1918-07-04       209
+82-213-98.jpg
+Date Created:  1918-07-04       210
+82-213-100.jpg
+Date Created:  1918-07-04       211
+82-213-102.jpg
+Date Created:  1918-07-04       212
+82-213-103.jpg
+Date Created:  1918-07-04       213
+82-213-97.jpg
+Date Created:  1918-07-04       214
+82-213-101.jpg
+Date Created:  1918-07-04       215
+82-213-99.jpg
+Date Created:  1918-07-04       216
+82-213-54.jpg
+Date Created:  1918-09-28       217
+82-213-104.jpg
+Date Created:  1918-11-20       218
+82-213-105.jpg
+Date Created:  1918-11-20       219
+82-213-107.jpg
+Date Created:  1918-11-20       220
+82-213-106.jpg
+Date Created:  1918-11-20       221
+82-213-108.jpg
+Date Created:  1918-11-20       222
+82-213-109.jpg
+Date Created:  1918-11-20       223
+82-213-110.jpg
+Date Created:  1918-11-20       224
+82-213-17.jpg
+Date Created:  1919-00-00       225
+82-213-34.jpg
+Date Created:  1919-00-00       226
+82-213-35.jpg
+Date Created:  1919-00-00       227
+82-213-38.jpg
+Date Created:  1919-00-00       228
+82-213-25.jpg
+Date Created:  1919-00-00       229
+82-268.jpg
+Date Created:  1919-00-00       230
+82-213-39.jpg
+Date Created:  1919-00-00       231
+82-213-40.jpg
+Date Created:  1919-00-00       232
+82-213-49.jpg
+Date Created:  1919-00-00       233
+82-269.jpg
+Date Created:  1919-00-00       234
+82-213-47.jpg
+Date Created:  1919-00-00       235
+82-213-29.jpg
+Date Created:  1919-00-00       236
+82-213-140.jpg
+Date Created:  1919-02-00       237
+82-213-119.jpg
+Date Created:  1919-03-00       238
+82-213-120.jpg
+Date Created:  1919-03-00       239
+82-213-133.jpg
+Date Created:  1919-03-00       240
+82-213-13.jpg
+Date Created:  1919-03-00       241
+82-213-112.jpg
+Date Created:  1919-03-00       242
+82-213-129.jpg
+Date Created:  1919-03-00       243
+82-213-130.jpg
+Date Created:  1919-03-00       244
+82-213-142.jpg
+Date Created:  1919-03-00       245
+82-213-149.jpg
+Date Created:  1919-03-00       246
+82-213-114.jpg
+Date Created:  1919-03-00       247
+82-213-117.jpg
+Date Created:  1919-03-00       248
+82-213-118.jpg
+Date Created:  1919-03-00       249
+82-213-134.jpg
+Date Created:  1919-03-00       250
+82-213-136.jpg
+Date Created:  1919-03-00       251
+82-213-137.jpg
+Date Created:  1919-03-00       252
+82-213-143.jpg
+Date Created:  1919-03-00       253
+82-213-147.jpg
+Date Created:  1919-03-00       254
+82-213-148.jpg
+Date Created:  1919-03-00       255
+82-213-115.jpg
+Date Created:  1919-03-00       256
+82-213-132.jpg
+Date Created:  1919-03-00       257
+82-213-135.jpg
+Date Created:  1919-03-00       258
+82-213-138.jpg
+Date Created:  1919-03-00       259
+82-213-141.jpg
+Date Created:  1919-03-00       260
+82-213-145.jpg
+Date Created:  1919-03-00       261
+82-213-150.jpg
+Date Created:  1919-03-00       262
+82-213-128.jpg
+Date Created:  1919-03-00       263
+82-213-131.jpg
+Date Created:  1919-03-00       264
+82-213-146.jpg
+Date Created:  1919-03-00       265
+82-213-144.jpg
+Date Created:  1919-03-30       266
+82-213-41.jpg
+Date Created:  1919-04-00       267
+82-213-42.jpg
+Date Created:  1919-04-00       268
+82-213-45.jpg
+Date Created:  1919-04-00       269
+82-213-151.jpg
+Date Created:  1919-04-00       270
+82-213-15.jpg
+Date Created:  1919-04-00       271
+82-213-28.jpg
+Date Created:  1919-04-00       272
+82-213-111.jpg
+Date Created:  1919-04-00       273
+82-213-113.jpg
+Date Created:  1919-04-00       274
+82-213-152.jpg
+Date Created:  1919-04-00       275
+82-213-155.jpg
+Date Created:  1919-04-00       276
+82-213-156.jpg
+Date Created:  1919-04-00       277
+82-213-159.jpg
+Date Created:  1919-04-00       278
+82-213-30.jpg
+Date Created:  1919-04-00       279
+82-213-36.jpg
+Date Created:  1919-04-00       280
+82-213-43.jpg
+Date Created:  1919-04-00       281
+82-213-46.jpg
+Date Created:  1919-04-00       282
+82-213-158.jpg
+Date Created:  1919-04-00       283
+82-213-16.jpg
+Date Created:  1919-04-00       284
+82-213-31.jpg
+Date Created:  1919-04-00       285
+82-213-32.jpg
+Date Created:  1919-04-00       286
+82-213-33.jpg
+Date Created:  1919-04-00       287
+82-213-44.jpg
+Date Created:  1919-04-00       288
+82-213-153.jpg
+Date Created:  1919-04-00       289
+82-213-154.jpg
+Date Created:  1919-04-00       290
+82-213-116.jpg
+Date Created:  1919-04-00       291
+82-213-157.jpg
+Date Created:  1919-04-00       292
+82-213-48.jpg
+Date Created:  1919-04-20       293
+82-153.jpg
+Date Created:  1920-00-00       294
+82-64.jpg
+Date Created:  1920-00-00       295
+82-315-06.jpg
+Date Created:  1924-00-00       296
+82-315-03.jpg
+Date Created:  1924-05-00       297
+82-315-01.jpg
+Date Created:  1924-05-00       298
+82-315-02.jpg
+Date Created:  1924-05-00       299
+82-68.jpg
+Date Created:  1924-10-05       300
+82-197.jpg
+Date Created:  1926-07-00       301
+82-202-07.jpg
+Date Created:  1926-07-00       302
+82-202-08.jpg
+Date Created:  1926-07-00       303
+82-70-01.jpg
+Date Created:  1926-12-00       304
+82-70-02.jpg
+Date Created:  1926-12-00       305
+82-321-01.jpg
+Date Created:  1928-04-01       306
+82-318.jpg
+Date Created:  1928-05-00       307
+82-317-03.jpg
+Date Created:  1929-00-00       308
+82-317-04.jpg
+Date Created:  1929-00-00       309
+82-67.jpg
+Date Created:  1929-08-00       310
+82-69.jpg
+Date Created:  1929-08-00       311
+82-74-02.jpg
+Date Created:  1931-07-00       312
+82-71.jpg
+Date Created:  1932-00-00       313
+82-72.jpg
+Date Created:  1932-00-00       314
+82-61-11.jpg
+Date Created:  1934-10-00       315
+82-61-18.jpg
+Date Created:  1934-10-00       316
+82-61-20.jpg
+Date Created:  1934-10-00       317
+82-61-25.jpg
+Date Created:  1934-10-00       318
+82-61-36.jpg
+Date Created:  1934-10-00       319
+82-61-43.jpg
+Date Created:  1934-10-00       320
+82-61-34.jpg
+Date Created:  1934-10-00       321
+82-61-14.jpg
+Date Created:  1934-10-00       322
+82-61-15.jpg
+Date Created:  1934-10-00       323
+82-61-30.jpg
+Date Created:  1934-10-00       324
+82-61-48.jpg
+Date Created:  1934-10-00       325
+82-61-50.jpg
+Date Created:  1934-10-00       326
+82-61-52.jpg
+Date Created:  1934-10-00       327
+82-61-55.jpg
+Date Created:  1934-10-00       328
+82-61-31.jpg
+Date Created:  1934-10-00       329
+82-61-38.jpg
+Date Created:  1934-10-00       330
+82-61-49.jpg
+Date Created:  1934-10-00       331
+82-61-27.jpg
+Date Created:  1934-10-00       332
+82-61-13.jpg
+Date Created:  1934-10-00       333
+82-61-17.jpg
+Date Created:  1934-10-00       334
+82-61-41.jpg
+Date Created:  1934-10-00       335
+82-61-42.jpg
+Date Created:  1934-10-00       336
+82-61-51.jpg
+Date Created:  1934-10-00       337
+82-61-54.jpg
+Date Created:  1934-10-00       338
+82-61-28.jpg
+Date Created:  1934-10-00       339
+82-61-16.jpg
+Date Created:  1934-10-00       340
+82-61-19.jpg
+Date Created:  1934-10-00       341
+82-61-24.jpg
+Date Created:  1934-10-00       342
+82-61-53.jpg
+Date Created:  1934-10-00       343
+82-61-02.jpg
+Date Created:  1934-10-01       344
+82-61-01.jpg
+Date Created:  1934-10-01       345
+82-61-03.jpg
+Date Created:  1934-10-01       346
+82-61-5.jpg
+Date Created:  1934-10-02       347
+82-61-10.jpg
+Date Created:  1934-10-02       348
+82-61-6.jpg
+Date Created:  1934-10-02       349
+82-61-12.jpg
+Date Created:  1934-10-02       350
+82-61-7.jpg
+Date Created:  1934-10-02       351
+82-61-8.jpg
+Date Created:  1934-10-02       352
+82-61-4.jpg
+Date Created:  1934-10-02       353
+82-61-9.jpg
+Date Created:  1934-10-02       354
+82-61-22.jpg
+Date Created:  1934-10-03       355
+82-61-23.jpg
+Date Created:  1934-10-04       356
+82-61-21.jpg
+Date Created:  1934-10-04       357
+82-61-26.jpg
+Date Created:  1934-10-05       358
+82-61-33.jpg
+Date Created:  1934-10-10       359
+82-61-29.jpg
+Date Created:  1934-10-10       360
+82-61-32.jpg
+Date Created:  1934-10-10       361
+82-61-35.jpg
+Date Created:  1934-10-11       362
+82-61-37.jpg
+Date Created:  1934-10-12       363
+82-61-39.jpg
+Date Created:  1934-10-12       364
+82-61-40.jpg
+Date Created:  1934-10-13       365
+82-61-45.jpg
+Date Created:  1934-10-22       366
+82-61-44.jpg
+Date Created:  1934-10-22       367
+82-61-46.jpg
+Date Created:  1934-10-22       368
+82-61-47.jpg
+Date Created:  1934-10-24       369
+82-193-3.jpg
+Date Created:  1935-00-00       370
+82-182-1.jpg
+Date Created:  1935-08-11       371
+82-182-02.jpg
+Date Created:  1935-08-11       372
+82-195-3.jpg
+Date Created:  1936-07-00       373
+82-183-01.jpg
+Date Created:  1937-12-00       374
+82-185-02.jpg
+Date Created:  1939-12-00       375
+82-125.jpg
+Date Created:  1940-00-00       376
+82-54-116.jpg
+Date Created:  1946-11-05       377
+82-54-120.jpg
+Date Created:  1946-11-05       378
+82-54-118.jpg
+Date Created:  1946-11-05       379
+82-54-122.jpg
+Date Created:  1946-11-13       380
+82-54-67.jpg
+Date Created:  1947-09-00       381
+82-54-123.jpg
+Date Created:  1947-09-06       382
+82-54-117.jpg
+Date Created:  1947-09-17       383
+82-54-121.jpg
+Date Created:  1947-09-17       384
+82-54-119.jpg
+Date Created:  1947-09-17       385
+82-54-4.jpg
+Date Created:  1947-11-00       386
+82-54-5.jpg
+Date Created:  1947-11-00       387
+82-54-31.jpg
+Date Created:  1947-11-00       388
+82-54-23.jpg
+Date Created:  1947-11-00       389
+82-54-11.jpg
+Date Created:  1947-11-00       390
+82-54-12.jpg
+Date Created:  1947-11-00       391
+82-54-3.jpg
+Date Created:  1947-11-00       392
+82-54-6.jpg
+Date Created:  1947-11-00       393
+82-54-9.jpg
+Date Created:  1947-11-00       394
+82-54-29.jpg
+Date Created:  1947-11-00       395
+82-54-8.jpg
+Date Created:  1947-11-00       396
+82-54-22.jpg
+Date Created:  1947-11-00       397
+82-54-21.jpg
+Date Created:  1947-11-13       398
+82-54-20.jpg
+Date Created:  1947-11-13       399
+82-54-7.jpg
+Date Created:  1947-11-20       400
+82-54-63.jpg
+Date Created:  1947-12-00       401
+82-54-64.jpg
+Date Created:  1947-12-00       402
+82-54-65.jpg
+Date Created:  1947-12-00       403
+82-54-61.jpg
+Date Created:  1947-12-00       404
+82-54-68.jpg
+Date Created:  1947-12-00       405
+82-54-69.jpg
+Date Created:  1947-12-00       406
+82-54-60.jpg
+Date Created:  1947-12-00       407
+82-54-62.jpg
+Date Created:  1947-12-00       408
+82-54-70.jpg
+Date Created:  1947-12-00       409
+82-54-108.jpg
+Date Created:  1947-12-03       410
+82-54-105.jpg
+Date Created:  1947-12-20       411
+82-54-104.jpg
+Date Created:  1947-12-20       412
+82-54-103.jpg
+Date Created:  1947-12-24       413
+82-54-2.jpg
+Date Created:  1947-12-29       414
+82-158.jpg
+Date Created:  1947-12-25       415
+82-54-98.jpg
+Date Created:  1948-01-00       416
+82-54-84.jpg
+Date Created:  1948-01-00       417
+82-54-99.jpg
+Date Created:  1948-01-00       418
+82-54-83.jpg
+Date Created:  1948-01-00       419
+82-54-102.jpg
+Date Created:  1948-01-08       420
+82-54-90.jpg
+Date Created:  1948-01-15       421
+82-54-92.jpg
+Date Created:  1948-01-15       422
+82-54-88.jpg
+Date Created:  1948-01-15       423
+82-54-91.jpg
+Date Created:  1948-01-15       424
+82-54-93.jpg
+Date Created:  1948-01-15       425
+82-54-106.jpg
+Date Created:  1948-01-21       426
+82-54-107.jpg
+Date Created:  1948-01-21       427
+82-157.jpg
+Date Created:  1948-02-00       428
+82-54-25.jpg
+Date Created:  1948-02-00       429
+82-54-24.jpg
+Date Created:  1948-02-00       430
+82-54-27.jpg
+Date Created:  1948-02-00       431
+82-54-28.jpg
+Date Created:  1948-02-00       432
+82-54-26.jpg
+Date Created:  1948-02-00       433
+82-54-34.jpg
+Date Created:  1948-02-11       434
+82-54-114.jpg
+Date Created:  1948-03-10       435
+82-54-127.jpg
+Date Created:  1948-03-10       436
+82-54-110.jpg
+Date Created:  1948-03-11       437
+82-54-112.jpg
+Date Created:  1948-03-11       438
+82-54-111.jpg
+Date Created:  1948-03-11       439
+82-54-113.jpg
+Date Created:  1948-03-11       440
+82-54-109.jpg
+Date Created:  1948-03-12       441
+82-54-94.jpg
+Date Created:  1948-03-18       442
+82-54-96.jpg
+Date Created:  1948-03-18       443
+82-54-97.jpg
+Date Created:  1948-03-18       444
+82-54-95.jpg
+Date Created:  1948-03-18       445
+82-54-124.jpg
+Date Created:  1948-03-19       446
+82-54-126.jpg
+Date Created:  1948-03-19       447
+82-54-125.jpg
+Date Created:  1948-03-19       448
+82-54-1.jpg
+Date Created:  1948-03-28       449
+82-54-100.jpg
+Date Created:  1948-05-04       450
+82-54-42.jpg
+Date Created:  1948-05-19       451
+82-54-51.jpg
+Date Created:  1948-05-19       452
+82-54-44.jpg
+Date Created:  1948-05-19       453
+82-54-52.jpg
+Date Created:  1948-05-19       454
+82-54-41.jpg
+Date Created:  1948-05-19       455
+82-54-46.jpg
+Date Created:  1948-05-19       456
+82-54-49.jpg
+Date Created:  1948-05-19       457
+82-54-56.jpg
+Date Created:  1948-05-19       458
+82-54-43.jpg
+Date Created:  1948-05-19       459
+82-54-45.jpg
+Date Created:  1948-05-19       460
+82-54-47.jpg
+Date Created:  1948-05-19       461
+82-54-48.jpg
+Date Created:  1948-05-19       462
+82-54-54.jpg
+Date Created:  1948-05-19       463
+82-54-55.jpg
+Date Created:  1948-05-19       464
+82-54-58.jpg
+Date Created:  1948-05-20       465
+82-54-57.jpg
+Date Created:  1948-05-20       466
+82-54-74.jpg
+Date Created:  1948-05-20       467
+82-54-38.jpg
+Date Created:  1948-05-20       468
+82-54-73.jpg
+Date Created:  1948-05-20       469
+82-54-79.jpg
+Date Created:  1948-05-21       470
+82-54-76.jpg
+Date Created:  1948-05-22       471
+82-54-77.jpg
+Date Created:  1948-05-22       472
+82-54-78.jpg
+Date Created:  1948-05-22       473
+82-54-75.jpg
+Date Created:  1948-05-22       474
+82-54-66.jpg
+Date Created:  1948-07-00       475
+82-54-50.jpg
+Date Created:  1948-07-00       476
+82-54-59.jpg
+Date Created:  1948-07-29       477
+82-54-72.jpg
+Date Created:  1948-07-30       478
+82-54-81.jpg
+Date Created:  1948-07-30       479
+82-54-71.jpg
+Date Created:  1948-07-30       480
+82-54-82.jpg
+Date Created:  1948-07-30       481
+82-54-80.jpg
+Date Created:  1948-07-30       482
+82-54-39.jpg
+Date Created:  1948-08-10       483
+82-54-40.jpg
+Date Created:  1948-08-10       484
+82-54-37.jpg
+Date Created:  1948-08-10       485
+82-54-35.jpg
+Date Created:  1948-08-10       486
+82-54-36.jpg
+Date Created:  1948-08-10       487
+82-54-13.jpg
+Date Created:  1948-09-00       488
+82-54-19.jpg
+Date Created:  1948-09-00       489
+82-54-16.jpg
+Date Created:  1948-09-00       490
+82-54-17.jpg
+Date Created:  1948-09-00       491
+82-54-15.jpg
+Date Created:  1948-09-00       492
+82-54-30.jpg
+Date Created:  1948-09-00       493
+82-54-18.jpg
+Date Created:  1948-09-00       494
+82-54-14.jpg
+Date Created:  1948-09-00       495
+82-54-101.jpg
+Date Created:  1948-09-02       496
+82-54-33.jpg
+Date Created:  1948-09-02       497
+82-54-32.jpg
+Date Created:  1948-09-02       498
+82-54-86.jpg
+Date Created:  1948-11-15       499
+82-54-87.jpg
+Date Created:  1948-11-15       500
+82-54-85.jpg
+Date Created:  1948-11-15       501
+82-54-10.jpg
+Date Created:  1949-11-00       502
+82-159.jpg
+Date Created:  1950-00-00       503
+82-57-43.jpg
+Date Created:  1952-04-04       504
+82-57-11.jpg
+Date Created:  1952-04-04       505
+82-57-1.jpg
+Date Created:  1952-04-04       506
+82-57-2.jpg
+Date Created:  1952-04-04       507
+82-57-38.jpg
+Date Created:  1952-04-16       508
+82-57-37.jpg
+Date Created:  1952-04-16       509
+82-57-9.jpg
+Date Created:  1952-04-17       510
+82-57-13.jpg
+Date Created:  1952-04-17       511
+82-57-14.jpg
+Date Created:  1952-04-17       512
+82-57-15.jpg
+Date Created:  1952-04-17       513
+82-57-10.jpg
+Date Created:  1952-04-18       514
+82-57-27.jpg
+Date Created:  1952-04-18       515
+82-57-28.jpg
+Date Created:  1952-04-18       516
+82-57-29.jpg
+Date Created:  1952-04-18       517
+82-57-18.jpg
+Date Created:  1952-04-24       518
+82-57-55.jpg
+Date Created:  1952-04-28       519
+82-57-58.jpg
+Date Created:  1952-04-28       520
+82-57-50.jpg
+Date Created:  1952-04-28       521
+82-57-73.jpg
+Date Created:  1952-07-13       522
+82-57-75.jpg
+Date Created:  1952-07-13       523
+82-57-95.jpg
+Date Created:  1952-07-28       524
+82-57-96.jpg
+Date Created:  1952-07-28       525
+82-57-97.jpg
+Date Created:  1952-07-28       526
+82-57-105.jpg
+Date Created:  1952-07-28       527
+82-57-106.jpg
+Date Created:  1952-07-28       528
+82-57-100.jpg
+Date Created:  1952-07-28       529
+82-57-98.jpg
+Date Created:  1952-07-28       530
+82-57-99.jpg
+Date Created:  1952-07-28       531
+82-57-80.jpg
+Date Created:  1952-07-29       532
+82-57-82.jpg
+Date Created:  1952-07-29       533
+82-57-79.jpg
+Date Created:  1952-07-29       534
+82-57-84.jpg
+Date Created:  1952-07-29       535
+82-57-78.jpg
+Date Created:  1952-07-29       536
+82-57-85.jpg
+Date Created:  1952-07-29       537
+82-57-86.jpg
+Date Created:  1952-07-29       538
+82-57-88.jpg
+Date Created:  1952-07-29       539
+82-57-81.jpg
+Date Created:  1952-07-29       540
+82-57-83.jpg
+Date Created:  1952-07-29       541
+82-57-87.jpg
+Date Created:  1952-07-29       542
+82-57-89.jpg
+Date Created:  1952-07-29       543
+82-57-90.jpg
+Date Created:  1952-07-29       544
+82-57-8.jpg
+Date Created:  1952-07-31       545
+82-57-103.jpg
+Date Created:  1952-07-31       546
+82-57-108.jpg
+Date Created:  1952-07-31       547
+82-57-63.jpg
+Date Created:  1952-07-31       548
+82-57-64.jpg
+Date Created:  1952-07-31       549
+82-57-65.jpg
+Date Created:  1952-07-31       550
+82-57-67.jpg
+Date Created:  1952-07-31       551
+82-57-71.jpg
+Date Created:  1952-07-31       552
+82-57-72.jpg
+Date Created:  1952-07-31       553
+82-57-76.jpg
+Date Created:  1952-07-31       554
+82-57-102.jpg
+Date Created:  1952-07-31       555
+82-57-110.jpg
+Date Created:  1952-07-31       556
+82-57-111.jpg
+Date Created:  1952-07-31       557
+82-57-112.jpg
+Date Created:  1952-07-31       558
+82-57-69.jpg
+Date Created:  1952-07-31       559
+82-57-77.jpg
+Date Created:  1952-07-31       560
+82-57-74.jpg
+Date Created:  1952-07-31       561
+82-57-104.jpg
+Date Created:  1952-07-31       562
+82-57-107.jpg
+Date Created:  1952-07-31       563
+82-57-109.jpg
+Date Created:  1952-07-31       564
+82-57-113.jpg
+Date Created:  1952-07-31       565
+82-57-114.jpg
+Date Created:  1952-07-31       566
+82-57-115.jpg
+Date Created:  1952-07-31       567
+82-57-68.jpg
+Date Created:  1952-07-31       568
+82-57-70.jpg
+Date Created:  1952-07-31       569
+82-57-62.jpg
+Date Created:  1952-07-31       570
+82-57-66.jpg
+Date Created:  1952-07-31       571
+82-57-121.jpg
+Date Created:  1952-08-00       572
+82-57-124.jpg
+Date Created:  1952-08-00       573
+82-57-117.jpg
+Date Created:  1952-08-00       574
+82-57-119.jpg
+Date Created:  1952-08-00       575
+82-57-122.jpg
+Date Created:  1952-08-00       576
+82-57-120.jpg
+Date Created:  1952-08-00       577
+82-57-123.jpg
+Date Created:  1952-08-00       578
+82-57-125.jpg
+Date Created:  1952-08-00       579
+82-57-128.jpg
+Date Created:  1952-08-00       580
+82-57-130.jpg
+Date Created:  1952-08-00       581
+82-57-118.jpg
+Date Created:  1952-08-00       582
+82-57-126.jpg
+Date Created:  1952-08-00       583
+82-57-127.jpg
+Date Created:  1952-08-00       584
+82-57-116.jpg
+Date Created:  1952-08-00       585
+82-57-129.jpg
+Date Created:  1952-08-00       586
+82-57-26.jpg
+Date Created:  1952-08-01       587
+82-57-25.jpg
+Date Created:  1952-08-01       588
+82-57-16.jpg
+Date Created:  1952-08-04       589
+82-57-41.jpg
+Date Created:  1952-08-04       590
+82-57-7.jpg
+Date Created:  1952-08-11       591
+82-57-6.jpg
+Date Created:  1952-08-11       592
+82-57-17.jpg
+Date Created:  1952-08-19       593
+82-57-12.jpg
+Date Created:  1952-09-02       594
+82-57-44.jpg
+Date Created:  1952-10-06       595
+82-57-53.jpg
+Date Created:  1952-10-06       596
+82-57-56.jpg
+Date Created:  1952-10-06       597
+82-57-61.jpg
+Date Created:  1952-10-06       598
+82-57-34.jpg
+Date Created:  1952-10-06       599
+82-57-45.jpg
+Date Created:  1952-10-06       600
+82-57-52.jpg
+Date Created:  1952-10-06       601
+82-57-57.jpg
+Date Created:  1952-10-06       602
+82-57-33.jpg
+Date Created:  1952-10-13       603
+82-57-23.jpg
+Date Created:  1952-10-13       604
+82-57-35.jpg
+Date Created:  1952-10-13       605
+82-57-21.jpg
+Date Created:  1952-10-13       606
+82-57-22.jpg
+Date Created:  1952-10-13       607
+82-57-36.jpg
+Date Created:  1952-10-13       608
+82-57-20.jpg
+Date Created:  1952-10-20       609
+82-57-46.jpg
+Date Created:  1952-10-20       610
+82-57-51.jpg
+Date Created:  1952-10-20       611
+82-57-40.jpg
+Date Created:  1952-10-20       612
+82-57-19.jpg
+Date Created:  1952-10-20       613
+82-57-39.jpg
+Date Created:  1952-10-20       614
+82-57-47.jpg
+Date Created:  1952-10-20       615
+82-57-54.jpg
+Date Created:  1952-11-10       616
+82-57-91.jpg
+Date Created:  1952-11-17       617
+82-57-94.jpg
+Date Created:  1952-11-17       618
+82-57-101.jpg
+Date Created:  1952-11-17       619
+82-57-93.jpg
+Date Created:  1952-11-17       620
+82-57-48.jpg
+Date Created:  1952-11-17       621
+82-57-92.jpg
+Date Created:  1952-11-17       622
+82-57-30.jpg
+Date Created:  1952-12-08       623
+82-57-31.jpg
+Date Created:  1952-12-08       624
+82-57-4.jpg
+Date Created:  1952-12-08       625
+82-57-49.jpg
+Date Created:  1952-12-08       626
+82-57-59.jpg
+Date Created:  1952-12-08       627
+82-57-24.jpg
+Date Created:  1952-12-08       628
+82-57-5.jpg
+Date Created:  1952-12-08       629
+82-57-42.jpg
+Date Created:  1952-12-08       630
+82-57-60.jpg
+Date Created:  1952-12-08       631
+82-57-32.jpg
+Date Created:  1952-12-08       632
+82-142.jpg
+Date Created:  1954-09-00       633
+82-143-01.jpg
+Date Created:  1954-09-00       634
+82-17-2.jpg
+Date Created:  1956-04-21       635
+82-53.jpg
+Date Created:  1981-05-08       636
+======================================================================
+Processing complete at  2023-12-20 16:48:07
+636 records read from the CSV file
+636 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 12:53  MM:SS
+Processing time for each image:  1.22  seconds
+REPORT_JPEG-2023-12-20_16-35-11.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

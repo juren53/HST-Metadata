@@ -1,0 +1,99 @@
+[ExifTool]      ExifTool Version Number         : 12.70
+[File]          File Name                       : 77-2238.jpg
+[File]          Directory                       : /home/juren/Downloads
+[File]          File Size                       : 1488 kB
+[File]          File Modification Date/Time     : 2024:06:01 01:34:46-05:00
+[File]          File Access Date/Time           : 2024:06:06 18:02:23-05:00
+[File]          File Inode Change Date/Time     : 2024:06:01 01:34:46-05:00
+[File]          File Permissions                : -rw-r--r--
+[File]          File Type                       : JPEG
+[File]          File Type Extension             : jpg
+[File]          MIME Type                       : image/jpeg
+[File]          Exif Byte Order                 : Little-endian (Intel, II)
+[File]          Current IPTC Digest             : cdcffa7da8c7be09057076aeaf05c34e
+[File]          Image Width                     : 4142
+[File]          Image Height                    : 2913
+[File]          Encoding Process                : Baseline DCT, Huffman coding
+[File]          Bits Per Sample                 : 8
+[File]          Color Components                : 1
+[EXIF]          Compression                     : Uncompressed
+[EXIF]          Photometric Interpretation      : BlackIsZero
+[EXIF]          Orientation                     : Horizontal (normal)
+[EXIF]          Samples Per Pixel               : 1
+[EXIF]          X Resolution                    : 600
+[EXIF]          Y Resolution                    : 600
+[EXIF]          Resolution Unit                 : inches
+[EXIF]          Software                        : Adobe Photoshop CS6 (Windows)
+[EXIF]          Modify Date                     : 2014:06:20 10:48:30
+[EXIF]          Color Space                     : Uncalibrated
+[EXIF]          Exif Image Width                : 4142
+[EXIF]          Exif Image Height               : 2913
+[EXIF]          Thumbnail Offset                : 386
+[EXIF]          Thumbnail Length                : 4634
+[EXIF]          Thumbnail Image                 : (Binary data 4634 bytes, use -b option to extract)
+[IPTC]          Coded Character Set             : UTF8
+[IPTC]          Application Record Version      : 0
+[Photoshop]     IPTC Digest                     : cdcffa7da8c7be09057076aeaf05c34e
+[Photoshop]     Displayed Units X               : inches
+[Photoshop]     Displayed Units Y               : inches
+[Photoshop]     Print Style                     : Centered
+[Photoshop]     Print Position                  : 0 0
+[Photoshop]     Print Scale                     : 1
+[Photoshop]     Global Angle                    : 120
+[Photoshop]     Global Altitude                 : 30
+[Photoshop]     URL List                        : 
+[Photoshop]     Slices Group Name               : 77-2238
+[Photoshop]     Num Slices                      : 1
+[Photoshop]     Pixel Aspect Ratio              : 1
+[Photoshop]     Photoshop Thumbnail             : (Binary data 4634 bytes, use -b option to extract)
+[Photoshop]     Has Real Merged Data            : Yes
+[Photoshop]     Writer Name                     : Adobe Photoshop
+[Photoshop]     Reader Name                     : Adobe Photoshop CS6
+[Photoshop]     Photoshop Quality               : 9
+[Photoshop]     Photoshop Format                : Standard
+[XMP]           XMP Toolkit                     : Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27
+[XMP]           Creator Tool                    : Adobe Photoshop CS6 (Windows)
+[XMP]           Create Date                     : 2014:06:20 08:21:54-05:00
+[XMP]           Metadata Date                   : 2014:06:20 10:48:30-05:00
+[XMP]           Format                          : image/jpeg
+[XMP]           Instance ID                     : xmp.iid:A87E755392F8E3118259AA04EE61BAD4
+[XMP]           Document ID                     : xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           Original Document ID            : xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           Color Mode                      : Grayscale
+[XMP]           ICC Profile Name                : Dot Gain 20%
+[XMP]           History Action                  : created, saved, converted, derived, saved
+[XMP]           History Instance ID             : xmp.iid:983F0DD97DF8E311B922F2116A0180E1, xmp.iid:A77E755392F8E3118259AA04EE61BAD4, xmp.iid:A87E755392F8E3118259AA04EE61BAD4
+[XMP]           History When                    : 2014:06:20 08:21:54-05:00, 2014:06:20 10:48:30-05:00, 2014:06:20 10:48:30-05:00
+[XMP]           History Software Agent          : Adobe Photoshop CS6 (Windows), Adobe Photoshop CS6 (Windows), Adobe Photoshop CS6 (Windows)
+[XMP]           History Changed                 : /, /
+[XMP]           History Parameters              : from image/tiff to image/jpeg, converted from image/tiff to image/jpeg
+[XMP]           Derived From Instance ID        : xmp.iid:A77E755392F8E3118259AA04EE61BAD4
+[XMP]           Derived From Document ID        : xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[XMP]           Derived From Original Document ID: xmp.did:983F0DD97DF8E311B922F2116A0180E1
+[ICC_Profile]   Profile CMM Type                : Adobe Systems Inc.
+[ICC_Profile]   Profile Version                 : 2.1.0
+[ICC_Profile]   Profile Class                   : Output Device Profile
+[ICC_Profile]   Color Space Data                : GRAY
+[ICC_Profile]   Profile Connection Space        : XYZ
+[ICC_Profile]   Profile Date Time               : 1999:06:03 00:00:00
+[ICC_Profile]   Profile File Signature          : acsp
+[ICC_Profile]   Primary Platform                : Apple Computer Inc.
+[ICC_Profile]   CMM Flags                       : Not Embedded, Independent
+[ICC_Profile]   Device Manufacturer             : none
+[ICC_Profile]   Device Model                    : 
+[ICC_Profile]   Device Attributes               : Reflective, Glossy, Positive, Color
+[ICC_Profile]   Rendering Intent                : Media-Relative Colorimetric
+[ICC_Profile]   Connection Space Illuminant     : 0.9642 1 0.82491
+[ICC_Profile]   Profile Creator                 : Adobe Systems Inc.
+[ICC_Profile]   Profile ID                      : 0
+[ICC_Profile]   Profile Copyright               : Copyright 1999 Adobe Systems Incorporated
+[ICC_Profile]   Profile Description             : Dot Gain 20%
+[ICC_Profile]   Media White Point               : 0.9642 1 0.82491
+[ICC_Profile]   Media Black Point               : 0 0 0
+[ICC_Profile]   Gray Tone Reproduction Curve    : (Binary data 524 bytes, use -b option to extract)
+[APP14]         DCT Encode Version              : 100
+[APP14]         APP14 Flags 0                   : (none)
+[APP14]         APP14 Flags 1                   : (none)
+[APP14]         Color Transform                 : Unknown (RGB or CMYK)
+[Composite]     Image Size                      : 4142x2913
+[Composite]     Megapixels                      : 12.1

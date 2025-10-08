@@ -1,0 +1,2964 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 19710 MB
+ 
+Number of lines in the CSV file: 1464
+ 
+Number of jpg files in the diretory:  1463
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2024-01-29 15:29:31
+98-164.jpg
+Date Created:  0000-00-00       1
+98-361.jpg
+Date Created:  0000-00-00       2
+98-3027.jpg
+Date Created:  0000-00-00       3
+98-3028.jpg
+Date Created:  0000-00-00       4
+98-3029.jpg
+Date Created:  0000-00-00       5
+98-3033.jpg
+Date Created:  0000-00-00       6
+98-3034.jpg
+Date Created:  0000-00-00       7
+98-154.jpg
+Date Created:  0000-00-00       8
+98-1779.jpg
+Date Created:  0000-00-00       9
+98-109C.jpg
+Date Created:  0000-00-00       10
+98-352.jpg
+Date Created:  0000-00-00       11
+98-2321.jpg
+Date Created:  0000-00-00       12
+98-368.jpg
+Date Created:  0000-00-00       13
+98-369.jpg
+Date Created:  0000-00-00       14
+98-371.jpg
+Date Created:  0000-00-00       15
+98-3031.jpg
+Date Created:  0000-00-00       16
+98-3035.jpg
+Date Created:  0000-00-00       17
+98-155.jpg
+Date Created:  0000-00-00       18
+98-2918.jpg
+Date Created:  0000-00-00       19
+98-1719.jpg
+Date Created:  0000-00-00       20
+98-1780.jpg
+Date Created:  0000-00-00       21
+98-1784.jpg
+Date Created:  0000-00-00       22
+98-2310.jpg
+Date Created:  0000-00-00       23
+98-2835.jpg
+Date Created:  0000-00-00       24
+98-2836.jpg
+Date Created:  0000-00-00       25
+98-103.jpg
+Date Created:  0000-00-00       26
+98-105.jpg
+Date Created:  0000-00-00       27
+98-106.jpg
+Date Created:  0000-00-00       28
+98-367.jpg
+Date Created:  0000-00-00       29
+98-3030.jpg
+Date Created:  0000-00-00       30
+98-173.jpg
+Date Created:  0000-00-00       31
+98-2990.jpg
+Date Created:  0000-00-00       32
+98-2796.jpg
+Date Created:  0000-00-00       33
+98-2797.jpg
+Date Created:  0000-00-00       34
+98-1772.jpg
+Date Created:  0000-00-00       35
+98-1782.jpg
+Date Created:  0000-00-00       36
+98-1788.jpg
+Date Created:  0000-00-00       37
+98-406.jpg
+Date Created:  0000-00-00       38
+98-507.jpg
+Date Created:  0000-00-00       39
+98-110C.jpg
+Date Created:  0000-00-00       40
+98-104.jpg
+Date Created:  0000-00-00       41
+98-107.jpg
+Date Created:  0000-00-00       42
+98-108.jpg
+Date Created:  0000-00-00       43
+98-116.jpg
+Date Created:  0000-00-00       44
+98-151.jpg
+Date Created:  0000-00-00       45
+98-163.jpg
+Date Created:  0000-00-00       46
+98-365.jpg
+Date Created:  0000-00-00       47
+98-366.jpg
+Date Created:  0000-00-00       48
+98-2935.jpg
+Date Created:  0000-00-00       49
+98-2868.jpg
+Date Created:  0000-00-00       50
+98-2991.jpg
+Date Created:  0000-00-00       51
+98-1778.jpg
+Date Created:  0000-00-00       52
+98-1781.jpg
+Date Created:  0000-00-00       53
+98-1786.jpg
+Date Created:  0000-00-00       54
+98-405.jpg
+Date Created:  0000-00-00       55
+98-409.jpg
+Date Created:  0000-00-00       56
+98-2841.jpg
+Date Created:  0000-00-00       57
+98-122.jpg
+Date Created:  0000-00-00       58
+98-370.jpg
+Date Created:  0000-00-00       59
+98-3032.jpg
+Date Created:  0000-00-00       60
+98-152.jpg
+Date Created:  0000-00-00       61
+98-153.jpg
+Date Created:  0000-00-00       62
+98-156.jpg
+Date Created:  0000-00-00       63
+98-2798.jpg
+Date Created:  0000-00-00       64
+98-1774.jpg
+Date Created:  0000-00-00       65
+98-1783.jpg
+Date Created:  0000-00-00       66
+98-120.jpg
+Date Created:  1913-06-09       67
+98-121.jpg
+Date Created:  1913-06-09       68
+98-119.jpg
+Date Created:  1919-04-12       69
+98-127.jpg
+Date Created:  1936-00-00       70
+98-39.jpg
+Date Created:  1936-06-24       71
+98-130.jpg
+Date Created:  1943-01-00       72
+98-129.jpg
+Date Created:  1943-01-00       73
+98-2359.jpg
+Date Created:  1943-11-13       74
+98-2328.jpg
+Date Created:  1943-11-13       75
+98-2329.jpg
+Date Created:  1943-11-13       76
+98-2361.jpg
+Date Created:  1943-11-13       77
+98-2363.jpg
+Date Created:  1943-11-13       78
+98-2373.jpg
+Date Created:  1943-11-13       79
+98-2327.jpg
+Date Created:  1943-11-13       80
+98-2335.jpg
+Date Created:  1943-11-13       81
+98-2347.jpg
+Date Created:  1943-11-13       82
+98-2362.jpg
+Date Created:  1943-11-13       83
+98-2331.jpg
+Date Created:  1943-11-13       84
+98-2334.jpg
+Date Created:  1943-11-13       85
+98-2337.jpg
+Date Created:  1943-11-13       86
+98-2352.jpg
+Date Created:  1943-11-13       87
+98-2370.jpg
+Date Created:  1943-11-13       88
+98-2342.jpg
+Date Created:  1943-11-13       89
+98-2355.jpg
+Date Created:  1943-11-13       90
+98-2358.jpg
+Date Created:  1943-11-13       91
+98-2375.jpg
+Date Created:  1943-11-13       92
+98-140.jpg
+Date Created:  1943-11-25       93
+98-95.jpg
+Date Created:  1944-00-00       94
+98-2408.jpg
+Date Created:  1944-02-26       95
+98-2400.jpg
+Date Created:  1944-02-26       96
+98-2401.jpg
+Date Created:  1944-02-26       97
+98-12.jpg
+Date Created:  1944-07-21       98
+98-15.jpg
+Date Created:  1944-07-22       99
+98-13.jpg
+Date Created:  1944-07-22       100
+98-14.jpg
+Date Created:  1944-07-22       101
+98-11.jpg
+Date Created:  1944-08-01       102
+98-10.jpg
+Date Created:  1944-08-03       103
+98-2518.jpg
+Date Created:  1944-08-25       104
+98-2517.jpg
+Date Created:  1944-08-25       105
+98-51.jpg
+Date Created:  1944-10-27       106
+98-708.jpg
+Date Created:  1945-00-00       107
+98-2462.jpg
+Date Created:  1945-00-00       108
+98-93.jpg
+Date Created:  1945-00-00       109
+98-99.jpg
+Date Created:  1945-00-00       110
+98-2466.jpg
+Date Created:  1945-00-00       111
+98-2469.jpg
+Date Created:  1945-00-00       112
+98-2501.jpg
+Date Created:  1945-00-00       113
+98-100.jpg
+Date Created:  1945-00-00       114
+98-2498.jpg
+Date Created:  1945-00-00       115
+98-83.jpg
+Date Created:  1945-00-00       116
+98-101.jpg
+Date Created:  1945-00-00       117
+98-98.jpg
+Date Created:  1945-00-00       118
+98-2451.jpg
+Date Created:  1945-00-00       119
+98-2473.jpg
+Date Created:  1945-00-00       120
+98-2496.jpg
+Date Created:  1945-00-00       121
+98-2500.jpg
+Date Created:  1945-00-00       122
+98-97.jpg
+Date Created:  1945-00-00       123
+98-2458.jpg
+Date Created:  1945-00-00       124
+98-2316.jpg
+Date Created:  1945-00-00       125
+98-2488.jpg
+Date Created:  1945-00-00       126
+98-2489.jpg
+Date Created:  1945-00-00       127
+98-2503.jpg
+Date Created:  1945-00-00       128
+98-17.jpg
+Date Created:  1945-00-00       129
+98-50.jpg
+Date Created:  1945-01-02       130
+98-2309.jpg
+Date Created:  1945-01-30       131
+98-53.jpg
+Date Created:  1945-04-00       132
+98-49.jpg
+Date Created:  1945-04-13       133
+98-23.jpg
+Date Created:  1945-04-14       134
+98-54.jpg
+Date Created:  1945-06-01       135
+98-658.jpg
+Date Created:  1945-06-15       136
+98-48.jpg
+Date Created:  1945-06-23       137
+98-20.jpg
+Date Created:  1945-06-27       138
+98-2485.jpg
+Date Created:  1945-07-00       139
+98-2460.jpg
+Date Created:  1945-08-00       140
+98-2463.jpg
+Date Created:  1945-08-00       141
+98-2459.jpg
+Date Created:  1945-08-00       142
+98-2461.jpg
+Date Created:  1945-08-00       143
+98-81-01.jpg
+Date Created:  1945-08-10       144
+98-19.jpg
+Date Created:  1945-08-24       145
+98-2445.jpg
+Date Created:  1945-08-30       146
+98-2509.jpg
+Date Created:  1945-09-00       147
+98-2504.jpg
+Date Created:  1945-09-00       148
+98-2506.jpg
+Date Created:  1945-09-00       149
+98-2508.jpg
+Date Created:  1945-09-00       150
+98-2502.jpg
+Date Created:  1945-09-00       151
+98-2505.jpg
+Date Created:  1945-09-00       152
+98-2507.jpg
+Date Created:  1945-09-00       153
+98-2436.jpg
+Date Created:  1945-09-02       154
+98-2438.jpg
+Date Created:  1945-09-02       155
+98-2450.jpg
+Date Created:  1945-09-02       156
+98-2447.jpg
+Date Created:  1945-09-02       157
+98-2448.jpg
+Date Created:  1945-09-02       158
+98-2437.jpg
+Date Created:  1945-09-02       159
+98-2433.jpg
+Date Created:  1945-09-02       160
+98-2434.jpg
+Date Created:  1945-09-02       161
+98-2435.jpg
+Date Created:  1945-09-02       162
+98-2440.jpg
+Date Created:  1945-09-09       163
+98-2441.jpg
+Date Created:  1945-09-09       164
+98-2439.jpg
+Date Created:  1945-09-09       165
+98-2453.jpg
+Date Created:  1945-09-11       166
+98-620.jpg
+Date Created:  1945-10-26       167
+98-624.jpg
+Date Created:  1945-10-26       168
+98-38.jpg
+Date Created:  1945-11-09       169
+98-24.jpg
+Date Created:  1945-11-24       170
+98-616.jpg
+Date Created:  1945-11-26       171
+98-623.jpg
+Date Created:  1945-11-26       172
+98-685.jpg
+Date Created:  1945-12-01       173
+98-699.jpg
+Date Created:  1945-12-01       174
+98-700.jpg
+Date Created:  1945-12-01       175
+98-701.jpg
+Date Created:  1945-12-01       176
+98-702.jpg
+Date Created:  1945-12-01       177
+98-693.jpg
+Date Created:  1945-12-01       178
+98-698.jpg
+Date Created:  1945-12-01       179
+98-686.jpg
+Date Created:  1945-12-01       180
+98-687.jpg
+Date Created:  1945-12-01       181
+98-688.jpg
+Date Created:  1945-12-01       182
+98-694.jpg
+Date Created:  1945-12-01       183
+98-696.jpg
+Date Created:  1945-12-01       184
+98-707.jpg
+Date Created:  1945-12-01       185
+98-689.jpg
+Date Created:  1945-12-01       186
+98-690.jpg
+Date Created:  1945-12-01       187
+98-691.jpg
+Date Created:  1945-12-01       188
+98-697.jpg
+Date Created:  1945-12-01       189
+98-692.jpg
+Date Created:  1945-12-01       190
+98-695.jpg
+Date Created:  1945-12-01       191
+98-706.jpg
+Date Created:  1945-12-02       192
+98-2454.jpg
+Date Created:  1946-00-00       193
+98-1951.jpg
+Date Created:  1946-00-00       194
+98-1968.jpg
+Date Created:  1946-00-00       195
+98-1973.jpg
+Date Created:  1946-00-00       196
+98-1978.jpg
+Date Created:  1946-00-00       197
+98-2452.jpg
+Date Created:  1946-00-00       198
+98-2455.jpg
+Date Created:  1946-00-00       199
+98-1950.jpg
+Date Created:  1946-00-00       200
+98-1962.jpg
+Date Created:  1946-00-00       201
+98-1970.jpg
+Date Created:  1946-00-00       202
+98-1980.jpg
+Date Created:  1946-00-00       203
+98-2457.jpg
+Date Created:  1946-00-00       204
+98-2320.jpg
+Date Created:  1946-00-00       205
+98-1972.jpg
+Date Created:  1946-00-00       206
+98-1974.jpg
+Date Created:  1946-00-00       207
+98-1977.jpg
+Date Created:  1946-00-00       208
+98-1979.jpg
+Date Created:  1946-00-00       209
+98-1956.jpg
+Date Created:  1946-00-00       210
+98-1966.jpg
+Date Created:  1946-00-00       211
+98-1967.jpg
+Date Created:  1946-00-00       212
+98-1969.jpg
+Date Created:  1946-00-00       213
+98-1971.jpg
+Date Created:  1946-00-00       214
+98-1976.jpg
+Date Created:  1946-00-00       215
+98-1989.jpg
+Date Created:  1946-00-00       216
+98-2010.jpg
+Date Created:  1946-00-00       217
+98-2027.jpg
+Date Created:  1946-00-00       218
+98-2456.jpg
+Date Created:  1946-00-00       219
+98-1957.jpg
+Date Created:  1946-00-00       220
+98-1964.jpg
+Date Created:  1946-00-00       221
+98-1965.jpg
+Date Created:  1946-00-00       222
+98-1975.jpg
+Date Created:  1946-00-00       223
+98-22.jpg
+Date Created:  1946-01-18       224
+98-2307.jpg
+Date Created:  1946-01-30       225
+98-2312.jpg
+Date Created:  1946-01-30       226
+98-2314.jpg
+Date Created:  1946-01-30       227
+98-2306.jpg
+Date Created:  1946-01-30       228
+98-2391.jpg
+Date Created:  1946-02-06       229
+98-610.jpg
+Date Created:  1946-03-19       230
+98-613.jpg
+Date Created:  1946-03-19       231
+98-609.jpg
+Date Created:  1946-03-19       232
+98-611.jpg
+Date Created:  1946-03-19       233
+98-615.jpg
+Date Created:  1946-03-19       234
+98-607.jpg
+Date Created:  1946-03-19       235
+98-608.jpg
+Date Created:  1946-03-19       236
+98-614.jpg
+Date Created:  1946-03-19       237
+98-606.jpg
+Date Created:  1946-03-19       238
+98-612.jpg
+Date Created:  1946-03-19       239
+98-37.jpg
+Date Created:  1946-03-23       240
+98-35.jpg
+Date Created:  1946-03-27       241
+98-1141.jpg
+Date Created:  1946-05-00       242
+98-56.jpg
+Date Created:  1946-05-00       243
+98-2421.jpg
+Date Created:  1946-07-00       244
+98-2425.jpg
+Date Created:  1946-07-00       245
+98-2428.jpg
+Date Created:  1946-07-00       246
+98-2416.jpg
+Date Created:  1946-07-00       247
+98-2499.jpg
+Date Created:  1946-07-00       248
+98-2412.jpg
+Date Created:  1946-07-00       249
+98-2414.jpg
+Date Created:  1946-07-00       250
+98-2420.jpg
+Date Created:  1946-07-00       251
+98-2422.jpg
+Date Created:  1946-07-00       252
+98-2432.jpg
+Date Created:  1946-07-00       253
+98-2415.jpg
+Date Created:  1946-07-00       254
+98-2419.jpg
+Date Created:  1946-07-00       255
+98-2426.jpg
+Date Created:  1946-07-00       256
+98-2431.jpg
+Date Created:  1946-07-00       257
+98-2511.jpg
+Date Created:  1946-07-04       258
+98-45.jpg
+Date Created:  1946-08-00       259
+98-33.jpg
+Date Created:  1946-08-15       260
+98-32.jpg
+Date Created:  1946-08-17       261
+98-34.jpg
+Date Created:  1946-09-22       262
+98-2845.jpg
+Date Created:  1946-10-00       263
+98-29.jpg
+Date Created:  1946-11-02       264
+98-30.jpg
+Date Created:  1946-11-02       265
+98-31.jpg
+Date Created:  1946-11-05       266
+98-84.jpg
+Date Created:  1946-11-16       267
+98-1963.jpg
+Date Created:  1946-11-21       268
+98-1961.jpg
+Date Created:  1946-11-21       269
+98-27.jpg
+Date Created:  1946-11-23       270
+98-28.jpg
+Date Created:  1946-11-23       271
+98-2937.jpg
+Date Created:  1947-00-00       272
+98-2008.jpg
+Date Created:  1947-00-00       273
+98-2014.jpg
+Date Created:  1947-00-00       274
+98-2015.jpg
+Date Created:  1947-00-00       275
+98-2018.jpg
+Date Created:  1947-00-00       276
+98-2020.jpg
+Date Created:  1947-00-00       277
+98-2022.jpg
+Date Created:  1947-00-00       278
+98-2023.jpg
+Date Created:  1947-00-00       279
+98-2029.jpg
+Date Created:  1947-00-00       280
+98-2031.jpg
+Date Created:  1947-00-00       281
+98-2034.jpg
+Date Created:  1947-00-00       282
+98-2037.jpg
+Date Created:  1947-00-00       283
+98-2042.jpg
+Date Created:  1947-00-00       284
+98-2046.jpg
+Date Created:  1947-00-00       285
+98-2048.jpg
+Date Created:  1947-00-00       286
+98-2053.jpg
+Date Created:  1947-00-00       287
+98-2054.jpg
+Date Created:  1947-00-00       288
+98-2055.jpg
+Date Created:  1947-00-00       289
+98-2059.jpg
+Date Created:  1947-00-00       290
+98-2065.jpg
+Date Created:  1947-00-00       291
+98-2068.jpg
+Date Created:  1947-00-00       292
+98-2079.jpg
+Date Created:  1947-00-00       293
+98-1955.jpg
+Date Created:  1947-00-00       294
+98-1958.jpg
+Date Created:  1947-00-00       295
+98-1959.jpg
+Date Created:  1947-00-00       296
+98-1982.jpg
+Date Created:  1947-00-00       297
+98-1985.jpg
+Date Created:  1947-00-00       298
+98-1990.jpg
+Date Created:  1947-00-00       299
+98-2004.jpg
+Date Created:  1947-00-00       300
+98-2011.jpg
+Date Created:  1947-00-00       301
+98-2019.jpg
+Date Created:  1947-00-00       302
+98-2030.jpg
+Date Created:  1947-00-00       303
+98-2047.jpg
+Date Created:  1947-00-00       304
+98-2056.jpg
+Date Created:  1947-00-00       305
+98-2060.jpg
+Date Created:  1947-00-00       306
+98-2064.jpg
+Date Created:  1947-00-00       307
+98-2040.jpg
+Date Created:  1947-00-00       308
+98-2069.jpg
+Date Created:  1947-00-00       309
+98-2070.jpg
+Date Created:  1947-00-00       310
+98-2078.jpg
+Date Created:  1947-00-00       311
+98-2081.jpg
+Date Created:  1947-00-00       312
+98-2082.jpg
+Date Created:  1947-00-00       313
+98-2083.jpg
+Date Created:  1947-00-00       314
+98-2857.jpg
+Date Created:  1947-00-00       315
+98-128.jpg
+Date Created:  1947-00-00       316
+98-1987.jpg
+Date Created:  1947-00-00       317
+98-1988.jpg
+Date Created:  1947-00-00       318
+98-1992.jpg
+Date Created:  1947-00-00       319
+98-1995.jpg
+Date Created:  1947-00-00       320
+98-1997.jpg
+Date Created:  1947-00-00       321
+98-2000.jpg
+Date Created:  1947-00-00       322
+98-2002.jpg
+Date Created:  1947-00-00       323
+98-2033.jpg
+Date Created:  1947-00-00       324
+98-2035.jpg
+Date Created:  1947-00-00       325
+98-2038.jpg
+Date Created:  1947-00-00       326
+98-2039.jpg
+Date Created:  1947-00-00       327
+98-2044.jpg
+Date Created:  1947-00-00       328
+98-2049.jpg
+Date Created:  1947-00-00       329
+98-2050.jpg
+Date Created:  1947-00-00       330
+98-2058.jpg
+Date Created:  1947-00-00       331
+98-2072.jpg
+Date Created:  1947-00-00       332
+98-1984.jpg
+Date Created:  1947-00-00       333
+98-2006.jpg
+Date Created:  1947-00-00       334
+98-2007.jpg
+Date Created:  1947-00-00       335
+98-2024.jpg
+Date Created:  1947-00-00       336
+98-2032.jpg
+Date Created:  1947-00-00       337
+98-2036.jpg
+Date Created:  1947-00-00       338
+98-2051.jpg
+Date Created:  1947-00-00       339
+98-2057.jpg
+Date Created:  1947-00-00       340
+98-2063.jpg
+Date Created:  1947-00-00       341
+98-2075.jpg
+Date Created:  1947-00-00       342
+98-2076.jpg
+Date Created:  1947-00-00       343
+98-2077.jpg
+Date Created:  1947-00-00       344
+98-1960.jpg
+Date Created:  1947-00-00       345
+98-1983.jpg
+Date Created:  1947-00-00       346
+98-1986.jpg
+Date Created:  1947-00-00       347
+98-1991.jpg
+Date Created:  1947-00-00       348
+98-1993.jpg
+Date Created:  1947-00-00       349
+98-1994.jpg
+Date Created:  1947-00-00       350
+98-1996.jpg
+Date Created:  1947-00-00       351
+98-1998.jpg
+Date Created:  1947-00-00       352
+98-2012.jpg
+Date Created:  1947-00-00       353
+98-2016.jpg
+Date Created:  1947-00-00       354
+98-2017.jpg
+Date Created:  1947-00-00       355
+98-2021.jpg
+Date Created:  1947-00-00       356
+98-2043.jpg
+Date Created:  1947-00-00       357
+98-2052.jpg
+Date Created:  1947-00-00       358
+98-2061.jpg
+Date Created:  1947-00-00       359
+98-2066.jpg
+Date Created:  1947-00-00       360
+98-2071.jpg
+Date Created:  1947-00-00       361
+98-2086.jpg
+Date Created:  1947-00-00       362
+98-81-02.jpg
+Date Created:  1947-01-31       363
+98-2394.jpg
+Date Created:  1947-02-07       364
+98-26.jpg
+Date Created:  1947-02-16       365
+98-2001.jpg
+Date Created:  1947-02-21       366
+98-1140.jpg
+Date Created:  1947-04-00       367
+98-1093.jpg
+Date Created:  1947-05-00       368
+98-1094.jpg
+Date Created:  1947-05-00       369
+98-1097.jpg
+Date Created:  1947-05-00       370
+98-1105.jpg
+Date Created:  1947-05-00       371
+98-1107.jpg
+Date Created:  1947-05-00       372
+98-1108.jpg
+Date Created:  1947-05-00       373
+98-1111.jpg
+Date Created:  1947-05-00       374
+98-1113.jpg
+Date Created:  1947-05-00       375
+98-1114.jpg
+Date Created:  1947-05-00       376
+98-1122.jpg
+Date Created:  1947-05-00       377
+98-1124.jpg
+Date Created:  1947-05-00       378
+98-1125.jpg
+Date Created:  1947-05-00       379
+98-1142.jpg
+Date Created:  1947-05-00       380
+98-1143.jpg
+Date Created:  1947-05-00       381
+98-1149.jpg
+Date Created:  1947-05-00       382
+98-1101.jpg
+Date Created:  1947-05-00       383
+98-1104.jpg
+Date Created:  1947-05-00       384
+98-1119.jpg
+Date Created:  1947-05-00       385
+98-1126.jpg
+Date Created:  1947-05-00       386
+98-1127.jpg
+Date Created:  1947-05-00       387
+98-1130.jpg
+Date Created:  1947-05-00       388
+98-1131.jpg
+Date Created:  1947-05-00       389
+98-1135.jpg
+Date Created:  1947-05-00       390
+98-1138.jpg
+Date Created:  1947-05-00       391
+98-1146.jpg
+Date Created:  1947-05-00       392
+98-1099.jpg
+Date Created:  1947-05-00       393
+98-1103.jpg
+Date Created:  1947-05-00       394
+98-1112.jpg
+Date Created:  1947-05-00       395
+98-1116.jpg
+Date Created:  1947-05-00       396
+98-1120.jpg
+Date Created:  1947-05-00       397
+98-1136.jpg
+Date Created:  1947-05-00       398
+98-1145.jpg
+Date Created:  1947-05-00       399
+98-1096.jpg
+Date Created:  1947-05-00       400
+98-1110.jpg
+Date Created:  1947-05-00       401
+98-1115.jpg
+Date Created:  1947-05-00       402
+98-1117.jpg
+Date Created:  1947-05-00       403
+98-1121.jpg
+Date Created:  1947-05-00       404
+98-1128.jpg
+Date Created:  1947-05-00       405
+98-1132.jpg
+Date Created:  1947-05-00       406
+98-1133.jpg
+Date Created:  1947-05-00       407
+98-1137.jpg
+Date Created:  1947-05-00       408
+98-1144.jpg
+Date Created:  1947-05-00       409
+98-1147.jpg
+Date Created:  1947-05-00       410
+98-1148.jpg
+Date Created:  1947-05-00       411
+98-1100.jpg
+Date Created:  1947-05-00       412
+98-1109.jpg
+Date Created:  1947-05-00       413
+98-1118.jpg
+Date Created:  1947-05-00       414
+98-1123.jpg
+Date Created:  1947-05-00       415
+98-1129.jpg
+Date Created:  1947-05-00       416
+98-1134.jpg
+Date Created:  1947-05-00       417
+98-1139.jpg
+Date Created:  1947-05-00       418
+98-1150.jpg
+Date Created:  1947-05-00       419
+98-1091.jpg
+Date Created:  1947-05-00       420
+98-2945.jpg
+Date Created:  1947-06-02       421
+98-3041.jpg
+Date Created:  1947-08-28       422
+98-3042.jpg
+Date Created:  1947-08-28       423
+98-3044.jpg
+Date Created:  1947-08-28       424
+98-3049.jpg
+Date Created:  1947-08-28       425
+98-3059.jpg
+Date Created:  1947-08-28       426
+98-3062.jpg
+Date Created:  1947-08-28       427
+98-3037.jpg
+Date Created:  1947-08-28       428
+98-3038.jpg
+Date Created:  1947-08-28       429
+98-3047.jpg
+Date Created:  1947-08-28       430
+98-3051.jpg
+Date Created:  1947-08-28       431
+98-3036.jpg
+Date Created:  1947-08-28       432
+98-3045.jpg
+Date Created:  1947-08-28       433
+98-3046.jpg
+Date Created:  1947-08-28       434
+98-3048.jpg
+Date Created:  1947-08-28       435
+98-3040.jpg
+Date Created:  1947-08-28       436
+98-3043.jpg
+Date Created:  1947-08-28       437
+98-3063.jpg
+Date Created:  1947-08-28       438
+98-1346.jpg
+Date Created:  1947-11-15       439
+98-1619.jpg
+Date Created:  1947-12-19       440
+98-1618.jpg
+Date Created:  1947-12-19       441
+98-1634.jpg
+Date Created:  1947-12-21       442
+98-1457.jpg
+Date Created:  1948-00-00       443
+98-1468.jpg
+Date Created:  1948-00-00       444
+98-1469.jpg
+Date Created:  1948-00-00       445
+98-2062.jpg
+Date Created:  1948-00-00       446
+98-2073.jpg
+Date Created:  1948-00-00       447
+98-1459.jpg
+Date Created:  1948-00-00       448
+98-1461.jpg
+Date Created:  1948-00-00       449
+98-1462.jpg
+Date Created:  1948-00-00       450
+98-1472.jpg
+Date Created:  1948-00-00       451
+98-1473.jpg
+Date Created:  1948-00-00       452
+98-2085.jpg
+Date Created:  1948-00-00       453
+98-1465.jpg
+Date Created:  1948-00-00       454
+98-1467.jpg
+Date Created:  1948-00-00       455
+98-1474.jpg
+Date Created:  1948-00-00       456
+98-90.jpg
+Date Created:  1948-00-00       457
+98-1456.jpg
+Date Created:  1948-00-00       458
+98-1460.jpg
+Date Created:  1948-00-00       459
+98-1464.jpg
+Date Created:  1948-00-00       460
+98-1471.jpg
+Date Created:  1948-00-00       461
+98-1412.jpg
+Date Created:  1948-00-00       462
+98-1602.jpg
+Date Created:  1948-00-00       463
+98-1454.jpg
+Date Created:  1948-00-00       464
+98-1455.jpg
+Date Created:  1948-00-00       465
+98-1458.jpg
+Date Created:  1948-00-00       466
+98-1463.jpg
+Date Created:  1948-00-00       467
+98-1466.jpg
+Date Created:  1948-00-00       468
+98-1470.jpg
+Date Created:  1948-00-00       469
+98-1475.jpg
+Date Created:  1948-00-00       470
+98-2067.jpg
+Date Created:  1948-00-00       471
+98-1411.jpg
+Date Created:  1948-02-00       472
+98-1573.jpg
+Date Created:  1948-02-06       473
+98-44.jpg
+Date Created:  1948-02-19       474
+98-1359.jpg
+Date Created:  1948-02-20       475
+98-1358.jpg
+Date Created:  1948-02-20       476
+98-1355.jpg
+Date Created:  1948-02-20       477
+98-1378.jpg
+Date Created:  1948-02-22       478
+98-1379.jpg
+Date Created:  1948-02-22       479
+98-1386.jpg
+Date Created:  1948-02-22       480
+98-1380.jpg
+Date Created:  1948-02-22       481
+98-1401.jpg
+Date Created:  1948-02-22       482
+98-1406.jpg
+Date Created:  1948-02-25       483
+98-1382.jpg
+Date Created:  1948-02-27       484
+98-1383.jpg
+Date Created:  1948-02-27       485
+98-1410.jpg
+Date Created:  1948-03-01       486
+98-1403.jpg
+Date Created:  1948-03-01       487
+98-1400.jpg
+Date Created:  1948-03-03       488
+98-1572.jpg
+Date Created:  1948-03-06       489
+98-1567.jpg
+Date Created:  1948-03-06       490
+98-1577.jpg
+Date Created:  1948-03-06       491
+98-82.jpg
+Date Created:  1948-03-15       492
+98-781.jpg
+Date Created:  1948-05-28       493
+98-782.jpg
+Date Created:  1948-05-28       494
+98-789.jpg
+Date Created:  1948-05-28       495
+98-799.jpg
+Date Created:  1948-05-28       496
+98-783.jpg
+Date Created:  1948-05-28       497
+98-784.jpg
+Date Created:  1948-05-28       498
+98-795.jpg
+Date Created:  1948-05-28       499
+98-802.jpg
+Date Created:  1948-05-28       500
+98-786.jpg
+Date Created:  1948-05-28       501
+98-787.jpg
+Date Created:  1948-05-28       502
+98-791.jpg
+Date Created:  1948-05-28       503
+98-794.jpg
+Date Created:  1948-05-28       504
+98-797.jpg
+Date Created:  1948-05-28       505
+98-785.jpg
+Date Created:  1948-05-28       506
+98-788.jpg
+Date Created:  1948-05-28       507
+98-790.jpg
+Date Created:  1948-05-28       508
+98-792.jpg
+Date Created:  1948-05-28       509
+98-793.jpg
+Date Created:  1948-05-28       510
+98-796.jpg
+Date Created:  1948-05-28       511
+98-798.jpg
+Date Created:  1948-05-28       512
+98-801.jpg
+Date Created:  1948-05-30       513
+98-800.jpg
+Date Created:  1948-05-30       514
+98-1252.jpg
+Date Created:  1948-06-00       515
+98-1254.jpg
+Date Created:  1948-06-00       516
+98-1288.jpg
+Date Created:  1948-06-00       517
+98-1295.jpg
+Date Created:  1948-06-00       518
+98-1302.jpg
+Date Created:  1948-06-00       519
+98-1303.jpg
+Date Created:  1948-06-00       520
+98-1305.jpg
+Date Created:  1948-06-00       521
+98-1250.jpg
+Date Created:  1948-06-00       522
+98-1286.jpg
+Date Created:  1948-06-00       523
+98-1297.jpg
+Date Created:  1948-06-00       524
+98-1265.jpg
+Date Created:  1948-06-00       525
+98-1273.jpg
+Date Created:  1948-06-00       526
+98-1275.jpg
+Date Created:  1948-06-00       527
+98-1293.jpg
+Date Created:  1948-06-00       528
+98-1299.jpg
+Date Created:  1948-06-00       529
+98-1291.jpg
+Date Created:  1948-06-00       530
+98-1251.jpg
+Date Created:  1948-06-00       531
+98-1253.jpg
+Date Created:  1948-06-00       532
+98-1292.jpg
+Date Created:  1948-06-00       533
+98-1296.jpg
+Date Created:  1948-06-00       534
+98-1298.jpg
+Date Created:  1948-06-00       535
+98-1306.jpg
+Date Created:  1948-06-08       536
+98-1309.jpg
+Date Created:  1948-06-10       537
+98-1278.jpg
+Date Created:  1948-06-10       538
+98-1280.jpg
+Date Created:  1948-06-10       539
+98-52.jpg
+Date Created:  1948-06-11       540
+98-1264.jpg
+Date Created:  1948-06-12       541
+98-1307.jpg
+Date Created:  1948-06-12       542
+98-1255.jpg
+Date Created:  1948-06-12       543
+98-1262.jpg
+Date Created:  1948-06-12       544
+98-4.jpg
+Date Created:  1948-06-12       545
+98-1258.jpg
+Date Created:  1948-06-12       546
+98-1261.jpg
+Date Created:  1948-06-12       547
+98-1263.jpg
+Date Created:  1948-06-12       548
+98-1259.jpg
+Date Created:  1948-06-12       549
+98-1260.jpg
+Date Created:  1948-06-12       550
+98-1256.jpg
+Date Created:  1948-06-12       551
+98-1269.jpg
+Date Created:  1948-06-13       552
+98-1271.jpg
+Date Created:  1948-06-13       553
+98-1267.jpg
+Date Created:  1948-06-13       554
+98-1270.jpg
+Date Created:  1948-06-13       555
+98-1266.jpg
+Date Created:  1948-06-13       556
+98-1274.jpg
+Date Created:  1948-06-14       557
+98-1300.jpg
+Date Created:  1948-06-16       558
+98-1308.jpg
+Date Created:  1948-06-17       559
+98-1310.jpg
+Date Created:  1948-06-18       560
+98-1311.jpg
+Date Created:  1948-06-18       561
+98-2.jpg
+Date Created:  1948-07-14       562
+98-91.jpg
+Date Created:  1948-09-23       563
+98-1.jpg
+Date Created:  1948-09-23       564
+98-3.jpg
+Date Created:  1948-09-25       565
+98-1324.jpg
+Date Created:  1948-10-15       566
+98-1317.jpg
+Date Created:  1948-11-07       567
+98-1312.jpg
+Date Created:  1948-11-07       568
+98-1316.jpg
+Date Created:  1948-11-07       569
+98-1325.jpg
+Date Created:  1948-11-11       570
+98-1322.jpg
+Date Created:  1948-11-12       571
+98-1347.jpg
+Date Created:  1948-11-12       572
+98-1323.jpg
+Date Created:  1948-11-14       573
+98-1334.jpg
+Date Created:  1948-11-15       574
+98-1345.jpg
+Date Created:  1948-11-15       575
+98-1338.jpg
+Date Created:  1948-11-16       576
+98-1326.jpg
+Date Created:  1948-11-18       577
+98-1350.jpg
+Date Created:  1948-11-18       578
+98-1333.jpg
+Date Created:  1948-11-20       579
+98-1337.jpg
+Date Created:  1948-11-21       580
+98-46.jpg
+Date Created:  1949-00-00       581
+98-2864.jpg
+Date Created:  1949-00-00       582
+98-2972.jpg
+Date Created:  1949-00-00       583
+98-2862.jpg
+Date Created:  1949-00-00       584
+98-2960.jpg
+Date Created:  1949-00-00       585
+98-92.jpg
+Date Created:  1949-02-03       586
+98-1585.jpg
+Date Created:  1949-02-08       587
+98-1381.jpg
+Date Created:  1949-02-27       588
+98-1574.jpg
+Date Created:  1949-03-06       589
+98-1575.jpg
+Date Created:  1949-03-06       590
+98-1571.jpg
+Date Created:  1949-03-06       591
+98-1564.jpg
+Date Created:  1949-03-06       592
+98-1565.jpg
+Date Created:  1949-03-06       593
+98-1566.jpg
+Date Created:  1949-03-06       594
+98-1570.jpg
+Date Created:  1949-03-06       595
+98-1576.jpg
+Date Created:  1949-03-06       596
+98-1579.jpg
+Date Created:  1949-03-08       597
+98-1587.jpg
+Date Created:  1949-03-08       598
+98-1580.jpg
+Date Created:  1949-03-08       599
+98-1589.jpg
+Date Created:  1949-03-08       600
+98-1591.jpg
+Date Created:  1949-03-12       601
+98-1595.jpg
+Date Created:  1949-03-16       602
+98-1700.jpg
+Date Created:  1949-03-20       603
+98-655.jpg
+Date Created:  1949-05-15       604
+98-662.jpg
+Date Created:  1949-05-15       605
+98-649.jpg
+Date Created:  1949-06-15       606
+98-646.jpg
+Date Created:  1949-06-15       607
+98-647.jpg
+Date Created:  1949-06-15       608
+98-648.jpg
+Date Created:  1949-06-15       609
+98-654.jpg
+Date Created:  1949-06-15       610
+98-660.jpg
+Date Created:  1949-06-15       611
+98-661.jpg
+Date Created:  1949-06-15       612
+98-650.jpg
+Date Created:  1949-06-15       613
+98-652.jpg
+Date Created:  1949-06-15       614
+98-663.jpg
+Date Created:  1949-06-15       615
+98-664.jpg
+Date Created:  1949-06-15       616
+98-1488.jpg
+Date Created:  1949-06-15       617
+98-644.jpg
+Date Created:  1949-06-15       618
+98-645.jpg
+Date Created:  1949-06-15       619
+98-651.jpg
+Date Created:  1949-06-15       620
+98-653.jpg
+Date Created:  1949-06-15       621
+98-657.jpg
+Date Created:  1949-06-15       622
+98-641.jpg
+Date Created:  1949-06-15       623
+98-656.jpg
+Date Created:  1949-06-15       624
+98-659.jpg
+Date Created:  1949-06-15       625
+98-80.jpg
+Date Created:  1949-08-11       626
+98-683.jpg
+Date Created:  1949-09-17       627
+98-2889.jpg
+Date Created:  1949-09-22       628
+98-2890.jpg
+Date Created:  1949-09-22       629
+98-2894.jpg
+Date Created:  1949-09-22       630
+98-2888.jpg
+Date Created:  1949-09-22       631
+98-2891.jpg
+Date Created:  1949-09-22       632
+98-2895.jpg
+Date Created:  1949-09-22       633
+98-2896.jpg
+Date Created:  1949-09-22       634
+98-2900.jpg
+Date Created:  1949-09-22       635
+98-2901.jpg
+Date Created:  1949-09-22       636
+98-2902.jpg
+Date Created:  1949-09-22       637
+98-2897.jpg
+Date Created:  1949-10-22       638
+98-2898.jpg
+Date Created:  1949-10-22       639
+98-2893.jpg
+Date Created:  1949-10-22       640
+98-234.jpg
+Date Created:  1950-00-00       641
+98-96.jpg
+Date Created:  1950-00-00       642
+98-2854.jpg
+Date Created:  1950-00-00       643
+98-2856.jpg
+Date Created:  1950-00-00       644
+98-2858.jpg
+Date Created:  1950-00-00       645
+98-2853.jpg
+Date Created:  1950-00-00       646
+98-1709.jpg
+Date Created:  1950-02-26       647
+98-2842.jpg
+Date Created:  1950-03-01       648
+98-1675.jpg
+Date Created:  1950-03-12       649
+98-1679.jpg
+Date Created:  1950-03-12       650
+98-1681.jpg
+Date Created:  1950-03-13       651
+98-1683.jpg
+Date Created:  1950-03-15       652
+98-1689.jpg
+Date Created:  1950-03-15       653
+98-1697.jpg
+Date Created:  1950-03-18       654
+98-1698.jpg
+Date Created:  1950-03-19       655
+98-1725.jpg
+Date Created:  1950-03-20       656
+98-1726.jpg
+Date Created:  1950-03-20       657
+98-1692.jpg
+Date Created:  1950-03-23       658
+98-1694.jpg
+Date Created:  1950-03-23       659
+98-1693.jpg
+Date Created:  1950-03-23       660
+98-1691.jpg
+Date Created:  1950-03-23       661
+98-1707.jpg
+Date Created:  1950-03-24       662
+98-1701.jpg
+Date Created:  1950-03-24       663
+98-1713.jpg
+Date Created:  1950-03-29       664
+98-1714.jpg
+Date Created:  1950-03-29       665
+98-1710.jpg
+Date Created:  1950-03-29       666
+98-1720.jpg
+Date Created:  1950-03-30       667
+98-1721.jpg
+Date Created:  1950-03-30       668
+98-3020.jpg
+Date Created:  1950-04-00       669
+98-1716.jpg
+Date Created:  1950-04-01       670
+98-1728.jpg
+Date Created:  1950-04-05       671
+98-1727.jpg
+Date Created:  1950-04-05       672
+98-1718.jpg
+Date Created:  1950-04-06       673
+98-1732.jpg
+Date Created:  1950-04-06       674
+98-1717.jpg
+Date Created:  1950-04-07       675
+98-1498.jpg
+Date Created:  1950-05-06       676
+98-1668.jpg
+Date Created:  1950-05-11       677
+98-1669.jpg
+Date Created:  1950-05-11       678
+98-643.jpg
+Date Created:  1950-05-14       679
+98-675.jpg
+Date Created:  1950-05-14       680
+98-1509.jpg
+Date Created:  1950-05-15       681
+98-1510.jpg
+Date Created:  1950-05-15       682
+98-1520.jpg
+Date Created:  1950-05-15       683
+98-1524.jpg
+Date Created:  1950-05-15       684
+98-1494.jpg
+Date Created:  1950-05-15       685
+98-1518.jpg
+Date Created:  1950-05-15       686
+98-640.jpg
+Date Created:  1950-05-15       687
+98-676.jpg
+Date Created:  1950-05-15       688
+98-1478.jpg
+Date Created:  1950-05-15       689
+98-1527.jpg
+Date Created:  1950-05-15       690
+98-1658.jpg
+Date Created:  1950-06-09       691
+98-1643.jpg
+Date Created:  1950-06-09       692
+98-1652.jpg
+Date Created:  1950-06-09       693
+98-1653.jpg
+Date Created:  1950-06-09       694
+98-1654.jpg
+Date Created:  1950-06-09       695
+98-1672.jpg
+Date Created:  1950-06-10       696
+98-1661.jpg
+Date Created:  1950-06-11       697
+98-1666.jpg
+Date Created:  1950-06-11       698
+98-1671.jpg
+Date Created:  1950-06-11       699
+98-1665.jpg
+Date Created:  1950-06-11       700
+98-1670.jpg
+Date Created:  1950-06-11       701
+98-1660.jpg
+Date Created:  1950-06-11       702
+98-1667.jpg
+Date Created:  1950-06-11       703
+98-1673.jpg
+Date Created:  1950-06-11       704
+98-680.jpg
+Date Created:  1950-06-14       705
+98-639.jpg
+Date Created:  1950-06-14       706
+98-635.jpg
+Date Created:  1950-06-14       707
+98-634.jpg
+Date Created:  1950-06-15       708
+98-667.jpg
+Date Created:  1950-06-15       709
+98-671.jpg
+Date Created:  1950-06-15       710
+98-672.jpg
+Date Created:  1950-06-15       711
+98-679.jpg
+Date Created:  1950-06-15       712
+98-684.jpg
+Date Created:  1950-06-15       713
+98-1479.jpg
+Date Created:  1950-06-15       714
+98-1485.jpg
+Date Created:  1950-06-15       715
+98-1487.jpg
+Date Created:  1950-06-15       716
+98-1490.jpg
+Date Created:  1950-06-15       717
+98-1492.jpg
+Date Created:  1950-06-15       718
+98-1497.jpg
+Date Created:  1950-06-15       719
+98-1505.jpg
+Date Created:  1950-06-15       720
+98-1517.jpg
+Date Created:  1950-06-15       721
+98-637.jpg
+Date Created:  1950-06-15       722
+98-666.jpg
+Date Created:  1950-06-15       723
+98-674.jpg
+Date Created:  1950-06-15       724
+98-1484.jpg
+Date Created:  1950-06-15       725
+98-1486.jpg
+Date Created:  1950-06-15       726
+98-1491.jpg
+Date Created:  1950-06-15       727
+98-1496.jpg
+Date Created:  1950-06-15       728
+98-1502.jpg
+Date Created:  1950-06-15       729
+98-1507.jpg
+Date Created:  1950-06-15       730
+98-1513.jpg
+Date Created:  1950-06-15       731
+98-1523.jpg
+Date Created:  1950-06-15       732
+98-642.jpg
+Date Created:  1950-06-15       733
+98-668.jpg
+Date Created:  1950-06-15       734
+98-670.jpg
+Date Created:  1950-06-15       735
+98-677.jpg
+Date Created:  1950-06-15       736
+98-1489.jpg
+Date Created:  1950-06-15       737
+98-1493.jpg
+Date Created:  1950-06-15       738
+98-1499.jpg
+Date Created:  1950-06-15       739
+98-1500.jpg
+Date Created:  1950-06-15       740
+98-1503.jpg
+Date Created:  1950-06-15       741
+98-1508.jpg
+Date Created:  1950-06-15       742
+98-1511.jpg
+Date Created:  1950-06-15       743
+98-630.jpg
+Date Created:  1950-06-15       744
+98-665.jpg
+Date Created:  1950-06-15       745
+98-673.jpg
+Date Created:  1950-06-15       746
+98-678.jpg
+Date Created:  1950-06-15       747
+98-681.jpg
+Date Created:  1950-06-15       748
+98-629.jpg
+Date Created:  1950-06-15       749
+98-631.jpg
+Date Created:  1950-06-15       750
+98-1476.jpg
+Date Created:  1950-06-15       751
+98-1501.jpg
+Date Created:  1950-06-15       752
+98-1504.jpg
+Date Created:  1950-06-15       753
+98-1506.jpg
+Date Created:  1950-06-15       754
+98-1514.jpg
+Date Created:  1950-06-15       755
+98-1515.jpg
+Date Created:  1950-06-15       756
+98-1521.jpg
+Date Created:  1950-06-15       757
+98-1519.jpg
+Date Created:  1950-06-15       758
+98-1526.jpg
+Date Created:  1950-06-15       759
+98-1528.jpg
+Date Created:  1950-06-15       760
+98-632.jpg
+Date Created:  1950-06-15       761
+98-633.jpg
+Date Created:  1950-06-15       762
+98-636.jpg
+Date Created:  1950-06-15       763
+98-682.jpg
+Date Created:  1950-06-15       764
+98-1477.jpg
+Date Created:  1950-06-15       765
+98-1480.jpg
+Date Created:  1950-06-15       766
+98-1481.jpg
+Date Created:  1950-06-15       767
+98-1495.jpg
+Date Created:  1950-06-15       768
+98-1512.jpg
+Date Created:  1950-06-15       769
+98-1516.jpg
+Date Created:  1950-06-15       770
+98-1522.jpg
+Date Created:  1950-06-15       771
+98-1525.jpg
+Date Created:  1950-06-15       772
+98-669.jpg
+Date Created:  1950-06-16       773
+98-2892.jpg
+Date Created:  1950-09-22       774
+98-2899.jpg
+Date Created:  1950-09-22       775
+98-1185.jpg
+Date Created:  1950-10-00       776
+98-1152.jpg
+Date Created:  1950-10-00       777
+98-1179.jpg
+Date Created:  1950-10-00       778
+98-1151.jpg
+Date Created:  1950-10-00       779
+98-1183.jpg
+Date Created:  1950-10-00       780
+98-1812.jpg
+Date Created:  1950-10-08       781
+98-1167.jpg
+Date Created:  1950-10-13       782
+98-1158.jpg
+Date Created:  1950-10-13       783
+98-1165.jpg
+Date Created:  1950-10-13       784
+98-1174.jpg
+Date Created:  1950-10-15       785
+98-1176.jpg
+Date Created:  1950-10-15       786
+98-1180.jpg
+Date Created:  1950-10-15       787
+98-18.jpg
+Date Created:  1950-12-23       788
+98-118.jpg
+Date Created:  1951-00-00       789
+98-3008.jpg
+Date Created:  1951-02-01       790
+98-3003.jpg
+Date Created:  1951-02-01       791
+98-3004.jpg
+Date Created:  1951-02-01       792
+98-2250.jpg
+Date Created:  1951-02-08       793
+98-57.jpg
+Date Created:  1951-03-09       794
+98-86.jpg
+Date Created:  1951-03-15       795
+98-40.jpg
+Date Created:  1951-05-07       796
+98-141.jpg
+Date Created:  1951-09-08       797
+98-25.jpg
+Date Created:  1951-10-31       798
+98-1809.jpg
+Date Created:  1951-11-08       799
+98-1826.jpg
+Date Created:  1951-11-12       800
+98-1825.jpg
+Date Created:  1951-11-12       801
+98-1823.jpg
+Date Created:  1951-11-24       802
+98-1815.jpg
+Date Created:  1951-12-04       803
+98-41.jpg
+Date Created:  1951-12-28       804
+98-518.jpg
+Date Created:  1952-00-00       805
+98-521.jpg
+Date Created:  1952-00-00       806
+98-519.jpg
+Date Created:  1952-00-00       807
+98-520.jpg
+Date Created:  1952-00-00       808
+98-844.jpg
+Date Created:  1952-01-05       809
+98-847.jpg
+Date Created:  1952-01-05       810
+98-845.jpg
+Date Created:  1952-01-05       811
+98-843.jpg
+Date Created:  1952-01-05       812
+98-2251.jpg
+Date Created:  1952-02-08       813
+98-2244.jpg
+Date Created:  1952-03-07       814
+98-2248.jpg
+Date Created:  1952-03-07       815
+98-2242.jpg
+Date Created:  1952-03-07       816
+98-2245.jpg
+Date Created:  1952-03-07       817
+98-2249.jpg
+Date Created:  1952-03-07       818
+98-2252.jpg
+Date Created:  1952-03-08       819
+98-42.jpg
+Date Created:  1952-03-24       820
+98-59.jpg
+Date Created:  1952-03-29       821
+98-60.jpg
+Date Created:  1952-03-29       822
+98-75.jpg
+Date Created:  1952-03-29       823
+98-68.jpg
+Date Created:  1952-03-29       824
+98-77.jpg
+Date Created:  1952-03-29       825
+98-78.jpg
+Date Created:  1952-03-29       826
+98-70.jpg
+Date Created:  1952-03-29       827
+98-71.jpg
+Date Created:  1952-03-29       828
+98-72.jpg
+Date Created:  1952-03-29       829
+98-58.jpg
+Date Created:  1952-03-29       830
+98-61.jpg
+Date Created:  1952-03-29       831
+98-65.jpg
+Date Created:  1952-03-29       832
+98-67.jpg
+Date Created:  1952-03-29       833
+98-69.jpg
+Date Created:  1952-03-29       834
+98-73.jpg
+Date Created:  1952-03-29       835
+98-62.jpg
+Date Created:  1952-03-29       836
+98-64.jpg
+Date Created:  1952-03-29       837
+98-74.jpg
+Date Created:  1952-03-29       838
+98-63.jpg
+Date Created:  1952-03-29       839
+98-66.jpg
+Date Created:  1952-03-29       840
+98-76.jpg
+Date Created:  1952-03-29       841
+98-43.jpg
+Date Created:  1952-04-02       842
+98-513.jpg
+Date Created:  1952-05-02       843
+98-516.jpg
+Date Created:  1952-05-02       844
+98-510.jpg
+Date Created:  1952-05-02       845
+98-508.jpg
+Date Created:  1952-05-02       846
+98-512.jpg
+Date Created:  1952-05-02       847
+98-511.jpg
+Date Created:  1952-05-02       848
+98-514.jpg
+Date Created:  1952-06-02       849
+98-509.jpg
+Date Created:  1952-06-02       850
+98-515.jpg
+Date Created:  1952-06-02       851
+98-517.jpg
+Date Created:  1952-06-02       852
+98-5.jpg
+Date Created:  1952-06-07       853
+98-85.jpg
+Date Created:  1952-07-25       854
+98-6.jpg
+Date Created:  1952-09-03       855
+98-79.jpg
+Date Created:  1952-10-00       856
+98-9.jpg
+Date Created:  1952-10-00       857
+98-7.jpg
+Date Created:  1952-10-11       858
+98-8.jpg
+Date Created:  1952-10-16       859
+98-111.jpg
+Date Created:  1953-01-15       860
+98-713.jpg
+Date Created:  1953-04-18       861
+98-711.jpg
+Date Created:  1953-04-18       862
+98-718.jpg
+Date Created:  1953-04-18       863
+98-728.jpg
+Date Created:  1953-04-18       864
+98-730.jpg
+Date Created:  1953-04-18       865
+98-714.jpg
+Date Created:  1953-04-18       866
+98-715.jpg
+Date Created:  1953-04-18       867
+98-716.jpg
+Date Created:  1953-04-18       868
+98-719.jpg
+Date Created:  1953-04-18       869
+98-724.jpg
+Date Created:  1953-04-18       870
+98-731.jpg
+Date Created:  1953-04-18       871
+98-734.jpg
+Date Created:  1953-04-18       872
+98-712.jpg
+Date Created:  1953-04-18       873
+98-720.jpg
+Date Created:  1953-04-18       874
+98-723.jpg
+Date Created:  1953-04-18       875
+98-725.jpg
+Date Created:  1953-04-18       876
+98-726.jpg
+Date Created:  1953-04-18       877
+98-710.jpg
+Date Created:  1953-04-18       878
+98-717.jpg
+Date Created:  1953-04-18       879
+98-721.jpg
+Date Created:  1953-04-18       880
+98-722.jpg
+Date Created:  1953-04-18       881
+98-727.jpg
+Date Created:  1953-04-18       882
+98-729.jpg
+Date Created:  1953-04-18       883
+98-733.jpg
+Date Created:  1953-04-18       884
+98-709.jpg
+Date Created:  1953-04-18       885
+98-102.jpg
+Date Created:  1953-11-18       886
+98-1006.jpg
+Date Created:  1954-00-00       887
+98-994.jpg
+Date Created:  1955-00-00       888
+98-1005.jpg
+Date Created:  1955-00-00       889
+98-1443.jpg
+Date Created:  1955-00-00       890
+98-988.jpg
+Date Created:  1955-00-00       891
+98-997.jpg
+Date Created:  1955-00-00       892
+98-986.jpg
+Date Created:  1955-00-00       893
+98-993.jpg
+Date Created:  1955-00-00       894
+98-995.jpg
+Date Created:  1955-00-00       895
+98-982.jpg
+Date Created:  1955-03-00       896
+98-981.jpg
+Date Created:  1955-03-00       897
+98-1002.jpg
+Date Created:  1955-03-00       898
+98-980.jpg
+Date Created:  1955-03-00       899
+98-1003.jpg
+Date Created:  1955-03-00       900
+98-999.jpg
+Date Created:  1955-03-00       901
+98-1434.jpg
+Date Created:  1956-00-00       902
+98-1435.jpg
+Date Created:  1956-00-00       903
+98-1436.jpg
+Date Created:  1956-00-00       904
+98-1450.jpg
+Date Created:  1956-00-00       905
+98-1437.jpg
+Date Created:  1956-00-00       906
+98-1438.jpg
+Date Created:  1956-00-00       907
+98-1440.jpg
+Date Created:  1956-00-00       908
+98-1445.jpg
+Date Created:  1956-00-00       909
+98-1446.jpg
+Date Created:  1956-00-00       910
+98-1428.jpg
+Date Created:  1956-00-00       911
+98-1429.jpg
+Date Created:  1956-00-00       912
+98-1447.jpg
+Date Created:  1956-00-00       913
+98-1449.jpg
+Date Created:  1956-00-00       914
+98-1451.jpg
+Date Created:  1956-00-00       915
+98-1452.jpg
+Date Created:  1956-00-00       916
+98-1430.jpg
+Date Created:  1956-00-00       917
+98-1432.jpg
+Date Created:  1956-00-00       918
+98-1439.jpg
+Date Created:  1956-00-00       919
+98-1441.jpg
+Date Created:  1956-00-00       920
+98-1444.jpg
+Date Created:  1956-00-00       921
+98-1427.jpg
+Date Created:  1956-00-00       922
+98-1431.jpg
+Date Created:  1956-00-00       923
+98-1442.jpg
+Date Created:  1956-00-00       924
+98-1448.jpg
+Date Created:  1956-00-00       925
+98-1453.jpg
+Date Created:  1956-00-00       926
+98-1610.jpg
+Date Created:  1956-05-12       927
+98-1609.jpg
+Date Created:  1956-05-12       928
+98-1608.jpg
+Date Created:  1956-06-12       929
+98-1607.jpg
+Date Created:  1956-06-12       930
+98-1908.jpg
+Date Created:  1957-02-22       931
+98-1901.jpg
+Date Created:  1957-03-22       932
+98-1932.jpg
+Date Created:  1957-03-22       933
+98-1930.jpg
+Date Created:  1957-03-22       934
+98-1905.jpg
+Date Created:  1957-03-22       935
+98-1929.jpg
+Date Created:  1957-03-22       936
+98-523.jpg
+Date Created:  1957-04-09       937
+98-535.jpg
+Date Created:  1957-04-09       938
+98-537.jpg
+Date Created:  1957-04-09       939
+98-539.jpg
+Date Created:  1957-04-09       940
+98-540.jpg
+Date Created:  1957-04-09       941
+98-541.jpg
+Date Created:  1957-04-09       942
+98-548.jpg
+Date Created:  1957-04-09       943
+98-550.jpg
+Date Created:  1957-04-09       944
+98-551.jpg
+Date Created:  1957-04-09       945
+98-559.jpg
+Date Created:  1957-04-09       946
+98-562.jpg
+Date Created:  1957-04-09       947
+98-569.jpg
+Date Created:  1957-04-09       948
+98-526.jpg
+Date Created:  1957-04-09       949
+98-527.jpg
+Date Created:  1957-04-09       950
+98-528.jpg
+Date Created:  1957-04-09       951
+98-529.jpg
+Date Created:  1957-04-09       952
+98-530.jpg
+Date Created:  1957-04-09       953
+98-533.jpg
+Date Created:  1957-04-09       954
+98-534.jpg
+Date Created:  1957-04-09       955
+98-536.jpg
+Date Created:  1957-04-09       956
+98-542.jpg
+Date Created:  1957-04-09       957
+98-544.jpg
+Date Created:  1957-04-09       958
+98-560.jpg
+Date Created:  1957-04-09       959
+98-563.jpg
+Date Created:  1957-04-09       960
+98-566.jpg
+Date Created:  1957-04-09       961
+98-568.jpg
+Date Created:  1957-04-09       962
+98-570.jpg
+Date Created:  1957-04-09       963
+98-573.jpg
+Date Created:  1957-04-09       964
+98-538.jpg
+Date Created:  1957-04-09       965
+98-545.jpg
+Date Created:  1957-04-09       966
+98-547.jpg
+Date Created:  1957-04-09       967
+98-554.jpg
+Date Created:  1957-04-09       968
+98-557.jpg
+Date Created:  1957-04-09       969
+98-565.jpg
+Date Created:  1957-04-09       970
+98-572.jpg
+Date Created:  1957-04-09       971
+98-574.jpg
+Date Created:  1957-04-09       972
+98-531.jpg
+Date Created:  1957-04-09       973
+98-532.jpg
+Date Created:  1957-04-09       974
+98-549.jpg
+Date Created:  1957-04-09       975
+98-552.jpg
+Date Created:  1957-04-09       976
+98-555.jpg
+Date Created:  1957-04-09       977
+98-556.jpg
+Date Created:  1957-04-09       978
+98-564.jpg
+Date Created:  1957-04-09       979
+98-575.jpg
+Date Created:  1957-04-09       980
+98-522.jpg
+Date Created:  1957-04-09       981
+98-524.jpg
+Date Created:  1957-04-09       982
+98-525.jpg
+Date Created:  1957-04-09       983
+98-543.jpg
+Date Created:  1957-04-09       984
+98-546.jpg
+Date Created:  1957-04-09       985
+98-553.jpg
+Date Created:  1957-04-09       986
+98-558.jpg
+Date Created:  1957-04-09       987
+98-561.jpg
+Date Created:  1957-04-09       988
+98-567.jpg
+Date Created:  1957-04-09       989
+98-571.jpg
+Date Created:  1957-04-09       990
+98-945.jpg
+Date Created:  1957-11-09       991
+98-956.jpg
+Date Created:  1957-11-09       992
+98-962.jpg
+Date Created:  1957-11-09       993
+98-963.jpg
+Date Created:  1957-11-09       994
+98-964.jpg
+Date Created:  1957-11-09       995
+98-946.jpg
+Date Created:  1957-11-09       996
+98-949.jpg
+Date Created:  1957-11-09       997
+98-951.jpg
+Date Created:  1957-11-09       998
+98-954.jpg
+Date Created:  1957-11-09       999
+98-958.jpg
+Date Created:  1957-11-09       1000
+98-958.jpg
+Date Created:  1957-11-09       1001
+98-966.jpg
+Date Created:  1957-11-09       1002
+98-978.jpg
+Date Created:  1957-11-09       1003
+98-948.jpg
+Date Created:  1957-11-09       1004
+98-950.jpg
+Date Created:  1957-11-09       1005
+98-952.jpg
+Date Created:  1957-11-09       1006
+98-953.jpg
+Date Created:  1957-11-09       1007
+98-959.jpg
+Date Created:  1957-11-09       1008
+98-965.jpg
+Date Created:  1957-11-09       1009
+98-969.jpg
+Date Created:  1957-11-09       1010
+98-976.jpg
+Date Created:  1957-11-09       1011
+98-955.jpg
+Date Created:  1957-11-09       1012
+98-957.jpg
+Date Created:  1957-11-09       1013
+98-960.jpg
+Date Created:  1957-11-09       1014
+98-961.jpg
+Date Created:  1957-11-09       1015
+98-968.jpg
+Date Created:  1957-11-09       1016
+98-974.jpg
+Date Created:  1957-11-09       1017
+98-975.jpg
+Date Created:  1957-11-09       1018
+98-947.jpg
+Date Created:  1957-11-09       1019
+98-967.jpg
+Date Created:  1957-11-09       1020
+98-970.jpg
+Date Created:  1957-11-09       1021
+98-971.jpg
+Date Created:  1957-11-09       1022
+98-972.jpg
+Date Created:  1957-11-09       1023
+98-973.jpg
+Date Created:  1957-11-09       1024
+98-977.jpg
+Date Created:  1957-11-09       1025
+98-88.jpg
+Date Created:  1957-11-12       1026
+98-1555.jpg
+Date Created:  1958-01-19       1027
+98-1553.jpg
+Date Created:  1958-01-19       1028
+98-1554.jpg
+Date Created:  1958-01-19       1029
+98-1920.jpg
+Date Created:  1958-01-22       1030
+98-1557.jpg
+Date Created:  1958-02-06       1031
+98-1561.jpg
+Date Created:  1958-02-06       1032
+98-1558.jpg
+Date Created:  1958-02-06       1033
+98-1562.jpg
+Date Created:  1958-02-06       1034
+98-1563.jpg
+Date Created:  1958-02-06       1035
+98-1559.jpg
+Date Created:  1958-02-06       1036
+98-1560.jpg
+Date Created:  1958-02-06       1037
+98-1911.jpg
+Date Created:  1958-02-22       1038
+98-1917.jpg
+Date Created:  1958-02-22       1039
+98-1900.jpg
+Date Created:  1958-02-22       1040
+98-1923.jpg
+Date Created:  1958-02-22       1041
+98-1907.jpg
+Date Created:  1958-02-22       1042
+98-1914.jpg
+Date Created:  1958-02-22       1043
+98-1921.jpg
+Date Created:  1958-02-22       1044
+98-1924.jpg
+Date Created:  1958-03-21       1045
+98-1895.jpg
+Date Created:  1958-03-22       1046
+98-1896.jpg
+Date Created:  1958-03-22       1047
+98-1894.jpg
+Date Created:  1958-03-22       1048
+98-1916.jpg
+Date Created:  1958-03-22       1049
+98-1913.jpg
+Date Created:  1958-03-22       1050
+98-1927.jpg
+Date Created:  1958-03-22       1051
+98-601.jpg
+Date Created:  1958-03-22       1052
+98-605.jpg
+Date Created:  1958-03-22       1053
+98-578.jpg
+Date Created:  1958-03-22       1054
+98-1906.jpg
+Date Created:  1958-03-22       1055
+98-1915.jpg
+Date Created:  1958-03-22       1056
+98-1922.jpg
+Date Created:  1958-03-22       1057
+98-1897.jpg
+Date Created:  1958-03-22       1058
+98-1904.jpg
+Date Created:  1958-03-22       1059
+98-1912.jpg
+Date Created:  1958-03-22       1060
+98-1918.jpg
+Date Created:  1958-03-22       1061
+98-1919.jpg
+Date Created:  1958-03-22       1062
+98-1926.jpg
+Date Created:  1958-03-22       1063
+98-1931.jpg
+Date Created:  1958-03-22       1064
+98-1933.jpg
+Date Created:  1958-03-22       1065
+98-589.jpg
+Date Created:  1958-03-22       1066
+98-1899.jpg
+Date Created:  1958-03-22       1067
+98-1925.jpg
+Date Created:  1958-03-22       1068
+98-1902.jpg
+Date Created:  1958-03-22       1069
+98-1903.jpg
+Date Created:  1958-03-22       1070
+98-1893.jpg
+Date Created:  1958-03-22       1071
+98-1910.jpg
+Date Created:  1958-03-22       1072
+98-1898.jpg
+Date Created:  1958-03-22       1073
+98-577.jpg
+Date Created:  1958-03-22       1074
+98-602.jpg
+Date Created:  1958-03-22       1075
+98-604.jpg
+Date Created:  1958-03-22       1076
+98-1074.jpg
+Date Created:  1958-04-00       1077
+98-1079.jpg
+Date Created:  1958-04-00       1078
+98-1082.jpg
+Date Created:  1958-04-00       1079
+98-1090.jpg
+Date Created:  1958-04-00       1080
+98-1062.jpg
+Date Created:  1958-04-00       1081
+98-1065.jpg
+Date Created:  1958-04-00       1082
+98-1067.jpg
+Date Created:  1958-04-00       1083
+98-1068.jpg
+Date Created:  1958-04-00       1084
+98-1087.jpg
+Date Created:  1958-04-00       1085
+98-1088.jpg
+Date Created:  1958-04-00       1086
+98-1061.jpg
+Date Created:  1958-04-00       1087
+98-1063.jpg
+Date Created:  1958-04-00       1088
+98-1070.jpg
+Date Created:  1958-04-00       1089
+98-1072.jpg
+Date Created:  1958-04-00       1090
+98-1078.jpg
+Date Created:  1958-04-00       1091
+98-1086.jpg
+Date Created:  1958-04-00       1092
+98-1060.jpg
+Date Created:  1958-04-00       1093
+98-1064.jpg
+Date Created:  1958-04-00       1094
+98-1066.jpg
+Date Created:  1958-04-00       1095
+98-1069.jpg
+Date Created:  1958-04-00       1096
+98-1071.jpg
+Date Created:  1958-04-00       1097
+98-1075.jpg
+Date Created:  1958-04-00       1098
+98-1077.jpg
+Date Created:  1958-04-00       1099
+98-1081.jpg
+Date Created:  1958-04-00       1100
+98-1089.jpg
+Date Created:  1958-04-00       1101
+98-1073.jpg
+Date Created:  1958-04-00       1102
+98-1076.jpg
+Date Created:  1958-04-00       1103
+98-1080.jpg
+Date Created:  1958-04-00       1104
+98-1083.jpg
+Date Created:  1958-04-00       1105
+98-1085.jpg
+Date Created:  1958-04-00       1106
+98-757.jpg
+Date Created:  1959-04-00       1107
+98-759.jpg
+Date Created:  1959-04-00       1108
+98-770.jpg
+Date Created:  1959-04-00       1109
+98-779.jpg
+Date Created:  1959-04-00       1110
+98-760.jpg
+Date Created:  1959-04-00       1111
+98-766.jpg
+Date Created:  1959-04-00       1112
+98-767.jpg
+Date Created:  1959-04-00       1113
+98-768.jpg
+Date Created:  1959-04-00       1114
+98-769.jpg
+Date Created:  1959-04-00       1115
+98-774.jpg
+Date Created:  1959-04-00       1116
+98-758.jpg
+Date Created:  1959-04-00       1117
+98-761.jpg
+Date Created:  1959-04-00       1118
+98-762.jpg
+Date Created:  1959-04-00       1119
+98-771.jpg
+Date Created:  1959-04-00       1120
+98-772.jpg
+Date Created:  1959-04-00       1121
+98-773.jpg
+Date Created:  1959-04-00       1122
+98-775.jpg
+Date Created:  1959-04-00       1123
+98-778.jpg
+Date Created:  1959-04-00       1124
+98-763.jpg
+Date Created:  1959-04-00       1125
+98-764.jpg
+Date Created:  1959-04-00       1126
+98-776.jpg
+Date Created:  1959-04-00       1127
+98-765.jpg
+Date Created:  1959-04-00       1128
+98-777.jpg
+Date Created:  1959-04-00       1129
+98-1027.jpg
+Date Created:  1959-04-27       1130
+98-1030.jpg
+Date Created:  1959-04-27       1131
+98-1031.jpg
+Date Created:  1959-04-27       1132
+98-1033.jpg
+Date Created:  1959-04-27       1133
+98-1035.jpg
+Date Created:  1959-04-27       1134
+98-1034.jpg
+Date Created:  1959-04-27       1135
+98-1039.jpg
+Date Created:  1959-04-27       1136
+98-1024.jpg
+Date Created:  1959-04-27       1137
+98-1029.jpg
+Date Created:  1959-04-27       1138
+98-1037.jpg
+Date Created:  1959-04-27       1139
+98-1025.jpg
+Date Created:  1959-04-27       1140
+98-1036.jpg
+Date Created:  1959-04-27       1141
+98-1040.jpg
+Date Created:  1959-04-27       1142
+98-1028.jpg
+Date Created:  1959-04-27       1143
+98-1032.jpg
+Date Created:  1959-04-27       1144
+98-1760.jpg
+Date Created:  1959-04-28       1145
+98-1762.jpg
+Date Created:  1959-04-28       1146
+98-1765.jpg
+Date Created:  1959-04-28       1147
+98-1767.jpg
+Date Created:  1959-04-28       1148
+98-1044.jpg
+Date Created:  1959-04-28       1149
+98-1049.jpg
+Date Created:  1959-04-28       1150
+98-1052.jpg
+Date Created:  1959-04-28       1151
+98-1047.jpg
+Date Created:  1959-04-28       1152
+98-1051.jpg
+Date Created:  1959-04-28       1153
+98-1057.jpg
+Date Created:  1959-04-28       1154
+98-1763.jpg
+Date Created:  1959-04-28       1155
+98-1770.jpg
+Date Created:  1959-04-28       1156
+98-1761.jpg
+Date Created:  1959-04-28       1157
+98-1764.jpg
+Date Created:  1959-04-28       1158
+98-1769.jpg
+Date Created:  1959-04-28       1159
+98-1046.jpg
+Date Created:  1959-04-28       1160
+98-1056.jpg
+Date Created:  1959-04-28       1161
+98-1766.jpg
+Date Created:  1959-04-28       1162
+98-1042.jpg
+Date Created:  1959-04-28       1163
+98-1045.jpg
+Date Created:  1959-04-28       1164
+98-1759.jpg
+Date Created:  1959-04-28       1165
+98-1768.jpg
+Date Created:  1959-04-28       1166
+98-1041.jpg
+Date Created:  1959-04-28       1167
+98-1048.jpg
+Date Created:  1959-04-28       1168
+98-1050.jpg
+Date Created:  1959-04-28       1169
+98-1053.jpg
+Date Created:  1959-04-28       1170
+98-1058.jpg
+Date Created:  1959-04-29       1171
+98-117.jpg
+Date Created:  1960-00-00       1172
+98-1011.jpg
+Date Created:  1960-00-00       1173
+98-1019.jpg
+Date Created:  1960-00-00       1174
+98-1007.jpg
+Date Created:  1960-00-00       1175
+98-1012.jpg
+Date Created:  1960-00-00       1176
+98-1934.jpg
+Date Created:  1960-00-00       1177
+98-396.jpg
+Date Created:  1960-00-00       1178
+98-1009.jpg
+Date Created:  1960-00-00       1179
+98-1010.jpg
+Date Created:  1960-00-00       1180
+98-1013.jpg
+Date Created:  1960-00-00       1181
+98-1014.jpg
+Date Created:  1960-00-00       1182
+98-1018.jpg
+Date Created:  1960-00-00       1183
+98-1020.jpg
+Date Created:  1960-00-00       1184
+98-1022.jpg
+Date Created:  1960-00-00       1185
+98-1935.jpg
+Date Created:  1960-00-00       1186
+98-397.jpg
+Date Created:  1960-00-00       1187
+98-1008.jpg
+Date Created:  1960-00-00       1188
+98-1017.jpg
+Date Created:  1960-00-00       1189
+98-1021.jpg
+Date Created:  1960-00-00       1190
+98-376.jpg
+Date Created:  1960-00-00       1191
+98-1015.jpg
+Date Created:  1960-00-00       1192
+98-1016.jpg
+Date Created:  1960-00-00       1193
+98-126.jpg
+Date Created:  1960-04-00       1194
+98-123.jpg
+Date Created:  1960-05-10       1195
+98-936.jpg
+Date Created:  1960-10-28       1196
+98-930.jpg
+Date Created:  1960-10-28       1197
+98-900.jpg
+Date Created:  1960-10-28       1198
+98-937.jpg
+Date Created:  1960-10-28       1199
+98-901.jpg
+Date Created:  1960-10-28       1200
+98-943.jpg
+Date Created:  1960-10-28       1201
+98-929.jpg
+Date Created:  1960-10-28       1202
+98-887.jpg
+Date Created:  1960-10-28       1203
+98-204.jpg
+Date Created:  1961-00-00       1204
+98-2784.jpg
+Date Created:  1961-00-00       1205
+98-2770.jpg
+Date Created:  1961-02-01       1206
+98-1808.jpg
+Date Created:  1961-05-17       1207
+98-1791.jpg
+Date Created:  1961-06-17       1208
+98-1805.jpg
+Date Created:  1961-06-17       1209
+98-1794.jpg
+Date Created:  1961-06-17       1210
+98-1792.jpg
+Date Created:  1961-06-17       1211
+98-1800.jpg
+Date Created:  1961-06-17       1212
+98-1807.jpg
+Date Created:  1961-06-17       1213
+98-1802.jpg
+Date Created:  1961-06-17       1214
+98-1803.jpg
+Date Created:  1961-06-17       1215
+98-1793.jpg
+Date Created:  1961-06-17       1216
+98-1795.jpg
+Date Created:  1961-06-17       1217
+98-1796.jpg
+Date Created:  1961-06-17       1218
+98-1797.jpg
+Date Created:  1961-06-17       1219
+98-1806.jpg
+Date Created:  1961-06-17       1220
+98-1799.jpg
+Date Created:  1961-06-17       1221
+98-1801.jpg
+Date Created:  1961-06-17       1222
+98-1804.jpg
+Date Created:  1961-06-17       1223
+98-459.jpg
+Date Created:  1961-08-00       1224
+98-446.jpg
+Date Created:  1961-08-00       1225
+98-448.jpg
+Date Created:  1961-08-00       1226
+98-447.jpg
+Date Created:  1961-08-00       1227
+98-2768.jpg
+Date Created:  1962-03-01       1228
+98-2769.jpg
+Date Created:  1962-03-01       1229
+98-2759.jpg
+Date Created:  1962-05-31       1230
+98-144.jpg
+Date Created:  1962-06-14       1231
+98-2736.jpg
+Date Created:  1962-08-02       1232
+98-2722.jpg
+Date Created:  1962-08-10       1233
+98-2723.jpg
+Date Created:  1962-08-10       1234
+98-2724.jpg
+Date Created:  1962-08-10       1235
+98-2725.jpg
+Date Created:  1962-08-10       1236
+98-2719.jpg
+Date Created:  1962-09-00       1237
+98-145.jpg
+Date Created:  1962-09-00       1238
+98-2718.jpg
+Date Created:  1962-09-00       1239
+98-2717.jpg
+Date Created:  1962-09-00       1240
+98-825.jpg
+Date Created:  1962-09-06       1241
+98-828.jpg
+Date Created:  1962-09-06       1242
+98-839.jpg
+Date Created:  1962-09-06       1243
+98-2713.jpg
+Date Created:  1962-09-10       1244
+98-2710.jpg
+Date Created:  1962-09-10       1245
+98-2714.jpg
+Date Created:  1962-09-10       1246
+98-2708.jpg
+Date Created:  1962-09-10       1247
+98-2711.jpg
+Date Created:  1962-09-10       1248
+98-2700.jpg
+Date Created:  1962-09-11       1249
+98-2704.jpg
+Date Created:  1962-09-11       1250
+98-2701.jpg
+Date Created:  1962-09-11       1251
+98-2702.jpg
+Date Created:  1962-09-11       1252
+98-2703.jpg
+Date Created:  1962-09-11       1253
+98-2705.jpg
+Date Created:  1962-09-11       1254
+98-2707.jpg
+Date Created:  1962-09-11       1255
+98-2706.jpg
+Date Created:  1962-09-11       1256
+98-157.jpg
+Date Created:  1962-10-03       1257
+98-824.jpg
+Date Created:  1962-10-06       1258
+98-822.jpg
+Date Created:  1962-10-06       1259
+98-829.jpg
+Date Created:  1962-10-06       1260
+98-833.jpg
+Date Created:  1962-10-06       1261
+98-837.jpg
+Date Created:  1962-10-06       1262
+98-826.jpg
+Date Created:  1962-10-06       1263
+98-830.jpg
+Date Created:  1962-10-06       1264
+98-831.jpg
+Date Created:  1962-10-06       1265
+98-832.jpg
+Date Created:  1962-10-06       1266
+98-836.jpg
+Date Created:  1962-10-06       1267
+98-840.jpg
+Date Created:  1962-10-06       1268
+98-841.jpg
+Date Created:  1962-10-06       1269
+98-842.jpg
+Date Created:  1962-10-06       1270
+98-817.jpg
+Date Created:  1962-10-06       1271
+98-820.jpg
+Date Created:  1962-10-06       1272
+98-823.jpg
+Date Created:  1962-10-06       1273
+98-818.jpg
+Date Created:  1962-10-06       1274
+98-819.jpg
+Date Created:  1962-10-06       1275
+98-821.jpg
+Date Created:  1962-10-06       1276
+98-827.jpg
+Date Created:  1962-10-06       1277
+98-834.jpg
+Date Created:  1962-10-06       1278
+98-835.jpg
+Date Created:  1962-10-06       1279
+98-838.jpg
+Date Created:  1962-10-06       1280
+98-2698.jpg
+Date Created:  1962-10-28       1281
+98-2699.jpg
+Date Created:  1962-10-28       1282
+98-2720.jpg
+Date Created:  1962-11-00       1283
+98-238.jpg
+Date Created:  1962-12-14       1284
+98-114.jpg
+Date Created:  1963-00-00       1285
+98-146.jpg
+Date Created:  1963-00-00       1286
+98-142.jpg
+Date Created:  1963-01-17       1287
+98-143.jpg
+Date Created:  1963-01-17       1288
+98-2520.jpg
+Date Created:  1963-03-05       1289
+98-2521.jpg
+Date Created:  1963-03-05       1290
+98-2527.jpg
+Date Created:  1963-03-09       1291
+98-2526.jpg
+Date Created:  1963-03-09       1292
+98-2537.jpg
+Date Created:  1963-04-00       1293
+98-2540.jpg
+Date Created:  1963-04-00       1294
+98-2538.jpg
+Date Created:  1963-04-00       1295
+98-2539.jpg
+Date Created:  1963-04-00       1296
+98-2535.jpg
+Date Created:  1963-04-15       1297
+98-89.jpg
+Date Created:  1963-06-13       1298
+98-2546.jpg
+Date Created:  1963-07-22       1299
+98-2543.jpg
+Date Created:  1963-07-22       1300
+98-2544.jpg
+Date Created:  1963-07-22       1301
+98-410.jpg
+Date Created:  1963-10-10       1302
+98-2801.jpg
+Date Created:  1964-00-00       1303
+98-2586.jpg
+Date Created:  1964-04-08       1304
+98-2553.jpg
+Date Created:  1964-04-13       1305
+98-2555.jpg
+Date Created:  1964-04-13       1306
+98-2554.jpg
+Date Created:  1964-04-13       1307
+98-2598.jpg
+Date Created:  1964-04-24       1308
+98-2590.jpg
+Date Created:  1964-05-08       1309
+98-2591.jpg
+Date Created:  1964-05-08       1310
+98-2585.jpg
+Date Created:  1964-05-08       1311
+98-2582.jpg
+Date Created:  1964-05-08       1312
+98-2583.jpg
+Date Created:  1964-05-08       1313
+98-2588.jpg
+Date Created:  1964-05-08       1314
+98-2592.jpg
+Date Created:  1964-05-08       1315
+98-2593.jpg
+Date Created:  1964-05-08       1316
+98-2587.jpg
+Date Created:  1964-05-08       1317
+98-2584.jpg
+Date Created:  1964-05-08       1318
+98-2589.jpg
+Date Created:  1964-05-08       1319
+98-2594.jpg
+Date Created:  1964-05-08       1320
+98-2596.jpg
+Date Created:  1964-05-24       1321
+98-2595.jpg
+Date Created:  1964-05-24       1322
+98-2597.jpg
+Date Created:  1964-05-24       1323
+98-2601.jpg
+Date Created:  1964-05-24       1324
+98-2602.jpg
+Date Created:  1964-05-24       1325
+98-2611.jpg
+Date Created:  1964-05-26       1326
+98-2628.jpg
+Date Created:  1964-07-04       1327
+98-2627.jpg
+Date Created:  1964-07-04       1328
+98-2626.jpg
+Date Created:  1964-07-04       1329
+98-2806.jpg
+Date Created:  1964-08-27       1330
+98-2831.jpg
+Date Created:  1964-08-27       1331
+98-2822.jpg
+Date Created:  1964-09-27       1332
+98-2826.jpg
+Date Created:  1964-09-27       1333
+98-2827.jpg
+Date Created:  1964-09-27       1334
+98-2823.jpg
+Date Created:  1964-09-27       1335
+98-2832.jpg
+Date Created:  1964-09-27       1336
+98-2820.jpg
+Date Created:  1964-09-27       1337
+98-2828.jpg
+Date Created:  1964-09-27       1338
+98-2819.jpg
+Date Created:  1964-09-27       1339
+98-2825.jpg
+Date Created:  1964-09-27       1340
+98-2821.jpg
+Date Created:  1964-09-27       1341
+98-2824.jpg
+Date Created:  1964-09-27       1342
+98-2830.jpg
+Date Created:  1964-09-27       1343
+98-2642.jpg
+Date Created:  1964-11-12       1344
+98-2645.jpg
+Date Created:  1964-11-12       1345
+98-2646.jpg
+Date Created:  1964-11-12       1346
+98-2641.jpg
+Date Created:  1964-11-12       1347
+98-2643.jpg
+Date Created:  1964-11-12       1348
+98-2644.jpg
+Date Created:  1964-11-12       1349
+98-2640.jpg
+Date Created:  1964-11-12       1350
+98-2651.jpg
+Date Created:  1964-12-16       1351
+98-2664.jpg
+Date Created:  1965-00-00       1352
+98-2662.jpg
+Date Created:  1965-00-00       1353
+98-2665.jpg
+Date Created:  1965-00-00       1354
+98-2666.jpg
+Date Created:  1965-00-00       1355
+98-2661.jpg
+Date Created:  1965-00-00       1356
+98-2659.jpg
+Date Created:  1965-00-00       1357
+98-2663.jpg
+Date Created:  1965-00-00       1358
+98-2681.jpg
+Date Created:  1965-00-00       1359
+98-2660.jpg
+Date Created:  1965-00-00       1360
+98-149.jpg
+Date Created:  1965-02-25       1361
+98-419.jpg
+Date Created:  1965-06-00       1362
+98-2680.jpg
+Date Created:  1965-06-29       1363
+98-2694.jpg
+Date Created:  1965-09-28       1364
+98-2693.jpg
+Date Created:  1965-10-28       1365
+98-2691.jpg
+Date Created:  1965-10-28       1366
+98-195.jpg
+Date Created:  1966-00-00       1367
+98-196.jpg
+Date Created:  1966-00-00       1368
+98-858.jpg
+Date Created:  1966-01-19       1369
+98-848.jpg
+Date Created:  1966-01-20       1370
+98-851.jpg
+Date Created:  1966-01-20       1371
+98-856.jpg
+Date Created:  1966-01-20       1372
+98-857.jpg
+Date Created:  1966-01-20       1373
+98-854.jpg
+Date Created:  1966-01-20       1374
+98-863.jpg
+Date Created:  1966-01-20       1375
+98-860.jpg
+Date Created:  1966-01-20       1376
+98-862.jpg
+Date Created:  1966-01-20       1377
+98-418.jpg
+Date Created:  1966-01-20       1378
+98-855.jpg
+Date Created:  1966-01-20       1379
+98-849.jpg
+Date Created:  1966-01-20       1380
+98-850.jpg
+Date Created:  1966-01-20       1381
+98-852.jpg
+Date Created:  1966-01-20       1382
+98-505.jpg
+Date Created:  1966-03-29       1383
+98-420.jpg
+Date Created:  1967-01-24       1384
+98-200.jpg
+Date Created:  1967-03-15       1385
+98-174.jpg
+Date Created:  1967-05-12       1386
+98-211.jpg
+Date Created:  1967-05-26       1387
+98-207.jpg
+Date Created:  1967-05-26       1388
+98-214.jpg
+Date Created:  1967-05-26       1389
+98-219.jpg
+Date Created:  1967-05-26       1390
+98-428.jpg
+Date Created:  1967-06-04       1391
+98-430.jpg
+Date Created:  1967-09-20       1392
+98-429.jpg
+Date Created:  1967-09-28       1393
+98-239.jpg
+Date Created:  1968-00-00       1394
+98-220.jpg
+Date Created:  1968-00-00       1395
+98-416.jpg
+Date Created:  1968-02-00       1396
+98-112.jpg
+Date Created:  1968-03-30       1397
+98-113.jpg
+Date Created:  1968-03-30       1398
+98-885.jpg
+Date Created:  1968-06-00       1399
+98-886.jpg
+Date Created:  1968-06-00       1400
+98-883.jpg
+Date Created:  1968-06-00       1401
+98-884.jpg
+Date Created:  1968-06-00       1402
+98-300.jpg
+Date Created:  1968-06-13       1403
+98-879.jpg
+Date Created:  1968-09-00       1404
+98-881.jpg
+Date Created:  1968-09-00       1405
+98-882.jpg
+Date Created:  1968-09-00       1406
+98-877.jpg
+Date Created:  1968-09-00       1407
+98-876.jpg
+Date Created:  1968-09-00       1408
+98-878.jpg
+Date Created:  1968-09-00       1409
+98-880.jpg
+Date Created:  1968-09-00       1410
+98-873.jpg
+Date Created:  1968-12-00       1411
+98-865.jpg
+Date Created:  1968-12-00       1412
+98-867.jpg
+Date Created:  1968-12-00       1413
+98-871.jpg
+Date Created:  1968-12-00       1414
+98-874.jpg
+Date Created:  1968-12-00       1415
+98-875.jpg
+Date Created:  1968-12-00       1416
+98-866.jpg
+Date Created:  1968-12-00       1417
+98-869.jpg
+Date Created:  1968-12-00       1418
+98-868.jpg
+Date Created:  1968-12-00       1419
+98-870.jpg
+Date Created:  1968-12-00       1420
+98-872.jpg
+Date Created:  1968-12-00       1421
+98-299.jpg
+Date Created:  1969-00-00       1422
+98-2239.jpg
+Date Created:  1974-00-00       1423
+98-1943.jpg
+Date Created:  1974-02-14       1424
+98-1940.jpg
+Date Created:  1974-02-14       1425
+98-1949.jpg
+Date Created:  1974-02-14       1426
+98-2241.jpg
+Date Created:  1974-09-07       1427
+98-2233.jpg
+Date Created:  1974-09-07       1428
+98-2240.jpg
+Date Created:  1974-09-07       1429
+98-2237.jpg
+Date Created:  1974-09-07       1430
+98-2217.jpg
+Date Created:  1974-09-07       1431
+98-2234.jpg
+Date Created:  1974-09-07       1432
+98-2235.jpg
+Date Created:  1974-09-07       1433
+98-2236.jpg
+Date Created:  1974-09-07       1434
+98-1944.jpg
+Date Created:  1975-01-14       1435
+98-1946.jpg
+Date Created:  1975-02-14       1436
+98-1948.jpg
+Date Created:  1975-02-14       1437
+98-1947.jpg
+Date Created:  1975-02-14       1438
+98-1945.jpg
+Date Created:  1975-02-14       1439
+98-1937.jpg
+Date Created:  1975-02-14       1440
+98-1938.jpg
+Date Created:  1975-02-14       1441
+98-1936.jpg
+Date Created:  1975-02-14       1442
+98-1941.jpg
+Date Created:  1975-02-14       1443
+98-1942.jpg
+Date Created:  1975-02-14       1444
+98-1939.jpg
+Date Created:  1975-02-22       1445
+98-435.jpg
+Date Created:  1975-07-25       1446
+98-438.jpg
+Date Created:  1976-06-22       1447
+98-445.jpg
+Date Created:  1976-07-01       1448
+98-441.jpg
+Date Created:  1976-07-18       1449
+98-439.jpg
+Date Created:  1976-07-20       1450
+98-431.jpg
+Date Created:  1976-07-20       1451
+98-432.jpg
+Date Created:  1976-07-21       1452
+98-434.jpg
+Date Created:  1976-07-22       1453
+98-440.jpg
+Date Created:  1976-07-24       1454
+98-433.jpg
+Date Created:  1976-07-24       1455
+98-444.jpg
+Date Created:  1976-07-27       1456
+98-436.jpg
+Date Created:  1976-07-28       1457
+98-442.jpg
+Date Created:  1976-07-31       1458
+98-437.jpg
+Date Created:  1976-08-01       1459
+98-443.jpg
+Date Created:  1976-09-05       1460
+98-1771.jpg
+Date Created:  1985-00-00       1461
+98-208.jpg
+Date Created:  1987-05-26       1462
+98-414.jpg
+Date Created:  1997-00-00       1463
+98-415.jpg
+Date Created:  1997-00-00       1464
+======================================================================
+Processing complete at  2024-01-29 15:59:39
+1464 records read from the CSV file
+1464 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 30:8  MM:SS
+Processing time for each image:  1.24  seconds
+REPORT_JPEG-2024-01-29_15-29-08.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

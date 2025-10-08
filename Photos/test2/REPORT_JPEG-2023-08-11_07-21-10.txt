@@ -1,0 +1,226 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 6772 MB
+ 
+Number of lines in the CSV file: 95
+ 
+Number of jpg files in the diretory:  0
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-08-11 07:21:13
+***** File 2006-487.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-2049.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-1564.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-229-04.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-1869.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 89-45.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-13-02.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 69-1746.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1333.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-1079.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1595.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 82-157.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2012-203.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2005-352.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 58-156.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-2036.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-1928.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-2218.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 73-3620.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-2280.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 82-57-72.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2004-418.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-416.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 58-160.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2002-200.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 93-145.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1519.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 93-158.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-22-68.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-24.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-22-64.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1504.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1506.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1508.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1507.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-397-1.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-397-5.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-1505.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-397-2.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-398-04.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-398-7.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 97-2255.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-398-03.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 59-398-8.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-654-01.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 93-235.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 98-602.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2009-2027.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 98-779.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 98-1057.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-1.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-245-01.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-243-05.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-43-59.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-43-60.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2006-128.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2002-501.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 60-279-01.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 72-3113.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2017-1245.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-3-09.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 61-280-02.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 93-361-02.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 98-1800.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-140.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2016-1836.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2016-1835.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 62-718-03.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 62-735-05.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 62-772.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1429.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-24-03.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-629-05.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-208-22.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-208-33.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-601.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-989-17.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1487.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1419-05.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1419-03.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 63-1538-02.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-657.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-606-18.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-1082.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-1137.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-1322.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-1321.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2006-129.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-2019.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 64-2022.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 65-86.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 95-291.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 2016-3094.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 69-1196A.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+***** File 73-326.jpg not found in directory /home/juren/Projects/HST-Metadata/Photos/test2 ********
+======================================================================
+Processing complete at  2023-08-11 07:21:13
+95 records read from the CSV file
+0 images processed
+95 missing images
+*** Missing images not processed:
+2006-487.jpg missing
+97-2049.jpg missing
+59-1564.jpg missing
+60-229-04.jpg missing
+64-1869.jpg missing
+89-45.jpg missing
+64-13-02.jpg missing
+69-1746.jpg missing
+63-1333.jpg missing
+59-1079.jpg missing
+2009-1595.jpg missing
+82-157.jpg missing
+2012-203.jpg missing
+2005-352.jpg missing
+58-156.jpg missing
+97-2036.jpg missing
+97-1928.jpg missing
+97-2218.jpg missing
+73-3620.jpg missing
+97-2280.jpg missing
+82-57-72.jpg missing
+2004-418.jpg missing
+59-416.jpg missing
+58-160.jpg missing
+2002-200.jpg missing
+93-145.jpg missing
+2009-1519.jpg missing
+93-158.jpg missing
+95-22-68.jpg missing
+95-24.jpg missing
+95-22-64.jpg missing
+2009-1504.jpg missing
+2009-1506.jpg missing
+2009-1508.jpg missing
+2009-1507.jpg missing
+59-397-1.jpg missing
+59-397-5.jpg missing
+2009-1505.jpg missing
+59-397-2.jpg missing
+60-398-04.jpg missing
+59-398-7.jpg missing
+97-2255.jpg missing
+60-398-03.jpg missing
+59-398-8.jpg missing
+64-654-01.jpg missing
+93-235.jpg missing
+98-602.jpg missing
+2009-2027.jpg missing
+98-779.jpg missing
+98-1057.jpg missing
+60-1.jpg missing
+60-245-01.jpg missing
+60-243-05.jpg missing
+60-43-59.jpg missing
+60-43-60.jpg missing
+2006-128.jpg missing
+2002-501.jpg missing
+60-279-01.jpg missing
+72-3113.jpg missing
+2017-1245.jpg missing
+63-3-09.jpg missing
+61-280-02.jpg missing
+93-361-02.jpg missing
+98-1800.jpg missing
+95-140.jpg missing
+2016-1836.jpg missing
+2016-1835.jpg missing
+62-718-03.jpg missing
+62-735-05.jpg missing
+62-772.jpg missing
+63-1429.jpg missing
+63-24-03.jpg missing
+64-629-05.jpg missing
+95-208-22.jpg missing
+95-208-33.jpg missing
+64-601.jpg missing
+63-989-17.jpg missing
+63-1487.jpg missing
+63-1419-05.jpg missing
+63-1419-03.jpg missing
+63-1538-02.jpg missing
+64-657.jpg missing
+64-606-18.jpg missing
+64-1082.jpg missing
+64-1137.jpg missing
+64-1322.jpg missing
+64-1321.jpg missing
+2006-129.jpg missing
+64-2019.jpg missing
+64-2022.jpg missing
+65-86.jpg missing
+95-291.jpg missing
+2016-3094.jpg missing
+69-1196A.jpg missing
+73-326.jpg missing
+
+___________________________
+Elapsed time: 0:0  MM:SS
+Processing time for each image:  0.0  seconds
+REPORT_JPEG-2023-08-11_07-21-10.txt log file printed to /home/juren/Projects/HST-Metadata/Photos/test2
+======================================================================

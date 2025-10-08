@@ -1,0 +1,84 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 6755 MB
+ 
+Number of lines in the CSV file: 24
+ 
+Number of tif files in the diretory:  24
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-08-11 01:51:41
+2008-901.tif
+Date Created:  0000-00-00       1
+2008-899.tif
+Date Created:  0000-00-00       2
+2008-900.tif
+Date Created:  0000-00-00       3
+2013-3393.tif
+Date Created:  0000-00-00       4
+62-203.tif
+Date Created:  1901-00-00       5
+2006-314.tif
+Date Created:  1935-00-00       6
+2017-2269.tif
+Date Created:  1939-00-00       7
+2017-2268.tif
+Date Created:  1939-00-00       8
+2017-2265.tif
+Date Created:  1939-00-00       9
+2017-2311.tif
+Date Created:  1941-00-00       10
+2017-2312.tif
+Date Created:  1941-00-00       11
+2017-2991.tif
+Date Created:  1941-00-00       12
+2016-3315.tif
+Date Created:  1943-10-03       13
+59-783.tif
+Date Created:  1944-10-10       14
+99-484.tif
+Date Created:  1945-06-30       15
+2006-186.tif
+Date Created:  1948-09-27       16
+2001-19.tif
+Date Created:  1949-12-20       17
+60-398-03.tif
+Date Created:  1957-06-26       18
+2008-315.tif
+Date Created:  1957-10-15       19
+2014-80.tif
+Date Created:  1959-01-21       20
+2002-322.tif
+Date Created:  1959-11-02       21
+2014-217.tif
+Date Created:  1960-00-00       22
+2016-3577.tif
+Date Created:  1960-00-00       23
+93-357.tif
+Date Created:  1961-02-13       24
+======================================================================
+Processing complete at  2023-08-11 01:52:03
+24 records read from the CSV file
+24 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 0:22  MM:SS
+Processing time for each image:  0.92  seconds
+REPORT_TIFF-2023-08-11_01-51-38.txt log file printed to /home/juren/Projects/HST-Metadata/Photos/test1
+======================================================================

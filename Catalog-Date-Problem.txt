@@ -1,0 +1,57 @@
+          72-119.jpg     
+File Modification Date/Time     : 2024:01:12 06:53:42-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:46-05:00
+Modify Date                     : 2005:02:23 13:34:33
+Create Date                     : 2005:02:23 13:34:33-06:00
+Metadata Date                   : 2005:02:23 13:34:33-06:00
+Date Created                    : 0000:00:00
+
+          72-3277.jpg     
+File Modification Date/Time     : 2024:01:12 06:56:36-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:51-05:00
+Date Created                    : 1945:04:00
+
+          72-3271.jpg     
+File Modification Date/Time     : 2024:01:12 06:57:22-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:51-05:00
+Date Created                    : 1945:04:00
+
+          72-130.jpg     
+File Modification Date/Time     : 2024:01:12 07:03:06-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:46-05:00
+Modify Date                     : 2012:05:14 08:31:47
+Date Created                    : 1952:00:00
+
+          72-116.jpg     
+File Modification Date/Time     : 2024:01:12 07:03:56-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:45-05:00
+Modify Date                     : 2012:05:14 08:28:51
+Date Created                    : 1952:04:00
+
+          72-113.jpg     
+File Modification Date/Time     : 2024:01:12 07:04:38-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:45-05:00
+Modify Date                     : 2012:05:14 08:36:17
+Date Created                    : 1953:00:00
+
+
+          72-3290.jpg     
+File Modification Date/Time     : 2024:01:12 06:57:54-06:00
+File Access Date/Time           : 2024:04:17 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:53-05:00
+Date Created                    : 1945:04:00
+
+
+          72-3303.jpg     
+File Modification Date/Time     : 2024:01:12 06:57:32-06:00
+File Access Date/Time           : 2024:04:15 19:00:00-05:00
+File Inode Change Date/Time     : 2024:04:16 06:21:55-05:00
+Date Created                    : 1945:04:00
+
+

@@ -1,0 +1,251 @@
+
+<!-- saved from url=(0049)https://exiftool.org/gui/articles/where_what.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Keywords" content="ExifTool,ExifToolGUI,exif,metadata">
+<meta http-equiv="Description" content="Writting metadata: Where and what to save">
+<meta http-equiv="Content-Language" content="en-us">
+
+<title>Metadata: Where and what to save</title>
+<link rel="stylesheet" type="text/css" href="./Metadata_ Where and what to save_files/page.css">
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1108.0" data-gr-ext-installed="">
+<p align="center">
+<table class="A4">
+<tbody><tr><td class="A4">
+<h1>Metadata: Where and what to save</h1><hr>
+This article is ment for amateur/hobby photographers in first place and should help to find the way thru metadata jungle.<br>
+<br>
+<h2>Character sets</h2>
+I believe, you should make you familiar with basics of character sets (charset) before you decide to populate metadata.
+<br>
+<h4>ASCII</h4>
+Complete ASCII charset contains 256 (0..255) characters. First 32 (0..31) characters are so called "control" characters, which can't be directly accesed by user. Next 95 characters (32..126) represent latin alpha-numeric characters and few punctuation characters:<br>
+<br>
+<table class="hex">
+<tbody><tr><td>&nbsp;&nbsp;  ! " # $ % &amp; ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; &lt; = &gt;</td></tr>
+<tr><td>&nbsp;? @ A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^</td></tr>
+<tr><td>&nbsp;_ ` a b c d e f g h i j k l m n o p q r s t u v w x y z { | } ~</td></tr>
+</tbody></table>
+<br>
+Keep in mind, that above characters are the same on every PC, no matter what language (charset) is used.<br>
+The remaining characters (127..255) depend on PC's regional settings. So, for example, appereance of character 227 will depend on charset being used, for example:<br>
+<li>United States: &#960;</li>
+<li>Western Europe: Ó</li>
+<li>Central Europe: Ń</li>
+Meaning, if you use some character not shown in table above, then you can't be sure that it will be shown correctly on any PC.<br>
+<h4>ANSI, Windows, etc.</h4>
+To put it simple: these charsets are "extended" versions of ASCII. For user, the only important difference is, they contain more (regional and other) characters.<br>
+It is very important to know, that ANSI characters 32..126 are the same as in ASCII. However, portability limitation is almost the same as with ASCII: when non-ASCII characters (also called "foreign" characters) are used, then there's no guarantee, that  these characters will be shown correctly on every PC.<br>
+<h4>UTF-8</h4>
+UTF-8 charset (sometimes written as UTF8) is charset transformed from Unicode charset. There exist many transformations from Unicode, but in metadata case, UTF-8 is to be preferred, because (cited from Wikipedia): <font class="brown">UTF-8 is an 8-bit variable-width encoding which maximizes compatibility with ASCII.</font><br>
+<br>
+What does that mean in practice? It means, that if UTF-8 charset is used:<br>
+<li>non-ASCII (foreign) characters will be shown correctly on every PC,</li>
+<li>characters 32..126 (see table above) are written automatically as ASCII characters (again: shown correctly on every PC).</li>
+-these two properties should have big impact on our decission about where to save our metadata.<br>
+<br>
+<h2>Metadata sections inside image file</h2>
+<h4>Exif section</h4>
+When photo is taken, camera automatically writes many metadata into image file. Most of that data, known as "Exif metadata", describes technical aspect of image: what camera/lens was used, what settings were applied, etc. Most recent cameras allow to store camera owner's name or/and copyright notice, which is then automatically written into each image file -and in most cases, that's it.<br>
+<br>
+Exif data has great value for studying photography, but is less interesting for archiving purposes. With one (or two) exceptions:<br>
+<li>Inside Exif, <font class="brown">Date and Time</font> of <u>when</u> photo was taken, is automatically saved by camera.</li>
+<li>Inside Exif, <font class="brown">GPS</font> data of <u>where</u> photo was taken, is (should be) saved.</li>
+<br>
+Now, there do exist some "interesting" tags in Exif:<br>
+<li><font class="blue">Artist, Copyright, Software, OwnerName, UserComment,</font> etc.</li>
+-which are ment to be populated by user.<br>
+<br>
+However, before adopting them, we must be aware of Exif limitations:<br>
+<br>
+<b>1st limitation:</b> <u>Officially</u>, Exif supports ASCII characters only. However, <font class="brown">Metadata Working Group</font> (MWG) organisation recommends using UTF-8 charset in Exif. No problem with that, as long characters 32..126 are used. But as soon we use some foreign characters, then again, there's no guarantee, that these characters will be displayed correctly if another software is used -software might "expect" that characters conforms Exif specification (are ASCII only) and will thus decode foreign characters wrong!<br>
+Something similar is already happening: To make use of foreign characters possible, today, most software uses ANSI charset when writting/reading Exif section. So, as long software makers don't change that, your foreign characters (encoded in UTF-8) won't be shown properly.<br> 
+Ok, there's one exception, where this limitation doesn't apply: <font class="blue">UserComment</font> tag. For this tag, foreign characters can be used officially, but I wouldn't say this makes a big difference in Exif usage.<br>
+<u>Conclusion:</u> if you're from Poland, you should't put your name in Exif, because your friend in Germany might not be able to read it.<br> 
+<br>
+<b>2nd limitation:</b> Exif doesn't have that many "interesting" tags as one might think. For example, in Exif, you <b>can't</b> save:<br>
+<li>location names of where photo was taken (city, country,..)</li>
+<li>names of peoples on photo</li>
+<li>keywords about photo content</li>
+<li>...and many more.</li>
+<u>Conclusion:</u> if you wish to save more complete data about photo, then you're forced to look elsewhere.<br>
+<br>
+<h4>IPTC section</h4>
+In first place, IPTC metadata section was made for archiving purpose. It specifies many "about" (photographer, photo content, etc.) tags, which are ment to be populated by user.<br>
+At first, IPTC also allowed using ASCII/ANSI characters only, but now, Unicode/UTF-8 can be officially used as well. Of course, IPTC section has limitations:<br>
+<br>
+<b>1st limitation:</b> Officially, tags defined in IPTC section are length limited. Some tags can only contain 3 characters (i.e. <font class="blue">Iptc:Category</font>), while other can contain several hundreds characters (most tags are limited to 32 characters, though).<br>
+That's officially. However, in most cases, more than "allowed" characters can be (and many times are) written into IPTC section, and most software will show them all. But the fact remains: officially, limitation exist.<br>
+<br>
+<b>2nd limitation:</b> Being a bit "old" standard, IPTC section doesn't specify tags we wish to have and need today. For example, there's no place, where you could save "rating" of your photo. The same is true for (photographed) people names, etc.<br>
+<br>
+<b>3rd limitation:</b> <font class="brown">IPTC metadata specification for <u>IPTC section</u> isn't maintained anymore -instead, IPTC organisation decided to move IPTC metadata specification into <u>XMP section</u></font>.<br>
+This fact added some confusion among photographers... Anyway, with many software today, when entering "IPTC" metadata, data actually isn't written into IPTC <u>section</u> only (or not at all) -by most "up to date" software, it is (additionally) saved into <u>XMP section</u>. <br>
+<br>
+To sumarize: Above limitations are only valid for metadata inside <u>IPTC section</u>. That is, in case you use ExifTool command like:<br>
+&nbsp;&nbsp;<code><font class="brown">exiftool -<b>Iptc</b>:City=Paris -<b>Iptc</b>:By-line="My name" ...</font></code><br>
+..values will be written into "old" IPTC <u>section</u> -because metadata section is specified. Ok, <font class="blue">By-line</font> tag only exist in Iptc, but you get the idea.<br>
+<br>
+<u>Conclusion:</u> Old IPTC is dead... time to move on.<br>
+<br>
+<h4>XMP section</h4>
+XMP metadata specification defines how metadata is organized inside XMP section. XMP section can contain "any" metadata as long it follows the rule. There exist many specifications, but most known inside XMP section are:<br>
+<br>
+<li>Adobe metadata (Photoshop imaging, pdf documents, etc)</li>
+and
+<li>IPTC metadata (for photography in general)</li>
+<br>
+Now, believe it or not, XMP has no limitations. Limitless... sounds good, huh? Well, not neccessary. The problem I see is, in near future, XMP content can/will become huge and messy. Well, that's the price for having flexibility...<br>
+<br>
+<font class="sz10pt">
+Note: In this article it is assumed, that XMP metadata is stored inside image file. I say that, because XMP can also be saved as separate (sidecar) file. In both cases however, data structure is the same.</font><br>
+<br>
+There's another thing that might lead to confusion: it's quite hard to differentiate data between various metadata groups inside <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html" target="_blank"><b>XMP section</b></a>. Let me (hopefully) explain:<br>
+<br>
+Even <font class="blue">City</font> is "general" tag, it is saved into <font class="blue">XMP-photoshop</font> group. It's, I assume, because Adobe was the first defining that tag -I have no problems with that. But, on the other hand, <font class="blue">Rating</font> value (again, written by Adobe products) is saved into <font class="blue">XMP-xmp</font> group.<br>
+Now... By using <font class="blue">XMP-xmp</font> group, am I writting <font class="blue">Rating</font> into group I can "trust" for future? I mean, <font class="blue">XMP-xmp</font> group contain many tags; among others, there's <font class="blue">Author</font> tag, which is already marked as "non-standard".<br>
+Now, if that <font class="blue">Author</font> tag shouldn't be used, which tag to use then? How about <font class="blue">Author</font> tag specified in <font class="blue">XMP-acdsee</font> group? How to be sure my tags will be recognized properly? This question has it's place, because I believe, that my personal (about photo) data doesn't belong into "software specific" group. Does it matter, you ask? Remember <font class="brown">iView MediaPro</font> software? There, <font class="blue">XMP-mediapro</font> group was used to store <font class="blue">Event, Location, People,..</font> values. Today, all those tags are actually deprecated -similar tags in other groups are recommended to be used instead.<br>
+Let us return to <font class="blue">City</font> tag, which is (as said), defined inside <font class="blue">XMP-photoshop</font> group. Is that the tag to be used for saving city name? Not neccessary... Not at all, if you wish to be more specific (and up to date with metadata). The thing is, it's not clear what that <font class="blue">City</font> tag (inside <font class="blue">XMP-photoshop</font> group) means: is that the city shown on photo, or is that the city from where photographer took the photo?<br>
+<br>
+<u>Conclusion:</u> There's no doubt, XMP section is the place where you should store your data. The only thing you should do when starting is, choose the "right" group of metadata tags -you don't want to move your data from one place into another every two years, do you?<br>
+It depends on how much metadata you need/wish to manage, but right now, I would recommend using following groups:<br>
+<br>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html#dc" target="_blank"><b>XMP-dc</b></a> -for your name, copyright notice, photo title, keywords, etc.</li>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html#iptcCore" target="_blank"><b>XMP-iptcCore</b></a> -for your contact data (address, mail, phone, etc.); in short, stuff ment for pro photographers.</li>
+<li><a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html#iptcExt" target="_blank"><b>XMP-iptcExt</b></a> -for location data, event notice, names of persons on photo, etc.</li>
+<br>
+Of course, there might be specific need to also use some other group. In most cases however, above groups will suffice.<br>
+<br>
+We have mentioned, that inside XMP tags may exist, which have equal name: <font class="blue">Event</font> tag, for example. If you use ExifTool for writting:<br>
+<code><font class="brown">exiftool -Xmp:Event=Birthday MyPhoto.jpg</font></code><br>
+..then value will be written inside both: <font class="blue">iptcExt</font> and <font class="blue">mediapro</font> group -because both have this tag specified. If you wish to be precise about where exactly to write, then specify the group:<br>
+<code><font class="brown">exiftool -Xmp-iptcExt:Event=Birthday MyPhoto.jpg</font></code><br>
+..which is the way I recommend.<br>
+<br>
+<h2>How many metadata can you handle?</h2>
+<h4>Writting metadata into all sections: Exif, IPTC and XMP?</h4>
+Just to be sure, that data will guaranteed be seen by any software, some are saving the same metadata values wherever possible. Do what you think is the best for you, but speaking for me, it's pure waste of time. No matter how perfectly you think your "workflow" is, at the end (as your photo collection grows), you will give up doing this.<br>
+<br>
+<font class="blue">DateTime</font> of when photo was taken is typical case... As mentioned above, this data is automatically saved by camera into <font class="blue">Exif</font> section. Now, I really see no reason to have the same value elsewhere too (inside <font class="blue">Iptc</font> or/and <font class="blue">Xmp</font>, for example).<br>
+<br>
+Ok, let's say, you have the reason for doing this. But do you know how photo software handles this? In 99% cases it goes like this:<br>
+<li><u>1. Look into Exif:</u> if DateTime exist here, then show that value and don't look elsewhere. If not, go to 2.</li>
+<li><u>2. Look into Iptc:</u> if DateTime exist here, then show that value and don't look elsewhere. If not, go to 3.</li>
+<li><u>3. Look into Xmp:</u> if DateTime is defined here, then show that value.</li>
+-you get the point: if value is defined in <font class="blue">Exif</font>, then there isn't of much use to have the same value elsewhere.<br>
+<br>
+Next <u>very</u> typical case is <font class="blue">Exif:Artist</font> tag, which is equivalent to <font class="blue">Iptc:by-line</font> and <font class="blue">Xmp-dc:Creator</font> and follows the same rule as described for DateTime above.<br>
+And then, there are keywords, which can, again, be stored inside <font class="blue">Iptc</font> or/and <font class="blue">Xmp</font> -here, I really have no idea how to keep them synchronized... etc.<br>
+<br>
+And finally, for photos taken with digital camera, here's my personal view on where and what to save.<br>
+<br>
+<h4>What goes into Exif section</h4>
+<font class="blue">Artist</font> and <font class="blue">Copyright</font><br>
+It's a good idea to save this data inside Exif. Because, in future, it might happen you will reorganize/rewrite (or even delete) complete Iptc/Xmp section -having both inside Exif, you won't need to worry about them. Btw. some cameras can automatically write that data in Exif.<br>
+However, I don't say that data "must" be in Exif (only). It's a personal decission and if you decide to manage all your "personal" metadata in one section only (i.e. in Xmp section), that's fine too.<br>
+<br>
+<font class="blue">DateTimeOriginal</font> and <font class="blue">CreateDate</font><br>
+If photo was taken with digital camera, then both values are already inside Exif. Eventually, you will modify these two values in case date/time on camera was wrong at the time when photo was taken. And why are two DateTime tags there (having equal value)? Because, for scanned photos, their values can't be equal.<br>
+And what about <font class="blue">ModifyDate</font>? Don't ask me why, but some are desperate trying to keep all three DateTime values equal. I mean, what does "modify date" mean to you? Exactly!<br>
+<br>
+<font class="blue">GPS</font> data<br>
+If at all, then <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/GPS.html" target="_blank">GPS</a> data should always be written into Exif. In this case, at least <font class="blue">GPSLatitude, GPSLatitudeRef, GPSLongitude</font> and <font class="blue">GPSLongitudeRef</font> values should be written -when doing this, ExifTool will automatically set obligatory <font class="blue">GPSVersionID</font> value.<br>
+<br>
+And that's all what photographer "need" to write into Exif.<br>
+<br>
+<h4>What goes into Iptc section</h4>
+Nothing. I simply see no reason to start using this section anymore. Reading many forums, I can see, that many are magically attracted when hearing "iptc". But reading further, it many times reveals, that many don't really distinguish between Iptc metadata <u>section</u> and Iptc metadata <u>standard</u>. So, I repeat here again:<br>
+<font class="brown">IPTC (organization) decided to move specification into Xmp section</font> -by making this move, Iptc <u>section</u> became obsolete.<br>
+<br>
+<h4>What goes into Xmp section</h4>
+There's nothing we can't save here -but saving everything would be too much to ask. Thus, let's see what tags amateur/hobby photographer would eventually like to populate.<br>
+<br>
+<font class="blue">Xmp-dc:Creator</font><br>
+-here, photographer's name should be saved. This is Xmp equivalent of <font class="blue">Exif:Artist</font> tag.<br>
+<br>
+<font class="blue">Xmp-dc:Rights</font><br>
+-here, copyright notice can be saved. This is Xmp equivalent of <font class="blue">Exif:Copyright</font> tag.<br>
+<br>
+<font class="blue">Xmp-dc:Date</font><br>
+-here, date and (optionally) time can be saved. This is equivalent of Exif DateTime value(s). It is important to note, that here, "partial" DateTime value can be saved, i.e. "1978:06" -usefull in cases when exact time isn't known (i.e. old scanned photos). I mention that, because in Exif, complete (date and time) value is required.<br>
+<br>
+<font class="blue">Xmp-dc:Title</font><br>
+If you decide to title your photos, then it should be written here. Even there's no length limit, it's expected to be short. That is, no matter what you might think, but others are usually not that much interested to read long stories.<br>
+<br>
+<font class="blue">Xmp-dc:Subject</font><br>
+This is the place, where <u>keywords</u> should be saved. Tag <font class="blue">Subject</font> is "multi-value" tag, which means, it can hold multiple (internally separated) values. This tag can hold "normal" keywords, which means, all keywords have equal "weight"; i.e. if you store keyword "animal" and keyword "spider" into <font class="blue">Subject</font> tag, then both will have equal importance.<br>
+There also exist tags, which can hold keywords "hierarchically" structured. In this case, for example, keyword "animal" can be one of many main/root keywords, holding other sub-keywords, for example "spider", "bird", etc. If you're interested doing it that way, then take a look into <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html" target="_blank"><b>XMP section</b></a> and decide what tag you wish to use. But be warned: maintaining such keyword structure isn't necessary simple.<br>
+Keywording can be very helpfull later -but only if done right! Thus, before starting, make sure you know what "keyword" actually means and what benefits you expect by having them. Keywords is not something one must have in metadata. However, if you decide writting them, then in my opinion, it only make sense, if <u>all</u> your photos are "keyworded". I say that, because all this might take a lot of time.<br>
+
+<br>
+<font class="blue">Xmp-dc:Type</font><br>
+This tag has the same characteristics as tag <font class="blue">Subject</font> (above): it can contain multiple values. While <font class="blue">Subject</font> tag usually defines the content shown on photo (i.e. "bird", "sunset", etc.), tag <font class="blue">Type</font> is ment to tell about "kind" of photo. This can be, i.e. "portrait", "landscape", "studio", "sport", etc. But being multi-value capable, you can save "portrait" and "studio", or "portrait" and "outdoor" here, of course. That way, it might be easier to find i.e. all "portrait" photos taken in "studio".<br>
+Similar to keywording: if at all, then start with only few (major) types -you can add more later.<br>
+<br>
+<b>Xmp locations tags</b><br>
+In most cases, we want so save location of photo content. That is, for example, if photo of village was taken from the hill nearby, then we want to save location of the village (on photo); not the location of the hill. In this case, the following <font class="brown">Iptc4xmpExt</font> tags should be used:<br>
+<br>
+<table width="70%" border="0" cellspacing="0"><tbody><tr><td width="50%"><u>Iptc4xmpExt</u></td><td><u>Adobe legacy</u></td></tr>
+<tr><td>
+<font class="blue">Xmp:LocationShownCountryName<br>
+Xmp:LocationShownProvinceState<br>
+Xmp:LocationShownCity<br>
+Xmp:LocationShownSublocation</font><br>
+</td><td><font class="blue">
+Xmp-photoshop:Country<br>Xmp-photoshop:State<br>Xmp-photoshop:City<br>Xmp-IptcCore:Location<br>
+</font></td></tr></tbody></table>
+I have already mentioned multiple tags inside Xmp section, which serve the same purpose and locations tags are no exception.<br>
+Right now, most software will write locations to (and read from) tags introduced by <font class="brown">Adobe</font> and it's hard to predict if this "habbit" will change soon. I mean, Adobe was here first and <font class="brown">IPTC</font> was simply too slow with Xmp <font class="brown">IPTC Extension</font> implementation. Inbetween, zillions of photos are already tagged...<br>
+On the other hand, Iptc tags in  <a href="http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/XMP.html#iptcExt" target="_blank">Xmp-iptcExt</a> group are "standardized" and recommended to be used. If you take a look there, you can see there are many other tags defined which might be usefull, i.e. the location from where photo was taken.<br>
+<br>
+Usually, not all locations tags can be populated on all kind of photos. For example, if you make a trip across desert in Tunisia, you will hardly know later in what province exactly you were.<br>
+<br>
+<font class="blue">Xmp-iptcExt:PersonInImage</font><br>
+Here you can save names of persons shown on photo. Similar as <font class="blue">Subject</font> and <font class="blue">Type</font> tag, this tag can hold multiple values (names).<br>
+Maybe I should mention this: because only one tag having name <font class="blue">PersonInImage</font> is defined for Xmp, we don't need to specify Xmp group. That is, in this case, both commands<br>
+<code><font class="brown">exiftool -Xmp-iptcExt:PersonInImage=Frankie myPhoto.jpg</font></code><br>
+and<br>
+<code><font class="brown">exiftool -Xmp:PersonInImage+=Johnny myPhoto.jpg</font></code><br>
+-will populate the same tag. The same goes for every tag, which has unique name inside Xmp.<br>
+<br>
+<font class="blue">Xmp-iptcExt:Event</font><br>
+As you might quess, here you can write "birthday", "fishing", etc. Here, however, you shouldn't use "short" group name (i.e. <font class="brown">-Xmp:Event="race"</font>), because this tag is defined elsewhere!<br>
+That is, exact group must be specified in this case, i.e. <font class="brown">-Xmp-iptcExt:Event="race"</font>.<br>
+<br>
+<br>
+<h2>Summary</h2>
+I think, now is the time to rethink few things, before you jump populating metadata. As you can see, there are tags, that serve quite similar purpose. For example: you can decide to write the words like "birthday" into <font class="blue">Subject</font> tag, or into <font class="blue">Event</font> tag. And no, nobody says you <u>must</u> use both tags. That is, use <font=class=blue">Event tag, if you think, your photography interests can be classified by "events" -otherwise, use <font class="blue">Subject</font> tag only.<br>
+What I'm trying to say is, you dont need to populate all tags I've mentioned above! And before everything, first start with few "must have" tags; i.e. locations tags. When you finish this on all photos you have, you will get a feeling how much time all that requires.<br>
+<br>
+Bogdan Hrastnik<br>
+February, 2012<br>
+<br>
+<br>
+<br>
+</font=class=blue"></td></tr>
+</tbody></table>
+</p>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

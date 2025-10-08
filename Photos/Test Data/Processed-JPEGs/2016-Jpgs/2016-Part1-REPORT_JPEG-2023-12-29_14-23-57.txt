@@ -1,0 +1,2234 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 13752 MB
+ 
+Number of lines in the CSV file: 1099
+ 
+Number of jpg files in the diretory:  946
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-29 14:24:12
+2016-01.jpg
+Date Created:  1957-09-00       1
+2016-02.jpg
+Date Created:  1957-09-00       2
+2016-03.jpg
+Date Created:  1957-09-00       3
+2016-04.jpg
+Date Created:  1957-09-00       4
+2016-05.jpg
+Date Created:  1957-09-00       5
+2016-06.jpg
+Date Created:  1957-09-00       6
+2016-07.jpg
+Date Created:  1957-09-00       7
+2016-08.jpg
+Date Created:  1957-09-00       8
+2016-09.jpg
+Date Created:  1957-09-00       9
+2016-10.jpg
+Date Created:  1957-09-00       10
+2016-100.jpg
+Date Created:  1961-02-03       11
+2016-1000.jpg
+Date Created:  1918-00-00       12
+2016-1001.jpg
+Date Created:  1918-00-00       13
+2016-1002.jpg
+Date Created:  1918-00-00       14
+2016-1003.jpg
+Date Created:  1918-00-00       15
+2016-1004.jpg
+Date Created:  1918-00-00       16
+2016-1005.jpg
+Date Created:  1918-00-00       17
+2016-1006.jpg
+Date Created:  1918-00-00       18
+2016-1007.jpg
+Date Created:  1918-04-00       19
+2016-1008.jpg
+Date Created:  1917-04-00       20
+2016-1009.jpg
+Date Created:  1918-04-00       21
+2016-101.jpg
+Date Created:  1961-02-03       22
+2016-1010.jpg
+Date Created:  1918-04-00       23
+2016-1011.jpg
+Date Created:  1918-04-00       24
+2016-1012.jpg
+Date Created:  1918-00-00       25
+2016-1013.jpg
+Date Created:  1918-00-00       26
+2016-1014.jpg
+Date Created:  1919-00-00       27
+2016-1015.jpg
+Date Created:  1919-04-00       28
+2016-1016.jpg
+Date Created:  1919-04-00       29
+2016-1017.jpg
+Date Created:  1918-04-00       30
+2016-1018.jpg
+Date Created:  1919-04-00       31
+2016-1019.jpg
+Date Created:  1919-04-00       32
+2016-102.jpg
+Date Created:  1961-02-03       33
+2016-1020.jpg
+Date Created:  1919-04-00       34
+2016-1021.jpg
+Date Created:  1919-04-00       35
+2016-1022.jpg
+Date Created:  1919-04-00       36
+2016-1023.jpg
+Date Created:  1919-04-00       37
+2016-1024.jpg
+Date Created:  1919-04-00       38
+2016-1025.jpg
+Date Created:  1919-04-00       39
+2016-1026.jpg
+Date Created:  1919-04-00       40
+2016-1027.jpg
+Date Created:  1919-04-00       41
+2016-1028.jpg
+Date Created:  1919-00-00       42
+2016-1029.jpg
+Date Created:  1919-00-00       43
+***** File 2016-103.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1030.jpg
+Date Created:  1919-00-00       44
+2016-1031.jpg
+Date Created:  1919-00-00       45
+2016-1032.jpg
+Date Created:  1919-00-00       46
+2016-1033.jpg
+Date Created:  1919-03-00       47
+2016-1034.jpg
+Date Created:  1919-04-00       48
+2016-1035.jpg
+Date Created:  1919-03-00       49
+2016-1036.jpg
+Date Created:  1919-03-00       50
+2016-1037.jpg
+Date Created:  1919-00-00       51
+2016-1038.jpg
+Date Created:  1919-00-00       52
+2016-1039.jpg
+Date Created:  1918-00-00       53
+***** File 2016-104.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1040.jpg
+Date Created:  1919-00-00       54
+2016-1041.jpg
+Date Created:  1919-00-00       55
+2016-1042.jpg
+Date Created:  1919-00-00       56
+2016-1043.jpg
+Date Created:  1919-00-00       57
+2016-1044.jpg
+Date Created:  1919-00-00       58
+2016-1045.jpg
+Date Created:  1919-00-00       59
+2016-1046.jpg
+Date Created:  1919-00-00       60
+2016-1047.jpg
+Date Created:  1919-00-00       61
+2016-1048.jpg
+Date Created:  1919-00-00       62
+2016-1049.jpg
+Date Created:  1951-12-04       63
+***** File 2016-105.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1050.jpg
+Date Created:  1919-00-00       64
+2016-1051.jpg
+Date Created:  1919-00-00       65
+2016-1052.jpg
+Date Created:  1919-00-00       66
+2016-1053.jpg
+Date Created:  1919-00-00       67
+2016-1054.jpg
+Date Created:  1919-00-00       68
+2016-1055.jpg
+Date Created:  1918-12-00       69
+2016-1056.jpg
+Date Created:  1918-12-00       70
+2016-1057.jpg
+Date Created:  1918-00-00       71
+2016-1058.jpg
+Date Created:  1918-00-00       72
+2016-1059.jpg
+Date Created:  1919-04-00       73
+***** File 2016-106.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-107.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-108.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-109.jpg
+Date Created:  1961-00-00       74
+2016-11.jpg
+Date Created:  1957-09-00       75
+2016-110.jpg
+Date Created:  1961-00-00       76
+2016-112.jpg
+Date Created:  1961-02-00       77
+2016-113.jpg
+Date Created:  1961-02-00       78
+2016-114.jpg
+Date Created:  1961-02-00       79
+2016-115.jpg
+Date Created:  1961-02-00       80
+2016-116.jpg
+Date Created:  1961-02-00       81
+2016-117.jpg
+Date Created:  1961-02-00       82
+2016-118.jpg
+Date Created:  1961-02-00       83
+2016-119.jpg
+Date Created:  1961-02-00       84
+2016-12.jpg
+Date Created:  1957-09-00       85
+2016-120.jpg
+Date Created:  1961-02-00       86
+2016-121.jpg
+Date Created:  1961-02-00       87
+2016-122.jpg
+Date Created:  1961-02-00       88
+2016-123.jpg
+Date Created:  1961-02-00       89
+2016-124.jpg
+Date Created:  1961-02-00       90
+2016-125.jpg
+Date Created:  1961-02-00       91
+2016-126.jpg
+Date Created:  1961-02-00       92
+2016-1263.jpg
+Date Created:  1946-00-00       93
+2016-1264.jpg
+Date Created:  1946-00-00       94
+***** File 2016-1265.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1266.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1267.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1268.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1269.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-127.jpg
+Date Created:  1961-02-00       95
+2016-1270.jpg
+Date Created:  1947-01-23       96
+2016-1271.jpg
+Date Created:  1947-00-00       97
+2016-1272.jpg
+Date Created:  1947-00-00       98
+2016-1273.jpg
+Date Created:  1947-00-00       99
+2016-1274.jpg
+Date Created:  1947-00-00       100
+2016-1275.jpg
+Date Created:  1947-00-00       101
+2016-1276.jpg
+Date Created:  1947-00-00       102
+2016-1277.jpg
+Date Created:  1947-12-25       103
+2016-128.jpg
+Date Created:  1961-02-00       104
+2016-129.jpg
+Date Created:  1961-02-00       105
+2016-1296.jpg
+Date Created:  1947-12-25       106
+2016-1297.jpg
+Date Created:  1947-12-25       107
+2016-13.jpg
+Date Created:  1957-09-00       108
+2016-130.jpg
+Date Created:  1961-02-00       109
+2016-131.jpg
+Date Created:  1963-00-00       110
+2016-132.jpg
+Date Created:  1958-00-00       111
+***** File 2016-1327.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-133.jpg
+Date Created:  1958-00-00       112
+2016-1334.jpg
+Date Created:  1947-12-00       113
+2016-1335.jpg
+Date Created:  1947-12-00       114
+2016-134.jpg
+Date Created:  1963-00-00       115
+2016-135.jpg
+Date Created:  1963-00-00       116
+2016-136.jpg
+Date Created:  1963-00-00       117
+2016-137.jpg
+Date Created:  1963-00-00       118
+2016-139.jpg
+Date Created:  1961-02-00       119
+2016-14.jpg
+Date Created:  1957-09-00       120
+2016-140.jpg
+Date Created:  1961-02-00       121
+2016-141.jpg
+Date Created:  1961-02-00       122
+2016-142.jpg
+Date Created:  1961-00-00       123
+2016-143.jpg
+Date Created:  1961-00-00       124
+2016-144.jpg
+Date Created:  1961-00-00       125
+2016-145.jpg
+Date Created:  1961-00-00       126
+2016-146.jpg
+Date Created:  1961-00-00       127
+2016-147.jpg
+Date Created:  1961-00-00       128
+2016-148.jpg
+Date Created:  1961-00-00       129
+2016-15.jpg
+Date Created:  1957-09-00       130
+2016-150.jpg
+Date Created:  1961-00-00       131
+2016-151.jpg
+Date Created:  1961-00-00       132
+2016-152.jpg
+Date Created:  1961-00-00       133
+2016-153.jpg
+Date Created:  1961-00-00       134
+2016-154.jpg
+Date Created:  1961-00-00       135
+2016-155.jpg
+Date Created:  1961-00-00       136
+2016-156.jpg
+Date Created:  1961-00-00       137
+2016-157.jpg
+Date Created:  1961-00-00       138
+2016-158.jpg
+Date Created:  1961-00-00       139
+2016-159.jpg
+Date Created:  1961-00-00       140
+2016-1595.jpg
+Date Created:  1949-06-04       141
+2016-1596.jpg
+Date Created:  1949-06-04       142
+2016-16.jpg
+Date Created:  1957-09-00       143
+2016-160.jpg
+Date Created:  1960-00-00       144
+***** File 2016-161.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-162.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-163.jpg
+Date Created:  1965-08-00       145
+2016-164.jpg
+Date Created:  1965-08-00       146
+2016-165.jpg
+Date Created:  1965-08-00       147
+2016-166.jpg
+Date Created:  1965-08-00       148
+2016-167.jpg
+Date Created:  1965-08-00       149
+2016-1670.jpg
+Date Created:  1951-11-01       150
+2016-1671.jpg
+Date Created:  1951-11-01       151
+2016-168.jpg
+Date Created:  1965-08-00       152
+2016-169.jpg
+Date Created:  1965-08-00       153
+2016-17.jpg
+Date Created:  1957-09-00       154
+2016-170.jpg
+Date Created:  1965-08-00       155
+2016-171.jpg
+Date Created:  1965-00-00       156
+2016-172.jpg
+Date Created:  1965-00-00       157
+2016-173.jpg
+Date Created:  1965-00-00       158
+2016-174.jpg
+Date Created:  1964-00-00       159
+2016-175.jpg
+Date Created:  1965-00-00       160
+2016-176.jpg
+Date Created:  1965-00-00       161
+2016-1765.jpg
+Date Created:  1958-06-00       162
+2016-177.jpg
+Date Created:  1965-00-00       163
+2016-178.jpg
+Date Created:  1965-00-00       164
+2016-1782.jpg
+Date Created:  1958-06-00       165
+2016-1783.jpg
+Date Created:  1958-06-00       166
+2016-1785.jpg
+Date Created:  1958-06-00       167
+2016-1787.jpg
+Date Created:  1958-06-00       168
+2016-1788.jpg
+Date Created:  1958-06-00       169
+2016-1789.jpg
+Date Created:  1958-06-00       170
+2016-179.jpg
+Date Created:  1966-08-00       171
+2016-1792.jpg
+Date Created:  1958-06-00       172
+2016-1793.jpg
+Date Created:  1958-06-00       173
+2016-1795.jpg
+Date Created:  1958-06-03       174
+2016-1796.jpg
+Date Created:  1958-06-03       175
+2016-1799.jpg
+Date Created:  1958-06-00       176
+2016-18.jpg
+Date Created:  1957-09-00       177
+2016-180.jpg
+Date Created:  1966-08-00       178
+2016-1800.jpg
+Date Created:  1958-06-00       179
+2016-181.jpg
+Date Created:  1966-08-00       180
+2016-1811.jpg
+Date Created:  1960-09-24       181
+2016-182.jpg
+Date Created:  1966-08-00       182
+2016-1829.jpg
+Date Created:  1961-11-01       183
+2016-183.jpg
+Date Created:  1966-10-00       184
+***** File 2016-1835.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1836.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-1837.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-1839.jpg
+Date Created:  1962-05-08       185
+2016-184.jpg
+Date Created:  1966-10-00       186
+2016-185.jpg
+Date Created:  1966-10-00       187
+2016-186.jpg
+Date Created:  1966-09-00       188
+2016-187.jpg
+Date Created:  1966-12-00       189
+2016-188.jpg
+Date Created:  1966-11-00       190
+2016-189.jpg
+Date Created:  1966-12-00       191
+2016-19.jpg
+Date Created:  1957-09-00       192
+2016-190.jpg
+Date Created:  1966-12-00       193
+2016-191.jpg
+Date Created:  1966-11-00       194
+2016-192.jpg
+Date Created:  1966-12-00       195
+2016-193.jpg
+Date Created:  1965-12-00       196
+2016-194.jpg
+Date Created:  1966-12-00       197
+2016-195.jpg
+Date Created:  1966-12-00       198
+2016-1953.jpg
+Date Created:  1970-12-14       199
+2016-1954.jpg
+Date Created:  1970-12-14       200
+2016-1955.jpg
+Date Created:  1970-12-14       201
+2016-1956.jpg
+Date Created:  1970-12-14       202
+2016-1957.jpg
+Date Created:  1970-12-14       203
+2016-1958.jpg
+Date Created:  1970-12-14       204
+2016-1959.jpg
+Date Created:  1970-12-14       205
+2016-196.jpg
+Date Created:  1966-12-00       206
+2016-197.jpg
+Date Created:  1966-00-00       207
+2016-198.jpg
+Date Created:  1966-00-00       208
+2016-199.jpg
+Date Created:  1966-00-00       209
+2016-20.jpg
+Date Created:  1957-09-00       210
+2016-200.jpg
+Date Created:  1967-10-00       211
+***** File 2016-2006.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-2008.jpg
+Date Created:  1969-05-05       212
+***** File 2016-2009.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-201.jpg
+Date Created:  1967-10-00       213
+2016-2014.jpg
+Date Created:  1972-12-28       214
+2016-202.jpg
+Date Created:  1967-10-00       215
+2016-203.jpg
+Date Created:  1967-07-00       216
+2016-204.jpg
+Date Created:  1967-07-00       217
+2016-205.jpg
+Date Created:  1967-07-00       218
+2016-206.jpg
+Date Created:  1967-07-00       219
+2016-207.jpg
+Date Created:  1967-07-00       220
+2016-208.jpg
+Date Created:  1967-07-00       221
+***** File 2016-209.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-21.jpg
+Date Created:  1957-09-00       222
+***** File 2016-210.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-211.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-212.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-213.jpg
+Date Created:  1969-09-00       223
+2016-214.jpg
+Date Created:  1969-00-00       224
+2016-215.jpg
+Date Created:  1969-03-00       225
+2016-216.jpg
+Date Created:  1969-00-00       226
+2016-217.jpg
+Date Created:  1969-00-00       227
+2016-218.jpg
+Date Created:  1969-00-00       228
+2016-219.jpg
+Date Created:  1969-00-00       229
+2016-22.jpg
+Date Created:  1957-09-00       230
+2016-220.jpg
+Date Created:  1970-06-01       231
+***** File 2016-221.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-222.jpg
+Date Created:  1972-10-00       232
+2016-223.jpg
+Date Created:  1972-10-00       233
+2016-23.jpg
+Date Created:  1957-09-00       234
+***** File 2016-231.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-232.jpg
+Date Created:  1970-00-00       235
+2016-233.jpg
+Date Created:  1970-00-00       236
+***** File 2016-234.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-235.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-236.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-237.jpg
+Date Created:  1972-00-00       237
+2016-238.jpg
+Date Created:  1970-00-00       238
+2016-2380.jpg
+Date Created:  1952-12-25       239
+2016-239.jpg
+Date Created:  1970-00-00       240
+2016-2392.jpg
+Date Created:  1947-12-25       241
+2016-2393.jpg
+Date Created:  1947-12-25       242
+2016-2394.jpg
+Date Created:  1947-12-25       243
+2016-24.jpg
+Date Created:  1957-09-00       244
+2016-240.jpg
+Date Created:  1978-00-00       245
+2016-25.jpg
+Date Created:  1957-09-00       246
+***** File 2016-251.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-252.jpg
+Date Created:  1930-00-00       247
+2016-253.jpg
+Date Created:  1955-10-00       248
+2016-254.jpg
+Date Created:  1960-00-00       249
+2016-255.jpg
+Date Created:  1920-00-00       250
+2016-256.jpg
+Date Created:  1930-00-00       251
+2016-257.jpg
+Date Created:  1935-00-00       252
+2016-258.jpg
+Date Created:  1930-00-00       253
+2016-259.jpg
+Date Created:  1935-00-00       254
+2016-26.jpg
+Date Created:  1957-09-00       255
+2016-260.jpg
+Date Created:  1935-00-00       256
+2016-261.jpg
+Date Created:  1935-00-00       257
+2016-262.jpg
+Date Created:  1947-00-00       258
+2016-263.jpg
+Date Created:  1970-00-00       259
+2016-264.jpg
+Date Created:  1933-00-00       260
+2016-265.jpg
+Date Created:  1949-00-00       261
+2016-266.jpg
+Date Created:  1949-00-00       262
+2016-267.jpg
+Date Created:  1949-00-00       263
+2016-268.jpg
+Date Created:  1949-00-00       264
+2016-269.jpg
+Date Created:  1949-00-00       265
+2016-27.jpg
+Date Created:  1957-09-00       266
+2016-270.jpg
+Date Created:  1949-00-00       267
+2016-271.jpg
+Date Created:  1949-00-00       268
+2016-272.jpg
+Date Created:  1949-00-00       269
+2016-273.jpg
+Date Created:  1949-00-00       270
+2016-274.jpg
+Date Created:  1949-00-00       271
+2016-275.jpg
+Date Created:  1949-00-00       272
+2016-276.jpg
+Date Created:  1949-00-00       273
+2016-277.jpg
+Date Created:  1949-00-00       274
+2016-278.jpg
+Date Created:  1949-00-00       275
+2016-279.jpg
+Date Created:  1949-00-00       276
+2016-28.jpg
+Date Created:  1957-09-00       277
+2016-280.jpg
+Date Created:  1949-00-00       278
+2016-281.jpg
+Date Created:  1949-00-00       279
+2016-282.jpg
+Date Created:  1949-00-00       280
+2016-283.jpg
+Date Created:  1949-00-00       281
+2016-284.jpg
+Date Created:  1949-00-00       282
+2016-285.jpg
+Date Created:  1949-00-00       283
+2016-286.jpg
+Date Created:  1949-00-00       284
+2016-287.jpg
+Date Created:  1949-00-00       285
+2016-288.jpg
+Date Created:  1949-00-00       286
+2016-289.jpg
+Date Created:  1949-00-00       287
+2016-29.jpg
+Date Created:  1957-09-00       288
+2016-290.jpg
+Date Created:  1944-01-00       289
+2016-291.jpg
+Date Created:  1943-00-00       290
+***** File 2016-293.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-294.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-2946.jpg
+Date Created:  1956-04-00       291
+***** File 2016-295.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-296.jpg
+Date Created:  1946-00-00       292
+2016-297.jpg
+Date Created:  1944-00-00       293
+2016-2975.jpg
+Date Created:  1958-08-17       294
+2016-298.jpg
+Date Created:  1948-00-00       295
+2016-299.jpg
+Date Created:  1948-00-00       296
+2016-30.jpg
+Date Created:  1957-08-00       297
+2016-300.jpg
+Date Created:  1948-00-00       298
+2016-301.jpg
+Date Created:  1948-00-00       299
+2016-302.jpg
+Date Created:  1948-00-00       300
+2016-303.jpg
+Date Created:  1948-00-00       301
+2016-304.jpg
+Date Created:  1948-00-00       302
+2016-305.jpg
+Date Created:  1948-00-00       303
+2016-306.jpg
+Date Created:  1948-00-00       304
+2016-307.jpg
+Date Created:  1948-00-00       305
+***** File 2016-3072.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-308.jpg
+Date Created:  1948-00-00       306
+2016-309.jpg
+Date Created:  1948-00-00       307
+***** File 2016-3093.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-3094.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-31.jpg
+Date Created:  1957-09-00       308
+2016-310.jpg
+Date Created:  1948-00-00       309
+2016-311.jpg
+Date Created:  1948-00-00       310
+2016-312.jpg
+Date Created:  1948-00-00       311
+2016-313.jpg
+Date Created:  1948-00-00       312
+2016-314.jpg
+Date Created:  1948-00-00       313
+2016-315.jpg
+Date Created:  1948-00-00       314
+2016-316.jpg
+Date Created:  1948-00-00       315
+2016-317.jpg
+Date Created:  1948-00-00       316
+2016-318.jpg
+Date Created:  1948-00-00       317
+2016-319.jpg
+Date Created:  1948-00-00       318
+2016-32.jpg
+Date Created:  1957-09-00       319
+2016-320.jpg
+Date Created:  1948-00-00       320
+2016-321.jpg
+Date Created:  1948-00-00       321
+2016-322.jpg
+Date Created:  1948-00-00       322
+2016-323.jpg
+Date Created:  1948-00-00       323
+2016-324.jpg
+Date Created:  1948-00-00       324
+2016-325.jpg
+Date Created:  1948-00-00       325
+2016-326.jpg
+Date Created:  1948-00-00       326
+2016-327.jpg
+Date Created:  1948-00-00       327
+2016-328.jpg
+Date Created:  1941-00-00       328
+2016-329.jpg
+Date Created:  1941-00-00       329
+2016-33.jpg
+Date Created:  1957-10-00       330
+2016-330.jpg
+Date Created:  1941-00-00       331
+2016-331.jpg
+Date Created:  1941-00-00       332
+2016-332.jpg
+Date Created:  1941-00-00       333
+2016-333.jpg
+Date Created:  1941-00-00       334
+2016-334.jpg
+Date Created:  1941-00-00       335
+2016-335.jpg
+Date Created:  1941-00-00       336
+2016-336.jpg
+Date Created:  1941-00-00       337
+2016-337.jpg
+Date Created:  1941-00-00       338
+2016-338.jpg
+Date Created:  1941-00-00       339
+2016-339.jpg
+Date Created:  1941-00-00       340
+2016-34.jpg
+Date Created:  1957-10-00       341
+2016-340.jpg
+Date Created:  1941-00-00       342
+2016-341.jpg
+Date Created:  1941-00-00       343
+2016-3410.jpg
+Date Created:  0000-00-00       344
+2016-342.jpg
+Date Created:  1941-00-00       345
+2016-343.jpg
+Date Created:  1941-00-00       346
+2016-344.jpg
+Date Created:  1941-00-00       347
+2016-345.jpg
+Date Created:  1941-00-00       348
+2016-346.jpg
+Date Created:  1941-00-00       349
+2016-347.jpg
+Date Created:  1941-00-00       350
+2016-348.jpg
+Date Created:  1941-00-00       351
+2016-349.jpg
+Date Created:  1941-00-00       352
+2016-35.jpg
+Date Created:  1957-09-00       353
+2016-350.jpg
+Date Created:  1941-00-00       354
+2016-351.jpg
+Date Created:  1941-00-00       355
+2016-352.jpg
+Date Created:  1941-00-00       356
+2016-353.jpg
+Date Created:  1941-00-00       357
+2016-354.jpg
+Date Created:  1941-00-00       358
+2016-355.jpg
+Date Created:  1941-00-00       359
+2016-356.jpg
+Date Created:  1941-00-00       360
+2016-357.jpg
+Date Created:  1941-00-00       361
+2016-358.jpg
+Date Created:  1941-00-00       362
+2016-359.jpg
+Date Created:  1941-00-00       363
+2016-36.jpg
+Date Created:  1957-09-00       364
+2016-360.jpg
+Date Created:  1941-00-00       365
+2016-361.jpg
+Date Created:  1941-00-00       366
+2016-362.jpg
+Date Created:  1941-00-00       367
+2016-363.jpg
+Date Created:  1941-00-00       368
+2016-364.jpg
+Date Created:  1941-00-00       369
+2016-365.jpg
+Date Created:  1941-00-00       370
+2016-366.jpg
+Date Created:  1941-00-00       371
+2016-367.jpg
+Date Created:  1941-00-00       372
+2016-368.jpg
+Date Created:  1941-00-00       373
+2016-369.jpg
+Date Created:  1941-00-00       374
+2016-37.jpg
+Date Created:  1957-06-10       375
+2016-370.jpg
+Date Created:  1941-00-00       376
+2016-371.jpg
+Date Created:  1941-00-00       377
+2016-372.jpg
+Date Created:  1941-00-00       378
+2016-373.jpg
+Date Created:  1941-00-00       379
+2016-374.jpg
+Date Created:  1941-00-00       380
+2016-375.jpg
+Date Created:  1941-00-00       381
+2016-376.jpg
+Date Created:  1941-00-00       382
+2016-377.jpg
+Date Created:  1941-00-00       383
+2016-378.jpg
+Date Created:  1941-00-00       384
+2016-379.jpg
+Date Created:  1941-00-00       385
+2016-38.jpg
+Date Created:  1958-00-00       386
+2016-380.jpg
+Date Created:  1941-00-00       387
+2016-381.jpg
+Date Created:  1941-00-00       388
+2016-382.jpg
+Date Created:  1941-00-00       389
+2016-383.jpg
+Date Created:  1941-00-00       390
+2016-384.jpg
+Date Created:  1941-00-00       391
+2016-385.jpg
+Date Created:  1941-00-00       392
+2016-386.jpg
+Date Created:  1941-00-00       393
+2016-387.jpg
+Date Created:  1941-00-00       394
+2016-388.jpg
+Date Created:  1941-00-00       395
+2016-389.jpg
+Date Created:  1941-00-00       396
+2016-39.jpg
+Date Created:  1958-00-00       397
+2016-390.jpg
+Date Created:  1941-00-00       398
+2016-391.jpg
+Date Created:  1941-00-00       399
+2016-392.jpg
+Date Created:  1941-00-00       400
+2016-393.jpg
+Date Created:  1941-00-00       401
+2016-394.jpg
+Date Created:  1941-00-00       402
+2016-395.jpg
+Date Created:  1941-00-00       403
+2016-396.jpg
+Date Created:  1941-00-00       404
+2016-397.jpg
+Date Created:  1941-00-00       405
+2016-398.jpg
+Date Created:  1941-00-00       406
+2016-399.jpg
+Date Created:  1941-00-00       407
+2016-40.jpg
+Date Created:  1958-00-00       408
+2016-400.jpg
+Date Created:  1941-00-00       409
+2016-401.jpg
+Date Created:  1941-00-00       410
+2016-402.jpg
+Date Created:  1941-00-00       411
+2016-403.jpg
+Date Created:  1941-00-00       412
+2016-404.jpg
+Date Created:  1941-00-00       413
+2016-405.jpg
+Date Created:  1941-00-00       414
+2016-406.jpg
+Date Created:  1941-00-00       415
+2016-407.jpg
+Date Created:  1941-00-00       416
+2016-408.jpg
+Date Created:  1941-00-00       417
+2016-409.jpg
+Date Created:  1941-00-00       418
+2016-41.jpg
+Date Created:  1958-00-00       419
+2016-410.jpg
+Date Created:  1941-00-00       420
+2016-411.jpg
+Date Created:  1941-00-00       421
+2016-412.jpg
+Date Created:  1941-00-00       422
+2016-413.jpg
+Date Created:  1941-00-00       423
+2016-414.jpg
+Date Created:  1941-00-00       424
+2016-415.jpg
+Date Created:  1941-00-00       425
+2016-416.jpg
+Date Created:  1941-00-00       426
+2016-417.jpg
+Date Created:  1941-00-00       427
+2016-418.jpg
+Date Created:  1955-00-00       428
+2016-419.jpg
+Date Created:  1941-00-00       429
+2016-42.jpg
+Date Created:  1958-00-00       430
+2016-420.jpg
+Date Created:  1941-00-00       431
+2016-421.jpg
+Date Created:  1940-00-00       432
+2016-422.jpg
+Date Created:  1941-00-00       433
+2016-423.jpg
+Date Created:  1940-00-00       434
+2016-424.jpg
+Date Created:  1941-00-00       435
+2016-425.jpg
+Date Created:  1941-00-00       436
+2016-426.jpg
+Date Created:  1941-00-00       437
+2016-427.jpg
+Date Created:  1941-00-00       438
+2016-428.jpg
+Date Created:  1941-00-00       439
+2016-429.jpg
+Date Created:  1941-00-00       440
+2016-43.jpg
+Date Created:  1958-00-00       441
+2016-430.jpg
+Date Created:  1941-00-00       442
+2016-431.jpg
+Date Created:  1941-00-00       443
+2016-432.jpg
+Date Created:  1941-00-00       444
+2016-433.jpg
+Date Created:  1941-00-00       445
+2016-434.jpg
+Date Created:  1941-00-00       446
+2016-435.jpg
+Date Created:  1941-00-00       447
+2016-436.jpg
+Date Created:  1941-00-00       448
+2016-437.jpg
+Date Created:  1941-00-00       449
+2016-438.jpg
+Date Created:  1941-00-00       450
+2016-439.jpg
+Date Created:  1941-00-00       451
+2016-44.jpg
+Date Created:  1958-00-00       452
+2016-440.jpg
+Date Created:  1941-00-00       453
+2016-441.jpg
+Date Created:  1941-00-00       454
+2016-442.jpg
+Date Created:  1941-00-00       455
+2016-443.jpg
+Date Created:  1941-00-00       456
+2016-444.jpg
+Date Created:  1941-00-00       457
+2016-445.jpg
+Date Created:  1941-00-00       458
+2016-446.jpg
+Date Created:  1941-00-00       459
+2016-447.jpg
+Date Created:  1941-00-00       460
+2016-448.jpg
+Date Created:  1941-00-00       461
+2016-449.jpg
+Date Created:  1941-00-00       462
+2016-45.jpg
+Date Created:  1958-00-00       463
+2016-450.jpg
+Date Created:  1941-00-00       464
+2016-451.jpg
+Date Created:  1941-00-00       465
+2016-452.jpg
+Date Created:  1941-00-00       466
+2016-453.jpg
+Date Created:  1941-00-00       467
+2016-454.jpg
+Date Created:  1941-00-00       468
+2016-455.jpg
+Date Created:  1941-00-00       469
+2016-456.jpg
+Date Created:  1941-00-00       470
+2016-457.jpg
+Date Created:  1941-00-00       471
+2016-458.jpg
+Date Created:  1941-00-00       472
+2016-459.jpg
+Date Created:  1941-00-00       473
+2016-46.jpg
+Date Created:  1958-06-05       474
+2016-460.jpg
+Date Created:  1941-00-00       475
+2016-461.jpg
+Date Created:  1941-00-00       476
+2016-462.jpg
+Date Created:  1941-00-00       477
+2016-463.jpg
+Date Created:  1941-00-00       478
+2016-464.jpg
+Date Created:  1941-00-00       479
+2016-465.jpg
+Date Created:  1941-00-00       480
+2016-466.jpg
+Date Created:  1941-00-00       481
+2016-467.jpg
+Date Created:  1941-00-00       482
+2016-468.jpg
+Date Created:  1941-00-00       483
+2016-469.jpg
+Date Created:  1941-00-00       484
+2016-47.jpg
+Date Created:  1958-06-05       485
+2016-470.jpg
+Date Created:  1941-00-00       486
+2016-471.jpg
+Date Created:  1941-00-00       487
+2016-472.jpg
+Date Created:  1941-00-00       488
+2016-473.jpg
+Date Created:  1941-00-00       489
+2016-474.jpg
+Date Created:  1941-00-00       490
+2016-475.jpg
+Date Created:  1941-00-00       491
+2016-476.jpg
+Date Created:  1941-00-00       492
+2016-477.jpg
+Date Created:  1941-00-00       493
+2016-478.jpg
+Date Created:  1941-00-00       494
+2016-479.jpg
+Date Created:  1941-00-00       495
+2016-48.jpg
+Date Created:  1958-00-00       496
+2016-480.jpg
+Date Created:  1941-00-00       497
+2016-481.jpg
+Date Created:  1941-00-00       498
+2016-482.jpg
+Date Created:  1941-00-00       499
+2016-483.jpg
+Date Created:  1941-00-00       500
+2016-484.jpg
+Date Created:  1941-00-00       501
+2016-485.jpg
+Date Created:  1941-00-00       502
+2016-486.jpg
+Date Created:  1941-00-00       503
+2016-487.jpg
+Date Created:  1941-00-00       504
+2016-488.jpg
+Date Created:  1941-00-00       505
+2016-489.jpg
+Date Created:  1941-00-00       506
+2016-49.jpg
+Date Created:  1958-00-00       507
+2016-490.jpg
+Date Created:  1941-00-00       508
+2016-491.jpg
+Date Created:  1941-00-00       509
+2016-492.jpg
+Date Created:  1941-00-00       510
+2016-493.jpg
+Date Created:  1941-00-00       511
+2016-494.jpg
+Date Created:  1941-00-00       512
+2016-495.jpg
+Date Created:  1941-00-00       513
+2016-496.jpg
+Date Created:  1941-00-00       514
+2016-497.jpg
+Date Created:  1941-00-00       515
+2016-498.jpg
+Date Created:  1941-00-00       516
+2016-499.jpg
+Date Created:  1941-00-00       517
+2016-50.jpg
+Date Created:  1958-00-00       518
+2016-500.jpg
+Date Created:  1941-00-00       519
+2016-501.jpg
+Date Created:  1941-00-00       520
+2016-502.jpg
+Date Created:  1941-00-00       521
+2016-503.jpg
+Date Created:  1941-00-00       522
+2016-504.jpg
+Date Created:  1941-00-00       523
+2016-505.jpg
+Date Created:  1941-00-00       524
+2016-506.jpg
+Date Created:  1941-00-00       525
+2016-507.jpg
+Date Created:  1941-00-00       526
+2016-508.jpg
+Date Created:  1941-00-00       527
+2016-509.jpg
+Date Created:  1941-00-00       528
+2016-51.jpg
+Date Created:  1958-00-00       529
+2016-510.jpg
+Date Created:  1941-00-00       530
+2016-511.jpg
+Date Created:  1941-00-00       531
+2016-512.jpg
+Date Created:  1941-00-00       532
+2016-513.jpg
+Date Created:  1941-00-00       533
+2016-514.jpg
+Date Created:  1941-00-00       534
+2016-515.jpg
+Date Created:  1941-00-00       535
+2016-516.jpg
+Date Created:  1941-00-00       536
+2016-517.jpg
+Date Created:  1941-00-00       537
+2016-518.jpg
+Date Created:  1941-00-00       538
+2016-519.jpg
+Date Created:  1941-00-00       539
+2016-52.jpg
+Date Created:  1958-00-00       540
+2016-520.jpg
+Date Created:  1941-00-00       541
+2016-521.jpg
+Date Created:  1941-00-00       542
+2016-522.jpg
+Date Created:  1941-00-00       543
+2016-523.jpg
+Date Created:  1941-00-00       544
+2016-524.jpg
+Date Created:  1941-00-00       545
+2016-525.jpg
+Date Created:  1941-00-00       546
+2016-526.jpg
+Date Created:  1941-00-00       547
+2016-527.jpg
+Date Created:  1941-00-00       548
+2016-528.jpg
+Date Created:  1941-00-00       549
+2016-529.jpg
+Date Created:  1941-00-00       550
+2016-53.jpg
+Date Created:  1958-00-00       551
+2016-530.jpg
+Date Created:  1941-00-00       552
+2016-531.jpg
+Date Created:  1941-00-00       553
+2016-532.jpg
+Date Created:  1941-00-00       554
+2016-533.jpg
+Date Created:  1941-00-00       555
+2016-534.jpg
+Date Created:  1941-00-00       556
+2016-535.jpg
+Date Created:  1941-00-00       557
+2016-536.jpg
+Date Created:  1941-00-00       558
+2016-537.jpg
+Date Created:  1941-00-00       559
+2016-538.jpg
+Date Created:  1941-00-00       560
+2016-539.jpg
+Date Created:  1941-00-00       561
+2016-54.jpg
+Date Created:  1959-00-00       562
+2016-540.jpg
+Date Created:  1941-00-00       563
+2016-541.jpg
+Date Created:  1941-00-00       564
+2016-542.jpg
+Date Created:  1941-00-00       565
+2016-543.jpg
+Date Created:  1941-00-00       566
+2016-544.jpg
+Date Created:  1941-00-00       567
+2016-545.jpg
+Date Created:  1941-00-00       568
+2016-546.jpg
+Date Created:  1941-00-00       569
+2016-547.jpg
+Date Created:  1941-00-00       570
+2016-548.jpg
+Date Created:  1941-00-00       571
+2016-549.jpg
+Date Created:  1941-00-00       572
+2016-55.jpg
+Date Created:  1959-00-00       573
+2016-550.jpg
+Date Created:  1941-00-00       574
+2016-551.jpg
+Date Created:  1941-00-00       575
+2016-552.jpg
+Date Created:  1941-00-00       576
+2016-553.jpg
+Date Created:  1941-00-00       577
+2016-554.jpg
+Date Created:  1941-00-00       578
+2016-555.jpg
+Date Created:  1941-00-00       579
+2016-556.jpg
+Date Created:  1941-00-00       580
+2016-557.jpg
+Date Created:  1941-00-00       581
+2016-558.jpg
+Date Created:  1941-00-00       582
+2016-559.jpg
+Date Created:  1941-00-00       583
+***** File 2016-56.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-560.jpg
+Date Created:  1969-05-21       584
+2016-561.jpg
+Date Created:  1969-03-20       585
+2016-562.jpg
+Date Created:  1969-00-00       586
+2016-563.jpg
+Date Created:  1969-04-21       587
+2016-564.jpg
+Date Created:  1970-04-21       588
+2016-565.jpg
+Date Created:  1970-04-21       589
+2016-566.jpg
+Date Created:  1969-05-08       590
+2016-567.jpg
+Date Created:  1970-01-21       591
+2016-568.jpg
+Date Created:  1970-01-21       592
+2016-569.jpg
+Date Created:  1970-04-01       593
+***** File 2016-57.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-570.jpg
+Date Created:  1970-04-15       594
+2016-571.jpg
+Date Created:  1970-04-00       595
+2016-572.jpg
+Date Created:  1970-05-20       596
+2016-573.jpg
+Date Created:  1970-05-27       597
+***** File 2016-574.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-575.jpg
+Date Created:  1970-05-27       598
+2016-576.jpg
+Date Created:  1970-05-27       599
+2016-577.jpg
+Date Created:  1983-05-00       600
+2016-578.jpg
+Date Created:  1958-10-00       601
+2016-579.jpg
+Date Created:  1959-11-08       602
+2016-58.jpg
+Date Created:  1959-06-00       603
+2016-580.jpg
+Date Created:  1959-08-31       604
+2016-581.jpg
+Date Created:  1960-05-02       605
+2016-582.jpg
+Date Created:  1960-05-02       606
+2016-583.jpg
+Date Created:  1963-12-00       607
+2016-584.jpg
+Date Created:  1970-07-00       608
+2016-585.jpg
+Date Created:  1970-07-00       609
+2016-586.jpg
+Date Created:  1970-07-00       610
+2016-587.jpg
+Date Created:  1971-06-00       611
+2016-588.jpg
+Date Created:  1970-06-00       612
+2016-589.jpg
+Date Created:  1972-04-02       613
+2016-59.jpg
+Date Created:  1959-06-00       614
+2016-590.jpg
+Date Created:  1972-03-02       615
+2016-591.jpg
+Date Created:  1972-03-08       616
+2016-592.jpg
+Date Created:  1974-00-00       617
+2016-593.jpg
+Date Created:  1975-06-00       618
+2016-594.jpg
+Date Created:  1975-06-00       619
+2016-595.jpg
+Date Created:  1975-08-00       620
+2016-596.jpg
+Date Created:  1977-06-00       621
+2016-597.jpg
+Date Created:  1977-00-00       622
+2016-598.jpg
+Date Created:  1970-00-00       623
+2016-599.jpg
+Date Created:  1977-12-00       624
+2016-60.jpg
+Date Created:  1959-05-00       625
+2016-600.jpg
+Date Created:  1941-00-00       626
+2016-601.jpg
+Date Created:  1941-00-00       627
+2016-602.jpg
+Date Created:  1941-00-00       628
+2016-603.jpg
+Date Created:  1941-00-00       629
+2016-604.jpg
+Date Created:  1941-00-00       630
+2016-605.jpg
+Date Created:  1941-00-00       631
+2016-606.jpg
+Date Created:  1941-00-00       632
+2016-607.jpg
+Date Created:  1941-00-00       633
+2016-608.jpg
+Date Created:  1941-00-00       634
+2016-609.jpg
+Date Created:  1941-00-00       635
+2016-61.jpg
+Date Created:  1959-05-00       636
+2016-610.jpg
+Date Created:  1941-00-00       637
+2016-611.jpg
+Date Created:  1941-00-00       638
+2016-612.jpg
+Date Created:  1941-00-00       639
+2016-613.jpg
+Date Created:  1941-00-00       640
+2016-614.jpg
+Date Created:  1941-00-00       641
+2016-615.jpg
+Date Created:  1941-00-00       642
+2016-616.jpg
+Date Created:  1941-00-00       643
+2016-617.jpg
+Date Created:  1941-00-00       644
+2016-618.jpg
+Date Created:  1941-00-00       645
+2016-619.jpg
+Date Created:  1941-04-00       646
+2016-62.jpg
+Date Created:  1959-12-00       647
+2016-620.jpg
+Date Created:  1941-00-00       648
+2016-621.jpg
+Date Created:  1940-00-00       649
+2016-622.jpg
+Date Created:  1941-00-00       650
+2016-623.jpg
+Date Created:  1941-00-00       651
+2016-624.jpg
+Date Created:  1941-00-00       652
+2016-625.jpg
+Date Created:  1941-00-00       653
+2016-626.jpg
+Date Created:  1941-00-00       654
+2016-627.jpg
+Date Created:  1941-00-00       655
+2016-628.jpg
+Date Created:  1941-00-00       656
+2016-629.jpg
+Date Created:  1941-00-00       657
+2016-63.jpg
+Date Created:  1957-00-00       658
+2016-630.jpg
+Date Created:  1941-00-00       659
+2016-631.jpg
+Date Created:  1941-00-00       660
+2016-632.jpg
+Date Created:  1941-00-00       661
+2016-633.jpg
+Date Created:  1941-00-00       662
+2016-634.jpg
+Date Created:  1941-00-00       663
+2016-635.jpg
+Date Created:  1954-09-18       664
+2016-636.jpg
+Date Created:  1955-11-07       665
+2016-637.jpg
+Date Created:  1955-11-00       666
+2016-638.jpg
+Date Created:  1955-11-00       667
+2016-639.jpg
+Date Created:  1955-11-00       668
+2016-64.jpg
+Date Created:  1959-12-00       669
+2016-640.jpg
+Date Created:  1955-11-00       670
+2016-641.jpg
+Date Created:  1955-11-00       671
+2016-642.jpg
+Date Created:  1955-11-00       672
+2016-643.jpg
+Date Created:  1955-12-00       673
+2016-644.jpg
+Date Created:  1955-11-00       674
+2016-645.jpg
+Date Created:  1955-11-00       675
+2016-646.jpg
+Date Created:  1955-11-00       676
+2016-647.jpg
+Date Created:  1955-11-00       677
+2016-648.jpg
+Date Created:  1955-11-07       678
+2016-649.jpg
+Date Created:  1955-11-00       679
+2016-65.jpg
+Date Created:  1959-12-00       680
+2016-650.jpg
+Date Created:  1955-11-00       681
+2016-651.jpg
+Date Created:  1955-11-00       682
+2016-652.jpg
+Date Created:  1955-11-00       683
+2016-653.jpg
+Date Created:  1955-11-00       684
+2016-654.jpg
+Date Created:  1955-11-00       685
+2016-655.jpg
+Date Created:  1955-10-00       686
+2016-656.jpg
+Date Created:  1955-11-00       687
+2016-657.jpg
+Date Created:  1955-00-00       688
+2016-658.jpg
+Date Created:  1955-11-00       689
+2016-659.jpg
+Date Created:  1955-11-00       690
+2016-66.jpg
+Date Created:  1959-12-00       691
+2016-660.jpg
+Date Created:  1955-11-00       692
+2016-661.jpg
+Date Created:  1955-11-00       693
+2016-662.jpg
+Date Created:  1955-11-00       694
+2016-663.jpg
+Date Created:  1955-11-00       695
+2016-664.jpg
+Date Created:  1955-11-00       696
+2016-665.jpg
+Date Created:  1955-11-00       697
+2016-666.jpg
+Date Created:  1955-11-07       698
+2016-667.jpg
+Date Created:  1955-11-00       699
+2016-668.jpg
+Date Created:  1955-11-00       700
+2016-669.jpg
+Date Created:  1955-11-00       701
+2016-67.jpg
+Date Created:  1959-12-00       702
+2016-670.jpg
+Date Created:  1955-11-00       703
+2016-671.jpg
+Date Created:  1955-11-00       704
+2016-672.jpg
+Date Created:  1955-11-00       705
+2016-673.jpg
+Date Created:  1955-11-00       706
+2016-674.jpg
+Date Created:  1955-11-00       707
+2016-675.jpg
+Date Created:  1955-11-00       708
+2016-676.jpg
+Date Created:  1955-00-00       709
+2016-677.jpg
+Date Created:  1955-00-00       710
+2016-678.jpg
+Date Created:  1955-00-00       711
+***** File 2016-679.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-68.jpg
+Date Created:  1959-10-00       712
+***** File 2016-680.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-681.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-682.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-683.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-684.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-685.jpg
+Date Created:  1961-06-13       713
+2016-686.jpg
+Date Created:  1964-09-00       714
+2016-687.jpg
+Date Created:  1964-09-00       715
+2016-688.jpg
+Date Created:  1964-09-00       716
+2016-689.jpg
+Date Created:  1964-09-00       717
+2016-69.jpg
+Date Created:  1959-10-00       718
+2016-690.jpg
+Date Created:  1964-09-00       719
+2016-691.jpg
+Date Created:  1964-00-00       720
+2016-692.jpg
+Date Created:  1964-09-00       721
+2016-693.jpg
+Date Created:  1964-09-00       722
+***** File 2016-694.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-695.jpg
+Date Created:  1966-03-00       723
+2016-696.jpg
+Date Created:  1966-03-00       724
+2016-697.jpg
+Date Created:  1966-03-00       725
+2016-698.jpg
+Date Created:  1966-03-00       726
+2016-699.jpg
+Date Created:  1966-03-00       727
+2016-70.jpg
+Date Created:  1966-12-00       728
+2016-700.jpg
+Date Created:  1984-06-00       729
+2016-701.jpg
+Date Created:  1968-02-09       730
+2016-702.jpg
+Date Created:  1968-02-09       731
+***** File 2016-703.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-704.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-705.jpg
+Date Created:  1977-09-16       732
+***** File 2016-706.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-707.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-708.jpg
+Date Created:  1980-00-00       733
+2016-709.jpg
+Date Created:  1983-00-00       734
+2016-71.jpg
+Date Created:  1960-06-20       735
+2016-710.jpg
+Date Created:  1981-04-00       736
+***** File 2016-711.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-712.jpg
+Date Created:  1987-00-00       737
+2016-713.jpg
+Date Created:  1987-00-00       738
+2016-714.jpg
+Date Created:  1987-10-15       739
+2016-715.jpg
+Date Created:  1987-10-15       740
+2016-716.jpg
+Date Created:  1987-10-15       741
+2016-717.jpg
+Date Created:  1987-08-15       742
+2016-718.jpg
+Date Created:  1989-11-07       743
+2016-719.jpg
+Date Created:  1989-11-07       744
+2016-72.jpg
+Date Created:  1960-06-20       745
+2016-720.jpg
+Date Created:  1989-11-07       746
+2016-721.jpg
+Date Created:  1989-11-07       747
+2016-722.jpg
+Date Created:  1989-11-07       748
+2016-723.jpg
+Date Created:  1989-11-07       749
+2016-724.jpg
+Date Created:  1989-11-07       750
+2016-725.jpg
+Date Created:  1989-11-07       751
+2016-726.jpg
+Date Created:  1989-00-00       752
+2016-727.jpg
+Date Created:  1989-00-00       753
+2016-728.jpg
+Date Created:  1946-00-00       754
+2016-729.jpg
+Date Created:  1946-00-00       755
+2016-73.jpg
+Date Created:  1960-02-00       756
+2016-730.jpg
+Date Created:  1947-04-10       757
+2016-731.jpg
+Date Created:  1955-08-27       758
+2016-732.jpg
+Date Created:  1955-08-27       759
+2016-733.jpg
+Date Created:  1955-08-27       760
+***** File 2016-734.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-735.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-736.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-737.jpg
+Date Created:  1956-04-21       761
+2016-738.jpg
+Date Created:  1960-04-16       762
+2016-739.jpg
+Date Created:  1961-11-01       763
+2016-74.jpg
+Date Created:  1960-02-00       764
+2016-740.jpg
+Date Created:  1961-11-01       765
+2016-741.jpg
+Date Created:  1969-01-20       766
+2016-742.jpg
+Date Created:  1970-03-15       767
+***** File 2016-743.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-744.jpg
+Date Created:  1972-12-27       768
+2016-745.jpg
+Date Created:  1969-05-08       769
+2016-746.jpg
+Date Created:  1970-00-00       770
+2016-747.jpg
+Date Created:  1970-04-21       771
+2016-748.jpg
+Date Created:  1970-00-00       772
+2016-749.jpg
+Date Created:  1970-00-00       773
+2016-75.jpg
+Date Created:  1960-02-00       774
+2016-750.jpg
+Date Created:  1975-00-00       775
+2016-751.jpg
+Date Created:  1975-00-00       776
+***** File 2016-752.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-753.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-754.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-755.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-756.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-757.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-758.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-759.jpg
+Date Created:  1950-00-00       777
+2016-76.jpg
+Date Created:  1960-06-00       778
+***** File 2016-760.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-761.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-762.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-763.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-764.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-765.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-766.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-767.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-768.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-769.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-77.jpg
+Date Created:  1960-05-00       779
+***** File 2016-770.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-771.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-772.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-773.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-774.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-775.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-776.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-777.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-778.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-779.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-78.jpg
+Date Created:  1960-06-00       780
+***** File 2016-780.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-781.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-782.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-783.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-784.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-785.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-786.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-787.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-788.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-789.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-79.jpg
+Date Created:  1960-06-00       781
+***** File 2016-790.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-791.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-792.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-793.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-794.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-795.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-796.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-797.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-798.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-799.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-80.jpg
+Date Created:  1960-06-00       782
+***** File 2016-800.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-801.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-802.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-803.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-804.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-805.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-806.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-807.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-808.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-809.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-81.jpg
+Date Created:  1947-00-00       783
+***** File 2016-810.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-811.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-812.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-813.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-814.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-815.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-816.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-817.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-818.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-819.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-82.jpg
+Date Created:  1960-04-00       784
+***** File 2016-820.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-821.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-822.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-823.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-824.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-825.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-826.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-827.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-828.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-829.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-83.jpg
+Date Created:  1961-00-00       785
+***** File 2016-830.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-831.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-832.jpg
+Date Created:  1950-00-00       786
+2016-833.jpg
+Date Created:  1950-00-00       787
+2016-834.jpg
+Date Created:  1950-00-00       788
+2016-835.jpg
+Date Created:  1950-00-00       789
+2016-836.jpg
+Date Created:  1950-00-00       790
+2016-837.jpg
+Date Created:  1950-00-00       791
+2016-838.jpg
+Date Created:  1950-00-00       792
+2016-839.jpg
+Date Created:  1950-00-00       793
+2016-84.jpg
+Date Created:  1961-00-00       794
+2016-840.jpg
+Date Created:  1950-00-00       795
+2016-841.jpg
+Date Created:  1950-00-00       796
+***** File 2016-842.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-843.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-844.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-845.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-846.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-847.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-848.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-849.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-85.jpg
+Date Created:  1961-00-00       797
+***** File 2016-850.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-851.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-852.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-853.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-854.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-855.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-856.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-857.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-858.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-859.jpg
+Date Created:  1949-08-07       798
+2016-86.jpg
+Date Created:  1961-06-05       799
+2016-860.jpg
+Date Created:  1949-08-06       800
+2016-861.jpg
+Date Created:  1949-08-06       801
+2016-862.jpg
+Date Created:  1949-08-06       802
+2016-863.jpg
+Date Created:  1949-08-06       803
+2016-864.jpg
+Date Created:  1949-08-06       804
+2016-865.jpg
+Date Created:  1949-08-06       805
+2016-866.jpg
+Date Created:  1949-08-06       806
+2016-867.jpg
+Date Created:  1949-08-06       807
+2016-868.jpg
+Date Created:  1949-08-06       808
+2016-869.jpg
+Date Created:  1949-08-06       809
+2016-87.jpg
+Date Created:  1961-06-05       810
+2016-870.jpg
+Date Created:  1949-08-06       811
+2016-871.jpg
+Date Created:  1949-08-06       812
+2016-872.jpg
+Date Created:  1949-08-06       813
+2016-873.jpg
+Date Created:  1900-00-00       814
+2016-874.jpg
+Date Created:  1918-06-00       815
+2016-875.jpg
+Date Created:  1918-06-00       816
+2016-876.jpg
+Date Created:  1850-00-00       817
+2016-877.jpg
+Date Created:  1850-00-00       818
+2016-878.jpg
+Date Created:  1850-00-00       819
+2016-879.jpg
+Date Created:  1880-00-00       820
+2016-88.jpg
+Date Created:  1961-00-00       821
+2016-880.jpg
+Date Created:  1880-00-00       822
+2016-881.jpg
+Date Created:  1882-00-00       823
+2016-882.jpg
+Date Created:  1887-00-00       824
+2016-883.jpg
+Date Created:  1930-00-00       825
+2016-884.jpg
+Date Created:  1890-00-00       826
+2016-885.jpg
+Date Created:  1889-00-00       827
+2016-886.jpg
+Date Created:  1890-00-00       828
+2016-887.jpg
+Date Created:  1890-00-00       829
+2016-888.jpg
+Date Created:  1887-00-00       830
+2016-889.jpg
+Date Created:  1925-00-00       831
+2016-89.jpg
+Date Created:  1961-00-00       832
+2016-891.jpg
+Date Created:  1898-02-11       833
+2016-893.jpg
+Date Created:  1913-00-00       834
+2016-894.jpg
+Date Created:  1913-00-00       835
+2016-895.jpg
+Date Created:  1913-00-00       836
+2016-896.jpg
+Date Created:  1913-00-00       837
+2016-897.jpg
+Date Created:  1916-00-00       838
+2016-898.jpg
+Date Created:  1908-00-00       839
+2016-90.jpg
+Date Created:  1961-00-00       840
+2016-900.jpg
+Date Created:  1914-00-00       841
+2016-901.jpg
+Date Created:  1880-00-00       842
+2016-902.jpg
+Date Created:  1870-00-00       843
+2016-903.jpg
+Date Created:  1900-00-00       844
+2016-904.jpg
+Date Created:  1900-00-00       845
+2016-905.jpg
+Date Created:  1920-00-00       846
+2016-906.jpg
+Date Created:  1942-06-04       847
+2016-907.jpg
+Date Created:  1900-00-00       848
+2016-908.jpg
+Date Created:  1925-00-00       849
+2016-909.jpg
+Date Created:  1925-00-00       850
+2016-91.jpg
+Date Created:  1961-00-00       851
+2016-910.jpg
+Date Created:  1900-00-00       852
+2016-911.jpg
+Date Created:  1919-06-28       853
+2016-912.jpg
+Date Created:  1933-04-30       854
+2016-913.jpg
+Date Created:  1940-00-00       855
+***** File 2016-914.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-915.jpg
+Date Created:  1935-00-00       856
+2016-916.jpg
+Date Created:  1950-00-00       857
+2016-917.jpg
+Date Created:  1935-00-00       858
+2016-918.jpg
+Date Created:  1945-00-00       859
+2016-919.jpg
+Date Created:  1950-00-00       860
+2016-92.jpg
+Date Created:  1961-00-00       861
+2016-920.jpg
+Date Created:  1950-00-00       862
+2016-921.jpg
+Date Created:  1925-00-00       863
+2016-922.jpg
+Date Created:  1890-00-00       864
+2016-923.jpg
+Date Created:  1940-00-00       865
+***** File 2016-924.jpg not found in directory C:\Temp\Metadata-tagging ********
+***** File 2016-925.jpg not found in directory C:\Temp\Metadata-tagging ********
+2016-926.jpg
+Date Created:  1917-07-00       866
+2016-927.jpg
+Date Created:  1917-07-00       867
+2016-928.jpg
+Date Created:  1917-07-00       868
+2016-929.jpg
+Date Created:  1935-00-00       869
+2016-93.jpg
+Date Created:  1961-00-00       870
+2016-930.jpg
+Date Created:  1917-07-00       871
+2016-931.jpg
+Date Created:  1917-07-00       872
+2016-932.jpg
+Date Created:  1917-07-00       873
+2016-933.jpg
+Date Created:  1917-07-00       874
+2016-934.jpg
+Date Created:  1917-06-00       875
+2016-935.jpg
+Date Created:  1917-07-00       876
+2016-936.jpg
+Date Created:  1917-07-00       877
+2016-937.jpg
+Date Created:  1917-07-00       878
+2016-938.jpg
+Date Created:  1917-07-00       879
+2016-939.jpg
+Date Created:  1917-07-00       880
+2016-94.jpg
+Date Created:  1961-00-00       881
+2016-940.jpg
+Date Created:  1918-03-00       882
+2016-941.jpg
+Date Created:  1918-03-00       883
+2016-942.jpg
+Date Created:  1918-03-00       884
+2016-943.jpg
+Date Created:  1918-00-00       885
+2016-944.jpg
+Date Created:  1918-00-00       886
+2016-945.jpg
+Date Created:  1918-00-00       887
+2016-946.jpg
+Date Created:  1918-00-00       888
+2016-947.jpg
+Date Created:  1919-00-00       889
+2016-948.jpg
+Date Created:  1919-04-00       890
+2016-949.jpg
+Date Created:  1919-04-00       891
+2016-95.jpg
+Date Created:  1961-00-00       892
+2016-950.jpg
+Date Created:  1919-04-00       893
+2016-951.jpg
+Date Created:  1919-04-00       894
+2016-952.jpg
+Date Created:  1918-00-00       895
+2016-953.jpg
+Date Created:  1918-00-00       896
+2016-954.jpg
+Date Created:  1918-00-00       897
+2016-955.jpg
+Date Created:  1918-00-00       898
+2016-956.jpg
+Date Created:  1919-00-00       899
+2016-957.jpg
+Date Created:  1917-00-00       900
+2016-958.jpg
+Date Created:  1917-00-00       901
+2016-959.jpg
+Date Created:  1917-00-00       902
+2016-96.jpg
+Date Created:  1961-00-00       903
+2016-960.jpg
+Date Created:  1919-00-00       904
+2016-961.jpg
+Date Created:  1919-00-00       905
+2016-962.jpg
+Date Created:  1919-00-00       906
+2016-963.jpg
+Date Created:  1919-00-00       907
+2016-964.jpg
+Date Created:  1918-00-00       908
+2016-965.jpg
+Date Created:  1918-00-00       909
+2016-966.jpg
+Date Created:  1918-00-00       910
+2016-967.jpg
+Date Created:  1919-00-00       911
+2016-968.jpg
+Date Created:  1918-00-00       912
+2016-969.jpg
+Date Created:  1919-00-00       913
+2016-97.jpg
+Date Created:  1961-00-00       914
+2016-970.jpg
+Date Created:  1918-00-00       915
+2016-971.jpg
+Date Created:  1918-08-00       916
+2016-972.jpg
+Date Created:  1918-08-00       917
+2016-973.jpg
+Date Created:  1918-08-00       918
+2016-974.jpg
+Date Created:  1918-00-00       919
+2016-975.jpg
+Date Created:  1918-00-00       920
+2016-976.jpg
+Date Created:  1918-00-00       921
+2016-977.jpg
+Date Created:  1918-00-00       922
+2016-978.jpg
+Date Created:  1918-04-00       923
+2016-979.jpg
+Date Created:  1918-04-00       924
+2016-98.jpg
+Date Created:  1961-00-00       925
+2016-980.jpg
+Date Created:  1918-05-00       926
+2016-981.jpg
+Date Created:  1918-04-00       927
+2016-982.jpg
+Date Created:  1918-04-00       928
+2016-983.jpg
+Date Created:  1918-00-00       929
+2016-984.jpg
+Date Created:  1918-00-00       930
+2016-985.jpg
+Date Created:  1918-00-00       931
+2016-986.jpg
+Date Created:  1918-08-00       932
+2016-987.jpg
+Date Created:  1918-08-00       933
+2016-988.jpg
+Date Created:  1918-00-00       934
+2016-989.jpg
+Date Created:  1918-00-00       935
+2016-99.jpg
+Date Created:  1945-00-00       936
+2016-990.jpg
+Date Created:  1918-00-00       937
+2016-991.jpg
+Date Created:  1918-00-00       938
+2016-992.jpg
+Date Created:  1918-00-00       939
+2016-993.jpg
+Date Created:  1918-00-00       940
+2016-994.jpg
+Date Created:  1918-00-00       941
+2016-995.jpg
+Date Created:  1918-00-00       942
+2016-996.jpg
+Date Created:  1918-00-00       943
+2016-997.jpg
+Date Created:  1918-00-00       944
+2016-998.jpg
+Date Created:  1918-00-00       945
+2016-999.jpg
+Date Created:  1918-00-00       946
+======================================================================
+Processing complete at  2023-12-29 14:41:33
+1099 records read from the CSV file
+946 images processed
+153 missing images
+*** Missing images not processed:
+2016-103.jpg missing
+2016-104.jpg missing
+2016-105.jpg missing
+2016-106.jpg missing
+2016-107.jpg missing
+2016-108.jpg missing
+2016-1265.jpg missing
+2016-1266.jpg missing
+2016-1267.jpg missing
+2016-1268.jpg missing
+2016-1269.jpg missing
+2016-1327.jpg missing
+2016-161.jpg missing
+2016-162.jpg missing
+2016-1835.jpg missing
+2016-1836.jpg missing
+2016-1837.jpg missing
+2016-2006.jpg missing
+2016-2009.jpg missing
+2016-209.jpg missing
+2016-210.jpg missing
+2016-211.jpg missing
+2016-212.jpg missing
+2016-221.jpg missing
+2016-231.jpg missing
+2016-234.jpg missing
+2016-235.jpg missing
+2016-236.jpg missing
+2016-251.jpg missing
+2016-293.jpg missing
+2016-294.jpg missing
+2016-295.jpg missing
+2016-3072.jpg missing
+2016-3093.jpg missing
+2016-3094.jpg missing
+2016-56.jpg missing
+2016-57.jpg missing
+2016-574.jpg missing
+2016-679.jpg missing
+2016-680.jpg missing
+2016-681.jpg missing
+2016-682.jpg missing
+2016-683.jpg missing
+2016-684.jpg missing
+2016-694.jpg missing
+2016-703.jpg missing
+2016-704.jpg missing
+2016-706.jpg missing
+2016-707.jpg missing
+2016-711.jpg missing
+2016-734.jpg missing
+2016-735.jpg missing
+2016-736.jpg missing
+2016-743.jpg missing
+2016-752.jpg missing
+2016-753.jpg missing
+2016-754.jpg missing
+2016-755.jpg missing
+2016-756.jpg missing
+2016-757.jpg missing
+2016-758.jpg missing
+2016-760.jpg missing
+2016-761.jpg missing
+2016-762.jpg missing
+2016-763.jpg missing
+2016-764.jpg missing
+2016-765.jpg missing
+2016-766.jpg missing
+2016-767.jpg missing
+2016-768.jpg missing
+2016-769.jpg missing
+2016-770.jpg missing
+2016-771.jpg missing
+2016-772.jpg missing
+2016-773.jpg missing
+2016-774.jpg missing
+2016-775.jpg missing
+2016-776.jpg missing
+2016-777.jpg missing
+2016-778.jpg missing
+2016-779.jpg missing
+2016-780.jpg missing
+2016-781.jpg missing
+2016-782.jpg missing
+2016-783.jpg missing
+2016-784.jpg missing
+2016-785.jpg missing
+2016-786.jpg missing
+2016-787.jpg missing
+2016-788.jpg missing
+2016-789.jpg missing
+2016-790.jpg missing
+2016-791.jpg missing
+2016-792.jpg missing
+2016-793.jpg missing
+2016-794.jpg missing
+2016-795.jpg missing
+2016-796.jpg missing
+2016-797.jpg missing
+2016-798.jpg missing
+2016-799.jpg missing
+2016-800.jpg missing
+2016-801.jpg missing
+2016-802.jpg missing
+2016-803.jpg missing
+2016-804.jpg missing
+2016-805.jpg missing
+2016-806.jpg missing
+2016-807.jpg missing
+2016-808.jpg missing
+2016-809.jpg missing
+2016-810.jpg missing
+2016-811.jpg missing
+2016-812.jpg missing
+2016-813.jpg missing
+2016-814.jpg missing
+2016-815.jpg missing
+2016-816.jpg missing
+2016-817.jpg missing
+2016-818.jpg missing
+2016-819.jpg missing
+2016-820.jpg missing
+2016-821.jpg missing
+2016-822.jpg missing
+2016-823.jpg missing
+2016-824.jpg missing
+2016-825.jpg missing
+2016-826.jpg missing
+2016-827.jpg missing
+2016-828.jpg missing
+2016-829.jpg missing
+2016-830.jpg missing
+2016-831.jpg missing
+2016-842.jpg missing
+2016-843.jpg missing
+2016-844.jpg missing
+2016-845.jpg missing
+2016-846.jpg missing
+2016-847.jpg missing
+2016-848.jpg missing
+2016-849.jpg missing
+2016-850.jpg missing
+2016-851.jpg missing
+2016-852.jpg missing
+2016-853.jpg missing
+2016-854.jpg missing
+2016-855.jpg missing
+2016-856.jpg missing
+2016-857.jpg missing
+2016-858.jpg missing
+2016-914.jpg missing
+2016-924.jpg missing
+2016-925.jpg missing
+
+___________________________
+Elapsed time: 17:21  MM:SS
+Processing time for each image:  0.95  seconds
+REPORT_JPEG-2023-12-29_14-23-57.txt log file printed to C:\Temp\Metadata-tagging
+======================================================================

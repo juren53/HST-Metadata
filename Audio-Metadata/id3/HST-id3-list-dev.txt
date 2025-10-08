@@ -1,0 +1,75 @@
+
+Round 1 tags
+
+    'TIT1': 'TIT1: TITLE - HST playing piano',
+    'TIT2': 'TIT2: SUB-TITLE - HST playing the Black Hawk Waltz',
+    'TIT3': 'TIT3: DESCRIPTION - HST playing the Black Hawk Waltz in the White House',
+    'TPE1': 'TPEI: Artist - Harry Truman',
+    'TALB': 'TALB: Album ',
+    'TYER': 'TYER: Year 1948',
+    'TDAT': 'TDAT: September 30, 1948',
+    'TCOP': 'TCOP: COPYRIGHT - Restricted',
+    'TCMT': 'TCMT: COMMENT - HST playing piano',
+    'TOWN': 'TOWN: Owner/SOURCE - Harry S. Truman Presidental Library"       FIXED
+
+
+
+Suggested additonal tags for next round:
+
+'TCON' Genre           
+
+'WOAS' SourceURL      Official audio source webpage                           FIXED
+
+'TRDA' Recording dates   an alt date test for handling dates as strings
+
+'TENC' ‘Encoded by’
+
+'TPUB' Publisher
+
+'TOFN' Original filename   alternative HSTL use: Accession Number
+
+
+ Notes:
+
+TRDA
+The ‘Recording dates’ frame is a intended to be used as complement to the “TYER”, “TDAT” and “TIME” frames. 
+e.g. “4th-7th June, 12th June” in combination with the “TYER” frame.  
+[ alternative HSTL use: DATE as a string - - could still use the YYYY-MM-DD format; it would keep 
+the date from possiblily being rigidly evaluated in context by applications and systems of which there is little knowledge ]
+
+TYER
+The ‘Year’ frame is a numeric string with a year of the recording. This frames is always four characters long 
+(until the year 10000).   [ though some apps treat it as a longer string ]
+
+TDAT
+The ‘Date’ frame is a numeric string in the DDMM format containing the date for the recording. 
+This field is always four characters long. [ though some apps treat it as a longer string ]
+
+TIT1
+The ‘Content group description’ frame is used if the sound belongs to a larger category of sounds/music. 
+For example, classical music is often sorted in different musical sections 
+(e.g. “Piano Concerto”, “Weather - Hurricane”).
+[alternative HSTL use: TITLE ]
+
+TIT2
+The ‘Title/Songname/Content description’ frame is the actual name of the piece 
+(e.g. “Adagio”, “Hurricane Donna”).
+[alternative HSTL use: SUB-TITLE ]
+
+TIT3
+The ‘Subtitle/Description refinement’ frame is used for information directly related to the contents title 
+(e.g. “Op. 16” or “Performed live at Wembley”).
+[alternative HSTL use: DESCRIPTION ]
+
+TENC
+The ‘Encoded by’ frame contains the name of the person or organisation that encoded the audio file. 
+This field may contain a copyright message, if the audio file also is copyrighted by the encoder.
+
+TOFN
+The ‘Original filename’ frame contains the preferred filename for the file, since some media doesn’t allow 
+the desired length of the filename. The filename is case sensitive and includes its suffix.  
+[alternative HSTL use: ACCESSION NUMBER - - WAV files listed in CSV file use INAM tag label for Accession No ]
+
+
+
+

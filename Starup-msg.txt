@@ -1,0 +1,7 @@
+This Python program embeds IPTC metadata tags into TIFF files listed in a CSV file generated from the HST PDB.
+
+
+This program requires the CSV file, all the TIFF files listed in the CSV file and this program [ write-tags-from-csv.py ]are present in the same directory. 
+
+
+Also, it is essential that the CSV file contains updated IPTC headers for the embedding process to proceed accurately.

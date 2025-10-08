@@ -1,0 +1,41 @@
+To list metadata tags for an MP3 file using ffmpeg, you can use the following command:
+
+bash
+Copy code
+ffmpeg -i input.mp3 -f ffmetadata
+Replace input.mp3 with the name of your MP3 file.
+
+When you run this command, ffmpeg will output metadata information for the specified MP3 file in the ffmetadata format, including tags like artist, title, album, duration, etc.
+
+You can also use the following command to display metadata in a more human-readable format:
+
+bash
+Copy code
+ffprobe -i input.mp3 -show_format -show_streams
+
+ffmpeg -i "SR59-12 BlackHawkWaltz.wav" -metadata rights="Public Domain" -metadata description="HST on the 1948 campaign trail" output.wav
+
+
+ffmpeg -i \
+"SR59-12 BlackHawkWaltz.wav" \
+-metadata ICOP="Copyright" \
+-metadata ISRC="Source" \
+-metadata ICRD="Date" \
+-metadata ISBJ="Subject" \
+-metadata ICMT="Comment" \
+output.wav
+
+
+
+
+ffmpeg -i \
+"SR59-12 BlackHawkWaltz.mp3" \
+-metadata ICOP="Public Domain" \
+-metadata ICMT="HST on the 1948 campaign trail" \
+output.mp3
+
+
+
+
+
+

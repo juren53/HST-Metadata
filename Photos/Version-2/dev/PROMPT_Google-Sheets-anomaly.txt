@@ -1,0 +1,14 @@
+My Python code does not work properly on this Google Spreadsheet:
+
+https://docs.google.com/spreadsheets/d/1mgxguKnNThYH8PspEge6xS2xxPwdU2Qv/edit?gid=1418369420#gid=1418369420
+
+It only accesses some of the data I can see in the web page but ignors certain columns.
+
+When I select 'Save as Google Sheets' under the  File menu, the URL changes to 
+
+https://docs.google.com/spreadsheets/d/14uNYVk68fFuoQM2exIRTsifkL7brn4pTzqt6DC3M9uk/edit?gid=1418369420#gid=1418369420
+
+and my Python code accesses all the data I see in the in the webpage.  
+
+I would like to understand what is going on here.
+

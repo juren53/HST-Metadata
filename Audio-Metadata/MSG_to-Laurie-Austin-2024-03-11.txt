@@ -1,0 +1,35 @@
+From: Laurie Austin
+	
+Attachments
+
+Mar 8, 2024, 12:30 PM (3 days ago)
+	
+Hi Jim,
+
+Thank you for this new MP3 test file with the ID3v2 tags. I added a new tab to our spreadsheet to keep track of the ID3v2 tag test this time around. See an updated version here. 
+
+One thing I find very interesting is that the date (even just in year form) isn't appearing in any of these platforms, both in the WAV schema and the MP3 schema. It sounds like you think this might be a matter of formulating the data correctly. We don't always have a precise date for sound recordings, but in general the dates tend to be more precise than the photos were. Particularly for the presidential speeches, most times a specific date is known. Date is such an important detail that if we can't get it to display properly, we're going to have to find a way to put it in a different field instead. And if we can't figure that out, then we probably shouldn't bother continuing this work because it has little value.
+
+I am also sad that the source doesn't seem to appear. If we can't figure out how to make this work better, I think we need to put Harry S. Truman Library as the artist, which is a field that always appears. In this way, anyone who has downloaded multiple sound files from us will find them all grouped together in their music library under Harry S. Truman Library, and I don't think that's a bad thing. Most often the "artist" will be Harry S. Truman, so it will be instinctive to look there anyway. I talked to Lindsay about this, too, and she likes the idea of calling the Harry S. Truman Library the "artist."
+_______
+You will see a new tab in the spreadsheet that's called ID3v2 Tag List that has all the potentially useful tags I would like to test. I have listed the tag in column A, the potential CSV column in column C, and some notes about what I'm thinking for this round of testing.
+
+The first tag (APIC) is the album art. It would be pretty amazing if we could add an image to all of our mp3 files. I'm not sure how difficult that might be, but I put a couple of URLs for more information next to the notes field. Please, if you think it's possible, I would love to try and add album art to the mp3s. I am attaching a 300 x 300 JPG here of 97-2030 that Lindsay and I agree is good for this purpose. 
+
+You will also see another tab in the spreadsheet, called Image Tests. I took the example set of MP3 sound files from Richard Farrar's helpful pages. I tested them on the various platforms. I didn't list all of them because there are several we would clearly never use anyway. But here's a sampling of how the images displayed. Based on this limited testing, can we please try to embed the art in the two following APIC fields:
+$00 – Other
+$0E – During recording
+
+Do you think that would be possible?
+
+I think we need to think about this as two different projects that are somewhat related:
+1. What schema and fields will we use for WAV files
+2. What schema and fields will we use for MP3 files 
+
+For WAV files, I'd like to try and stick to FADGI standards as much as possible, while trying to maximize the visible fields that the common sound applications see. The WAV files will be the "digital item of record" so to speak, so getting the data into fields that aren't normally visible on common applications will still be important. Future archivists will thank us for being thorough.
+
+For MP3 files, I'd like to try and use the ID3v2 fields that are in common use by applications. The MP3 files are reference files, and they are the ones that will end up in the NARA catalog for download by most people, and the usefulness of this project will be most visible in these files. I'd really like to try and embed the "album art" in this. Whatever our next test files are, we need to do an upload to the catalog to see how it works in that setting. For that reason, I'd like to concentrate on the MP3 project first, so we can get a test file sooner rather than later, in case it fails miserably in the catalog and we have to re-group.
+
+Does this make sense? Please feel free to call me if you have questions or need to talk it out.
+
+

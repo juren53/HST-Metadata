@@ -1,0 +1,395 @@
+#!/usr/bin/env python3
+import os
+import sys
+import pickle
+import re
+import io
+import tempfile
+from datetime import datetime
+
+# Google API libraries
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from googleapiclient.http import MediaIoBaseDownload
+
+# Data analysis libraries - handle gracefully if not installed
+try:
+    import pandas as pd
+    import numpy as np
+    PANDAS_AVAILABLE = True
+except ImportError:
+    print("Note: pandas or numpy not available. Install with: pip install pandas numpy")
+    PANDAS_AVAILABLE = False
+
+# === CONFIG ===
+CLIENT_SECRET_FILE = 'client_secret_562755451687-9rpcl9hgjpkkamhu935p5a1gqcj06ot7.apps.googleusercontent.com.json'
+TOKEN_PICKLE_FILE = 'token_drive.pickle'
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+
+def extract_file_id_from_url(url_or_id):
+    """Extract a file ID from a Google Drive URL or return the ID if already an ID."""
+    # If it's likely already an ID (not a URL), return it
+    if not any(x in url_or_id for x in ['http', 'drive.google', 'docs.google']):
+        return url_or_id
+        
+    # Handle Google Drive links of various formats
+    drive_link_patterns = [
+        # Standard Drive file link
+        r'https://drive.google.com/file/d/([a-zA-Z0-9_-]+)',
+        # Open links
+        r'https://drive.google.com/open\?id=([a-zA-Z0-9_-]+)',
+        # Docs, Sheets, Slides
+        r'https://docs.google.com/spreadsheets/d/([a-zA-Z0-9_-]+)',
+        r'https://docs.google.com/document/d/([a-zA-Z0-9_-]+)',
+        r'https://docs.google.com/presentation/d/([a-zA-Z0-9_-]+)',
+        # Forms and other types
+        r'https://docs.google.com/forms/d/([a-zA-Z0-9_-]+)'
+    ]
+    
+    # Check if the input matches any of the URL patterns
+    for pattern in drive_link_patterns:
+        match = re.search(pattern, url_or_id)
+        if match:
+            # Clean up ID (remove trailing slashes or other characters)
+            file_id = match.group(1)
+            file_id = file_id.split('/')[0]  # Remove anything after a slash
+            file_id = file_id.split('?')[0]  # Remove query parameters
+            file_id = file_id.split('#')[0]  # Remove fragments
+            return file_id
+    
+    # If we get here, we couldn't extract an ID using the patterns
+    print(f"Warning: Could not extract a file ID from: {url_or_id}")
+    print("Proceeding with the full string as the ID, but this might not work.")
+    return url_or_id
+
+def get_valid_file_id():
+    """
+    Prompts user for file ID or URL and validates it.
+    Returns a valid file ID or None if cancelled.
+    """
+    print("\n=== Google Drive File Access ===")
+    print("Please enter a Google Drive file URL or ID")
+    print("Example URL: https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view")
+    print("Example ID: 1a2b3c4d5e6f7g8h9i0j")
+    print("Enter 'q' to quit")
+    
+    while True:
+        user_input = input("\nFile URL or ID: ").strip()
+        
+        if user_input.lower() == 'q':
+            return None
+            
+        file_id = extract_file_id_from_url(user_input)
+        
+        # Basic validation - Google Drive file IDs are typically longer
+        if len(file_id) < 25:
+            print(f"Warning: '{file_id}' seems too short for a Google Drive file ID (typically ~33+ chars)")
+            confirm = input("Continue anyway? (y/n): ").lower()
+            if confirm != 'y':
+                continue
+                
+        print(f"Using file ID: {file_id}")
+        return file_id
+
+def get_credentials():
+    """Get valid user credentials from storage or run the OAuth flow."""
+    credentials = None
+    
+    # Try to load credentials from the token pickle file
+    if os.path.exists(TOKEN_PICKLE_FILE):
+        with open(TOKEN_PICKLE_FILE, 'rb') as token:
+            try:
+                credentials = pickle.load(token)
+                print("Loaded credentials from token file")
+            except Exception as e:
+                print(f"Error loading token file: {e}")
+    
+    # If no valid credentials available, run the OAuth flow
+    if not credentials or not credentials.valid:
+        if credentials and credentials.expired and credentials.refresh_token:
+            try:
+                credentials.refresh(Request())
+                print("Refreshed expired credentials")
+            except Exception as e:
+                print(f"Error refreshing credentials: {e}")
+                credentials = None
+        
+        # If still no valid credentials, run the flow
+        if not credentials:
+            try:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    CLIENT_SECRET_FILE, SCOPES)
+                
+                print("Please authenticate using your browser...")
+                credentials = flow.run_local_server(port=0)
+                
+                # Save the credentials for future use
+                with open(TOKEN_PICKLE_FILE, 'wb') as token:
+                    pickle.dump(credentials, token)
+                print("Saved new credentials to token file")
+            except Exception as e:
+                print(f"Error during OAuth flow: {e}")
+                raise
+    
+    return credentials
+
+def get_file_metadata_with_retry(service, file_id, max_retries=2):
+    """
+    Get metadata for a file from Google Drive with retry and better diagnostics.
+    
+    Args:
+        service: Google Drive API service instance
+        file_id: ID of the file
+        max_retries: Maximum number of retry attempts
+        
+    Returns:
+        dict: File metadata or None if error
+    """
+    # First, try to verify if the file ID is valid by listing files
+    try:
+        print(f"Verifying file ID: {file_id}")
+        # Try to search for the file by ID
+        query = f"name contains '{file_id}' or '{file_id}' in parents"
+        results = service.files().list(
+            q=query,
+            fields="files(id, name, mimeType)",
+            pageSize=10
+        ).execute()
+        
+        items = results.get('files', [])
+        if items:
+            print(f"Found {len(items)} related files or folders:")
+            for item in items:
+                print(f"- {item.get('name')} (ID: {item.get('id')}) [{item.get('mimeType')}]")
+                
+    except HttpError as error:
+        print(f"Search error: {error}")
+    
+    # Now try to get the specific file metadata
+    for attempt in range(max_retries + 1):
+        try:
+            # Try with various field combinations
+            fields = "id,name,mimeType,size,modifiedTime"
+            if attempt > 0:
+                # On retries, use minimal fields
+                fields = "id,name"
+                
+            # Try the standard method
+            file_metadata = service.files().get(
+                fileId=file_id, 
+                fields=fields,
+                supportsAllDrives=True  # Add support for shared drives
+            ).execute()
+            
+            print(f"Successfully retrieved metadata for file: {file_metadata.get('name', 'Unnamed')}")
+            return file_metadata
+            
+        except HttpError as error:
+            if attempt < max_retries:
+                print(f"Attempt {attempt+1} failed. Retrying...")
+            else:
+                if "not found" in str(error).lower():
+                    print("\nFile not found. This could be because:")
+                    print("1. The file ID is incorrect")
+                    print("2. The file might be in a shared drive")
+                    print("3. You don't have permission to access this file")
+                    print("4. The file might have been deleted or moved")
+                    
+                    # Check if a Drive URL was provided and extract details
+                    if "docs.google.com" in file_id or "drive.google.com" in file_id:
+                        print("\nWarning: You seem to have provided a complete URL instead of just the file ID.")
+                        print("The correct file ID should be a string of letters, numbers, and symbols like:")
+                        print("1zarRJ1t-Gk8Inwfn3FeI_jlivat4ga0I")
+                return None
+        
+        except Exception as error:
+            print(f"Error retrieving file metadata: {error}")
+            return None
+    
+    return None
+
+def download_file(service, file_id, file_metadata=None):
+    """
+    Download a file from Google Drive.
+    
+    Args:
+        service: Google Drive API service instance
+        file_id: ID of the file to download
+        file_metadata: File metadata if already retrieved
+        
+    Returns:
+        tuple: (success, file_path or error_message)
+    """
+    if file_metadata is None:
+        file_metadata = get_file_metadata_with_retry(service, file_id)
+        if not file_metadata:
+            return False, "Failed to retrieve file metadata"
+    
+    file_name = file_metadata.get('name', f"drive_file_{file_id}")
+    mime_type = file_metadata.get('mimeType', '')
+    
+    print(f"\nDownloading: {file_name}")
+    print(f"MIME Type: {mime_type}")
+    
+    try:
+        # Handle Google Docs formats specially
+        if mime_type.startswith('application/vnd.google-apps'):
+            # Map Google formats to export formats
+            export_formats = {
+                'application/vnd.google-apps.document': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.google-apps.spreadsheet': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.google-apps.presentation': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            }
+            
+            # Add extensions based on MIME type
+            extensions = {
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation': '.pptx'
+            }
+            
+            # Get the export format for the Google file type
+            export_mime = export_formats.get(mime_type)
+            if not export_mime:
+                return False, f"Unsupported Google format: {mime_type}"
+            
+            # Add proper extension to filename
+            if not any(file_name.endswith(ext) for ext in extensions.values()):
+                file_name += extensions.get(export_mime, '')
+            
+            # Export the file
+            print(f"Converting from Google format to: {export_mime}")
+            request = service.files().export_media(fileId=file_id, mimeType=export_mime)
+        else:
+            # Regular download for non-Google formats
+            request = service.files().get_media(fileId=file_id)
+        
+        # Download the file
+        file_path = os.path.join(os.getcwd(), file_name)
+        
+        # Create a BytesIO stream to hold the downloaded data
+        file_content = io.BytesIO()
+        downloader = MediaIoBaseDownload(file_content, request)
+        
+        # Download the file in chunks
+        done = False
+        while not done:
+            status, done = downloader.next_chunk()
+            print(f"Download {int(status.progress() * 100)}%")
+        
+        # Write the file to disk
+        file_content.seek(0)
+        with open(file_path, 'wb') as f:
+            f.write(file_content.read())
+        
+        print(f"File saved to: {file_path}")
+        return True, file_path
+    
+    except HttpError as error:
+        return False, f"Error downloading file: {error}"
+    except Exception as error:
+        return False, f"Unexpected error: {error}"
+
+def analyze_excel_file(file_path, sheet_name=None):
+    """
+    Analyze Excel file with pandas and provide some basic information.
+    
+    Args:
+        file_path: Path to the Excel file
+        sheet_name: Optional specific sheet to load (None loads first sheet)
+    
+    Returns:
+        DataFrame or dict of DataFrames if successful, None if error
+    """
+    if not PANDAS_AVAILABLE:
+        print("Pandas is not available. Install pandas and numpy to analyze Excel files.")
+        return None
+    
+    try:
+        print(f"\nAnalyzing Excel file: {file_path}")
+        
+        # Load the Excel file
+        if sheet_name is None:
+            # First try to get list of sheet names
+            xl = pd.ExcelFile(file_path)
+            sheet_names = xl.sheet_names
+            print(f"File contains {len(sheet_names)} sheets: {', '.join(sheet_names)}")
+            
+            # If multiple sheets, ask which one to analyze
+            if len(sheet_names) > 1:
+                print("\nAvailable sheets:")
+                for i, name in enumerate(sheet_names, 1):
+                    print(f"{i}. {name}")
+                
+                choice = input("\nEnter sheet number to analyze (or 'a' for all): ")
+                if choice.lower() == 'a':
+                    sheet_name = None  # This will load all sheets as a dict
+                else:
+                    try:
+                        idx = int(choice) - 1
+                        if 0 <= idx < len(sheet_names):
+                            sheet_name = sheet_names[idx]
+                        else:
+                            print("Invalid selection. Loading first sheet.")
+                            sheet_name = sheet_names[0]
+                    except ValueError:
+                        print("Invalid input. Loading first sheet.")
+                        sheet_name = sheet_names[0]
+            else:
+                sheet_name = sheet_names[0]
+        
+        # Load the data
+        if sheet_name is None:
+            # Load all sheets
+            df_dict = pd.read_excel(file_path, sheet_name=None)
+            
+            # Basic analysis of all sheets
+            for name, df in df_dict.items():
+                print(f"\n--- Sheet: {name} ---")
+                print_dataframe_info(df)
+            
+            return df_dict
+        else:
+            # Load specific sheet
+            df = pd.read_excel(file_path, sheet_name=sheet_name)
+            print_dataframe_info(df)
+            return df
+            
+    except Exception as e:
+        print(f"Error analyzing Excel file: {e}")
+        import traceback
+        print(traceback.format_exc())
+        return None
+
+def print_dataframe_info(df):
+    """Print basic information about a pandas DataFrame."""
+    # Basic information
+    print(f"Dimensions: {df.shape[0]} rows × {df.shape[1]} columns")
+    
+    # Column information
+    print("\nColumn information:")
+    for col in df.columns:
+        non_null = df[col].count()
+        dtype = df[col].dtype
+        null_percent = (df.shape[0] - non_null) / df.shape[0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,192 @@
+ExifTool Version Number         : 12.62
+File Name                       : 2010-367.tif
+Directory                       : .
+File Size                       : 54 MB
+File Modification Date/Time     : 2023:05:10 01:42:43-05:00
+File Access Date/Time           : 2023:05:10 01:42:44-05:00
+File Inode Change Date/Time     : 2023:05:10 01:42:44-05:00
+File Permissions                : -rw-rw-r--
+File Type                       : TIFF
+File Type Extension             : tif
+MIME Type                       : image/tiff
+Exif Byte Order                 : Little-endian (Intel, II)
+Subfile Type                    : Full-resolution image
+Image Width                     : 5184
+Image Height                    : 3456
+Bits Per Sample                 : 8 8 8
+Compression                     : Uncompressed
+Photometric Interpretation      : RGB
+Image Description               : Patrick Mahomes reading to the children particating in the 2018 Harry's Hop'n Hunt.
+Make                            : Canon
+Camera Model Name               : Canon EOS REBEL T3i
+Strip Offsets                   : 24096
+Orientation                     : Horizontal (normal)
+Samples Per Pixel               : 3
+Rows Per Strip                  : 3456
+Strip Byte Counts               : 53747712
+X Resolution                    : 72
+Y Resolution                    : 72
+Planar Configuration            : Chunky
+Resolution Unit                 : inches
+Software                        : Adobe Photoshop CC 2018 (Windows)
+Modify Date                     : 2018:10:25 13:36:35
+Artist                          : Ed Autry
+XMP Toolkit                     : Image::ExifTool 12.62
+Location                        : Harry S. Truman Presidental Library
+Lens                            : EF-S18-55mm f/3.5-5.6 IS II
+Creator                         : Ed Autry
+Description                     : Patrick Mahomes reading to the children particating in the 2018 Harry's Hop'n Hunt.
+Format                          : image/tiff
+Rights                          : Public Domain - This item is in the public domain and can be used freely without further permission.
+Title                           : 2010-367
+Authors Position                : NARA
+Caption Writer                  : J. U'Ren
+Color Mode                      : RGB
+Country                         : USA
+ICC Profile Name                : sRGB IEC61966-2.1
+Legacy IPTC Digest              : E9C31DE65440BF9470BE9D33BA12C2E1
+State                           : Missouri
+Creator Tool                    : Adobe Photoshop CC 2018 (Windows)
+Metadata Date                   : 2018:10:25 13:36:35-05:00
+Rating                          : 0
+Derived From Document ID        : 372F240E769E2BEAB5A891689B8BE1D5
+Derived From Instance ID        : xmp.iid:ad09acd1-a988-7447-ad22-3ccff68d18ad
+Derived From Original Document ID: 372F240E769E2BEAB5A891689B8BE1D5
+Document ID                     : adobe:docid:photoshop:6ba7ea3c-9441-d745-8d3b-2ca2a71ce89e
+History Action                  : saved, saved, saved, converted, derived, saved, saved
+History Changed                 : /metadata, /metadata, /, /, /
+History Instance ID             : xmp.iid:5b633525-39a8-e949-a121-d0a50e510455, xmp.iid:8c803e3d-0308-c54e-8431-f750f593d70f, xmp.iid:ad09acd1-a988-7447-ad22-3ccff68d18ad, xmp.iid:0c22ad5b-c9bf-f749-9464-f767bf32719a, xmp.iid:bc2710ed-6d66-804d-ae77-e991217030a3
+History Software Agent          : Adobe Photoshop Camera Raw 10.4, Adobe Photoshop Camera Raw 10.4 (Windows), Adobe Photoshop CC 2018 (Windows), Adobe Photoshop CC 2018 (Windows), Adobe Photoshop CC 2018 (Windows)
+History When                    : 2018:10:18 14:23:44-05:00, 2018:10:18 14:39:52-05:00, 2018:10:18 14:55:39-05:00, 2018:10:18 14:55:39-05:00, 2018:10:25 13:36:35-05:00
+History Parameters              : from image/jpeg to image/tiff, converted from image/jpeg to image/tiff
+Instance ID                     : xmp.iid:bc2710ed-6d66-804d-ae77-e991217030a3
+Original Document ID            : 372F240E769E2BEAB5A891689B8BE1D5
+Marked                          : False
+Copyright                       : Public Domain - This item is in the public domain and can be used freely without further permission.
+Current IPTC Digest             : d26a8a89a1991a3163e03dd7af0a51a2
+Coded Character Set             : UTF8
+Envelope Record Version         : 4
+Application Record Version      : 4
+Caption-Abstract                : Patrick Mahomes reading to the children particating in the 2018 Harry's Hop'n Hunt.
+Writer-Editor                   : J. U'Ren
+Headline                        : 2018 Harry's Hop n' Hunt
+By-line                         : Ed Autry
+By-line Title                   : NARA
+Credit                          : Ed Autry, NARA, Harry S. Truman
+Source                          : RG 64
+Object Name                     : 2010-367
+Date Created                    : 2018:06:14
+Time Created                    : 17:50:32+00:00
+City                            : Independence
+Sub-location                    : Harry S. Truman Library
+Province-State                  : Missouri
+Country-Primary Location Name   : USA
+Copyright Notice                : Public Domain - This item is in the public domain and can be used freely without further permission.
+IPTC Digest                     : e9782cf53a782fde678e98f0c35d03ab
+Displayed Units X               : inches
+Displayed Units Y               : inches
+Print Style                     : Centered
+Print Position                  : 0 0
+Print Scale                     : 1
+Global Angle                    : 30
+Global Altitude                 : 30
+Copyright Flag                  : False
+URL List                        : 
+Slices Group Name               : 
+Num Slices                      : 1
+Pixel Aspect Ratio              : 1
+Photoshop Thumbnail             : (Binary data 8462 bytes, use -b option to extract)
+Has Real Merged Data            : Yes
+Writer Name                     : Adobe Photoshop
+Reader Name                     : Adobe Photoshop CC 2018
+Warning                         : IPTCDigest is not current. XMP may be out of sync
+Exposure Time                   : 1/400
+F Number                        : 4.5
+Exposure Program                : Action (High speed)
+ISO                             : 100
+Sensitivity Type                : Recommended Exposure Index
+Recommended Exposure Index      : 100
+Exif Version                    : 0230
+Date/Time Original              : 2018:03:30 21:31:31
+Create Date                     : 2018:06:14 17:50:32
+Components Configuration        : Y, Cb, Cr, -
+Shutter Speed Value             : 1/395
+Aperture Value                  : 4.6
+Exposure Compensation           : 0
+Metering Mode                   : Multi-segment
+Flash                           : Off, Did not fire
+Focal Length                    : 27.0 mm
+Sub Sec Time                    : 29
+Sub Sec Time Original           : 29
+Flashpix Version                : 0100
+Color Space                     : sRGB
+Exif Image Width                : 5184
+Exif Image Height               : 3456
+Interoperability Index          : R98 - DCF basic file (sRGB)
+Interoperability Version        : 0100
+Focal Plane X Resolution        : 5728.176796
+Focal Plane Y Resolution        : 5808.403361
+Focal Plane Resolution Unit     : inches
+Custom Rendered                 : Normal
+Exposure Mode                   : Auto
+White Balance                   : Auto
+Scene Capture Type              : Standard
+Owner Name                      : 
+Serial Number                   : 422078004758
+Lens Info                       : 18-55mm f/?
+Lens Model                      : EF-S18-55mm f/3.5-5.6 IS II
+Lens Serial Number              : 00005a33c9
+Offset Schema                   : -128
+Profile CMM Type                : Linotronic
+Profile Version                 : 2.1.0
+Profile Class                   : Display Device Profile
+Color Space Data                : RGB
+Profile Connection Space        : XYZ
+Profile Date Time               : 1998:02:09 06:49:00
+Profile File Signature          : acsp
+Primary Platform                : Microsoft Corporation
+CMM Flags                       : Not Embedded, Independent
+Device Manufacturer             : Hewlett-Packard
+Device Model                    : sRGB
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : Hewlett-Packard
+Profile ID                      : 0
+Profile Copyright               : Copyright (c) 1998 Hewlett-Packard Company
+Profile Description             : sRGB IEC61966-2.1
+Media White Point               : 0.95045 1 1.08905
+Media Black Point               : 0 0 0
+Red Matrix Column               : 0.43607 0.22249 0.01392
+Green Matrix Column             : 0.38515 0.71687 0.09708
+Blue Matrix Column              : 0.14307 0.06061 0.7141
+Device Mfg Desc                 : IEC http://www.iec.ch
+Device Model Desc               : IEC 61966-2.1 Default RGB colour space - sRGB
+Viewing Cond Desc               : Reference Viewing Condition in IEC61966-2.1
+Viewing Cond Illuminant         : 19.6445 20.3718 16.8089
+Viewing Cond Surround           : 3.92889 4.07439 3.36179
+Viewing Cond Illuminant Type    : D50
+Luminance                       : 76.03647 80 87.12462
+Measurement Observer            : CIE 1931
+Measurement Backing             : 0 0 0
+Measurement Geometry            : Unknown
+Measurement Flare               : 0.999%
+Measurement Illuminant          : D65
+Technology                      : Cathode Ray Tube Display
+Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
+Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
+Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)
+Aperture                        : 4.5
+Image Size                      : 5184x3456
+Megapixels                      : 17.9
+Scale Factor To 35 mm Equivalent: 1.6
+Shutter Speed                   : 1/400
+Date/Time Original              : 2018:03:30 21:31:31.29
+Modify Date                     : 2018:10:25 13:36:35.29
+Date/Time Created               : 2018:06:14 17:50:32+00:00
+Circle Of Confusion             : 0.019 mm
+Field Of View                   : 45.9 deg
+Focal Length                    : 27.0 mm (35 mm equivalent: 42.5 mm)
+Hyperfocal Distance             : 8.48 m
+Light Value                     : 13.0
+Lens ID                         : EF-S18-55mm f/3.5-5.6 IS II

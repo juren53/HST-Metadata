@@ -1,0 +1,160 @@
+=========================================================================
+write-tags-from-csv.py ver 0.66  updated Fri 10 Aug 2023 18:25:00 PM CDT 
+-------------------------------------------------------------------------
+ 
+This Python program embeds IPTC metadata tags into TIFF and JPEG files
+listed in a CSV file generated from the HST PDB.
+ 
+To run correctly, it requires the following in the current working directory: 
+ 
+ (1) the PDB CSV file with updated IPTC headers
+ (2) the TIFF or JPEG files listed in the CSV file
+ (3) the Python program [ write-tags-from-csv.py ] 
+ 
+Free disk space on current drive: 15289 MB
+ 
+Number of lines in the CSV file: 62
+ 
+Number of jpg files in the diretory:  62
+ 
+=========================================================================
+ 
+Press Enter to continue...
+ 
+Processing started at  2023-12-20 15:00:10
+78-94.jpg
+Date Created:  0000-00-00       1
+78-901.jpg
+Date Created:  0000-00-00       2
+78-17-04.jpg
+Date Created:  0000-00-00       3
+78-93.jpg
+Date Created:  1850-00-00       4
+78-703.jpg
+Date Created:  1933-00-00       5
+78-949.jpg
+Date Created:  1942-07-04       6
+78-694.jpg
+Date Created:  1945-10-16       7
+78-449.jpg
+Date Created:  1946-03-27       8
+78-468.jpg
+Date Created:  1946-03-27       9
+78-622.jpg
+Date Created:  1946-05-07       10
+78-222.jpg
+Date Created:  1948-09-15       11
+78-741.jpg
+Date Created:  1948-10-00       12
+78-38-873.jpg
+Date Created:  1949-00-00       13
+78-614.jpg
+Date Created:  1949-07-15       14
+78-100.jpg
+Date Created:  1950-00-00       15
+78-54.jpg
+Date Created:  1950-03-21       16
+78-729.jpg
+Date Created:  1952-07-15       17
+78-730.jpg
+Date Created:  1952-07-15       18
+78-726.jpg
+Date Created:  1952-07-15       19
+78-731.jpg
+Date Created:  1952-07-15       20
+78-734.jpg
+Date Created:  1952-07-15       21
+78-728.jpg
+Date Created:  1952-07-15       22
+78-732.jpg
+Date Created:  1952-07-15       23
+78-727.jpg
+Date Created:  1952-07-15       24
+78-735.jpg
+Date Created:  1952-07-15       25
+78-733.jpg
+Date Created:  1952-07-15       26
+78-621.jpg
+Date Created:  1952-08-20       27
+78-445.jpg
+Date Created:  1952-11-19       28
+78-64.jpg
+Date Created:  1953-00-00       29
+78-59.jpg
+Date Created:  1953-03-30       30
+78-23.jpg
+Date Created:  1953-06-21       31
+78-22.jpg
+Date Created:  1953-06-23       32
+78-36.jpg
+Date Created:  1953-06-23       33
+78-455.jpg
+Date Created:  1956-06-01       34
+78-720.jpg
+Date Created:  1962-12-00       35
+78-719.jpg
+Date Created:  1964-00-00       36
+78-721.jpg
+Date Created:  1965-07-30       37
+78-953.jpg
+Date Created:  1970-00-00       38
+78-952.jpg
+Date Created:  1970-00-00       39
+78-279.jpg
+Date Created:  1975-06-15       40
+78-246.jpg
+Date Created:  1975-06-15       41
+78-263.jpg
+Date Created:  1975-06-15       42
+78-275.jpg
+Date Created:  1975-06-15       43
+78-286.jpg
+Date Created:  1975-06-15       44
+78-288.jpg
+Date Created:  1975-06-15       45
+78-299.jpg
+Date Created:  1975-06-15       46
+78-232.jpg
+Date Created:  1975-06-15       47
+78-235.jpg
+Date Created:  1975-06-15       48
+78-315.jpg
+Date Created:  1975-06-15       49
+78-273.jpg
+Date Created:  1975-06-15       50
+78-307.jpg
+Date Created:  1975-06-15       51
+78-229.jpg
+Date Created:  1975-06-15       52
+78-242.jpg
+Date Created:  1975-06-15       53
+78-278.jpg
+Date Created:  1975-06-15       54
+78-920.jpg
+Date Created:  1978-03-09       55
+78-740.jpg
+Date Created:  1978-03-22       56
+78-17-09.jpg
+Date Created:  1978-03-24       57
+78-17-06.jpg
+Date Created:  1978-03-24       58
+78-17-01.jpg
+Date Created:  1978-03-24       59
+78-17-05.jpg
+Date Created:  1978-03-24       60
+78-17-13.jpg
+Date Created:  1978-03-24       61
+78-17-07.jpg
+Date Created:  1978-03-24       62
+======================================================================
+Processing complete at  2023-12-20 15:01:18
+62 records read from the CSV file
+62 images processed
+0 missing images
+*** Missing images not processed:
+
+___________________________
+Elapsed time: 1:8  MM:SS
+Processing time for each image:  1.1  seconds
+REPORT_JPEG-2023-12-20_15-00-07.txt log file printed to c:\Temp\Metadata-tagging
+======================================================================

@@ -1,0 +1,20 @@
+ID3v2 tags:,Field(s) from CSV,Notes
+APIC' Picture N,(n/a - try photo 97-2030),"""album art"" for these recordings including Accession Number visible"
+TALB' Album N,Accession Number,
+TIT2' Title N,Title ,"NOTE: May also need to add ""Place"" to some of these if they're just rear platform remarks without the place name"
+COMM' Comment N,Description,repeat the description here because some platforms see the Comment but not the Subtitle.
+TIT3' Subtitle N,Description,Is there a character limit on this? Let's repeat the description here because some platforms see the Subtitle but not the Comment.
+TPE1' Artist N,(n/a),Harry S. Truman Library
+IPLS' InvolvedPeople N,Speakers,This might get confusing because the speakers include their dates of birth and death. We would have to see how this translates.
+TCON' Genre N,(n/a - would have to provide data),"Is there a specific genre vocabulary we need to choose from, or can we make our own? Can we say things like ""speech"" ""interview"" ""song""? Or more generically, ""archival recording."" Not everything will be a speech so we'll have to think about this field a little more."
+TCOP' Copyright N,Restrictions,
+TPUB' Publisher N,Production and Copyright,
+TDAT' Date N,Date,Just the four digit DDMM
+TORY' OriginalReleaseYear N,Date,"Need to find a date field that displays, maybe this one?"
+TRDA' RecordingDates N,Date,Can we try the full expression of the date here? In digits and words? 
+TYER' Year N,Date,Just the four digit year YYYY
+WOAS' SourceURL N,(n/a),USE: https://www.trumanlibrary.gov/library/sound-recordings-collection
+WXXX' UserDefinedURL N,(n/a),USE: https://catalog.archives.gov/id/300931773
+TENC' EncodedBy N,(n/a),"USE: ENC Harry S. Truman Library. Let's test this and see how it appears. If not in wide use, we will stick to the Artist field instead."
+TIT1' Grouping N,(n/a - use: NARA-HST-SRC Sound Recordings Collection),"If we use this field, it's best use might be something like NARA-HST-SRC Sound Recordings Collection"
+TOFN' OriginalFilename N,(n/a actual file name),

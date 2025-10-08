@@ -1,0 +1,7 @@
+Notes on writing to SR59-12 - Black Hawk Waltz using BWF Metaedit and viewing metadata in ffprobe
+
+- BWF unable to change title which was entered  is "Track 1" in original WAV file
+
+- BWF wrote Description  - - ffprobe labeled as 'comment'
+
+- BWF wrote Orginator "Harry S. Truman Library" - - ffprobe labeled as 'encoded-by'
