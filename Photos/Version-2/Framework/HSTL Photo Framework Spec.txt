@@ -1,0 +1,25 @@
+HSTL Photo Framework Spec
+
+I would like to build a framework in Python that would be an umbrella app for all the pieces that make up the HSTL Photo Metadata Project as outlined in the file:///C:/Users/jimur/Downloads/HSTL%20Photo%20Metadata%20Process%20-%20table.pdf.  Below is an ASCII text version of the process table
+
+		HSTL Photo Metadata Process	
+			
+	Step	Code Package or Process	Checking and Validation
+ 			
+1	Prepare Collaborative Google Spreadsheet	Build out Google Spreadsheet from TIFF image collection  |  save as a "Google Worksheet" before going on to next step	Confirm that Title, Descripton, AN, Date, Rights, Phototgrapher, & Organization are completed
+2	Convert Google WS to CSV file	Python code: g2c.py & gui_b2c.py creates an 'export.csv' file	Number of rows in CSV file should closely match number of Accession Numbers
+3	Unicode filtering of text in CSV file	Python code: analyze.py & fix.py & analyze. py catch 'special characters'	Post-processing Summary Reports should highlight problems to be addressed
+4	Test for & convert if necessary 16 bit TIFFS to 8 bit images		
+5	Embed metadata into TIFF images	Python code:  write_tags.py	Post-processing Summary Report  | spot check metadata fields using nomacs &/or tagwriter
+6	Convert TIFFs to JPEGs	[Reuse the Python code from Ver 1]	Number of TIFFs should match number of JPEGs
+7	Resize JPEGs to fit 800x800 box	[Reuse the Python code from Ver 1]	Spot check in nomacs &/or tagwriter
+8	Add watermarks to restricted JPEGs	[Reuse the Python code from Ver 1]	Spot check in nomacs &/or tagwriter
+			
+			2025-09-23  0730
+
+
+This framework should be run as both a CLI app and then add Python3 GUI  version using PyQt6.  I would like to start with the CLI version and then add the GUI version once we have the CLI version mostly working.
+
+This framework code and the collection of apps it runs and manages will be located in the 
+
+C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework  directory but the TIFF and JPEG photos will be located in different data directories and the framework will need to keep track of the data directories and pass that information on to the apps it manages and runs.
