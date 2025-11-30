@@ -29,6 +29,7 @@ try:
     from utils.logger import setup_logger
     from utils.path_manager import PathManager
     from utils.validator import Validator
+    from utils.batch_registry import BatchRegistry
     from steps.base_step import ProcessingContext
     from core.pipeline import Pipeline
 except ImportError as e:
@@ -111,9 +112,14 @@ class HSLTFramework:
             # Create directory structure
             self._create_project_directories(data_path)
             
+            # Register batch in the registry
+            registry = BatchRegistry()
+            registry.register_batch(project_name, str(data_path.absolute()), str(config_path.absolute()))
+            
             print(f"✅ Project '{project_name}' initialized successfully")
             print(f"📁 Data directory: {data_dir}")
             print(f"⚙️ Configuration: {config_path}")
+            print(f"📝 Batch registered in framework registry")
             
             return True
             
@@ -227,6 +233,268 @@ class HSLTFramework:
             print("✅ Project validation completed")
         
         return True
+    
+    def list_config(self) -> bool:
+        """List current configuration."""
+        if not self.config_manager:
+            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            return False
+        
+        print("⚙️  Current Configuration")
+        print("=" * 50)
+        
+        config_dict = self.config_manager.to_dict()
+        
+        # Print configuration in a formatted way
+        self._print_config_dict(config_dict, indent=0)
+        
+        if self.config_manager.config_path:
+            print(f"\n📄 Configuration file: {self.config_manager.config_path}")
+        
+        return True
+    
+    def _print_config_dict(self, data: dict, indent: int = 0):
+        """Recursively print configuration dictionary."""
+        indent_str = "  " * indent
+        
+        for key, value in data.items():
+            # Skip metadata section for cleaner output
+            if key == '_metadata':
+                continue
+            
+            if isinstance(value, dict):
+                print(f"{indent_str}🔹 {key}:")
+                self._print_config_dict(value, indent + 1)
+            else:
+                print(f"{indent_str}  {key}: {value}")
+    
+    def set_config(self, key: str, value: str) -> bool:
+        """Set configuration value."""
+        if not self.config_manager:
+            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            return False
+        
+        # Convert value to appropriate type
+        converted_value = self._convert_config_value(value)
+        
+        # Set the value
+        if self.config_manager.set(key, converted_value):
+            print(f"✅ Configuration updated: {key} = {converted_value}")
+            
+            # Save to file if config path exists
+            if self.config_manager.config_path:
+                self.config_manager.save_config(
+                    self.config_manager.to_dict(),
+                    self.config_manager.config_path
+                )
+                print(f"💾 Saved to: {self.config_manager.config_path}")
+            
+            return True
+        else:
+            print(f"❌ Failed to set configuration: {key}")
+            return False
+    
+    def _convert_config_value(self, value: str):
+        """Convert string value to appropriate type."""
+        # Try to convert to bool
+        if value.lower() in ('true', 'yes', '1'):
+            return True
+        if value.lower() in ('false', 'no', '0'):
+            return False
+        
+        # Try to convert to int
+        try:
+            return int(value)
+        except ValueError:
+            pass
+        
+        # Try to convert to float
+        try:
+            return float(value)
+        except ValueError:
+            pass
+        
+        # Return as string
+        return value
+    
+    def list_batches(self, show_all: bool = False) -> bool:
+        """List all registered batch projects."""
+        registry = BatchRegistry()
+        
+        if show_all:
+            batches = registry.list_batches_summary()
+            title = "All Registered Batches"
+        else:
+            summaries = registry.list_batches_summary()
+            batches = [b for b in summaries if b.get('status') == 'active']
+            title = "Active Batches"
+        
+        if not batches:
+            print("⚠️  No batches found")
+            if not show_all:
+                print("    Use 'batches --all' to see archived batches")
+            return True
+        
+        print(f"📋 {title}")
+        print("=" * 80)
+        print()
+        
+        for batch in batches:
+            batch_id = batch['batch_id']
+            name = batch['name']
+            status = batch.get('status', 'unknown')
+            completed = batch.get('completed_steps', 0)
+            total = batch.get('total_steps', 8)
+            percentage = batch.get('completion_percentage', 0)
+            
+            # Status emoji
+            if percentage == 100:
+                status_icon = "✅"
+            elif percentage > 0:
+                status_icon = "🔄"
+            else:
+                status_icon = "⭕"
+            
+            print(f"{status_icon} {name} ({batch_id})")
+            print(f"   Progress: {completed}/{total} steps ({percentage:.0f}%)")
+            print(f"   Status: {status}")
+            print(f"   Data Directory: {batch['data_directory']}")
+            print(f"   Config: {batch['config_path']}")
+            print()
+        
+        print(f"Total: {len(batches)} batch(es)")
+        return True
+    
+    def archive_batch(self, batch_id: str) -> bool:
+        """Archive a batch project."""
+        registry = BatchRegistry()
+        batch = registry.get_batch(batch_id)
+        
+        if not batch:
+            print(f"❌ Batch not found: {batch_id}")
+            return False
+        
+        if registry.update_batch_status(batch_id, 'archived'):
+            print(f"✅ Batch '{batch['name']}' archived successfully")
+            print(f"   Batch ID: {batch_id}")
+            print(f"   Note: Files remain in {batch['data_directory']}")
+            return True
+        else:
+            print(f"❌ Failed to archive batch: {batch_id}")
+            return False
+    
+    def complete_batch(self, batch_id: str) -> bool:
+        """Mark a batch as completed."""
+        registry = BatchRegistry()
+        batch = registry.get_batch(batch_id)
+        
+        if not batch:
+            print(f"❌ Batch not found: {batch_id}")
+            return False
+        
+        if registry.update_batch_status(batch_id, 'completed'):
+            print(f"✅ Batch '{batch['name']}' marked as completed")
+            print(f"   Batch ID: {batch_id}")
+            print(f"   Data directory: {batch['data_directory']}")
+            return True
+        else:
+            print(f"❌ Failed to mark batch as completed: {batch_id}")
+            return False
+    
+    def reactivate_batch(self, batch_id: str) -> bool:
+        """Reactivate an archived or completed batch."""
+        registry = BatchRegistry()
+        batch = registry.get_batch(batch_id)
+        
+        if not batch:
+            print(f"❌ Batch not found: {batch_id}")
+            return False
+        
+        old_status = batch.get('status', 'unknown')
+        if registry.update_batch_status(batch_id, 'active'):
+            print(f"✅ Batch '{batch['name']}' reactivated")
+            print(f"   Previous status: {old_status}")
+            print(f"   New status: active")
+            return True
+        else:
+            print(f"❌ Failed to reactivate batch: {batch_id}")
+            return False
+    
+    def remove_batch(self, batch_id: str, confirm: bool = False) -> bool:
+        """Remove a batch from the registry."""
+        registry = BatchRegistry()
+        batch = registry.get_batch(batch_id)
+        
+        if not batch:
+            print(f"❌ Batch not found: {batch_id}")
+            return False
+        
+        if not confirm:
+            print(f"⚠️  Remove batch '{batch['name']}' from registry?")
+            print(f"   Batch ID: {batch_id}")
+            print(f"   Data directory: {batch['data_directory']}")
+            print(f"   Config: {batch['config_path']}")
+            print()
+            print("⚠️  This will remove the batch from the registry.")
+            print("   The data directory and all files will NOT be deleted.")
+            print()
+            print("   Run with --confirm to proceed:")
+            print(f"   hstl_framework.py batch remove {batch_id} --confirm")
+            return False
+        
+        if registry.unregister_batch(batch_id):
+            print(f"✅ Batch '{batch['name']}' removed from registry")
+            print(f"   Data directory preserved at: {batch['data_directory']}")
+            return True
+        else:
+            print(f"❌ Failed to remove batch: {batch_id}")
+            return False
+    
+    def show_batch_info(self, batch_id: str) -> bool:
+        """Show detailed information about a batch."""
+        registry = BatchRegistry()
+        summary = registry.get_batch_summary(batch_id)
+        
+        if not summary:
+            print(f"❌ Batch not found: {batch_id}")
+            return False
+        
+        print(f"📋 Batch Information")
+        print("=" * 60)
+        print(f"Name: {summary['name']}")
+        print(f"Batch ID: {batch_id}")
+        print(f"Status: {summary.get('status', 'unknown')}")
+        print()
+        print(f"Created: {summary.get('created', 'unknown')}")
+        print(f"Last Accessed: {summary.get('last_accessed', 'unknown')}")
+        print()
+        print(f"Data Directory: {summary['data_directory']}")
+        print(f"Config File: {summary['config_path']}")
+        print()
+        print(f"Progress: {summary.get('completed_steps', 0)}/{summary.get('total_steps', 8)} steps ({summary.get('completion_percentage', 0):.0f}%)")
+        print()
+        print("Step Status:")
+        
+        if 'steps_completed' in summary:
+            step_names = {
+                'step1': "Google Spreadsheet Preparation",
+                'step2': "CSV Conversion",
+                'step3': "Unicode Filtering",
+                'step4': "TIFF Bit Depth Conversion",
+                'step5': "Metadata Embedding",
+                'step6': "JPEG Conversion",
+                'step7': "JPEG Resizing",
+                'step8': "Watermark Addition"
+            }
+            
+            for step_key in sorted(summary['steps_completed'].keys()):
+                step_num = step_key.replace('step', '')
+                completed = summary['steps_completed'][step_key]
+                status_icon = "✅" if completed else "⭕"
+                step_name = step_names.get(step_key, step_key)
+                print(f"  {status_icon} Step {step_num}: {step_name}")
+        
+        return True
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -285,6 +553,35 @@ Framework Version: {FRAMEWORK_VERSION}
     config_parser = subparsers.add_parser('config', help='Manage configuration')
     config_parser.add_argument('--list', action='store_true', help='List configuration')
     config_parser.add_argument('--set', nargs=2, metavar=('KEY', 'VALUE'), help='Set configuration value')
+    
+    # Batches command
+    batches_parser = subparsers.add_parser('batches', help='List all batch projects')
+    batches_parser.add_argument('--all', action='store_true', help='Show all batches including archived')
+    
+    # Batch command (singular - for managing individual batches)
+    batch_parser = subparsers.add_parser('batch', help='Manage individual batch')
+    batch_subparsers = batch_parser.add_subparsers(dest='batch_action', help='Batch management actions')
+    
+    # Archive batch
+    archive_parser = batch_subparsers.add_parser('archive', help='Archive a batch')
+    archive_parser.add_argument('batch_id', help='ID of the batch to archive')
+    
+    # Complete batch
+    complete_parser = batch_subparsers.add_parser('complete', help='Mark batch as completed')
+    complete_parser.add_argument('batch_id', help='ID of the batch to mark as completed')
+    
+    # Reactivate batch
+    reactivate_parser = batch_subparsers.add_parser('reactivate', help='Reactivate an archived/completed batch')
+    reactivate_parser.add_argument('batch_id', help='ID of the batch to reactivate')
+    
+    # Remove batch from registry
+    remove_parser = batch_subparsers.add_parser('remove', help='Remove batch from registry (does not delete files)')
+    remove_parser.add_argument('batch_id', help='ID of the batch to remove from registry')
+    remove_parser.add_argument('--confirm', action='store_true', help='Confirm removal')
+    
+    # Show batch info
+    info_parser = batch_subparsers.add_parser('info', help='Show detailed information about a batch')
+    info_parser.add_argument('batch_id', help='ID of the batch')
     
     return parser
 
@@ -359,11 +656,36 @@ def main():
             
         elif args.command == 'config':
             if args.list:
-                print("⚠️  Config list functionality not yet implemented")
-                success = True
+                success = framework.list_config()
             elif args.set:
-                print("⚠️  Config set functionality not yet implemented")
-                success = True
+                success = framework.set_config(args.set[0], args.set[1])
+            else:
+                parser.print_help()
+                success = False
+        
+        elif args.command == 'batches':
+            # Batches command doesn't require initialization
+            batch_framework = HSLTFramework()
+            success = batch_framework.list_batches(show_all=args.all)
+        
+        elif args.command == 'batch':
+            # Batch management command
+            if not args.batch_action:
+                parser.print_help()
+                return 1
+            
+            batch_framework = HSLTFramework()
+            
+            if args.batch_action == 'archive':
+                success = batch_framework.archive_batch(args.batch_id)
+            elif args.batch_action == 'complete':
+                success = batch_framework.complete_batch(args.batch_id)
+            elif args.batch_action == 'reactivate':
+                success = batch_framework.reactivate_batch(args.batch_id)
+            elif args.batch_action == 'remove':
+                success = batch_framework.remove_batch(args.batch_id, args.confirm)
+            elif args.batch_action == 'info':
+                success = batch_framework.show_batch_info(args.batch_id)
             else:
                 parser.print_help()
                 success = False
