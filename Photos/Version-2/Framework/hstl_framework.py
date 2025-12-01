@@ -79,9 +79,11 @@ class HSLTFramework:
         """Initialize a new project."""
         try:
             data_path = Path(data_dir)
+            
+            # Create data directory if it doesn't exist
             if not data_path.exists():
-                print(f"Error: Data directory does not exist: {data_dir}")
-                return False
+                print(f"📁 Creating data directory: {data_dir}")
+                data_path.mkdir(parents=True, exist_ok=True)
             
             # Create project configuration
             project_config = {

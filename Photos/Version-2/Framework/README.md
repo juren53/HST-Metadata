@@ -5,8 +5,7 @@ A comprehensive Python framework for managing the complete HSTL Photo Metadata P
 ## Quick Start
 
 ```bash
-# Initialize a new project (create the data directory first)
-mkdir "C:\path\to\images"
+# Initialize a new project (directory will be created automatically)
 python hstl_framework.py init --data-dir "C:\path\to\images" --project-name "MyProject"
 
 # View current configuration
