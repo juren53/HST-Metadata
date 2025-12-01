@@ -7,25 +7,21 @@
 
 ## Setting Up a New Batch Project
 
-### Step 1: Create Your Data Directory
+### Step 1: Initialize the Project
 
-First, create a directory where you'll store your batch of TIFF images and all processing outputs:
-
-```powershell
-# Create a directory for your batch project
-mkdir "C:\Data\HSTL_Batches\Batch_2024_December"
-```
-
-### Step 2: Initialize the Project
-
-Initialize the framework to set up the project structure and configuration:
+Initialize the framework to set up the project structure and configuration. The data directory will be created automatically if it doesn't exist:
 
 ```powershell
 python hstl_framework.py init --data-dir "C:\Data\HSTL_Batches\Batch_2024_December" --project-name "December2024Batch"
 ```
 
-This will create:
-- All necessary subdirectories (input/, output/, logs/, reports/, config/)
+This will:
+- Create the data directory if it doesn't exist
+- Create all necessary subdirectories (input/, output/, logs/, reports/, config/)
+- Generate a project configuration file at `config/project_config.yaml`
+- Register the batch in the framework registry
+
+### Step 2: Add Your Source Files
 - A project configuration file at `config/project_config.yaml`
 
 ### Step 3: Add Your Source Files
@@ -40,7 +36,7 @@ Copy-Item "C:\path\to\your\*.tif" "C:\Data\HSTL_Batches\Batch_2024_December\inpu
 Copy-Item "C:\path\to\metadata.csv" "C:\Data\HSTL_Batches\Batch_2024_December\input\spreadsheet\"
 ```
 
-### Step 4: Review Configuration
+### Step 3: Review Configuration
 
 View your current project configuration:
 
@@ -48,7 +44,7 @@ View your current project configuration:
 python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\config\project_config.yaml" config --list
 ```
 
-### Step 5: Customize Settings (Optional)
+### Step 4: Customize Settings (Optional)
 
 Adjust configuration values as needed:
 
@@ -63,7 +59,7 @@ python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\conf
 python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\config\project_config.yaml" config --set step_configurations.step8.watermark_opacity 0.25
 ```
 
-### Step 6: Check Project Status
+### Step 5: Check Project Status
 
 View the current processing status:
 
@@ -71,7 +67,7 @@ View the current processing status:
 python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\config\project_config.yaml" status
 ```
 
-### Step 7: Run Processing Steps
+### Step 6: Run Processing Steps
 
 Execute the processing workflow:
 
@@ -91,7 +87,7 @@ python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\conf
 
 ## Typical Workflow
 
-1. **Initialize project** - Set up directory structure and configuration
+1. **Initialize batch** - Set up directory structure and configuration
 2. **Add source files** - Place TIFF images and spreadsheet data in input directories
 3. **Review configuration** - Verify settings are appropriate for this batch
 4. **Run Steps 1-3** - Prepare spreadsheet, convert to CSV, filter Unicode
@@ -101,6 +97,7 @@ python hstl_framework.py --config "C:\Data\HSTL_Batches\Batch_2024_December\conf
 8. **Run Step 8** - Add watermarks to restricted images
 9. **Review reports** - Check validation reports in the `reports/` directory
 10. **Deliver outputs** - Retrieve processed files from `output/` subdirectories
+11. **Disposition of batch data**  - Archive or Delete workflow artifacts
 
 ## Directory Reference
 
@@ -110,9 +107,9 @@ After initialization, your project directory will look like:
 Batch_2024_December/
 ├── input/
 │   ├── tiff/              ← Place your source TIFF images here
-│   └── spreadsheet/       ← Place Google Spreadsheet exports here
+│   └── spreadsheet/       ← Save Google Worksheet URL here
 ├── output/
-│   ├── csv/               → CSV conversion output (Step 2)
+│   ├── csv/               → export.csv saved here  (Step 2)
 │   ├── tiff_processed/    → Processed TIFFs (Step 4)
 │   ├── jpeg/              → JPEG conversions (Step 6)
 │   ├── jpeg_resized/      → Resized JPEGs (Step 7)
@@ -125,17 +122,7 @@ Batch_2024_December/
 
 ## Common Configuration Changes
 
-### JPEG Quality
-
-Default is 85. Adjust for larger/smaller file sizes:
-
-```powershell
-# Step 6 (TIFF to JPEG conversion)
-python hstl_framework.py --config "path\to\project_config.yaml" config --set step_configurations.step6.quality 90
-
-# Step 7 (JPEG resizing)
-python hstl_framework.py --config "path\to\project_config.yaml" config --set step_configurations.step7.quality 90
-```
+### JPEG Processing
 
 ### Resize Dimensions
 
@@ -147,7 +134,7 @@ python hstl_framework.py --config "path\to\project_config.yaml" config --set ste
 
 ### Watermark Settings
 
-Adjust opacity and position:
+Apply if the image is `Restricted`:
 
 ```powershell
 python hstl_framework.py --config "path\to\project_config.yaml" config --set step_configurations.step8.watermark_opacity 0.5
@@ -175,3 +162,5 @@ python hstl_framework.py --config "path\to\project_config.yaml" config --set val
 - Review [`README.md`](README.md) for detailed documentation
 - See [`DEVELOPMENT_PLAN.md`](DEVELOPMENT_PLAN.md) for architecture details
 - Check processing logs in your project's `logs/` directory
+
+Last updated: 2025-11-30  15:16
