@@ -410,14 +410,11 @@ The framework is designed to handle multiple batch projects simultaneously. This
 ### Workflow Example
 
 ```bash
-# Initialize multiple batches
-mkdir "C:\Data\Batch_2024_January"
+# Initialize multiple batches (directories created automatically)
 python hstl_framework.py init --data-dir "C:\Data\Batch_2024_January" --project-name "January2024"
 
-mkdir "C:\Data\Batch_2024_February"
 python hstl_framework.py init --data-dir "C:\Data\Batch_2024_February" --project-name "February2024"
 
-mkdir "C:\Data\Batch_2024_March"
 python hstl_framework.py init --data-dir "C:\Data\Batch_2024_March" --project-name "March2024"
 
 # View all batches at a glance
