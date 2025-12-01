@@ -9,10 +9,22 @@
 
 ### Step 1: Initialize the Project
 
-Initialize the framework to set up the project structure and configuration. The data directory will be created automatically if it doesn't exist:
+Initialize the framework with just the project name! The directory will be created automatically:
 
 ```powershell
-python hstl_framework.py init --data-dir "C:\Data\HSTL_Batches\Batch_2024_December" --project-name "December2024Batch"
+# Simple - just provide the batch name
+python hstl_framework.py init "December 2024 Batch"
+
+# This creates: C:\Data\HSTL_Batches\December_2024_Batch
+```
+
+Optional: Specify a different location:
+```powershell
+# Use a different base directory
+python hstl_framework.py init "December 2024" --base-dir "D:\MyBatches"
+
+# Or specify the full path
+python hstl_framework.py init "December 2024" --data-dir "C:\Custom\Dec2024"
 ```
 
 This will:
