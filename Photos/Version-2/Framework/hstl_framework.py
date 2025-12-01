@@ -506,12 +506,23 @@ def create_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
 Examples:
-  %(prog)s init --data-dir "C:\\Data\\Photos" --project-name "HSTL_2024"
+  # Simple init (uses default base directory C:\\Data\\HSTL_Batches)
+  %(prog)s init "January 2025 Batch"
+  
+  # Init with custom base directory
+  %(prog)s init "January 2025" --base-dir "D:\\MyBatches"
+  
+  # Init with full custom path
+  %(prog)s init "January 2025" --data-dir "C:\\CustomPath\\Jan2025"
+  
+  # List all batches
+  %(prog)s batches
+  
+  # Run steps
   %(prog)s run --step 2
   %(prog)s run --steps 1-3
   %(prog)s run --all
   %(prog)s status --verbose
-  %(prog)s validate --step 5
   
 Framework Version: {FRAMEWORK_VERSION}
         """
@@ -527,8 +538,10 @@ Framework Version: {FRAMEWORK_VERSION}
     
     # Init command
     init_parser = subparsers.add_parser('init', help='Initialize a new project')
-    init_parser.add_argument('--data-dir', required=True, help='Path to data directory')
-    init_parser.add_argument('--project-name', required=True, help='Name of the project')
+    init_parser.add_argument('project_name', help='Name of the project (used to create directory)')
+    init_parser.add_argument('--base-dir', default='C:\\Data\\HSTL_Batches', 
+                            help='Base directory for batches (default: C:\\Data\\HSTL_Batches)')
+    init_parser.add_argument('--data-dir', help='Custom full path to data directory (overrides base-dir + project-name)')
     init_parser.add_argument('--force', action='store_true', help='Overwrite existing configuration')
     
     # Run command
@@ -620,8 +633,18 @@ def main():
     
     # Handle init command (special case - doesn't need existing config)
     if args.command == 'init':
+        # Determine data directory
+        if args.data_dir:
+            # Use custom path if provided
+            data_dir = args.data_dir
+        else:
+            # Derive from base_dir + project_name
+            # Convert project name to directory name (replace spaces with underscores, etc.)
+            dir_name = args.project_name.replace(' ', '_')
+            data_dir = str(Path(args.base_dir) / dir_name)
+        
         success = framework.init_project(
-            data_dir=args.data_dir,
+            data_dir=data_dir,
             project_name=args.project_name,
             force=args.force
         )
