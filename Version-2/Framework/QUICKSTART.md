@@ -132,6 +132,98 @@ Batch_2024_December/
     └── project_config.yaml → Project configuration
 ```
 
+## Managing Multiple Batches
+
+### Viewing All Batches
+
+See all your active batches at a glance:
+
+```powershell
+# List active batches
+python hstl_framework.py batches
+
+# List all batches (including completed and archived)
+python hstl_framework.py batches --all
+```
+
+### Viewing Batch Details
+
+Get detailed information about a specific batch:
+
+```powershell
+python hstl_framework.py batch info december2024batch
+```
+
+This shows:
+- Batch name, ID, and status
+- Creation and last accessed dates
+- Data directory and config file locations
+- Progress (X/8 steps completed)
+- Individual step status
+
+## Retiring Batches
+
+When you've finished processing a batch, you should retire it to keep your active batch list clean.
+
+### Step 1: Mark as Completed
+
+Once all 8 steps are done, mark the batch as completed:
+
+```powershell
+# Get the batch ID from the batches list
+python hstl_framework.py batches
+
+# Mark as completed (removes from active list)
+python hstl_framework.py batch complete december2024batch
+```
+
+### Step 2: Archive (Optional)
+
+For long-term storage, archive the batch:
+
+```powershell
+python hstl_framework.py batch archive december2024batch
+```
+
+### Step 3: Remove from Registry (Optional)
+
+When you no longer need to track the batch:
+
+```powershell
+# Shows confirmation prompt with details
+python hstl_framework.py batch remove december2024batch
+
+# Actually remove after confirming
+python hstl_framework.py batch remove december2024batch --confirm
+```
+
+**Important:** This only removes the batch from tracking. All files remain on disk.
+
+### Step 4: Delete Files (Manual)
+
+If you want to delete the actual files:
+
+```powershell
+# Manually delete the directory
+Remove-Item "C:\Data\HSTL_Batches\December_2024_Batch" -Recurse -Force
+```
+
+### Batch Lifecycle Summary
+
+1. **active** → Working on the batch (default state)
+2. **completed** → All processing finished
+3. **archived** → Long-term storage, not actively working
+4. **removed** → Untracked by framework (files still exist)
+5. **deleted** → Files permanently removed (manual action)
+
+### Reactivating a Batch
+
+If you need to work on a completed or archived batch again:
+
+```powershell
+python hstl_framework.py batch reactivate december2024batch
+```
+
 ## Common Configuration Changes
 
 ### JPEG Processing
