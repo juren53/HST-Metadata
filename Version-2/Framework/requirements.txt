@@ -21,7 +21,7 @@ google-api-python-client>=2.0.0
 # pathlib - built into Python 3.4+
 
 # GUI (Phase 2)
-# PyQt6>=6.0.0
+PyQt6>=6.0.0
 
 # Development and testing
 pytest>=7.0.0
