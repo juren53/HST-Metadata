@@ -153,6 +153,13 @@ class MainWindow(QMainWindow):
         # Help menu
         help_menu = menubar.addMenu("&Help")
         
+        quickstart_action = QAction("Quick Start &Guide", self)
+        quickstart_action.setShortcut("F1")
+        quickstart_action.triggered.connect(self._show_quickstart)
+        help_menu.addAction(quickstart_action)
+        
+        help_menu.addSeparator()
+        
         about_action = QAction("&About", self)
         about_action.triggered.connect(self._show_about)
         help_menu.addAction(about_action)
@@ -296,6 +303,38 @@ class MainWindow(QMainWindow):
         dialog = SettingsDialog(self)
         dialog.exec()
         
+    def _show_quickstart(self):
+        """Open the Quick Start Guide."""
+        import os
+        import subprocess
+        
+        # Get path to GUI_QUICKSTART.md
+        quickstart_path = Path(__file__).parent.parent / 'GUI_QUICKSTART.md'
+        
+        if quickstart_path.exists():
+            # Try to open with default markdown viewer or text editor
+            try:
+                if os.name == 'nt':  # Windows
+                    os.startfile(str(quickstart_path))
+                elif os.name == 'posix':  # macOS and Linux
+                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(quickstart_path)])
+                
+                self.status_bar.showMessage("Opening Quick Start Guide...", 2000)
+            except Exception as e:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Open File",
+                    f"Could not open Quick Start Guide.\n\n"
+                    f"Please open manually:\n{quickstart_path}\n\n"
+                    f"Error: {str(e)}"
+                )
+        else:
+            QMessageBox.warning(
+                self,
+                "File Not Found",
+                f"Quick Start Guide not found at:\n{quickstart_path}"
+            )
+        
     def _show_about(self):
         """Show about dialog."""
         QMessageBox.about(
@@ -306,7 +345,7 @@ class MainWindow(QMainWindow):
             "<p><b>Commit Date:</b> 2025-12-07 18:45</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
-            "<p>Orchestrates 8 steps of photo metadata processing from Google Spreadsheet "
+            "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
             "preparation through final watermarked JPEG creation.</p>"
             "<br>"
             "<p><b>Features:</b></p>"
