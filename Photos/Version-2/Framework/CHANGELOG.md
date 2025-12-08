@@ -5,6 +5,15 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.3] - 2025-12-08 10:10
+
+### Fixed
+- **Step 5 File Handling** - Fixed metadata embedding to preserve source files
+  - Source TIFFs now copied from `input/tiff/` to `output/tiff_processed/`
+  - Metadata written to copies in output directory, not to source files
+  - Progress messages and reports updated to clarify source vs. output locations
+  - Added full output directory path display after successful completion
+
 ## [0.0.2] - 2025-12-07 19:45
 
 ### Added

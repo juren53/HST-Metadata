@@ -48,7 +48,11 @@ class MetadataEmbeddingThread(QThread):
             
             self.progress.emit("Starting metadata embedding...")
             self.progress.emit(f"CSV file: {self.csv_path}")
-            self.progress.emit(f"TIFF directory: {self.tiff_dir}")
+            self.progress.emit(f"TIFF source directory: {self.tiff_dir}")
+            self.progress.emit(f"Output directory: {self.output_dir}")
+            
+            # Ensure output directory exists (defensive; UI already creates it)
+            Path(self.output_dir).mkdir(parents=True, exist_ok=True)
             
             # Count CSV records
             with open(self.csv_path, 'r', encoding='utf-8') as f:
@@ -57,12 +61,12 @@ class MetadataEmbeddingThread(QThread):
             
             self.progress.emit(f"✓ CSV records: {stats['csv_records']}")
             
-            # Count TIFF files
+            # Count TIFF files (in source dir)
             tiff_files = glob.glob(str(Path(self.tiff_dir) / '*.tif')) + \
                         glob.glob(str(Path(self.tiff_dir) / '*.tiff'))
             stats['tiff_files_found'] = len(tiff_files)
             
-            self.progress.emit(f"✓ TIFF files in directory: {stats['tiff_files_found']}")
+            self.progress.emit(f"✓ TIFF files in source: {stats['tiff_files_found']}")
             
             # Date conversion function from the original script
             def convert_date(date_str):
@@ -136,25 +140,31 @@ class MetadataEmbeddingThread(QThread):
                 with exiftool.ExifTool() as et:
                     for row in reader:
                         photo = f"{row['ObjectName']}.tif"
-                        file_path = Path(self.tiff_dir) / photo
+                        src_path = Path(self.tiff_dir) / photo
                         
-                        if not file_path.exists():
+                        if not src_path.exists():
                             # Try .tiff extension
                             photo = f"{row['ObjectName']}.tiff"
-                            file_path = Path(self.tiff_dir) / photo
+                            src_path = Path(self.tiff_dir) / photo
                             
-                            if not file_path.exists():
+                            if not src_path.exists():
                                 self.progress.emit(f"⚠️  Missing: {row['ObjectName']}")
                                 stats['missing'] += 1
                                 stats['missing_list'].append(row['ObjectName'])
                                 continue
                         
+                        # Destination path in output directory
+                        dest_path = Path(self.output_dir) / photo
+                        
+                        # Copy source to destination (overwrite if exists) preserving metadata/timestamps
+                        shutil.copy2(src_path, dest_path)
+                        
                         # Convert date - DateCreated column has the date
                         date_str = row.get("DateCreated", "")
                         converted_date = convert_date(date_str) if date_str else "0000-00-00"
                         
-                        # Write metadata tags - use .get() with defaults for safety
-                        file_path_str = str(file_path)
+                        # Write metadata tags to the COPY in output dir
+                        file_path_str = str(dest_path)
                         et.execute(b"-Headline=" + row.get("Headline", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         et.execute(b"-Credit=" + row.get("Credit", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         et.execute(b"-By-line=" + row.get("By-line", "").encode('utf-8'), file_path_str.encode('utf-8'))
@@ -166,8 +176,8 @@ class MetadataEmbeddingThread(QThread):
                         et.execute(b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         et.execute(b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         
-                        # Remove ExifTool backup files
-                        for backup_file in glob.glob(str(file_path.parent / "*_original")):
+                        # Remove ExifTool backup files created in output directory
+                        for backup_file in glob.glob(str(Path(self.output_dir) / "*_original")):
                             os.remove(backup_file)
                         
                         stats['processed'] += 1
@@ -176,8 +186,9 @@ class MetadataEmbeddingThread(QThread):
                             self.progress.emit(f"Processed: {stats['processed']}")
             
             self.progress.emit(f"\n✓ Embedding complete!")
-            self.progress.emit(f"✓ Processed: {stats['processed']} images")
+            self.progress.emit(f"✓ Processed (written to output): {stats['processed']} images")
             self.progress.emit(f"✓ Missing: {stats['missing']} images")
+            self.progress.emit(f"\n✓ Processed TIFFs saved to: {self.output_dir}")
             
             # Generate report
             self._generate_report(stats)
@@ -205,13 +216,14 @@ class MetadataEmbeddingThread(QThread):
                 f.write(f"Report generated: {current_datetime.strftime('%Y-%m-%d %H:%M:%S')}\n")
                 f.write("\n")
                 f.write(f"CSV file: {self.csv_path}\n")
-                f.write(f"TIFF directory: {self.tiff_dir}\n")
+                f.write(f"TIFF source directory: {self.tiff_dir}\n")
+                f.write(f"Output directory: {self.output_dir}\n")
                 f.write("\n")
                 f.write("SUMMARY:\n")
                 f.write("-" * 70 + "\n")
                 f.write(f"Records in CSV: {stats['csv_records']}\n")
-                f.write(f"TIFF files found: {stats['tiff_files_found']}\n")
-                f.write(f"Images processed: {stats['processed']}\n")
+                f.write(f"TIFF files found (source): {stats['tiff_files_found']}\n")
+                f.write(f"Images processed (written to output): {stats['processed']}\n")
                 f.write(f"Missing images: {stats['missing']}\n")
                 f.write("\n")
                 
@@ -425,6 +437,11 @@ class Step5Dialog(QDialog):
             self.output_text.append(f"  Processed: {stats['processed']} images")
             self.output_text.append(f"  Missing: {stats['missing']} images")
             
+            # Show output directory
+            data_directory = self.config_manager.get('project.data_directory', '')
+            output_dir = Path(data_directory) / 'output' / 'tiff_processed'
+            self.output_text.append(f"\n✓ Processed TIFFs saved to:\n  {output_dir}")
+            
             # Mark step 5 as completed
             self.config_manager.update_step_status(5, True)
             
@@ -435,12 +452,16 @@ class Step5Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            data_directory = self.config_manager.get('project.data_directory', '')
+            output_dir = Path(data_directory) / 'output' / 'tiff_processed'
+            
             QMessageBox.information(
                 self,
                 "Embedding Complete",
                 f"Metadata embedding completed successfully!\n\n"
                 f"Processed: {stats['processed']} images\n"
                 f"Missing: {stats['missing']} images\n\n"
+                f"Processed TIFFs saved to:\n{output_dir}\n\n"
                 f"Step 5 is now marked as complete."
             )
             
