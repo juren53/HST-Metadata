@@ -50,10 +50,12 @@ class MetadataEmbeddingThread(QThread):
             self.progress.emit(f"CSV file: {self.csv_path}")
             self.progress.emit(f"TIFF directory: {self.tiff_dir}")
             
-            # Count CSV records
+            # Count CSV records (skip first 5 rows which are metadata/headers)
             with open(self.csv_path, 'r', encoding='utf-8') as f:
                 reader = csv.reader(f)
-                stats['csv_records'] = sum(1 for row in reader) - 1  # Exclude header
+                all_rows = list(reader)
+                # Data starts at row 6 (index 5), row 5 (index 4) has the actual IPTC headers
+                stats['csv_records'] = len(all_rows) - 5 if len(all_rows) > 5 else 0
             
             self.progress.emit(f"✓ CSV records: {stats['csv_records']}")
             
@@ -118,14 +120,27 @@ class MetadataEmbeddingThread(QThread):
             # Process each record in CSV
             self.progress.emit("\nStarting metadata embedding...")
             
+            # Read CSV and skip first 4 rows (metadata), use row 5 as headers
             with open(self.csv_path, 'r', encoding='utf-8', newline='') as csvfile:
-                reader = csv.DictReader(csvfile)
+                # Read all lines
+                all_lines = csvfile.readlines()
+                
+                # Skip first 4 rows, row 5 (index 4) is the header
+                if len(all_lines) < 6:
+                    self.error.emit("CSV file has insufficient rows")
+                    return
+                
+                # Create a temporary CSV-like structure with proper headers
+                import io
+                csv_content = ''.join(all_lines[4:])  # Start from row 5 (index 4) which has headers
+                csv_file = io.StringIO(csv_content)
+                reader = csv.DictReader(csv_file)
                 
                 # Check for required columns
                 if reader.fieldnames:
                     self.progress.emit(f"CSV columns found: {', '.join(reader.fieldnames)}")
-                    required_fields = ['ObjectName', 'Headline', 'Credit', 'By-line', 'SpecialInstructions',
-                                     'Source', 'Caption-Abstract', 'CopyrightNotice', 'By-lineTitle']
+                    required_fields = ['ObjectName', 'Headline', 'CopyrightNotice', 'By-line',
+                                     'Source', 'Caption-Abstract', 'By-lineTitle']
                     missing_fields = [f for f in required_fields if f not in reader.fieldnames]
                     if missing_fields:
                         self.error.emit(f"Missing required CSV columns: {', '.join(missing_fields)}\n\n"
@@ -149,22 +164,22 @@ class MetadataEmbeddingThread(QThread):
                                 stats['missing_list'].append(row['ObjectName'])
                                 continue
                         
-                        # Convert date
-                        date_str = row.get("SpecialInstructions", "")
-                        converted_date = convert_date(date_str)
+                        # Convert date - DateCreated column has the date
+                        date_str = row.get("DateCreated", "")
+                        converted_date = convert_date(date_str) if date_str else "0000-00-00"
                         
-                        # Write metadata tags
+                        # Write metadata tags - use .get() with defaults for safety
                         file_path_str = str(file_path)
-                        et.execute(b"-Headline=" + row["Headline"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Credit=" + row["Credit"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-By-line=" + row["By-line"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-SpecialInstructions=" + row["SpecialInstructions"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-ObjectName=" + row["ObjectName"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Source=" + row["Source"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Caption-Abstract=" + row["Caption-Abstract"].encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-Headline=" + row.get("Headline", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-Credit=" + row.get("Credit", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-By-line=" + row.get("By-line", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-Source=" + row.get("Source", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         et.execute(b"-DateCreated=" + converted_date.encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-CopyrightNotice=" + row["CopyrightNotice"].encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-By-lineTitle=" + row["By-lineTitle"].encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'), file_path_str.encode('utf-8'))
+                        et.execute(b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'), file_path_str.encode('utf-8'))
                         
                         # Remove ExifTool backup files
                         for backup_file in glob.glob(str(file_path.parent / "*_original")):
@@ -337,10 +352,12 @@ class Step5Dialog(QDialog):
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
             
-            # Count CSV records
+            # Count CSV records (skip first 5 rows which are metadata/headers)
             with open(csv_path, 'r', encoding='utf-8') as f:
                 reader = csv.reader(f)
-                csv_count = sum(1 for row in reader) - 1  # Exclude header
+                all_rows = list(reader)
+                # Data starts at row 6 (index 5), row 5 (index 4) has the headers
+                csv_count = len(all_rows) - 5 if len(all_rows) > 5 else 0
             
             self.csv_count_label.setText(f"CSV records: {csv_count}")
             
