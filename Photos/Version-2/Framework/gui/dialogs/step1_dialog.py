@@ -40,6 +40,7 @@ class Step1Dialog(QDialog):
             "<ul>"
             "<li>The worksheet must be complete with all required fields</li>"
             "<li>Required fields: Title, Description, Accession Number, Date, Rights, Photographer, Organization</li>"
+            "<li>The Google Worksheet MUST be saved as a Google Sheet <a href='#'>click here to see example</a></li>"
             "</ul>"
         )
         desc_label.setWordWrap(True)
