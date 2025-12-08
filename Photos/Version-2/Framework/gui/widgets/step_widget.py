@@ -287,6 +287,11 @@ class StepWidget(QWidget):
         if step_num == 5:
             self._run_step_5()
             return
+        
+        # Step 6 has a special dialog
+        if step_num == 6:
+            self._run_step_6()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -400,6 +405,30 @@ class StepWidget(QWidget):
             # Dialog was cancelled or embedding failed
             self.output_text.append("❌ Step 5 cancelled or failed\n")
     
+    def _run_step_6(self):
+        """Run Step 6: JPEG Conversion (special dialog)."""
+        from gui.dialogs.step6_dialog import Step6Dialog
+        
+        self.output_text.append(f"\n--- Running Step 6: {STEP_NAMES[6]} ---\n")
+        
+        # Open the Step 6 dialog
+        dialog = Step6Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (conversion succeeded)
+            self.output_text.append("✅ JPEG conversion completed\n")
+            self.output_text.append("✅ Step 6 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(6, True)
+        else:
+            # Dialog was cancelled or conversion failed
+            self.output_text.append("❌ Step 6 cancelled or failed\n")
+    
     def _review_step(self, step_num: int):
         """Show review information for a step."""
         if not self.framework:
@@ -408,6 +437,11 @@ class StepWidget(QWidget):
         # Special handling for Step 5 - Launch TagWriter
         if step_num == 5:
             self._review_step_5_with_tagwriter()
+            return
+        
+        # Special handling for Step 6 - Open JPEG directory
+        if step_num == 6:
+            self._review_step_6_open_directory()
             return
         
         # Get step configuration
@@ -542,6 +576,51 @@ class StepWidget(QWidget):
                 "Launch Error",
                 f"Failed to launch TagWriter:\n\n{str(e)}\n\n"
                 f"TagWriter path: {tagwriter_path}"
+            )
+    
+    def _review_step_6_open_directory(self):
+        """Open JPEG output directory to review converted files."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the JPEG output directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        jpeg_dir = Path(data_directory) / 'output' / 'jpeg'
+        
+        # Check if directory exists
+        if not jpeg_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"JPEG output directory not found:\n\n{jpeg_dir}\n\n"
+                "Have you run Step 6 yet?"
+            )
+            return
+        
+        # Open directory in File Explorer
+        try:
+            subprocess.run(['explorer', str(jpeg_dir)], check=True)
+            self.output_text.append(f"✓ Opened JPEG directory: {jpeg_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "Directory Opened",
+                f"JPEG output directory has been opened in File Explorer.\n\n"
+                f"Directory: {jpeg_dir}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
             )
         
     def _run_all_steps(self):
