@@ -226,6 +226,11 @@ class StepWidget(QWidget):
         """Run a specific step."""
         if not self.framework:
             return
+        
+        # Step 1 has a special dialog
+        if step_num == 1:
+            self._run_step_1()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -264,6 +269,30 @@ class StepWidget(QWidget):
             
         # Update statuses
         self._update_step_statuses()
+    
+    def _run_step_1(self):
+        """Run Step 1: Google Worksheet Preparation (special dialog)."""
+        from gui.dialogs.step1_dialog import Step1Dialog
+        
+        self.output_text.append(f"\n--- Running Step 1: {STEP_NAMES[1]} ---\n")
+        
+        # Open the Step 1 dialog
+        dialog = Step1Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (Save clicked)
+            url = dialog.get_url()
+            self.output_text.append(f"✅ Google Worksheet URL saved: {url}\n")
+            self.output_text.append("✅ Step 1 marked as complete\n")
+            
+            # Update status
+            self._update_step_statuses()
+            
+            # Emit signal
+            self.step_executed.emit(1, True)
+        else:
+            # Dialog was cancelled
+            self.output_text.append("❌ Step 1 cancelled by user\n")
         
     def _run_all_steps(self):
         """Run all steps in sequence."""
