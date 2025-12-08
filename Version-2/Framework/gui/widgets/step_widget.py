@@ -13,7 +13,7 @@ from PyQt6.QtGui import QColor, QPalette
 
 
 STEP_NAMES = {
-    1: "Google Spreadsheet Preparation",
+    1: "Google Worksheet Preparation",
     2: "CSV Conversion",
     3: "Unicode Filtering",
     4: "TIFF Bit Depth Conversion",
@@ -122,9 +122,13 @@ class StepWidget(QWidget):
         
         layout.addLayout(header_layout)
         
-        # Step name
-        name_label = QLabel(STEP_NAMES[step_num])
+        # Step name - larger and bold
+        name_label = QLabel(f"<b>{STEP_NAMES[step_num]}</b>")
         name_label.setWordWrap(True)
+        # Increase font size by 2 points
+        font = name_label.font()
+        font.setPointSize(font.pointSize() + 2)
+        name_label.setFont(font)
         layout.addWidget(name_label)
         
         # Buttons layout
