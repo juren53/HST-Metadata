@@ -191,9 +191,14 @@ class StepWidget(QWidget):
         # Update UI
         self.batch_label.setText(f"<h2>{batch_info['name']}</h2>")
         
-        completed = batch_info.get('completed_steps', 0)
-        total = batch_info.get('total_steps', 8)
-        percentage = batch_info.get('completion_percentage', 0)
+        # Count completed steps directly from config instead of relying on batch_info
+        completed = 0
+        for step_num in range(1, 9):
+            if self.framework.config_manager.get_step_status(step_num):
+                completed += 1
+        
+        total = 8
+        percentage = (completed / total * 100) if total > 0 else 0
         
         self.batch_status_label.setText(
             f"Progress: {completed}/{total} steps ({percentage:.0f}%) | "
