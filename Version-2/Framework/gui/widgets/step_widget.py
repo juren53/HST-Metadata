@@ -283,6 +283,11 @@ class StepWidget(QWidget):
             self._run_step_2()
             return
         
+        # Step 4 has a special dialog
+        if step_num == 4:
+            self._run_step_4()
+            return
+        
         # Step 5 has a special dialog
         if step_num == 5:
             self._run_step_5()
@@ -391,6 +396,30 @@ class StepWidget(QWidget):
             # Dialog was cancelled or conversion failed
             self.output_text.append("❌ Step 2 cancelled or failed\n")
     
+    def _run_step_4(self):
+        """Run Step 4: TIFF Bit Depth Conversion (special dialog)."""
+        from gui.dialogs.step4_dialog import Step4Dialog
+        
+        self.output_text.append(f"\n--- Running Step 4: {STEP_NAMES[4]} ---\n")
+        
+        # Open the Step 4 dialog
+        dialog = Step4Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (conversion succeeded)
+            self.output_text.append("✅ Bit depth conversion completed\n")
+            self.output_text.append("✅ Step 4 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(4, True)
+        else:
+            # Dialog was cancelled or conversion failed
+            self.output_text.append("❌ Step 4 cancelled or failed\n")
+    
     def _run_step_5(self):
         """Run Step 5: Metadata Embedding (special dialog)."""
         from gui.dialogs.step5_dialog import Step5Dialog
@@ -492,6 +521,11 @@ class StepWidget(QWidget):
         if not self.framework:
             return
         
+        # Special handling for Step 4 - Open TIFF directory
+        if step_num == 4:
+            self._review_step_4_open_directory()
+            return
+        
         # Special handling for Step 5 - Launch TagWriter
         if step_num == 5:
             self._review_step_5_with_tagwriter()
@@ -558,6 +592,51 @@ class StepWidget(QWidget):
         msg_box.setText(review_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.exec()
+    
+    def _review_step_4_open_directory(self):
+        """Open TIFF input directory to review converted files."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the TIFF input directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        tiff_dir = Path(data_directory) / 'input' / 'tiff'
+        
+        # Check if directory exists
+        if not tiff_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"TIFF input directory not found:\n\n{tiff_dir}\n\n"
+                "Have you set up the input directory?"
+            )
+            return
+        
+        # Open directory in File Explorer
+        try:
+            subprocess.run(['explorer', str(tiff_dir)], check=True)
+            self.output_text.append(f"✓ Opened TIFF directory: {tiff_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "Directory Opened",
+                f"TIFF input directory has been opened in File Explorer.\n\n"
+                f"Directory: {tiff_dir}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
+            )
     
     def _review_step_5_with_tagwriter(self):
         """Launch TagWriter to review metadata in processed TIFF files."""
