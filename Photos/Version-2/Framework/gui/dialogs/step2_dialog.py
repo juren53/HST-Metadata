@@ -37,13 +37,15 @@ class CSVConversionThread(QThread):
             # Import g2c functionality
             try:
                 import sys
+                # Add dev directory to path for g2c imports
                 dev_path = Path(__file__).parent.parent.parent.parent / 'dev'
                 if str(dev_path) not in sys.path:
                     sys.path.insert(0, str(dev_path))
                 
-                # Change to dev directory so g2c can find credentials
-                os.chdir(str(dev_path))
-                self.progress.emit(f"Working directory: {dev_path}")
+                # Change to Framework directory where credentials are located
+                framework_path = Path(__file__).parent.parent.parent
+                os.chdir(str(framework_path))
+                self.progress.emit(f"Working directory: {framework_path}")
                 
                 from g2c import (fetch_sheet_data, export_to_csv, 
                                extract_spreadsheet_id_from_url)
