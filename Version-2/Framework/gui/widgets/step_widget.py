@@ -163,6 +163,13 @@ class StepWidget(QWidget):
         run_btn.clicked.connect(lambda: self._run_step(step_num))
         buttons_layout.addWidget(run_btn)
         
+        # Review button
+        review_btn = QPushButton("Review")
+        review_btn.setEnabled(False)
+        review_btn.setToolTip("Review information about this step")
+        review_btn.clicked.connect(lambda: self._review_step(step_num))
+        buttons_layout.addWidget(review_btn)
+        
         # Revert button
         revert_btn = QPushButton("Revert")
         revert_btn.setEnabled(False)
@@ -176,6 +183,7 @@ class StepWidget(QWidget):
         self.step_buttons[step_num] = {
             'widget': widget,
             'button': run_btn,
+            'review_button': review_btn,
             'revert_button': revert_btn,
             'status': status_label
         }
@@ -227,15 +235,18 @@ class StepWidget(QWidget):
             
             status_label = self.step_buttons[step_num]['status']
             run_btn = self.step_buttons[step_num]['button']
+            review_btn = self.step_buttons[step_num]['review_button']
             revert_btn = self.step_buttons[step_num]['revert_button']
             
             if completed:
                 status_label.setText("✅ Completed")
                 run_btn.setEnabled(True)  # Can re-run
+                review_btn.setEnabled(True)  # Can review
                 revert_btn.setEnabled(True)  # Can revert
             else:
                 status_label.setText("⭕ Pending")
                 run_btn.setEnabled(True)
+                review_btn.setEnabled(True)  # Can always review
                 revert_btn.setEnabled(False)  # Cannot revert pending
     
     def _update_batch_progress(self):
@@ -330,6 +341,62 @@ class StepWidget(QWidget):
         else:
             # Dialog was cancelled
             self.output_text.append("❌ Step 1 cancelled by user\n")
+    
+    def _review_step(self, step_num: int):
+        """Show review information for a step."""
+        if not self.framework:
+            return
+        
+        # Get step configuration
+        step_config = self.framework.config_manager.get(f'step_configurations.step{step_num}', {})
+        completed = self.framework.config_manager.get_step_status(step_num)
+        
+        # Build review information
+        review_text = f"<h3>Step {step_num}: {STEP_NAMES[step_num]}</h3>"
+        review_text += f"<p><b>Status:</b> {'✅ Completed' if completed else '⭕ Pending'}</p>"
+        
+        # Add step-specific information
+        if step_num == 1:
+            worksheet_url = step_config.get('worksheet_url', 'Not set')
+            required_fields = step_config.get('required_fields', [])
+            review_text += f"<p><b>Google Worksheet URL:</b><br>{worksheet_url}</p>"
+            review_text += f"<p><b>Required Fields:</b><br>" + ', '.join(required_fields) + "</p>"
+        elif step_num == 2:
+            output_file = step_config.get('output_filename', 'export.csv')
+            review_text += f"<p><b>Output File:</b> {output_file}</p>"
+            review_text += f"<p><b>Validate Row Count:</b> {step_config.get('validate_row_count', False)}</p>"
+        elif step_num == 3:
+            review_text += f"<p><b>Generate Reports:</b> {step_config.get('generate_reports', False)}</p>"
+            review_text += f"<p><b>Backup Original:</b> {step_config.get('backup_original', False)}</p>"
+            review_text += f"<p><b>Encoding:</b> {step_config.get('encoding', 'utf-8')}</p>"
+        elif step_num == 4:
+            review_text += f"<p><b>Target Bit Depth:</b> {step_config.get('target_bit_depth', 8)}</p>"
+            review_text += f"<p><b>Backup Original:</b> {step_config.get('backup_original', False)}</p>"
+            review_text += f"<p><b>Quality Check:</b> {step_config.get('quality_check', False)}</p>"
+        elif step_num == 5:
+            review_text += f"<p><b>Generate Reports:</b> {step_config.get('generate_reports', False)}</p>"
+            review_text += f"<p><b>Validate Embedding:</b> {step_config.get('validate_embedding', False)}</p>"
+            review_text += f"<p><b>Backup on Error:</b> {step_config.get('backup_on_error', False)}</p>"
+        elif step_num == 6:
+            review_text += f"<p><b>Quality:</b> {step_config.get('quality', 85)}</p>"
+            review_text += f"<p><b>Validate Count:</b> {step_config.get('validate_count', False)}</p>"
+            review_text += f"<p><b>Preserve Metadata:</b> {step_config.get('preserve_metadata', False)}</p>"
+        elif step_num == 7:
+            review_text += f"<p><b>Max Dimension:</b> {step_config.get('max_dimension', 800)}px</p>"
+            review_text += f"<p><b>Maintain Aspect Ratio:</b> {step_config.get('maintain_aspect_ratio', False)}</p>"
+            review_text += f"<p><b>Quality:</b> {step_config.get('quality', 85)}</p>"
+        elif step_num == 8:
+            review_text += f"<p><b>Watermark Opacity:</b> {step_config.get('watermark_opacity', 0.3)}</p>"
+            review_text += f"<p><b>Watermark Position:</b> {step_config.get('watermark_position', 'bottom_right')}</p>"
+            review_text += f"<p><b>Only Restricted:</b> {step_config.get('only_restricted', False)}</p>"
+        
+        # Show in message box
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle(f"Review Step {step_num}")
+        msg_box.setTextFormat(Qt.TextFormat.RichText)
+        msg_box.setText(review_text)
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.exec()
         
     def _run_all_steps(self):
         """Run all steps in sequence."""
