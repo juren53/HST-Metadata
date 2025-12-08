@@ -282,6 +282,11 @@ class StepWidget(QWidget):
         if step_num == 2:
             self._run_step_2()
             return
+        
+        # Step 5 has a special dialog
+        if step_num == 5:
+            self._run_step_5()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -370,6 +375,30 @@ class StepWidget(QWidget):
         else:
             # Dialog was cancelled or conversion failed
             self.output_text.append("❌ Step 2 cancelled or failed\n")
+    
+    def _run_step_5(self):
+        """Run Step 5: Metadata Embedding (special dialog)."""
+        from gui.dialogs.step5_dialog import Step5Dialog
+        
+        self.output_text.append(f"\n--- Running Step 5: {STEP_NAMES[5]} ---\n")
+        
+        # Open the Step 5 dialog
+        dialog = Step5Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (embedding succeeded)
+            self.output_text.append("✅ Metadata embedding completed\n")
+            self.output_text.append("✅ Step 5 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(5, True)
+        else:
+            # Dialog was cancelled or embedding failed
+            self.output_text.append("❌ Step 5 cancelled or failed\n")
     
     def _review_step(self, step_num: int):
         """Show review information for a step."""
