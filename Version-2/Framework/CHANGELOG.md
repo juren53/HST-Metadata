@@ -5,6 +5,42 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.2] - 2025-12-07 19:45
+
+### Added
+- **Quick Start Guide Menu** - Added "Quick Start Guide" (F1) to Help menu
+  - Opens GUI_QUICKSTART.md in default application
+  - Cross-platform support (Windows, macOS, Linux)
+  - Error handling with fallback path display
+
+### Changed
+- **Step Name Visibility** - Enhanced step labels for better readability
+  - Increased font size by 2 points
+  - Made step names bold
+  - Improved visual hierarchy
+- **Step Layout** - Changed step arrangement to vertical columns
+  - Column 1: Steps 1-4 (Google Spreadsheet → TIFF Conversion)
+  - Column 2: Steps 5-8 (Metadata → Watermark)
+  - More natural workflow progression
+- **Window Sizing** - Improved window resizing behavior
+  - Reduced minimum size from 1200x800 to 800x600
+  - Added scroll areas to all tabs for better content handling
+  - Window now resizes smoothly without content clipping
+
+### Fixed
+- **Batch List Refresh** - Fixed newly created batches not appearing
+  - Added explicit registry reload from disk on refresh
+- **Status Column Contrast** - Fixed low contrast in batch status column
+  - Changed text color to black for better readability
+- **Syntax Errors** - Fixed indentation and duplicate method issues
+  - Corrected _show_settings method indentation
+  - Removed duplicate _show_about method
+- **UI Clipping** - Fixed text clipping when window is maximized
+  - Added proper size policies to step widgets
+  - Set column stretch for grid layout
+  - Removed problematic window flags
+  - Content now adapts to all window sizes
+
 ## [0.0.1] - 2025-12-07 18:45
 
 ### Added - GUI Application (Initial Release)
