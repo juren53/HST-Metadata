@@ -121,6 +121,18 @@ class MetadataEmbeddingThread(QThread):
             with open(self.csv_path, 'r', encoding='utf-8', newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 
+                # Check for required columns
+                if reader.fieldnames:
+                    self.progress.emit(f"CSV columns found: {', '.join(reader.fieldnames)}")
+                    required_fields = ['ObjectName', 'Headline', 'Credit', 'By-line', 'SpecialInstructions',
+                                     'Source', 'Caption-Abstract', 'CopyrightNotice', 'By-lineTitle']
+                    missing_fields = [f for f in required_fields if f not in reader.fieldnames]
+                    if missing_fields:
+                        self.error.emit(f"Missing required CSV columns: {', '.join(missing_fields)}\n\n"
+                                      f"Expected columns: {', '.join(required_fields)}\n\n"
+                                      f"Found columns: {', '.join(reader.fieldnames)}")
+                        return
+                
                 with exiftool.ExifTool() as et:
                     for row in reader:
                         photo = f"{row['ObjectName']}.tif"
