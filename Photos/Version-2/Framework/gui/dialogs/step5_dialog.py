@@ -50,12 +50,10 @@ class MetadataEmbeddingThread(QThread):
             self.progress.emit(f"CSV file: {self.csv_path}")
             self.progress.emit(f"TIFF directory: {self.tiff_dir}")
             
-            # Count CSV records (skip first 5 rows which are metadata/headers)
+            # Count CSV records
             with open(self.csv_path, 'r', encoding='utf-8') as f:
                 reader = csv.reader(f)
-                all_rows = list(reader)
-                # Data starts at row 6 (index 5), row 5 (index 4) has the actual IPTC headers
-                stats['csv_records'] = len(all_rows) - 5 if len(all_rows) > 5 else 0
+                stats['csv_records'] = sum(1 for row in reader) - 1  # Exclude header
             
             self.progress.emit(f"✓ CSV records: {stats['csv_records']}")
             
@@ -120,21 +118,8 @@ class MetadataEmbeddingThread(QThread):
             # Process each record in CSV
             self.progress.emit("\nStarting metadata embedding...")
             
-            # Read CSV and skip first 4 rows (metadata), use row 5 as headers
             with open(self.csv_path, 'r', encoding='utf-8', newline='') as csvfile:
-                # Read all lines
-                all_lines = csvfile.readlines()
-                
-                # Skip first 4 rows, row 5 (index 4) is the header
-                if len(all_lines) < 6:
-                    self.error.emit("CSV file has insufficient rows")
-                    return
-                
-                # Create a temporary CSV-like structure with proper headers
-                import io
-                csv_content = ''.join(all_lines[4:])  # Start from row 5 (index 4) which has headers
-                csv_file = io.StringIO(csv_content)
-                reader = csv.DictReader(csv_file)
+                reader = csv.DictReader(csvfile)
                 
                 # Check for required columns
                 if reader.fieldnames:
@@ -352,12 +337,10 @@ class Step5Dialog(QDialog):
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
             
-            # Count CSV records (skip first 5 rows which are metadata/headers)
+            # Count CSV records
             with open(csv_path, 'r', encoding='utf-8') as f:
                 reader = csv.reader(f)
-                all_rows = list(reader)
-                # Data starts at row 6 (index 5), row 5 (index 4) has the headers
-                csv_count = len(all_rows) - 5 if len(all_rows) > 5 else 0
+                csv_count = sum(1 for row in reader) - 1  # Exclude header
             
             self.csv_count_label.setText(f"CSV records: {csv_count}")
             
