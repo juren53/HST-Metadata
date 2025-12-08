@@ -297,6 +297,11 @@ class StepWidget(QWidget):
         if step_num == 7:
             self._run_step_7()
             return
+        
+        # Step 8 has a special dialog
+        if step_num == 8:
+            self._run_step_8()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -458,6 +463,30 @@ class StepWidget(QWidget):
             # Dialog was cancelled or resize failed
             self.output_text.append("❌ Step 7 cancelled or failed\n")
     
+    def _run_step_8(self):
+        """Run Step 8: Watermark Addition (special dialog)."""
+        from gui.dialogs.step8_dialog import Step8Dialog
+        
+        self.output_text.append(f"\n--- Running Step 8: {STEP_NAMES[8]} ---\n")
+        
+        # Open the Step 8 dialog
+        dialog = Step8Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (watermarking succeeded)
+            self.output_text.append("✅ Watermarking completed\n")
+            self.output_text.append("✅ Step 8 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(8, True)
+        else:
+            # Dialog was cancelled or watermarking failed
+            self.output_text.append("❌ Step 8 cancelled or failed\n")
+    
     def _review_step(self, step_num: int):
         """Show review information for a step."""
         if not self.framework:
@@ -476,6 +505,11 @@ class StepWidget(QWidget):
         # Special handling for Step 7 - Open resized JPEG directory
         if step_num == 7:
             self._review_step_7_open_directory()
+            return
+        
+        # Special handling for Step 8 - Open watermarked JPEG directory
+        if step_num == 8:
+            self._review_step_8_open_directory()
             return
         
         # Get step configuration
@@ -694,6 +728,51 @@ class StepWidget(QWidget):
                 "Directory Opened",
                 f"Resized JPEG output directory has been opened in File Explorer.\n\n"
                 f"Directory: {resized_jpeg_dir}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
+            )
+    
+    def _review_step_8_open_directory(self):
+        """Open watermarked JPEG output directory to review watermarked files."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the watermarked JPEG output directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        watermarked_jpeg_dir = Path(data_directory) / 'output' / 'jpeg_watermarked'
+        
+        # Check if directory exists
+        if not watermarked_jpeg_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"Watermarked JPEG output directory not found:\n\n{watermarked_jpeg_dir}\n\n"
+                "Have you run Step 8 yet?"
+            )
+            return
+        
+        # Open directory in File Explorer
+        try:
+            subprocess.run(['explorer', str(watermarked_jpeg_dir)], check=True)
+            self.output_text.append(f"✓ Opened watermarked JPEG directory: {watermarked_jpeg_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "Directory Opened",
+                f"Watermarked JPEG output directory has been opened in File Explorer.\n\n"
+                f"Directory: {watermarked_jpeg_dir}"
             )
         except Exception as e:
             QMessageBox.critical(
