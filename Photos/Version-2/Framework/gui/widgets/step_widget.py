@@ -405,6 +405,11 @@ class StepWidget(QWidget):
         if not self.framework:
             return
         
+        # Special handling for Step 5 - Launch TagWriter
+        if step_num == 5:
+            self._review_step_5_with_tagwriter()
+            return
+        
         # Get step configuration
         step_config = self.framework.config_manager.get(f'step_configurations.step{step_num}', {})
         completed = self.framework.config_manager.get_step_status(step_num)
@@ -431,10 +436,6 @@ class StepWidget(QWidget):
             review_text += f"<p><b>Target Bit Depth:</b> {step_config.get('target_bit_depth', 8)}</p>"
             review_text += f"<p><b>Backup Original:</b> {step_config.get('backup_original', False)}</p>"
             review_text += f"<p><b>Quality Check:</b> {step_config.get('quality_check', False)}</p>"
-        elif step_num == 5:
-            review_text += f"<p><b>Generate Reports:</b> {step_config.get('generate_reports', False)}</p>"
-            review_text += f"<p><b>Validate Embedding:</b> {step_config.get('validate_embedding', False)}</p>"
-            review_text += f"<p><b>Backup on Error:</b> {step_config.get('backup_on_error', False)}</p>"
         elif step_num == 6:
             review_text += f"<p><b>Quality:</b> {step_config.get('quality', 85)}</p>"
             review_text += f"<p><b>Validate Count:</b> {step_config.get('validate_count', False)}</p>"
@@ -455,6 +456,93 @@ class StepWidget(QWidget):
         msg_box.setText(review_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.exec()
+    
+    def _review_step_5_with_tagwriter(self):
+        """Launch TagWriter to review metadata in processed TIFF files."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the processed TIFF directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        tiff_processed_dir = Path(data_directory) / 'output' / 'tiff_processed'
+        
+        # Check if directory exists
+        if not tiff_processed_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"Processed TIFF directory not found:\n\n{tiff_processed_dir}\n\n"
+                "Have you run Step 5 yet?"
+            )
+            return
+        
+        # Get TagWriter path from config, or use default
+        tagwriter_path = self.framework.config_manager.get('tools.tagwriter', None)
+        
+        # If not configured, try to find TagWriter in common locations
+        if not tagwriter_path:
+            # Common installation locations for TagWriter
+            possible_paths = [
+                Path("C:/Program Files/TagWriter/TagWriter.exe"),
+                Path("C:/Program Files (x86)/TagWriter/TagWriter.exe"),
+                Path("C:/TagWriter/TagWriter.exe"),
+            ]
+            
+            for path in possible_paths:
+                if path.exists():
+                    tagwriter_path = str(path)
+                    break
+        
+        # If still not found, ask user
+        if not tagwriter_path or not Path(tagwriter_path).exists():
+            reply = QMessageBox.question(
+                self,
+                "TagWriter Not Found",
+                f"TagWriter executable not found.\n\n"
+                f"Would you like to open the processed TIFF directory in File Explorer instead?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+            
+            if reply == QMessageBox.StandardButton.Yes:
+                # Open directory in File Explorer
+                try:
+                    subprocess.run(['explorer', str(tiff_processed_dir)], check=True)
+                    self.output_text.append(f"✓ Opened directory: {tiff_processed_dir}\n")
+                except Exception as e:
+                    QMessageBox.critical(
+                        self,
+                        "Error",
+                        f"Failed to open directory:\n\n{str(e)}"
+                    )
+            return
+        
+        # Launch TagWriter with the processed TIFF directory
+        try:
+            # Launch TagWriter with directory as working directory
+            subprocess.Popen([tagwriter_path], cwd=str(tiff_processed_dir))
+            self.output_text.append(f"✓ Launched TagWriter in: {tiff_processed_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "TagWriter Launched",
+                f"TagWriter has been launched to review metadata tags.\n\n"
+                f"Directory: {tiff_processed_dir}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Launch Error",
+                f"Failed to launch TagWriter:\n\n{str(e)}\n\n"
+                f"TagWriter path: {tagwriter_path}"
+            )
         
     def _run_all_steps(self):
         """Run all steps in sequence."""
