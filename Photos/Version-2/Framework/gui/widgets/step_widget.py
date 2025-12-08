@@ -57,11 +57,17 @@ class StepWidget(QWidget):
         steps_layout = QVBoxLayout(steps_group)
         
         # Create grid for step buttons
+        # Steps arranged vertically: column 1 has steps 1-4, column 2 has steps 5-8
         grid_layout = QGridLayout()
         
         for step_num in range(1, 9):
-            row = (step_num - 1) // 2
-            col = (step_num - 1) % 2
+            # Steps 1-4 go in column 0, steps 5-8 go in column 1
+            if step_num <= 4:
+                row = step_num - 1  # 0, 1, 2, 3
+                col = 0
+            else:
+                row = step_num - 5  # 0, 1, 2, 3
+                col = 1
             
             step_widget = self._create_step_button(step_num)
             grid_layout.addWidget(step_widget, row, col)
