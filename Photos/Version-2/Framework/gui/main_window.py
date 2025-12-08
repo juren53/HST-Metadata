@@ -51,6 +51,16 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("HSTL Photo Framework")
         self.setMinimumSize(1200, 800)
         
+        # Ensure standard window buttons (minimize, maximize, close) are visible
+        # These are provided by the OS window manager by default
+        # This explicitly sets the window flags to include them
+        self.setWindowFlags(
+            Qt.WindowType.Window |
+            Qt.WindowType.WindowMinimizeButtonHint |
+            Qt.WindowType.WindowMaximizeButtonHint |
+            Qt.WindowType.WindowCloseButtonHint
+        )
+        
         # Create central widget with tab interface
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
