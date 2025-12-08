@@ -5,6 +5,29 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.5] - 2025-12-08 15:05
+
+### Added
+- **Step 4 Dialog** - TIFF Bit Depth Test & Conversion
+  - Detects 16-bit TIFF images using ExifTool metadata (BitsPerSample tag)
+  - Handles "EXIF 16" format returned by ExifTool
+  - Pre-analysis shows count and complete list of 16-bit TIFFs before conversion
+  - Converts 16-bit TIFFs to 8-bit using proper scaling (divide by 256)
+  - Overwrites original files in input/tiff directory (unlike Step 5 which copies)
+  - Generates timestamped conversion reports
+  - Review button opens input/tiff directory in File Explorer
+  - Warning dialog before overwriting original files
+  - Detailed progress tracking and error handling
+
+### Fixed
+- **Step 4 File Locking** - Fixed Windows file locking issue during conversion
+  - Explicitly close source image before saving converted version
+  - Prevents "file in use" errors when overwriting TIFF files
+- **Step 4 Detection Logic** - Improved 16-bit detection
+  - Checks for '16' presence AND absence of '8' in metadata value
+  - Correctly handles various formats: "16", "16 16 16", "EXIF 16", "IFD0 16"
+  - Avoids false positives on 8-bit images with "8" in metadata
+
 ## [0.0.4] - 2025-12-08 13:15
 
 ### Added
