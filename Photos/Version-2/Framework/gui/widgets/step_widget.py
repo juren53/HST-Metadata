@@ -232,6 +232,25 @@ class StepWidget(QWidget):
                 status_label.setText("⭕ Pending")
                 run_btn.setEnabled(True)
                 revert_btn.setEnabled(False)  # Cannot revert pending
+    
+    def _update_batch_progress(self):
+        """Update the batch progress display."""
+        if not self.framework or not self.batch_info:
+            return
+        
+        # Count completed steps from config
+        completed = 0
+        for step_num in range(1, 9):
+            if self.framework.config_manager.get_step_status(step_num):
+                completed += 1
+        
+        total = 8
+        percentage = (completed / total * 100) if total > 0 else 0
+        
+        self.batch_status_label.setText(
+            f"Progress: {completed}/{total} steps ({percentage:.0f}%) | "
+            f"Status: {self.batch_info.get('status', 'unknown')}"
+        )
                 
     def _run_step(self, step_num: int):
         """Run a specific step."""
@@ -278,8 +297,9 @@ class StepWidget(QWidget):
             status_label.setText("❌ Error")
             self.step_executed.emit(step_num, False)
             
-        # Update statuses
+        # Update statuses and progress
         self._update_step_statuses()
+        self._update_batch_progress()
     
     def _run_step_1(self):
         """Run Step 1: Google Worksheet Preparation (special dialog)."""
@@ -296,8 +316,9 @@ class StepWidget(QWidget):
             self.output_text.append(f"✅ Google Worksheet URL saved: {url}\n")
             self.output_text.append("✅ Step 1 marked as complete\n")
             
-            # Update status
+            # Update status and progress
             self._update_step_statuses()
+            self._update_batch_progress()
             
             # Emit signal
             self.step_executed.emit(1, True)
@@ -373,8 +394,9 @@ class StepWidget(QWidget):
             self.output_text.append(f"✅ Step {step_num} reverted to Pending\n")
             self.output_text.append("Note: Output files were not deleted. Re-run the step to regenerate.\n")
             
-            # Update statuses
+            # Update statuses and progress
             self._update_step_statuses()
+            self._update_batch_progress()
             
             # Emit signal to update batch list
             self.step_executed.emit(step_num, False)
