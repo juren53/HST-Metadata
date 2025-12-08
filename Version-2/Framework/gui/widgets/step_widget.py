@@ -43,9 +43,20 @@ class StepWidget(QWidget):
         """Initialize the user interface."""
         layout = QVBoxLayout(self)
         
-        # Batch info section
+        # Batch info section with version/date on same line
+        batch_header_layout = QHBoxLayout()
+        
         self.batch_label = QLabel("<h2>No batch selected</h2>")
-        layout.addWidget(self.batch_label)
+        batch_header_layout.addWidget(self.batch_label)
+        
+        batch_header_layout.addStretch()
+        
+        # Version and date/time stamp (right-aligned, 10pt font)
+        version_label = QLabel("<span style='font-size: 10pt;'>v0.0.2 | 2025-12-07 19:45</span>")
+        version_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        batch_header_layout.addWidget(version_label)
+        
+        layout.addLayout(batch_header_layout)
         
         self.batch_status_label = QLabel("Select a batch from the Batches tab to begin")
         layout.addWidget(self.batch_status_label)
