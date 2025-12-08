@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
     QMainWindow, QTabWidget, QWidget, QVBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog
+    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSettings
 from PyQt6.QtGui import QAction
@@ -49,17 +49,8 @@ class MainWindow(QMainWindow):
     def _init_ui(self):
         """Initialize the user interface."""
         self.setWindowTitle("HSTL Photo Framework")
-        self.setMinimumSize(1200, 800)
-        
-        # Ensure standard window buttons (minimize, maximize, close) are visible
-        # These are provided by the OS window manager by default
-        # This explicitly sets the window flags to include them
-        self.setWindowFlags(
-            Qt.WindowType.Window |
-            Qt.WindowType.WindowMinimizeButtonHint |
-            Qt.WindowType.WindowMaximizeButtonHint |
-            Qt.WindowType.WindowCloseButtonHint
-        )
+        self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
+        self.resize(1200, 800)  # Default size
         
         # Create central widget with tab interface
         self.tabs = QTabWidget()
@@ -87,20 +78,35 @@ class MainWindow(QMainWindow):
         self.step_widget = StepWidget()
         self.step_widget.step_executed.connect(self._on_step_executed)
         
-        self.tabs.addTab(self.step_widget, "Current Batch")
+        # Wrap in scroll area to handle small window sizes
+        scroll = QScrollArea()
+        scroll.setWidget(self.step_widget)
+        scroll.setWidgetResizable(True)  # Important: allows content to resize
+        
+        self.tabs.addTab(scroll, "Current Batch")
         
     def _create_config_tab(self):
         """Create the configuration editor tab."""
         self.config_widget = ConfigWidget()
         self.config_widget.config_changed.connect(self._on_config_changed)
         
-        self.tabs.addTab(self.config_widget, "Configuration")
+        # Wrap in scroll area
+        scroll = QScrollArea()
+        scroll.setWidget(self.config_widget)
+        scroll.setWidgetResizable(True)
+        
+        self.tabs.addTab(scroll, "Configuration")
         
     def _create_logs_tab(self):
         """Create the logs viewer tab."""
         self.log_widget = LogWidget()
         
-        self.tabs.addTab(self.log_widget, "Logs")
+        # Wrap in scroll area
+        scroll = QScrollArea()
+        scroll.setWidget(self.log_widget)
+        scroll.setWidgetResizable(True)
+        
+        self.tabs.addTab(scroll, "Logs")
         
     def _create_menu_bar(self):
         """Create the menu bar."""
