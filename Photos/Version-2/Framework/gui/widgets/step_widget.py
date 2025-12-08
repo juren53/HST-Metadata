@@ -277,6 +277,11 @@ class StepWidget(QWidget):
         if step_num == 1:
             self._run_step_1()
             return
+        
+        # Step 2 has a special dialog
+        if step_num == 2:
+            self._run_step_2()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -341,6 +346,30 @@ class StepWidget(QWidget):
         else:
             # Dialog was cancelled
             self.output_text.append("❌ Step 1 cancelled by user\n")
+    
+    def _run_step_2(self):
+        """Run Step 2: CSV Conversion (special dialog)."""
+        from gui.dialogs.step2_dialog import Step2Dialog
+        
+        self.output_text.append(f"\n--- Running Step 2: {STEP_NAMES[2]} ---\n")
+        
+        # Open the Step 2 dialog
+        dialog = Step2Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (conversion succeeded)
+            self.output_text.append("✅ CSV conversion completed\n")
+            self.output_text.append("✅ Step 2 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(2, True)
+        else:
+            # Dialog was cancelled or conversion failed
+            self.output_text.append("❌ Step 2 cancelled or failed\n")
     
     def _review_step(self, step_num: int):
         """Show review information for a step."""
