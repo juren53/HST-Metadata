@@ -113,7 +113,7 @@ class BatchListWidget(QWidget):
         # Set text color to black for better contrast
         status_item.setForeground(QBrush(QColor(0, 0, 0)))
         if status == 'active':
-            status_item.setBackground(QBrush(QColor(144, 238, 144)))  # Light green
+            status_item.setBackground(QBrush(QColor(0, 255, 255)))  # Aqua
         elif status == 'completed':
             status_item.setBackground(QBrush(QColor(173, 216, 230)))  # Light blue
         elif status == 'archived':
