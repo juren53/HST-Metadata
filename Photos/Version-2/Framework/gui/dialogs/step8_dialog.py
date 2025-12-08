@@ -100,7 +100,9 @@ class WatermarkThread(QThread):
                             self.progress.emit(f"  Debug: {jpeg_path.name} - Copyright: '{copyright_notice}'")
                         
                         # Check if 'Restricted' is in copyright notice (case-insensitive)
-                        is_restricted = 'restricted' in copyright_notice.lower() if copyright_notice else False
+                        # But exclude 'Unrestricted'
+                        copyright_lower = copyright_notice.lower()
+                        is_restricted = ('restricted' in copyright_lower and 'unrestricted' not in copyright_lower) if copyright_notice else False
                         
                         if is_restricted:
                             stats['restricted_found'] += 1
@@ -442,7 +444,9 @@ class Step8Dialog(QDialog):
                         # Debug output for all files
                         self.output_text.append(f"  {filename}: Copyright='{copyright_notice}' (len={len(copyright_notice)})")
                         
-                        if copyright_notice and 'restricted' in copyright_notice.lower():
+                        # Check for 'Restricted' but exclude 'Unrestricted'
+                        copyright_lower = copyright_notice.lower()
+                        if copyright_notice and 'restricted' in copyright_lower and 'unrestricted' not in copyright_lower:
                             restricted_count += 1
                             restricted_list.append(filename)
                             self.output_text.append(f"    -> MATCH: This file is restricted!")
