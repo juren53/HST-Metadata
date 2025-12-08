@@ -5,6 +5,45 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.4] - 2025-12-08 13:15
+
+### Added
+- **Step 6 Dialog** - JPEG Conversion with metadata preservation
+  - Converts processed TIFFs from output/tiff_processed to output/jpeg
+  - Preserves all metadata (EXIF, IPTC, XMP) using ExifTool
+  - Adjustable JPEG quality setting (1-100%, default 85%)
+  - Real-time progress updates and error tracking
+  - Generates timestamped conversion report
+  - Review button opens output/jpeg directory
+
+- **Step 7 Dialog** - JPEG Resizing with aspect ratio preservation
+  - Resizes JPEGs from output/jpeg to output/jpeg_resized
+  - Fits images within configurable box (default 800x800 px)
+  - Maintains original aspect ratio during resize
+  - Uses high-quality Lanczos resampling
+  - Smart skipping of images already within size constraints
+  - Detailed resize information (original → resized dimensions)
+  - Review button opens output/jpeg_resized directory
+
+- **Step 8 Dialog** - Selective watermarking for restricted images
+  - Reads IPTC:CopyrightNotice field to identify restricted images
+  - Only watermarks images containing 'Restricted' in copyright field
+  - Copies unrestricted images without watermarks
+  - Adjustable watermark opacity slider (10-100%, default 30%)
+  - Uses gui/Copyright_Watermark.png as overlay
+  - Scales watermark to 50% of image width, centers on image
+  - Pre-analysis counts and lists restricted images before processing
+  - Review button opens output/jpeg_watermarked directory
+
+### Changed
+- **Status Column Color** - Changed active batch background from light green to aqua
+- **TagWriter Integration** - Step 5 Review button launches TagWriter in tiff_processed directory
+
+### Fixed
+- **Step 6 Import** - Removed unnecessary piexif import (using ExifTool instead)
+- **Step 8 Detection** - Fixed ExifTool result handling (returns string not bytes)
+- **Copyright Field** - Case-insensitive 'Restricted' detection
+
 ## [0.0.3] - 2025-12-08 10:10
 
 ### Fixed
