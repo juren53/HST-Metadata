@@ -6,7 +6,7 @@ Interface for executing and monitoring the 8 processing steps.
 
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton,
-    QLabel, QProgressBar, QTextEdit, QGroupBox, QMessageBox
+    QLabel, QProgressBar, QTextEdit, QGroupBox, QMessageBox, QSizePolicy
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot
 from PyQt6.QtGui import QColor, QPalette
@@ -60,6 +60,10 @@ class StepWidget(QWidget):
         # Steps arranged vertically: column 1 has steps 1-4, column 2 has steps 5-8
         grid_layout = QGridLayout()
         
+        # Set column stretch so both columns expand equally
+        grid_layout.setColumnStretch(0, 1)
+        grid_layout.setColumnStretch(1, 1)
+        
         for step_num in range(1, 9):
             # Steps 1-4 go in column 0, steps 5-8 go in column 1
             if step_num <= 4:
@@ -112,6 +116,8 @@ class StepWidget(QWidget):
     def _create_step_button(self, step_num: int):
         """Create a step button widget."""
         widget = QWidget()
+        # Set size policy to expand horizontally and vertically
+        widget.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         layout = QVBoxLayout(widget)
         layout.setContentsMargins(5, 5, 5, 5)
         
