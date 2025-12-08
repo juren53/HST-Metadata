@@ -26,6 +26,9 @@ class CSVConversionThread(QThread):
         
     def run(self):
         """Run the CSV conversion."""
+        import os
+        original_dir = os.getcwd()
+        
         try:
             self.progress.emit("Starting CSV conversion...")
             self.progress.emit(f"Source: {self.worksheet_url}")
@@ -38,12 +41,17 @@ class CSVConversionThread(QThread):
                 if str(dev_path) not in sys.path:
                     sys.path.insert(0, str(dev_path))
                 
+                # Change to dev directory so g2c can find credentials
+                os.chdir(str(dev_path))
+                self.progress.emit(f"Working directory: {dev_path}")
+                
                 from g2c import (fetch_sheet_data, export_to_csv, 
                                extract_spreadsheet_id_from_url)
                 
                 self.progress.emit("✓ g2c module loaded")
                 
             except ImportError as e:
+                os.chdir(original_dir)
                 self.error.emit(f"Failed to import g2c module: {e}")
                 return
             
@@ -74,6 +82,9 @@ class CSVConversionThread(QThread):
                 
         except Exception as e:
             self.error.emit(f"Error during conversion: {str(e)}")
+        finally:
+            # Restore original working directory
+            os.chdir(original_dir)
 
 
 class Step2Dialog(QDialog):
