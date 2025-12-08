@@ -292,6 +292,11 @@ class StepWidget(QWidget):
         if step_num == 6:
             self._run_step_6()
             return
+        
+        # Step 7 has a special dialog
+        if step_num == 7:
+            self._run_step_7()
+            return
             
         self.output_text.append(f"\n--- Running Step {step_num}: {STEP_NAMES[step_num]} ---\n")
         
@@ -429,6 +434,30 @@ class StepWidget(QWidget):
             # Dialog was cancelled or conversion failed
             self.output_text.append("❌ Step 6 cancelled or failed\n")
     
+    def _run_step_7(self):
+        """Run Step 7: JPEG Resizing (special dialog)."""
+        from gui.dialogs.step7_dialog import Step7Dialog
+        
+        self.output_text.append(f"\n--- Running Step 7: {STEP_NAMES[7]} ---\n")
+        
+        # Open the Step 7 dialog
+        dialog = Step7Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (resize succeeded)
+            self.output_text.append("✅ JPEG resizing completed\n")
+            self.output_text.append("✅ Step 7 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(7, True)
+        else:
+            # Dialog was cancelled or resize failed
+            self.output_text.append("❌ Step 7 cancelled or failed\n")
+    
     def _review_step(self, step_num: int):
         """Show review information for a step."""
         if not self.framework:
@@ -442,6 +471,11 @@ class StepWidget(QWidget):
         # Special handling for Step 6 - Open JPEG directory
         if step_num == 6:
             self._review_step_6_open_directory()
+            return
+        
+        # Special handling for Step 7 - Open resized JPEG directory
+        if step_num == 7:
+            self._review_step_7_open_directory()
             return
         
         # Get step configuration
@@ -615,6 +649,51 @@ class StepWidget(QWidget):
                 "Directory Opened",
                 f"JPEG output directory has been opened in File Explorer.\n\n"
                 f"Directory: {jpeg_dir}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
+            )
+    
+    def _review_step_7_open_directory(self):
+        """Open resized JPEG output directory to review resized files."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the resized JPEG output directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        resized_jpeg_dir = Path(data_directory) / 'output' / 'jpeg_resized'
+        
+        # Check if directory exists
+        if not resized_jpeg_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"Resized JPEG output directory not found:\n\n{resized_jpeg_dir}\n\n"
+                "Have you run Step 7 yet?"
+            )
+            return
+        
+        # Open directory in File Explorer
+        try:
+            subprocess.run(['explorer', str(resized_jpeg_dir)], check=True)
+            self.output_text.append(f"✓ Opened resized JPEG directory: {resized_jpeg_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "Directory Opened",
+                f"Resized JPEG output directory has been opened in File Explorer.\n\n"
+                f"Directory: {resized_jpeg_dir}"
             )
         except Exception as e:
             QMessageBox.critical(
