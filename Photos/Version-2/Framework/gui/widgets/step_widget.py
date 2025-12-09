@@ -521,6 +521,11 @@ class StepWidget(QWidget):
         if not self.framework:
             return
         
+        # Special handling for Step 2 - Open CSV directory
+        if step_num == 2:
+            self._review_step_2_open_directory()
+            return
+        
         # Special handling for Step 4 - Open TIFF directory
         if step_num == 4:
             self._review_step_4_open_directory()
@@ -592,6 +597,52 @@ class StepWidget(QWidget):
         msg_box.setText(review_text)
         msg_box.setIcon(QMessageBox.Icon.Information)
         msg_box.exec()
+    
+    def _review_step_2_open_directory(self):
+        """Open CSV directory to review export.csv file."""
+        import subprocess
+        from pathlib import Path
+        
+        # Get the CSV output directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        csv_dir = Path(data_directory) / 'output' / 'csv'
+        
+        # Check if directory exists
+        if not csv_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"CSV output directory not found:\n\n{csv_dir}\n\n"
+                "Have you run Step 2 yet?"
+            )
+            return
+        
+        # Open directory in File Explorer
+        try:
+            subprocess.run(['explorer', str(csv_dir)], check=True)
+            self.output_text.append(f"✓ Opened CSV directory: {csv_dir}\n")
+            
+            QMessageBox.information(
+                self,
+                "Directory Opened",
+                f"CSV output directory has been opened in File Explorer.\n\n"
+                f"Directory: {csv_dir}\n\n"
+                f"You can now open export.csv to review the converted data."
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
+            )
     
     def _review_step_4_open_directory(self):
         """Open TIFF input directory to review converted files."""
