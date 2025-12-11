@@ -95,13 +95,24 @@ class Step3Dialog(QDialog):
         
         self.setWindowTitle("Step 3: Unicode Filtering")
         self.setMinimumWidth(900)
-        self.setMinimumHeight(700)
+        self.setMinimumHeight(600)
+        self.resize(900, 650)  # Default size
         
         self._init_ui()
         
     def _init_ui(self):
         """Initialize the user interface."""
-        layout = QVBoxLayout(self)
+        from PyQt6.QtWidgets import QScrollArea
+        
+        # Create scroll area for the entire dialog content
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        
+        # Container widget for scroll area
+        container = QWidget()
+        layout = QVBoxLayout(container)
         
         # Title and description
         title_label = QLabel("<h2>Step 3: Unicode Filtering</h2>")
@@ -127,7 +138,7 @@ class Step3Dialog(QDialog):
         
         self.status_text = QTextEdit()
         self.status_text.setReadOnly(True)
-        self.status_text.setMaximumHeight(150)
+        self.status_text.setMaximumHeight(120)
         layout.addWidget(self.status_text)
         
         layout.addSpacing(10)
@@ -164,14 +175,22 @@ class Step3Dialog(QDialog):
         self.issues_table.setHorizontalHeaderLabels(['Field', 'Original Text', 'Suggested Fix', 'Action'])
         self.issues_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.issues_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
-        self.issues_table.setMinimumHeight(200)
+        self.issues_table.setMinimumHeight(150)
+        self.issues_table.setMaximumHeight(250)
         review_layout.addWidget(self.issues_table)
         
         layout.addWidget(self.review_group)
         
-        layout.addSpacing(20)
+        layout.addSpacing(10)
         
-        # Buttons
+        # Set the container in the scroll area
+        scroll.setWidget(container)
+        
+        # Main layout for dialog
+        main_layout = QVBoxLayout(self)
+        main_layout.addWidget(scroll)
+        
+        # Buttons (outside scroll area, always visible)
         button_layout = QHBoxLayout()
         
         self.scan_btn = QPushButton("Scan for Mojibake")
@@ -195,7 +214,7 @@ class Step3Dialog(QDialog):
         
         button_layout.addStretch()
         
-        layout.addLayout(button_layout)
+        main_layout.addLayout(button_layout)
         
         self.status_text.append("Ready to scan export.csv for mojibake.")
         
