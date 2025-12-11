@@ -283,6 +283,11 @@ class StepWidget(QWidget):
             self._run_step_2()
             return
         
+        # Step 3 has a special dialog
+        if step_num == 3:
+            self._run_step_3()
+            return
+        
         # Step 4 has a special dialog
         if step_num == 4:
             self._run_step_4()
@@ -395,6 +400,30 @@ class StepWidget(QWidget):
         else:
             # Dialog was cancelled or conversion failed
             self.output_text.append("❌ Step 2 cancelled or failed\n")
+    
+    def _run_step_3(self):
+        """Run Step 3: Unicode Filtering (special dialog)."""
+        from gui.dialogs.step3_dialog import Step3Dialog
+        
+        self.output_text.append(f"\n--- Running Step 3: {STEP_NAMES[3]} ---\n")
+        
+        # Open the Step 3 dialog
+        dialog = Step3Dialog(self.framework.config_manager, self)
+        
+        if dialog.exec():
+            # Dialog was accepted (mojibake fixes applied or skipped)
+            self.output_text.append("✅ Unicode filtering completed\n")
+            self.output_text.append("✅ Step 3 marked as complete\n")
+            
+            # Update status and progress
+            self._update_step_statuses()
+            self._update_batch_progress()
+            
+            # Emit signal
+            self.step_executed.emit(3, True)
+        else:
+            # Dialog was cancelled
+            self.output_text.append("❌ Step 3 cancelled by user\n")
     
     def _run_step_4(self):
         """Run Step 4: TIFF Bit Depth Conversion (special dialog)."""
