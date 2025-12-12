@@ -52,7 +52,7 @@ class StepWidget(QWidget):
         batch_header_layout.addStretch()
         
         # Version and date/time stamp (right-aligned, 10pt font)
-        version_label = QLabel("<span style='font-size: 10pt;'>v0.0.5 | 2025-12-08 15:05</span>")
+        version_label = QLabel("<span style='font-size: 10pt;'>v0.0.6 | 2025-12-12 11:30</span>")
         version_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
         batch_header_layout.addWidget(version_label)
         
@@ -656,7 +656,7 @@ class StepWidget(QWidget):
         
         # Open directory in File Explorer
         try:
-            subprocess.run(['explorer', str(csv_dir)], check=True)
+            subprocess.run(['explorer', str(csv_dir)], check=True, shell=True)
             self.output_text.append(f"✓ Opened CSV directory: {csv_dir}\n")
             
             QMessageBox.information(
@@ -702,7 +702,7 @@ class StepWidget(QWidget):
         
         # Open directory in File Explorer
         try:
-            subprocess.run(['explorer', str(tiff_dir)], check=True)
+            subprocess.run(['explorer', str(tiff_dir)], check=True, shell=True)
             self.output_text.append(f"✓ Opened TIFF directory: {tiff_dir}\n")
             
             QMessageBox.information(
@@ -775,7 +775,7 @@ class StepWidget(QWidget):
             if reply == QMessageBox.StandardButton.Yes:
                 # Open directory in File Explorer
                 try:
-                    subprocess.run(['explorer', str(tiff_processed_dir)], check=True)
+                    subprocess.run(['explorer', str(tiff_processed_dir)], check=True, shell=True)
                     self.output_text.append(f"✓ Opened directory: {tiff_processed_dir}\n")
                 except Exception as e:
                     QMessageBox.critical(
@@ -834,7 +834,7 @@ class StepWidget(QWidget):
         
         # Open directory in File Explorer
         try:
-            subprocess.run(['explorer', str(jpeg_dir)], check=True)
+            subprocess.run(['explorer', str(jpeg_dir)], check=True, shell=True)
             self.output_text.append(f"✓ Opened JPEG directory: {jpeg_dir}\n")
             
             QMessageBox.information(
@@ -879,7 +879,7 @@ class StepWidget(QWidget):
         
         # Open directory in File Explorer
         try:
-            subprocess.run(['explorer', str(resized_jpeg_dir)], check=True)
+            subprocess.run(['explorer', str(resized_jpeg_dir)], check=True, shell=True)
             self.output_text.append(f"✓ Opened resized JPEG directory: {resized_jpeg_dir}\n")
             
             QMessageBox.information(
@@ -924,7 +924,7 @@ class StepWidget(QWidget):
         
         # Open directory in File Explorer
         try:
-            subprocess.run(['explorer', str(watermarked_jpeg_dir)], check=True)
+            subprocess.run(['explorer', str(watermarked_jpeg_dir)], check=True, shell=True)
             self.output_text.append(f"✓ Opened watermarked JPEG directory: {watermarked_jpeg_dir}\n")
             
             QMessageBox.information(

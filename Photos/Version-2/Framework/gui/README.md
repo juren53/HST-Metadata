@@ -1,7 +1,7 @@
 # HSTL Photo Framework - GUI Application
 
-**Version:** 0.0.5  
-**Commit Date:** 2025-12-08 15:05
+**Version:** 0.0.6  
+**Commit Date:** 2025-12-12 11:30
 
 PyQt6-based graphical user interface for the HSTL Photo Framework.
 
