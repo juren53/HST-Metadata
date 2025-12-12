@@ -14,6 +14,87 @@ from PyQt6.QtWidgets import (
     QPushButton, QTextEdit, QMessageBox, QProgressBar, QGroupBox
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
+import time
+
+
+class TIFFSearchThread(QThread):
+    """Worker thread for searching missing TIFF files."""
+    
+    progress = pyqtSignal(str)  # Progress messages
+    progress_percent = pyqtSignal(int)  # Progress percentage (0-100)
+    finished = pyqtSignal(dict)  # Found files map: ObjectName -> [paths]
+    error = pyqtSignal(str)  # Error messages
+    
+    def __init__(self, base_dir, missing_names):
+        super().__init__()
+        self.base_dir = base_dir
+        self.missing_names = set(missing_names)
+        self._stop_requested = False
+        
+    def stop(self):
+        self._stop_requested = True
+        
+    def run(self):
+        """Search for missing TIFF files with progress updates."""
+        found = {}
+        try:
+            # First pass: count total directories for progress estimation
+            self.progress.emit("Counting directories...")
+            total_dirs = 0
+            for root, dirs, files in os.walk(self.base_dir):
+                if self._stop_requested:
+                    return
+                total_dirs += 1
+            
+            self.progress.emit(f"Searching {total_dirs} directories...")
+            
+            # Second pass: search with progress
+            dirs_processed = 0
+            start_time = time.time()
+            
+            for root, dirs, files in os.walk(self.base_dir):
+                if self._stop_requested:
+                    self.progress.emit("Search cancelled.")
+                    return
+                
+                dirs_processed += 1
+                
+                # Update progress every 10 directories or on last directory
+                if dirs_processed % 10 == 0 or dirs_processed == total_dirs:
+                    percent = int((dirs_processed / total_dirs) * 100)
+                    self.progress_percent.emit(percent)
+                    
+                    # Estimate time remaining
+                    elapsed = time.time() - start_time
+                    if dirs_processed > 0:
+                        rate = elapsed / dirs_processed
+                        remaining = (total_dirs - dirs_processed) * rate
+                        if remaining > 60:
+                            eta_str = f"{int(remaining / 60)}m {int(remaining % 60)}s"
+                        else:
+                            eta_str = f"{int(remaining)}s"
+                        self.progress.emit(f"Searched {dirs_processed}/{total_dirs} directories - ETA: {eta_str}")
+                    else:
+                        self.progress.emit(f"Searched {dirs_processed}/{total_dirs} directories")
+                
+                # Search for TIFF files in current directory
+                for fname in files:
+                    if self._stop_requested:
+                        return
+                    
+                    if not (fname.lower().endswith('.tif') or fname.lower().endswith('.tiff')):
+                        continue
+                    
+                    stem = Path(fname).stem
+                    if stem in self.missing_names:
+                        found.setdefault(stem, []).append(str(Path(root) / fname))
+            
+            self.progress_percent.emit(100)
+            self.progress.emit("Search complete.")
+            self.finished.emit(found)
+            
+        except Exception as e:
+            self.error.emit(f"Search error: {str(e)}")
 
 
 class MetadataEmbeddingThread(QThread):
@@ -300,6 +381,11 @@ class Step5Dialog(QDialog):
         self.progress_bar.setVisible(False)
         layout.addWidget(self.progress_bar)
         
+        # Search progress label
+        self.search_progress_label = QLabel()
+        self.search_progress_label.setVisible(False)
+        layout.addWidget(self.search_progress_label)
+        
         # Output/Status section
         status_label = QLabel("<b>Status & Output:</b>")
         layout.addWidget(status_label)
@@ -313,6 +399,16 @@ class Step5Dialog(QDialog):
         
         # Buttons
         button_layout = QHBoxLayout()
+        
+        self.report_btn = QPushButton("Generate Comparison Report")
+        self.report_btn.setVisible(False)
+        self.report_btn.clicked.connect(self._generate_comparison_report)
+        button_layout.addWidget(self.report_btn)
+        
+        self.search_btn = QPushButton("Search for Missing TIFFs")
+        self.search_btn.setVisible(False)
+        self.search_btn.clicked.connect(self._search_for_missing)
+        button_layout.addWidget(self.search_btn)
         
         self.embed_btn = QPushButton("Proceed with Embedding")
         self.embed_btn.setDefault(True)
@@ -328,13 +424,236 @@ class Step5Dialog(QDialog):
         
         layout.addLayout(button_layout)
         
+        # Store missing files for search functionality
+        self.missing_tiffs = []
+        self.data_directory = None
+        self.search_thread = None
+        
+        # Store analysis results for reporting
+        self.csv_object_names = []
+        self.tiff_basenames = []
+        
+    def _search_for_missing(self):
+        """Prompt user and search for missing TIFF files."""
+        from PyQt6.QtWidgets import QFileDialog
+        
+        if not self.missing_tiffs:
+            QMessageBox.information(self, "No Missing Files", "No missing TIFF files to search for.")
+            return
+        
+        # Check if search is already running
+        if self.search_thread and self.search_thread.isRunning():
+            QMessageBox.warning(self, "Search In Progress", "A search is already in progress.")
+            return
+        
+        reply = QMessageBox.question(
+            self,
+            "Search for Missing TIFFs",
+            f"Search your filesystem for {len(self.missing_tiffs)} missing TIFF file(s)?\n\n"
+            "You'll be prompted to choose a folder to search (recursively).",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        
+        if reply == QMessageBox.StandardButton.Yes:
+            base_dir = QFileDialog.getExistingDirectory(
+                self,
+                "Select folder to search recursively for missing TIFFs",
+                str(Path(self.data_directory).parent) if self.data_directory else ""
+            )
+            if base_dir:
+                self.output_text.append(f"\n--- Searching for missing TIFFs in: {base_dir} ---")
+                
+                # Disable search button during search
+                self.search_btn.setEnabled(False)
+                self.search_btn.setText("Searching...")
+                
+                # Show progress indicators
+                self.progress_bar.setVisible(True)
+                self.progress_bar.setValue(0)
+                self.search_progress_label.setVisible(True)
+                self.search_progress_label.setText("Initializing search...")
+                
+                # Start search thread
+                self.search_thread = TIFFSearchThread(base_dir, self.missing_tiffs)
+                self.search_thread.progress.connect(self._on_search_progress)
+                self.search_thread.progress_percent.connect(self._on_search_progress_percent)
+                self.search_thread.finished.connect(self._on_search_finished)
+                self.search_thread.error.connect(self._on_search_error)
+                self.search_thread.start()
+    
+    def _on_search_progress(self, message):
+        """Handle search progress messages."""
+        self.search_progress_label.setText(message)
+    
+    def _on_search_progress_percent(self, percent):
+        """Handle search progress percentage."""
+        self.progress_bar.setValue(percent)
+    
+    def _on_search_finished(self, found_map):
+        """Handle search completion."""
+        # Hide progress indicators
+        self.progress_bar.setVisible(False)
+        self.search_progress_label.setVisible(False)
+        
+        # Re-enable search button
+        self.search_btn.setEnabled(True)
+        self.search_btn.setText("Search for Missing TIFFs")
+        
+        # Display results
+        total_found = sum(len(v) for v in found_map.values())
+        self.output_text.append(f"Search complete.")
+        self.output_text.append(f"Found {total_found} matching file(s) for {len(found_map)} of {len(self.missing_tiffs)} missing object(s).")
+        
+        # List first few results per object
+        if found_map:
+            self.output_text.append("\nMatching files found:")
+            for oname, paths in list(found_map.items())[:10]:
+                self.output_text.append(f"  {oname}:")
+                for p in paths[:2]:
+                    self.output_text.append(f"    - {p}")
+                if len(paths) > 2:
+                    self.output_text.append(f"    ... and {len(paths) - 2} more location(s)")
+            if len(found_map) > 10:
+                self.output_text.append(f"  ... and {len(found_map) - 10} more object(s)")
+        else:
+            self.output_text.append("No matching TIFFs were found in the selected folder.")
+    
+    def _on_search_error(self, error_msg):
+        """Handle search errors."""
+        # Hide progress indicators
+        self.progress_bar.setVisible(False)
+        self.search_progress_label.setVisible(False)
+        
+        # Re-enable search button
+        self.search_btn.setEnabled(True)
+        self.search_btn.setText("Search for Missing TIFFs")
+        
+        self.output_text.append(f"⚠️  {error_msg}")
+        QMessageBox.warning(self, "Search Error", error_msg)
+    
+    def _generate_comparison_report(self):
+        """Generate a comparison report of CSV records vs TIFF files."""
+        try:
+            if not self.csv_object_names and not self.tiff_basenames:
+                QMessageBox.warning(self, "No Data", "No analysis data available. Please run the analysis first.")
+                return
+            
+            # Get report directory
+            data_directory = self.config_manager.get('project.data_directory', '')
+            report_dir = Path(data_directory) / 'reports'
+            report_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Generate report filename with timestamp
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            report_path = report_dir / f"step5_comparison_report_{timestamp}.txt"
+            
+            # Prepare report content
+            csv_only = sorted(set(self.csv_object_names) - set(self.tiff_basenames))
+            tiff_only = sorted(set(self.tiff_basenames) - set(self.csv_object_names))
+            tiff_set = set(self.tiff_basenames)
+            
+            # Calculate column widths
+            max_csv_len = max(len(name) for name in self.csv_object_names) if self.csv_object_names else 20
+            col_width = max(max_csv_len, 30) + 2
+            
+            # Build report
+            lines = []
+            lines.append("="*100)
+            lines.append("STEP 5 - CSV RECORDS vs TIFF FILES COMPARISON REPORT")
+            lines.append("="*100)
+            lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            lines.append(f"Batch: {Path(data_directory).name}")
+            lines.append("")
+            lines.append(f"Total CSV Records: {len(self.csv_object_names)}")
+            lines.append(f"Total TIFF Files:  {len(self.tiff_basenames)}")
+            lines.append(f"Matched:           {len(set(self.csv_object_names) & set(self.tiff_basenames))}")
+            lines.append(f"CSV Only:          {len(csv_only)}")
+            lines.append(f"TIFF Only:         {len(tiff_only)}")
+            lines.append("")
+            lines.append("="*100)
+            lines.append("CSV RECORDS WITH MATCHING STATUS (Sorted by Accession Number)")
+            lines.append("="*100)
+            lines.append(f"{'CSV Record (Accession Number)':<{col_width}} | Status | Matching TIFF")
+            lines.append("-"*100)
+            
+            # List CSV records with their matching status
+            for csv_name in self.csv_object_names:
+                if csv_name in tiff_set:
+                    lines.append(f"{csv_name:<{col_width}} | MATCH  | {csv_name}")
+                else:
+                    lines.append(f"{csv_name:<{col_width}} | MISS   | (no matching TIFF found)")
+            
+            # Extra TIFF files section
+            if tiff_only:
+                lines.append("")
+                lines.append("="*100)
+                lines.append(f"TIFF FILES WITHOUT MATCHING CSV RECORDS ({len(tiff_only)} items)")
+                lines.append("="*100)
+                for name in tiff_only:
+                    lines.append(f"  - {name}")
+            
+            lines.append("")
+            lines.append("="*100)
+            lines.append("LEGEND")
+            lines.append("="*100)
+            lines.append("MATCH - CSV record has a corresponding TIFF file")
+            lines.append("MISS  - CSV record does NOT have a corresponding TIFF file")
+            lines.append("")
+            lines.append("="*100)
+            lines.append("END OF REPORT")
+            lines.append("="*100)
+            
+            # Write report to file
+            report_content = "\n".join(lines)
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write(report_content)
+            
+            self.output_text.append(f"\n✓ Comparison report generated: {report_path.name}")
+            
+            # Show report in dialog
+            self._show_report_dialog(report_content, str(report_path))
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Report Error", f"Failed to generate report:\n\n{str(e)}")
+            self.output_text.append(f"⚠️  Report generation failed: {str(e)}")
+    
+    def _show_report_dialog(self, report_content, report_path):
+        """Display report in a dialog window."""
+        dialog = QDialog(self)
+        dialog.setWindowTitle("CSV vs TIFF Comparison Report")
+        dialog.setMinimumSize(1100, 650)
+        
+        layout = QVBoxLayout(dialog)
+        
+        # Info label
+        info_label = QLabel(f"<b>Report saved to:</b> {report_path}")
+        info_label.setWordWrap(True)
+        layout.addWidget(info_label)
+        
+        # Report text
+        text_edit = QTextEdit()
+        text_edit.setReadOnly(True)
+        text_edit.setPlainText(report_content)
+        text_edit.setFontFamily("Courier New")  # Monospace font for alignment
+        layout.addWidget(text_edit)
+        
+        # Close button
+        close_btn = QPushButton("Close")
+        close_btn.clicked.connect(dialog.accept)
+        layout.addWidget(close_btn)
+        
+        dialog.exec()
+        
+        
     def _analyze_files(self):
         """Analyze CSV and TIFF files before processing."""
         try:
-            data_directory = self.config_manager.get('project.data_directory', '')
-            if not data_directory:
+            self.data_directory = self.config_manager.get('project.data_directory', '')
+            if not self.data_directory:
                 self.output_text.append("⚠️  Error: Project data directory not set")
                 return
+            
+            data_directory = self.data_directory
             
             # CSV file path
             csv_dir = Path(data_directory) / 'output' / 'csv'
@@ -361,6 +680,9 @@ class Step5Dialog(QDialog):
                     if 'ObjectName' in row and row['ObjectName']:
                         csv_object_names.append(row['ObjectName'])
             
+            # Store for reporting
+            self.csv_object_names = sorted(csv_object_names)
+            
             csv_count = len(csv_object_names)
             self.csv_count_label.setText(f"CSV records: {csv_count}")
             
@@ -368,6 +690,9 @@ class Step5Dialog(QDialog):
             tiff_files = glob.glob(str(tiff_dir / '*.tif')) + glob.glob(str(tiff_dir / '*.tiff'))
             tiff_count = len(tiff_files)
             tiff_basenames = [Path(f).stem for f in tiff_files]  # Get filename without extension
+            
+            # Store for reporting
+            self.tiff_basenames = sorted(tiff_basenames)
             
             self.tiff_count_label.setText(f"TIFF files: {tiff_count}")
             
@@ -413,9 +738,18 @@ class Step5Dialog(QDialog):
                     self.output_text.append(f"  - {name}")
                 if missing_count > 10:
                     self.output_text.append(f"  ... and {missing_count - 10} more")
+                
+                # Store missing files and show search button
+                self.missing_tiffs = missing_tiffs
+                self.search_btn.setVisible(True)
+            else:
+                self.missing_tiffs = []
+                self.search_btn.setVisible(False)
             
             self.output_text.append("\nReady to proceed with metadata embedding.")
             
+            # Show report button after analysis
+            self.report_btn.setVisible(True)
             self.embed_btn.setEnabled(True)
             
         except Exception as e:

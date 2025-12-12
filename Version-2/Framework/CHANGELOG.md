@@ -5,6 +5,45 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.6] - 2025-12-12 11:30
+
+### Added
+- **Step 5 Missing TIFF Search** - Added search functionality for missing TIFF files
+  - Search button appears when missing files are detected
+  - Recursive filesystem search with progress feedback
+  - Real-time progress bar and ETA estimation
+  - Two-pass directory counting for accurate progress
+  - Results display showing found file locations
+  - User selects search directory via folder picker
+
+- **Step 5 Comparison Report** - Generate detailed CSV vs TIFF comparison reports
+  - Generate Comparison Report button in Step 5 dialog
+  - Side-by-side listing of CSV records with matching status
+  - MATCH/MISS indicators for each record
+  - Shows matching TIFF filename next to each CSV record
+  - Lists TIFF files without matching CSV records
+  - Timestamped reports saved to batch reports directory
+  - Report displayed in popup dialog with monospace font
+  - Sorted alphabetically by accession number
+
+- **Step 5 Enhanced File Analysis** - Improved file matching display
+  - Shows count of matched files (CSV records with TIFF files)
+  - Shows count of missing files (CSV records without TIFF files)
+  - Lists first 10 missing filenames in output
+  - Color-coded status labels (green/orange) for visual feedback
+
+### Fixed
+- **Review Button Windows Integration** - Fixed explorer command execution
+  - Added shell=True parameter to subprocess.run() calls
+  - Review buttons now properly open directories in Windows File Explorer
+  - Fixed for Steps 2, 4, 5, 6, 7, and 8
+  - Error handling for non-existent directories
+
+### Changed
+- **Step 5 Dialog Layout** - Added report button between search and embed buttons
+- **Search Progress UI** - Two-phase search with directory counting and ETA display
+- **Report Format** - 100-character width for better column alignment
+
 ## [0.0.5] - 2025-12-08 15:05
 
 ### Added
