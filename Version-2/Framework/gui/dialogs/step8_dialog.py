@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel,
-    QPushButton, QTextEdit, QMessageBox, QProgressBar, QGroupBox, QSlider
+    QPushButton, QTextEdit, QMessageBox, QProgressBar, QGroupBox, QSlider, QScrollArea, QWidget
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
@@ -276,14 +276,25 @@ class Step8Dialog(QDialog):
         
         self.setWindowTitle("Step 8: Watermark Addition")
         self.setMinimumWidth(800)
-        self.setMinimumHeight(600)
+        self.setMinimumHeight(500)  # Reduced from 600
+        self.resize(810, 585)  # Default size (10% smaller: 900->810, 650->585)
         
         self._init_ui()
         self._analyze_files()
         
     def _init_ui(self):
         """Initialize the user interface."""
-        layout = QVBoxLayout(self)
+        # Main layout for dialog
+        main_layout = QVBoxLayout(self)
+        
+        # Create scroll area for content
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        
+        # Content widget inside scroll area
+        content_widget = QWidget()
+        layout = QVBoxLayout(content_widget)
         
         # Title and description
         title_label = QLabel("<h2>Step 8: Watermark Addition</h2>")
@@ -359,12 +370,14 @@ class Step8Dialog(QDialog):
         
         self.output_text = QTextEdit()
         self.output_text.setReadOnly(True)
-        self.output_text.setMinimumHeight(250)
+        self.output_text.setMinimumHeight(200)  # Reduced from 250
         layout.addWidget(self.output_text)
         
-        layout.addSpacing(20)
+        # Set the content widget to the scroll area
+        scroll.setWidget(content_widget)
+        main_layout.addWidget(scroll)
         
-        # Buttons
+        # Buttons - OUTSIDE scroll area so they're always visible
         button_layout = QHBoxLayout()
         
         self.watermark_btn = QPushButton("Apply Watermarks")
@@ -379,7 +392,7 @@ class Step8Dialog(QDialog):
         
         button_layout.addStretch()
         
-        layout.addLayout(button_layout)
+        main_layout.addLayout(button_layout)
         
     def _on_opacity_changed(self, value):
         """Handle opacity slider change."""

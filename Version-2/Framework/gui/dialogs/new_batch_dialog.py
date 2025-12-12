@@ -6,6 +6,7 @@ from PyQt6.QtWidgets import (
     QLineEdit, QPushButton, QFileDialog, QRadioButton,
     QButtonGroup, QGroupBox, QDialogButtonBox
 )
+from PyQt6.QtCore import QSettings
 
 
 class NewBatchDialog(QDialog):
@@ -14,6 +15,7 @@ class NewBatchDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         
+        self.settings = QSettings("HSTL", "PhotoFramework")
         self.setWindowTitle("Create New Batch")
         self.setMinimumWidth(500)
         
@@ -37,8 +39,9 @@ class NewBatchDialog(QDialog):
         
         self.location_group = QButtonGroup(self)
         
-        # Option 1: Use default
-        self.default_radio = QRadioButton("Use default location (C:\\Data\\HSTL_Batches)")
+        # Option 1: Use default (get from settings)
+        default_location = self.settings.value("defaultBatchLocation", "C:\\Data\\HSTL_Batches")
+        self.default_radio = QRadioButton(f"Use default location ({default_location})")
         self.default_radio.setChecked(True)
         self.location_group.addButton(self.default_radio, 1)
         location_layout.addWidget(self.default_radio)
@@ -124,9 +127,10 @@ class NewBatchDialog(QDialog):
         selected_id = self.location_group.checkedId()
         
         if selected_id == 1:
-            # Default location
+            # Default location (from settings)
+            default_location = self.settings.value("defaultBatchLocation", "C:\\Data\\HSTL_Batches")
             dir_name = project_name.replace(' ', '_')
-            data_dir = str(Path("C:\\Data\\HSTL_Batches") / dir_name)
+            data_dir = str(Path(default_location) / dir_name)
         elif selected_id == 2:
             # Custom base directory
             base_dir = self.base_dir_edit.text().strip()
