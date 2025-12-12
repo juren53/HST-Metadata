@@ -25,6 +25,7 @@ from gui.widgets.config_widget import ConfigWidget
 from gui.widgets.log_widget import LogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.settings_dialog import SettingsDialog
+from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 
 
 class MainWindow(QMainWindow):
@@ -131,6 +132,13 @@ class MainWindow(QMainWindow):
         exit_action.setShortcut("Ctrl+Q")
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
+        
+        # Edit menu
+        edit_menu = menubar.addMenu("&Edit")
+        
+        set_location_action = QAction("Set &Location of Data Files...", self)
+        set_location_action.triggered.connect(self._set_data_location)
+        edit_menu.addAction(set_location_action)
         
         # Batch menu
         batch_menu = menubar.addMenu("&Batch")
@@ -314,6 +322,19 @@ class MainWindow(QMainWindow):
         else:
             QMessageBox.warning(self, "Validation", "Project validation found issues")
             
+    def _set_data_location(self):
+        """Show dialog to set default data files location."""
+        dialog = SetDataLocationDialog(self)
+        if dialog.exec():
+            new_location = dialog.get_location()
+            self.status_bar.showMessage(f"Default batch location set to: {new_location}", 5000)
+            QMessageBox.information(
+                self,
+                "Location Updated",
+                f"Default batch location has been updated to:\n\n{new_location}\n\n"
+                "This will be used for new batches created from the File → New Batch menu."
+            )
+    
     def _show_settings(self):
         """Show settings dialog."""
         dialog = SettingsDialog(self)

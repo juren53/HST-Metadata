@@ -244,22 +244,23 @@ class MetadataEmbeddingThread(QThread):
                         date_str = row.get("DateCreated", "")
                         converted_date = convert_date(date_str) if date_str else "0000-00-00"
                         
-                        # Write metadata tags to the COPY in output dir
+                        # Write all metadata tags in a SINGLE command to preserve bit depth
+                        # Using -overwrite_original_in_place to only update metadata without rewriting image data
                         file_path_str = str(dest_path)
-                        et.execute(b"-Headline=" + row.get("Headline", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Credit=" + row.get("Credit", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-By-line=" + row.get("By-line", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Source=" + row.get("Source", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-DateCreated=" + converted_date.encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        et.execute(b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'), file_path_str.encode('utf-8'))
-                        
-                        # Remove ExifTool backup files created in output directory
-                        for backup_file in glob.glob(str(Path(self.output_dir) / "*_original")):
-                            os.remove(backup_file)
+                        et.execute(
+                            b"-overwrite_original_in_place",
+                            b"-Headline=" + row.get("Headline", "").encode('utf-8'),
+                            b"-Credit=" + row.get("Credit", "").encode('utf-8'),
+                            b"-By-line=" + row.get("By-line", "").encode('utf-8'),
+                            b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'),
+                            b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'),
+                            b"-Source=" + row.get("Source", "").encode('utf-8'),
+                            b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'),
+                            b"-DateCreated=" + converted_date.encode('utf-8'),
+                            b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'),
+                            b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'),
+                            file_path_str.encode('utf-8')
+                        )
                         
                         stats['processed'] += 1
                         
