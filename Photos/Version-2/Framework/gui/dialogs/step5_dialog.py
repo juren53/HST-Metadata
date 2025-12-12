@@ -564,6 +564,8 @@ class Step5Dialog(QDialog):
             lines.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             lines.append(f"Batch: {Path(data_directory).name}")
             lines.append("")
+            lines.append("NOTE: CSV records without Accession Numbers (ObjectName) are excluded.")
+            lines.append("")
             lines.append(f"Total CSV Records: {len(self.csv_object_names)}")
             lines.append(f"Total TIFF Files:  {len(self.tiff_basenames)}")
             lines.append(f"Matched:           {len(set(self.csv_object_names) & set(self.tiff_basenames))}")
@@ -573,15 +575,15 @@ class Step5Dialog(QDialog):
             lines.append("="*100)
             lines.append("CSV RECORDS WITH MATCHING STATUS (Sorted by Accession Number)")
             lines.append("="*100)
-            lines.append(f"{'CSV Record (Accession Number)':<{col_width}} | Status | Matching TIFF")
+            lines.append(f"{'CSV Record (Accession Number)':<{col_width}} | Matching TIFF")
             lines.append("-"*100)
             
             # List CSV records with their matching status
             for csv_name in self.csv_object_names:
                 if csv_name in tiff_set:
-                    lines.append(f"{csv_name:<{col_width}} | MATCH  | {csv_name}")
+                    lines.append(f"{csv_name:<{col_width}} | {csv_name}")
                 else:
-                    lines.append(f"{csv_name:<{col_width}} | MISS   | (no matching TIFF found)")
+                    lines.append(f"{csv_name:<{col_width}} | MISS - (no matching TIFF found)")
             
             # Extra TIFF files section
             if tiff_only:
@@ -596,8 +598,8 @@ class Step5Dialog(QDialog):
             lines.append("="*100)
             lines.append("LEGEND")
             lines.append("="*100)
-            lines.append("MATCH - CSV record has a corresponding TIFF file")
-            lines.append("MISS  - CSV record does NOT have a corresponding TIFF file")
+            lines.append("MISS - CSV record does NOT have a corresponding TIFF file")
+            lines.append("(Records with matching TIFFs show the filename directly)")
             lines.append("")
             lines.append("="*100)
             lines.append("END OF REPORT")
@@ -672,13 +674,23 @@ class Step5Dialog(QDialog):
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
             
-            # Get CSV ObjectNames
+            # Get CSV ObjectNames (filter out empty/whitespace and artifact records)
+            # Artifact patterns to exclude: header names, field references, empty values
+            artifact_patterns = {
+                'ObjectName', 'Accession Number', 'Local Identifier', 
+                'record.localIdentifier', 'Headline', 'Caption-Abstract',
+                'Source', 'By-line', 'By-lineTitle', 'CopyrightNotice',
+                'DateCreated', 'Credit', 'SpecialInstructions'
+            }
+            
             csv_object_names = []
             with open(csv_path, 'r', encoding='utf-8', newline='') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    if 'ObjectName' in row and row['ObjectName']:
-                        csv_object_names.append(row['ObjectName'])
+                    obj_name = row.get('ObjectName', '').strip()
+                    # Skip empty values, whitespace-only, and known artifact patterns
+                    if obj_name and obj_name not in artifact_patterns:
+                        csv_object_names.append(obj_name)
             
             # Store for reporting
             self.csv_object_names = sorted(csv_object_names)
