@@ -8,8 +8,8 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton,
     QLabel, QProgressBar, QTextEdit, QGroupBox, QMessageBox, QSizePolicy
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot
-from PyQt6.QtGui import QColor, QPalette
+from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot, QUrl
+from PyQt6.QtGui import QColor, QPalette, QDesktopServices
 
 
 STEP_NAMES = {
@@ -629,7 +629,6 @@ class StepWidget(QWidget):
     
     def _review_step_2_open_directory(self):
         """Open CSV directory to review export.csv file."""
-        import subprocess
         from pathlib import Path
         
         # Get the CSV output directory
@@ -654,18 +653,17 @@ class StepWidget(QWidget):
             )
             return
         
-        # Open directory in File Explorer
+        # Open directory in File Explorer using QDesktopServices
         try:
-            subprocess.run(['explorer', str(csv_dir)], check=True, shell=True)
-            self.output_text.append(f"✓ Opened CSV directory: {csv_dir}\n")
-            
-            QMessageBox.information(
-                self,
-                "Directory Opened",
-                f"CSV output directory has been opened in File Explorer.\n\n"
-                f"Directory: {csv_dir}\n\n"
-                f"You can now open export.csv to review the converted data."
-            )
+            url = QUrl.fromLocalFile(str(csv_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened CSV directory: {csv_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{csv_dir}"
+                )
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -675,7 +673,6 @@ class StepWidget(QWidget):
     
     def _review_step_4_open_directory(self):
         """Open TIFF input directory to review converted files."""
-        import subprocess
         from pathlib import Path
         
         # Get the TIFF input directory
@@ -700,17 +697,17 @@ class StepWidget(QWidget):
             )
             return
         
-        # Open directory in File Explorer
+        # Open directory in File Explorer using QDesktopServices
         try:
-            subprocess.run(['explorer', str(tiff_dir)], check=True, shell=True)
-            self.output_text.append(f"✓ Opened TIFF directory: {tiff_dir}\n")
-            
-            QMessageBox.information(
-                self,
-                "Directory Opened",
-                f"TIFF input directory has been opened in File Explorer.\n\n"
-                f"Directory: {tiff_dir}"
-            )
+            url = QUrl.fromLocalFile(str(tiff_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened TIFF directory: {tiff_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{tiff_dir}"
+                )
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -773,10 +770,17 @@ class StepWidget(QWidget):
             )
             
             if reply == QMessageBox.StandardButton.Yes:
-                # Open directory in File Explorer
+                # Open directory in File Explorer using QDesktopServices
                 try:
-                    subprocess.run(['explorer', str(tiff_processed_dir)], check=True, shell=True)
-                    self.output_text.append(f"✓ Opened directory: {tiff_processed_dir}\n")
+                    url = QUrl.fromLocalFile(str(tiff_processed_dir))
+                    if QDesktopServices.openUrl(url):
+                        self.output_text.append(f"✓ Opened directory: {tiff_processed_dir}\n")
+                    else:
+                        QMessageBox.warning(
+                            self,
+                            "Failed to Open",
+                            f"Could not open directory:\n\n{tiff_processed_dir}"
+                        )
                 except Exception as e:
                     QMessageBox.critical(
                         self,
@@ -807,7 +811,6 @@ class StepWidget(QWidget):
     
     def _review_step_6_open_directory(self):
         """Open JPEG output directory to review converted files."""
-        import subprocess
         from pathlib import Path
         
         # Get the JPEG output directory
@@ -832,17 +835,17 @@ class StepWidget(QWidget):
             )
             return
         
-        # Open directory in File Explorer
+        # Open directory in File Explorer using QDesktopServices
         try:
-            subprocess.run(['explorer', str(jpeg_dir)], check=True, shell=True)
-            self.output_text.append(f"✓ Opened JPEG directory: {jpeg_dir}\n")
-            
-            QMessageBox.information(
-                self,
-                "Directory Opened",
-                f"JPEG output directory has been opened in File Explorer.\n\n"
-                f"Directory: {jpeg_dir}"
-            )
+            url = QUrl.fromLocalFile(str(jpeg_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened JPEG directory: {jpeg_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{jpeg_dir}"
+                )
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -852,7 +855,6 @@ class StepWidget(QWidget):
     
     def _review_step_7_open_directory(self):
         """Open resized JPEG output directory to review resized files."""
-        import subprocess
         from pathlib import Path
         
         # Get the resized JPEG output directory
@@ -877,17 +879,17 @@ class StepWidget(QWidget):
             )
             return
         
-        # Open directory in File Explorer
+        # Open directory in File Explorer using QDesktopServices
         try:
-            subprocess.run(['explorer', str(resized_jpeg_dir)], check=True, shell=True)
-            self.output_text.append(f"✓ Opened resized JPEG directory: {resized_jpeg_dir}\n")
-            
-            QMessageBox.information(
-                self,
-                "Directory Opened",
-                f"Resized JPEG output directory has been opened in File Explorer.\n\n"
-                f"Directory: {resized_jpeg_dir}"
-            )
+            url = QUrl.fromLocalFile(str(resized_jpeg_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened resized JPEG directory: {resized_jpeg_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{resized_jpeg_dir}"
+                )
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -897,7 +899,6 @@ class StepWidget(QWidget):
     
     def _review_step_8_open_directory(self):
         """Open watermarked JPEG output directory to review watermarked files."""
-        import subprocess
         from pathlib import Path
         
         # Get the watermarked JPEG output directory
@@ -922,17 +923,17 @@ class StepWidget(QWidget):
             )
             return
         
-        # Open directory in File Explorer
+        # Open directory in File Explorer using QDesktopServices
         try:
-            subprocess.run(['explorer', str(watermarked_jpeg_dir)], check=True, shell=True)
-            self.output_text.append(f"✓ Opened watermarked JPEG directory: {watermarked_jpeg_dir}\n")
-            
-            QMessageBox.information(
-                self,
-                "Directory Opened",
-                f"Watermarked JPEG output directory has been opened in File Explorer.\n\n"
-                f"Directory: {watermarked_jpeg_dir}"
-            )
+            url = QUrl.fromLocalFile(str(watermarked_jpeg_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened watermarked JPEG directory: {watermarked_jpeg_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{watermarked_jpeg_dir}"
+                )
         except Exception as e:
             QMessageBox.critical(
                 self,
