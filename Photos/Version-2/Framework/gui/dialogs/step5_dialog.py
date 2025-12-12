@@ -281,10 +281,14 @@ class Step5Dialog(QDialog):
         
         self.csv_count_label = QLabel("CSV records: Analyzing...")
         self.tiff_count_label = QLabel("TIFF files: Analyzing...")
-        self.comparison_label = QLabel("Comparison: Analyzing...")
+        self.matched_label = QLabel("Matched: Analyzing...")
+        self.missing_tiff_label = QLabel("Missing TIFF files: Analyzing...")
+        self.comparison_label = QLabel("Status: Analyzing...")
         
         analysis_layout.addWidget(self.csv_count_label)
         analysis_layout.addWidget(self.tiff_count_label)
+        analysis_layout.addWidget(self.matched_label)
+        analysis_layout.addWidget(self.missing_tiff_label)
         analysis_layout.addWidget(self.comparison_label)
         
         layout.addWidget(analysis_group)
@@ -349,33 +353,67 @@ class Step5Dialog(QDialog):
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
             
-            # Count CSV records
-            with open(csv_path, 'r', encoding='utf-8') as f:
-                reader = csv.reader(f)
-                csv_count = sum(1 for row in reader) - 1  # Exclude header
+            # Get CSV ObjectNames
+            csv_object_names = []
+            with open(csv_path, 'r', encoding='utf-8', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if 'ObjectName' in row and row['ObjectName']:
+                        csv_object_names.append(row['ObjectName'])
             
+            csv_count = len(csv_object_names)
             self.csv_count_label.setText(f"CSV records: {csv_count}")
             
-            # Count TIFF files
+            # Get TIFF filenames (without extensions)
             tiff_files = glob.glob(str(tiff_dir / '*.tif')) + glob.glob(str(tiff_dir / '*.tiff'))
             tiff_count = len(tiff_files)
+            tiff_basenames = [Path(f).stem for f in tiff_files]  # Get filename without extension
             
             self.tiff_count_label.setText(f"TIFF files: {tiff_count}")
             
-            # Comparison
-            if csv_count == tiff_count:
-                self.comparison_label.setText(f"✓ Match: {csv_count} records = {tiff_count} files")
-                self.comparison_label.setStyleSheet("color: green;")
-            elif tiff_count > csv_count:
-                self.comparison_label.setText(f"⚠️  More TIFF files ({tiff_count}) than CSV records ({csv_count})")
-                self.comparison_label.setStyleSheet("color: orange;")
+            # Find matches and missing
+            matched = [name for name in csv_object_names if name in tiff_basenames]
+            missing_tiffs = [name for name in csv_object_names if name not in tiff_basenames]
+            
+            matched_count = len(matched)
+            missing_count = len(missing_tiffs)
+            
+            # Display matched info
+            self.matched_label.setText(f"Matched: {matched_count} TIFF files match CSV records")
+            self.matched_label.setStyleSheet("color: green;" if matched_count > 0 else "")
+            
+            # Display missing info
+            if missing_count == 0:
+                self.missing_tiff_label.setText("✓ All CSV records have matching TIFF files")
+                self.missing_tiff_label.setStyleSheet("color: green;")
             else:
-                self.comparison_label.setText(f"⚠️  Fewer TIFF files ({tiff_count}) than CSV records ({csv_count})")
+                self.missing_tiff_label.setText(f"⚠️  Missing TIFF files: {missing_count} CSV records have no matching TIFF")
+                self.missing_tiff_label.setStyleSheet("color: orange;")
+            
+            # Overall status
+            if csv_count == tiff_count == matched_count:
+                self.comparison_label.setText(f"✓ Perfect match: All {csv_count} records have corresponding TIFF files")
+                self.comparison_label.setStyleSheet("color: green;")
+            elif matched_count == csv_count:
+                self.comparison_label.setText(f"✓ All CSV records matched, but {tiff_count - matched_count} extra TIFF file(s) found")
+                self.comparison_label.setStyleSheet("color: #006400;")  # Dark green
+            else:
+                self.comparison_label.setText(f"⚠️  {matched_count} matched, {missing_count} CSV records missing TIFF files")
                 self.comparison_label.setStyleSheet("color: orange;")
             
             self.output_text.append("File analysis complete.")
-            self.output_text.append(f"CSV: {csv_count} records")
-            self.output_text.append(f"TIFF: {tiff_count} files")
+            self.output_text.append(f"CSV records: {csv_count}")
+            self.output_text.append(f"TIFF files: {tiff_count}")
+            self.output_text.append(f"Matched: {matched_count}")
+            self.output_text.append(f"Missing TIFF files: {missing_count}")
+            
+            if missing_count > 0:
+                self.output_text.append(f"\nCSV records without TIFF files:")
+                for name in missing_tiffs[:10]:  # Show first 10
+                    self.output_text.append(f"  - {name}")
+                if missing_count > 10:
+                    self.output_text.append(f"  ... and {missing_count - 10} more")
+            
             self.output_text.append("\nReady to proceed with metadata embedding.")
             
             self.embed_btn.setEnabled(True)
