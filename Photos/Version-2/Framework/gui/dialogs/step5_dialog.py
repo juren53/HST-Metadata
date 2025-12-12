@@ -636,7 +636,14 @@ class Step5Dialog(QDialog):
         text_edit = QTextEdit()
         text_edit.setReadOnly(True)
         text_edit.setPlainText(report_content)
-        text_edit.setFontFamily("Courier New")  # Monospace font for alignment
+        
+        # Set monospace font for proper column alignment
+        from PyQt6.QtGui import QFont
+        font = QFont("Courier New", 10)
+        font.setStyleHint(QFont.StyleHint.Monospace)
+        font.setFixedPitch(True)
+        text_edit.setFont(font)
+        
         layout.addWidget(text_edit)
         
         # Close button

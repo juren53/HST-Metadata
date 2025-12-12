@@ -114,17 +114,12 @@ class WatermarkThread(QThread):
                                 if img.mode != 'RGBA':
                                     img = img.convert('RGBA')
                                 
-                                # Resize watermark to fit image if needed
-                                # Scale watermark to 50% of image width, maintaining aspect ratio
+                                # Resize watermark to cover entire image
                                 img_width, img_height = img.size
-                                wm_width, wm_height = watermark.size
                                 
-                                target_width = int(img_width * 0.5)
-                                scale_factor = target_width / wm_width
-                                target_height = int(wm_height * scale_factor)
-                                
+                                # Scale watermark to match image size exactly
                                 watermark_resized = watermark.resize(
-                                    (target_width, target_height),
+                                    (img_width, img_height),
                                     Image.Resampling.LANCZOS
                                 )
                                 
@@ -134,9 +129,9 @@ class WatermarkThread(QThread):
                                 alpha = alpha.point(lambda p: int(p * self.opacity))
                                 watermark_with_opacity.putalpha(alpha)
                                 
-                                # Calculate position (center)
-                                x = (img_width - target_width) // 2
-                                y = (img_height - target_height) // 2
+                                # Position at top-left (covers entire image)
+                                x = 0
+                                y = 0
                                 
                                 # Create a transparent layer for watermark
                                 watermark_layer = Image.new('RGBA', img.size, (0, 0, 0, 0))
