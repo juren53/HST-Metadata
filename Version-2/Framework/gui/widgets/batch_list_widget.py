@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
     QPushButton, QHeaderView, QMenu, QLabel, QProgressBar, QCheckBox
 )
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QSettings
 from PyQt6.QtGui import QColor, QBrush
 
 
@@ -23,8 +23,10 @@ class BatchListWidget(QWidget):
         
         self.registry = registry
         self.show_all = False
+        self.settings = QSettings("HSTL", "PhotoFramework")
         
         self._init_ui()
+        self._load_column_widths()
         
     def _init_ui(self):
         """Initialize the user interface."""
@@ -50,9 +52,9 @@ class BatchListWidget(QWidget):
         
         # Batch table
         self.table = QTableWidget()
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels([
-            "Name", "Status", "Progress", "Completed", "Last Accessed", "Batch ID"
+            "Name", "Status", "Progress", "Completed", "Last Accessed", "Batch ID", "Data Directory"
         ])
         
         # Configure table
@@ -61,20 +63,26 @@ class BatchListWidget(QWidget):
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         
-        # Stretch columns
+        # Configure columns - all interactive (user adjustable)
         header = self.table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)  # Name
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)  # Status
-        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Fixed)  # Progress
-        header.setMinimumSectionSize(150)
-        self.table.setColumnWidth(2, 200)
-        header.setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)  # Completed
-        header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)  # Last Accessed
-        header.setSectionResizeMode(5, QHeaderView.ResizeMode.Stretch)  # Batch ID
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
+        
+        # Set initial column widths
+        self.table.setColumnWidth(0, 200)  # Name
+        self.table.setColumnWidth(1, 100)  # Status
+        self.table.setColumnWidth(2, 200)  # Progress
+        self.table.setColumnWidth(3, 100)  # Completed
+        self.table.setColumnWidth(4, 150)  # Last Accessed
+        self.table.setColumnWidth(5, 200)  # Batch ID
+        self.table.setColumnWidth(6, 300)  # Data Directory
+        
+        # Enable stretch for last column
+        header.setStretchLastSection(True)
         
         # Connect signals
         self.table.doubleClicked.connect(self._on_double_click)
         self.table.customContextMenuRequested.connect(self._show_context_menu)
+        header.sectionResized.connect(self._on_column_resized)
         
         layout.addWidget(self.table)
         
@@ -157,6 +165,11 @@ class BatchListWidget(QWidget):
         id_item = QTableWidgetItem(batch_id)
         self.table.setItem(row, 5, id_item)
         
+        # Data Directory
+        data_dir = summary.get('data_directory', 'Unknown')
+        data_dir_item = QTableWidgetItem(data_dir)
+        self.table.setItem(row, 6, data_dir_item)
+        
         # Store batch info in first column
         name_item.setData(Qt.ItemDataRole.UserRole, summary)
         
@@ -173,6 +186,17 @@ class BatchListWidget(QWidget):
         """Handle show all checkbox change."""
         self.show_all = (state == Qt.CheckState.Checked.value)
         self.refresh()
+    
+    def _load_column_widths(self):
+        """Load saved column widths from settings."""
+        for col in range(self.table.columnCount()):
+            width = self.settings.value(f"batchList/columnWidth_{col}", None)
+            if width is not None:
+                self.table.setColumnWidth(col, int(width))
+    
+    def _on_column_resized(self, column, old_width, new_width):
+        """Save column width when resized by user."""
+        self.settings.setValue(f"batchList/columnWidth_{column}", new_width)
         
     def _show_context_menu(self, position):
         """Show context menu for batch actions."""
