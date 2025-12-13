@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.8] - 2025-12-13 00:25
 
+### Added
+- **Batch Projects Data Directory Column** - Added data directory path display
+  - New column shows full path to each batch's data directory
+  - Positioned as rightmost column in the table
+  - Helps identify batch locations at a glance
+
+- **Batch Projects Column Width Persistence** - User column adjustments now saved
+  - All columns are user-adjustable by dragging column borders
+  - Column widths saved automatically using QSettings
+  - Preferences restored between sessions
+  - Reasonable default widths set for all columns
+
 ### Changed
 - **Step Labels** - Updated step names for improved clarity
   - Step 1: "Google Worksheet Preparation" → "Google Worksheet Completed"
