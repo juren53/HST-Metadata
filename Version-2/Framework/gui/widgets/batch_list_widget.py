@@ -52,9 +52,9 @@ class BatchListWidget(QWidget):
         
         # Batch table
         self.table = QTableWidget()
-        self.table.setColumnCount(7)
+        self.table.setColumnCount(8)
         self.table.setHorizontalHeaderLabels([
-            "Name", "Status", "Progress", "Completed", "Last Accessed", "Batch ID", "Data Directory"
+            "Name", "Status", "Progress", "Completed", "Date Created", "Last Accessed", "Batch ID", "Data Directory"
         ])
         
         # Configure table
@@ -72,12 +72,22 @@ class BatchListWidget(QWidget):
         self.table.setColumnWidth(1, 100)  # Status
         self.table.setColumnWidth(2, 200)  # Progress
         self.table.setColumnWidth(3, 100)  # Completed
-        self.table.setColumnWidth(4, 150)  # Last Accessed
-        self.table.setColumnWidth(5, 200)  # Batch ID
-        self.table.setColumnWidth(6, 300)  # Data Directory
+        self.table.setColumnWidth(4, 150)  # Date Created
+        self.table.setColumnWidth(5, 150)  # Last Accessed
+        self.table.setColumnWidth(6, 200)  # Batch ID
+        self.table.setColumnWidth(7, 300)  # Data Directory
         
         # Enable stretch for last column
         header.setStretchLastSection(True)
+        
+        # Left-align specific column headers
+        header_item_batch_id = self.table.horizontalHeaderItem(6)
+        if header_item_batch_id:
+            header_item_batch_id.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        
+        header_item_data_dir = self.table.horizontalHeaderItem(7)
+        if header_item_data_dir:
+            header_item_data_dir.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
         
         # Connect signals
         self.table.doubleClicked.connect(self._on_double_click)
@@ -148,7 +158,20 @@ class BatchListWidget(QWidget):
         completed_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         self.table.setItem(row, 3, completed_item)
         
-        # Last accessed
+        # Date Created
+        date_created = summary.get('created', 'Unknown')
+        if date_created != 'Unknown':
+            # Format datetime
+            try:
+                from datetime import datetime
+                dt = datetime.fromisoformat(date_created)
+                date_created = dt.strftime('%Y-%m-%d %H:%M')
+            except:
+                pass
+        created_item = QTableWidgetItem(date_created)
+        self.table.setItem(row, 4, created_item)
+        
+        # Last Accessed
         last_accessed = summary.get('last_accessed', 'Unknown')
         if last_accessed != 'Unknown':
             # Format datetime
@@ -159,16 +182,16 @@ class BatchListWidget(QWidget):
             except:
                 pass
         last_item = QTableWidgetItem(last_accessed)
-        self.table.setItem(row, 4, last_item)
+        self.table.setItem(row, 5, last_item)
         
         # Batch ID
         id_item = QTableWidgetItem(batch_id)
-        self.table.setItem(row, 5, id_item)
+        self.table.setItem(row, 6, id_item)
         
         # Data Directory
         data_dir = summary.get('data_directory', 'Unknown')
         data_dir_item = QTableWidgetItem(data_dir)
-        self.table.setItem(row, 6, data_dir_item)
+        self.table.setItem(row, 7, data_dir_item)
         
         # Store batch info in first column
         name_item.setData(Qt.ItemDataRole.UserRole, summary)

@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.8] - 2025-12-13 00:25
 
 ### Added
+- **Batch Projects Date Created Column** - Added creation date display
+  - New column shows when each batch was created
+  - Formatted as YYYY-MM-DD HH:MM for easy reading
+  - Separate from Last Accessed to show true creation time
+
 - **Batch Projects Data Directory Column** - Added data directory path display
   - New column shows full path to each batch's data directory
   - Positioned as rightmost column in the table
@@ -18,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Column widths saved automatically using QSettings
   - Preferences restored between sessions
   - Reasonable default widths set for all columns
+
+### Fixed
+- **Batch Projects Last Accessed** - Now properly updates when batch is opened
+  - Fixed issue where Last Accessed showed creation date
+  - Added call to update_last_accessed() when batch is selected
+  - Timestamp now accurately reflects most recent access
+  - Batch ID and Data Directory column headers now left-aligned
 
 ### Changed
 - **Step Labels** - Updated step names for improved clarity
