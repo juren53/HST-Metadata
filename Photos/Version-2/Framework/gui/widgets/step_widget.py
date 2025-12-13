@@ -89,8 +89,11 @@ class StepWidget(QWidget):
             
         steps_layout.addLayout(grid_layout)
         
-        # Batch action buttons
+        # Batch action buttons - centered
         action_layout = QHBoxLayout()
+        
+        # Add stretch before buttons to center them
+        action_layout.addStretch()
         
         self.run_all_btn = QPushButton("Run All Steps")
         self.run_all_btn.setEnabled(False)
@@ -107,6 +110,13 @@ class StepWidget(QWidget):
         self.validate_btn.clicked.connect(self._validate_all)
         action_layout.addWidget(self.validate_btn)
         
+        self.reports_btn = QPushButton("Reports")
+        self.reports_btn.setEnabled(False)
+        self.reports_btn.setToolTip("Open reports directory")
+        self.reports_btn.clicked.connect(self._open_reports_directory)
+        action_layout.addWidget(self.reports_btn)
+        
+        # Add stretch after buttons to center them
         action_layout.addStretch()
         
         steps_layout.addLayout(action_layout)
@@ -217,6 +227,7 @@ class StepWidget(QWidget):
         self.run_all_btn.setEnabled(True)
         self.run_next_btn.setEnabled(True)
         self.validate_btn.setEnabled(True)
+        self.reports_btn.setEnabled(True)
         
         # Update step statuses
         self._update_step_statuses()
@@ -1231,3 +1242,50 @@ class StepWidget(QWidget):
         else:
             self.output_text.append("⚠️ Validation found issues\n")
             QMessageBox.warning(self, "Validation", "Validation found some issues. Check the output.")
+    
+    def _open_reports_directory(self):
+        """Open the reports directory for the current batch."""
+        if not self.framework:
+            return
+        
+        from pathlib import Path
+        
+        # Get the reports directory
+        data_directory = self.framework.config_manager.get('project.data_directory', '')
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                "No Data Directory",
+                "Data directory is not configured for this batch."
+            )
+            return
+        
+        reports_dir = Path(data_directory) / 'reports'
+        
+        # Check if directory exists
+        if not reports_dir.exists():
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"Reports directory not found:\n\n{reports_dir}\n\n"
+                "Reports will be created when steps generate them."
+            )
+            return
+        
+        # Open directory in File Explorer using QDesktopServices
+        try:
+            url = QUrl.fromLocalFile(str(reports_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(f"✓ Opened reports directory: {reports_dir}\n")
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{reports_dir}"
+                )
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to open directory:\n\n{str(e)}"
+            )
