@@ -23,7 +23,6 @@ class Step1Dialog(QDialog):
         self.setMinimumWidth(600)
         
         self._init_ui()
-        self._load_existing_url()
         
     def _init_ui(self):
         """Initialize the user interface."""
@@ -78,13 +77,6 @@ class Step1Dialog(QDialog):
         button_box.addButton(cancel_btn, QDialogButtonBox.ButtonRole.RejectRole)
         
         layout.addWidget(button_box)
-        
-    def _load_existing_url(self):
-        """Load existing URL if available."""
-        if self.config_manager:
-            existing_url = self.config_manager.get('step_configurations.step1.worksheet_url', '')
-            if existing_url:
-                self.url_edit.setText(existing_url)
                 
     def _save_and_close(self):
         """Save the URL and mark step as complete."""

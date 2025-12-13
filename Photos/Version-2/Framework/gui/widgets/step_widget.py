@@ -13,14 +13,14 @@ from PyQt6.QtGui import QColor, QPalette, QDesktopServices
 
 
 STEP_NAMES = {
-    1: "Google Worksheet Preparation",
-    2: "CSV Conversion",
-    3: "Unicode Filtering",
-    4: "TIFF Bit Depth Conversion",
-    5: "Metadata Embedding",
+    1: "Google Worksheet Completed",
+    2: "Create export.csv file",
+    3: "Test for Unicode scrabbling",
+    4: "Test/Convert 16 Bit TIFFs",
+    5: "Metadata Embedding of TIFF images",
     6: "JPEG Conversion",
     7: "JPEG Resizing",
-    8: "Watermark Addition"
+    8: "Watermark Restricted JPEGs"
 }
 
 
@@ -980,17 +980,216 @@ class StepWidget(QWidget):
         if not self.framework:
             return
         
-        # Confirm with user
-        reply = QMessageBox.question(
-            self,
-            "Revert Step",
-            f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
-            f"This will mark the step as not completed. Output files will NOT be deleted.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
+        # Special handling for Steps 2, 4, 5, 6, 7, and 8 - offer to delete files
+        if step_num == 2:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE the\n"
+                f"export.csv file in the output/csv directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        elif step_num == 4:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the input/tiff directory.\n\n"
+                f"WARNING: Step 4 overwrites original 16-bit files with 8-bit versions.\n"
+                f"Those original files cannot be recovered.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        elif step_num == 5:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the output/tiff_processed directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        elif step_num == 6:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the output/jpeg directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        elif step_num == 7:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the output/jpeg_resized directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        elif step_num == 8:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the output/jpeg_watermarked directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+        else:
+            # Confirm with user for other steps
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed. Output files will NOT be deleted.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
         
         if reply == QMessageBox.StandardButton.Yes:
             self.output_text.append(f"\n--- Reverting Step {step_num}: {STEP_NAMES[step_num]} ---\n")
+            
+            # Special handling for Steps 2, 4, 5, 6, 7, and 8 - delete files in output directories
+            if step_num == 2:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    csv_file = Path(data_directory) / 'output' / 'csv' / 'export.csv'
+                    
+                    if csv_file.exists():
+                        try:
+                            # Delete the export.csv file
+                            csv_file.unlink()
+                            self.output_text.append(f"✅ Deleted {csv_file}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting file: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete export.csv:\n\n{str(e)}"
+                            )
+            elif step_num == 4:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    tiff_dir = Path(data_directory) / 'input' / 'tiff'
+                    
+                    if tiff_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in tiff_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+                            
+                            self.output_text.append(f"✅ Deleted {file_count} files from {tiff_dir}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting files: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete some files:\n\n{str(e)}"
+                            )
+            elif step_num == 5:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    tiff_processed_dir = Path(data_directory) / 'output' / 'tiff_processed'
+                    
+                    if tiff_processed_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in tiff_processed_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+                            
+                            self.output_text.append(f"✅ Deleted {file_count} files from {tiff_processed_dir}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting files: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete some files:\n\n{str(e)}"
+                            )
+            elif step_num == 6:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    jpeg_dir = Path(data_directory) / 'output' / 'jpeg'
+                    
+                    if jpeg_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in jpeg_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+                            
+                            self.output_text.append(f"✅ Deleted {file_count} files from {jpeg_dir}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting files: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete some files:\n\n{str(e)}"
+                            )
+            elif step_num == 7:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    resized_jpeg_dir = Path(data_directory) / 'output' / 'jpeg_resized'
+                    
+                    if resized_jpeg_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in resized_jpeg_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+                            
+                            self.output_text.append(f"✅ Deleted {file_count} files from {resized_jpeg_dir}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting files: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete some files:\n\n{str(e)}"
+                            )
+            elif step_num == 8:
+                from pathlib import Path
+                
+                data_directory = self.framework.config_manager.get('project.data_directory', '')
+                if data_directory:
+                    watermarked_jpeg_dir = Path(data_directory) / 'output' / 'jpeg_watermarked'
+                    
+                    if watermarked_jpeg_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in watermarked_jpeg_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+                            
+                            self.output_text.append(f"✅ Deleted {file_count} files from {watermarked_jpeg_dir}\n")
+                        except Exception as e:
+                            self.output_text.append(f"⚠️ Error deleting files: {str(e)}\n")
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete some files:\n\n{str(e)}"
+                            )
             
             # Update status to pending
             status_label = self.step_buttons[step_num]['status']
@@ -1007,7 +1206,8 @@ class StepWidget(QWidget):
                 )
             
             self.output_text.append(f"✅ Step {step_num} reverted to Pending\n")
-            self.output_text.append("Note: Output files were not deleted. Re-run the step to regenerate.\n")
+            if step_num not in [2, 4, 5, 6, 7, 8]:
+                self.output_text.append("Note: Output files were not deleted. Re-run the step to regenerate.\n")
             
             # Update statuses and progress
             self._update_step_statuses()

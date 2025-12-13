@@ -5,6 +5,50 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.7] - 2025-12-12 14:55
+
+### Added
+- **Edit Menu** - Added Edit menu with "Set Location of Data Files" option
+  - Allows users to set custom default batch location
+  - Validates and creates directories as needed
+  - Stores preference in QSettings (Windows Registry/AppData)
+  - New batches created in custom location
+  - Falls back to C:\Data\HSTL_Batches if not set
+  - Existing batches remain in original locations
+
+- **Step 5 Artifact Filtering** - CSV records without accession numbers now excluded
+  - Filters out artifact records (header names appearing as data)
+  - Excludes empty, whitespace-only, and known artifact patterns
+  - Affects all Step 5 analysis, reports, and search functionality
+  - Note added to comparison report explaining exclusions
+
+### Fixed
+- **Step 5 Bit Depth Preservation** - Metadata embedding now preserves original bit depth
+  - Changed from multiple ExifTool calls to single batched command
+  - Added `-overwrite_original_in_place` flag
+  - Prevents unwanted conversion from 8-bit to 16-bit
+  - Preserves original compression and image format
+  - Only updates metadata sections, not image data
+
+- **Review Button Directory Opening** - Replaced subprocess with QDesktopServices
+  - Changed from subprocess.run(['explorer'...]) to QDesktopServices.openUrl()
+  - More reliable and cross-platform compatible
+  - Fixed for Steps 2, 4, 5, 6, 7, and 8
+  - No longer shows "Command returned non-zero exit status 1" errors
+
+- **Step 8 Watermark Coverage** - Watermark now covers entire image
+  - Changed from 50% width centered to full image dimensions
+  - Watermark resized to match full image width and height
+  - Position set to (0, 0) for complete coverage
+
+- **Step 8 Dialog Sizing** - Dialog no longer runs off screen
+  - Added QScrollArea for content scrolling
+  - Buttons placed outside scroll area for accessibility
+  - Reduced minimum height from 600px to 500px
+  - Reduced output text minimum height from 250px to 200px
+  - Default window size reduced to 810x585 (10% smaller)
+  - Disabled horizontal scrollbar, enabled vertical scrolling
+
 ## [0.0.6] - 2025-12-12 11:30
 
 ### Added
