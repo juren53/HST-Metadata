@@ -241,6 +241,9 @@ class MainWindow(QMainWindow):
         if self.framework.initialize(config_path):
             self.batch_changed.emit(batch_id, batch_info)
             
+            # Update last accessed timestamp
+            self.registry.update_last_accessed(batch_id)
+            
             # Update widgets
             self.step_widget.set_batch(self.framework, batch_id, batch_info)
             self.config_widget.set_config(self.framework.config_manager)
