@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Formatted as YYYY-MM-DD HH:MM for easy reading
   - Separate from Last Accessed to show true creation time
 
+- **Current Batch Reports Button** - Added quick access to reports directory
+  - New Reports button in Current Batch action button bar
+  - Opens batch reports directory in file manager
+  - Positioned alongside Run All Steps, Run Next Step, and Validate All buttons
+  - All four action buttons now centered at bottom of window
+  - Shows warning if reports directory doesn't exist yet
+  - Provides feedback in output log when directory is opened
+
 ### Fixed
 - **Batch Projects Last Accessed** - Now properly updates when batch is opened
   - Fixed issue where Last Accessed showed creation date
