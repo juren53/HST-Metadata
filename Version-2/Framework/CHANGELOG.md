@@ -5,6 +5,21 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.9] - 2025-12-13 11:20
+
+### Added
+- **Batch Projects Date Created Column** - Added creation date display
+  - New column shows when each batch was created
+  - Formatted as YYYY-MM-DD HH:MM for easy reading
+  - Separate from Last Accessed to show true creation time
+
+### Fixed
+- **Batch Projects Last Accessed** - Now properly updates when batch is opened
+  - Fixed issue where Last Accessed showed creation date
+  - Added call to update_last_accessed() when batch is selected
+  - Timestamp now accurately reflects most recent access
+  - Batch ID and Data Directory column headers now left-aligned
+
 ## [0.0.8] - 2025-12-13 00:25
 
 ### Added
