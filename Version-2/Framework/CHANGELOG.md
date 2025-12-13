@@ -5,6 +5,31 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2025-12-13 00:25
+
+### Changed
+- **Step Labels** - Updated step names for improved clarity
+  - Step 1: "Google Worksheet Preparation" → "Google Worksheet Completed"
+  - Step 2: "CSV Conversion" → "Create export.csv file"
+  - Step 3: "Unicode Filtering" → "Test for Unicode scrabbling"
+  - Step 4: "TIFF Bit Depth Conversion" → "Test/Convert 16 Bit TIFFs"
+  - Step 5: "Metadata Embedding" → "Metadata Embedding of TIFF images"
+  - Step 8: "Watermark Addition" → "Watermark Restricted JPEGs"
+
+- **Revert Button Functionality** - Enhanced to delete working files when reverting steps
+  - Step 2: Deletes export.csv file from output/csv directory
+  - Step 4: Deletes all files from input/tiff directory with warning about overwritten 16-bit files
+  - Step 5: Deletes all files from output/tiff_processed directory
+  - Step 6: Deletes all files from output/jpeg directory
+  - Step 7: Deletes all files from output/jpeg_resized directory
+  - Step 8: Deletes all files from output/jpeg_watermarked directory
+  - Custom confirmation dialogs for each step with clear file deletion warnings
+  - File count feedback after deletion
+
+- **Step 1 Dialog** - URL field now starts blank instead of pre-filled
+  - Removed auto-loading of previously saved URL to prevent confusion
+  - URL still saved to configuration but won't appear on next dialog open
+
 ## [0.0.7] - 2025-12-12 14:55
 
 ### Added
