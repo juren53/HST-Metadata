@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Includes examples of common mojibake transformations
   - Structured with clear sections and visual examples
 
+- **Change Log Menu Item** - Added to Help menu for easy version history access
+  - Opens CHANGELOG.md in default markdown viewer/text editor
+  - Cross-platform support (Windows, macOS, Linux)
+  - Positioned between Quick Start Guide and About
+  - Error handling with fallback path display
+
+- **Single Instance Protection** - Prevents multiple app instances from running
+  - Uses QLockFile to ensure only one instance at a time
+  - Shows critical message box if another instance is already running
+  - Prevents data corruption from concurrent file access
+  - Lock file in system temp directory
+  - Automatic cleanup when application closes
 ### Fixed
 - **CSV Record Viewer Encoding** - Added explicit UTF-8 encoding to prevent mojibake
   - Added `encoding='utf-8'` to all file operations in csv_record_viewer.py
