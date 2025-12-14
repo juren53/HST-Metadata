@@ -24,6 +24,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Prevents mojibake when viewing photo metadata records
   - Eliminates silent encoding switches between Windows (cp1252) and Linux (UTF-8)
 
+### Changed
+- **g2c Module Location** - Moved g2c.py into Framework directory
+  - Copied from ../dev/g2c.py to Framework root
+  - Updated PyInstaller spec to reference local g2c.py
+  - Simplified step2_dialog.py import logic
+  - Removed dependency on external ../dev directory
+  - Framework directory now fully self-contained
+
 ### Build
 - **GUI Executable v0.0.10** - Compiled standalone Windows application
   - PyInstaller 6.17.0 build on Python 3.12.10
