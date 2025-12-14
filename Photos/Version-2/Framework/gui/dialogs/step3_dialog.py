@@ -95,8 +95,8 @@ class Step3Dialog(QDialog):
         
         self.setWindowTitle("Step 3: Unicode Filtering")
         self.setMinimumWidth(900)
-        self.setMinimumHeight(600)
-        self.resize(900, 650)  # Default size
+        self.setMinimumHeight(720)  # Increased by 20% (600 * 1.2 = 720)
+        self.resize(900, 720)  # Default size
         
         self._init_ui()
         
@@ -208,7 +208,7 @@ class Step3Dialog(QDialog):
         self.skip_btn.clicked.connect(self._skip_fixes)
         button_layout.addWidget(self.skip_btn)
         
-        close_btn = QPushButton("Close")
+        close_btn = QPushButton("Cancel")
         close_btn.clicked.connect(self.reject)
         button_layout.addWidget(close_btn)
         
