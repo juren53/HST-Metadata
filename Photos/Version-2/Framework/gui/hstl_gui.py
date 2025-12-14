@@ -13,6 +13,8 @@ Usage:
 """
 
 import sys
+import warnings
+import logging
 from pathlib import Path
 from PyQt6.QtWidgets import QApplication, QMessageBox
 from PyQt6.QtCore import Qt, QLockFile, QDir
@@ -30,6 +32,22 @@ __commit_date__ = "2025-12-14 14:20"
 
 def main():
     """Main entry point for the GUI application."""
+    # Configure Python warnings to be logged instead of printed to console
+    logging.captureWarnings(True)
+    warnings_logger = logging.getLogger('py.warnings')
+    warnings_logger.setLevel(logging.WARNING)
+    
+    # Set up file handler for warnings (append mode)
+    log_dir = Path.home() / '.hstl_photo_framework' / 'logs'
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / 'warnings.log'
+    
+    file_handler = logging.FileHandler(log_file, encoding='utf-8')
+    file_handler.setFormatter(
+        logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    )
+    warnings_logger.addHandler(file_handler)
+    
     # Enable high DPI scaling
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
