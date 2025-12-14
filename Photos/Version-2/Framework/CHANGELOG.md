@@ -5,6 +5,26 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.10] - 2025-12-14 13:37
+
+### Added
+- **UTF-8 Encoding Documentation** - Created comprehensive documentation about mojibake
+  - New document: Encodings_UTF-8_and_Mojibake.md
+  - Explains cross-platform encoding issues between Windows and Linux
+  - Documents the mojibake problem and how it occurs
+  - Describes Python 3.15's UTF-8 everywhere solution
+  - Includes examples of common mojibake transformations
+  - Structured with clear sections and visual examples
+
+### Fixed
+- **CSV Record Viewer Encoding** - Added explicit UTF-8 encoding to prevent mojibake
+  - Added `encoding='utf-8'` to all file operations in csv_record_viewer.py
+  - Fixed JSON config file operations (lines 201, 219)
+  - Fixed CSV file loading operation (line 374)
+  - Ensures consistent cross-platform handling of special characters (é, ñ, ™, etc.)
+  - Prevents mojibake when viewing photo metadata records
+  - Eliminates silent encoding switches between Windows (cp1252) and Linux (UTF-8)
+
 ## [0.0.9] - 2025-12-13 11:20
 
 ### Added
