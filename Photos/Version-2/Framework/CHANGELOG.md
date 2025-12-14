@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - New document: Encodings_UTF-8_and_Mojibake.md
   - Explains cross-platform encoding issues between Windows and Linux
   - Documents the mojibake problem and how it occurs
-  - Describes Python 3.15's UTF-8 everywhere solution
   - Includes examples of common mojibake transformations
   - Structured with clear sections and visual examples
 
@@ -24,6 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Ensures consistent cross-platform handling of special characters (é, ñ, ™, etc.)
   - Prevents mojibake when viewing photo metadata records
   - Eliminates silent encoding switches between Windows (cp1252) and Linux (UTF-8)
+
+### Build
+- **GUI Executable v0.0.10** - Compiled standalone Windows application
+  - PyInstaller 6.17.0 build on Python 3.12.10
+  - Executable size: 24 MB (25,151,324 bytes)
+  - Includes all dependencies (110 supporting files)
+  - Location: `dist/HSTL_Photo_Framework_GUI/`
+  - No Python installation required to run
 
 ## [0.0.9] - 2025-12-13 11:20
 
