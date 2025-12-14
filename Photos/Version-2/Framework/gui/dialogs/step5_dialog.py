@@ -135,12 +135,24 @@ class MetadataEmbeddingThread(QThread):
             # Ensure output directory exists (defensive; UI already creates it)
             Path(self.output_dir).mkdir(parents=True, exist_ok=True)
             
-            # Count CSV records
-            with open(self.csv_path, 'r', encoding='utf-8') as f:
-                reader = csv.reader(f)
-                stats['csv_records'] = sum(1 for row in reader) - 1  # Exclude header
+            # Count CSV records with valid ObjectName (Accession Number)
+            # Filter out rows without ObjectName or with artifact patterns
+            artifact_patterns = {
+                'ObjectName', 'Accession Number', 'Local Identifier', 
+                'record.localIdentifier', 'Headline', 'Caption-Abstract',
+                'Source', 'By-line', 'By-lineTitle', 'CopyrightNotice',
+                'DateCreated', 'Credit', 'SpecialInstructions'
+            }
             
-            self.progress.emit(f"✓ CSV records: {stats['csv_records']}")
+            with open(self.csv_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    obj_name = row.get('ObjectName', '').strip()
+                    # Only count records with valid ObjectName
+                    if obj_name and obj_name not in artifact_patterns:
+                        stats['csv_records'] += 1
+            
+            self.progress.emit(f"✓ CSV records with Accession Numbers: {stats['csv_records']}")
             
             # Count TIFF files (in source dir)
             tiff_files = glob.glob(str(Path(self.tiff_dir) / '*.tif')) + \
@@ -220,7 +232,13 @@ class MetadataEmbeddingThread(QThread):
                 
                 with exiftool.ExifTool() as et:
                     for row in reader:
-                        photo = f"{row['ObjectName']}.tif"
+                        obj_name = row.get('ObjectName', '').strip()
+                        
+                        # Skip rows without valid ObjectName or with artifact patterns
+                        if not obj_name or obj_name in artifact_patterns:
+                            continue
+                        
+                        photo = f"{obj_name}.tif"
                         src_path = Path(self.tiff_dir) / photo
                         
                         if not src_path.exists():
