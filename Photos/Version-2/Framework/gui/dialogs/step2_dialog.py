@@ -100,7 +100,7 @@ class Step2Dialog(QDialog):
         
         self.setWindowTitle("Step 2: CSV Conversion")
         self.setMinimumWidth(700)
-        self.setMinimumHeight(500)
+        self.setMinimumHeight(600)  # Increased by 20% (500 * 1.2 = 600)
         
         self._init_ui()
         
