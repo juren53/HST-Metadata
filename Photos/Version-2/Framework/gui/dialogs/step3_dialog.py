@@ -94,9 +94,9 @@ class Step3Dialog(QDialog):
         self.edits = {}  # Store user edits: {row_num: {field: new_value}}
         
         self.setWindowTitle("Step 3: Unicode Filtering")
-        self.setMinimumWidth(900)
-        self.setMinimumHeight(720)  # Increased by 20% (600 * 1.2 = 720)
-        self.resize(900, 720)  # Default size
+        self.setMinimumWidth(700)
+        self.setMinimumHeight(500)
+        self.resize(900, 600)  # Default size - fits most screens
         
         self._init_ui()
         
