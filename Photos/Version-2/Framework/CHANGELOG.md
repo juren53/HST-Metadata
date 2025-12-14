@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Includes all dependencies (110 supporting files)
   - Location: `dist/HSTL_Photo_Framework_GUI/`
   - No Python installation required to run
+- **Git Tag**: v0.0.10 created and pushed to remote repository
 
 ## [0.0.9] - 2025-12-13 11:20
 
