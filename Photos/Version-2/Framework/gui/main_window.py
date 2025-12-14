@@ -381,8 +381,8 @@ class MainWindow(QMainWindow):
             self,
             "About HSTL Photo Framework",
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.0.9</p>"
-                f"<p><b>Commit Date:</b> 2025-12-13 11:20</p>"
+                f"<p><b>Version:</b> 0.0.10</p>"
+                f"<p><b>Commit Date:</b> 2025-12-14 14:20</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "

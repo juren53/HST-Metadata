@@ -6,7 +6,7 @@ Main entry point for the graphical user interface version of the HSTL Photo Fram
 Provides a comprehensive visual interface for managing photo metadata processing workflows.
 
 Version: 0.0.10
-Commit Date: 2025-12-14 13:37
+Commit Date: 2025-12-14 14:20
 
 Usage:
     python hstl_gui.py
@@ -25,7 +25,7 @@ from gui.main_window import MainWindow
 
 # Version information
 __version__ = "0.0.10"
-__commit_date__ = "2025-12-14 13:37"
+__commit_date__ = "2025-12-14 14:20"
 
 
 def main():
