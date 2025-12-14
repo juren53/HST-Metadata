@@ -36,6 +36,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Prevents mojibake when viewing photo metadata records
   - Eliminates silent encoding switches between Windows (cp1252) and Linux (UTF-8)
 
+- **Step 5 CSV Record Counting** - Fixed to only count records with valid Accession Numbers
+  - Changed counting logic to filter out rows without ObjectName
+  - Uses same artifact_patterns filtering as file analysis
+  - Skips empty, whitespace-only, and header artifact values
+  - Processing loop also skips invalid records during embedding
+  - Prevents false "missing images" counts
+  - Now displays "CSV records with Accession Numbers" in progress
+  - Adheres to rule: records without Accession Numbers are not records
+
+- **Warning Messages** - Captured Python warnings to system log file
+  - Redirects warnings to ~/.hstl_photo_framework/logs/warnings.log
+  - Keeps console output clean
+  - Preserves warnings for debugging
+  - UTF-8 encoding with timestamps
+  - Appends to log file (doesn't overwrite)
+
 ### Changed
 - **g2c Module Location** - Moved g2c.py into Framework directory
   - Copied from ../dev/g2c.py to Framework root
