@@ -182,6 +182,10 @@ class MainWindow(QMainWindow):
         quickstart_action.triggered.connect(self._show_quickstart)
         help_menu.addAction(quickstart_action)
         
+        changelog_action = QAction("&Change Log", self)
+        changelog_action.triggered.connect(self._show_changelog)
+        help_menu.addAction(changelog_action)
+        
         help_menu.addSeparator()
         
         about_action = QAction("&About", self)
@@ -373,6 +377,38 @@ class MainWindow(QMainWindow):
                 self,
                 "File Not Found",
                 f"Quick Start Guide not found at:\n{quickstart_path}"
+            )
+    
+    def _show_changelog(self):
+        """Open the Change Log."""
+        import os
+        import subprocess
+        
+        # Get path to CHANGELOG.md
+        changelog_path = Path(__file__).parent.parent / 'CHANGELOG.md'
+        
+        if changelog_path.exists():
+            # Try to open with default markdown viewer or text editor
+            try:
+                if os.name == 'nt':  # Windows
+                    os.startfile(str(changelog_path))
+                elif os.name == 'posix':  # macOS and Linux
+                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(changelog_path)])
+                
+                self.status_bar.showMessage("Opening Change Log...", 2000)
+            except Exception as e:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Open File",
+                    f"Could not open Change Log.\n\n"
+                    f"Please open manually:\n{changelog_path}\n\n"
+                    f"Error: {str(e)}"
+                )
+        else:
+            QMessageBox.warning(
+                self,
+                "File Not Found",
+                f"Change Log not found at:\n{changelog_path}"
             )
         
     def _show_about(self):
