@@ -70,8 +70,14 @@ class JpegConversionThread(QThread):
                 jpeg_path = Path(self.output_dir) / jpeg_filename
                 
                 try:
+                    # Show progress for current file
+                    self.progress.emit(f"Converting: {tiff_path.name} → {jpeg_filename}")
+                    
                     # Open TIFF image
                     with Image.open(tiff_path) as img:
+                        # Get image dimensions for feedback
+                        dimensions = f"{img.width}x{img.height}"
+                        
                         # Convert to RGB if necessary (JPEG doesn't support transparency)
                         if img.mode in ('RGBA', 'LA', 'P'):
                             # Create white background
@@ -113,10 +119,14 @@ class JpegConversionThread(QThread):
                             str(jpeg_path).encode('utf-8')
                         )
                     
+                    # Get file size for feedback
+                    jpeg_size_kb = jpeg_path.stat().st_size / 1024
+                    
                     stats['converted'] += 1
+                    self.progress.emit(f"  ✓ Saved: {jpeg_filename} ({dimensions}, {jpeg_size_kb:.1f} KB, quality {self.quality}%)")
                     
                     if stats['converted'] % 10 == 0:
-                        self.progress.emit(f"Converted: {stats['converted']}/{stats['tiff_files_found']}")
+                        self.progress.emit(f"\n--- Progress checkpoint: {stats['converted']}/{stats['tiff_files_found']} files completed ---\n")
                     
                 except Exception as e:
                     self.progress.emit(f"⚠️  Failed: {tiff_path.name} - {str(e)}")
