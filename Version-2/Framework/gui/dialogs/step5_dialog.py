@@ -262,6 +262,12 @@ class MetadataEmbeddingThread(QThread):
                         date_str = row.get("DateCreated", "")
                         converted_date = convert_date(date_str) if date_str else "0000-00-00"
                         
+                        # Show progress for current file
+                        headline = row.get("Headline", "")[:50]  # Truncate for display
+                        if len(row.get("Headline", "")) > 50:
+                            headline += "..."
+                        self.progress.emit(f"Processing: {photo} - {headline}")
+                        
                         # Write all metadata tags in a SINGLE command to preserve bit depth
                         # Using -overwrite_original_in_place to only update metadata without rewriting image data
                         file_path_str = str(dest_path)
@@ -281,9 +287,10 @@ class MetadataEmbeddingThread(QThread):
                         )
                         
                         stats['processed'] += 1
+                        self.progress.emit(f"  ✓ Embedded metadata: {photo}")
                         
                         if stats['processed'] % 10 == 0:
-                            self.progress.emit(f"Processed: {stats['processed']}")
+                            self.progress.emit(f"\n--- Progress checkpoint: {stats['processed']} files completed ---\n")
             
             self.progress.emit(f"\n✓ Embedding complete!")
             self.progress.emit(f"✓ Processed (written to output): {stats['processed']} images")
