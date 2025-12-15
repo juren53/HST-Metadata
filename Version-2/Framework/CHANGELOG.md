@@ -26,6 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All steps now show progress checkpoints with file count tracker (e.g., "45/100 files completed")
   - Consistent feedback pattern across all processing steps
 
+### Fixed
+- **Step 5 UTF-8 Mojibake** - Fixed corrupted special characters in TIFF metadata
+  - Root cause: pyexiftool library defaulted to cp1252 encoding on Windows
+  - Special characters were being corrupted (e.g., "Niños" → "NiÃ±os", "Héroes" → "HÃ©roes")
+  - CSV file contained correct UTF-8 text, but encoding mismatch during metadata embedding
+  - Solution: Set ExifTool instance to use UTF-8 encoding with `encoding='utf-8'` parameter
+  - Now properly handles Spanish and other non-ASCII characters in Headline and Caption-Abstract fields
+  - Tested and verified with example: "President Truman Visits Niños Héroes Monument in Mexico"
+
 ## [0.0.10] - 2025-12-14 14:20
 
 ### Added
