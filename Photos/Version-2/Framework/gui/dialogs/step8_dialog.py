@@ -108,6 +108,9 @@ class WatermarkThread(QThread):
                             stats['restricted_found'] += 1
                             stats['restricted_list'].append(jpeg_path.name)
                             
+                            # Show progress for current file
+                            self.progress.emit(f"Processing RESTRICTED: {jpeg_path.name} - applying watermark")
+                            
                             # Apply watermark
                             with Image.open(jpeg_path) as img:
                                 # Convert to RGBA for watermarking
@@ -116,6 +119,7 @@ class WatermarkThread(QThread):
                                 
                                 # Resize watermark to cover entire image
                                 img_width, img_height = img.size
+                                dimensions = f"{img_width}x{img_height}"
                                 
                                 # Scale watermark to match image size exactly
                                 watermark_resized = watermark.resize(
@@ -155,11 +159,19 @@ class WatermarkThread(QThread):
                                 str(output_path).encode('utf-8')
                             )
                             
+                            # Get file size for feedback
+                            output_size_kb = output_path.stat().st_size / 1024
+                            
                             stats['watermarked'] += 1
-                            self.progress.emit(f"  ✓ Watermarked: {jpeg_path.name}")
+                            self.progress.emit(f"  ✓ Watermarked: {jpeg_path.name} ({dimensions}, {output_size_kb:.1f} KB, opacity {self.opacity:.0%})")
                         else:
                             # Not restricted, just copy the file
+                            self.progress.emit(f"Processing UNRESTRICTED: {jpeg_path.name} - copying without watermark")
+                            
                             with Image.open(jpeg_path) as img:
+                                # Get dimensions for feedback
+                                dimensions = f"{img.width}x{img.height}"
+                                
                                 # Extract EXIF data if present
                                 exif_data = None
                                 if 'exif' in img.info:
@@ -185,10 +197,14 @@ class WatermarkThread(QThread):
                                 str(output_path).encode('utf-8')
                             )
                             
+                            # Get file size for feedback
+                            output_size_kb = output_path.stat().st_size / 1024
+                            
                             stats['copied_unrestricted'] += 1
+                            self.progress.emit(f"  ✓ Copied: {jpeg_path.name} ({dimensions}, {output_size_kb:.1f} KB)")
                         
                         if (stats['watermarked'] + stats['copied_unrestricted']) % 10 == 0:
-                            self.progress.emit(f"Processed: {stats['watermarked'] + stats['copied_unrestricted']}/{stats['jpeg_files_found']}")
+                            self.progress.emit(f"\n--- Progress checkpoint: {stats['watermarked'] + stats['copied_unrestricted']}/{stats['jpeg_files_found']} files completed ---\n")
                         
                     except Exception as e:
                         self.progress.emit(f"⚠️  Failed: {jpeg_path.name} - {str(e)}")
