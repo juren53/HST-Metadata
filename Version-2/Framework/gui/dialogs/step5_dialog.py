@@ -279,21 +279,20 @@ class MetadataEmbeddingThread(QThread):
                         try:
                             # Write all metadata tags in a SINGLE command to preserve bit depth
                             # Using -overwrite_original_in_place to only update metadata without rewriting image data
-                            # ExifTool instance created with UTF-8 encoding to prevent mojibake
-                            file_path_str = str(dest_path)
+                            # ExifTool instance uses UTF-8 encoding, so pass strings (not bytes)
                             et.execute(
-                                b"-overwrite_original_in_place",
-                                b"-Headline=" + row.get("Headline", "").encode('utf-8'),
-                                b"-Credit=" + row.get("Credit", "").encode('utf-8'),
-                                b"-By-line=" + row.get("By-line", "").encode('utf-8'),
-                                b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'),
-                                b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'),
-                                b"-Source=" + row.get("Source", "").encode('utf-8'),
-                                b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'),
-                                b"-DateCreated=" + converted_date.encode('utf-8'),
-                                b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'),
-                                b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'),
-                                file_path_str.encode('utf-8')
+                                "-overwrite_original_in_place",
+                                f"-Headline={row.get('Headline', '')}",
+                                f"-Credit={row.get('Credit', '')}",
+                                f"-By-line={row.get('By-line', '')}",
+                                f"-SpecialInstructions={row.get('SpecialInstructions', '')}",
+                                f"-ObjectName={row.get('ObjectName', '')}",
+                                f"-Source={row.get('Source', '')}",
+                                f"-Caption-Abstract={row.get('Caption-Abstract', '')}",
+                                f"-DateCreated={converted_date}",
+                                f"-CopyrightNotice={row.get('CopyrightNotice', '')}",
+                                f"-By-lineTitle={row.get('By-lineTitle', '')}",
+                                str(dest_path)
                             )
                             
                             stats['processed'] += 1
