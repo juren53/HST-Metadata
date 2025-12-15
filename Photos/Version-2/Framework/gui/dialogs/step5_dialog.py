@@ -270,8 +270,11 @@ class MetadataEmbeddingThread(QThread):
                         
                         # Write all metadata tags in a SINGLE command to preserve bit depth
                         # Using -overwrite_original_in_place to only update metadata without rewriting image data
+                        # Using -charset utf8 to ensure proper UTF-8 encoding and prevent mojibake
                         file_path_str = str(dest_path)
                         et.execute(
+                            b"-charset",
+                            b"utf8",
                             b"-overwrite_original_in_place",
                             b"-Headline=" + row.get("Headline", "").encode('utf-8'),
                             b"-Credit=" + row.get("Credit", "").encode('utf-8'),
