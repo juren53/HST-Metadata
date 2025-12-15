@@ -256,8 +256,15 @@ class MetadataEmbeddingThread(QThread):
                         # Destination path in output directory
                         dest_path = Path(self.output_dir) / photo
                         
-                        # Copy source to destination (overwrite if exists) preserving metadata/timestamps
-                        shutil.copy2(src_path, dest_path)
+                        try:
+                            # Copy source to destination (overwrite if exists) preserving metadata/timestamps
+                            shutil.copy2(src_path, dest_path)
+                        except PermissionError as e:
+                            self.progress.emit(f"⚠️  Cannot copy {photo}: File is locked or in use")
+                            self.progress.emit(f"   Please close the file in any image viewer or other application")
+                            stats['missing'] += 1
+                            stats['missing_list'].append(f"{row['ObjectName']} (locked)")
+                            continue
                         
                         # Convert date - DateCreated column has the date
                         date_str = row.get("DateCreated", "")
@@ -269,30 +276,38 @@ class MetadataEmbeddingThread(QThread):
                             headline += "..."
                         self.progress.emit(f"Processing: {photo} - {headline}")
                         
-                        # Write all metadata tags in a SINGLE command to preserve bit depth
-                        # Using -overwrite_original_in_place to only update metadata without rewriting image data
-                        # ExifTool instance created with UTF-8 encoding to prevent mojibake
-                        file_path_str = str(dest_path)
-                        et.execute(
-                            b"-overwrite_original_in_place",
-                            b"-Headline=" + row.get("Headline", "").encode('utf-8'),
-                            b"-Credit=" + row.get("Credit", "").encode('utf-8'),
-                            b"-By-line=" + row.get("By-line", "").encode('utf-8'),
-                            b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'),
-                            b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'),
-                            b"-Source=" + row.get("Source", "").encode('utf-8'),
-                            b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'),
-                            b"-DateCreated=" + converted_date.encode('utf-8'),
-                            b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'),
-                            b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'),
-                            file_path_str.encode('utf-8')
-                        )
-                        
-                        stats['processed'] += 1
-                        self.progress.emit(f"  ✓ Embedded metadata: {photo}")
-                        
-                        if stats['processed'] % 10 == 0:
-                            self.progress.emit(f"\n--- Progress checkpoint: {stats['processed']} files completed ---\n")
+                        try:
+                            # Write all metadata tags in a SINGLE command to preserve bit depth
+                            # Using -overwrite_original_in_place to only update metadata without rewriting image data
+                            # ExifTool instance created with UTF-8 encoding to prevent mojibake
+                            file_path_str = str(dest_path)
+                            et.execute(
+                                b"-overwrite_original_in_place",
+                                b"-Headline=" + row.get("Headline", "").encode('utf-8'),
+                                b"-Credit=" + row.get("Credit", "").encode('utf-8'),
+                                b"-By-line=" + row.get("By-line", "").encode('utf-8'),
+                                b"-SpecialInstructions=" + row.get("SpecialInstructions", "").encode('utf-8'),
+                                b"-ObjectName=" + row.get("ObjectName", "").encode('utf-8'),
+                                b"-Source=" + row.get("Source", "").encode('utf-8'),
+                                b"-Caption-Abstract=" + row.get("Caption-Abstract", "").encode('utf-8'),
+                                b"-DateCreated=" + converted_date.encode('utf-8'),
+                                b"-CopyrightNotice=" + row.get("CopyrightNotice", "").encode('utf-8'),
+                                b"-By-lineTitle=" + row.get("By-lineTitle", "").encode('utf-8'),
+                                file_path_str.encode('utf-8')
+                            )
+                            
+                            stats['processed'] += 1
+                            self.progress.emit(f"  ✓ Embedded metadata: {photo}")
+                            
+                            if stats['processed'] % 10 == 0:
+                                self.progress.emit(f"\n--- Progress checkpoint: {stats['processed']} files completed ---\n")
+                                
+                        except Exception as e:
+                            self.progress.emit(f"⚠️  Failed to embed metadata in {photo}: {str(e)}")
+                            if "WinError 32" in str(e) or "being used by another process" in str(e):
+                                self.progress.emit(f"   File is locked - please close it in any image viewer or application")
+                            stats['missing'] += 1
+                            stats['missing_list'].append(f"{row['ObjectName']} (embed failed)")
             
             self.progress.emit(f"\n✓ Embedding complete!")
             self.progress.emit(f"✓ Processed (written to output): {stats['processed']} images")
