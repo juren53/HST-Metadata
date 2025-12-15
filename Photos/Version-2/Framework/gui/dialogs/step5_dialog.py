@@ -280,8 +280,10 @@ class MetadataEmbeddingThread(QThread):
                             # Write all metadata tags in a SINGLE command to preserve bit depth
                             # Using -overwrite_original_in_place to only update metadata without rewriting image data
                             # ExifTool instance uses UTF-8 encoding, so pass strings (not bytes)
+                            # Set CodedCharacterSet to UTF8 so IPTC tags are stored as UTF-8, not Latin1
                             et.execute(
                                 "-overwrite_original_in_place",
+                                "-IPTC:CodedCharacterSet=UTF8",
                                 f"-Headline={row.get('Headline', '')}",
                                 f"-Credit={row.get('Credit', '')}",
                                 f"-By-line={row.get('By-line', '')}",
