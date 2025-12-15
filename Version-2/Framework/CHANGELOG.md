@@ -5,6 +5,27 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2025-12-14 18:25
+
+### Improved
+- **Real-Time Processing Feedback** - Enhanced user feedback across all processing steps
+  - **Step 5 (Metadata Embedding)**: Added per-file progress messages
+    - Shows file being processed with headline preview
+    - Displays completion checkmark after metadata embedded
+    - Enhanced progress checkpoints every 10 files
+  - **Step 6 (JPEG Conversion)**: Added detailed conversion feedback
+    - Shows TIFF → JPEG conversion progress for each file
+    - Displays image dimensions and output file size
+    - Shows quality setting in completion message
+  - **Step 7 (JPEG Resizing)**: Already had real-time feedback (reference implementation)
+  - **Step 8 (Watermarking)**: Added comprehensive status messages
+    - Shows RESTRICTED/UNRESTRICTED status for each file
+    - Displays dimensions and file size for all files
+    - Shows opacity setting for watermarked files
+    - Separate feedback for watermarked vs copied files
+  - All steps now show progress checkpoints with file count tracker (e.g., "45/100 files completed")
+  - Consistent feedback pattern across all processing steps
+
 ## [0.0.10] - 2025-12-14 14:20
 
 ### Added
