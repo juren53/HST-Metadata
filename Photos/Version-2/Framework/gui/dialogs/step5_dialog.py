@@ -877,6 +877,9 @@ class Step5Dialog(QDialog):
             output_dir = Path(data_directory) / 'output' / 'tiff_processed'
             self.output_text.append(f"\n✓ Processed TIFFs saved to:\n  {output_dir}")
             
+            # Copy verso TIFF files
+            self._copy_verso_files()
+            
             # Mark step 5 as completed
             self.config_manager.update_step_status(5, True)
             
@@ -904,6 +907,43 @@ class Step5Dialog(QDialog):
         else:
             self.output_text.append("\n❌ Metadata embedding failed.")
             
+    def _copy_verso_files(self):
+        """Copy verso TIFF files to tiff_processed directory."""
+        try:
+            import shutil
+            
+            data_directory = self.config_manager.get('project.data_directory', '')
+            tiff_dir = Path(data_directory) / 'input' / 'tiff'
+            output_dir = Path(data_directory) / 'output' / 'tiff_processed'
+            
+            # Find all TIFF files containing '_verso' or '_Verso' in the filename
+            verso_files = []
+            for pattern in ['*_verso.tif', '*_Verso.tif', '*_verso.tiff', '*_Verso.tiff']:
+                verso_files.extend(glob.glob(str(tiff_dir / pattern)))
+            
+            if verso_files:
+                self.output_text.append(f"\n--- Copying verso TIFF files ---")
+                self.output_text.append(f"Found {len(verso_files)} verso file(s) to copy...")
+                
+                copied_count = 0
+                for src_path in verso_files:
+                    src = Path(src_path)
+                    dest = output_dir / src.name
+                    
+                    try:
+                        shutil.copy2(src, dest)
+                        self.output_text.append(f"  ✓ Copied: {src.name}")
+                        copied_count += 1
+                    except Exception as e:
+                        self.output_text.append(f"  ⚠️  Failed to copy {src.name}: {str(e)}")
+                
+                self.output_text.append(f"\n✓ Copied {copied_count} verso file(s) to tiff_processed directory")
+            else:
+                self.output_text.append(f"\n✓ No verso files found to copy")
+                
+        except Exception as e:
+            self.output_text.append(f"\n⚠️  Error copying verso files: {str(e)}")
+    
     def _on_error(self, error_msg):
         """Handle embedding errors."""
         self.progress_bar.setVisible(False)
