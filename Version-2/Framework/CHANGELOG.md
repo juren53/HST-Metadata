@@ -26,6 +26,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All steps now show progress checkpoints with file count tracker (e.g., "45/100 files completed")
   - Consistent feedback pattern across all processing steps
 
+- **Step 5 Verso File Handling** - Automatic copying of verso TIFF files
+  - After metadata embedding completes, automatically searches for verso files
+  - Identifies files containing '_verso' or '_Verso' in filename (case-insensitive)
+  - Copies all verso TIFFs from input/tiff to output/tiff_processed directory
+  - Ensures verso images are available for Step 6 processing alongside tagged siblings
+  - Addresses issue where verso TIFFs appear in "TIFF FILES WITHOUT MATCHING CSV RECORDS" report
+  - Verso files don't have metadata records but need to be processed with their non-verso counterparts
+  - Provides detailed feedback showing which files were copied
+  - Example output: "✓ Copied 15 verso file(s) to tiff_processed directory"
+  - Graceful error handling if copying fails for individual files
+
 ### Fixed
 - **Step 5 UTF-8 Mojibake** - Fixed corrupted special characters in TIFF metadata
   - Root cause: pyexiftool library defaulted to cp1252 encoding on Windows
