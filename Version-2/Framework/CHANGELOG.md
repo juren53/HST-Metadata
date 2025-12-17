@@ -38,14 +38,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Graceful error handling if copying fails for individual files
 
 ### Changed
-- **Step 2 Batch Title in CSV** - Automatically adds batch title to cell A1 (2025-12-16 20:03)
-  - After CSV conversion completes, batch title is prepended to cell A1 in brackets
-  - Format: "[BatchTitle] OriginalA1Content"
-  - Example: "[Lindsay_Test5a] ObjectName"
+- **Step 2 Batch Title in CSV** - Automatically adds batch title to cell A2 (2025-12-16 20:03)
+  - After CSV conversion completes, batch title is appended to cell A2 in brackets
+  - Format: "OriginalA2Content [BatchTitle]"
+  - Example: "record.title [Lindsay_Test5a]"
   - Provides clear visual identifier of which batch the CSV belongs to
   - Prevents confusion when multiple batch CSV files are open simultaneously
-  - Status message shows confirmation: "✓ Added batch title '[BatchTitle]' to cell A1"
-  - Includes error handling if batch title not set or CSV is empty
+  - Status message shows confirmation: "✓ Appended batch title '[BatchTitle]' to cell A2"
+  - Includes error handling if batch title not set or CSV has less than 2 rows
   - Modified gui/dialogs/step2_dialog.py lines 231-269
 
 - **Step 5 Credit Field** - Hardcoded to "Harry S. Truman Library" (2025-12-16 19:48)
