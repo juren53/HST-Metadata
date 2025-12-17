@@ -5,6 +5,36 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2025-12-16 20:30
+
+### Changed
+- **Step 2 Batch Title in CSV** - Automatically adds batch title to cell A2
+  - After CSV conversion completes, batch title is appended to cell A2 in brackets
+  - Format: "OriginalA2Content [BatchTitle]"
+  - Example: "record.title [Lindsay_Test5a]"
+  - Provides clear visual identifier of which batch the CSV belongs to
+  - Prevents confusion when multiple batch CSV files are open simultaneously
+  - Status message shows confirmation: "✓ Appended batch title '[BatchTitle]' to cell A2"
+  - Includes error handling if batch title not set or CSV has less than 2 rows
+
+- **Step 5 Credit Field** - Hardcoded to "Harry S. Truman Library"
+  - Credit metadata tag now always set to "Harry S. Truman Library"
+  - No longer reads Credit value from export.csv file
+  - Ensures consistent institutional attribution across all TIFF files
+  - Applied to all images processed through Step 5 metadata embedding
+
+### Improved
+- **Step 5 Verso File Handling** - Automatic copying of verso TIFF files
+  - After metadata embedding completes, automatically searches for verso files
+  - Identifies files containing '_verso' or '_Verso' in filename (case-insensitive)
+  - Copies all verso TIFFs from input/tiff to output/tiff_processed directory
+  - Ensures verso images are available for Step 6 processing alongside tagged siblings
+  - Addresses issue where verso TIFFs appear in "TIFF FILES WITHOUT MATCHING CSV RECORDS" report
+  - Verso files don't have metadata records but need to be processed with their non-verso counterparts
+  - Provides detailed feedback showing which files were copied
+  - Example output: "✓ Copied 15 verso file(s) to tiff_processed directory"
+  - Graceful error handling if copying fails for individual files
+
 ## [0.1.1] - 2025-12-14 18:25
 
 ### Improved
