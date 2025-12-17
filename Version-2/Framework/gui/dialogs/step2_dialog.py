@@ -228,6 +228,46 @@ class Step2Dialog(QDialog):
         if success:
             self.output_text.append("\n✅ CSV conversion completed successfully!")
             
+            # Add batch title to cell A1 of export.csv
+            try:
+                # Get the batch title (project name)
+                batch_title = self.config_manager.get('project.name', '')
+                
+                if batch_title:
+                    # Get the CSV file path
+                    data_directory = self.config_manager.get('project.data_directory', '')
+                    output_filename = self.config_manager.get('step_configurations.step2.output_filename', 'export.csv')
+                    csv_path = Path(data_directory) / 'output' / 'csv' / output_filename
+                    
+                    if csv_path.exists():
+                        import csv
+                        
+                        # Read the CSV file
+                        with open(csv_path, 'r', encoding='utf-8', newline='') as f:
+                            reader = csv.reader(f)
+                            rows = list(reader)
+                        
+                        # Modify cell A1 to prepend batch title in brackets
+                        if rows and len(rows[0]) > 0:
+                            original_a1 = rows[0][0]
+                            rows[0][0] = f"[{batch_title}] {original_a1}"
+                            
+                            # Write back to CSV
+                            with open(csv_path, 'w', encoding='utf-8', newline='') as f:
+                                writer = csv.writer(f)
+                                writer.writerows(rows)
+                            
+                            self.output_text.append(f"✓ Added batch title '[{batch_title}]' to cell A1")
+                        else:
+                            self.output_text.append("⚠️  Warning: CSV file is empty, could not add batch title")
+                    else:
+                        self.output_text.append("⚠️  Warning: CSV file not found, could not add batch title")
+                else:
+                    self.output_text.append("⚠️  Warning: Batch title not set, skipping A1 modification")
+                    
+            except Exception as e:
+                self.output_text.append(f"⚠️  Error adding batch title to A1: {str(e)}")
+            
             # Mark step 2 as completed
             self.config_manager.update_step_status(2, True)
             
