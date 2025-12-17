@@ -37,6 +37,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Example output: "✓ Copied 15 verso file(s) to tiff_processed directory"
   - Graceful error handling if copying fails for individual files
 
+### Changed
+- **Step 5 Credit Field** - Hardcoded to "Harry S. Truman Library" (2025-12-16 19:48)
+  - Credit metadata tag now always set to "Harry S. Truman Library"
+  - No longer reads Credit value from export.csv file
+  - Ensures consistent institutional attribution across all TIFF files
+  - Applied to all images processed through Step 5 metadata embedding
+  - Modified gui/dialogs/step5_dialog.py line 289
+
 ### Fixed
 - **Step 5 UTF-8 Mojibake** - Fixed corrupted special characters in TIFF metadata
   - Root cause: pyexiftool library defaulted to cp1252 encoding on Windows
