@@ -264,7 +264,7 @@ python hstl_framework.py --config "path\to\project_config.yaml" config --set val
 ## Need Help?
 
 - Review [`README.md`](README.md) for detailed documentation
-- See [`DEVELOPMENT_PLAN.md`](DEVELOPMENT_PLAN.md) for architecture details
+- See [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) for architecture details
 - Check processing logs in your project's `logs/` directory
 
 Last updated: 2025-11-30  15:16

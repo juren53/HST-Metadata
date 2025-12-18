@@ -254,7 +254,7 @@ Settings stored in system-specific location:
 
 - Check `gui/README.md` for detailed documentation
 - Review main `README.md` for framework overview
-- See `DEVELOPMENT_PLAN.md` for architecture details
+- See `docs/DEVELOPMENT_PLAN.md` for architecture details
 
 ## What's Next?
 

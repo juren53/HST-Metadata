@@ -125,14 +125,14 @@ If you're currently using the CLI version:
 
 ## Documentation
 
-- **Quick Start Guide**: `GUI_QUICKSTART.md`
+- **Quick Start Guide**: `docs/GUI_QUICKSTART.md`
 - **Full Documentation**: `gui/README.md`
 - **Changelog**: `CHANGELOG.md`
 
 ## Feedback
 
 This is an early release. If you encounter issues or have suggestions:
-1. Check the troubleshooting section in `GUI_QUICKSTART.md`
+1. Check the troubleshooting section in `docs/GUI_QUICKSTART.md`
 2. Review known limitations above
 3. Document steps to reproduce any issues
 

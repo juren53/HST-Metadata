@@ -396,7 +396,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Quick Start Guide Menu** - Added "Quick Start Guide" (F1) to Help menu
-  - Opens GUI_QUICKSTART.md in default application
+  - Opens docs/GUI_QUICKSTART.md in default application
   - Cross-platform support (Windows, macOS, Linux)
   - Error handling with fallback path display
 

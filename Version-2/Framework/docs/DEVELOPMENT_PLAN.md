@@ -47,7 +47,7 @@ C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\
 ├── gui/                           # Future PyQt6 GUI (Phase 2)
 │   └── __init__.py
 ├── requirements.txt               # Python dependencies
-├── DEVELOPMENT_PLAN.md            # This file
+├── docs/DEVELOPMENT_PLAN.md            # This file
 └── README.md                      # Usage documentation
 ```
 
