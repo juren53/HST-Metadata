@@ -1,0 +1,35 @@
+# Configuration files (user-specific)
+config/batch_registry.yaml
+**/batch_registry.yaml
+
+# Credentials and secrets
+*.json
+client_secret_*.json
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+logs/
+temp/
+tmp/
