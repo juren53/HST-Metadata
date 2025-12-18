@@ -8,8 +8,14 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
     QPushButton, QHeaderView, QMenu, QLabel, QProgressBar, QCheckBox
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QSettings
+from PyQt6.QtCore import Qt, pyqtSignal, QSettings, QTimer
 from PyQt6.QtGui import QColor, QBrush
+from pathlib import Path
+from typing import Dict, Tuple
+import time
+
+# Import utility functions
+from utils.file_utils import FileUtils
 
 
 class BatchListWidget(QWidget):
@@ -24,6 +30,10 @@ class BatchListWidget(QWidget):
         self.registry = registry
         self.show_all = False
         self.settings = QSettings("HSTL", "PhotoFramework")
+        
+        # Cache for expensive operations (batch_id -> (records, size, timestamp))
+        self._batch_info_cache: Dict[str, Tuple[int, str, float]] = {}
+        self._cache_timeout = 30  # Cache for 30 seconds
         
         self._init_ui()
         self._load_column_widths()
@@ -52,9 +62,9 @@ class BatchListWidget(QWidget):
         
         # Batch table
         self.table = QTableWidget()
-        self.table.setColumnCount(8)
+        self.table.setColumnCount(10)
         self.table.setHorizontalHeaderLabels([
-            "Name", "Status", "Progress", "Completed", "Date Created", "Last Accessed", "Batch ID", "Data Directory"
+            "Name", "Status", "Progress", "Completed", "Date Created", "Last Accessed", "Batch ID", "Records", "Size", "Data Directory"
         ])
         
         # Configure table
@@ -75,7 +85,9 @@ class BatchListWidget(QWidget):
         self.table.setColumnWidth(4, 150)  # Date Created
         self.table.setColumnWidth(5, 150)  # Last Accessed
         self.table.setColumnWidth(6, 200)  # Batch ID
-        self.table.setColumnWidth(7, 300)  # Data Directory
+        self.table.setColumnWidth(7, 100)  # Records
+        self.table.setColumnWidth(8, 120)  # Size
+        self.table.setColumnWidth(9, 300)  # Data Directory
         
         # Enable stretch for last column
         header.setStretchLastSection(True)
@@ -85,7 +97,7 @@ class BatchListWidget(QWidget):
         if header_item_batch_id:
             header_item_batch_id.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
         
-        header_item_data_dir = self.table.horizontalHeaderItem(7)
+        header_item_data_dir = self.table.horizontalHeaderItem(9)
         if header_item_data_dir:
             header_item_data_dir.setTextAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
         
@@ -98,6 +110,9 @@ class BatchListWidget(QWidget):
         
     def refresh(self):
         """Refresh the batch list."""
+        # Clear cache to ensure fresh data
+        self._batch_info_cache.clear()
+        
         # Reload registry from disk to get latest batches
         self.registry.batches = self.registry._load_registry()
         
@@ -188,10 +203,23 @@ class BatchListWidget(QWidget):
         id_item = QTableWidgetItem(batch_id)
         self.table.setItem(row, 6, id_item)
         
+        # Get cached batch info
+        records_count, directory_size = self._get_batch_info_cached(batch_id, summary)
+        
+        # Records column
+        records_item = QTableWidgetItem(str(records_count) if records_count > 0 else "N/A")
+        records_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.table.setItem(row, 7, records_item)
+        
+        # Size column
+        size_item = QTableWidgetItem(directory_size if directory_size else "N/A")
+        size_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.table.setItem(row, 8, size_item)
+        
         # Data Directory
         data_dir = summary.get('data_directory', 'Unknown')
         data_dir_item = QTableWidgetItem(data_dir)
-        self.table.setItem(row, 7, data_dir_item)
+        self.table.setItem(row, 9, data_dir_item)
         
         # Store batch info in first column
         name_item.setData(Qt.ItemDataRole.UserRole, summary)
@@ -279,3 +307,72 @@ class BatchListWidget(QWidget):
         
         # Show menu at cursor position
         menu.exec(self.table.viewport().mapToGlobal(position))
+    
+    def _get_batch_info_cached(self, batch_id: str, summary: dict) -> Tuple[int, str]:
+        """
+        Get records count and directory size for a batch, using cache for performance.
+        
+        Args:
+            batch_id: Batch identifier
+            summary: Batch summary dictionary
+            
+        Returns:
+            Tuple of (records_count, formatted_size)
+        """
+        current_time = time.time()
+        
+        # Check cache
+        if batch_id in self._batch_info_cache:
+            records, size, timestamp = self._batch_info_cache[batch_id]
+            if current_time - timestamp < self._cache_timeout:
+                return records, size
+        
+        # Calculate fresh values
+        records = self._get_records_count(summary)
+        size = self._get_directory_size(summary)
+        
+        # Cache the results
+        self._batch_info_cache[batch_id] = (records, size, current_time)
+        
+        return records, size
+    
+    def _get_records_count(self, summary: dict) -> int:
+        """
+        Get the number of records in the export.csv file for this batch.
+        
+        Args:
+            summary: Batch summary dictionary
+            
+        Returns:
+            Number of records, 0 if no file or error
+        """
+        try:
+            data_directory = summary.get('data_directory')
+            if not data_directory:
+                return 0
+                
+            csv_path = Path(data_directory) / 'output' / 'csv' / 'export.csv'
+            return FileUtils.count_csv_records(csv_path)
+        except Exception:
+            return 0
+    
+    def _get_directory_size(self, summary: dict) -> str:
+        """
+        Get the formatted directory size for this batch.
+        
+        Args:
+            summary: Batch summary dictionary
+            
+        Returns:
+            Formatted size string, empty string if error
+        """
+        try:
+            data_directory = summary.get('data_directory')
+            if not data_directory:
+                return ""
+                
+            dir_path = Path(data_directory)
+            size_bytes = FileUtils.get_directory_size(dir_path)
+            return FileUtils.format_file_size(size_bytes)
+        except Exception:
+            return ""
