@@ -1,5 +1,5 @@
 ### HSTL Photo Metadata Project  Ver. 2
-### Test Google Worksheet URLs
+### Test Cases - Google Worksheet URLs
 
 <a href="https://docs.google.com/spreadsheets/d/1mgxguKnNThYH8PspEge6xS2xxPwdU2Qv/edit?gid=1418369420#gid=1418369420" target="_blank">Test3  of New Photo Metadata (Brian)  [ template worksheet - no images ]</a>
 
