@@ -5,6 +5,14 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **ftfy Dependency** - Added ftfy library for text encoding fixes (2025-12-17 01:49 CST)
+  - Added ftfy>=6.0.0 to requirements.txt
+  - Required for mojibake detection and text encoding repair
+  - Supports Step 3 mojibake scan functionality in metadata processing
+
 ## [0.1.2] - 2025-12-16 20:30
 
 ### Changed
