@@ -185,7 +185,7 @@ When you finish processing a batch:
 
 ## Documentation
 
-- [`DEVELOPMENT_PLAN.md`](DEVELOPMENT_PLAN.md) - Comprehensive development roadmap
+- [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) - Comprehensive development roadmap
 - Requirements and dependencies listed in development plan
 - Integration strategy for existing Version-2 applications
 

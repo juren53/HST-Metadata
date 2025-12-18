@@ -353,7 +353,7 @@ class MainWindow(QMainWindow):
         import subprocess
         
         # Get path to GUI_QUICKSTART.md
-        quickstart_path = Path(__file__).parent.parent / 'GUI_QUICKSTART.md'
+        quickstart_path = Path(__file__).parent.parent / 'docs' / 'GUI_QUICKSTART.md'
         
         if quickstart_path.exists():
             # Try to open with default markdown viewer or text editor
