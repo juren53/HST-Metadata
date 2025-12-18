@@ -5,6 +5,42 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-12-18 16:15
+
+### Added
+- **Batch Projects Records Column** - Added CSV record count display to Batch Projects dialog (2025-12-18 16:30 CST)
+  - New Records column shows count of Accession Numbers/ObjectNames from export.csv file
+  - Counts records by checking Accession Number, ObjectName, and AccessionNumber fields
+  - Display format: Integer count or "N/A" if export.csv doesn't exist
+  - Positioned immediately after Batch ID column for logical grouping
+  - Center-aligned for clean presentation alongside existing metrics
+
+- **Batch Projects Size Column** - Added directory size display to Batch Projects dialog (2025-12-18 16:30 CST)
+  - New Size column shows total disk space used by each batch directory
+  - Recursive calculation includes all files and subdirectories in batch folder
+  - Human-readable format with automatic unit scaling (B, KB, MB, GB, TB)
+  - Display format: Formatted size (e.g., "1.5 MB", "500 KB") or "N/A" if inaccessible
+  - Positioned after Records column to complete batch information grouping
+  - Center-aligned for visual consistency with Records column
+
+- **Performance Caching** - Added 30-second cache for expensive batch information calculations
+  - CSV record counting and directory size calculations cached to improve responsiveness
+  - Cache automatically cleared when refresh button is pressed or F5 key used
+  - Prevents recalculation during rapid user interactions or batch switching
+  - Ensures fresh data while maintaining performance for large directories
+
+- **File Utility Enhancements** - Added utility functions for CSV and directory operations
+  - Added `FileUtils.count_csv_records()` - counts records by Accession Numbers/ObjectNames
+  - Added `FileUtils.get_directory_size()` - recursive directory size calculation with error handling
+  - Added `FileUtils.format_file_size()` - human-readable size formatting with unit scaling
+  - Robust error handling for missing files, permission issues, and malformed data
+  - Cross-platform compatibility with proper encoding support
+
+- **ftfy Dependency** - Added ftfy library for text encoding fixes (2025-12-17 01:49 CST)
+  - Added ftfy>=6.0.0 to requirements.txt
+  - Required for mojibake detection and text encoding repair
+  - Supports Step 3 mojibake scan functionality in metadata processing
+
 ## [Unreleased]
 
 ### Added

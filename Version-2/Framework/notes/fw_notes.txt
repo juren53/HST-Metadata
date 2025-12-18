@@ -1,0 +1,113 @@
+# Run HSTL PDB Ver 2 GUI
+python gui/hstl_gui.py
+
+
+=============================================================
+Warp commands:
+
+OK, let's stage, commit and push these updates.
+
+Lets bump the version to [    ] and the date/time stamp to [      ] per the version rules in Warp.ini  and then generate a related git version tag. 
+
+Lets bump the version to v0.1.3 and the date/time stamp to 2025-12-18 16:15 per the version rules in Warp.ini and then generate a related git version tag.
+=============================================================
+
+ C:\Data\HSTL_Batches\Lindsay_Test4\input\tiff\
+ 
+ 
+ ============================================
+ 
+ Test Sets Characterized
+ -----------------------
+ 
+ Lindsay_Test4 set contains [   ]
+ 
+     9 16bit TIFF images
+
+ Lindsay_Test5 set contains [   ]
+ 
+     10 16bit TIFF images
+	 10 restricted images
+
+ Laurie_Test7 set [3 TIFF files]
+ 
+     2 restricted images [ good for testing opacity settings]
+	  
+============================================	
+
+git error/warning message [investigate]
+
+  cd C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework && git add -A
+warning: in the working copy of 'Photos/Version-1/check-dates-from-csv.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Photos/Version-1/replace_headers.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Photos/Version-1/write-tags-from-csv.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Photos/Version-2/Unicode_local_backup/unicode_test_NFKC.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Photos/Version-2/Unicode_local_backup/unicode_test_sample.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Photos/Version-2/csv_record_viewer.py', LF will be replaced by CRLF the next time Git touches it
+
+
+=========================================================
+Prompts used to develop HSTL GUI
+
+Let's develop a Step 6 dialogue that converts the processed TIFFs to JPEGs with all the metadata tags transfering to the JPEGs
+
+Let's develop a Step 7 dialogue the resizes the processed JPEGs to fit in a 800x800 box while maintaining the original aspect ratio and carrying over all the metadata tags.
+
+Let's develop a Step 8 dialogue that overlays a copyright watermark layer on 'Restricted' images.  This step will take the resized JPEGs and look for those that contain the word 'Restricted' in the CopyRight field.  The watermark should be layered over only those JPEGs and they should be stored in the output\jpeg_watermarked directory.  An opacity slider adjustment feature should be included in dialogue. The watermark file to use as an overlay is gui\Copyright_Watermark.png.
+
+Let's develop a Step 4 TIFF Bit Depth Test & Conversion.  This step looks for 16 bit TIFF images, converts them to 8 bit TIFFs and over-writes the 16 bit TIFF in the CWD.  The dialogue should run the test of 16 bit TIFFs and let the user determine if they want to proceed wth 16-to-8 bit conversion.  This dialogue is similar to Step 8 Watermark except in this case the original TIFF is over-written.
+
+
+
+
+## Python Files in HSTL GUI Application
+
+### Main Application Files (3)
+
+• hstl_gui.py - Application entry point and main launcher
+• main_window.py - Main window with tab interface and menu system
+• __init__.py - GUI package initialization
+
+### Widget Components (4)
+
+• widgets/batch_list_widget.py - Batch management table widget
+• widgets/step_widget.py - Step execution interface with 8 processing steps
+• widgets/config_widget.py - Configuration tree viewer
+• widgets/log_widget.py - Log viewer widget
+
+=========================================================
+Summary
+
+✅ Compilation successful!
+
+Executable location:
+C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\dist\HSTL_Photo_Framework_GUI\HSTL_Photo_Framework_GUI.exe
+
+Details:
+•  Size: ~24 MB (25,084,043 bytes)
+•  Last modified: December 9, 2025 at 2:28 PM
+•  Successfully launches without errors
+
+Changes made:
+1. Fixed PyQt5/PyQt6 conflict by excluding PyQt5 from the build
+2. Fixed module import paths by setting pathex=['.'] in the spec file
+3. Rebuilt from the correct Framework directory
+
+The app is now compiled and ready to run. The executable can be distributed along with the other files in the dist\HSTL_Photo_Framework_GUI folder.
+
+-----------------------------------------------
+
+Perfect! The zip file has been created successfully.
+
+Zip file details:
+•  Location: C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\dist\HSTL_Photo_Framework_GUI.zip
+•  Size: ~399 MB (418,508,827 bytes)
+•  Created: December 9, 2025 at 8:55 PM
+
+This zip file contains the HSTL Photo Framework GUI executable and all supporting files needed to run the application on other Windows 11 systems. Simply extract the zip file and run HSTL_Photo_Framework_GUI.exe to launch the application.
+
+name of the zip file and location:
+
+Zip file name: HSTL_Photo_Framework_GUI.zip
+
+Location: C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\dist\HSTL_Photo_Framework_GUI.zip
