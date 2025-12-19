@@ -1,0 +1,7 @@
+Processed 3 images
+Missing 103 images
+
+CSV Conversion failed
+
+Error during conversion: [Errno 2] No such file or directory
+'client_secret-5676868 blah, blah blah .com.json'
