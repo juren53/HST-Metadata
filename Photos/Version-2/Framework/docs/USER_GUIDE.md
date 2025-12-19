@@ -61,8 +61,6 @@ Before running the steps, you must place copies of the source files in the corre
 
 1. Navigate to the batch directory you just created (e.g., `C:\Data\HSTL_Batches\Truman Home Photos - Jan 2025`).
 2. Place the copies of the source TIFF images into the `input\tiff\` folder.
-   
-   
 
 ### 4.3. The 8 Processing Steps
 
