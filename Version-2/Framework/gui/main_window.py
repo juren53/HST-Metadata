@@ -181,6 +181,10 @@ class MainWindow(QMainWindow):
         quickstart_action.setShortcut("F1")
         quickstart_action.triggered.connect(self._show_quickstart)
         help_menu.addAction(quickstart_action)
+
+        user_guide_action = QAction("&User Guide", self)
+        user_guide_action.triggered.connect(self._show_user_guide)
+        help_menu.addAction(user_guide_action)
         
         changelog_action = QAction("&Change Log", self)
         changelog_action.triggered.connect(self._show_changelog)
@@ -377,6 +381,38 @@ class MainWindow(QMainWindow):
                 self,
                 "File Not Found",
                 f"Quick Start Guide not found at:\n{quickstart_path}"
+            )
+
+    def _show_user_guide(self):
+        """Open the User Guide."""
+        import os
+        import subprocess
+        
+        # Get path to USER_GUIDE.md
+        user_guide_path = Path(__file__).parent.parent / 'docs' / 'USER_GUIDE.md'
+        
+        if user_guide_path.exists():
+            # Try to open with default markdown viewer or text editor
+            try:
+                if os.name == 'nt':  # Windows
+                    os.startfile(str(user_guide_path))
+                elif os.name == 'posix':  # macOS and Linux
+                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(user_guide_path)])
+                
+                self.status_bar.showMessage("Opening User Guide...", 2000)
+            except Exception as e:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Open File",
+                    f"Could not open User Guide.\n\n"
+                    f"Please open manually:\n{user_guide_path}\n\n"
+                    f"Error: {str(e)}"
+                )
+        else:
+            QMessageBox.warning(
+                self,
+                "File Not Found",
+                f"User Guide not found at:\n{user_guide_path}"
             )
     
     def _show_changelog(self):
