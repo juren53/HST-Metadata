@@ -186,6 +186,9 @@ When you finish processing a batch:
 ## Documentation
 
 - [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) - Comprehensive development roadmap
+- [`docs/GLOSSARY.md`](docs/GLOSSARY.md) - Complete glossary of framework terminology and concepts
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) - Step-by-step user guide for the GUI application
+- [`docs/GLOSSARY_PLAN.md`](docs/GLOSSARY_PLAN.md) - Development plan for the glossary
 - Requirements and dependencies listed in development plan
 - Integration strategy for existing Version-2 applications
 
