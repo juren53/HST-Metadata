@@ -41,6 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Required for mojibake detection and text encoding repair
   - Supports Step 3 mojibake scan functionality in metadata processing
 
+### Build
+- **Enforced Line Endings** - Added `.gitattributes` to standardize line endings (LF for text files).
+  - Ensures consistent line endings across different operating systems (Windows, Linux, macOS).
+  - Prevents "mixed line endings" warnings and improves cross-platform compatibility.
+  - Configures Git to normalize text files to LF on commit and convert to CRLF on Windows checkout.
+
 ## [Unreleased]
 
 ### Added
