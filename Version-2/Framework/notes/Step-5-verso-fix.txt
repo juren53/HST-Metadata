@@ -1,0 +1,26 @@
+In Step 5 - Metadata tagging of TIFF imaages - processed TIFF images are copied to th tiff_processed directory where Step 6 looks for files to execute its process.  The problem is there are some times 'verso' TIFFs that do not get tagged because there is not mataching record in export.csv but these verso TIFFs need to be copied to the tiff_processed directory because they correspond with their non-verso sibling.
+
+These verso TIFFs show up in the STEP 5 - CSV RECORDS vs TIFF FILES COMPARISON REPORT
+
+as 
+
+====================================================================================================
+TIFF FILES WITHOUT MATCHING CSV RECORDS (23 items)
+====================================================================================================
+  - 2020-1246_verso
+  - 2020-1744_verso
+  - 2020-1926_verso
+  - 2023-149_verso
+  - 2023-6020
+  - 2023-6024
+  - 2023-6406
+  - 2024-27_Verso
+  - 2025-1137-1
+  - 2025-1137-1_origneg
+  - 67-7850A_Verso
+  - 68-1578_Verso
+  - 68-1788_verso
+  - 70-1054_Verso
+  - 70-1062_Verso
+
+The final step in STEP 5 should be to copy all TIFF images containing either '_verso' or '_Verso' to the tiff_processed directory and let the user know the verso images were copied too.

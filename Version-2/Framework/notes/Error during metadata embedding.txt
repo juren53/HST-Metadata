@@ -1,0 +1,5 @@
+Metadata embedding failed:
+
+Error during metadata embedding: [WinError 32]  The process cannot acces the file because it is being used by another process
+
+Ver 0.1.0 (2025-12-15 04:40)
