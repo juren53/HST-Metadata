@@ -12,6 +12,46 @@ A robust Python-based launcher for running PowerShell scripts from a thumbdrive 
 - **Timeout Protection**: Prevents hanging on long-running scripts
 - **User Notifications**: Clear GUI messages for all scenarios
 
+## Installation & Deployment
+
+The Thumbdrive Launcher is fully portable and can be installed to any directory on your system.
+
+### Automated Installation (Recommended)
+
+1. **Run the installer:**
+   ```powershell
+   Right-click INSTALL.ps1 → Run with PowerShell
+   ```
+
+2. **Choose installation location:**
+   - Default: `C:\Tools\ThumbdriveLauncher`
+   - Or specify any custom path you prefer
+
+3. **Installer will:**
+   - Copy all necessary files to the chosen location
+   - Offer to create a desktop shortcut
+   - Configure everything automatically
+
+### Manual Installation
+
+If you prefer to install manually:
+
+1. **Copy the entire `launcher` folder** to your desired location:
+   - Example: `C:\Tools\ThumbdriveLauncher`
+   - Example: `C:\Program Files\ThumbdriveLauncher`
+   - Example: `D:\Utilities\ThumbdriveLauncher`
+
+2. **Create desktop shortcut:**
+   - Navigate to your installation folder
+   - Run `create_shortcut.ps1` (right-click → Run with PowerShell)
+   - Desktop shortcut will be created automatically
+
+3. **Customize configuration:**
+   - Edit `launcher_config.json` as needed
+   - See Configuration section below
+
+**Note**: The launcher works from any directory - no hardcoded paths!
+
 ## Quick Start
 
 ### Option 1: Run as Python Script (For Testing)

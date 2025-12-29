@@ -111,3 +111,17 @@ name of the zip file and location:
 Zip file name: HSTL_Photo_Framework_GUI.zip
 
 Location: C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework\dist\HSTL_Photo_Framework_GUI.zip
+
+Thumbdrive launcher
+
+ Framework/
+  └── launcher/
+      ├── thumbdrive_launcher.py
+      ├── launcher_config.json
+      ├── LAUNCHER_README.md
+      ├── build_launcher.bat
+      ├── create_shortcut.ps1
+      ├── create_icon.py
+      ├── create_desktop_shortcut.py
+      ├── setup_desktop_icon.bat
+      └── thumbdrive_icon.ico
