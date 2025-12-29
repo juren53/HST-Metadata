@@ -50,6 +50,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Thumbdrive Launcher Utility** - Complete Python-based launcher for running PowerShell scripts from thumbdrive (2025-12-29)
+  - Robust launcher (`thumbdrive_launcher.py`) with comprehensive error handling
+  - Smart drive detection with automatic wait for thumbdrive insertion (configurable timeout)
+  - Required file validation ensures all dependencies exist before execution
+  - Detailed logging to `%USERPROFILE%\thumbdrive_launcher.log` for troubleshooting
+  - User-friendly GUI notifications for all error scenarios
+  - JSON configuration file (`launcher_config.json`) for easy customization
+  - Desktop icon creation with custom thumbdrive icon (blue USB design with "D:" label)
+  - Build script (`build_launcher.bat`) for creating standalone .exe with PyInstaller
+  - PowerShell shortcut creator (`create_shortcut.ps1`) for automated desktop setup
+  - Icon generator (`create_icon.py`) creates multi-resolution .ico file with PIL/Pillow
+  - Complete documentation in `LAUNCHER_README.md` with setup and troubleshooting guides
+  - Handles edge cases: thumbdrive not inserted, missing files, script timeouts, PowerShell errors
+  - Configurable script timeout protection (default 300 seconds)
+  - Optional success notifications and auto-retry behavior
+
 - **Batch Projects Records Column** - Added CSV record count display to Batch Projects dialog (2025-12-18 16:30 CST)
   - New Records column shows count of Accession Numbers/ObjectNames from export.csv file
   - Counts records by checking Accession Number, ObjectName, and AccessionNumber fields
