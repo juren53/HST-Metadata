@@ -5,6 +5,43 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3a] - 2025-12-31 13:45
+
+### Added
+- **Theme Selection Feature** - Comprehensive Light/Dark theme support with system default option (2025-12-31 13:45)
+  - New "Theme Selection..." menu item under Edit menu for easy access
+  - Three theme modes: Light, Dark, and System Default (auto-detects OS theme)
+  - Theme selection dialog with live preview showing colors before applying
+  - Instant theme switching without application restart
+  - Persistent theme preference saved to Windows Registry via QSettings
+  - Custom color palettes designed for both Light and Dark themes
+  - Light Theme: White background (#FFFFFF) with dark text, optimized for bright environments
+  - Dark Theme: Dark background (#1E1E1E) with light text, optimized for low-light environments
+  - System Default: Automatically detects and matches operating system theme preference
+  - Theme-aware status colors that adapt to current theme (success green, warning orange)
+  - Theme-aware batch status backgrounds (active aqua/cyan, completed light/steel blue, archived gray)
+  - All existing UI elements automatically adapt to selected theme
+  - Enhanced Settings dialog with "Appearance" section containing theme button
+  - Professional color contrast ratios for accessibility (WCAG AA compliance)
+
+### Changed
+- **Theme-Aware Colors** - Updated hardcoded colors throughout UI to use theme manager
+  - Step 1 hint text now uses theme-aware disabled text color
+  - Step 2 URL display uses theme-aware link color and background
+  - Step 5 status indicators (success/warning) use theme-aware semantic colors
+  - Batch list widget status backgrounds use theme-aware status colors
+  - All color changes apply instantly when theme is switched
+
+### Technical
+- **Theme Manager Architecture** - Singleton pattern with QPalette-based theme application
+  - `gui/theme_manager.py` - Core theme management with ThemeManager singleton class
+  - `gui/dialogs/theme_dialog.py` - Theme selection UI with radio buttons and preview widget
+  - PyQt6 QPalette for native widget theming with supplementary stylesheets for custom elements
+  - Signal/slot architecture for real-time theme updates across all widgets
+  - Automatic theme initialization on application startup in `gui/hstl_gui.py`
+  - Batch list widget automatically refreshes when theme changes
+  - Theme colors stored in dataclass for type safety and easy access
+
 ## [0.1.3] - 2025-12-18 16:15
 
 ### Added

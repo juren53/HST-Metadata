@@ -59,7 +59,9 @@ class Step1Dialog(QDialog):
         hint_label = QLabel(
             "<i>Paste the complete URL from your browser's address bar when viewing the worksheet.</i>"
         )
-        hint_label.setStyleSheet("color: gray;")
+        from gui.theme_manager import ThemeManager
+        theme = ThemeManager.instance()
+        hint_label.setStyleSheet(f"color: {theme.get_current_colors().disabled_text};")
         layout.addWidget(hint_label)
         
         layout.addSpacing(20)

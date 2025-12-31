@@ -766,29 +766,34 @@ class Step5Dialog(QDialog):
             
             matched_count = len(matched)
             missing_count = len(missing_tiffs)
-            
+
+            # Get theme colors
+            from gui.theme_manager import ThemeManager
+            theme = ThemeManager.instance()
+            colors = theme.get_current_colors()
+
             # Display matched info
             self.matched_label.setText(f"Matched: {matched_count} TIFF files match CSV records")
-            self.matched_label.setStyleSheet("color: green;" if matched_count > 0 else "")
-            
+            self.matched_label.setStyleSheet(f"color: {colors.success};" if matched_count > 0 else "")
+
             # Display missing info
             if missing_count == 0:
                 self.missing_tiff_label.setText("✓ All CSV records have matching TIFF files")
-                self.missing_tiff_label.setStyleSheet("color: green;")
+                self.missing_tiff_label.setStyleSheet(f"color: {colors.success};")
             else:
                 self.missing_tiff_label.setText(f"⚠️  Missing TIFF files: {missing_count} CSV records have no matching TIFF")
-                self.missing_tiff_label.setStyleSheet("color: orange;")
-            
+                self.missing_tiff_label.setStyleSheet(f"color: {colors.warning};")
+
             # Overall status
             if csv_count == tiff_count == matched_count:
                 self.comparison_label.setText(f"✓ Perfect match: All {csv_count} records have corresponding TIFF files")
-                self.comparison_label.setStyleSheet("color: green;")
+                self.comparison_label.setStyleSheet(f"color: {colors.success};")
             elif matched_count == csv_count:
                 self.comparison_label.setText(f"✓ All CSV records matched, but {tiff_count - matched_count} extra TIFF file(s) found")
-                self.comparison_label.setStyleSheet("color: #006400;")  # Dark green
+                self.comparison_label.setStyleSheet(f"color: {colors.success};")  # Success color
             else:
                 self.comparison_label.setText(f"⚠️  {matched_count} matched, {missing_count} CSV records missing TIFF files")
-                self.comparison_label.setStyleSheet("color: orange;")
+                self.comparison_label.setStyleSheet(f"color: {colors.warning};")
             
             self.output_text.append("File analysis complete.")
             self.output_text.append(f"CSV records: {csv_count}")
