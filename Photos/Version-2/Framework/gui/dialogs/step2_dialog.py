@@ -129,7 +129,12 @@ class Step2Dialog(QDialog):
         worksheet_url = self.config_manager.get('step_configurations.step1.worksheet_url', 'Not set')
         self.url_display = QLabel(worksheet_url)
         self.url_display.setWordWrap(True)
-        self.url_display.setStyleSheet("color: #0066cc; padding: 5px; background-color: #f0f0f0; border-radius: 3px;")
+        # Use theme-aware colors
+        from gui.theme_manager import ThemeManager, ThemeMode
+        theme = ThemeManager.instance()
+        colors = theme.get_current_colors()
+        bg_color = colors.base_bg if theme._current_resolved_mode == ThemeMode.DARK else "#f0f0f0"
+        self.url_display.setStyleSheet(f"color: {colors.link}; padding: 5px; background-color: {bg_color}; border-radius: 3px;")
         layout.addWidget(self.url_display)
         
         layout.addSpacing(20)

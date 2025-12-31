@@ -135,11 +135,16 @@ class MainWindow(QMainWindow):
         
         # Edit menu
         edit_menu = menubar.addMenu("&Edit")
-        
+
         set_location_action = QAction("Set &Location of Data Files...", self)
         set_location_action.triggered.connect(self._set_data_location)
         edit_menu.addAction(set_location_action)
-        
+
+        # Theme selection menu item
+        theme_action = QAction("&Theme Selection...", self)
+        theme_action.triggered.connect(self._show_theme_dialog)
+        edit_menu.addAction(theme_action)
+
         # Batch menu
         batch_menu = menubar.addMenu("&Batch")
         
@@ -345,7 +350,13 @@ class MainWindow(QMainWindow):
                 f"Default batch location has been updated to:\n\n{new_location}\n\n"
                 "This will be used for new batches created from the File → New Batch menu."
             )
-    
+
+    def _show_theme_dialog(self):
+        """Show theme selection dialog."""
+        from gui.dialogs.theme_dialog import ThemeDialog
+        dialog = ThemeDialog(self)
+        dialog.exec()
+
     def _show_settings(self):
         """Show settings dialog."""
         dialog = SettingsDialog(self)
