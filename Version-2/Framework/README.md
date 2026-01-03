@@ -2,6 +2,21 @@
 
 A comprehensive Python framework for managing the complete HSTL Photo Metadata Project workflow.
 
+## Installation
+
+**Before starting, install all dependencies:**
+
+```bash
+# Install Python packages
+pip install -r requirements.txt
+
+# Install ExifTool (required for metadata operations)
+# Download from: https://exiftool.org/
+# Add to system PATH
+```
+
+See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions.
+
 ## Quick Start
 
 ```bash
@@ -185,11 +200,11 @@ When you finish processing a batch:
 
 ## Documentation
 
+- [`INSTALLATION.md`](INSTALLATION.md) - Complete installation guide with all dependencies
 - [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) - Comprehensive development roadmap
 - [`docs/GLOSSARY.md`](docs/GLOSSARY.md) - Complete glossary of framework terminology and concepts
 - [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) - Step-by-step user guide for the GUI application
 - [`docs/GLOSSARY_PLAN.md`](docs/GLOSSARY_PLAN.md) - Development plan for the glossary
-- Requirements and dependencies listed in development plan
 - Integration strategy for existing Version-2 applications
 
 ## Environment

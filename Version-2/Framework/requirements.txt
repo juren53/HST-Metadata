@@ -1,37 +1,97 @@
 # HSTL Photo Framework Dependencies
+# Version: 0.1.3b
+# Python Requirement: 3.7+
 
-# Core framework
-PyYAML>=6.0
-colorama>=0.4.4
-tqdm>=4.64.0
+# ============================================================================
+# CORE FRAMEWORK DEPENDENCIES
+# ============================================================================
 
-# Image processing
-Pillow>=9.0.0
+# Configuration and data handling
+PyYAML>=6.0                    # YAML configuration file parsing
+pandas>=1.5.0                  # Data manipulation and CSV processing
+pydantic>=1.10.0               # Configuration validation and data models
 
-# Data handling
-pandas>=1.5.0
+# Text processing and encoding
+ftfy>=6.0.0                    # Text encoding fixes and Unicode normalization
 
-# Text encoding fixes
-ftfy>=6.0.0
-
-# Google Sheets integration (for existing g2c.py compatibility)
-google-auth>=2.0.0
-google-auth-oauthlib>=0.5.0
-google-auth-httplib2>=0.1.0
-google-api-python-client>=2.0.0
-
-# Path handling (built-in pathlib used, but keeping for reference)
-# pathlib - built into Python 3.4+
-
-# GUI (Phase 2)
-PyQt6>=6.0.0
-
-# Development and testing
-pytest>=7.0.0
-pytest-cov>=4.0.0
+# Progress tracking and terminal output
+tqdm>=4.64.0                   # Progress bars for CLI operations
+colorama>=0.4.4                # Cross-platform colored terminal output (optional)
 
 # Logging enhancements
-structlog>=22.0.0
+structlog>=22.0.0              # Enhanced structured logging
 
-# Configuration validation
-pydantic>=1.10.0
+# ============================================================================
+# IMAGE PROCESSING DEPENDENCIES
+# ============================================================================
+
+# Core image processing
+Pillow>=9.0.0                  # Image processing and format conversions
+PyExifTool>=0.5.0              # Python wrapper for ExifTool command-line utility
+
+# ============================================================================
+# GUI FRAMEWORK DEPENDENCIES
+# ============================================================================
+
+# Primary GUI framework
+PyQt6>=6.0.0                   # Main GUI framework for the application
+
+# Optional GUI utilities
+wxPython>=4.1.0                # For csv_record_viewer.py utility (optional)
+
+# ============================================================================
+# GOOGLE SERVICES INTEGRATION
+# ============================================================================
+
+# Google authentication and API access
+google-auth>=2.0.0             # Google authentication library
+google-auth-oauthlib>=0.5.0    # OAuth 2.0 flow for Google services
+google-auth-httplib2>=0.1.0    # HTTP transport for Google authentication
+google-api-python-client>=2.0.0 # Google API client library
+gspread>=5.0.0                 # Google Sheets API wrapper
+
+# ============================================================================
+# DEVELOPMENT AND TESTING DEPENDENCIES
+# ============================================================================
+
+# Testing framework
+pytest>=7.0.0                  # Unit testing framework
+pytest-cov>=4.0.0              # Test coverage reporting
+
+# ============================================================================
+# PLATFORM-SPECIFIC DEPENDENCIES
+# ============================================================================
+
+# Windows-specific (auto-installed when needed)
+# pywin32 - Windows COM automation for desktop shortcuts
+# Note: This is auto-installed by create_desktop_shortcut.py if needed
+
+# ============================================================================
+# EXTERNAL DEPENDENCIES (Not installable via pip)
+# ============================================================================
+
+# ExifTool - Required for metadata operations (BOTH required):
+# 1. ExifTool command-line tool - Download from: https://exiftool.org/
+#    Must be installed separately and available in system PATH
+# 2. PyExifTool Python wrapper - Included in requirements.txt above
+
+# ============================================================================
+# NOTES
+# ============================================================================
+
+# 1. Optional dependencies with fallbacks:
+#    - colorama: If not available, logging works without colors
+#    - pywin32: Auto-installed on Windows when creating desktop shortcuts
+#    - wxPython: Only needed for csv_record_viewer.py utility
+#
+# 2. Authentication setup required:
+#    - Google OAuth client secrets file for Google services integration
+#    - Token pickle files are generated automatically on first use
+#
+# 3. Installation order recommendation:
+#    1. Install core dependencies first (PyYAML, pandas, Pillow)
+#    2. Install GUI framework (PyQt6)
+#    3. Install Google services libraries
+#    4. Install optional dependencies (colorama, structlog, wxPython)
+# 5. Install external tools (ExifTool command-line + PyExifTool wrapper)
+#    6. Set up Google authentication credentials

@@ -2,8 +2,9 @@
 
 ## Prerequisites
 
-- Python 3.8 or higher
+- Python 3.7 or higher
 - All dependencies installed: `pip install -r requirements.txt`
+- ExifTool installed: See [INSTALLATION.md](../INSTALLATION.md) for detailed setup instructions
 
 ## Setting Up a New Batch Project
 
