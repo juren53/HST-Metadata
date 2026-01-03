@@ -52,7 +52,7 @@ class StepWidget(QWidget):
         batch_header_layout.addStretch()
         
         # Version and date/time stamp (right-aligned, 10pt font)
-        version_label = QLabel("<span style='font-size: 10pt;'>v0.1.3b | 2026-01-02 20:05</span>")
+        version_label = QLabel("<span style='font-size: 10pt;'>v0.1.3c | 2026-01-03 10:00</span>")
         version_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
         batch_header_layout.addWidget(version_label)
         
