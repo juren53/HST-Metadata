@@ -5,6 +5,29 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3b] - 2026-01-02 20:05
+
+### Changed
+- **HPM Launcher Reconfiguration** - Launcher system updated for local execution (2026-01-02 20:05 CST)
+  - Reconfigured launcher to run HPM system from local Framework directory instead of USB thumbdrive
+  - Updated to execute from `C:\Users\<username>\Projects\HST-Metadata\Photos\Version-2\Framework`
+  - Integrated WinPython environment activation (`activate.bat`) into launch sequence
+  - Launcher now creates temporary batch file to: activate WinPython, change to Framework directory, run `python gui\hstl_gui.py`
+  - Replaced PowerShell script execution with Python GUI application launch
+  - Updated configuration to use environment variables (`%USERPROFILE%`) for multi-user portability
+  - Changed hardcoded username "jimur" to `%USERPROFILE%` in all paths for easy deployment to other users
+  - Renamed `thumbdrive_launcher.py` to `launcher.py` to reflect local execution purpose
+  - Renamed executable output from `ThumbdriveLauncher.exe` to `HPMLauncher.exe`
+  - Updated log filename from `thumbdrive_launcher.log` to `hpm_launcher.log`
+  - Desktop shortcut label changed from "Thumbdrive Launcher" to "HPM Launcher"
+  - Desktop shortcut description updated to "Launch HSTL Photo Metadata System"
+  - All launcher scripts updated: `create_shortcut.ps1`, `create_desktop_shortcut.py`, `build_launcher.bat`, `INSTALL.ps1`
+  - Updated `LAUNCHER_README.md` with new configuration examples and environment variable documentation
+  - Added environment variable expansion support in launcher configuration (automatically expands `%USERPROFILE%`, `%HOMEDRIVE%`, etc.)
+  - Path validation updated to check: base directory, WinPython activate script, and GUI script
+  - Fixed USB drive health issues (D: drive had filesystem corruption, repaired with CHKDSK)
+  - Successfully tested local execution - HPM GUI launches correctly from Framework directory
+
 ## [0.1.3a] - 2025-12-31 13:45
 
 ### Added

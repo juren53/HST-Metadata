@@ -12,6 +12,11 @@ Lets bump the version to [    ] and the date/time stamp to [      ] per the vers
 Lets bump the version to v0.1.3 and the date/time stamp to 2025-12-18 16:15 per the version rules in Warp.ini and then generate a related git version tag.
 =============================================================
 
+C:\Users\jimur\winpython\WPy64-31201b5\scripts\activate.bat
+cd Projects\HST-Metadata\Photos\Version-2\Framework\
+python gui\hstl_gui.py
+
+
  C:\Data\HSTL_Batches\Lindsay_Test4\input\tiff\
  
  

@@ -4,8 +4,8 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $desktopPath = [Environment]::GetFolderPath("Desktop")
 
 # Determine target (exe or py script)
-$exePath = Join-Path $scriptDir "dist\ThumbdriveLauncher.exe"
-$pyScript = Join-Path $scriptDir "thumbdrive_launcher.py"
+$exePath = Join-Path $scriptDir "dist\HPMLauncher.exe"
+$pyScript = Join-Path $scriptDir "launcher.py"
 $iconPath = Join-Path $scriptDir "thumbdrive_icon.ico"
 
 # Find Python interpreter
@@ -66,7 +66,7 @@ if (Test-Path $exePath) {
 }
 
 # Create shortcut
-$shortcutPath = Join-Path $desktopPath "Thumbdrive Launcher.lnk"
+$shortcutPath = Join-Path $desktopPath "HPM Launcher.lnk"
 
 try {
     $WScriptShell = New-Object -ComObject WScript.Shell
@@ -79,7 +79,7 @@ try {
     }
 
     $shortcut.WorkingDirectory = $scriptDir
-    $shortcut.Description = "Launch PowerShell script from thumbdrive"
+    $shortcut.Description = "Launch HSTL Photo Metadata System"
 
     # Set icon if it exists
     if (Test-Path $iconPath) {

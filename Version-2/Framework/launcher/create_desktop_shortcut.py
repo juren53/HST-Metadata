@@ -14,8 +14,8 @@ def create_desktop_shortcut():
     desktop = Path.home() / "Desktop"
 
     # Determine what to link to
-    exe_path = script_dir / "dist" / "ThumbdriveLauncher.exe"
-    py_script = script_dir / "thumbdrive_launcher.py"
+    exe_path = script_dir / "dist" / "HPMLauncher.exe"
+    py_script = script_dir / "launcher.py"
     icon_path = script_dir / "thumbdrive_icon.ico"
 
     # Check what exists
@@ -33,7 +33,7 @@ def create_desktop_shortcut():
         return False
 
     # Shortcut path
-    shortcut_path = desktop / "Thumbdrive Launcher.lnk"
+    shortcut_path = desktop / "HPM Launcher.lnk"
 
     try:
         # Try using win32com (Windows-specific)
@@ -43,7 +43,7 @@ def create_desktop_shortcut():
             shortcut = shell.CreateShortCut(str(shortcut_path))
             shortcut.TargetPath = str(target)
             shortcut.WorkingDirectory = str(script_dir)
-            shortcut.Description = "Launch PowerShell script from thumbdrive"
+            shortcut.Description = "Launch HSTL Photo Metadata System"
 
             # Set icon if it exists
             if icon_path.exists():
@@ -83,7 +83,7 @@ def create_desktop_shortcut():
 def main():
     """Main function"""
     print("=" * 50)
-    print("Thumbdrive Launcher - Desktop Shortcut Creator")
+    print("HPM Launcher - Desktop Shortcut Creator")
     print("=" * 50)
     print()
 
