@@ -197,6 +197,12 @@ class MainWindow(QMainWindow):
         
         help_menu.addSeparator()
         
+        issue_tracker_action = QAction("HPM &Issue Tracker", self)
+        issue_tracker_action.triggered.connect(self._show_issue_tracker)
+        help_menu.addAction(issue_tracker_action)
+        
+        help_menu.addSeparator()
+        
         about_action = QAction("&About", self)
         about_action.triggered.connect(self._show_about)
         help_menu.addAction(about_action)
@@ -456,8 +462,35 @@ class MainWindow(QMainWindow):
                 self,
                 "File Not Found",
                 f"Change Log not found at:\n{changelog_path}"
-            )
+)
+    
+    def _show_issue_tracker(self):
+        """Open HPM Issue Tracker in web browser."""
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
         
+        issue_tracker_url = "https://github.com/juren53/HST-Metadata/issues"
+        
+        try:
+            # Try to open with system default browser
+            QDesktopServices.openUrl(QUrl(issue_tracker_url))
+            self.status_bar.showMessage("Opening HPM Issue Tracker...", 2000)
+        except Exception as e:
+            # Fallback to webbrowser module
+            try:
+                webbrowser.open(issue_tracker_url)
+                self.status_bar.showMessage("Opening HPM Issue Tracker...", 2000)
+            except Exception as e2:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Open Issue Tracker",
+                    f"Could not open HPM Issue Tracker in browser.\n\n"
+                    f"Please open manually:\n{issue_tracker_url}\n\n"
+                    f"Primary error: {str(e)}\n"
+                    f"Fallback error: {str(e2)}"
+                )
+         
     def _show_about(self):
         """Show about dialog."""
         QMessageBox.about(
