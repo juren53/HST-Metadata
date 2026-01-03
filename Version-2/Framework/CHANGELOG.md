@@ -43,6 +43,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Platform-Specific Documentation** - Added Windows, macOS, and Linux installation notes
 - **External Tool Integration** - Clarified relationship between ExifTool and PyExifTool
 
+## [0.1.3c] - 2026-01-03 10:00
+
+### Changed
+- **Version Label Updates** - Updated all version references from 0.1.3b to 0.1.3c
+
 ## [0.1.3b] - 2026-01-02 20:05
 
 ### Changed
