@@ -52,7 +52,7 @@ Write-Host "Installing files..." -ForegroundColor Cyan
 
 # List of files to copy
 $filesToCopy = @(
-    "thumbdrive_launcher.py",
+    "launcher.py",
     "launcher_config.json",
     "LAUNCHER_README.md",
     "build_launcher.bat",

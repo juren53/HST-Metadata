@@ -38,7 +38,7 @@ REM Build the executable
 echo Building executable...
 echo.
 
-pyinstaller --onefile --windowed --name "ThumbdriveLauncher" thumbdrive_launcher.py
+pyinstaller --onefile --windowed --name "HPMLauncher" launcher.py
 
 if errorlevel 1 (
     echo.
@@ -53,14 +53,14 @@ echo Build Complete!
 echo ============================================
 echo.
 echo The executable is located at:
-echo   dist\ThumbdriveLauncher.exe
+echo   dist\HPMLauncher.exe
 echo.
 echo IMPORTANT: Copy launcher_config.json to the same directory as the .exe
 echo.
 echo Next steps:
-echo   1. Copy dist\ThumbdriveLauncher.exe to your desired location
+echo   1. Copy dist\HPMLauncher.exe to your desired location
 echo   2. Copy launcher_config.json to the same directory
-echo   3. Right-click ThumbdriveLauncher.exe and create a desktop shortcut
+echo   3. Right-click HPMLauncher.exe and create a desktop shortcut
 echo   4. (Optional) Customize the shortcut icon
 echo.
 pause
