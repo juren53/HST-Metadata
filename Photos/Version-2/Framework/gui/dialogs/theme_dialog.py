@@ -197,6 +197,15 @@ class ThemeDialog(QDialog):
                 color: {colors.text};
             }}
         """)
+        
+        # Also apply menu stylesheets for consistency
+        from PyQt6.QtWidgets import QApplication
+        app = QApplication.instance()
+        if app:
+            menu_stylesheet = self.theme_manager.get_menu_stylesheet(
+                ThemeMode.SYSTEM if self.selected_mode == ThemeMode.SYSTEM else self.selected_mode
+            )
+            app.setStyleSheet(menu_stylesheet)
 
         # Update text colors
         self.preview_title.setStyleSheet(f"""

@@ -1,5 +1,5 @@
 # HSTL Photo Framework Dependencies
-# Version: 0.1.3c
+# Version: 0.1.3d
 # Python Requirement: 3.7+
 
 # ============================================================================

@@ -5,6 +5,43 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3d] - 2026-01-03 19:10 CST
+
+### Fixed
+- **Menu Readability Issue** - Fixed dropdown menu text visibility in Light and Dark themes (2026-01-03 19:15)
+  - **Root Cause**: QMenu and QMenuBar widgets weren't properly styled by existing theme system
+  - **Problem**: 
+    - Light Theme caused white text on white background (unreadable)
+    - Dark Theme caused black text on dark background (unreadable)
+    - Menus inherited system colors that conflicted with custom theme palettes
+  - **Solution Implemented**:
+    - Added comprehensive `get_menu_stylesheet()` method to ThemeManager
+    - Generates CSS stylesheets for QMenu, QMenuBar, and all menu states
+    - Integrated stylesheet application in `apply_theme()` method
+    - Proper color contrast for all theme modes (Light, Dark, System Default)
+  - **Menu Styling Features**:
+    - Background and text colors match current theme
+    - Hover effects with theme-appropriate highlight colors
+    - Disabled item styling with proper contrast
+    - Separator styling for visual menu organization
+    - Consistent padding and spacing across all menus
+    - Cross-platform compatibility (Windows, macOS, Linux)
+  - **Files Modified**:
+    - `gui/theme_manager.py` - Added menu stylesheet generation and integration
+    - `gui/dialogs/theme_dialog.py` - Updated theme preview to include menu styling
+    - Created `test_menu_theme.py` for testing menu theme functionality
+  - **Verification**:
+    - Successfully tested with all three theme modes
+    - Menu readability maintained across File, Edit, Batch, Tools, and Help menus
+    - Theme switching instantly updates menu appearance without restart
+    - Professional appearance with WCAG AA contrast compliance
+
+### Technical
+- **Theme Architecture Enhancement** - Extended theme system to handle complex widget styling
+- **CSS Integration** - Added PyQt6 stylesheet support alongside existing QPalette system
+- **Cross-Platform Menu Rendering** - Ensured consistent menu appearance across operating systems
+- **Theme Testing Framework** - Created dedicated test script for menu theme validation
+
 ## [0.1.3c] - 2026-01-02 21:30
 
 ### Added
