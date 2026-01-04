@@ -116,6 +116,10 @@ class ThemeManager(QObject):
         palette = self._create_palette(self._current_resolved_mode)
         app.setPalette(palette)
 
+        # Apply menu stylesheet to fix dropdown menu readability
+        menu_stylesheet = self.get_menu_stylesheet(self._current_resolved_mode)
+        app.setStyleSheet(menu_stylesheet)
+
         # Emit signal for widgets with custom stylesheets
         self.theme_changed.emit(mode)
 
@@ -180,6 +184,73 @@ class ThemeManager(QObject):
                         QColor(colors.disabled_text))
 
         return palette
+
+    def get_menu_stylesheet(self, mode: ThemeMode = None) -> str:
+        """Get stylesheet for menu widgets to ensure proper readability.
+
+        Args:
+            mode: The theme mode (if None, uses current resolved mode)
+
+        Returns:
+            CSS stylesheet string for menu widgets
+        """
+        if mode is None:
+            mode = self._current_resolved_mode
+        
+        colors = self.get_colors(mode)
+        
+        return f"""
+        QMenu {{
+            background-color: {colors.window_bg};
+            color: {colors.text};
+            border: 1px solid {colors.button_bg};
+            padding: 2px;
+        }}
+        
+        QMenu::item {{
+            background-color: transparent;
+            color: {colors.text};
+            padding: 5px 20px;
+            border: none;
+        }}
+        
+        QMenu::item:selected {{
+            background-color: {colors.highlight};
+            color: {colors.highlighted_text};
+        }}
+        
+        QMenu::item:disabled {{
+            color: {colors.disabled_text};
+        }}
+        
+        QMenu::separator {{
+            height: 1px;
+            background-color: {colors.button_bg};
+            margin: 5px 10px;
+        }}
+        
+        QMenuBar {{
+            background-color: {colors.window_bg};
+            color: {colors.text};
+            border: none;
+        }}
+        
+        QMenuBar::item {{
+            background-color: transparent;
+            color: {colors.text};
+            padding: 5px 10px;
+        }}
+        
+        QMenuBar::item:selected {{
+            background-color: {colors.button_bg};
+            color: {colors.text};
+        }}
+        
+        QMenuBar::item:pressed {{
+            background-color: {colors.highlight};
+            color: {colors.highlighted_text};
+        }}
+        """
 
     def get_colors(self, mode: ThemeMode = None) -> ThemeColors:
         """Get color definitions for a theme mode.
