@@ -33,3 +33,7 @@ pip-delete-this-directory.txt
 logs/
 temp/
 tmp/
+
+# Artifacts
+NUL
+1.5.0
