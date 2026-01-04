@@ -5,6 +5,54 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3e] - 2026-01-03 20:46 CST
+
+### Added
+- **Zoom/Font Scaling Feature** - Font-based zoom functionality for improved accessibility (2026-01-03 20:46 CST)
+  - **Zoom Range**: 75% to 200% in discrete steps (75%, 85%, 100%, 115%, 130%, 150%, 175%, 200%)
+  - **Multiple Control Methods**:
+    - View menu with Zoom In/Out/Reset actions
+    - Keyboard shortcuts: `Ctrl++` or `Ctrl+=` (zoom in), `Ctrl+-` (zoom out), `Ctrl+0` (reset to 100%)
+    - Mouse wheel: Hold `Ctrl` and scroll to zoom in/out
+  - **Features**:
+    - Global zoom applied consistently across all windows and tabs
+    - Persistent zoom level - saves to settings and restores on app restart
+    - Status bar feedback - shows "Zoom: X%" for 2 seconds when changed
+    - Font scaling approach - Qt layouts automatically adjust widget sizes
+  - **MVP Implementation** - Font-only scaling without widget-specific dimension code
+    - Simple ~200 line implementation vs. complex 1000+ line alternative
+    - Leverages Qt's built-in layout system for automatic size adjustments
+    - All text elements scale: buttons, labels, tables, trees, menus, logs
+    - Layout elements auto-adjust: button sizes, table row heights, tree item heights
+  - **Architecture**:
+    - ZoomManager singleton class following ThemeManager pattern
+    - Signal/slot architecture for responsive UI updates
+    - QSettings persistence using "ui/zoom_level" key
+    - Base font size capture for accurate scaling calculations
+    - Font size clamped to 8pt-24pt range for usability
+  - **Files Created**:
+    - `gui/zoom_manager.py` - ZoomManager singleton class with font scaling logic
+  - **Files Modified**:
+    - `gui/main_window.py` - Added View menu, keyboard shortcuts, mouse wheel support, zoom methods, persistence
+    - `gui/hstl_gui.py` - Initialize ZoomManager with base font on startup
+  - **Testing**:
+    - Verified zoom works across all tabs (Batches, Current Batch, Configuration, Logs)
+    - Confirmed theme integration - zoom persists when switching between Light/Dark themes
+    - Tested persistence - zoom level restores correctly after app restart
+    - All control methods working: menu, keyboard, mouse wheel
+
+### Technical
+- **Qt Font Scaling** - Application-wide font scaling with automatic widget updates
+  - Uses `QApplication.setFont()` for global font changes
+  - Iterates all widgets to force immediate font update on zoom change
+  - Qt layouts automatically handle size adjustments for scaled fonts
+  - No custom per-widget scaling code required
+- **Zoom Manager Architecture** - Singleton pattern with settings persistence
+  - Discrete zoom levels prevent fractional font sizes
+  - Nearest zoom level detection for smooth increment/decrement
+  - Signal emission for UI updates (status bar feedback)
+  - Robust validation and clamping for corrupted settings
+
 ## [0.1.3d] - 2026-01-03 19:10 CST
 
 ### Fixed

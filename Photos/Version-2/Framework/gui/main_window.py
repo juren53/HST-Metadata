@@ -8,7 +8,8 @@ import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
     QMainWindow, QTabWidget, QWidget, QVBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea
+    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea,
+    QApplication
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSettings
 from PyQt6.QtGui import QAction
@@ -26,6 +27,7 @@ from gui.widgets.log_widget import LogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
+from gui.zoom_manager import ZoomManager
 
 
 class MainWindow(QMainWindow):
@@ -35,12 +37,16 @@ class MainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        
+
         self.framework = HSLTFramework()
         self.registry = BatchRegistry()
         self.current_batch_id = None
         self.settings = QSettings("HSTL", "PhotoFramework")
-        
+
+        # Initialize zoom manager
+        self.zoom_manager = ZoomManager.instance()
+        self.zoom_manager.zoom_changed.connect(self._on_zoom_changed)
+
         self._init_ui()
         self._create_menu_bar()
         self._create_status_bar()
@@ -49,7 +55,7 @@ class MainWindow(QMainWindow):
         
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.3d")
+        self.setWindowTitle("HSTL Photo Framework v0.1.3e")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
         
@@ -144,6 +150,37 @@ class MainWindow(QMainWindow):
         theme_action = QAction("&Theme Selection...", self)
         theme_action.triggered.connect(self._show_theme_dialog)
         edit_menu.addAction(theme_action)
+
+        # View menu
+        view_menu = menubar.addMenu("&View")
+
+        # Zoom In action
+        zoom_in_action = QAction("Zoom &In", self)
+        zoom_in_action.setShortcut("Ctrl++")
+        zoom_in_action.setStatusTip("Increase zoom level")
+        zoom_in_action.triggered.connect(self._zoom_in)
+        view_menu.addAction(zoom_in_action)
+
+        # Zoom In alternate shortcut (Ctrl+=)
+        zoom_in_alt_action = QAction(self)
+        zoom_in_alt_action.setShortcut("Ctrl+=")
+        zoom_in_alt_action.triggered.connect(self._zoom_in)
+        self.addAction(zoom_in_alt_action)  # Add to window, not menu
+
+        # Zoom Out action
+        zoom_out_action = QAction("Zoom &Out", self)
+        zoom_out_action.setShortcut("Ctrl+-")
+        zoom_out_action.setStatusTip("Decrease zoom level")
+        zoom_out_action.triggered.connect(self._zoom_out)
+        view_menu.addAction(zoom_out_action)
+
+        # Reset Zoom action
+        view_menu.addSeparator()
+        zoom_reset_action = QAction("&Reset Zoom", self)
+        zoom_reset_action.setShortcut("Ctrl+0")
+        zoom_reset_action.setStatusTip("Reset zoom to 100%")
+        zoom_reset_action.triggered.connect(self._reset_zoom)
+        view_menu.addAction(zoom_reset_action)
 
         # Batch menu
         batch_menu = menubar.addMenu("&Batch")
@@ -331,7 +368,55 @@ class MainWindow(QMainWindow):
         tab_names = ["Batches", "Current Batch", "Configuration", "Logs"]
         if index < len(tab_names):
             self.status_bar.showMessage(f"Viewing: {tab_names[index]}", 2000)
-            
+
+    def _zoom_in(self):
+        """Handle zoom in action."""
+        app = QApplication.instance()
+        self.zoom_manager.zoom_in(app)
+
+    def _zoom_out(self):
+        """Handle zoom out action."""
+        app = QApplication.instance()
+        self.zoom_manager.zoom_out(app)
+
+    def _reset_zoom(self):
+        """Handle reset zoom action."""
+        app = QApplication.instance()
+        self.zoom_manager.reset_zoom(app)
+
+    def _on_zoom_changed(self, factor: float):
+        """Handle zoom level changes.
+
+        Args:
+            factor: New zoom factor
+        """
+        zoom_percent = self.zoom_manager.get_zoom_percentage()
+        self.status_bar.showMessage(f"Zoom: {zoom_percent}%", 2000)
+
+    def wheelEvent(self, event):
+        """Handle mouse wheel events for zoom control.
+
+        Args:
+            event: QWheelEvent
+        """
+        # Check if Ctrl key is pressed
+        if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
+            # Ctrl+Wheel for zoom
+            app = QApplication.instance()
+            delta = event.angleDelta().y()
+
+            if delta > 0:
+                # Scroll up = zoom in
+                self.zoom_manager.zoom_in(app)
+            elif delta < 0:
+                # Scroll down = zoom out
+                self.zoom_manager.zoom_out(app)
+
+            event.accept()  # Mark event as handled
+        else:
+            # Normal wheel scrolling - pass to parent
+            super().wheelEvent(event)
+
     def _validate_project(self):
         """Validate current project."""
         if not self.framework.config_manager:
@@ -497,8 +582,8 @@ class MainWindow(QMainWindow):
             self,
             "About HSTL Photo Framework",
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.1.3d</p>"
-                f"<p><b>Commit Date:</b> 2026-01-03 19:10 CST</p>"
+                f"<p><b>Version:</b> 0.1.3e</p>"
+                f"<p><b>Commit Date:</b> 2026-01-03 20:46 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -526,11 +611,16 @@ class MainWindow(QMainWindow):
         geometry = self.settings.value("geometry")
         if geometry:
             self.restoreGeometry(geometry)
-            
+
         window_state = self.settings.value("windowState")
         if window_state:
             self.restoreState(window_state)
-            
+
+        # Initialize and load zoom settings
+        app = QApplication.instance()
+        self.zoom_manager.initialize_base_font(app)
+        self.zoom_manager.apply_saved_zoom(app)
+
         # Load last opened batch
         last_batch = self.settings.value("lastBatch")
         if last_batch:
@@ -549,4 +639,8 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         """Handle window close event."""
         self._save_window_state()
+
+        # Save zoom settings
+        self.zoom_manager.save_zoom_preference()
+
         event.accept()
