@@ -5,6 +5,32 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3h] - 2026-01-06
+
+### Changed
+- **WinPython Installation Method** - Added winget as recommended installation approach (2026-01-06)
+  - **New Primary Method**: `winget install winpython` - simplified installation using Windows Package Manager
+  - **Installation Process**:
+    - Navigate to user root directory (`%USERPROFILE%`)
+    - Run `winget install winpython` command
+    - Follow on-screen prompts for automatic installation
+  - **Alternative Method**: Manual download and installation retained as fallback option
+    - Manual method still available for users without winget
+    - Download from WinPython official site (https://winpython.github.io/)
+    - Extract and verify installation structure
+  - **Documentation Updates**:
+    - Reorganized installation section with clear method prioritization
+    - Added winget availability note (Microsoft Store - "App Installer")
+    - Separated "Verify Installation Structure" as standalone subsection
+    - Improved readability with clearer section headers
+  - **Benefits**:
+    - Faster installation process
+    - Automatic dependency handling
+    - Simplified user experience for Windows users
+    - Maintains compatibility with existing installation workflows
+  - **Files Modified**:
+    - `HPM_Installation.md` - Updated WinPython installation section (lines 15-58)
+
 ## [0.1.3g] - 2026-01-05
 
 ### Added
