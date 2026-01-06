@@ -5,6 +5,55 @@
 - Python 3.7 or higher
 - All dependencies installed: `pip install -r requirements.txt`
 - ExifTool installed: See [INSTALLATION.md](../INSTALLATION.md) for detailed setup instructions
+- WinPython environment configured (for Windows users)
+
+## Starting the HPM Application
+
+### Recommended: Using the HPM Launcher
+
+The easiest way to start the HPM GUI application is using the HPM Launcher:
+
+1. **Double-click** `HPMLauncher.exe` (if you've built the executable)
+   - Or run: `python launcher/launcher.py`
+
+2. The launcher will automatically:
+   - Activate your WinPython environment
+   - Navigate to the Framework directory
+   - Launch the HPM GUI application
+
+**Benefits:**
+- One-click startup
+- Automatic path validation
+- Error logging and troubleshooting
+- Configuration via `launcher_config.json`
+
+See [`launcher/LAUNCHER_README.md`](../launcher/LAUNCHER_README.md) for detailed launcher documentation.
+
+### Manual HPM Startup
+
+If you prefer to start the HPM application manually or need to troubleshoot, follow these three steps:
+
+1. **Activate WinPython environment:**
+   ```powershell
+   call "C:\Users\<YourUsername>\winpython\WPy64-31201b5\scripts\activate.bat"
+   ```
+
+2. **Navigate to Framework directory:**
+   ```powershell
+   cd /d "C:\Users\<YourUsername>\Projects\HST-Metadata\Photos\Version-2\Framework"
+   ```
+
+3. **Launch the GUI application:**
+   ```powershell
+   python gui\hstl_gui.py
+   ```
+
+**Note:** These are the same three commands embedded in the HPM Launcher. Replace `<YourUsername>` with your actual Windows username, or use environment variables like `%USERPROFILE%`.
+
+**Alternative - Single Command Line:**
+```powershell
+call "%USERPROFILE%\winpython\WPy64-31201b5\scripts\activate.bat" && cd /d "%USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework" && python gui\hstl_gui.py
+```
 
 ## Setting Up a New Batch Project
 
@@ -267,5 +316,6 @@ python hstl_framework.py --config "path\to\project_config.yaml" config --set val
 - Review [`README.md`](README.md) for detailed documentation
 - See [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) for architecture details
 - Check processing logs in your project's `logs/` directory
+- For HPM Launcher issues, see [`launcher/LAUNCHER_README.md`](../launcher/LAUNCHER_README.md)
 
-Last updated: 2025-11-30  15:16
+Last updated: 2026-01-05

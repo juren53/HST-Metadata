@@ -5,6 +5,68 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3g] - 2026-01-05
+
+### Added
+- **HPM Installation Checklist** - Comprehensive installation guide with step-by-step verification (2026-01-05)
+  - **New Documentation**: `HPM_Installation.md` - Complete installation checklist for HPM system
+  - **Installation Sections**:
+    1. Prerequisites verification (Windows 10+, admin access, disk space)
+    2. WinPython installation and configuration
+    3. GitHub repository cloning (`git clone https://github.com/juren53/HST-Metadata.git`)
+    4. Python dependencies installation (`pip install -r requirements.txt`)
+    5. Helper tools setup (ExifTool with PATH configuration)
+    6. Google credentials configuration (OAuth 2.0 setup)
+    7. HPM Launcher configuration and desktop shortcut creation
+    8. Complete installation verification (CLI and GUI testing)
+  - **Features**:
+    - Checkbox format for progress tracking through installation
+    - Detailed verification steps for each component
+    - Quick Reference Card for daily startup commands
+    - Installation Summary table with component locations
+    - Troubleshooting references and documentation links
+    - Optional helper tools section (CSV Record Viewer, image viewers)
+  - **Comprehensive Coverage**:
+    - WinPython download, installation, and verification
+    - Git clone command with repository structure validation
+    - Complete dependency installation with import testing
+    - ExifTool installation with system PATH configuration
+    - Google Cloud Project setup with API enablement
+    - OAuth 2.0 credential creation and first-time authentication
+    - Launcher configuration file verification and testing
+    - Test batch creation and cleanup procedures
+  - **Installation Path Documentation**:
+    - Framework: `%USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework`
+    - WinPython: `%USERPROFILE%\winpython\WPy64-31201b5\`
+    - ExifTool: `C:\Program Files\ExifTool\` (in system PATH)
+    - Credentials: `client_secret.json` in Framework directory
+  - **Files Created**:
+    - `HPM_Installation.md` - Master installation checklist document
+
+## [0.1.3f] - 2026-01-05
+
+### Changed
+- **Quickstart Guide Update** - Enhanced documentation for HPM Launcher and manual startup (2026-01-05)
+  - **New Section**: "Starting the HPM Application" added after Prerequisites
+  - **HPM Launcher Documentation**:
+    - Recommended method using HPM Launcher executable or Python script
+    - Lists automatic features (WinPython activation, directory navigation, GUI launch)
+    - Benefits highlighted: one-click startup, path validation, error logging
+    - Reference to detailed launcher documentation
+  - **Manual HPM Startup Section**:
+    - Step-by-step instructions for manual application launch
+    - Three embedded commands from HPM Launcher documented:
+      1. Activate WinPython environment via activate.bat
+      2. Navigate to Framework directory using cd
+      3. Launch GUI application using python gui\hstl_gui.py
+    - Environment variable usage explained (%USERPROFILE%)
+    - Single-line command alternative provided for advanced users
+  - **Updated References**:
+    - Added launcher documentation link to "Need Help?" section
+    - Updated "Last updated" date to 2026-01-05
+  - **Files Modified**:
+    - `docs/QUICKSTART.md` - Added startup sections and updated references
+
 ## [0.1.3e] - 2026-01-03 20:46 CST
 
 ### Added
