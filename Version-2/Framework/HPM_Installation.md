@@ -7,7 +7,6 @@ This checklist guides you through installing the HPM system from scratch. Follow
 ## Prerequisites
 
 - [ ] Windows 10 or later (64-bit recommended)
-- [ ] Administrator access for installing software
 - [ ] Internet connection for downloads
 - [ ] Minimum 2 GB free disk space
 
@@ -15,7 +14,7 @@ This checklist guides you through installing the HPM system from scratch. Follow
 
 ## 1. Install WinPython
 
-WinPython is a portable Python distribution that includes all necessary scientific computing packages.
+WinPython is a portable Python distribution that includes all necessary computing packages.
 
 ### Download WinPython
 
@@ -56,7 +55,7 @@ You'll need this path later.
 
 ### Clone the Repository
 
-- [ ] Decide on a project directory location (e.g., `C:\Users\<YourUsername>\Projects\`)
+- [ ] Create a directory `C:\Users\<Username>\Projects\` 
 - [ ] Open **WinPython Command Prompt** or regular Command Prompt
 - [ ] Navigate to your projects directory:
   ```powershell
@@ -326,24 +325,9 @@ The CSV Record Viewer provides a visual interface for reviewing metadata CSV fil
 
 **Note:** This requires wxPython, which should already be installed via `requirements.txt`.
 
-- [ ] Test CSV Record Viewer:
-  ```powershell
-  python csv_record_viewer.py
-  ```
-  - Expected: wxPython-based viewer window opens
+- [ ] CSV Record Viewer - CSV_reader.exe
 
-### Image Viewer Tools
-
-Consider installing additional image viewers for working with TIFF files:
-
-- [ ] **IrfanView** (Free) - [https://www.irfanview.com/](https://www.irfanview.com/)
-  - Excellent for viewing/converting TIFF files
-  - Supports batch operations
-
-- [ ] **XnView** (Free) - [https://www.xnview.com/](https://www.xnview.com/)
-  - Multi-format image viewer
-  - Metadata display capabilities
-
+- [ ] TagWriter - Image Viewer Tool  - tag-writer.exe
 ---
 
 ## Installation Complete!
