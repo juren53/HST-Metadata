@@ -1,6 +1,6 @@
-# HPM (HSTL Photo Metadata) System - Installation Checklist
+## HPM (HSTL Photo Metadata) System - Installation Checklist
 
-This checklist guides you through installing the HPM system from scratch. Follow each section in order and check off items as you complete them.
+This checklist guides you through installing the HPM system (HSTL Photo Metadata System aka HSTL Photo Framework) from scratch. Follow each section in order and check off items as they are completed.
 
 ---
 
@@ -14,20 +14,39 @@ This checklist guides you through installing the HPM system from scratch. Follow
 
 ## 1. Install WinPython
 
-WinPython is a portable Python distribution that includes all necessary computing packages.
+WinPython is a portable Python distribution that includes all necessary packages to make a 'locally installed' version of Python.
 
-### Download WinPython
+### Install WinPython using winget (Recommended)
+
+The easiest way to install WinPython is using Windows Package Manager (winget).
+
+- [ ] Open **Command Prompt** or **PowerShell**
+- [ ] Navigate to your user root directory:
+  ```powershell
+  cd %USERPROFILE%
+  ```
+- [ ] Run the winget installation command:
+  ```powershell
+  winget install winpython
+  ```
+- [ ] Follow any on-screen prompts to complete the installation
+- [ ] Note the installation location (typically: `%USERPROFILE%\winpython\WPy64-31201b5\` or similar)
+
+**Note:** If winget is not available, you can install it from the Microsoft Store (search for "App Installer") or use the manual installation method below.
+
+### Alternative: Manual Download and Installation
+
+If you prefer manual installation or winget is not available:
 
 - [ ] Visit [WinPython Downloads](https://winpython.github.io/)
 - [ ] Download **WinPython 3.12.x.x** (or later) - 64-bit version recommended
   - Example: `Winpython64-3.12.0.1b5.exe`
-- [ ] Choose a permanent installation location (e.g., `C:\Users\<YourUsername>\winpython\`)
-
-### Install WinPython
-
 - [ ] Run the WinPython installer executable
 - [ ] Extract to your chosen location: `%USERPROFILE%\winpython\WPy64-31201b5\`
   - Note: The exact folder name depends on your WinPython version
+
+### Verify Installation Structure
+
 - [ ] Verify the WinPython structure exists:
   ```
   %USERPROFILE%\winpython\
