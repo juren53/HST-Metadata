@@ -324,6 +324,14 @@ The HPM Launcher provides one-click startup for the HPM GUI application.
 
 - [ ] Close the GUI application
 
+### Alternate manual start of HPM System from users home directory 
+
+-  C:\Users\laustin\winpython\WPy64-31201b5\scripts\activate.bat
+-  cd .\Projects\HST-Metadata\Photos\Version-2\Framework\
+-  python .\gui\hstl_gui.py
+
+
+
 ### Clean Up Test Batches (Optional)
 
 - [ ] Remove test batches:
