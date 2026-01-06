@@ -111,6 +111,96 @@ if ($createShortcut -eq 'y' -or $createShortcut -eq 'Y') {
 }
 
 Write-Host ""
+Write-Host "============================================" -ForegroundColor Cyan
+Write-Host "Checking Python Dependencies" -ForegroundColor Cyan
+Write-Host "============================================" -ForegroundColor Cyan
+Write-Host ""
+
+# Load the config to get WinPython path
+$configPath = Join-Path $installPath "launcher_config.json"
+if (Test-Path $configPath) {
+    try {
+        $config = Get-Content $configPath | ConvertFrom-Json
+        $winpythonActivate = $env:USERPROFILE + $config.winpython_activate.Replace('%USERPROFILE%', '')
+        $frameworkDir = $env:USERPROFILE + $config.base_directory.Replace('%USERPROFILE%', '')
+        $requirementsFile = Join-Path $frameworkDir "requirements.txt"
+        
+        if (Test-Path $winpythonActivate) {
+            Write-Host "Checking for required Python packages..." -ForegroundColor Yellow
+            
+            # Create a temporary batch file to check for key dependencies
+            $tempBatch = Join-Path $env:TEMP "check_deps.bat"
+            @"
+@echo off
+call "$winpythonActivate"
+python -c "import PyQt6; import yaml; import pandas" 2>nul
+exit /b %ERRORLEVEL%
+"@ | Out-File -FilePath $tempBatch -Encoding ASCII
+            
+            try {
+                $null = cmd /c $tempBatch 2>&1
+                Remove-Item $tempBatch -ErrorAction SilentlyContinue
+                
+                if ($LASTEXITCODE -eq 0) {
+                    Write-Host "[OK] Required dependencies are already installed" -ForegroundColor Green
+                } else {
+                    Write-Host "[WARNING] Some required dependencies are missing" -ForegroundColor Yellow
+                    
+                    if (Test-Path $requirementsFile) {
+                        Write-Host ""
+                        Write-Host "Would you like to install missing Python dependencies now? (y/n)" -ForegroundColor Yellow
+                        Write-Host "This will install packages from: requirements.txt" -ForegroundColor Gray
+                        $installDeps = Read-Host
+                        
+                        if ($installDeps -eq 'y' -or $installDeps -eq 'Y') {
+                            Write-Host ""
+                            Write-Host "Installing dependencies (this may take a few minutes)..." -ForegroundColor Cyan
+                            
+                            # Create a temporary batch file to install requirements
+                            $installBatch = Join-Path $env:TEMP "install_deps.bat"
+                            @"
+@echo off
+call "$winpythonActivate"
+cd /d "$frameworkDir"
+python -m pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org PyYAML pandas pydantic ftfy tqdm colorama structlog Pillow PyExifTool google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client gspread pytest pytest-cov PyQt6 PyQt6-Qt6 PyQt6-sip
+"@ | Out-File -FilePath $installBatch -Encoding ASCII
+                            
+                            try {
+                                $result = cmd /c $installBatch 2>&1
+                                Remove-Item $installBatch -ErrorAction SilentlyContinue
+                                
+                                if ($LASTEXITCODE -eq 0) {
+                                    Write-Host "[OK] Dependencies installed successfully" -ForegroundColor Green
+                                } else {
+                                    Write-Host "[WARNING] Some dependencies may not have installed correctly" -ForegroundColor Yellow
+                                    Write-Host "You can manually install them later with:" -ForegroundColor Gray
+                                    Write-Host "  cmd /c `"call $winpythonActivate && cd /d $frameworkDir && pip install -r requirements.txt`"" -ForegroundColor Gray
+                                }
+                            } catch {
+                                Write-Host "[ERROR] Failed to install dependencies: $_" -ForegroundColor Red
+                            }
+                        } else {
+                            Write-Host "[SKIPPED] You can install dependencies later" -ForegroundColor Yellow
+                        }
+                    } else {
+                        Write-Host "[WARNING] requirements.txt not found at: $requirementsFile" -ForegroundColor Yellow
+                    }
+                }
+            } catch {
+                Write-Host "[WARNING] Could not check dependencies: $_" -ForegroundColor Yellow
+            }
+        } else {
+            Write-Host "[WARNING] WinPython activation script not found at: $winpythonActivate" -ForegroundColor Yellow
+            Write-Host "You may need to edit launcher_config.json with the correct path" -ForegroundColor Gray
+        }
+    } catch {
+        Write-Host "[WARNING] Could not read launcher config: $_" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "[WARNING] launcher_config.json not found" -ForegroundColor Yellow
+}
+
+Write-Host ""
 Write-Host "============================================" -ForegroundColor Green
 Write-Host "Installation Complete!" -ForegroundColor Green
 Write-Host "============================================" -ForegroundColor Green
