@@ -4,6 +4,48 @@ This checklist guides you through installing the HPM system (HSTL Photo Metadata
 
 ---
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [1. Install WinPython](#1-install-winpython)
+  - [Install WinPython using winget (Recommended)](#install-winpython-using-winget-recommended)
+  - [Alternative: Manual Download and Installation](#alternative-manual-download-and-installation)
+  - [Verify Installation Structure](#verify-installation-structure)
+  - [Verify WinPython Installation](#verify-winpython-installation)
+- [2. Download HPM from GitHub](#2-download-hpm-from-github)
+  - [Clone the Repository](#clone-the-repository)
+  - [Verify Repository Structure](#verify-repository-structure)
+- [3. Install Dependencies](#3-install-dependencies)
+  - [Activate WinPython Environment](#activate-winpython-environment)
+  - [Install Python Packages](#install-python-packages)
+  - [Verify Python Package Installation](#verify-python-package-installation)
+- [4. Install Helper Tools/Apps](#4-install-helper-toolsapps)
+  - [Install ExifTool (Required)](#install-exiftool-required)
+- [5. Install Credentials](#5-install-credentials)
+  - [Create Google Cloud Project](#create-google-cloud-project)
+  - [Enable Required APIs](#enable-required-apis)
+  - [Create OAuth 2.0 Credentials](#create-oauth-20-credentials)
+  - [Download and Install Client Secret](#download-and-install-client-secret)
+  - [First-Time Authentication](#first-time-authentication)
+- [6. Configure HPM Launcher (Optional)](#6-configure-hpm-launcher-optional)
+  - [Verify Launcher Configuration](#verify-launcher-configuration)
+  - [Test the Launcher](#test-the-launcher)
+  - [Create Desktop Shortcut (Optional)](#create-desktop-shortcut-optional)
+- [7. Verify Complete Installation](#7-verify-complete-installation)
+  - [Test CLI Framework](#test-cli-framework)
+  - [Test GUI Application](#test-gui-application)
+  - [Alternate manual start of HPM System](#alternate-manual-start-of-hpm-system-from-users-home-directory)
+  - [Clean Up Test Batches (Optional)](#clean-up-test-batches-optional)
+- [8. Additional Helper Tools (Optional)](#8-additional-helper-tools-optional)
+  - [CSV Record Viewer](#csv-record-viewer)
+- [Installation Complete!](#installation-complete)
+  - [Next Steps](#next-steps)
+  - [Quick Reference Card](#quick-reference-card)
+  - [Troubleshooting](#troubleshooting)
+- [Installation Summary](#installation-summary)
+
+---
+
 ## Prerequisites
 
 - [ ] Windows 10 or later (64-bit recommended)
