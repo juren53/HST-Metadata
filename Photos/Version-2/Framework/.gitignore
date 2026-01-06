@@ -1,6 +1,7 @@
 # Configuration files (user-specific)
 config/batch_registry.yaml
 **/batch_registry.yaml
+.gitignore
 
 # Credentials and secrets
 *.json
@@ -21,6 +22,7 @@ venv/
 .venv/
 pip-log.txt
 pip-delete-this-directory.txt
+hpm
 
 # IDE
 .vscode/
