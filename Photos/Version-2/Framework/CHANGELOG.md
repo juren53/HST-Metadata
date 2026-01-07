@@ -33,6 +33,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Modified**:
     - `launcher\launcher_config.json` - Updated winpython_activate path (line 3)
 
+- **Launcher Documentation Update** - Added direct execution instructions (2026-01-06)
+  - **New Section**: "Option 1: Run Directly from Launcher Directory" in LAUNCHER_README.md
+  - **Execution Commands**:
+    - Using WinPython: `%USERPROFILE%\winpython\WPy64-313110\python\python.exe launcher.py`
+    - If Python in PATH: `python launcher.py`
+    - One-liner from anywhere: Full path to python.exe and launcher.py
+  - **Automatic Behaviors Documented**:
+    - Reads `launcher_config.json` from same directory
+    - Activates WinPython environment automatically
+    - Launches HPM GUI application
+    - Creates logs at `%USERPROFILE%\hpm_launcher.log`
+  - **Configuration Example Updated**:
+    - Updated WinPython version in config example: `WPy64-31201b5` → `WPy64-313110`
+    - Reflects current Python 3.13.11 installation
+  - **Documentation Reorganization**:
+    - Renumbered existing options to Option 2 and Option 3
+    - Made direct execution the primary recommended method
+  - **Benefits**:
+    - Users can run launcher without building executable
+    - No desktop shortcut creation required
+    - Simpler workflow for development and testing
+    - Clear commands for all user scenarios
+  - **Files Modified**:
+    - `launcher\LAUNCHER_README.md` - Added direct execution section and updated config example
+
 ### Added
 - **HPM Installation Checklist Table of Contents** - Enhanced documentation navigation (2026-01-06)
   - **New Feature**: Comprehensive hyperlinked table of contents at top of HPM_Installation.md
