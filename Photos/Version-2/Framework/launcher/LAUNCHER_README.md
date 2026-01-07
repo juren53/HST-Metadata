@@ -55,7 +55,34 @@ If you prefer to install manually:
 
 ## Quick Start
 
-### Option 1: Run as Python Script (For Testing)
+### Option 1: Run Directly from Launcher Directory (Simplest)
+
+The launcher can be run directly from its directory without installation:
+
+**Using WinPython:**
+```bash
+cd %USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework\launcher
+%USERPROFILE%\winpython\WPy64-313110\python\python.exe launcher.py
+```
+
+**If Python is in PATH:**
+```bash
+cd %USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework\launcher
+python launcher.py
+```
+
+**One-liner (works from anywhere):**
+```bash
+%USERPROFILE%\winpython\WPy64-313110\python\python.exe %USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework\launcher\launcher.py
+```
+
+The launcher automatically:
+- Reads `launcher_config.json` from the same directory
+- Activates WinPython environment
+- Launches the HPM GUI application
+- Creates logs at `%USERPROFILE%\hpm_launcher.log`
+
+### Option 2: Run as Python Script (For Testing)
 
 1. Make sure Python is installed (Python 3.7 or later)
 2. Run the script:
@@ -63,7 +90,7 @@ If you prefer to install manually:
    python launcher.py
    ```
 
-### Option 2: Create Desktop Executable (Recommended)
+### Option 3: Create Desktop Executable (Recommended for End Users)
 
 1. **Build the executable:**
    - Double-click `build_launcher.bat`
@@ -88,7 +115,7 @@ Edit `launcher_config.json` to customize the launcher:
 ```json
 {
     "base_directory": "%USERPROFILE%\\Projects\\HST-Metadata\\Photos\\Version-2\\Framework",
-    "winpython_activate": "%USERPROFILE%\\winpython\\WPy64-31201b5\\scripts\\activate.bat",
+    "winpython_activate": "%USERPROFILE%\\winpython\\WPy64-313110\\scripts\\activate.bat",
     "gui_script": "gui\\hstl_gui.py",
     "script_timeout": 300,
     "enable_logging": true,
