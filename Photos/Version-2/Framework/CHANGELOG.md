@@ -5,6 +5,64 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-01-07
+
+### Added
+- **USB Portable Setup System** - Complete portable WinPython solution for USB drives (2026-01-07)
+  - **New Directory**: `portable/` - Comprehensive portable USB deployment system
+  - **Portable Launcher**: `LAUNCH_HPM_PORTABLE.bat` - Drive-letter-agnostic batch launcher
+    - Uses `%~d0` magic variable to detect current USB drive letter automatically
+    - Works regardless of which drive letter (D:, E:, F:, etc.) Windows assigns
+    - Activates WinPython environment and launches HPM GUI from USB
+    - Solves the problem of hardcoded paths breaking when USB drive letter changes
+  - **Cross-Platform Development Support**:
+    - `launch_hpm_portable.sh` - Linux equivalent for testing application logic
+    - `validate_windows_scripts.sh` - Validates Windows batch files for common issues
+    - `fix_line_endings.sh` - Converts line endings to Windows format (CRLF)
+  - **Comprehensive Documentation**:
+    - `portable/README.md` - Overview and quick navigation guide
+    - `portable/QUICK_START.md` - Simple 3-step guide for USB portable setup
+    - `portable/USB_PORTABLE_SETUP.md` - Detailed portable WinPython guide with examples
+    - `portable/CROSS_PLATFORM_STRATEGY.md` - How to develop Windows scripts on Linux
+    - `portable/LINUX_WORKFLOW_CHEATSHEET.md` - Quick reference for Linux development
+  - **Line Ending Management**:
+    - `.gitattributes` - Ensures proper CRLF line endings for Windows batch files
+    - Git configuration prevents "mixed line endings" warnings
+    - Cross-platform compatibility maintained between Linux development and Windows deployment
+  - **Features**:
+    - Automatic drive letter detection using Windows batch variables
+    - No manual path editing required after initial setup
+    - Works on any Windows computer regardless of USB drive letter assignment
+    - Complete directory structure validation before execution
+    - Enables true portable Python development environment
+  - **Use Cases**:
+    - Run HPM system from USB drive on different computers
+    - No local installation required on target computers
+    - Ideal for fieldwork, demonstrations, or shared workstations
+    - WinPython and HPM Framework travel together on USB
+
+- **WinPython Activation Documentation** - Detailed explanation of WinPython environment activation (2026-01-06)
+  - **New File**: `launcher/WinPythons_activate-bat_explained.md`
+  - Explains what `activate.bat` does and how it works
+  - Documents WinPython path structure and versioning
+  - Describes environment variable modification during activation
+  - Clarifies difference between WinPython activation and Python venv
+  - Provides context for understanding portable launcher operations
+
+- **Copyright Watermark Image** - Branding asset for GUI and watermarking (2026-01-06)
+  - **New File**: `gui/Copyright_Watermark.png` (33.5 KB)
+  - Used for GUI branding and restricted image watermarking
+  - Professional institutional branding for HSTL Photo Framework
+  - Applied during Step 8 watermark processing for restricted images
+
+### Changed
+- **HPM Installation Documentation** - Added alternate manual startup instructions (2026-01-06)
+  - New section in `HPM_Installation.md` documenting manual application launch
+  - Step-by-step instructions for launching from user home directory
+  - Alternative to using HPM Launcher for users preferring manual control
+  - Documents three-step process: activate WinPython, navigate to Framework, launch GUI
+  - Single-line command alternative provided for advanced users
+
 ## [0.1.3i] - 2026-01-06
 
 ### Changed

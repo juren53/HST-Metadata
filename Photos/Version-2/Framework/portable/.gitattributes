@@ -1,0 +1,29 @@
+# Git line ending configuration for cross-platform development
+# This ensures Windows scripts maintain CRLF and Linux scripts maintain LF
+
+# Windows batch files MUST have CRLF line endings
+*.bat text eol=crlf
+
+# PowerShell scripts MUST have CRLF line endings
+*.ps1 text eol=crlf
+
+# Shell scripts MUST have LF line endings
+*.sh text eol=lf
+
+# Python files prefer LF but can handle both
+*.py text eol=lf
+
+# Markdown files prefer LF
+*.md text eol=lf
+
+# JSON files prefer LF
+*.json text eol=lf
+
+# Prevent binary files from being modified
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.exe binary

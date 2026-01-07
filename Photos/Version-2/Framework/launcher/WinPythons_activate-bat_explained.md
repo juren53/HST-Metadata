@@ -5,10 +5,15 @@
 This batch file activates a specific WinPython environment in your Windows system.
 
 Breaking down the path:
+
 - `%USERPROFILE%` - Points to your user directory (typically `C:\Users\YourUsername`)
+
 - `\winpython\WPy64-31201b5\` - Your WinPython installation directory
+
   - `WPy64` indicates 64-bit version
+  
   - `31201b5` suggests Python 3.12.01 beta 5
+  
 - `\scripts\activate.bat` - The activation script
 
 **What it does:**
