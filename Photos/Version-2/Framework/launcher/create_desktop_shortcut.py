@@ -11,7 +11,8 @@ def create_desktop_shortcut():
     """Create a desktop shortcut for the launcher"""
 
     script_dir = Path(__file__).parent
-    desktop = Path.home() / "Desktop"
+    # Create shortcut in launcher directory for portability
+    desktop = script_dir
 
     # Determine what to link to
     exe_path = script_dir / "dist" / "HPMLauncher.exe"
@@ -54,7 +55,7 @@ def create_desktop_shortcut():
                 shortcut.IconLocation = str(target)
 
             shortcut.save()
-            print(f"[OK] Desktop shortcut created: {shortcut_path}")
+            print(f"[OK] Shortcut created: {shortcut_path}")
             return True
 
         except ImportError:
@@ -69,7 +70,7 @@ def create_desktop_shortcut():
                 print("\nAlternative: Create shortcut manually:")
                 print(f"  1. Right-click on: {target}")
                 print(f"  2. Select 'Create shortcut'")
-                print(f"  3. Move shortcut to Desktop")
+                print(f"  3. Shortcut will be created in the same directory")
                 if icon_path.exists():
                     print(f"  4. Right-click shortcut → Properties → Change Icon")
                     print(f"     Browse to: {icon_path}")
@@ -83,7 +84,7 @@ def create_desktop_shortcut():
 def main():
     """Main function"""
     print("=" * 50)
-    print("HPM Launcher - Desktop Shortcut Creator")
+    print("HPM Launcher - Shortcut Creator")
     print("=" * 50)
     print()
 
@@ -92,7 +93,7 @@ def main():
     print()
     if success:
         print("[OK] Setup complete!")
-        print("\nYou can now launch your thumbdrive script from the desktop shortcut.")
+        print("\nShortcut created in launcher directory. You can copy it to your Desktop or anywhere else.")
     else:
         print("[WARNING] Setup incomplete. See messages above.")
 
