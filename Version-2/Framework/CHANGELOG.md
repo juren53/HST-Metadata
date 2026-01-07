@@ -5,6 +5,53 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3i] - 2026-01-06
+
+### Changed
+- **WinPython Upgrade** - Updated to latest Python 3.13.11 release (2026-01-06)
+  - **Previous Version**: WinPython 3.12.0.1b5 (Python 3.12.0, November 2023)
+  - **New Version**: WinPython 3.13.11.0slim_post1 (Python 3.13.11, December 2025)
+  - **Installation Process**:
+    - Downloaded WinPython64-3.13.11.0slim_post1.exe (623 MB) from GitHub releases
+    - Removed old installation: `%USERPROFILE%\winpython\WPy64-31201b5\`
+    - Extracted new version to: `%USERPROFILE%\winpython\WPy64-313110\`
+    - Verified Python 3.13.11 installation and activation
+  - **Dependency Reinstallation**:
+    - All HPM dependencies reinstalled from `requirements.txt`
+    - Core packages verified: PyYAML, pandas, pydantic, Pillow
+    - GUI frameworks: PyQt6 6.10.1, wxPython 4.2.4
+    - Google services: google-auth 2.41.1, gspread 6.2.1, google-api-python-client 2.187.0
+    - New packages: ftfy 6.3.1, structlog 25.5.0, PyExifTool 0.5.6, pytest-cov 7.0.0
+  - **Configuration Updates**:
+    - Updated `launcher\launcher_config.json` with new WinPython path
+    - Changed: `WPy64-31201b5` → `WPy64-313110`
+    - HPM Launcher tested and verified working with Python 3.13.11
+  - **Benefits**:
+    - Latest Python 3.13 features and performance improvements
+    - Updated package versions with security patches and bug fixes
+    - 2+ year version jump ensures long-term support
+  - **Files Modified**:
+    - `launcher\launcher_config.json` - Updated winpython_activate path (line 3)
+
+### Added
+- **HPM Installation Checklist Table of Contents** - Enhanced documentation navigation (2026-01-06)
+  - **New Feature**: Comprehensive hyperlinked table of contents at top of HPM_Installation.md
+  - **Navigation Links**:
+    - All 8 main installation sections (Prerequisites through Installation Complete)
+    - 40+ subsection links for quick access to specific installation steps
+    - Hierarchical indentation showing document structure
+  - **Link Structure**:
+    - Main sections: Prerequisites, WinPython installation, GitHub download, Dependencies, etc.
+    - Subsections: Installation methods, verification steps, configuration details
+    - Deep links to specific procedures (Google Cloud setup, launcher configuration, testing)
+  - **Benefits**:
+    - Faster navigation to specific installation steps
+    - Clear overview of entire installation process
+    - Improved user experience for long documentation
+    - Works in all Markdown viewers (GitHub, VS Code, etc.)
+  - **Files Modified**:
+    - `HPM_Installation.md` - Added table of contents section (lines 7-45)
+
 ## [0.1.3h] - 2026-01-06
 
 ### Changed
