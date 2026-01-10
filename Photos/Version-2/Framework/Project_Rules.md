@@ -1,4 +1,4 @@
-# SysMon Project Rules
+# Project Rules
 
 ## Timezone Convention
 **CRITICAL**: ALL timestamps, dates, and times in this project MUST use Central Time USA (CST/CDT), NEVER UTC or any other timezone.
@@ -14,6 +14,7 @@ Example formats:
 - Changelog: `Tue 03 Dec 2025 09:20:00 PM CST`
 - Version label: `v0.0.9b 2025-12-03`
 - Always include timezone indicator (CST or CDT) in full timestamps
+- an make certain time is represented as CST or CDT . . . and NOT GMT!!
 
 ## Version Numbering
 - Format: `v0.0.X` for releases
