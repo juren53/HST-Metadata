@@ -9,4 +9,10 @@
 
 <a href="https://docs.google.com/spreadsheets/d/18_Bv5sfYakU7ittMcWXgR1QcurD7O9pJ/edit?gid=1418369420#gid=1418369420" target="_blank">Test6  2025-07-22- New Photo Metadata (Brian) [ 43 records | 63 TIFFS | Unicode | Restricted | versos | 16bit TIFFs]</a>
 
-<a href="https://docs.google.com/spreadsheets/d/12CKTv2D715G2EqrSvnqO62Vi3scwE9sw/edit?gid=1418369420#gid=1418369420" target="_blank">Test 7  Laurie -LP-HST  Digitization Form 4 - Template-Photo Submission [ 3 Records | 3 TIFFS | 2 Restricted ]</a>
+<a href="https://docs.google.com/spreadsheets/d/1udxqN2hgGtI9-Oa4TDw69o_ftLk-u4KGxda-1h-Lgb4/edit?gid=1418369420#gid=1418369420" target="_blank">Test 7  Laurie -LP-HST  Digitization Form 4 - Template-Photo Submission [ 3 Records | 3 TIFFS | 2 Restricted ]</a>
+
+<a href="https://docs.google.com/spreadsheets/d/12CKTv2D715G2EqrSvnqO62Vi3scwE9sw/edit?gid=1418369420#gid=1418369420" target="_blank">Test 8 Copy of HST-PHC-FY26-Q1-For TESTING ONLY [ 3 Records | 3 TIFFS | 2 Restricted ]</a>
+
+Test 8 <br>
+https://docs.google.com/spreadsheets/d/1udxqN2hgGtI9-Oa4TDw69o_ftLk-u4KGxda-1h-Lgb4/edit?gid=1418369420#gid=1418369420
+
