@@ -26,15 +26,20 @@ class BatchListWidget(QWidget):
     
     def __init__(self, registry, parent=None):
         super().__init__(parent)
-        
+
         self.registry = registry
         self.show_all = False
         self.settings = QSettings("HSTL", "PhotoFramework")
-        
+
         # Cache for expensive operations (batch_id -> (records, size, timestamp))
         self._batch_info_cache: Dict[str, Tuple[int, str, float]] = {}
         self._cache_timeout = 30  # Cache for 30 seconds
-        
+
+        # Connect to theme changes
+        from gui.theme_manager import ThemeManager
+        theme = ThemeManager.instance()
+        theme.theme_changed.connect(self._on_theme_changed)
+
         self._init_ui()
         self._load_column_widths()
         
@@ -145,12 +150,16 @@ class BatchListWidget(QWidget):
         status_item = QTableWidgetItem(status.capitalize())
         # Set text color to black for better contrast
         status_item.setForeground(QBrush(QColor(0, 0, 0)))
+        # Use theme-aware colors
+        from gui.theme_manager import ThemeManager
+        theme = ThemeManager.instance()
+        colors = theme.get_current_colors()
         if status == 'active':
-            status_item.setBackground(QBrush(QColor(0, 255, 255)))  # Aqua
+            status_item.setBackground(QBrush(QColor(colors.active_bg)))
         elif status == 'completed':
-            status_item.setBackground(QBrush(QColor(173, 216, 230)))  # Light blue
+            status_item.setBackground(QBrush(QColor(colors.completed_bg)))
         elif status == 'archived':
-            status_item.setBackground(QBrush(QColor(211, 211, 211)))  # Light gray
+            status_item.setBackground(QBrush(QColor(colors.archived_bg)))
         self.table.setItem(row, 1, status_item)
         
         # Progress bar
@@ -376,3 +385,11 @@ class BatchListWidget(QWidget):
             return FileUtils.format_file_size(size_bytes)
         except Exception:
             return ""
+
+    def _on_theme_changed(self, theme_mode):
+        """Handle theme change by refreshing the widget.
+
+        Args:
+            theme_mode: The new theme mode
+        """
+        self.refresh()

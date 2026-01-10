@@ -8,7 +8,8 @@ import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
     QMainWindow, QTabWidget, QWidget, QVBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea
+    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea,
+    QApplication
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSettings
 from PyQt6.QtGui import QAction
@@ -26,6 +27,7 @@ from gui.widgets.log_widget import LogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
+from gui.zoom_manager import ZoomManager
 
 
 class MainWindow(QMainWindow):
@@ -35,12 +37,16 @@ class MainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        
+
         self.framework = HSLTFramework()
         self.registry = BatchRegistry()
         self.current_batch_id = None
         self.settings = QSettings("HSTL", "PhotoFramework")
-        
+
+        # Initialize zoom manager
+        self.zoom_manager = ZoomManager.instance()
+        self.zoom_manager.zoom_changed.connect(self._on_zoom_changed)
+
         self._init_ui()
         self._create_menu_bar()
         self._create_status_bar()
@@ -49,7 +55,7 @@ class MainWindow(QMainWindow):
         
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework")
+        self.setWindowTitle("HSTL Photo Framework v0.1.4")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
         
@@ -135,11 +141,47 @@ class MainWindow(QMainWindow):
         
         # Edit menu
         edit_menu = menubar.addMenu("&Edit")
-        
+
         set_location_action = QAction("Set &Location of Data Files...", self)
         set_location_action.triggered.connect(self._set_data_location)
         edit_menu.addAction(set_location_action)
-        
+
+        # Theme selection menu item
+        theme_action = QAction("&Theme Selection...", self)
+        theme_action.triggered.connect(self._show_theme_dialog)
+        edit_menu.addAction(theme_action)
+
+        # View menu
+        view_menu = menubar.addMenu("&View")
+
+        # Zoom In action
+        zoom_in_action = QAction("Zoom &In", self)
+        zoom_in_action.setShortcut("Ctrl++")
+        zoom_in_action.setStatusTip("Increase zoom level")
+        zoom_in_action.triggered.connect(self._zoom_in)
+        view_menu.addAction(zoom_in_action)
+
+        # Zoom In alternate shortcut (Ctrl+=)
+        zoom_in_alt_action = QAction(self)
+        zoom_in_alt_action.setShortcut("Ctrl+=")
+        zoom_in_alt_action.triggered.connect(self._zoom_in)
+        self.addAction(zoom_in_alt_action)  # Add to window, not menu
+
+        # Zoom Out action
+        zoom_out_action = QAction("Zoom &Out", self)
+        zoom_out_action.setShortcut("Ctrl+-")
+        zoom_out_action.setStatusTip("Decrease zoom level")
+        zoom_out_action.triggered.connect(self._zoom_out)
+        view_menu.addAction(zoom_out_action)
+
+        # Reset Zoom action
+        view_menu.addSeparator()
+        zoom_reset_action = QAction("&Reset Zoom", self)
+        zoom_reset_action.setShortcut("Ctrl+0")
+        zoom_reset_action.setStatusTip("Reset zoom to 100%")
+        zoom_reset_action.triggered.connect(self._reset_zoom)
+        view_menu.addAction(zoom_reset_action)
+
         # Batch menu
         batch_menu = menubar.addMenu("&Batch")
         
@@ -189,6 +231,12 @@ class MainWindow(QMainWindow):
         changelog_action = QAction("&Change Log", self)
         changelog_action.triggered.connect(self._show_changelog)
         help_menu.addAction(changelog_action)
+        
+        help_menu.addSeparator()
+        
+        issue_tracker_action = QAction("HPM &Issue Tracker", self)
+        issue_tracker_action.triggered.connect(self._show_issue_tracker)
+        help_menu.addAction(issue_tracker_action)
         
         help_menu.addSeparator()
         
@@ -320,7 +368,55 @@ class MainWindow(QMainWindow):
         tab_names = ["Batches", "Current Batch", "Configuration", "Logs"]
         if index < len(tab_names):
             self.status_bar.showMessage(f"Viewing: {tab_names[index]}", 2000)
-            
+
+    def _zoom_in(self):
+        """Handle zoom in action."""
+        app = QApplication.instance()
+        self.zoom_manager.zoom_in(app)
+
+    def _zoom_out(self):
+        """Handle zoom out action."""
+        app = QApplication.instance()
+        self.zoom_manager.zoom_out(app)
+
+    def _reset_zoom(self):
+        """Handle reset zoom action."""
+        app = QApplication.instance()
+        self.zoom_manager.reset_zoom(app)
+
+    def _on_zoom_changed(self, factor: float):
+        """Handle zoom level changes.
+
+        Args:
+            factor: New zoom factor
+        """
+        zoom_percent = self.zoom_manager.get_zoom_percentage()
+        self.status_bar.showMessage(f"Zoom: {zoom_percent}%", 2000)
+
+    def wheelEvent(self, event):
+        """Handle mouse wheel events for zoom control.
+
+        Args:
+            event: QWheelEvent
+        """
+        # Check if Ctrl key is pressed
+        if event.modifiers() & Qt.KeyboardModifier.ControlModifier:
+            # Ctrl+Wheel for zoom
+            app = QApplication.instance()
+            delta = event.angleDelta().y()
+
+            if delta > 0:
+                # Scroll up = zoom in
+                self.zoom_manager.zoom_in(app)
+            elif delta < 0:
+                # Scroll down = zoom out
+                self.zoom_manager.zoom_out(app)
+
+            event.accept()  # Mark event as handled
+        else:
+            # Normal wheel scrolling - pass to parent
+            super().wheelEvent(event)
+
     def _validate_project(self):
         """Validate current project."""
         if not self.framework.config_manager:
@@ -345,7 +441,13 @@ class MainWindow(QMainWindow):
                 f"Default batch location has been updated to:\n\n{new_location}\n\n"
                 "This will be used for new batches created from the File → New Batch menu."
             )
-    
+
+    def _show_theme_dialog(self):
+        """Show theme selection dialog."""
+        from gui.dialogs.theme_dialog import ThemeDialog
+        dialog = ThemeDialog(self)
+        dialog.exec()
+
     def _show_settings(self):
         """Show settings dialog."""
         dialog = SettingsDialog(self)
@@ -445,16 +547,43 @@ class MainWindow(QMainWindow):
                 self,
                 "File Not Found",
                 f"Change Log not found at:\n{changelog_path}"
-            )
+)
+    
+    def _show_issue_tracker(self):
+        """Open HPM Issue Tracker in web browser."""
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
         
+        issue_tracker_url = "https://github.com/juren53/HST-Metadata/issues"
+        
+        try:
+            # Try to open with system default browser
+            QDesktopServices.openUrl(QUrl(issue_tracker_url))
+            self.status_bar.showMessage("Opening HPM Issue Tracker...", 2000)
+        except Exception as e:
+            # Fallback to webbrowser module
+            try:
+                webbrowser.open(issue_tracker_url)
+                self.status_bar.showMessage("Opening HPM Issue Tracker...", 2000)
+            except Exception as e2:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Open Issue Tracker",
+                    f"Could not open HPM Issue Tracker in browser.\n\n"
+                    f"Please open manually:\n{issue_tracker_url}\n\n"
+                    f"Primary error: {str(e)}\n"
+                    f"Fallback error: {str(e2)}"
+                )
+         
     def _show_about(self):
         """Show about dialog."""
         QMessageBox.about(
             self,
             "About HSTL Photo Framework",
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.1.3</p>"
-                f"<p><b>Commit Date:</b> 2025-12-18 16:15</p>"
+                f"<p><b>Version:</b> 0.1.4</p>"
+                f"<p><b>Commit Date:</b> 2026-01-07 11:35 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -482,11 +611,16 @@ class MainWindow(QMainWindow):
         geometry = self.settings.value("geometry")
         if geometry:
             self.restoreGeometry(geometry)
-            
+
         window_state = self.settings.value("windowState")
         if window_state:
             self.restoreState(window_state)
-            
+
+        # Initialize and load zoom settings
+        app = QApplication.instance()
+        self.zoom_manager.initialize_base_font(app)
+        self.zoom_manager.apply_saved_zoom(app)
+
         # Load last opened batch
         last_batch = self.settings.value("lastBatch")
         if last_batch:
@@ -505,4 +639,8 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         """Handle window close event."""
         self._save_window_state()
+
+        # Save zoom settings
+        self.zoom_manager.save_zoom_preference()
+
         event.accept()

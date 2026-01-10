@@ -1,6 +1,7 @@
 # Configuration files (user-specific)
 config/batch_registry.yaml
 **/batch_registry.yaml
+.gitignore
 
 # Credentials and secrets
 *.json
@@ -24,6 +25,7 @@ pip-delete-this-directory.txt
 pytest.ini
 run_tests.py
 tests/
+hpm
 
 # IDE
 .vscode/
@@ -36,3 +38,7 @@ tests/
 logs/
 temp/
 tmp/
+
+# Artifacts
+NUL
+1.5.0
