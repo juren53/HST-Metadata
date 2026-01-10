@@ -21,6 +21,9 @@ venv/
 .venv/
 pip-log.txt
 pip-delete-this-directory.txt
+pytest.ini
+run_tests.py
+tests/
 
 # IDE
 .vscode/
