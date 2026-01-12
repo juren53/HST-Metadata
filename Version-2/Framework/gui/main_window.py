@@ -9,9 +9,9 @@ from pathlib import Path
 from PyQt6.QtWidgets import (
     QMainWindow, QTabWidget, QWidget, QVBoxLayout,
     QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea,
-    QApplication
+    QApplication, QDialog, QLabel, QTextEdit, QPushButton, QHBoxLayout
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QSettings
+from PyQt6.QtCore import Qt, pyqtSignal, QSettings, QThread
 from PyQt6.QtGui import QAction
 
 # Add the framework directory to the Python path
@@ -20,6 +20,7 @@ sys.path.insert(0, str(framework_dir))
 
 from hstl_framework import HSLTFramework
 from utils.batch_registry import BatchRegistry
+from utils.github_version_checker import GitHubVersionChecker, VersionCheckResult
 from gui.widgets.batch_list_widget import BatchListWidget
 from gui.widgets.step_widget import StepWidget
 from gui.widgets.config_widget import ConfigWidget
@@ -28,6 +29,7 @@ from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 from gui.zoom_manager import ZoomManager
+from __init__ import __version__
 
 
 class MainWindow(QMainWindow):
@@ -47,6 +49,13 @@ class MainWindow(QMainWindow):
         self.zoom_manager = ZoomManager.instance()
         self.zoom_manager.zoom_changed.connect(self._on_zoom_changed)
 
+        # Initialize version checker
+        self.version_checker = GitHubVersionChecker(
+            repo_url="juren53/HST-Metadata",
+            current_version=__version__,
+            timeout=10
+        )
+
         self._init_ui()
         self._create_menu_bar()
         self._create_status_bar()
@@ -55,7 +64,7 @@ class MainWindow(QMainWindow):
         
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.4")
+        self.setWindowTitle("HSTL Photo Framework v0.1.5")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
         
@@ -240,7 +249,14 @@ class MainWindow(QMainWindow):
         
         help_menu.addSeparator()
         
-        about_action = QAction("&About", self)
+        # Check for updates menu item
+        check_updates_action = QAction("Check for &Updates", self)
+        check_updates_action.triggered.connect(self._on_check_for_updates)
+        help_menu.addAction(check_updates_action)
+        
+        help_menu.addSeparator()
+        
+        about_action = QAction("\u0026About", self)
         about_action.triggered.connect(self._show_about)
         help_menu.addAction(about_action)
         
@@ -582,8 +598,8 @@ class MainWindow(QMainWindow):
             self,
             "About HSTL Photo Framework",
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.1.4</p>"
-                f"<p><b>Commit Date:</b> 2026-01-07 11:35 CST</p>"
+                f"<p><b>Version:</b> 0.1.5</p>"
+                f"<p><b>Commit Date:</b> 2026-01-12 10:15 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -644,3 +660,115 @@ class MainWindow(QMainWindow):
         self.zoom_manager.save_zoom_preference()
 
         event.accept()
+
+    # Version checking methods
+    class UpdateCheckThread(QThread):
+        """Thread for checking updates in background"""
+        result_ready = pyqtSignal(object)
+        
+        def __init__(self, checker):
+            super().__init__()
+            self.checker = checker
+        
+        def run(self):
+            result = self.checker.get_latest_version()
+            self.result_ready.emit(result)
+    
+    def _on_check_for_updates(self):
+        """Handle Check for Updates menu action"""
+        self.status_bar.showMessage("Checking for updates...")
+        
+        # Start background check
+        self.update_check_thread = self.UpdateCheckThread(self.version_checker)
+        self.update_check_thread.result_ready.connect(self._on_update_check_complete)
+        self.update_check_thread.start()
+    
+    def _on_update_check_complete(self, result):
+        """Handle completion of version check"""
+        if result.error_message:
+            self.status_bar.showMessage("Update check failed")
+            error_msg = result.error_message
+            
+            # Provide more helpful message for 404 errors
+            if "404" in error_msg and "Not Found" in error_msg:
+                friendly_msg = (
+                    "HPM repository doesn't have any releases yet.\n\n"
+                    "You're using the latest available version!"
+                )
+                QMessageBox.information(self, "No Releases Available", friendly_msg)
+            else:
+                QMessageBox.warning(
+                    self, 
+                    "Update Check Failed", 
+                    f"Could not check for updates:\n\n{error_msg}"
+                )
+            return
+        
+        # Update status
+        self.status_bar.showMessage("Update check complete")
+        
+        # Check if update available
+        if result.has_update:
+            self._show_update_dialog(result)
+        else:
+            self.status_bar.showMessage("You have the latest version")
+            QMessageBox.information(
+                self,
+                "Up to Date",
+                f"HPM {result.current_version} is the latest version available."
+            )
+    
+    def _show_update_dialog(self, result):
+        """Show update available dialog"""
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Update Available")
+        dialog.resize(500, 400)
+        
+        layout = QVBoxLayout(dialog)
+        
+        # Update information
+        info_text = f"""
+        <h3>Update Available!</h3>
+        <p><b>Current Version:</b> {result.current_version}</p>
+        <p><b>Latest Version:</b> {result.latest_version}</p>
+        <p><b>Published:</b> {result.published_date[:10]}</p>
+        <p><b>Download URL:</b> <a href="{result.download_url}">{result.download_url}</a></p>
+        """
+        
+        info_label = QLabel(info_text)
+        info_label.setOpenExternalLinks(True)
+        info_label.setTextFormat(Qt.TextFormat.RichText)
+        layout.addWidget(info_label)
+        
+        # Release notes (if available)
+        if result.release_notes:
+            layout.addWidget(QLabel("<h4>Release Notes:</h4>"))
+            notes_edit = QTextEdit()
+            notes_edit.setPlainText(result.release_notes)
+            notes_edit.setReadOnly(True)
+            notes_edit.setMaximumHeight(150)
+            layout.addWidget(notes_edit)
+        
+        # Buttons
+        button_layout = QHBoxLayout()
+        
+        download_btn = QPushButton("Download Update")
+        download_btn.clicked.connect(lambda: self._on_download_update(result.download_url))
+        button_layout.addWidget(download_btn)
+        
+        close_btn = QPushButton("Close")
+        close_btn.clicked.connect(dialog.accept)
+        close_btn.setDefault(True)
+        button_layout.addWidget(close_btn)
+        
+        layout.addLayout(button_layout)
+        
+        dialog.exec()
+    
+    def _on_download_update(self, download_url):
+        """Open download URL in browser"""
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
+        
+        QDesktopServices.openUrl(QUrl(download_url))
+        self.status_bar.showMessage("Opening download page...", 2000)
