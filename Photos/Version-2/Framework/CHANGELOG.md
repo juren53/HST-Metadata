@@ -5,6 +5,47 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.5] - 2026-01-12
+
+### Added
+
+- **Check for Updates Feature** - Integrated GitHub release version checking (2026-01-12 10:15 CST)
+  
+  - **New Module**: `utils/github_version_checker.py` - Standalone GitHub version checker
+    - Semantic version comparison (handles major.minor.patch format)
+    - Asynchronous version checking with background threads
+    - Robust error handling for network issues and API failures
+    - Reusable across PyQt6 applications
+  - **GUI Integration**: `gui/main_window.py`
+    - New menu item: Help → Check for Updates
+    - Background thread implementation for non-blocking UI
+    - Update available dialog with release notes display
+    - Direct download link to GitHub releases page
+    - Friendly error messages for common scenarios (404, network errors)
+  - **Repository Configuration**:
+    - Monitors juren53/HST-Metadata GitHub repository
+    - Checks for latest release tags
+    - Compares current version (0.1.5) with published releases
+  - **User Experience**:
+    - Manual check via Help menu
+    - Non-intrusive status bar updates
+    - Clear messaging when up-to-date or updates available
+    - One-click access to download page
+  - **Testing**:
+    - Added `test_version_checker.py` - Standalone test script
+    - Validates version checking functionality
+    - Tests API connectivity and error handling
+  - **Benefits**:
+    - Users can easily check for new HPM releases
+    - Automatic version comparison prevents manual checking
+    - Seamless integration with GitHub release workflow
+    - Consistent with TagWriter implementation
+  - **Files Added**:
+    - `utils/github_version_checker.py` - Version checker module (280 lines)
+    - `test_version_checker.py` - Test script (61 lines)
+  - **Files Modified**:
+    - `gui/main_window.py` - Added version checking integration (113 new lines)
+
 ## HPM [0.1.4] - 2026-01-07
 
 ### Added
