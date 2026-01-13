@@ -55,6 +55,13 @@ class BatchListWidget(QWidget):
         
         header_layout.addStretch()
         
+        # Version and date/time stamp (right-aligned, 10pt font)
+        version_label = QLabel("<span style='font-size: 10pt;'>v0.1.5a | 2026-01-12 20:03 CST</span>")
+        version_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        header_layout.addWidget(version_label)
+        
+        header_layout.addSpacing(20)  # Add space before checkbox
+        
         self.show_all_checkbox = QCheckBox("Show All (including archived)")
         self.show_all_checkbox.stateChanged.connect(self._on_show_all_changed)
         header_layout.addWidget(self.show_all_checkbox)
