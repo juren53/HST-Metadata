@@ -44,6 +44,26 @@ CHANGELOG.md | Add new version section at top with changes (line ~8)
 # - IMPORTANT: ALWAYS use CST time zone, NOT UTC!!!
 # - Version format: v0.0.X (with 'v' prefix in UI, without 'v' in code)
 
+## Post-Commit Steps (REQUIRED)
+
+After committing and pushing version changes:
+
+1. **Create Git Tag**:
+   ```bash
+   git tag -a v0.0.Xa -m "Release v0.0.Xa: Brief description of changes"
+   git push origin v0.0.Xa
+   ```
+
+2. **Create GitHub Release** (CRITICAL - required for "Check for Updates" feature):
+   ```bash
+   gh release create v0.0.Xa --title "HPM v0.0.Xa - Feature Name" --notes "## Release Notes..."
+   ```
+   See "GitHub Release Procedure" section below for detailed template and instructions.
+
+3. **Verify**:
+   - Check release appears at: https://github.com/juren53/HST-Metadata/releases
+   - Test "Check for Updates" in HPM GUI to confirm version detection works
+
 ## GitHub Release Procedure
 
 **CRITICAL**: After creating and pushing a version tag, you MUST create a GitHub Release for the "Check for Updates" feature to work correctly.
