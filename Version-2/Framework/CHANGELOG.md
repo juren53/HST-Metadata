@@ -5,6 +5,28 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.5b] - 2026-01-12 22:18
+
+### Changed
+
+- **Help Menu Streamlining** - Removed antiquated Quick Start Guide (2026-01-12 22:14 CST)
+  - Removed Quick Start Guide menu item from Help menu
+  - User Guide is sufficient for documentation
+  - Reassigned F1 keyboard shortcut to User Guide
+  - Removed unused `_show_quickstart()` method (36 lines)
+  - Cleaner, more focused Help menu structure
+  - **Files Modified**:
+    - `gui/main_window.py` - Removed Quick Start Guide menu item and method
+
+- **UI Consistency Improvement** - Added version label to Batches tab (2026-01-12 22:18 CST)
+  - Added version and date/time stamp to Batches tab header
+  - Matches styling from Current Batch tab (10pt font, right-aligned)
+  - Format: v0.1.5b | 2026-01-12 22:18 CST
+  - Added spacing for better visual separation
+  - Consistent version display across all major tabs
+  - **Files Modified**:
+    - `gui/widgets/batch_list_widget.py` - Added version label to header
+
 ## HPM [0.1.5a] - 2026-01-12 20:03
 
 ### Added

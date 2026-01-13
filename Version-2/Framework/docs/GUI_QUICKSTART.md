@@ -269,6 +269,6 @@ After creating and processing batches:
 
 ---
 
-**Version:** 0.1.5a
-**Commit Date:** 2026-01-12 20:03 CST
+**Version:** 0.1.5b
+**Commit Date:** 2026-01-12 22:18 CST
 **Last Updated:** January 2026
