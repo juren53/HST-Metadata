@@ -235,12 +235,8 @@ class MainWindow(QMainWindow):
         # Help menu
         help_menu = menubar.addMenu("&Help")
         
-        quickstart_action = QAction("Quick Start &Guide", self)
-        quickstart_action.setShortcut("F1")
-        quickstart_action.triggered.connect(self._show_quickstart)
-        help_menu.addAction(quickstart_action)
-
         user_guide_action = QAction("&User Guide", self)
+        user_guide_action.setShortcut("F1")
         user_guide_action.triggered.connect(self._show_user_guide)
         help_menu.addAction(user_guide_action)
         
@@ -480,38 +476,6 @@ class MainWindow(QMainWindow):
         """Show settings dialog."""
         dialog = SettingsDialog(self)
         dialog.exec()
-        
-    def _show_quickstart(self):
-        """Open the Quick Start Guide."""
-        import os
-        import subprocess
-        
-        # Get path to GUI_QUICKSTART.md
-        quickstart_path = Path(__file__).parent.parent / 'docs' / 'GUI_QUICKSTART.md'
-        
-        if quickstart_path.exists():
-            # Try to open with default markdown viewer or text editor
-            try:
-                if os.name == 'nt':  # Windows
-                    os.startfile(str(quickstart_path))
-                elif os.name == 'posix':  # macOS and Linux
-                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(quickstart_path)])
-                
-                self.status_bar.showMessage("Opening Quick Start Guide...", 2000)
-            except Exception as e:
-                QMessageBox.warning(
-                    self,
-                    "Cannot Open File",
-                    f"Could not open Quick Start Guide.\n\n"
-                    f"Please open manually:\n{quickstart_path}\n\n"
-                    f"Error: {str(e)}"
-                )
-        else:
-            QMessageBox.warning(
-                self,
-                "File Not Found",
-                f"Quick Start Guide not found at:\n{quickstart_path}"
-            )
 
     def _show_user_guide(self):
         """Open the User Guide."""
