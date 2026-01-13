@@ -21,6 +21,7 @@ sys.path.insert(0, str(framework_dir))
 from hstl_framework import HSLTFramework
 from utils.batch_registry import BatchRegistry
 from utils.github_version_checker import GitHubVersionChecker, VersionCheckResult
+from utils.git_updater import GitUpdater, GitUpdateResult
 from gui.widgets.batch_list_widget import BatchListWidget
 from gui.widgets.step_widget import StepWidget
 from gui.widgets.config_widget import ConfigWidget
@@ -56,6 +57,12 @@ class MainWindow(QMainWindow):
             timeout=10
         )
 
+        # Initialize git updater
+        try:
+            self.git_updater = GitUpdater()
+        except ValueError:
+            self.git_updater = None  # Not in a git repository
+
         self._init_ui()
         self._create_menu_bar()
         self._create_status_bar()
@@ -64,7 +71,7 @@ class MainWindow(QMainWindow):
         
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.5")
+        self.setWindowTitle("HSTL Photo Framework v0.1.5a")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
         
@@ -253,6 +260,11 @@ class MainWindow(QMainWindow):
         check_updates_action = QAction("Check for &Updates", self)
         check_updates_action.triggered.connect(self._on_check_for_updates)
         help_menu.addAction(check_updates_action)
+        
+        # Get latest updates menu item
+        get_updates_action = QAction("Get &Latest Updates", self)
+        get_updates_action.triggered.connect(self._on_get_latest_updates)
+        help_menu.addAction(get_updates_action)
         
         help_menu.addSeparator()
         
@@ -598,8 +610,8 @@ class MainWindow(QMainWindow):
             self,
             "About HSTL Photo Framework",
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.1.5</p>"
-                f"<p><b>Commit Date:</b> 2026-01-12 10:15 CST</p>"
+                f"<p><b>Version:</b> 0.1.5a</p>"
+                f"<p><b>Commit Date:</b> 2026-01-12 20:03 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -772,3 +784,154 @@ class MainWindow(QMainWindow):
         
         QDesktopServices.openUrl(QUrl(download_url))
         self.status_bar.showMessage("Opening download page...", 2000)
+    
+    # Git update methods
+    class GitUpdateThread(QThread):
+        """Thread for performing git pull in background"""
+        result_ready = pyqtSignal(object)
+        
+        def __init__(self, updater):
+            super().__init__()
+            self.updater = updater
+        
+        def run(self):
+            result = self.updater.pull_updates()
+            self.result_ready.emit(result)
+    
+    def _on_get_latest_updates(self):
+        """Handle Get Latest Updates menu action"""
+        # Check if git updater is available
+        if not self.git_updater:
+            QMessageBox.warning(
+                self,
+                "Not a Git Repository",
+                "This installation is not in a git repository.\n\n"
+                "To update, please use the standard installation method or download the latest release from GitHub."
+            )
+            return
+        
+        # Check for uncommitted changes first
+        has_changes, changes_desc = self.git_updater.has_uncommitted_changes()
+        if has_changes:
+            reply = QMessageBox.warning(
+                self,
+                "Uncommitted Changes",
+                f"You have uncommitted changes: {changes_desc}\n\n"
+                "Pulling updates may cause conflicts.\n\n"
+                "Do you want to continue anyway?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No
+            )
+            if reply == QMessageBox.StandardButton.No:
+                return
+        
+        # Check if updates are available
+        self.status_bar.showMessage("Checking for updates...")
+        updates_available, message = self.git_updater.check_for_updates()
+        
+        if not updates_available:
+            # Already up-to-date
+            self.status_bar.showMessage("Already up-to-date")
+            QMessageBox.information(
+                self,
+                "Already Up-to-Date",
+                f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
+                f"Current branch: {self.git_updater.get_current_branch()}"
+            )
+            return
+        
+        # Confirm before pulling
+        reply = QMessageBox.question(
+            self,
+            "Get Latest Updates",
+            f"Updates are available: {message}\n\n"
+            f"Current version: v{__version__}\n"
+            f"Branch: {self.git_updater.get_current_branch()}\n\n"
+            "Do you want to pull the latest updates?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.Yes
+        )
+        
+        if reply == QMessageBox.StandardButton.Yes:
+            self._perform_git_pull()
+    
+    def _perform_git_pull(self):
+        """Perform git pull in background thread"""
+        from PyQt6.QtWidgets import QProgressDialog
+        
+        # Show progress dialog
+        self.progress_dialog = QProgressDialog(
+            "Pulling latest updates from GitHub...\n\nPlease wait...",
+            "Cancel",
+            0, 0,
+            self
+        )
+        self.progress_dialog.setWindowTitle("Updating HPM")
+        self.progress_dialog.setWindowModality(Qt.WindowModality.WindowModal)
+        self.progress_dialog.setCancelButton(None)  # Can't cancel git pull mid-way
+        self.progress_dialog.show()
+        
+        # Update status
+        self.status_bar.showMessage("Pulling updates...")
+        
+        # Start background update
+        self.git_update_thread = self.GitUpdateThread(self.git_updater)
+        self.git_update_thread.result_ready.connect(self._on_git_update_complete)
+        self.git_update_thread.start()
+    
+    def _on_git_update_complete(self, result: GitUpdateResult):
+        """Handle completion of git pull operation"""
+        # Close progress dialog
+        if hasattr(self, 'progress_dialog'):
+            self.progress_dialog.close()
+        
+        if result.error_message:
+            # Update failed
+            self.status_bar.showMessage("Update failed")
+            QMessageBox.critical(
+                self,
+                "Update Failed",
+                f"Failed to pull updates from GitHub:\n\n{result.error_message}\n\n"
+                "Please resolve any issues and try again."
+            )
+        elif result.already_up_to_date:
+            # Already up-to-date
+            self.status_bar.showMessage("Already up-to-date")
+            QMessageBox.information(
+                self,
+                "Already Up-to-Date",
+                f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
+                f"Current branch: {self.git_updater.get_current_branch()}"
+            )
+        elif result.success:
+            # Update successful
+            self.status_bar.showMessage("Update completed successfully")
+            
+            # Build statistics message
+            stats = []
+            if result.files_changed > 0:
+                stats.append(f"{result.files_changed} file(s) changed")
+            if result.insertions > 0:
+                stats.append(f"{result.insertions} insertion(s)")
+            if result.deletions > 0:
+                stats.append(f"{result.deletions} deletion(s)")
+            
+            stats_text = ", ".join(stats) if stats else "No changes"
+            
+            QMessageBox.information(
+                self,
+                "Update Complete",
+                f"Successfully pulled latest updates from GitHub!\n\n"
+                f"Statistics: {stats_text}\n\n"
+                f"Current branch: {self.git_updater.get_current_branch()}\n\n"
+                "⚠️ Please restart HPM for changes to take effect."
+            )
+        else:
+            # Unknown result
+            self.status_bar.showMessage("Update completed with unknown status")
+            QMessageBox.warning(
+                self,
+                "Update Status Unknown",
+                "The update operation completed but the status is unclear.\n\n"
+                "Please check your git status manually."
+            )

@@ -5,7 +5,65 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## HPM [0.1.5] - 2026-01-12
+## HPM [0.1.5a] - 2026-01-12 20:03
+
+### Added
+
+- **Get Latest Updates Feature** - Integrated git pull functionality for automatic updates (2026-01-12 20:03 CST)
+  
+  - **New Module**: `utils/git_updater.py` - Git operations for safe repository updates
+    - Automatic git repository detection from module location
+    - Uncommitted changes detection with detailed file status
+    - Current branch identification
+    - Remote URL retrieval
+    - Safe git pull with comprehensive error handling
+    - Parse git output for update statistics (files changed, insertions, deletions)
+    - 30-second timeout protection
+  - **GUI Integration**: `gui/main_window.py`
+    - New menu item: Help → Get Latest Updates
+    - Background thread implementation using `GitUpdateThread` for non-blocking UI
+    - Progress dialog during git pull operation
+    - Multiple safety checks before updating
+    - Confirmation dialogs at each step
+    - Detailed success/error reporting
+  - **Safety Features**:
+    - Detects if installation is in a git repository
+    - Warns about uncommitted changes before pulling
+    - Checks if updates are available before pulling
+    - Requires user confirmation before executing git pull
+    - Cannot cancel git pull mid-operation (prevents corruption)
+    - Timeout protection prevents hanging operations
+  - **User Experience**:
+    - "Already up-to-date" message when no updates available
+    - Shows number of commits available when updates exist
+    - Displays current branch and remote URL
+    - Shows update statistics after successful pull
+    - Reminds user to restart HPM for changes to take effect
+    - Handles non-git installations gracefully
+  - **Error Handling**:
+    - Not in git repository detection
+    - Uncommitted changes warning with option to continue
+    - Network errors and timeouts
+    - Git command failures with detailed messages
+    - Merge conflict detection and reporting
+  - **Testing**:
+    - Built-in test function in `git_updater.py`
+    - Validates repository detection
+    - Tests branch and remote identification
+    - Checks uncommitted changes detection
+    - Verifies update availability checking
+  - **Benefits**:
+    - Users can update HPM with one click
+    - No need to manually run git pull commands
+    - Safe updates with multiple confirmation steps
+    - Clear feedback on what changed
+    - Works seamlessly with existing git workflow
+  - **Files Added**:
+    - `utils/git_updater.py` - Git updater module (301 lines)
+  - **Files Modified**:
+    - `gui/main_window.py` - Added git update integration (152 new lines)
+
+## HPM [0.1.5] - 2026-01-12 10:15
 
 ### Added
 
@@ -46,11 +104,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Modified**:
     - `gui/main_window.py` - Added version checking integration (113 new lines)
 
+  
+  - **New Module**: `utils/git_updater.py` - Git operations for safe repository updates
+    - Automatic git repository detection from module location
+    - Uncommitted changes detection with detailed file status
+    - Current branch identification
+    - Remote URL retrieval
+    - Safe git pull with comprehensive error handling
+    - Parse git output for update statistics (files changed, insertions, deletions)
+    - 30-second timeout protection
+  - **GUI Integration**: `gui/main_window.py`
+    - New menu item: Help → Get Latest Updates
+    - Background thread implementation using `GitUpdateThread` for non-blocking UI
+    - Progress dialog during git pull operation
+    - Multiple safety checks before updating
+    - Confirmation dialogs at each step
+    - Detailed success/error reporting
+  - **Safety Features**:
+    - Detects if installation is in a git repository
+    - Warns about uncommitted changes before pulling
+    - Checks if updates are available before pulling
+    - Requires user confirmation before executing git pull
+    - Cannot cancel git pull mid-operation (prevents corruption)
+    - Timeout protection prevents hanging operations
+  - **User Experience**:
+    - "Already up-to-date" message when no updates available
+    - Shows number of commits available when updates exist
+    - Displays current branch and remote URL
+    - Shows update statistics after successful pull
+    - Reminds user to restart HPM for changes to take effect
+    - Handles non-git installations gracefully
+  - **Error Handling**:
+    - Not in git repository detection
+    - Uncommitted changes warning with option to continue
+    - Network errors and timeouts
+    - Git command failures with detailed messages
+    - Merge conflict detection and reporting
+  - **Testing**:
+    - Built-in test function in `git_updater.py`
+    - Validates repository detection
+    - Tests branch and remote identification
+    - Checks uncommitted changes detection
+    - Verifies update availability checking
+  - **Benefits**:
+    - Users can update HPM with one click
+    - No need to manually run git pull commands
+    - Safe updates with multiple confirmation steps
+    - Clear feedback on what changed
+    - Works seamlessly with existing git workflow
+  - **Files Added**:
+    - `utils/git_updater.py` - Git updater module (301 lines)
+  - **Files Modified**:
+    - `gui/main_window.py` - Added git update integration (152 new lines)
+
 ## HPM [0.1.4] - 2026-01-07
 
 ### Added
 
-- **USB Portable Setup System** - Complete portable WinPython solution for USB drives (2026-01-07)
+- **USB Portable Setup System** - Complete portable WinPython solution for USB drives (Wed 07 Jan 2026)
   
   - **New Directory**: `portable/` - Comprehensive portable USB deployment system
   - **Portable Launcher**: `LAUNCH_HPM_PORTABLE.bat` - Drive-letter-agnostic batch launcher
@@ -84,7 +195,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Ideal for fieldwork, demonstrations, or shared workstations
     - WinPython and HPM Framework travel together on USB
 
-- **WinPython Activation Documentation** - Detailed explanation of WinPython environment activation (2026-01-06)
+- **WinPython Activation Documentation** - Detailed explanation of WinPython environment activation (Tue 06 Jan 2026)
   
   - **New File**: `launcher/WinPythons_activate-bat_explained.md`
   - Explains what `activate.bat` does and how it works
@@ -93,7 +204,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Clarifies difference between WinPython activation and Python venv
   - Provides context for understanding portable launcher operations
 
-- **Copyright Watermark Image** - Branding asset for GUI and watermarking (2026-01-06)
+- **Copyright Watermark Image** - Branding asset for GUI and watermarking (Tue 06 Jan 2026)
   
   - **New File**: `gui/Copyright_Watermark.png` (33.5 KB)
   - Used for GUI branding and restricted image watermarking
@@ -102,7 +213,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **HPM Installation Documentation** - Added alternate manual startup instructions (2026-01-06)
+- **HPM Installation Documentation** - Added alternate manual startup instructions (Tue 06 Jan 2026)
   - New section in `HPM_Installation.md` documenting manual application launch
   - Step-by-step instructions for launching from user home directory
   - Alternative to using HPM Launcher for users preferring manual control
@@ -113,7 +224,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **WinPython Upgrade** - Updated to latest Python 3.13.11 release (2026-01-06)
+- **WinPython Upgrade** - Updated to latest Python 3.13.11 release (Tue 06 Jan 2026)
   
   - **Previous Version**: WinPython 3.12.0.1b5 (Python 3.12.0, November 2023)
   - **New Version**: WinPython 3.13.11.0slim_post1 (Python 3.13.11, December 2025)
@@ -139,7 +250,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Modified**:
     - `launcher\launcher_config.json` - Updated winpython_activate path (line 3)
 
-- **Launcher Documentation Update** - Added direct execution instructions (2026-01-06)
+- **Launcher Documentation Update** - Added direct execution instructions (Tue 06 Jan 2026)
   
   - **New Section**: "Option 1: Run Directly from Launcher Directory" in LAUNCHER_README.md
   - **Execution Commands**:
@@ -167,7 +278,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **HPM Installation Checklist Table of Contents** - Enhanced documentation navigation (2026-01-06)
+- **HPM Installation Checklist Table of Contents** - Enhanced documentation navigation (Tue 06 Jan 2026)
   - **New Feature**: Comprehensive hyperlinked table of contents at top of HPM_Installation.md
   - **Navigation Links**:
     - All 8 main installation sections (Prerequisites through Installation Complete)
@@ -189,7 +300,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **WinPython Installation Method** - Added winget as recommended installation approach (2026-01-06)
+- **WinPython Installation Method** - Added winget as recommended installation approach (Tue 06 Jan 2026)
   - **New Primary Method**: `winget install winpython` - simplified installation using Windows Package Manager
   - **Installation Process**:
     - Navigate to user root directory (`%USERPROFILE%`)
@@ -216,7 +327,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **HPM Installation Checklist** - Comprehensive installation guide with step-by-step verification (2026-01-05)
+- **HPM Installation Checklist** - Comprehensive installation guide with step-by-step verification (Mon 05 Jan 2026)
   - **New Documentation**: `HPM_Installation.md` - Complete installation checklist for HPM system
   - **Installation Sections**:
     1. Prerequisites verification (Windows 10+, admin access, disk space)
@@ -255,7 +366,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Quickstart Guide Update** - Enhanced documentation for HPM Launcher and manual startup (2026-01-05)
+- **Quickstart Guide Update** - Enhanced documentation for HPM Launcher and manual startup (Mon 05 Jan 2026)
   - **New Section**: "Starting the HPM Application" added after Prerequisites
   - **HPM Launcher Documentation**:
     - Recommended method using HPM Launcher executable or Python script
@@ -280,7 +391,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Zoom/Font Scaling Feature** - Font-based zoom functionality for improved accessibility (2026-01-03 20:46 CST)
+- **Zoom/Font Scaling Feature** - Font-based zoom functionality for improved accessibility (Sat 03 Jan 2026 08:46:00 PM CST)
   - **Zoom Range**: 75% to 200% in discrete steps (75%, 85%, 100%, 115%, 130%, 150%, 175%, 200%)
   - **Multiple Control Methods**:
     - View menu with Zoom In/Out/Reset actions
@@ -330,7 +441,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Menu Readability Issue** - Fixed dropdown menu text visibility in Light and Dark themes (2026-01-03 19:15)
+- **Menu Readability Issue** - Fixed dropdown menu text visibility in Light and Dark themes (Sat 03 Jan 2026 07:15:00 PM CST)
   - **Root Cause**: QMenu and QMenuBar widgets weren't properly styled by existing theme system
   - **Problem**: 
     - Light Theme caused white text on white background (unreadable)
@@ -369,7 +480,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Requirements.txt Complete Review** - Comprehensive dependency analysis and updates (2026-01-02 21:30)
+- **Requirements.txt Complete Review** - Comprehensive dependency analysis and updates (Fri 02 Jan 2026 09:30:00 PM CST)
   - **Critical Missing Dependencies Added**:
     - `PyExifTool>=0.5.0` - Essential for metadata operations in Steps 4-8
     - `gspread>=5.0.0` - Required for Google Sheets API integration
@@ -415,7 +526,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **HPM Launcher Reconfiguration** - Launcher system updated for local execution (2026-01-02 20:05 CST)
+- **HPM Launcher Reconfiguration** - Launcher system updated for local execution (Fri 02 Jan 2026 08:05:00 PM CST)
   - Reconfigured launcher to run HPM system from local Framework directory instead of USB thumbdrive
   - Updated to execute from `C:\Users\<username>\Projects\HST-Metadata\Photos\Version-2\Framework`
   - Integrated WinPython environment activation (`activate.bat`) into launch sequence
@@ -439,7 +550,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Theme Selection Feature** - Comprehensive Light/Dark theme support with system default option (2025-12-31 13:45)
+- **Theme Selection Feature** - Comprehensive Light/Dark theme support with system default option (Wed 31 Dec 2025 01:45:00 PM CST)
   - New "Theme Selection..." menu item under Edit menu for easy access
   - Three theme modes: Light, Dark, and System Default (auto-detects OS theme)
   - Theme selection dialog with live preview showing colors before applying
@@ -479,7 +590,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Batch Projects Records Column** - Added CSV record count display to Batch Projects dialog (2025-12-18 16:30 CST)
+- **Batch Projects Records Column** - Added CSV record count display to Batch Projects dialog (Thu 18 Dec 2025 04:30:00 PM CST)
   
   - New Records column shows count of Accession Numbers/ObjectNames from export.csv file
   - Counts records by checking Accession Number, ObjectName, and AccessionNumber fields
