@@ -5,6 +5,28 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.5c] - 2026-01-13 10:30
+
+### Added
+
+- **About Dialog Enhancement** - Added Python executable and HPM code location information (2026-01-13 10:30 CST)
+  - Shows which Python executable is being used for quick verification
+  - Displays HPM code location (full path to hstl_gui.py)
+  - Information displayed in small, subdued font at bottom of About dialog
+  - Text is selectable for easy copying
+  - Helps developers and users quickly identify which Python instance is running
+  - **Files Modified**:
+    - `gui/main_window.py` - Enhanced About dialog with system information
+
+### Changed
+
+- **Help Menu Cleanup** - Removed redundant "Check for Updates" menu item (2026-01-13 10:30 CST)
+  - "Get Latest Updates" menu item covers both checking and updating
+  - Simplified Help menu structure
+  - Reduces user confusion with duplicate functionality
+  - **Files Modified**:
+    - `gui/main_window.py` - Removed "Check for Updates" menu item
+
 ## HPM [0.1.5b] - 2026-01-12 22:18
 
 ### Changed
