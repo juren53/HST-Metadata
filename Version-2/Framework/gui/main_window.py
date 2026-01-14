@@ -71,7 +71,7 @@ class MainWindow(QMainWindow):
         
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.5b")
+        self.setWindowTitle("HSTL Photo Framework v0.1.5c")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
         
@@ -251,12 +251,7 @@ class MainWindow(QMainWindow):
         help_menu.addAction(issue_tracker_action)
         
         help_menu.addSeparator()
-        
-        # Check for updates menu item
-        check_updates_action = QAction("Check for &Updates", self)
-        check_updates_action.triggered.connect(self._on_check_for_updates)
-        help_menu.addAction(check_updates_action)
-        
+
         # Get latest updates menu item
         get_updates_action = QAction("Get &Latest Updates", self)
         get_updates_action.triggered.connect(self._on_get_latest_updates)
@@ -570,12 +565,18 @@ class MainWindow(QMainWindow):
          
     def _show_about(self):
         """Show about dialog."""
-        QMessageBox.about(
-            self,
-            "About HSTL Photo Framework",
+        # Create custom dialog for better control over formatting
+        dialog = QDialog(self)
+        dialog.setWindowTitle("About HSTL Photo Framework")
+        dialog.resize(600, 500)
+
+        layout = QVBoxLayout(dialog)
+
+        # Main content
+        about_html = (
             "<h3>HSTL Photo Framework GUI</h3>"
-                f"<p><b>Version:</b> 0.1.5b</p>"
-                f"<p><b>Commit Date:</b> 2026-01-12 22:18 CST</p>"
+            f"<p><b>Version:</b> 0.1.5c</p>"
+            f"<p><b>Commit Date:</b> 2026-01-13 10:30 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -589,6 +590,43 @@ class MainWindow(QMainWindow):
             "<li>Step revert capability</li>"
             "</ul>"
         )
+
+        about_label = QLabel(about_html)
+        about_label.setTextFormat(Qt.TextFormat.RichText)
+        about_label.setWordWrap(True)
+        layout.addWidget(about_label)
+
+        # Add separator
+        layout.addSpacing(10)
+
+        # Technical information (subdued, smaller font)
+        python_exe = sys.executable
+        script_path = Path(__file__).resolve()
+
+        tech_html = (
+            f'<p style="font-size: 9pt; color: #666;">'
+            f'<b>Python Executable:</b><br>{python_exe}<br><br>'
+            f'<b>HPM Code Location:</b><br>{script_path}'
+            f'</p>'
+        )
+
+        tech_label = QLabel(tech_html)
+        tech_label.setTextFormat(Qt.TextFormat.RichText)
+        tech_label.setWordWrap(True)
+        tech_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        layout.addWidget(tech_label)
+
+        # OK button
+        button_layout = QHBoxLayout()
+        button_layout.addStretch()
+        ok_btn = QPushButton("OK")
+        ok_btn.clicked.connect(dialog.accept)
+        ok_btn.setDefault(True)
+        ok_btn.setMinimumWidth(80)
+        button_layout.addWidget(ok_btn)
+        layout.addLayout(button_layout)
+
+        dialog.exec()
         
     def _load_current_batch(self, config_path: Path):
         """Load current batch from config path."""
