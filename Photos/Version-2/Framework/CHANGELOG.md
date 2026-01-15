@@ -73,6 +73,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added logging for batch actions (complete, archive, reactivate, remove)
   - Batch creation and deletion now properly logged in GUI viewer
 
+- **Added logging to all step dialogs** (2026-01-15)
+  - Steps 2, 3, 4, 6, 7, 8 now log start/complete/error events with batch context
+  - Each step logs with `batch_id` and `step` number for filtering in log viewer
+  - Updated `step_widget.py` to pass `batch_id` to all step dialogs
+  - Files modified: `step2_dialog.py`, `step3_dialog.py`, `step4_dialog.py`, `step6_dialog.py`, `step7_dialog.py`, `step8_dialog.py`, `step_widget.py`
+
 ## HPM [0.1.5d] - 2026-01-15 05:52
 
 ### Added

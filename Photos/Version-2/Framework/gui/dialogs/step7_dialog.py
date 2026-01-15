@@ -15,6 +15,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
+from utils.log_manager import get_log_manager
+
 
 class JpegResizeThread(QThread):
     """Worker thread for JPEG resizing."""
@@ -226,17 +228,20 @@ class JpegResizeThread(QThread):
 
 class Step7Dialog(QDialog):
     """Dialog for Step 7: JPEG Resizing."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.resize_thread = None
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 7: JPEG Resizing")
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
-        
+
+        self.log_manager.debug("Opened Step 7 dialog", batch_id=batch_id, step=7)
         self._init_ui()
         self._analyze_files()
         
@@ -394,9 +399,10 @@ class Step7Dialog(QDialog):
     
     def _start_resizing(self):
         """Start the JPEG resizing process."""
+        self.log_manager.step_start(7, "JPEG Resizing", batch_id=self.batch_id)
         max_dim = self.dimension_spinbox.value()
         quality = self.quality_spinbox.value()
-        
+
         reply = QMessageBox.question(
             self,
             "Confirm Resizing",
@@ -476,6 +482,12 @@ class Step7Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(7, "JPEG Resizing", batch_id=self.batch_id)
+            self.log_manager.info(
+                f"Step 7: Resized {stats['resized']} JPEGs, skipped {stats['skipped']}",
+                batch_id=self.batch_id, step=7
+            )
+
             QMessageBox.information(
                 self,
                 "Resizing Complete",
@@ -486,18 +498,20 @@ class Step7Dialog(QDialog):
                 f"Resized JPEGs saved to:\n{resized_dir}\n\n"
                 f"Step 7 is now marked as complete."
             )
-            
+
             self.accept()
         else:
+            self.log_manager.step_error(7, "JPEG resizing failed", batch_id=self.batch_id)
             self.output_text.append("\n❌ JPEG resizing failed.")
             
     def _on_error(self, error_msg):
         """Handle resize errors."""
         self.progress_bar.setVisible(False)
         self.resize_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(7, error_msg, batch_id=self.batch_id)
         self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(
             self,
             "Resizing Error",

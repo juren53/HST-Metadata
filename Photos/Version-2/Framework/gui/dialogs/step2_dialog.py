@@ -11,6 +11,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from pathlib import Path
 
+from utils.log_manager import get_log_manager
+
 
 class CSVConversionThread(QThread):
     """Worker thread for CSV conversion."""
@@ -91,17 +93,20 @@ class CSVConversionThread(QThread):
 
 class Step2Dialog(QDialog):
     """Dialog for Step 2: CSV Conversion."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.conversion_thread = None
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 2: CSV Conversion")
         self.setMinimumWidth(700)
         self.setMinimumHeight(600)  # Increased by 20% (500 * 1.2 = 600)
-        
+
+        self.log_manager.debug("Opened Step 2 dialog", batch_id=batch_id, step=2)
         self._init_ui()
         
     def _init_ui(self):
@@ -181,8 +186,9 @@ class Step2Dialog(QDialog):
             
     def _start_conversion(self):
         """Start the CSV conversion process."""
+        self.log_manager.step_start(2, "CSV Conversion", batch_id=self.batch_id)
         worksheet_url = self.config_manager.get('step_configurations.step1.worksheet_url', '')
-        
+
         if not worksheet_url:
             QMessageBox.warning(
                 self,
@@ -283,24 +289,28 @@ class Step2Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(2, "CSV Conversion", batch_id=self.batch_id)
+
             QMessageBox.information(
                 self,
                 "Conversion Complete",
                 "CSV conversion completed successfully!\n\n"
                 "Step 2 is now marked as complete."
             )
-            
+
             self.accept()
         else:
+            self.log_manager.step_error(2, "CSV conversion failed", batch_id=self.batch_id)
             self.output_text.append("\n❌ CSV conversion failed.")
             
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(2, error_msg, batch_id=self.batch_id)
         self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(
             self,
             "Conversion Error",
