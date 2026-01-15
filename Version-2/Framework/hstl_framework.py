@@ -30,6 +30,7 @@ try:
     from utils.path_manager import PathManager
     from utils.validator import Validator
     from utils.batch_registry import BatchRegistry
+    from utils.log_manager import LogManager, get_log_manager
     from steps.base_step import ProcessingContext
     from core.pipeline import Pipeline
 except ImportError as e:
@@ -43,35 +44,38 @@ SUPPORTED_STEPS = list(range(1, 9))
 
 class HSLTFramework:
     """Main framework controller class."""
-    
+
     def __init__(self):
         self.config_manager = None
         self.logger = None
         self.path_manager = None
         self.pipeline = None
+        self.log_manager = get_log_manager()
         
     def initialize(self, config_path: Optional[Path] = None):
         """Initialize the framework with configuration."""
         try:
             # Initialize configuration
             self.config_manager = ConfigManager(config_path)
-            
+
             # Initialize logging
             self.logger = setup_logger(
                 level=self.config_manager.get('logging.level', 'INFO'),
                 log_file=self.config_manager.get('logging.file')
             )
-            
+
             # Initialize path manager
             self.path_manager = PathManager(
                 framework_root=framework_dir,
                 data_directory=self.config_manager.get('project.data_directory')
             )
-            
+
             self.logger.info("HSTL Framework initialized successfully")
+            self.log_manager.info("HSTL Framework initialized successfully")
             return True
-            
+
         except Exception as e:
+            self.log_manager.error(f"Failed to initialize framework: {e}", exc_info=True)
             print(f"Failed to initialize framework: {e}")
             return False
     
@@ -79,12 +83,13 @@ class HSLTFramework:
         """Initialize a new project."""
         try:
             data_path = Path(data_dir)
-            
+
             # Create data directory if it doesn't exist
             if not data_path.exists():
-                print(f"📁 Creating data directory: {data_dir}")
+                self.log_manager.info(f"Creating data directory: {data_dir}")
+                print(f"Creating data directory: {data_dir}")
                 data_path.mkdir(parents=True, exist_ok=True)
-            
+
             # Create project configuration
             project_config = {
                 'project': {
@@ -98,34 +103,37 @@ class HSLTFramework:
                     'auto_backup': True
                 }
             }
-            
+
             # Save configuration
             config_path = data_path / 'config' / 'project_config.yaml'
             config_path.parent.mkdir(parents=True, exist_ok=True)
-            
+
             if config_path.exists() and not force:
+                self.log_manager.warning(f"Project configuration already exists: {config_path}")
                 print(f"Project configuration already exists: {config_path}")
                 print("Use --force to overwrite existing configuration")
                 return False
-            
+
             self.config_manager = ConfigManager()
             self.config_manager.save_config(project_config, config_path)
-            
+
             # Create directory structure
             self._create_project_directories(data_path)
-            
+
             # Register batch in the registry
             registry = BatchRegistry()
-            registry.register_batch(project_name, str(data_path.absolute()), str(config_path.absolute()))
-            
-            print(f"✅ Project '{project_name}' initialized successfully")
-            print(f"📁 Data directory: {data_dir}")
-            print(f"⚙️ Configuration: {config_path}")
-            print(f"📝 Batch registered in framework registry")
-            
+            batch_id = registry.register_batch(project_name, str(data_path.absolute()), str(config_path.absolute()))
+
+            self.log_manager.info(f"Project '{project_name}' initialized successfully")
+            print(f"Project '{project_name}' initialized successfully")
+            print(f"Data directory: {data_dir}")
+            print(f"Configuration: {config_path}")
+            print(f"Batch registered in framework registry")
+
             return True
-            
+
         except Exception as e:
+            self.log_manager.error(f"Failed to initialize project: {e}", exc_info=True)
             print(f"Failed to initialize project: {e}")
             return False
     
@@ -194,23 +202,31 @@ class HSLTFramework:
     def run_steps(self, steps: List[int], dry_run: bool = False):
         """Run specified processing steps."""
         if not self.config_manager:
-            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized")
+            print("No project initialized. Run 'hstl_framework.py init' first.")
             return False
-        
-        print(f"🚀 {'Dry run' if dry_run else 'Running'} steps: {steps}")
-        
+
+        mode = 'Dry run' if dry_run else 'Running'
+        self.log_manager.info(f"{mode} steps: {steps}")
+        print(f"{mode} steps: {steps}")
+
         for step_num in steps:
             if step_num not in SUPPORTED_STEPS:
-                print(f"❌ Invalid step number: {step_num}")
+                self.log_manager.error(f"Invalid step number: {step_num}")
+                print(f"Invalid step number: {step_num}")
                 return False
-            
+
+            step_name = self._get_step_name(step_num)
             if dry_run:
-                print(f"✅ Would run Step {step_num}: {self._get_step_name(step_num)}")
+                self.log_manager.info(f"Would run Step {step_num}: {step_name}")
+                print(f"Would run Step {step_num}: {step_name}")
             else:
-                print(f"🔄 Running Step {step_num}: {self._get_step_name(step_num)}")
+                self.log_manager.step_start(step_num, step_name)
+                print(f"Running Step {step_num}: {step_name}")
                 # TODO: Implement actual step execution
-                print(f"⚠️  Step {step_num} implementation pending")
-        
+                self.log_manager.warning(f"Step {step_num} implementation pending")
+                print(f"Step {step_num} implementation pending")
+
         return True
     
     def validate(self, step: Optional[int] = None, pre_flight: bool = False):

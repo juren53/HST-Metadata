@@ -32,22 +32,24 @@ class StepResult:
 
 class ProcessingContext:
     """Shared context passed through the pipeline."""
-    
-    def __init__(self, 
-                 paths: PathManager, 
-                 config: ConfigManager, 
+
+    def __init__(self,
+                 paths: PathManager,
+                 config: ConfigManager,
                  logger: logging.Logger,
-                 current_step: int = 0):
+                 current_step: int = 0,
+                 batch_id: Optional[str] = None):
         self.paths = paths
         self.config = config
         self.logger = logger
         self.current_step = current_step
+        self.batch_id = batch_id  # Batch identifier for logging
         self.shared_data = {}  # For passing data between steps
-    
+
     def set_data(self, key: str, value: Any):
         """Set shared data."""
         self.shared_data[key] = value
-    
+
     def get_data(self, key: str, default: Any = None) -> Any:
         """Get shared data."""
         return self.shared_data.get(key, default)

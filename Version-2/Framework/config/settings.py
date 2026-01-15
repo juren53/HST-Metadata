@@ -74,10 +74,13 @@ DEFAULT_SETTINGS = {
     # Logging configuration
     'logging': {
         'level': 'INFO',
+        'verbosity': 'normal',  # 'minimal', 'normal', 'detailed'
         'file': None,  # Will be set to data_directory/logs/framework.log
         'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         'max_file_size': '10MB',
         'backup_count': 5,
+        'per_batch_logging': True,  # Enable per-batch log files
+        'gui_log_buffer': 1000,  # Max lines to keep in GUI log viewer
     },
     
     # Validation settings

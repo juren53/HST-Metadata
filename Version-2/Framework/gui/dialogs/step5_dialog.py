@@ -16,6 +16,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 import time
 
+from utils.log_manager import get_log_manager
+
 
 class TIFFSearchThread(QThread):
     """Worker thread for searching missing TIFF files."""
@@ -370,17 +372,20 @@ class MetadataEmbeddingThread(QThread):
 
 class Step5Dialog(QDialog):
     """Dialog for Step 5: Metadata Embedding."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
         self.embedding_thread = None
-        
+        self.batch_id = batch_id
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 5: Metadata Embedding")
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
-        
+
+        self.log_manager.info("Opened Step 5: Metadata Embedding dialog", batch_id=batch_id, step=5)
         self._init_ui()
         self._analyze_files()
         
@@ -833,27 +838,33 @@ class Step5Dialog(QDialog):
             "This will write IPTC metadata tags to all TIFF files listed in the CSV.",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
-        
+
         if reply != QMessageBox.StandardButton.Yes:
             return
-        
+
+        self.log_manager.step_start(5, "Metadata Embedding", batch_id=self.batch_id)
+
         data_directory = self.config_manager.get('project.data_directory', '')
         csv_path = Path(data_directory) / 'output' / 'csv' / 'export.csv'
         tiff_dir = Path(data_directory) / 'input' / 'tiff'
         output_dir = Path(data_directory) / 'output' / 'tiff_processed'
         report_dir = Path(data_directory) / 'reports'
-        
+
+        self.log_manager.debug(f"CSV: {csv_path}", batch_id=self.batch_id, step=5)
+        self.log_manager.debug(f"TIFF dir: {tiff_dir}", batch_id=self.batch_id, step=5)
+        self.log_manager.debug(f"Output dir: {output_dir}", batch_id=self.batch_id, step=5)
+
         # Create output directory
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Disable button and show progress
         self.embed_btn.setEnabled(False)
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
-        
+
         self.output_text.append("\n" + "="*50)
         self.output_text.append("Starting metadata embedding...")
-        
+
         # Start embedding thread
         self.embedding_thread = MetadataEmbeddingThread(
             str(csv_path), str(tiff_dir), str(output_dir), str(report_dir)
@@ -871,9 +882,14 @@ class Step5Dialog(QDialog):
         """Handle embedding completion."""
         self.progress_bar.setVisible(False)
         self.embed_btn.setEnabled(True)
-        
+
         if success:
-            self.output_text.append("\n✅ Metadata embedding completed successfully!")
+            self.log_manager.step_complete(5, "Metadata Embedding", batch_id=self.batch_id)
+            self.log_manager.info(
+                f"Metadata embedding complete: {stats['processed']} processed, {stats['missing']} missing",
+                batch_id=self.batch_id, step=5
+            )
+            self.output_text.append("\n Metadata embedding completed successfully!")
             self.output_text.append(f"\nSummary:")
             self.output_text.append(f"  Processed: {stats['processed']} images")
             self.output_text.append(f"  Missing: {stats['missing']} images")
@@ -911,7 +927,8 @@ class Step5Dialog(QDialog):
             
             self.accept()
         else:
-            self.output_text.append("\n❌ Metadata embedding failed.")
+            self.log_manager.step_error(5, "Metadata embedding failed", batch_id=self.batch_id)
+            self.output_text.append("\n Metadata embedding failed.")
             
     def _copy_verso_files(self):
         """Copy verso TIFF files to tiff_processed directory."""
@@ -954,9 +971,10 @@ class Step5Dialog(QDialog):
         """Handle embedding errors."""
         self.progress_bar.setVisible(False)
         self.embed_btn.setEnabled(True)
-        
-        self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
+        self.log_manager.step_error(5, error_msg, batch_id=self.batch_id, exc_info=True)
+        self.output_text.append(f"\n Error: {error_msg}")
+
         QMessageBox.critical(
             self,
             "Embedding Error",
