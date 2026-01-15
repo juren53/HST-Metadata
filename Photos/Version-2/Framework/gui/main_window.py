@@ -397,10 +397,13 @@ class MainWindow(QMainWindow):
             return
 
         if action == "complete":
+            self.log_manager.info(f"Marking batch as complete: {batch['name']}", batch_id=batch_id)
             self.framework.complete_batch(batch_id)
         elif action == "archive":
+            self.log_manager.info(f"Archiving batch: {batch['name']}", batch_id=batch_id)
             self.framework.archive_batch(batch_id)
         elif action == "reactivate":
+            self.log_manager.info(f"Reactivating batch: {batch['name']}", batch_id=batch_id)
             self.framework.reactivate_batch(batch_id)
         elif action == "remove":
             reply = QMessageBox.question(
@@ -411,7 +414,13 @@ class MainWindow(QMainWindow):
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             )
             if reply == QMessageBox.StandardButton.Yes:
+                self.log_manager.info(
+                    f"Removing batch from registry: {batch['name']}", batch_id=batch_id
+                )
                 self.framework.remove_batch(batch_id, confirm=True)
+                self.log_manager.info(
+                    f"Batch removed from registry: {batch['name']}"
+                )
         elif action == "info":
             from gui.dialogs.batch_info_dialog import BatchInfoDialog
 

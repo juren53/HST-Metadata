@@ -218,6 +218,8 @@ class LogManager:
         self._session_handler.setFormatter(logging.Formatter(
             '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         ))
+        # Mark as owned by LogManager so setup_logger() preserves it
+        self._session_handler._log_manager_owned = True
 
         # Set verbosity
         self.set_verbosity(verbosity)
