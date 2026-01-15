@@ -7,9 +7,22 @@ Provides the primary interface for batch management, step execution, and configu
 import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
-    QMainWindow, QTabWidget, QWidget, QVBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QMessageBox, QFileDialog, QScrollArea,
-    QApplication, QDialog, QLabel, QTextEdit, QPushButton, QHBoxLayout
+    QMainWindow,
+    QTabWidget,
+    QWidget,
+    QVBoxLayout,
+    QMenuBar,
+    QMenu,
+    QStatusBar,
+    QMessageBox,
+    QFileDialog,
+    QScrollArea,
+    QApplication,
+    QDialog,
+    QLabel,
+    QTextEdit,
+    QPushButton,
+    QHBoxLayout,
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSettings, QThread
 from PyQt6.QtGui import QAction
@@ -25,8 +38,10 @@ from utils.git_updater import GitUpdater, GitUpdateResult
 from gui.widgets.batch_list_widget import BatchListWidget
 from gui.widgets.step_widget import StepWidget
 from gui.widgets.config_widget import ConfigWidget
-from gui.widgets.log_widget import LogWidget
+from gui.widgets.enhanced_log_widget import EnhancedLogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
+from gui.dialogs.log_viewer_dialog import LogViewerDialog
+from utils.log_manager import LogManager
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 from gui.zoom_manager import ZoomManager
@@ -35,9 +50,9 @@ from __init__ import __version__
 
 class MainWindow(QMainWindow):
     """Main window for the HSTL Photo Framework GUI."""
-    
+
     batch_changed = pyqtSignal(str, dict)  # batch_id, batch_info
-    
+
     def __init__(self):
         super().__init__()
 
@@ -52,9 +67,7 @@ class MainWindow(QMainWindow):
 
         # Initialize version checker
         self.version_checker = GitHubVersionChecker(
-            repo_url="juren53/HST-Metadata",
-            current_version=__version__,
-            timeout=10
+            repo_url="juren53/HST-Metadata", current_version=__version__, timeout=10
         )
 
         # Initialize git updater
@@ -68,93 +81,109 @@ class MainWindow(QMainWindow):
         self._create_status_bar()
         self._load_window_state()
         self._refresh_batch_list()
-        
+
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.5c")
+        self.setWindowTitle("HSTL Photo Framework v0.1.5e")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
-        
+
         # Create central widget with tab interface
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
-        
+
         # Create tabs
         self._create_batches_tab()
         self._create_current_batch_tab()
         self._create_config_tab()
         self._create_logs_tab()
-        
+
         # Connect signals
         self.tabs.currentChanged.connect(self._on_tab_changed)
-        
+
     def _create_batches_tab(self):
         """Create the batches management tab."""
         self.batch_list_widget = BatchListWidget(self.registry)
         self.batch_list_widget.batch_selected.connect(self._on_batch_selected)
         self.batch_list_widget.batch_action_requested.connect(self._handle_batch_action)
-        
+
         self.tabs.addTab(self.batch_list_widget, "Batches")
-        
+
     def _create_current_batch_tab(self):
         """Create the current batch/step execution tab."""
         self.step_widget = StepWidget()
         self.step_widget.step_executed.connect(self._on_step_executed)
-        
+
         # Wrap in scroll area to handle small window sizes
         scroll = QScrollArea()
         scroll.setWidget(self.step_widget)
         scroll.setWidgetResizable(True)  # Important: allows content to resize
-        
+
         self.tabs.addTab(scroll, "Current Batch")
-        
+
     def _create_config_tab(self):
         """Create the configuration editor tab."""
         self.config_widget = ConfigWidget()
         self.config_widget.config_changed.connect(self._on_config_changed)
-        
+
         # Wrap in scroll area
         scroll = QScrollArea()
         scroll.setWidget(self.config_widget)
         scroll.setWidgetResizable(True)
-        
+
         self.tabs.addTab(scroll, "Configuration")
-        
+
     def _create_logs_tab(self):
         """Create the logs viewer tab."""
-        self.log_widget = LogWidget()
-        
-        # Wrap in scroll area
-        scroll = QScrollArea()
-        scroll.setWidget(self.log_widget)
-        scroll.setWidgetResizable(True)
-        
-        self.tabs.addTab(scroll, "Logs")
-        
+        # Initialize log manager
+        self.log_manager = LogManager.instance()
+
+        # Set up session logging to capture all log messages
+        from pathlib import Path
+
+        log_dir = Path.home() / ".hstl_photo_framework" / "logs"
+        self.log_manager.setup_session_logging(log_dir, verbosity="normal")
+
+        # Create enhanced log widget
+        self.log_widget = EnhancedLogWidget()
+        self.log_widget.pop_out_requested.connect(self._pop_out_logs)
+
+        # Connect log manager's GUI handler to the widget
+        gui_handler = self.log_manager.get_gui_handler()
+        gui_handler.log_emitted.connect(self.log_widget.append_log)
+
+        # Pop-out dialog reference
+        self.log_viewer_dialog = None
+
+        # Log application start
+        self.log_manager.info("HPM application started")
+
+        self.tabs.addTab(self.log_widget, "Logs")
+
     def _create_menu_bar(self):
         """Create the menu bar."""
         menubar = self.menuBar()
-        
+
         # File menu
         file_menu = menubar.addMenu("&File")
-        
+
         new_batch_action = QAction("&New Batch...", self)
         new_batch_action.setShortcut("Ctrl+N")
         new_batch_action.triggered.connect(self._new_batch)
         file_menu.addAction(new_batch_action)
-        
+
         open_config_action = QAction("&Open Config...", self)
         open_config_action.setShortcut("Ctrl+O")
         open_config_action.triggered.connect(self._open_config)
         file_menu.addAction(open_config_action)
-        
+
         file_menu.addSeparator()
-        
+
         exit_action = QAction("E&xit", self)
         exit_action.setShortcut("Ctrl+Q")
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
-        
+
         # Edit menu
         edit_menu = menubar.addMenu("&Edit")
 
@@ -198,145 +227,175 @@ class MainWindow(QMainWindow):
         zoom_reset_action.triggered.connect(self._reset_zoom)
         view_menu.addAction(zoom_reset_action)
 
+        # Log viewer
+        view_menu.addSeparator()
+        pop_out_logs_action = QAction("Pop Out &Logs", self)
+        pop_out_logs_action.setShortcut("Ctrl+L")
+        pop_out_logs_action.setStatusTip("Open logs in a separate window")
+        pop_out_logs_action.triggered.connect(self._pop_out_logs)
+        view_menu.addAction(pop_out_logs_action)
+
         # Batch menu
         batch_menu = menubar.addMenu("&Batch")
-        
+
         refresh_action = QAction("&Refresh Batches", self)
         refresh_action.setShortcut("F5")
         refresh_action.triggered.connect(self._refresh_batch_list)
         batch_menu.addAction(refresh_action)
-        
+
         batch_menu.addSeparator()
-        
+
         complete_action = QAction("Mark as &Complete", self)
         complete_action.triggered.connect(lambda: self._batch_action("complete"))
         batch_menu.addAction(complete_action)
-        
+
         archive_action = QAction("&Archive", self)
         archive_action.triggered.connect(lambda: self._batch_action("archive"))
         batch_menu.addAction(archive_action)
-        
+
         reactivate_action = QAction("&Reactivate", self)
         reactivate_action.triggered.connect(lambda: self._batch_action("reactivate"))
         batch_menu.addAction(reactivate_action)
-        
+
         # Tools menu
         tools_menu = menubar.addMenu("&Tools")
-        
+
         validate_action = QAction("&Validate Project", self)
         validate_action.setShortcut("Ctrl+V")
         validate_action.triggered.connect(self._validate_project)
         tools_menu.addAction(validate_action)
-        
+
         settings_action = QAction("&Settings...", self)
         settings_action.triggered.connect(self._show_settings)
         tools_menu.addAction(settings_action)
-        
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
-        
+
         user_guide_action = QAction("&User Guide", self)
         user_guide_action.setShortcut("F1")
         user_guide_action.triggered.connect(self._show_user_guide)
         help_menu.addAction(user_guide_action)
-        
+
         changelog_action = QAction("&Change Log", self)
         changelog_action.triggered.connect(self._show_changelog)
         help_menu.addAction(changelog_action)
-        
+
         help_menu.addSeparator()
-        
+
         issue_tracker_action = QAction("HPM &Issue Tracker", self)
         issue_tracker_action.triggered.connect(self._show_issue_tracker)
         help_menu.addAction(issue_tracker_action)
-        
+
         help_menu.addSeparator()
 
         # Get latest updates menu item
         get_updates_action = QAction("Get &Latest Updates", self)
         get_updates_action.triggered.connect(self._on_get_latest_updates)
         help_menu.addAction(get_updates_action)
-        
+
         help_menu.addSeparator()
-        
+
         about_action = QAction("\u0026About", self)
         about_action.triggered.connect(self._show_about)
         help_menu.addAction(about_action)
-        
+
     def _create_status_bar(self):
         """Create the status bar."""
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Ready")
-        
+
     def _new_batch(self):
         """Show dialog to create a new batch."""
         dialog = NewBatchDialog(self)
         if dialog.exec():
             project_name, data_dir = dialog.get_values()
-            
+
+            self.log_manager.info(f"Creating new batch: {project_name}")
+
             # Initialize the batch
             success = self.framework.init_project(data_dir, project_name)
-            
+
             if success:
+                self.log_manager.info(
+                    f"Batch created successfully: {project_name} at {data_dir}"
+                )
                 self.status_bar.showMessage(f"Created batch: {project_name}", 3000)
                 self._refresh_batch_list()
             else:
+                self.log_manager.error(f"Failed to create batch: {project_name}")
                 QMessageBox.warning(self, "Error", "Failed to create batch")
-                
+
     def _open_config(self):
         """Open a configuration file."""
         file_name, _ = QFileDialog.getOpenFileName(
-            self,
-            "Open Configuration",
-            "",
-            "YAML Files (*.yaml *.yml);;All Files (*)"
+            self, "Open Configuration", "", "YAML Files (*.yaml *.yml);;All Files (*)"
         )
-        
+
         if file_name:
             config_path = Path(file_name)
             if self.framework.initialize(config_path):
                 self.status_bar.showMessage(f"Loaded: {config_path.name}", 3000)
                 self._load_current_batch(config_path)
             else:
-                QMessageBox.warning(self, "Error", f"Failed to load config: {config_path}")
-                
+                QMessageBox.warning(
+                    self, "Error", f"Failed to load config: {config_path}"
+                )
+
     def _refresh_batch_list(self):
         """Refresh the batch list."""
         # Reload main window's registry as well
         self.registry.batches = self.registry._load_registry()
         self.batch_list_widget.refresh()
-        
+
     def _on_batch_selected(self, batch_id: str, batch_info: dict):
         """Handle batch selection."""
         self.current_batch_id = batch_id
-        config_path = Path(batch_info['config_path'])
-        
+        config_path = Path(batch_info["config_path"])
+
         # Initialize framework with this batch
         if self.framework.initialize(config_path):
             self.batch_changed.emit(batch_id, batch_info)
-            
+
             # Update last accessed timestamp
             self.registry.update_last_accessed(batch_id)
-            
+
             # Update widgets
             self.step_widget.set_batch(self.framework, batch_id, batch_info)
             self.config_widget.set_config(self.framework.config_manager)
-            
+
+            # Set up per-batch logging
+            data_dir = Path(batch_info.get("data_directory", ""))
+            if data_dir.exists():
+                self.log_manager.setup_batch_logging(batch_id, data_dir)
+
+            # Add batch to log filter dropdown
+            self.log_widget.add_batch_option(batch_id, batch_info["name"])
+            if self.log_viewer_dialog:
+                self.log_viewer_dialog.add_batch_option(batch_id, batch_info["name"])
+
+            # Log batch selection
+            self.log_manager.info(
+                f"Selected batch: {batch_info['name']}", batch_id=batch_id
+            )
+
             # Update status bar
             self.status_bar.showMessage(f"Current batch: {batch_info['name']}")
-            
+
             # Switch to current batch tab
             self.tabs.setCurrentIndex(1)
         else:
-            QMessageBox.warning(self, "Error", f"Failed to load batch: {batch_info['name']}")
-            
+            QMessageBox.warning(
+                self, "Error", f"Failed to load batch: {batch_info['name']}"
+            )
+
     def _handle_batch_action(self, action: str, batch_id: str):
         """Handle batch action requests."""
         batch = self.registry.get_batch(batch_id)
         if not batch:
             return
-            
+
         if action == "complete":
             self.framework.complete_batch(batch_id)
         elif action == "archive":
@@ -349,26 +408,27 @@ class MainWindow(QMainWindow):
                 "Confirm Removal",
                 f"Remove batch '{batch['name']}' from registry?\n\n"
                 f"Files will NOT be deleted.",
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             )
             if reply == QMessageBox.StandardButton.Yes:
                 self.framework.remove_batch(batch_id, confirm=True)
         elif action == "info":
             from gui.dialogs.batch_info_dialog import BatchInfoDialog
+
             dialog = BatchInfoDialog(batch_id, self.registry, self)
             dialog.exec()
-            
+
         # Refresh list after action
         self._refresh_batch_list()
-        
+
     def _batch_action(self, action: str):
         """Execute batch action on current batch."""
         if not self.current_batch_id:
             QMessageBox.information(self, "No Batch", "Please select a batch first")
             return
-            
+
         self._handle_batch_action(action, self.current_batch_id)
-        
+
     def _on_step_executed(self, step_num: int, success: bool):
         """Handle step execution completion."""
         if success:
@@ -377,11 +437,11 @@ class MainWindow(QMainWindow):
             self._refresh_batch_list()
         else:
             self.status_bar.showMessage(f"Step {step_num} failed", 3000)
-            
+
     def _on_config_changed(self):
         """Handle configuration changes."""
         self.status_bar.showMessage("Configuration updated", 2000)
-        
+
     def _on_tab_changed(self, index: int):
         """Handle tab changes."""
         tab_names = ["Batches", "Current Batch", "Configuration", "Logs"]
@@ -412,6 +472,28 @@ class MainWindow(QMainWindow):
         zoom_percent = self.zoom_manager.get_zoom_percentage()
         self.status_bar.showMessage(f"Zoom: {zoom_percent}%", 2000)
 
+    def _pop_out_logs(self):
+        """Open logs in a separate window."""
+        if self.log_viewer_dialog is None:
+            # Create new dialog
+            self.log_viewer_dialog = LogViewerDialog(self)
+            self.log_viewer_dialog.closed.connect(self._on_log_viewer_closed)
+
+            # Connect log manager to pop-out dialog as well
+            gui_handler = self.log_manager.get_gui_handler()
+            gui_handler.log_emitted.connect(self.log_viewer_dialog.append_log)
+
+            # Copy existing records to the pop-out
+            for record in self.log_widget.get_records():
+                self.log_viewer_dialog.append_log(record)
+
+        self.log_viewer_dialog.show_and_raise()
+        self.status_bar.showMessage("Log viewer opened in separate window", 2000)
+
+    def _on_log_viewer_closed(self):
+        """Handle log viewer dialog close."""
+        self.log_viewer_dialog = None
+
     def wheelEvent(self, event):
         """Handle mouse wheel events for zoom control.
 
@@ -441,29 +523,34 @@ class MainWindow(QMainWindow):
         if not self.framework.config_manager:
             QMessageBox.information(self, "No Project", "Please select a batch first")
             return
-            
+
         success = self.framework.validate()
         if success:
-            QMessageBox.information(self, "Validation", "Project validation completed successfully")
+            QMessageBox.information(
+                self, "Validation", "Project validation completed successfully"
+            )
         else:
             QMessageBox.warning(self, "Validation", "Project validation found issues")
-            
+
     def _set_data_location(self):
         """Show dialog to set default data files location."""
         dialog = SetDataLocationDialog(self)
         if dialog.exec():
             new_location = dialog.get_location()
-            self.status_bar.showMessage(f"Default batch location set to: {new_location}", 5000)
+            self.status_bar.showMessage(
+                f"Default batch location set to: {new_location}", 5000
+            )
             QMessageBox.information(
                 self,
                 "Location Updated",
                 f"Default batch location has been updated to:\n\n{new_location}\n\n"
-                "This will be used for new batches created from the File → New Batch menu."
+                "This will be used for new batches created from the File → New Batch menu.",
             )
 
     def _show_theme_dialog(self):
         """Show theme selection dialog."""
         from gui.dialogs.theme_dialog import ThemeDialog
+
         dialog = ThemeDialog(self)
         dialog.exec()
 
@@ -476,18 +563,23 @@ class MainWindow(QMainWindow):
         """Open the User Guide."""
         import os
         import subprocess
-        
+
         # Get path to USER_GUIDE.md
-        user_guide_path = Path(__file__).parent.parent / 'docs' / 'USER_GUIDE.md'
-        
+        user_guide_path = Path(__file__).parent.parent / "docs" / "USER_GUIDE.md"
+
         if user_guide_path.exists():
             # Try to open with default markdown viewer or text editor
             try:
-                if os.name == 'nt':  # Windows
+                if os.name == "nt":  # Windows
                     os.startfile(str(user_guide_path))
-                elif os.name == 'posix':  # macOS and Linux
-                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(user_guide_path)])
-                
+                elif os.name == "posix":  # macOS and Linux
+                    subprocess.run(
+                        [
+                            "open" if sys.platform == "darwin" else "xdg-open",
+                            str(user_guide_path),
+                        ]
+                    )
+
                 self.status_bar.showMessage("Opening User Guide...", 2000)
             except Exception as e:
                 QMessageBox.warning(
@@ -495,31 +587,34 @@ class MainWindow(QMainWindow):
                     "Cannot Open File",
                     f"Could not open User Guide.\n\n"
                     f"Please open manually:\n{user_guide_path}\n\n"
-                    f"Error: {str(e)}"
+                    f"Error: {str(e)}",
                 )
         else:
             QMessageBox.warning(
-                self,
-                "File Not Found",
-                f"User Guide not found at:\n{user_guide_path}"
+                self, "File Not Found", f"User Guide not found at:\n{user_guide_path}"
             )
-    
+
     def _show_changelog(self):
         """Open the Change Log."""
         import os
         import subprocess
-        
+
         # Get path to CHANGELOG.md
-        changelog_path = Path(__file__).parent.parent / 'CHANGELOG.md'
-        
+        changelog_path = Path(__file__).parent.parent / "CHANGELOG.md"
+
         if changelog_path.exists():
             # Try to open with default markdown viewer or text editor
             try:
-                if os.name == 'nt':  # Windows
+                if os.name == "nt":  # Windows
                     os.startfile(str(changelog_path))
-                elif os.name == 'posix':  # macOS and Linux
-                    subprocess.run(['open' if sys.platform == 'darwin' else 'xdg-open', str(changelog_path)])
-                
+                elif os.name == "posix":  # macOS and Linux
+                    subprocess.run(
+                        [
+                            "open" if sys.platform == "darwin" else "xdg-open",
+                            str(changelog_path),
+                        ]
+                    )
+
                 self.status_bar.showMessage("Opening Change Log...", 2000)
             except Exception as e:
                 QMessageBox.warning(
@@ -527,23 +622,21 @@ class MainWindow(QMainWindow):
                     "Cannot Open File",
                     f"Could not open Change Log.\n\n"
                     f"Please open manually:\n{changelog_path}\n\n"
-                    f"Error: {str(e)}"
+                    f"Error: {str(e)}",
                 )
         else:
             QMessageBox.warning(
-                self,
-                "File Not Found",
-                f"Change Log not found at:\n{changelog_path}"
-)
-    
+                self, "File Not Found", f"Change Log not found at:\n{changelog_path}"
+            )
+
     def _show_issue_tracker(self):
         """Open HPM Issue Tracker in web browser."""
         import webbrowser
         from PyQt6.QtGui import QDesktopServices
         from PyQt6.QtCore import QUrl
-        
+
         issue_tracker_url = "https://github.com/juren53/HST-Metadata/issues"
-        
+
         try:
             # Try to open with system default browser
             QDesktopServices.openUrl(QUrl(issue_tracker_url))
@@ -560,9 +653,9 @@ class MainWindow(QMainWindow):
                     f"Could not open HPM Issue Tracker in browser.\n\n"
                     f"Please open manually:\n{issue_tracker_url}\n\n"
                     f"Primary error: {str(e)}\n"
-                    f"Fallback error: {str(e2)}"
+                    f"Fallback error: {str(e2)}",
                 )
-         
+
     def _show_about(self):
         """Show about dialog."""
         # Create custom dialog for better control over formatting
@@ -575,8 +668,8 @@ class MainWindow(QMainWindow):
         # Main content
         about_html = (
             "<h3>HSTL Photo Framework GUI</h3>"
-            f"<p><b>Version:</b> 0.1.5c</p>"
-            f"<p><b>Commit Date:</b> 2026-01-13 10:30 CST</p>"
+            f"<p><b>Version:</b> 0.1.5e</p>"
+            f"<p><b>Commit Date:</b> 2026-01-15 13:53 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
@@ -605,9 +698,9 @@ class MainWindow(QMainWindow):
 
         tech_html = (
             f'<p style="font-size: 9pt; color: #666;">'
-            f'<b>Python Executable:</b><br>{python_exe}<br><br>'
-            f'<b>HPM Code Location:</b><br>{script_path}'
-            f'</p>'
+            f"<b>Python Executable:</b><br>{python_exe}<br><br>"
+            f"<b>HPM Code Location:</b><br>{script_path}"
+            f"</p>"
         )
 
         tech_label = QLabel(tech_html)
@@ -627,7 +720,7 @@ class MainWindow(QMainWindow):
         layout.addLayout(button_layout)
 
         dialog.exec()
-        
+
     def _load_current_batch(self, config_path: Path):
         """Load current batch from config path."""
         # Find batch by config path
@@ -635,7 +728,7 @@ class MainWindow(QMainWindow):
         if result:
             batch_id, batch_info = result
             self._on_batch_selected(batch_id, batch_info)
-            
+
     def _load_window_state(self):
         """Load window state from settings."""
         geometry = self.settings.value("geometry")
@@ -657,15 +750,15 @@ class MainWindow(QMainWindow):
             batch = self.registry.get_batch(last_batch)
             if batch:
                 self._on_batch_selected(last_batch, batch)
-                
+
     def _save_window_state(self):
         """Save window state to settings."""
         self.settings.setValue("geometry", self.saveGeometry())
         self.settings.setValue("windowState", self.saveState())
-        
+
         if self.current_batch_id:
             self.settings.setValue("lastBatch", self.current_batch_id)
-            
+
     def closeEvent(self, event):
         """Handle window close event."""
         self._save_window_state()
@@ -673,36 +766,44 @@ class MainWindow(QMainWindow):
         # Save zoom settings
         self.zoom_manager.save_zoom_preference()
 
+        # Close pop-out log viewer if open
+        if self.log_viewer_dialog:
+            self.log_viewer_dialog.close()
+
+        # Shutdown log manager
+        self.log_manager.shutdown()
+
         event.accept()
 
     # Version checking methods
     class UpdateCheckThread(QThread):
         """Thread for checking updates in background"""
+
         result_ready = pyqtSignal(object)
-        
+
         def __init__(self, checker):
             super().__init__()
             self.checker = checker
-        
+
         def run(self):
             result = self.checker.get_latest_version()
             self.result_ready.emit(result)
-    
+
     def _on_check_for_updates(self):
         """Handle Check for Updates menu action"""
         self.status_bar.showMessage("Checking for updates...")
-        
+
         # Start background check
         self.update_check_thread = self.UpdateCheckThread(self.version_checker)
         self.update_check_thread.result_ready.connect(self._on_update_check_complete)
         self.update_check_thread.start()
-    
+
     def _on_update_check_complete(self, result):
         """Handle completion of version check"""
         if result.error_message:
             self.status_bar.showMessage("Update check failed")
             error_msg = result.error_message
-            
+
             # Provide more helpful message for 404 errors
             if "404" in error_msg and "Not Found" in error_msg:
                 friendly_msg = (
@@ -712,15 +813,15 @@ class MainWindow(QMainWindow):
                 QMessageBox.information(self, "No Releases Available", friendly_msg)
             else:
                 QMessageBox.warning(
-                    self, 
-                    "Update Check Failed", 
-                    f"Could not check for updates:\n\n{error_msg}"
+                    self,
+                    "Update Check Failed",
+                    f"Could not check for updates:\n\n{error_msg}",
                 )
             return
-        
+
         # Update status
         self.status_bar.showMessage("Update check complete")
-        
+
         # Check if update available
         if result.has_update:
             self._show_update_dialog(result)
@@ -729,17 +830,17 @@ class MainWindow(QMainWindow):
             QMessageBox.information(
                 self,
                 "Up to Date",
-                f"HPM {result.current_version} is the latest version available."
+                f"HPM {result.current_version} is the latest version available.",
             )
-    
+
     def _show_update_dialog(self, result):
         """Show update available dialog"""
         dialog = QDialog(self)
         dialog.setWindowTitle("Update Available")
         dialog.resize(500, 400)
-        
+
         layout = QVBoxLayout(dialog)
-        
+
         # Update information
         info_text = f"""
         <h3>Update Available!</h3>
@@ -748,12 +849,12 @@ class MainWindow(QMainWindow):
         <p><b>Published:</b> {result.published_date[:10]}</p>
         <p><b>Download URL:</b> <a href="{result.download_url}">{result.download_url}</a></p>
         """
-        
+
         info_label = QLabel(info_text)
         info_label.setOpenExternalLinks(True)
         info_label.setTextFormat(Qt.TextFormat.RichText)
         layout.addWidget(info_label)
-        
+
         # Release notes (if available)
         if result.release_notes:
             layout.addWidget(QLabel("<h4>Release Notes:</h4>"))
@@ -762,44 +863,47 @@ class MainWindow(QMainWindow):
             notes_edit.setReadOnly(True)
             notes_edit.setMaximumHeight(150)
             layout.addWidget(notes_edit)
-        
+
         # Buttons
         button_layout = QHBoxLayout()
-        
+
         download_btn = QPushButton("Download Update")
-        download_btn.clicked.connect(lambda: self._on_download_update(result.download_url))
+        download_btn.clicked.connect(
+            lambda: self._on_download_update(result.download_url)
+        )
         button_layout.addWidget(download_btn)
-        
+
         close_btn = QPushButton("Close")
         close_btn.clicked.connect(dialog.accept)
         close_btn.setDefault(True)
         button_layout.addWidget(close_btn)
-        
+
         layout.addLayout(button_layout)
-        
+
         dialog.exec()
-    
+
     def _on_download_update(self, download_url):
         """Open download URL in browser"""
         from PyQt6.QtGui import QDesktopServices
         from PyQt6.QtCore import QUrl
-        
+
         QDesktopServices.openUrl(QUrl(download_url))
         self.status_bar.showMessage("Opening download page...", 2000)
-    
+
     # Git update methods
     class GitUpdateThread(QThread):
         """Thread for performing git pull in background"""
+
         result_ready = pyqtSignal(object)
-        
+
         def __init__(self, updater):
             super().__init__()
             self.updater = updater
-        
+
         def run(self):
             result = self.updater.pull_updates()
             self.result_ready.emit(result)
-    
+
     def _on_get_latest_updates(self):
         """Handle Get Latest Updates menu action"""
         # Check if git updater is available
@@ -808,10 +912,10 @@ class MainWindow(QMainWindow):
                 self,
                 "Not a Git Repository",
                 "This installation is not in a git repository.\n\n"
-                "To update, please use the standard installation method or download the latest release from GitHub."
+                "To update, please use the standard installation method or download the latest release from GitHub.",
             )
             return
-        
+
         # Check for uncommitted changes first
         has_changes, changes_desc = self.git_updater.has_uncommitted_changes()
         if has_changes:
@@ -822,15 +926,15 @@ class MainWindow(QMainWindow):
                 "Pulling updates may cause conflicts.\n\n"
                 "Do you want to continue anyway?",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                QMessageBox.StandardButton.No
+                QMessageBox.StandardButton.No,
             )
             if reply == QMessageBox.StandardButton.No:
                 return
-        
+
         # Check if updates are available
         self.status_bar.showMessage("Checking for updates...")
         updates_available, message = self.git_updater.check_for_updates()
-        
+
         if not updates_available:
             # Already up-to-date
             self.status_bar.showMessage("Already up-to-date")
@@ -838,10 +942,10 @@ class MainWindow(QMainWindow):
                 self,
                 "Already Up-to-Date",
                 f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
-                f"Current branch: {self.git_updater.get_current_branch()}"
+                f"Current branch: {self.git_updater.get_current_branch()}",
             )
             return
-        
+
         # Confirm before pulling
         reply = QMessageBox.question(
             self,
@@ -851,42 +955,43 @@ class MainWindow(QMainWindow):
             f"Branch: {self.git_updater.get_current_branch()}\n\n"
             "Do you want to pull the latest updates?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.Yes
+            QMessageBox.StandardButton.Yes,
         )
-        
+
         if reply == QMessageBox.StandardButton.Yes:
             self._perform_git_pull()
-    
+
     def _perform_git_pull(self):
         """Perform git pull in background thread"""
         from PyQt6.QtWidgets import QProgressDialog
-        
+
         # Show progress dialog
         self.progress_dialog = QProgressDialog(
             "Pulling latest updates from GitHub...\n\nPlease wait...",
             "Cancel",
-            0, 0,
-            self
+            0,
+            0,
+            self,
         )
         self.progress_dialog.setWindowTitle("Updating HPM")
         self.progress_dialog.setWindowModality(Qt.WindowModality.WindowModal)
         self.progress_dialog.setCancelButton(None)  # Can't cancel git pull mid-way
         self.progress_dialog.show()
-        
+
         # Update status
         self.status_bar.showMessage("Pulling updates...")
-        
+
         # Start background update
         self.git_update_thread = self.GitUpdateThread(self.git_updater)
         self.git_update_thread.result_ready.connect(self._on_git_update_complete)
         self.git_update_thread.start()
-    
+
     def _on_git_update_complete(self, result: GitUpdateResult):
         """Handle completion of git pull operation"""
         # Close progress dialog
-        if hasattr(self, 'progress_dialog'):
+        if hasattr(self, "progress_dialog"):
             self.progress_dialog.close()
-        
+
         if result.error_message:
             # Update failed
             self.status_bar.showMessage("Update failed")
@@ -894,7 +999,7 @@ class MainWindow(QMainWindow):
                 self,
                 "Update Failed",
                 f"Failed to pull updates from GitHub:\n\n{result.error_message}\n\n"
-                "Please resolve any issues and try again."
+                "Please resolve any issues and try again.",
             )
         elif result.already_up_to_date:
             # Already up-to-date
@@ -903,12 +1008,12 @@ class MainWindow(QMainWindow):
                 self,
                 "Already Up-to-Date",
                 f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
-                f"Current branch: {self.git_updater.get_current_branch()}"
+                f"Current branch: {self.git_updater.get_current_branch()}",
             )
         elif result.success:
             # Update successful
             self.status_bar.showMessage("Update completed successfully")
-            
+
             # Build statistics message
             stats = []
             if result.files_changed > 0:
@@ -917,16 +1022,16 @@ class MainWindow(QMainWindow):
                 stats.append(f"{result.insertions} insertion(s)")
             if result.deletions > 0:
                 stats.append(f"{result.deletions} deletion(s)")
-            
+
             stats_text = ", ".join(stats) if stats else "No changes"
-            
+
             QMessageBox.information(
                 self,
                 "Update Complete",
                 f"Successfully pulled latest updates from GitHub!\n\n"
                 f"Statistics: {stats_text}\n\n"
                 f"Current branch: {self.git_updater.get_current_branch()}\n\n"
-                "⚠️ Please restart HPM for changes to take effect."
+                "⚠️ Please restart HPM for changes to take effect.",
             )
         else:
             # Unknown result
@@ -935,5 +1040,5 @@ class MainWindow(QMainWindow):
                 self,
                 "Update Status Unknown",
                 "The update operation completed but the status is unclear.\n\n"
-                "Please check your git status manually."
+                "Please check your git status manually.",
             )

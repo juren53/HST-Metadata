@@ -3,9 +3,9 @@
 from .main_window import MainWindow
 from .hstl_gui import main
 
-__all__ = ['MainWindow', 'main']
-__version__ = "0.1.5c"
-__commit_date__ = "2026-01-13 10:30 CST"
+__all__ = ["MainWindow", "main"]
+__version__ = "0.1.5e"
+__commit_date__ = "2026-01-15 13:53 CST"
 
 """GUI modules for HSTL Photo Framework (Phase 2)."""
 
