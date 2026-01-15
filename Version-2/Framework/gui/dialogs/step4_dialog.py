@@ -14,6 +14,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
+from utils.log_manager import get_log_manager
+
 
 class BitDepthConversionThread(QThread):
     """Worker thread for bit depth conversion."""
@@ -217,17 +219,20 @@ class BitDepthConversionThread(QThread):
 
 class Step4Dialog(QDialog):
     """Dialog for Step 4: TIFF Bit Depth Test & Conversion."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.conversion_thread = None
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 4: TIFF Bit Depth Conversion")
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
-        
+
+        self.log_manager.debug("Opened Step 4 dialog", batch_id=batch_id, step=4)
         self._init_ui()
         self._analyze_files()
         
@@ -342,6 +347,7 @@ class Step4Dialog(QDialog):
     
     def _start_conversion(self):
         """Start the bit depth conversion process."""
+        self.log_manager.step_start(4, "TIFF Bit Depth Conversion", batch_id=self.batch_id)
         try:
             # First, analyze files to find 16-bit TIFFs
             self.output_text.append("\n" + "="*50)
@@ -405,6 +411,9 @@ class Step4Dialog(QDialog):
                         self.config_manager.config_path
                     )
                 
+                self.log_manager.step_complete(4, "TIFF Bit Depth Conversion", batch_id=self.batch_id)
+                self.log_manager.info("Step 4: No 16-bit TIFFs found, all files are 8-bit", batch_id=self.batch_id, step=4)
+
                 QMessageBox.information(
                     self,
                     "Step Complete",
@@ -495,6 +504,12 @@ class Step4Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(4, "TIFF Bit Depth Conversion", batch_id=self.batch_id)
+            self.log_manager.info(
+                f"Step 4: Converted {stats['converted']} 16-bit TIFFs to 8-bit",
+                batch_id=self.batch_id, step=4
+            )
+
             QMessageBox.information(
                 self,
                 "Conversion Complete",
@@ -505,18 +520,20 @@ class Step4Dialog(QDialog):
                 f"Failed: {stats['failed']}\n\n"
                 f"Step 4 is now marked as complete."
             )
-            
+
             self.accept()
         else:
+            self.log_manager.step_error(4, "Bit depth conversion failed", batch_id=self.batch_id)
             self.output_text.append("\n❌ Bit depth conversion failed.")
             
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(4, error_msg, batch_id=self.batch_id)
         self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(
             self,
             "Conversion Error",

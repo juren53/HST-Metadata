@@ -14,6 +14,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
+from utils.log_manager import get_log_manager
+
 
 class JpegConversionThread(QThread):
     """Worker thread for JPEG conversion."""
@@ -193,17 +195,20 @@ class JpegConversionThread(QThread):
 
 class Step6Dialog(QDialog):
     """Dialog for Step 6: JPEG Conversion."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.conversion_thread = None
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 6: JPEG Conversion")
         self.setMinimumWidth(800)
         self.setMinimumHeight(600)
-        
+
+        self.log_manager.debug("Opened Step 6 dialog", batch_id=batch_id, step=6)
         self._init_ui()
         self._analyze_files()
         
@@ -345,6 +350,7 @@ class Step6Dialog(QDialog):
     
     def _start_conversion(self):
         """Start the JPEG conversion process."""
+        self.log_manager.step_start(6, "JPEG Conversion", batch_id=self.batch_id)
         reply = QMessageBox.question(
             self,
             "Confirm Conversion",
@@ -423,6 +429,12 @@ class Step6Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(6, "JPEG Conversion", batch_id=self.batch_id)
+            self.log_manager.info(
+                f"Step 6: Converted {stats['converted']} TIFFs to JPEG",
+                batch_id=self.batch_id, step=6
+            )
+
             QMessageBox.information(
                 self,
                 "Conversion Complete",
@@ -432,18 +444,20 @@ class Step6Dialog(QDialog):
                 f"JPEG files saved to:\n{jpeg_dir}\n\n"
                 f"Step 6 is now marked as complete."
             )
-            
+
             self.accept()
         else:
+            self.log_manager.step_error(6, "JPEG conversion failed", batch_id=self.batch_id)
             self.output_text.append("\n❌ JPEG conversion failed.")
             
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(6, error_msg, batch_id=self.batch_id)
         self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(
             self,
             "Conversion Error",

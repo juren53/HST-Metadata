@@ -14,6 +14,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
+from utils.log_manager import get_log_manager
+
 
 class MojibakeDetectionThread(QThread):
     """Worker thread for mojibake detection."""
@@ -83,21 +85,24 @@ class MojibakeDetectionThread(QThread):
 
 class Step3Dialog(QDialog):
     """Dialog for Step 3: Unicode Filtering (Mojibake Detection)."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.detection_thread = None
         self.problematic_records = []
         self.current_record_index = 0
         self.edits = {}  # Store user edits: {row_num: {field: new_value}}
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 3: Unicode Filtering")
         self.setMinimumWidth(700)
         self.setMinimumHeight(500)
         self.resize(900, 600)  # Default size - fits most screens
-        
+
+        self.log_manager.debug("Opened Step 3 dialog", batch_id=batch_id, step=3)
         self._init_ui()
         
     def _init_ui(self):
@@ -220,6 +225,7 @@ class Step3Dialog(QDialog):
         
     def _start_scan(self):
         """Start the mojibake detection scan."""
+        self.log_manager.step_start(3, "Unicode Filtering", batch_id=self.batch_id)
         data_directory = self.config_manager.get('project.data_directory', '')
         if not data_directory:
             QMessageBox.warning(self, "Error", "Project data directory not set")
@@ -282,22 +288,26 @@ class Step3Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
+            self.log_manager.info("Step 3: No mojibake detected", batch_id=self.batch_id, step=3)
+
             QMessageBox.information(
                 self,
                 "Scan Complete",
                 "No mojibake detected in the CSV file.\n\n"
                 "Step 3 is now marked as complete."
             )
-            
+
             self.accept()
     
     def _on_error(self, error_msg):
         """Handle scan errors."""
         self.progress_bar.setVisible(False)
         self.scan_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(3, error_msg, batch_id=self.batch_id)
         self.status_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(self, "Scan Error", f"Mojibake scan failed:\n\n{error_msg}")
     
     def _display_current_record(self):
@@ -456,16 +466,20 @@ class Step3Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
+            self.log_manager.info(f"Step 3: Applied {len(self.edits)} mojibake fix(es)", batch_id=self.batch_id, step=3)
+
             QMessageBox.information(
                 self,
                 "Fixes Applied",
                 f"Successfully applied {len(self.edits)} fix(es) to the CSV file.\n\n"
                 "Step 3 is now marked as complete."
             )
-            
+
             self.accept()
-            
+
         except Exception as e:
+            self.log_manager.step_error(3, str(e), batch_id=self.batch_id, exc_info=True)
             QMessageBox.critical(
                 self,
                 "Error",
@@ -481,7 +495,7 @@ class Step3Dialog(QDialog):
             "The CSV file will not be modified.",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
-        
+
         if reply == QMessageBox.StandardButton.Yes:
             # Mark step as complete
             self.config_manager.update_step_status(3, True)
@@ -490,7 +504,9 @@ class Step3Dialog(QDialog):
                     self.config_manager.to_dict(),
                     self.config_manager.config_path
                 )
-            
+
+            self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
+            self.log_manager.info("Step 3: Skipped mojibake fixes", batch_id=self.batch_id, step=3)
             self.accept()
     
     def _generate_report(self):

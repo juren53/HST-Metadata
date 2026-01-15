@@ -412,7 +412,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 2: {STEP_NAMES[2]} ---\n")
 
         # Open the Step 2 dialog
-        dialog = Step2Dialog(self.framework.config_manager, self)
+        dialog = Step2Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -436,7 +436,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 3: {STEP_NAMES[3]} ---\n")
 
         # Open the Step 3 dialog
-        dialog = Step3Dialog(self.framework.config_manager, self)
+        dialog = Step3Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (mojibake fixes applied or skipped)
@@ -460,7 +460,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 4: {STEP_NAMES[4]} ---\n")
 
         # Open the Step 4 dialog
-        dialog = Step4Dialog(self.framework.config_manager, self)
+        dialog = Step4Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -510,7 +510,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 6: {STEP_NAMES[6]} ---\n")
 
         # Open the Step 6 dialog
-        dialog = Step6Dialog(self.framework.config_manager, self)
+        dialog = Step6Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -534,7 +534,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 7: {STEP_NAMES[7]} ---\n")
 
         # Open the Step 7 dialog
-        dialog = Step7Dialog(self.framework.config_manager, self)
+        dialog = Step7Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (resize succeeded)
@@ -558,7 +558,7 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 8: {STEP_NAMES[8]} ---\n")
 
         # Open the Step 8 dialog
-        dialog = Step8Dialog(self.framework.config_manager, self)
+        dialog = Step8Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
 
         if dialog.exec():
             # Dialog was accepted (watermarking succeeded)

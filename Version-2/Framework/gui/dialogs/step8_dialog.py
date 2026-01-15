@@ -14,6 +14,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
+from utils.log_manager import get_log_manager
+
 
 class WatermarkThread(QThread):
     """Worker thread for watermarking."""
@@ -283,18 +285,21 @@ class WatermarkThread(QThread):
 
 class Step8Dialog(QDialog):
     """Dialog for Step 8: Watermark Addition."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
+        self.batch_id = batch_id
         self.watermark_thread = None
-        
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 8: Watermark Addition")
         self.setMinimumWidth(800)
         self.setMinimumHeight(500)  # Reduced from 600
         self.resize(810, 585)  # Default size (10% smaller: 900->810, 650->585)
-        
+
+        self.log_manager.debug("Opened Step 8 dialog", batch_id=batch_id, step=8)
         self._init_ui()
         self._analyze_files()
         
@@ -510,8 +515,9 @@ class Step8Dialog(QDialog):
     
     def _start_watermarking(self):
         """Start the watermarking process."""
+        self.log_manager.step_start(8, "Watermark Addition", batch_id=self.batch_id)
         opacity = self.opacity_slider.value() / 100.0
-        
+
         reply = QMessageBox.question(
             self,
             "Confirm Watermarking",
@@ -603,6 +609,12 @@ class Step8Dialog(QDialog):
                     self.config_manager.config_path
                 )
             
+            self.log_manager.step_complete(8, "Watermark Addition", batch_id=self.batch_id)
+            self.log_manager.info(
+                f"Step 8: Watermarked {stats['watermarked']} restricted, copied {stats['copied_unrestricted']} unrestricted",
+                batch_id=self.batch_id, step=8
+            )
+
             QMessageBox.information(
                 self,
                 "Watermarking Complete",
@@ -614,18 +626,20 @@ class Step8Dialog(QDialog):
                 f"Output saved to:\n{watermarked_dir}\n\n"
                 f"Step 8 is now marked as complete."
             )
-            
+
             self.accept()
         else:
+            self.log_manager.step_error(8, "Watermarking process failed", batch_id=self.batch_id)
             self.output_text.append("\n❌ Watermarking process failed.")
             
     def _on_error(self, error_msg):
         """Handle watermarking errors."""
         self.progress_bar.setVisible(False)
         self.watermark_btn.setEnabled(True)
-        
+
+        self.log_manager.step_error(8, error_msg, batch_id=self.batch_id)
         self.output_text.append(f"\n❌ Error: {error_msg}")
-        
+
         QMessageBox.critical(
             self,
             "Watermarking Error",
