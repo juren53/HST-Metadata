@@ -2,11 +2,11 @@
 HSTL Photo Framework
 
 A comprehensive Python framework for managing the complete HSTL Photo Metadata Project workflow.
-Orchestrates 8 steps of photo metadata processing from Google Spreadsheet preparation 
+Orchestrates 8 steps of photo metadata processing from Google Spreadsheet preparation
 through final watermarked JPEG creation.
 """
 
-__version__ = "0.1.5c"
+__version__ = "0.1.5e"
 __author__ = "HSTL Photo Metadata Project"
 __description__ = "Framework for orchestrating HSTL photo metadata processing workflow"
 
