@@ -10,18 +10,23 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 
+from utils.log_manager import get_log_manager
+
 
 class Step1Dialog(QDialog):
     """Dialog for Step 1: Google Worksheet Preparation."""
-    
-    def __init__(self, config_manager, parent=None):
+
+    def __init__(self, config_manager, parent=None, batch_id=None):
         super().__init__(parent)
-        
+
         self.config_manager = config_manager
-        
+        self.batch_id = batch_id
+        self.log_manager = get_log_manager()
+
         self.setWindowTitle("Step 1: Google Worksheet Preparation")
         self.setMinimumWidth(600)
-        
+
+        self.log_manager.debug("Opened Step 1 dialog", batch_id=batch_id, step=1)
         self._init_ui()
         
     def _init_ui(self):
@@ -83,44 +88,51 @@ class Step1Dialog(QDialog):
     def _save_and_close(self):
         """Save the URL and mark step as complete."""
         url = self.url_edit.text().strip()
-        
+
         # Validate URL
         if not url:
+            self.log_manager.warning("Step 1: URL is required but was empty", batch_id=self.batch_id, step=1)
             QMessageBox.warning(
                 self,
                 "URL Required",
                 "Please enter the Google Worksheet URL."
             )
             return
-        
+
         # Basic URL validation
         if not url.startswith(('http://', 'https://')):
+            self.log_manager.warning(f"Step 1: Invalid URL format - {url[:50]}...", batch_id=self.batch_id, step=1)
             QMessageBox.warning(
                 self,
                 "Invalid URL",
                 "Please enter a valid URL starting with http:// or https://"
             )
             return
-        
+
         # Save URL to configuration
         try:
+            self.log_manager.step_start(1, "Google Worksheet Preparation", batch_id=self.batch_id)
+
             # Create step1 configuration section if it doesn't exist
             if not self.config_manager.get('step_configurations.step1'):
                 self.config_manager.set('step_configurations.step1', {})
-            
+
             # Save the URL
             self.config_manager.set('step_configurations.step1.worksheet_url', url)
-            
+
             # Mark step 1 as completed
             self.config_manager.update_step_status(1, True)
-            
+
             # Save configuration to file
             if self.config_manager.config_path:
                 self.config_manager.save_config(
                     self.config_manager.to_dict(),
                     self.config_manager.config_path
                 )
-                
+
+                self.log_manager.step_complete(1, "Google Worksheet Preparation", batch_id=self.batch_id)
+                self.log_manager.info(f"Step 1: Worksheet URL saved", batch_id=self.batch_id, step=1)
+
                 QMessageBox.information(
                     self,
                     "Step 1 Complete",
@@ -128,16 +140,18 @@ class Step1Dialog(QDialog):
                     f"Step 1 is now marked as complete.\n\n"
                     f"URL: {url}"
                 )
-                
+
                 self.accept()
             else:
+                self.log_manager.error("Step 1: No config file path found", batch_id=self.batch_id, step=1)
                 QMessageBox.warning(
                     self,
                     "Save Error",
                     "Could not save configuration: No config file path found."
                 )
-                
+
         except Exception as e:
+            self.log_manager.step_error(1, str(e), batch_id=self.batch_id, exc_info=True)
             QMessageBox.critical(
                 self,
                 "Error",

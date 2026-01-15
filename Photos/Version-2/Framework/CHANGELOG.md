@@ -5,6 +5,65 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.5e] - 2026-01-15
+
+### Added
+
+- **Comprehensive Logging System** - Enhanced logging infrastructure for documentation and troubleshooting (2026-01-15)
+
+  - **New Module**: `utils/log_manager.py` - Centralized logging manager singleton
+    - Session-level logging with rotating file handlers (10MB max, 5 backups)
+    - Per-batch log files in each batch's data directory
+    - Configurable verbosity levels: Minimal, Normal, Detailed
+    - Thread-safe GUI integration via Qt signals
+    - `LogRecord` dataclass with batch_id, step number, and timestamp metadata
+    - Convenience methods: `step_start()`, `step_complete()`, `step_error()`
+  - **Enhanced Log Viewer**: `gui/widgets/enhanced_log_widget.py`
+    - Filter bar with Level, Batch, Step, and Search filters
+    - Color-coded log entries by severity level
+    - Auto-scroll with pause option
+    - Export logs to file with filter information
+    - Pop-out button for separate window
+  - **Pop-out Log Window**: `gui/dialogs/log_viewer_dialog.py`
+    - Independent window for multi-monitor workflows
+    - Same filtering and search capabilities as embedded viewer
+    - Accessible via View menu (Ctrl+L) or Pop Out button
+  - **Settings Integration**: Added Logging section to Settings dialog
+    - Verbosity Level dropdown (Minimal/Normal/Detailed)
+    - Per-batch logging checkbox
+    - GUI log buffer size spinbox (100-10000 lines)
+  - **Framework Integration**:
+    - `BatchContextAdapter` in `utils/logger.py` for batch-aware logging
+    - `batch_id` parameter added to `ProcessingContext` in `steps/base_step.py`
+    - LogManager integrated into `hstl_framework.py` for CLI logging
+    - Step 5 dialog updated as example pattern for step logging
+  - **Configuration Updates**: New settings in `config/settings.py`
+    - `verbosity`: 'minimal', 'normal', or 'detailed'
+    - `per_batch_logging`: Enable/disable per-batch log files
+    - `gui_log_buffer`: Maximum lines in GUI log viewer
+  - **Log File Organization**:
+    - Session logs: `~/.hstl_photo_framework/logs/session_YYYYMMDD_HHMMSS.log`
+    - Per-batch logs: `{batch_data_directory}/logs/batch_{id}.log`
+  - **Features**:
+    - Real-time log display with color-coded severity levels
+    - Filter by log level (DEBUG, INFO, WARNING, ERROR)
+    - Filter by specific batch or step
+    - Full-text search across log messages
+    - Export filtered logs with metadata
+    - Persistent verbosity settings via QSettings
+  - **Files Created**:
+    - `utils/log_manager.py` - Centralized logging manager (300+ lines)
+    - `gui/widgets/enhanced_log_widget.py` - Advanced log viewer widget (350+ lines)
+    - `gui/dialogs/log_viewer_dialog.py` - Pop-out log window dialog (80 lines)
+  - **Files Modified**:
+    - `utils/logger.py` - Added BatchContextAdapter and get_batch_logger()
+    - `config/settings.py` - Added verbosity, per_batch_logging, gui_log_buffer settings
+    - `gui/main_window.py` - Integrated EnhancedLogWidget, pop-out, View menu item
+    - `gui/dialogs/settings_dialog.py` - Added Logging settings section
+    - `steps/base_step.py` - Added batch_id to ProcessingContext
+    - `hstl_framework.py` - Added LogManager integration
+    - `gui/dialogs/step5_dialog.py` - Added logging as example pattern
+
 ## HPM [0.1.5d] - 2026-01-15 05:52
 
 ### Added

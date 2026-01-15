@@ -111,14 +111,50 @@ def setup_logger(name: str = 'hstl_framework',
 def get_logger(name: str = 'hstl_framework') -> logging.Logger:
     """
     Get an existing logger instance.
-    
+
     Args:
         name: Logger name
-        
+
     Returns:
         Logger instance
     """
     return logging.getLogger(name)
+
+
+class BatchContextAdapter(logging.LoggerAdapter):
+    """
+    Logger adapter that adds batch context to log records.
+
+    Automatically injects batch_id and step number into every log message,
+    enabling filtering and per-batch log file routing.
+
+    Usage:
+        logger = get_batch_logger('batch123', step=5)
+        logger.info("Processing file")  # Includes batch_id and step in record
+    """
+
+    def process(self, msg, kwargs):
+        """Add batch context to the log record."""
+        extra = kwargs.get('extra', {})
+        extra['batch_id'] = self.extra.get('batch_id')
+        extra['step'] = self.extra.get('step')
+        kwargs['extra'] = extra
+        return msg, kwargs
+
+
+def get_batch_logger(batch_id: str, step: Optional[int] = None) -> BatchContextAdapter:
+    """
+    Get a logger adapter for batch-specific logging.
+
+    Args:
+        batch_id: Unique batch identifier
+        step: Optional step number (1-8)
+
+    Returns:
+        BatchContextAdapter that includes batch context in all log messages
+    """
+    logger = get_logger('hstl_framework')
+    return BatchContextAdapter(logger, {'batch_id': batch_id, 'step': step})
 
 
 class StepLogger:
