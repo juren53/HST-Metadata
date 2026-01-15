@@ -64,6 +64,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - `hstl_framework.py` - Added LogManager integration
     - `gui/dialogs/step5_dialog.py` - Added logging as example pattern
 
+### Fixed
+
+- **Logging System Bug** - Fixed log messages not appearing in GUI after batch selection (2026-01-15)
+  - **Root Cause**: `setup_logger()` in `utils/logger.py` was clearing all handlers including the GUI log handler when `framework.initialize()` was called during batch selection
+  - **Solution**: Modified `setup_logger()` to preserve LogManager-owned handlers (GUILogHandler, BatchFileHandler, and session handler)
+  - Added `_log_manager_owned` marker to session handler for preservation
+  - Added logging for batch actions (complete, archive, reactivate, remove)
+  - Batch creation and deletion now properly logged in GUI viewer
+
 ## HPM [0.1.5d] - 2026-01-15 05:52
 
 ### Added

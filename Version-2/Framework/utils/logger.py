@@ -60,9 +60,18 @@ def setup_logger(name: str = 'hstl_framework',
     # Create logger
     logger = logging.getLogger(name)
     logger.setLevel(getattr(logging, level.upper(), logging.INFO))
-    
-    # Clear any existing handlers
+
+    # Clear existing handlers EXCEPT LogManager handlers (preserve GUI and batch logging)
+    # Import here to avoid circular imports
+    from utils.log_manager import GUILogHandler, BatchFileHandler
+    handlers_to_keep = [
+        h for h in logger.handlers
+        if isinstance(h, (GUILogHandler, BatchFileHandler))
+        or getattr(h, '_log_manager_owned', False)  # Allow marking handlers
+    ]
     logger.handlers.clear()
+    for handler in handlers_to_keep:
+        logger.addHandler(handler)
     
     # Default format
     if not format_str:
