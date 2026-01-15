@@ -1,0 +1,121 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hstl-photo-framework"
+version = "0.1.5c"
+description = "Framework for orchestrating HSTL photo metadata processing workflow"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "HSTL Photo Metadata Project"}
+]
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+]
+
+dependencies = [
+    "PyYAML>=6.0",
+    "pandas>=1.5.0",
+    "pydantic>=1.10.0",
+    "ftfy>=6.0.0",
+    "tqdm>=4.64.0",
+    "colorama>=0.4.4",
+    "structlog>=22.0.0",
+    "Pillow>=9.0.0",
+    "PyExifTool>=0.5.0",
+    "PyQt6>=6.0.0",
+]
+
+[project.optional-dependencies]
+google = [
+    "google-auth>=2.0.0",
+    "google-auth-oauthlib>=0.5.0",
+    "google-auth-httplib2>=0.1.0",
+    "google-api-python-client>=2.0.0",
+    "gspread>=5.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-qt>=4.2.0",
+]
+
+[project.scripts]
+hpm = "hstl_framework:main"
+
+# ============================================================================
+# PYTEST CONFIGURATION
+# ============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "unit: Unit tests (fast, isolated)",
+    "integration: Integration tests (may use filesystem)",
+    "gui: GUI tests (require PyQt6, skip in CI)",
+    "slow: Slow tests (> 1 second)",
+    "network: Tests requiring network access",
+    "exiftool: Tests requiring ExifTool installed",
+]
+addopts = "-v --tb=short -ra"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+# ============================================================================
+# COVERAGE CONFIGURATION
+# ============================================================================
+
+[tool.coverage.run]
+source = ["config", "core", "steps", "utils", "gui"]
+branch = true
+omit = [
+    "tests/*",
+    "*/__init__.py",
+    "*/test_*.py",
+    "g2c.py",
+    "csv_record_viewer.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "except ImportError:",
+]
+fail_under = 80
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# ============================================================================
+# SETUPTOOLS CONFIGURATION
+# ============================================================================
+
+[tool.setuptools.packages.find]
+include = ["config*", "core*", "steps*", "utils*", "gui*"]
+exclude = ["tests*", "docs*", "archive*", "build*", "dist*"]
