@@ -31,10 +31,6 @@ import pandas as pd
 from pathlib import Path
 
 # === CONFIG ===
-CLIENT_SECRET_FILE = "client_secret_562755451687-9rpcl9hgjpkkamhu935p5a1gqcj06ot7.apps.googleusercontent.com.json"
-TOKEN_PICKLE_FILE = "token_sheets.pickle"
-
-# === CONFIG ===
 # Default Excel file path for HPM projects
 DEFAULT_EXCEL_PATH = "input/spreadsheet/metadata.xlsx"
 
@@ -524,18 +520,34 @@ def main():
     """Main function to execute the script."""
     # Set up argument parser
     parser = argparse.ArgumentParser(
-        description="Convert Excel spreadsheets to CSV with IPTC metadata mapping for HPM system",
+        description="Convert Excel spreadsheets to CSV with IPTC metadata mapping for HPM system.",
         epilog="""
 Examples:
   # Use default Excel file
   python g2c.py
   
-  # Specify custom Excel file
+  # Specify Excel file
   python g2c.py --excel-file "/path/to/metadata.xlsx"
   
   # Export to CSV with custom filename
   python g2c.py --excel-file "metadata.xlsx" --export-csv custom_output.csv
 """,
+    )
+
+    # Add arguments
+    parser.add_argument(
+        "--excel-file",
+        "-f",
+        default=DEFAULT_EXCEL_PATH,
+        help="Path to the Excel file (default: input/spreadsheet/metadata.xlsx)",
+    )
+
+    parser.add_argument(
+        "--export-csv",
+        "-e",
+        nargs="?",
+        const="export.csv",
+        help="Export data to CSV file (default filename: export.csv)",
     )
 
     # Add arguments
