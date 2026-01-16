@@ -22,7 +22,7 @@ from PyQt6.QtGui import QColor, QPalette, QDesktopServices
 
 
 STEP_NAMES = {
-    1: "Google Worksheet Completed",
+    1: "Excel Spreadsheet Completed",
     2: "Create export.csv file",
     3: "Test for Unicode scrabbling",
     4: "Test/Convert 16 Bit TIFFs",
@@ -379,7 +379,7 @@ class StepWidget(QWidget):
         self._update_batch_progress()
 
     def _run_step_1(self):
-        """Run Step 1: Google Worksheet Preparation (special dialog)."""
+        """Run Step 1: Excel Spreadsheet Preparation (special dialog)."""
         from gui.dialogs.step1_dialog import Step1Dialog
 
         self.output_text.append(f"\n--- Running Step 1: {STEP_NAMES[1]} ---\n")
@@ -391,9 +391,12 @@ class StepWidget(QWidget):
 
         if dialog.exec():
             # Dialog was accepted (Save clicked)
-            url = dialog.get_url()
-            self.output_text.append(f"✅ Google Worksheet URL saved: {url}\n")
-            self.output_text.append("✅ Step 1 marked as complete\n")
+            excel_paths = dialog.get_excel_paths()
+            if excel_paths:
+                self.output_text.append(
+                    f"✅ Excel file processed: {excel_paths['target_path']}\n"
+                )
+                self.output_text.append("✅ Step 1 marked as complete\n")
 
             # Update status and progress
             self._update_step_statuses()
@@ -412,7 +415,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 2: {STEP_NAMES[2]} ---\n")
 
         # Open the Step 2 dialog
-        dialog = Step2Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step2Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -436,7 +441,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 3: {STEP_NAMES[3]} ---\n")
 
         # Open the Step 3 dialog
-        dialog = Step3Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step3Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (mojibake fixes applied or skipped)
@@ -460,7 +467,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 4: {STEP_NAMES[4]} ---\n")
 
         # Open the Step 4 dialog
-        dialog = Step4Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step4Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -510,7 +519,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 6: {STEP_NAMES[6]} ---\n")
 
         # Open the Step 6 dialog
-        dialog = Step6Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step6Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (conversion succeeded)
@@ -534,7 +545,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 7: {STEP_NAMES[7]} ---\n")
 
         # Open the Step 7 dialog
-        dialog = Step7Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step7Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (resize succeeded)
@@ -558,7 +571,9 @@ class StepWidget(QWidget):
         self.output_text.append(f"\n--- Running Step 8: {STEP_NAMES[8]} ---\n")
 
         # Open the Step 8 dialog
-        dialog = Step8Dialog(self.framework.config_manager, self, batch_id=self.batch_id)
+        dialog = Step8Dialog(
+            self.framework.config_manager, self, batch_id=self.batch_id
+        )
 
         if dialog.exec():
             # Dialog was accepted (watermarking succeeded)
@@ -624,9 +639,11 @@ class StepWidget(QWidget):
 
         # Add step-specific information
         if step_num == 1:
-            worksheet_url = step_config.get("worksheet_url", "Not set")
+            excel_source_path = step_config.get("excel_source_path", "Not set")
+            excel_target_path = step_config.get("excel_target_path", "Not set")
             required_fields = step_config.get("required_fields", [])
-            review_text += f"<p><b>Google Worksheet URL:</b><br>{worksheet_url}</p>"
+            review_text += f"<p><b>Excel Source File:</b><br>{excel_source_path}</p>"
+            review_text += f"<p><b>Excel Target File:</b><br>{excel_target_path}</p>"
             review_text += (
                 f"<p><b>Required Fields:</b><br>" + ", ".join(required_fields) + "</p>"
             )
