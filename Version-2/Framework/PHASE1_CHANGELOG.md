@@ -207,6 +207,124 @@ data_directory/
 
 ---
 
-**Phase 1 Status**: ✅ COMPLETE AND TESTED  
-**Next Phase**: Ready for Phase 2 - UI Updates  
-**Migration Progress**: Phase 1/4 Complete (25% overall)
+## Phase 2: UI Updates
+
+**Status**: ✅ COMPLETE AND TESTED  
+**Date**: 2026-01-16  
+
+### Completed Tasks
+
+#### ✅ Step 1 Dialog Update
+**File**: `gui/dialogs/step1_dialog.py`
+
+**Changes**:
+- **Replaced Google Worksheet URL input** with Excel file browser
+- **Added file selection dialog** (`QFileDialog.getOpenFileName`)
+- **Integrated file_manager.py** for Excel validation and copying
+- **Added progress indicators** with status labels and progress bar
+- **Updated error handling** for Excel-specific validation
+- **Added Excel file validation** using `validate_hpm_excel_structure()`
+- **Added file copying** to `input/spreadsheet/` with conflict resolution
+- **Updated UI text** to reflect Excel workflow
+
+**Key Features**:
+- File browser with filter for `.xlsx` and `.xls` files
+- Real-time HPM structure validation
+- Automatic file copying with unique naming
+- Progress feedback during validation/copying
+- Clear error messages with actionable suggestions
+
+#### ✅ Step 2 Dialog Update  
+**File**: `gui/dialogs/step2_dialog.py`
+
+**Changes**:
+- **Updated CSVConversionThread** to use Excel processing instead of Google Sheets
+- **Replaced `fetch_sheet_data()`** with `read_excel_file()` calls
+- **Updated imports** to remove Google Sheets dependencies
+- **Modified progress messages** for Excel-specific terminology
+- **Maintained existing thread safety** and error handling
+- **Updated configuration handling** for Excel file paths
+
+**Key Features**:
+- Excel file reading with proper error handling
+- CSV export with IPTC metadata mapping preserved
+- Thread-safe processing with progress feedback
+- Batch title addition to CSV output
+
+#### ✅ UI Text Updates Across Framework
+
+**Files Updated**:
+- `gui/widgets/step_widget.py` - Step names and references
+- `gui/main_window.py` - About dialog description
+- `gui/dialogs/batch_info_dialog.py` - Step information display
+- `docs/GLOSSARY.md` - Terminology updates
+- `README.md` - Workflow descriptions
+
+**Text Changes**:
+- "Google Worksheet" → "Excel Spreadsheet"
+- "Google Spreadsheet Preparation" → "Excel Spreadsheet Preparation"  
+- "Google Worksheet URL" → "Excel Source File/Target File"
+- Updated all references to reflect new Excel-based workflow
+
+### ✅ Architecture Integration
+
+**File Manager Integration**:
+- Step 1 now uses `FileManager` class for file operations
+- Excel validation integrated with `ExcelValidator` system
+- File copying to standardized `input/spreadsheet/` directory
+- Error handling unified across file operations
+
+**Configuration Updates**:
+- Step 1 saves both `excel_source_path` and `excel_target_path`
+- Step 2 reads from `excel_target_path` for processing
+- Backward compatibility maintained for existing configurations
+
+### Technical Impact
+
+#### ✅ Positive Impacts
+- **Improved User Experience**: File browser vs manual URL entry
+- **Better Validation**: Real-time HPM structure checking
+- **Enhanced Security**: No OAuth tokens or API keys required
+- **Offline Processing**: Complete independence from Google services
+- **Faster Performance**: Direct file access vs API calls
+
+#### ✅ Testing Results
+- **Syntax Validation**: All updated files compile successfully
+- **Integration Testing**: File manager and validator integration verified
+- **UI Consistency**: All text references updated consistently
+- **Error Handling**: Comprehensive error messages for Excel workflows
+
+### Files Modified
+
+#### Core Dialog Updates
+- `gui/dialogs/step1_dialog.py` - Complete Excel integration
+- `gui/dialogs/step2_dialog.py` - Excel processing workflow
+
+#### UI and Documentation Updates  
+- `gui/widgets/step_widget.py` - Step names and references
+- `gui/main_window.py` - Application description
+- `gui/dialogs/batch_info_dialog.py` - Batch step information
+- `docs/GLOSSARY.md` - Technical terminology
+- `README.md` - Project overview and workflow
+
+### Phase 2 Quality Assurance
+
+#### ✅ Testing Completed
+- [x] Dialog functionality and error handling
+- [x] File manager integration
+- [x] Excel validation workflow  
+- [x] CSV conversion with Excel files
+- [x] UI text consistency across application
+- [x] Configuration updates for Excel paths
+
+#### ✅ Code Quality
+- [x] Syntax validation passed for all modified files
+- [x] Existing error handling patterns preserved
+- [x] Thread safety maintained for background processing
+- [x] Documentation updated for new workflows
+
+---
+
+**Phase 2 Status**: ✅ COMPLETE AND TESTED  
+**Next Phase**: Ready for Phase 3 - Dependencies and Configuration  
+**Migration Progress**: Phase 2/4 Complete (50% overall)
