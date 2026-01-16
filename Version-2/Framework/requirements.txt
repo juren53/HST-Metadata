@@ -40,15 +40,12 @@ PyQt6>=6.0.0                   # Main GUI framework for the application
 wxPython>=4.1.0                # For csv_record_viewer.py utility (optional)
 
 # ============================================================================
-# GOOGLE SERVICES INTEGRATION
+# EXCEL PROCESSING DEPENDENCIES
 # ============================================================================
 
-# Google authentication and API access
-google-auth>=2.0.0             # Google authentication library
-google-auth-oauthlib>=0.5.0    # OAuth 2.0 flow for Google services
-google-auth-httplib2>=0.1.0    # HTTP transport for Google authentication
-google-api-python-client>=2.0.0 # Google API client library
-gspread>=5.0.0                 # Google Sheets API wrapper
+# Excel file reading and processing
+openpyxl>=3.0.0                # For .xlsx Excel file reading
+xlrd>=2.0.0                    # For legacy .xls Excel file reading
 
 # ============================================================================
 # DEVELOPMENT AND TESTING DEPENDENCIES
