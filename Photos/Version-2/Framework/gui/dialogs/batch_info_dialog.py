@@ -58,8 +58,8 @@ class BatchInfoDialog(QDialog):
         
         info.append("<br><b>Step Status:</b><br>")
         
-        step_names = {
-            'step1': "Google Worksheet Preparation",
+step_names = {
+            'step1': "Excel Spreadsheet Preparation",
             'step2': "CSV Conversion",
             'step3': "Unicode Filtering",
             'step4': "TIFF Bit Depth Conversion",

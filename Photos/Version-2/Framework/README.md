@@ -50,8 +50,8 @@ python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml"
 
 This framework orchestrates 8 steps of photo metadata processing:
 
-1. **Google Spreadsheet Preparation** - Collaborative spreadsheet setup
-2. **CSV Conversion** - Google Worksheet to CSV conversion  
+1. **Excel Spreadsheet Preparation** - Select and validate Excel spreadsheet files
+2. **CSV Conversion** - Excel spreadsheet to CSV conversion
 3. **Unicode Filtering** - Text encoding cleanup and validation
 4. **TIFF Conversion** - 16-bit to 8-bit TIFF conversion
 5. **Metadata Embedding** - Embed metadata into TIFF images
@@ -67,7 +67,7 @@ When you initialize a project with `hstl_framework.py init`, the following direc
 Project Data Directory/
 ├── input/
 │   ├── tiff/              # Original TIFF files (your source images)
-│   └── spreadsheet/       # Google Spreadsheet exports
+│   └── spreadsheet/       # Excel spreadsheets (copied from user selection)
 ├── output/
 │   ├── csv/               # Processed CSV files (Step 2)
 │   ├── tiff_processed/    # Processed TIFF files (Step 4)

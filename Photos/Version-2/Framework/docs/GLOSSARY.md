@@ -54,9 +54,9 @@ python hstl_framework.py init "January 2025 Batch"
 ### **Step 2: CSV Conversion**
 **Definition:** Automated conversion of Google Worksheet data into a local CSV file for processing.
 
-**Context:** Uses `g2c.py` to fetch spreadsheet data via the Google Sheets API and convert it to CSV format.
+**Context:** Uses `g2c.py` to read Excel spreadsheet data and convert it to CSV format.
 
-**Related Terms:** Google Sheets API, g2c.py, CSV, Accession Number
+**Related Terms:** Excel, g2c.py, CSV, Accession Number
 
 ### **Step 3: Unicode Filtering**
 **Definition:** Automated detection and correction of text encoding issues in the CSV metadata.
@@ -320,19 +320,19 @@ config.set('steps_completed.step1', True)
 
 ## 9. Tools & External Dependencies
 
-### **Google Sheets API**
-**Definition:** Google's programming interface for accessing spreadsheet data.
+### **Excel Processing**
+**Definition:** Local Excel spreadsheet reading and processing using pandas and openpyxl.
 
-**Context:** Used in Step 2 to fetch metadata from collaborative Google Worksheets.
+**Context:** Used in Step 2 to read metadata from Excel spreadsheets stored in project directory.
 
-**Related Terms:** g2c.py, OAuth2, CSV Conversion
+**Related Terms:** Excel, pandas, openpyxl, CSV, IPTC
 
 ### **g2c.py**
-**Definition:** Google Drive to CSV converter script that maps spreadsheet columns to IPTC fields.
+**Definition:** Excel to CSV converter script that maps spreadsheet columns to IPTC fields.
 
-**Context:** Core utility for Step 2, handling authentication and data conversion.
+**Context:** Core utility for Step 2, handling Excel file reading and data conversion.
 
-**Related Terms:** Google Sheets API, CSV, IPTC
+**Related Terms:** Excel, CSV, IPTC
 
 ### **Nomacs**
 **Definition:** Free image viewer used for spot-checking processed images.

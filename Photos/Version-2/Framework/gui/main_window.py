@@ -397,13 +397,19 @@ class MainWindow(QMainWindow):
             return
 
         if action == "complete":
-            self.log_manager.info(f"Marking batch as complete: {batch['name']}", batch_id=batch_id)
+            self.log_manager.info(
+                f"Marking batch as complete: {batch['name']}", batch_id=batch_id
+            )
             self.framework.complete_batch(batch_id)
         elif action == "archive":
-            self.log_manager.info(f"Archiving batch: {batch['name']}", batch_id=batch_id)
+            self.log_manager.info(
+                f"Archiving batch: {batch['name']}", batch_id=batch_id
+            )
             self.framework.archive_batch(batch_id)
         elif action == "reactivate":
-            self.log_manager.info(f"Reactivating batch: {batch['name']}", batch_id=batch_id)
+            self.log_manager.info(
+                f"Reactivating batch: {batch['name']}", batch_id=batch_id
+            )
             self.framework.reactivate_batch(batch_id)
         elif action == "remove":
             reply = QMessageBox.question(
@@ -418,9 +424,7 @@ class MainWindow(QMainWindow):
                     f"Removing batch from registry: {batch['name']}", batch_id=batch_id
                 )
                 self.framework.remove_batch(batch_id, confirm=True)
-                self.log_manager.info(
-                    f"Batch removed from registry: {batch['name']}"
-                )
+                self.log_manager.info(f"Batch removed from registry: {batch['name']}")
         elif action == "info":
             from gui.dialogs.batch_info_dialog import BatchInfoDialog
 
@@ -681,7 +685,7 @@ class MainWindow(QMainWindow):
             f"<p><b>Commit Date:</b> 2026-01-15 13:53 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
-            "<p>Orchestrates 8 steps of photo metadata processing from Google Worksheet "
+            "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
             "preparation through final watermarked JPEG creation.</p>"
             "<br>"
             "<p><b>Features:</b></p>"
