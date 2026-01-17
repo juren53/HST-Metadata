@@ -5,6 +5,8 @@ Allows user to select an Excel spreadsheet file, validate it, copy it to the pro
 and marks Step 1 as complete.
 """
 
+import os
+
 from PyQt6.QtWidgets import (
     QDialog,
     QVBoxLayout,
@@ -119,10 +121,13 @@ class Step1Dialog(QDialog):
 
     def _browse_excel_file(self):
         """Open file browser to select Excel file."""
+        # Default to user's Downloads folder
+        downloads_folder = os.path.expanduser("~/Downloads")
+
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Select Excel Spreadsheet",
-            "",
+            downloads_folder,
             "Excel Files (*.xlsx *.xls);;All Files (*)",
         )
 

@@ -22,7 +22,7 @@ from PyQt6.QtGui import QColor, QPalette, QDesktopServices
 
 
 STEP_NAMES = {
-    1: "Excel Spreadsheet Completed",
+    1: "Excel Spreadsheet Download",
     2: "Create export.csv file",
     3: "Test for Unicode scrabbling",
     4: "Test/Convert 16 Bit TIFFs",
@@ -62,7 +62,7 @@ class StepWidget(QWidget):
 
         # Version and date/time stamp (right-aligned, 10pt font)
         version_label = QLabel(
-            "<span style='font-size: 10pt;'>v0.1.7 | 2026-01-16 17:30 CST</span>"
+            "<span style='font-size: 10pt;'>v0.1.7a | 2026-01-17 10:30 CST</span>"
         )
         version_label.setAlignment(
             Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter

@@ -5,6 +5,28 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7a] - 2026-01-17
+
+### Changed
+
+- **Step 1 Dialog** - File browser now opens in user's Downloads folder by default (2026-01-17)
+  - Excel spreadsheets are typically downloaded, so Downloads is the most logical starting location
+  - Uses `os.path.expanduser("~/Downloads")` for cross-platform compatibility
+  - **Files Modified**: `gui/dialogs/step1_dialog.py`
+
+- **Step 1 Label** - Changed from "Excel Spreadsheet Completed" to "Excel Spreadsheet Download" (2026-01-17)
+  - Better reflects the action of downloading/obtaining the spreadsheet
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **Help/About Dialog** - Updated title and content (2026-01-17)
+  - Title changed to "HSTL Photo Metadata Framework [ HPM ]"
+  - Header changed to match new title
+  - Description changed from "comprehensive" to "end-to-end" framework
+  - Added OS platform information (shows full Windows version info like "Windows-10-10.0.19045-SP0")
+  - **Files Modified**: `gui/main_window.py`
+
+---
+
 ## HPM [0.1.7] - 2026-01-16
 
 ### Changed
