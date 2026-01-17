@@ -29,6 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Created**: `utils/console_capture.py`
   - **Files Modified**: `utils/log_manager.py`, `gui/dialogs/settings_dialog.py`, `gui/main_window.py`
 
+- **Batch Name in Log Viewer** - Display current batch name in log viewer header (2026-01-17)
+  - Shows "Logs - {batch_name}" in the header above filter bar
+  - Pop-out Log Viewer dialog also shows batch name in title bar
+  - Helps users confirm which batch's logs they are viewing
+  - Updates automatically when switching batches
+  - **Files Modified**: `gui/widgets/enhanced_log_widget.py`, `gui/dialogs/log_viewer_dialog.py`, `gui/main_window.py`
+
 ### Changed
 
 - **Step 1 Dialog** - File browser now opens in user's Downloads folder by default (2026-01-17)
