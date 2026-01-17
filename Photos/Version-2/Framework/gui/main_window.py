@@ -4,6 +4,7 @@ Main Window for HSTL Photo Framework GUI
 Provides the primary interface for batch management, step execution, and configuration.
 """
 
+import platform
 import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
@@ -84,7 +85,7 @@ class MainWindow(QMainWindow):
 
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.7")
+        self.setWindowTitle("HSTL Photo Framework v0.1.7a")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
 
@@ -673,18 +674,18 @@ class MainWindow(QMainWindow):
         """Show about dialog."""
         # Create custom dialog for better control over formatting
         dialog = QDialog(self)
-        dialog.setWindowTitle("About HSTL Photo Framework")
+        dialog.setWindowTitle("About HSTL Photo Metadata Framework [ HPM ]")
         dialog.resize(600, 500)
 
         layout = QVBoxLayout(dialog)
 
         # Main content
         about_html = (
-            "<h3>HSTL Photo Framework GUI</h3>"
-            f"<p><b>Version:</b> 0.1.7</p>"
-            f"<p><b>Commit Date:</b> 2026-01-16 17:30 CST</p>"
+            "<h3>HSTL Photo Metadata Framework [ HPM ]</h3>"
+            f"<p><b>Version:</b> 0.1.7a</p>"
+            f"<p><b>Commit Date:</b> 2026-01-17 10:30 CST</p>"
             "<br>"
-            "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
+            "<p>An end-to-end framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
             "preparation through final watermarked JPEG creation.</p>"
             "<br>"
@@ -709,10 +710,13 @@ class MainWindow(QMainWindow):
         python_exe = sys.executable
         script_path = Path(__file__).resolve()
 
+        os_platform = platform.platform()
+
         tech_html = (
             f'<p style="font-size: 9pt; color: #666;">'
             f"<b>Python Executable:</b><br>{python_exe}<br><br>"
-            f"<b>HPM Code Location:</b><br>{script_path}"
+            f"<b>HPM Code Location:</b><br>{script_path}<br><br>"
+            f"<b>OS:</b> {os_platform}"
             f"</p>"
         )
 

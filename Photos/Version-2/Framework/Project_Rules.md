@@ -35,6 +35,7 @@ gui/widgets/step_widget.py | Version label displayed in UI (line ~55)
 
 # Documentation Files
 docs/GUI_QUICKSTART.md | Version and Commit Date footer (lines ~272-273)
+docs/USER_GUIDE.md | Version and Commit Date in document
 gui/README.md | Version and Commit Date header (lines ~3-4)
 CHANGELOG.md | Add new version section at top with changes (line ~8)
 
