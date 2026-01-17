@@ -48,6 +48,15 @@ class SettingsDialog(QDialog):
         logging_group = QGroupBox("Logging")
         logging_layout = QVBoxLayout(logging_group)
 
+        # Enable logging checkbox
+        self.logging_enabled_check = QCheckBox("Enable logging")
+        self.logging_enabled_check.setToolTip(
+            "Master switch for logging.\n"
+            "When disabled, no log messages are recorded or displayed."
+        )
+        self.logging_enabled_check.stateChanged.connect(self._on_logging_enabled_changed)
+        logging_layout.addWidget(self.logging_enabled_check)
+
         # Verbosity level
         verbosity_layout = QHBoxLayout()
         verbosity_layout.addWidget(QLabel("Verbosity Level:"))
@@ -72,6 +81,15 @@ class SettingsDialog(QDialog):
             "Useful for troubleshooting specific batch issues."
         )
         logging_layout.addWidget(self.per_batch_check)
+
+        # Console capture
+        self.console_capture_check = QCheckBox("Capture console output")
+        self.console_capture_check.setToolTip(
+            "When enabled, all print() statements and console output\n"
+            "are captured and routed to the logging system.\n"
+            "Useful for capturing output from external tools."
+        )
+        logging_layout.addWidget(self.console_capture_check)
 
         # Log buffer size
         buffer_layout = QHBoxLayout()
@@ -104,6 +122,11 @@ class SettingsDialog(QDialog):
 
     def _load_settings(self):
         """Load current settings values."""
+        # Logging enabled
+        logging_enabled = self.settings.value("logging/enabled", True, type=bool)
+        self.logging_enabled_check.setChecked(logging_enabled)
+        self._on_logging_enabled_changed(None)  # Update control states
+
         # Verbosity
         verbosity = self.settings.value("logging/verbosity", "normal")
         index = self.verbosity_combo.findData(verbosity)
@@ -114,6 +137,10 @@ class SettingsDialog(QDialog):
         per_batch = self.settings.value("logging/per_batch", True, type=bool)
         self.per_batch_check.setChecked(per_batch)
 
+        # Console capture
+        console_capture = self.settings.value("logging/console_capture", False, type=bool)
+        self.console_capture_check.setChecked(console_capture)
+
         # Buffer size
         buffer_size = self.settings.value("logging/buffer_size", 1000, type=int)
         self.buffer_spin.setValue(buffer_size)
@@ -121,18 +148,29 @@ class SettingsDialog(QDialog):
     def _save_and_accept(self):
         """Save settings and close dialog."""
         # Get values
+        logging_enabled = self.logging_enabled_check.isChecked()
         verbosity = self.verbosity_combo.currentData()
         per_batch = self.per_batch_check.isChecked()
+        console_capture = self.console_capture_check.isChecked()
         buffer_size = self.buffer_spin.value()
 
         # Save to QSettings
+        self.settings.setValue("logging/enabled", logging_enabled)
         self.settings.setValue("logging/verbosity", verbosity)
         self.settings.setValue("logging/per_batch", per_batch)
+        self.settings.setValue("logging/console_capture", console_capture)
         self.settings.setValue("logging/buffer_size", buffer_size)
 
         # Apply to LogManager
+        self.log_manager.set_enabled(logging_enabled)
         self.log_manager.set_verbosity(verbosity)
         self.log_manager.set_per_batch_logging(per_batch)
+
+        # Apply console capture
+        if console_capture:
+            self.log_manager.enable_console_capture()
+        else:
+            self.log_manager.disable_console_capture()
 
         self.accept()
 
@@ -141,3 +179,11 @@ class SettingsDialog(QDialog):
         from gui.dialogs.theme_dialog import ThemeDialog
         dialog = ThemeDialog(self)
         dialog.exec()
+
+    def _on_logging_enabled_changed(self, state):
+        """Enable/disable logging controls based on master switch."""
+        enabled = self.logging_enabled_check.isChecked()
+        self.verbosity_combo.setEnabled(enabled)
+        self.per_batch_check.setEnabled(enabled)
+        self.console_capture_check.setEnabled(enabled)
+        self.buffer_spin.setEnabled(enabled)

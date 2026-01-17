@@ -18,6 +18,8 @@ from logging.handlers import RotatingFileHandler
 
 from PyQt6.QtCore import QObject, pyqtSignal
 
+from utils.console_capture import ConsoleCaptureHandler, ConsoleCaptureContext
+
 
 # Verbosity level mappings
 VERBOSITY_LEVELS = {
@@ -94,6 +96,8 @@ class GUILogHandler(logging.Handler, QObject):
 
     def emit(self, record: logging.LogRecord):
         """Convert logging.LogRecord to our LogRecord and emit signal."""
+        # Set flag to prevent console capture from re-logging this message
+        ConsoleCaptureContext.set_logging_active(True)
         try:
             log_record = LogRecord(
                 timestamp=datetime.fromtimestamp(record.created),
@@ -107,6 +111,8 @@ class GUILogHandler(logging.Handler, QObject):
             self.log_emitted.emit(log_record)
         except Exception:
             self.handleError(record)
+        finally:
+            ConsoleCaptureContext.set_logging_active(False)
 
 
 class BatchFileHandler(RotatingFileHandler):
@@ -192,6 +198,10 @@ class LogManager:
         self._verbosity = 'normal'
         self._session_log_path: Optional[Path] = None
         self._per_batch_logging = True
+        self._enabled = True  # Master switch for logging
+        self._console_capture_enabled = False
+        self._original_stdout = None
+        self._original_stderr = None
         self._initialized = False
 
     def setup_session_logging(self, log_dir: Path, verbosity: str = 'normal'):
@@ -283,7 +293,10 @@ class LogManager:
         self._verbosity = level
         log_level = VERBOSITY_LEVELS.get(level, logging.INFO)
 
-        self._logger.setLevel(log_level)
+        # Only set logger level if logging is enabled
+        # (otherwise keep it at CRITICAL+1 to suppress messages)
+        if self._enabled:
+            self._logger.setLevel(log_level)
 
         if self._session_handler:
             self._session_handler.setLevel(log_level)
@@ -294,6 +307,104 @@ class LogManager:
     def set_per_batch_logging(self, enabled: bool):
         """Enable or disable per-batch logging."""
         self._per_batch_logging = enabled
+
+    def set_enabled(self, enabled: bool):
+        """
+        Enable or disable all logging.
+
+        When disabled, log messages are still processed but the logger
+        level is set to CRITICAL+1, effectively suppressing all output.
+        This provides a master on/off switch for logging.
+
+        Args:
+            enabled: True to enable logging, False to disable
+        """
+        self._enabled = enabled
+        if enabled:
+            # Restore normal logging level based on verbosity
+            self.set_verbosity(self._verbosity)
+        else:
+            # Set level above CRITICAL to suppress all messages
+            self._logger.setLevel(logging.CRITICAL + 1)
+
+    @property
+    def enabled(self) -> bool:
+        """Get whether logging is enabled."""
+        return self._enabled
+
+    def enable_console_capture(self) -> None:
+        """
+        Enable stdout/stderr capture to logging system.
+
+        All print() statements and direct stdout/stderr writes will be
+        captured and routed to the logging system while still appearing
+        on the console.
+        """
+        if self._console_capture_enabled:
+            return
+
+        import sys
+
+        self._original_stdout = sys.stdout
+        self._original_stderr = sys.stderr
+
+        sys.stdout = ConsoleCaptureHandler(
+            self._original_stdout,
+            self._log_captured_output,
+            'stdout'
+        )
+        sys.stderr = ConsoleCaptureHandler(
+            self._original_stderr,
+            self._log_captured_output,
+            'stderr'
+        )
+
+        self._console_capture_enabled = True
+        self.info("Console capture enabled - print() statements will appear in logs")
+
+    def disable_console_capture(self) -> None:
+        """Restore original stdout/stderr."""
+        if not self._console_capture_enabled:
+            return
+
+        import sys
+
+        # Flush before restoring
+        if hasattr(sys.stdout, 'flush'):
+            sys.stdout.flush()
+        if hasattr(sys.stderr, 'flush'):
+            sys.stderr.flush()
+
+        sys.stdout = self._original_stdout
+        sys.stderr = self._original_stderr
+
+        self._console_capture_enabled = False
+        self.debug("Console capture disabled")
+
+    def _log_captured_output(self, message: str, source: str) -> None:
+        """
+        Log captured console output.
+
+        Args:
+            message: The captured text
+            source: 'stdout' or 'stderr'
+        """
+        # Determine log level based on source
+        level = logging.WARNING if source == 'stderr' else logging.INFO
+
+        # Set flag to prevent infinite loop (logging writes to console, which would re-capture)
+        ConsoleCaptureContext.set_logging_active(True)
+        try:
+            # Add a marker to identify captured console output
+            extra = {'batch_id': None, 'step': None, 'console_capture': True}
+            self._logger.log(level, f"[console] {message}", extra=extra)
+        finally:
+            ConsoleCaptureContext.set_logging_active(False)
+
+    @property
+    def console_capture_enabled(self) -> bool:
+        """Get whether console capture is enabled."""
+        return self._console_capture_enabled
 
     @property
     def verbosity(self) -> str:
@@ -320,8 +431,13 @@ class LogManager:
             step: Optional step number (1-8)
             exc_info: Include exception info
         """
-        extra = {'batch_id': batch_id, 'step': step}
-        self._logger.log(level, message, extra=extra, exc_info=exc_info)
+        # Set flag to prevent console capture from re-logging
+        ConsoleCaptureContext.set_logging_active(True)
+        try:
+            extra = {'batch_id': batch_id, 'step': step}
+            self._logger.log(level, message, extra=extra, exc_info=exc_info)
+        finally:
+            ConsoleCaptureContext.set_logging_active(False)
 
     def debug(self, message: str, batch_id: Optional[str] = None, step: Optional[int] = None):
         """Log debug message."""
@@ -357,6 +473,9 @@ class LogManager:
 
     def shutdown(self):
         """Close all handlers and clean up."""
+        # Disable console capture first
+        self.disable_console_capture()
+
         for handler in list(self._batch_handlers.values()):
             self._logger.removeHandler(handler)
             handler.close()

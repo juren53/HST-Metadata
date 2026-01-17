@@ -59,7 +59,13 @@ def setup_logger(name: str = 'hstl_framework',
     
     # Create logger
     logger = logging.getLogger(name)
-    logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+
+    # Check if LogManager has disabled logging - if so, don't reset the level
+    from utils.log_manager import LogManager
+    log_manager = LogManager.instance()
+    if log_manager.enabled:
+        logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+    # else: keep the CRITICAL+1 level set by LogManager
 
     # Clear existing handlers EXCEPT LogManager handlers (preserve GUI and batch logging)
     # Import here to avoid circular imports
