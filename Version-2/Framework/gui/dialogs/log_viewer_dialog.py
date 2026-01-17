@@ -45,6 +45,7 @@ class LogViewerDialog(QDialog):
     def _setup_window(self):
         """Configure window properties."""
         self.setWindowTitle("HPM Log Viewer")
+        self._current_batch_name = None
 
         # Make it an independent window
         self.setWindowFlags(
@@ -72,6 +73,14 @@ class LogViewerDialog(QDialog):
     def set_max_records(self, max_records: int):
         """Set maximum number of records."""
         self.log_widget.set_max_records(max_records)
+
+    def set_batch_name(self, batch_name: str):
+        """Set the current batch name and update the title bar."""
+        self._current_batch_name = batch_name
+        if batch_name:
+            self.setWindowTitle(f"HPM Log Viewer - {batch_name}")
+        else:
+            self.setWindowTitle("HPM Log Viewer")
 
     def closeEvent(self, event):
         """Handle dialog close."""

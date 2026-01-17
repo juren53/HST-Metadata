@@ -384,6 +384,7 @@ class MainWindow(QMainWindow):
             self.log_widget.add_batch_option(batch_id, batch_info["name"])
             if self.log_viewer_dialog:
                 self.log_viewer_dialog.add_batch_option(batch_id, batch_info["name"])
+                self.log_viewer_dialog.set_batch_name(batch_info["name"])
 
             # Log batch selection
             self.log_manager.info(
@@ -509,6 +510,12 @@ class MainWindow(QMainWindow):
             # Copy existing records to the pop-out
             for record in self.log_widget.get_records():
                 self.log_viewer_dialog.append_log(record)
+
+            # Set the current batch name in the title bar
+            if self.current_batch_id:
+                batch_info = self.registry.get_batch(self.current_batch_id)
+                if batch_info:
+                    self.log_viewer_dialog.set_batch_name(batch_info.get("name", ""))
 
         self.log_viewer_dialog.show_and_raise()
         self.status_bar.showMessage("Log viewer opened in separate window", 2000)
