@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## HPM [0.1.7a] - 2026-01-17
 
+### Added
+
+- **Logging Toggle Feature** - Master on/off switch for logging in Settings dialog (2026-01-17)
+  - New "Enable logging" checkbox at top of Logging settings group
+  - When disabled, all log messages are suppressed (logger level set above CRITICAL)
+  - Other logging controls (verbosity, per-batch, buffer) are grayed out when disabled
+  - Setting persists across app restarts via QSettings
+  - Respects disabled state when `setup_logger()` is called from framework initialization
+  - **Files Modified**: `utils/log_manager.py`, `utils/logger.py`, `gui/dialogs/settings_dialog.py`, `gui/main_window.py`
+
+- **Console Capture Feature** - Route print() statements to logging system (2026-01-17)
+  - New "Capture console output" checkbox in Settings dialog
+  - Captures all print() statements and stdout/stderr writes from worker threads
+  - Messages appear in Log dialog with `[console]` prefix
+  - Useful for capturing output from external tools (e.g., g2c.py during Step 2)
+  - Uses thread-local flag to prevent infinite loops when log messages write to console
+  - Pattern matching skips already-formatted log messages to prevent duplication
+  - RLock prevents deadlocks when logging from captured output
+  - Debug mode available (`_debug = True`) for troubleshooting capture issues
+  - **Files Created**: `utils/console_capture.py`
+  - **Files Modified**: `utils/log_manager.py`, `gui/dialogs/settings_dialog.py`, `gui/main_window.py`
+
 ### Changed
 
 - **Step 1 Dialog** - File browser now opens in user's Downloads folder by default (2026-01-17)
