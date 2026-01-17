@@ -14,89 +14,8 @@ from PyQt6.QtWidgets import (
     QPushButton, QTextEdit, QMessageBox, QProgressBar, QGroupBox
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-import time
 
 from utils.log_manager import get_log_manager
-
-
-class TIFFSearchThread(QThread):
-    """Worker thread for searching missing TIFF files."""
-    
-    progress = pyqtSignal(str)  # Progress messages
-    progress_percent = pyqtSignal(int)  # Progress percentage (0-100)
-    finished = pyqtSignal(dict)  # Found files map: ObjectName -> [paths]
-    error = pyqtSignal(str)  # Error messages
-    
-    def __init__(self, base_dir, missing_names):
-        super().__init__()
-        self.base_dir = base_dir
-        self.missing_names = set(missing_names)
-        self._stop_requested = False
-        
-    def stop(self):
-        self._stop_requested = True
-        
-    def run(self):
-        """Search for missing TIFF files with progress updates."""
-        found = {}
-        try:
-            # First pass: count total directories for progress estimation
-            self.progress.emit("Counting directories...")
-            total_dirs = 0
-            for root, dirs, files in os.walk(self.base_dir):
-                if self._stop_requested:
-                    return
-                total_dirs += 1
-            
-            self.progress.emit(f"Searching {total_dirs} directories...")
-            
-            # Second pass: search with progress
-            dirs_processed = 0
-            start_time = time.time()
-            
-            for root, dirs, files in os.walk(self.base_dir):
-                if self._stop_requested:
-                    self.progress.emit("Search cancelled.")
-                    return
-                
-                dirs_processed += 1
-                
-                # Update progress every 10 directories or on last directory
-                if dirs_processed % 10 == 0 or dirs_processed == total_dirs:
-                    percent = int((dirs_processed / total_dirs) * 100)
-                    self.progress_percent.emit(percent)
-                    
-                    # Estimate time remaining
-                    elapsed = time.time() - start_time
-                    if dirs_processed > 0:
-                        rate = elapsed / dirs_processed
-                        remaining = (total_dirs - dirs_processed) * rate
-                        if remaining > 60:
-                            eta_str = f"{int(remaining / 60)}m {int(remaining % 60)}s"
-                        else:
-                            eta_str = f"{int(remaining)}s"
-                        self.progress.emit(f"Searched {dirs_processed}/{total_dirs} directories - ETA: {eta_str}")
-                    else:
-                        self.progress.emit(f"Searched {dirs_processed}/{total_dirs} directories")
-                
-                # Search for TIFF files in current directory
-                for fname in files:
-                    if self._stop_requested:
-                        return
-                    
-                    if not (fname.lower().endswith('.tif') or fname.lower().endswith('.tiff')):
-                        continue
-                    
-                    stem = Path(fname).stem
-                    if stem in self.missing_names:
-                        found.setdefault(stem, []).append(str(Path(root) / fname))
-            
-            self.progress_percent.emit(100)
-            self.progress.emit("Search complete.")
-            self.finished.emit(found)
-            
-        except Exception as e:
-            self.error.emit(f"Search error: {str(e)}")
 
 
 class MetadataEmbeddingThread(QThread):
@@ -430,12 +349,7 @@ class Step5Dialog(QDialog):
         self.progress_bar = QProgressBar()
         self.progress_bar.setVisible(False)
         layout.addWidget(self.progress_bar)
-        
-        # Search progress label
-        self.search_progress_label = QLabel()
-        self.search_progress_label.setVisible(False)
-        layout.addWidget(self.search_progress_label)
-        
+
         # Output/Status section
         status_label = QLabel("<b>Status & Output:</b>")
         layout.addWidget(status_label)
@@ -454,12 +368,7 @@ class Step5Dialog(QDialog):
         self.report_btn.setVisible(False)
         self.report_btn.clicked.connect(self._generate_comparison_report)
         button_layout.addWidget(self.report_btn)
-        
-        self.search_btn = QPushButton("Search for Missing TIFFs")
-        self.search_btn.setVisible(False)
-        self.search_btn.clicked.connect(self._search_for_missing)
-        button_layout.addWidget(self.search_btn)
-        
+
         self.embed_btn = QPushButton("Proceed with Embedding")
         self.embed_btn.setDefault(True)
         self.embed_btn.setEnabled(False)
@@ -474,113 +383,14 @@ class Step5Dialog(QDialog):
         
         layout.addLayout(button_layout)
         
-        # Store missing files for search functionality
+        # Store missing files for reporting
         self.missing_tiffs = []
         self.data_directory = None
-        self.search_thread = None
-        
+
         # Store analysis results for reporting
         self.csv_object_names = []
         self.tiff_basenames = []
         
-    def _search_for_missing(self):
-        """Prompt user and search for missing TIFF files."""
-        from PyQt6.QtWidgets import QFileDialog
-        
-        if not self.missing_tiffs:
-            QMessageBox.information(self, "No Missing Files", "No missing TIFF files to search for.")
-            return
-        
-        # Check if search is already running
-        if self.search_thread and self.search_thread.isRunning():
-            QMessageBox.warning(self, "Search In Progress", "A search is already in progress.")
-            return
-        
-        reply = QMessageBox.question(
-            self,
-            "Search for Missing TIFFs",
-            f"Search your filesystem for {len(self.missing_tiffs)} missing TIFF file(s)?\n\n"
-            "You'll be prompted to choose a folder to search (recursively).",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
-        )
-        
-        if reply == QMessageBox.StandardButton.Yes:
-            base_dir = QFileDialog.getExistingDirectory(
-                self,
-                "Select folder to search recursively for missing TIFFs",
-                str(Path(self.data_directory).parent) if self.data_directory else ""
-            )
-            if base_dir:
-                self.output_text.append(f"\n--- Searching for missing TIFFs in: {base_dir} ---")
-                
-                # Disable search button during search
-                self.search_btn.setEnabled(False)
-                self.search_btn.setText("Searching...")
-                
-                # Show progress indicators
-                self.progress_bar.setVisible(True)
-                self.progress_bar.setValue(0)
-                self.search_progress_label.setVisible(True)
-                self.search_progress_label.setText("Initializing search...")
-                
-                # Start search thread
-                self.search_thread = TIFFSearchThread(base_dir, self.missing_tiffs)
-                self.search_thread.progress.connect(self._on_search_progress)
-                self.search_thread.progress_percent.connect(self._on_search_progress_percent)
-                self.search_thread.finished.connect(self._on_search_finished)
-                self.search_thread.error.connect(self._on_search_error)
-                self.search_thread.start()
-    
-    def _on_search_progress(self, message):
-        """Handle search progress messages."""
-        self.search_progress_label.setText(message)
-    
-    def _on_search_progress_percent(self, percent):
-        """Handle search progress percentage."""
-        self.progress_bar.setValue(percent)
-    
-    def _on_search_finished(self, found_map):
-        """Handle search completion."""
-        # Hide progress indicators
-        self.progress_bar.setVisible(False)
-        self.search_progress_label.setVisible(False)
-        
-        # Re-enable search button
-        self.search_btn.setEnabled(True)
-        self.search_btn.setText("Search for Missing TIFFs")
-        
-        # Display results
-        total_found = sum(len(v) for v in found_map.values())
-        self.output_text.append(f"Search complete.")
-        self.output_text.append(f"Found {total_found} matching file(s) for {len(found_map)} of {len(self.missing_tiffs)} missing object(s).")
-        
-        # List first few results per object
-        if found_map:
-            self.output_text.append("\nMatching files found:")
-            for oname, paths in list(found_map.items())[:10]:
-                self.output_text.append(f"  {oname}:")
-                for p in paths[:2]:
-                    self.output_text.append(f"    - {p}")
-                if len(paths) > 2:
-                    self.output_text.append(f"    ... and {len(paths) - 2} more location(s)")
-            if len(found_map) > 10:
-                self.output_text.append(f"  ... and {len(found_map) - 10} more object(s)")
-        else:
-            self.output_text.append("No matching TIFFs were found in the selected folder.")
-    
-    def _on_search_error(self, error_msg):
-        """Handle search errors."""
-        # Hide progress indicators
-        self.progress_bar.setVisible(False)
-        self.search_progress_label.setVisible(False)
-        
-        # Re-enable search button
-        self.search_btn.setEnabled(True)
-        self.search_btn.setText("Search for Missing TIFFs")
-        
-        self.output_text.append(f"⚠️  {error_msg}")
-        QMessageBox.warning(self, "Search Error", error_msg)
-    
     def _generate_comparison_report(self):
         """Generate a comparison report of CSV records vs TIFF files."""
         try:
@@ -812,13 +622,11 @@ class Step5Dialog(QDialog):
                     self.output_text.append(f"  - {name}")
                 if missing_count > 10:
                     self.output_text.append(f"  ... and {missing_count - 10} more")
-                
-                # Store missing files and show search button
+
+                # Store missing files for reporting
                 self.missing_tiffs = missing_tiffs
-                self.search_btn.setVisible(True)
             else:
                 self.missing_tiffs = []
-                self.search_btn.setVisible(False)
             
             self.output_text.append("\nReady to proceed with metadata embedding.")
             
