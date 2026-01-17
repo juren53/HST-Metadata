@@ -151,8 +151,8 @@ class EnhancedLogWidget(QWidget):
 
         # Header with title and pop-out button
         header_layout = QHBoxLayout()
-        title_label = QLabel("<h2>Logs</h2>")
-        header_layout.addWidget(title_label)
+        self.title_label = QLabel("<h2>Logs</h2>")
+        header_layout.addWidget(self.title_label)
         header_layout.addStretch()
 
         self.pop_out_btn = QPushButton("Pop Out")
@@ -368,6 +368,13 @@ class EnhancedLogWidget(QWidget):
         """Set whether this widget is in pop-out mode."""
         self._is_popped_out = popped_out
         self.pop_out_btn.setVisible(not popped_out)
+
+    def set_batch_name(self, batch_name: str):
+        """Set the current batch name displayed in the header."""
+        if batch_name:
+            self.title_label.setText(f"<h2>Logs - {batch_name}</h2>")
+        else:
+            self.title_label.setText("<h2>Logs</h2>")
 
     def get_records(self) -> List[LogRecord]:
         """Get all log records."""
