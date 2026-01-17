@@ -62,7 +62,7 @@ class StepWidget(QWidget):
 
         # Version and date/time stamp (right-aligned, 10pt font)
         version_label = QLabel(
-            "<span style='font-size: 10pt;'>v0.1.7a | 2026-01-17 10:30 CST</span>"
+            "<span style='font-size: 10pt;'>v0.1.7b | 2026-01-17 16:05 CST</span>"
         )
         version_label.setAlignment(
             Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
