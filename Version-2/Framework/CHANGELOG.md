@@ -5,6 +5,33 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7] - 2026-01-16
+
+### Changed
+
+- **Excel Migration** - Migrated from Google Sheets to local Excel spreadsheet workflow (2026-01-16)
+  - Step 1 now handles Excel (.xlsx/.xls) files instead of Google Sheets
+  - Removed Google API dependencies for metadata input
+  - Excel files are validated and copied to batch input directory
+  - Row 2 validation updated to expect batch title instead of blank row
+  - CSV export now uses correct batch output directory path
+
+### Fixed
+
+- **Step 1 Dialog** - Fixed `AttributeError` for missing `get_data_directory` method
+  - Changed to use `config_manager.get('project.data_directory')` pattern
+- **Step 2 Dialog** - Fixed CSV export to use absolute path instead of relative `output/export.csv`
+- **Batch Info Dialog** - Fixed `IndentationError` in `step_names` dictionary
+- **CSV Export** - Removed blocking `input()` call that prevented GUI operation
+  - Now auto-continues with available mappings when some row 3 values are missing
+
+### Removed
+
+- Google Sheets integration (moved to Excel-based workflow)
+- Row 2 blank validation requirement
+
+---
+
 ## HPM [0.1.5e] - 2026-01-15
 
 ### Added

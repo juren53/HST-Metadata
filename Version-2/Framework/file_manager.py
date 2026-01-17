@@ -180,7 +180,7 @@ class FileManager:
             if len(df) < 4:
                 return (
                     False,
-                    f"Excel file has insufficient rows. Expected at least 4 rows, found {len(df)}. Required: Row 1 (headers), Row 2 (blank), Row 3 (mapping), Row 4+ (data)",
+                    f"Excel file has insufficient rows. Expected at least 4 rows, found {len(df)}. Required: Row 1 (headers), Row 2 (batch title), Row 3 (mapping), Row 4+ (data)",
                 )
 
             # Validate Row 3 mapping headers (index 2)
@@ -213,15 +213,6 @@ class FileManager:
                         f"Found headers: {', '.join(row3_headers)}\\n"
                         f"Required headers: {', '.join(required_mapping_headers)}"
                     )
-
-                # Check for empty rows in critical positions
-                if len(df) >= 2:
-                    row2_values = df.iloc[1].fillna("").astype(str).str.strip().tolist()
-                    if any(val.strip() for val in row2_values):
-                        return (
-                            False,
-                            "Row 2 should be blank for proper HPM structure. Please clear all data from Row 2.",
-                        )
 
             except Exception as e:
                 return False, f"Error validating Row 3 structure: {str(e)}"

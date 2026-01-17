@@ -217,8 +217,10 @@ class Step2Dialog(QDialog):
             return
 
         # Create and start conversion thread
+        data_dir = self.config_manager.get('project.data_directory')
+        output_csv_path = str(Path(data_dir) / "output" / "csv" / "export.csv")
         self.conversion_thread = CSVConversionThread(
-            excel_target_path, "output/export.csv"
+            excel_target_path, output_csv_path
         )
         self.conversion_thread.progress.connect(self._on_progress)
         self.conversion_thread.finished.connect(self._on_finished)
@@ -253,7 +255,7 @@ class Step2Dialog(QDialog):
                     import pandas as pd
 
                     csv_path = (
-                        Path(self.config_manager.get_data_directory())
+                        Path(self.config_manager.get('project.data_directory'))
                         / "output"
                         / "csv"
                         / "export.csv"

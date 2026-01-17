@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
 
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.5e")
+        self.setWindowTitle("HSTL Photo Framework v0.1.7")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
 
@@ -681,8 +681,8 @@ class MainWindow(QMainWindow):
         # Main content
         about_html = (
             "<h3>HSTL Photo Framework GUI</h3>"
-            f"<p><b>Version:</b> 0.1.5e</p>"
-            f"<p><b>Commit Date:</b> 2026-01-15 13:53 CST</p>"
+            f"<p><b>Version:</b> 0.1.7</p>"
+            f"<p><b>Commit Date:</b> 2026-01-16 17:30 CST</p>"
             "<br>"
             "<p>A comprehensive framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
