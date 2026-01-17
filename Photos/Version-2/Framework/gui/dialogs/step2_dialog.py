@@ -244,6 +244,15 @@ class Step2Dialog(QDialog):
         self.convert_btn.setEnabled(True)
 
         if success:
+            self.log_manager.step_complete(2, "CSV Conversion", batch_id=self.batch_id)
+            self.config_manager.update_step_status(2, True)
+
+            # Save configuration
+            if self.config_manager.config_path:
+                self.config_manager.save_config(
+                    self.config_manager.to_dict(), self.config_manager.config_path
+                )
+
             self.output_text.append("\n✅ CSV conversion completed successfully!")
 
             # Add batch title to cell A2 of export.csv
@@ -276,6 +285,8 @@ class Step2Dialog(QDialog):
                     batch_id=self.batch_id,
                     step=2,
                 )
+
+            self.accept()
 
     def _on_error(self, error_msg):
         """Handle conversion errors."""
