@@ -139,11 +139,20 @@ class MainWindow(QMainWindow):
         # Initialize log manager
         self.log_manager = LogManager.instance()
 
+        # Apply saved logging enabled setting BEFORE setup to prevent early messages
+        logging_enabled = self.settings.value("logging/enabled", True, type=bool)
+        self.log_manager.set_enabled(logging_enabled)
+
         # Set up session logging to capture all log messages
         from pathlib import Path
 
         log_dir = Path.home() / ".hstl_photo_framework" / "logs"
         self.log_manager.setup_session_logging(log_dir, verbosity="normal")
+
+        # Apply saved console capture setting
+        console_capture = self.settings.value("logging/console_capture", False, type=bool)
+        if console_capture:
+            self.log_manager.enable_console_capture()
 
         # Create enhanced log widget
         self.log_widget = EnhancedLogWidget()
