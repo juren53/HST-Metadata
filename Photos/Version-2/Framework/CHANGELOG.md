@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Step 1 Dialog** - Fixed `AttributeError` for missing `get_data_directory` method
   - Changed to use `config_manager.get('project.data_directory')` pattern
 - **Step 2 Dialog** - Fixed CSV export to use absolute path instead of relative `output/export.csv`
+- **Step 2 Dialog** - Fixed step completion not updating in UI after successful conversion
+  - Added missing `update_step_status()`, `save_config()`, and `accept()` calls
+  - Step 2 now properly shows as complete in Current Batch and Batches dialogs
+- **Step 4 Dialog** - Fixed `IndentationError` on `_on_error` method (missing indentation)
+- **Step 4 Dialog** - Fixed `AttributeError` for missing `data_directory` attribute
+  - Changed to use `config_manager.get('project.data_directory')` pattern
 - **Batch Info Dialog** - Fixed `IndentationError` in `step_names` dictionary
 - **CSV Export** - Removed blocking `input()` call that prevented GUI operation
   - Now auto-continues with available mappings when some row 3 values are missing
@@ -29,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Google Sheets integration (moved to Excel-based workflow)
 - Row 2 blank validation requirement
+- **Step 5 Dialog** - Removed "Search for Missing TIFFs" button and feature
+  - Feature was too slow for practical use (recursive filesystem search)
+  - Users can search for missing files offline if needed
+  - Missing TIFF list still displayed in output for reference
 
 ---
 
