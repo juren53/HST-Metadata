@@ -58,7 +58,7 @@ class Step1Dialog(QDialog):
             "<ul>"
             "<li>The spreadsheet must be in .xlsx or .xls format</li>"
             "<li>Row 1: Data headers</li>"
-            "<li>Row 2: Must be blank</li>"
+            "<li>Row 2: Batch title</li>"
             "<li>Row 3: Required mapping headers (Title, Accession Number, Restrictions, Scopenote, Related Collection, Source Photographer, Institutional Creator)</li>"
             "<li>Row 4+: Metadata data</li>"
             "</ul>"
@@ -162,7 +162,7 @@ class Step1Dialog(QDialog):
 
         # Initialize file manager if needed
         if not self.file_manager:
-            if not self.config_manager.get_data_directory():
+            if not self.config_manager.get('project.data_directory'):
                 self.log_manager.error(
                     "Step 1: No data directory found", batch_id=self.batch_id, step=1
                 )
@@ -173,7 +173,7 @@ class Step1Dialog(QDialog):
                 )
                 return
 
-            self.file_manager = FileManager(self.config_manager.get_data_directory())
+            self.file_manager = FileManager(self.config_manager.get('project.data_directory'))
 
         # Show progress
         self.status_label.setText("Validating Excel file...")

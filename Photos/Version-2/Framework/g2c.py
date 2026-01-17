@@ -360,9 +360,7 @@ def export_to_csv(df, output_file="export.csv"):
                 "Available row 3 values:",
                 ", ".join([str(val) for val in df.iloc[row3_index] if pd.notna(val)]),
             )
-            proceed = input("Continue anyway with available mappings? (y/n): ")
-            if proceed.lower() != "y":
-                return False
+            print("Continuing with available mappings...")
 
         # Clean encoding artifacts from the original DataFrame before processing
         print("\nCleaning encoding artifacts...")

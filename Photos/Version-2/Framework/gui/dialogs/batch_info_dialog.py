@@ -57,8 +57,8 @@ class BatchInfoDialog(QDialog):
         info.append(f"{completed}/{total} steps ({percentage:.0f}%)<br>")
         
         info.append("<br><b>Step Status:</b><br>")
-        
-step_names = {
+
+        step_names = {
             'step1': "Excel Spreadsheet Preparation",
             'step2': "CSV Conversion",
             'step3': "Unicode Filtering",

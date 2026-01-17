@@ -136,14 +136,6 @@ class ExcelValidator:
 
             details["validation_steps"].append("Row 3 structure check: PASSED")
 
-            # Validate Row 2 is blank
-            row2_valid, row2_message = self._validate_row2_blank(df)
-            if not row2_valid:
-                details["validation_steps"].append(f"Row 2 blank check: FAILED")
-                return False, row2_message, details
-
-            details["validation_steps"].append("Row 2 blank check: PASSED")
-
             # Validate data rows have content
             data_valid, data_message = self._validate_data_rows(df)
             if not data_valid:
@@ -202,32 +194,6 @@ class ExcelValidator:
 
         except Exception as e:
             return False, f"Error validating Row 3: {str(e)}", details
-
-    def _validate_row2_blank(self, df: pd.DataFrame) -> Tuple[bool, str]:
-        """
-        Validate Row 2 is blank as expected by HPM structure.
-
-        Args:
-            df: Pandas DataFrame with Excel data
-
-        Returns:
-            Tuple of (is_valid: bool, message: str)
-        """
-        try:
-            if len(df) >= 2:
-                row2_values = df.iloc[1].fillna("").astype(str).str.strip().tolist()
-                non_empty_values = [val for val in row2_values if val.strip()]
-
-                if non_empty_values:
-                    return False, (
-                        f"Row 2 should be blank for proper HPM structure. "
-                        f"Found non-empty values: {', '.join(non_empty_values[:3])}"
-                    )
-
-            return True, "Row 2 is properly blank"
-
-        except Exception as e:
-            return False, f"Error validating Row 2: {str(e)}"
 
     def _validate_data_rows(self, df: pd.DataFrame) -> Tuple[bool, str]:
         """
@@ -298,17 +264,13 @@ class ExcelValidator:
         # Check row count issues
         if details.get("row_count", 0) < 4:
             recommendations.append(
-                "Add at least 4 rows: headers, blank row, mapping, and data"
+                "Add at least 4 rows: headers, batch title, mapping, and data"
             )
 
         # Check validation steps for common issues
         steps = details.get("validation_steps", [])
         for step in steps:
-            if "Row 2 blank check: FAILED" in step:
-                recommendations.append(
-                    "Clear all content from Row 2 - it should be blank"
-                )
-            elif "Data rows validation: FAILED" in step:
+            if "Data rows validation: FAILED" in step:
                 recommendations.append("Add metadata data starting from Row 4")
 
         return recommendations
