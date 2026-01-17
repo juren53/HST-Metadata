@@ -380,8 +380,9 @@ class MainWindow(QMainWindow):
             if data_dir.exists():
                 self.log_manager.setup_batch_logging(batch_id, data_dir)
 
-            # Add batch to log filter dropdown
+            # Add batch to log filter dropdown and update tab title
             self.log_widget.add_batch_option(batch_id, batch_info["name"])
+            self.tabs.setTabText(3, f"Logs - {batch_info['name']}")
             if self.log_viewer_dialog:
                 self.log_viewer_dialog.add_batch_option(batch_id, batch_info["name"])
                 self.log_viewer_dialog.set_batch_name(batch_info["name"])
