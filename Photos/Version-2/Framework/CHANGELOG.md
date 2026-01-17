@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Logging Toggle Feature** - Master on/off switch for logging in Settings dialog (2026-01-17)
+- **Logging Toggle Feature** - Master on/off switch for logging in Settings dialog (2026-01-17 11:41 CST)
   - New "Enable logging" checkbox at top of Logging settings group
   - When disabled, all log messages are suppressed (logger level set above CRITICAL)
   - Other logging controls (verbosity, per-batch, buffer) are grayed out when disabled
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Respects disabled state when `setup_logger()` is called from framework initialization
   - **Files Modified**: `utils/log_manager.py`, `utils/logger.py`, `gui/dialogs/settings_dialog.py`, `gui/main_window.py`
 
-- **Console Capture Feature** - Route print() statements to logging system (2026-01-17)
+- **Console Capture Feature** - Route print() statements to logging system (2026-01-17 11:41 CST)
   - New "Capture console output" checkbox in Settings dialog
   - Captures all print() statements and stdout/stderr writes from worker threads
   - Messages appear in Log dialog with `[console]` prefix
@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Created**: `utils/console_capture.py`
   - **Files Modified**: `utils/log_manager.py`, `gui/dialogs/settings_dialog.py`, `gui/main_window.py`
 
-- **Batch Name in Log Viewer** - Display current batch name in log viewer header (2026-01-17)
+- **Batch Name in Log Viewer** - Display current batch name in log viewer header (2026-01-17 15:54 CST)
   - Shows "Logs - {batch_name}" in the header above filter bar
   - Pop-out Log Viewer dialog also shows batch name in title bar
   - Helps users confirm which batch's logs they are viewing
