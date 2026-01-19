@@ -286,8 +286,6 @@ class Step2Dialog(QDialog):
                     step=2,
                 )
 
-            self.accept()
-
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
