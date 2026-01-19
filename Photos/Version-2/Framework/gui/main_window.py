@@ -699,8 +699,8 @@ class MainWindow(QMainWindow):
         # Main content
         about_html = (
             "<h3>HSTL Photo Metadata Framework [ HPM ]</h3>"
-            f"<p><b>Version:</b> 0.1.7b</p>"
-            f"<p><b>Commit Date:</b> 2026-01-17 16:05 CST</p>"
+            f"<p><b>Version:</b> 0.1.7c</p>"
+            f"<p><b>Commit Date:</b> 2026-01-18 10:30 CST</p>"
             "<br>"
             "<p>An end-to-end framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "

@@ -5,6 +5,23 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7c] - 2026-01-18 10:30 CST
+
+### Changed
+
+- **Step 2 Dialog** - Dialog no longer auto-closes after successful CSV completion (2026-01-18 10:30 CST)
+  - Removed automatic `self.accept()` call after CSV conversion completes
+  - User can now review the completion status and close the dialog manually
+  - Allows users to see all status messages before dismissing the dialog
+  - **Files Modified**: `gui/dialogs/step2_dialog.py`
+
+- **Step 3 Label** - Changed from "Test for Unicode scrabbling" to "Test for Mojibake" (2026-01-18 10:30 CST)
+  - "Mojibake" is the standard technical term for garbled text from encoding issues
+  - More concise and recognizable terminology
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+---
+
 ## HPM [0.1.7b] - 2026-01-17 16:05 CST
 
 ### Added
