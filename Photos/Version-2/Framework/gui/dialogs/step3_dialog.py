@@ -221,6 +221,7 @@ class Step3Dialog(QDialog):
         
         main_layout.addLayout(button_layout)
         
+        self.status_text.append("Ready to scan export.csv for mojibake.")
         self.log_manager.info("Ready to scan export.csv for mojibake.", batch_id=self.batch_id, step=3)
         
     def _start_scan(self):
@@ -244,6 +245,11 @@ class Step3Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
         
+        # Clear previous output
+        self.status_text.clear()
+        self.status_text.append("="*50)
+        self.status_text.append("Starting mojibake scan...")
+        
         self.log_manager.info("="*50, batch_id=self.batch_id, step=3)
         self.log_manager.info("Starting mojibake scan...", batch_id=self.batch_id, step=3)
         
@@ -256,6 +262,7 @@ class Step3Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
+        self.status_text.append(message)
         self.log_manager.info(message, batch_id=self.batch_id, step=3)
         
     def _on_scan_finished(self, success, problematic_records):
@@ -269,6 +276,10 @@ class Step3Dialog(QDialog):
         self.problematic_records = problematic_records
         
         if problematic_records:
+            self.status_text.append("")
+            self.status_text.append(f"⚠️  Found {len(problematic_records)} record(s) with mojibake.")
+            self.status_text.append("Review and fix the issues below.")
+            
             self.log_manager.warning(f"Found {len(problematic_records)} record(s) with mojibake.", batch_id=self.batch_id, step=3)
             self.log_manager.info("Review and fix the issues below.", batch_id=self.batch_id, step=3)
             
@@ -280,6 +291,9 @@ class Step3Dialog(QDialog):
             self.current_record_index = 0
             self._display_current_record()
         else:
+            self.status_text.append("")
+            self.status_text.append("✓ No mojibake detected! CSV is clean.")
+            
             self.log_manager.success("No mojibake detected! CSV is clean.", batch_id=self.batch_id, step=3)
             
             # Mark step as complete
@@ -309,6 +323,9 @@ class Step3Dialog(QDialog):
         self.progress_bar.setVisible(False)
         self.scan_btn.setEnabled(True)
 
+        self.status_text.append("")
+        self.status_text.append(f"❌ Error: {error_msg}")
+        
         self.log_manager.step_error(3, error_msg, batch_id=self.batch_id)
         
         message = f"Mojibake scan failed:\n\n{error_msg}"

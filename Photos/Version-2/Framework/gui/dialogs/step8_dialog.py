@@ -583,6 +583,7 @@ class Step8Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
+        self.output_text.append(message)
         self.log_manager.info(message, batch_id=self.batch_id, step=8)
         
     def _on_finished(self, success, stats):

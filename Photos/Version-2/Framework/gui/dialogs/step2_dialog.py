@@ -193,9 +193,12 @@ class Step2Dialog(QDialog):
 
         # Check if Excel file is set
         if excel_target_path == "Not set":
+            self.output_text.append("⚠️  Excel file is not set. Please complete Step 1 first.")
             self.log_manager.warning("Excel file is not set. Please complete Step 1 first.", batch_id=self.batch_id, step=2)
             self.convert_btn.setEnabled(False)
         else:
+            self.output_text.append("Ready to convert Excel spreadsheet to CSV.")
+            self.output_text.append(f"Target: {excel_target_path}")
             self.log_manager.info("Ready to convert Excel spreadsheet to CSV.", batch_id=self.batch_id, step=2)
             self.log_manager.info(f"Target: {excel_target_path}", batch_id=self.batch_id, step=2)
 
@@ -236,6 +239,7 @@ class Step2Dialog(QDialog):
 
     def _on_progress(self, message):
         """Handle progress messages."""
+        self.output_text.append(message)
         self.log_manager.info(message, batch_id=self.batch_id, step=2)
 
     def _on_finished(self, success):
@@ -244,6 +248,9 @@ class Step2Dialog(QDialog):
         self.convert_btn.setEnabled(True)
 
         if success:
+            self.output_text.append("")
+            self.output_text.append("✓ CSV conversion completed successfully!")
+            
             self.log_manager.step_complete(2, "CSV Conversion", batch_id=self.batch_id)
             self.config_manager.update_step_status(2, True)
 
@@ -276,22 +283,38 @@ class Step2Dialog(QDialog):
                                 batch_title  # Set cell A2 (index 1, column 0)
                             )
                             df.to_csv(csv_path, index=False)
+                            self.output_text.append(f"Added batch title '{batch_title}' to CSV")
                             self.log_manager.info(
                                 f"Added batch title '{batch_title}' to CSV",
                                 batch_id=self.batch_id,
                                 step=2
                             )
             except Exception as e:
+                self.output_text.append(f"⚠️  Error adding batch title to CSV: {e}")
                 self.log_manager.error(
                     f"Error adding batch title to CSV: {e}",
                     batch_id=self.batch_id,
                     step=2,
                 )
+            
+            # Show completion message
+            QMessageBox.information(
+                self,
+                "Conversion Complete",
+                "CSV conversion completed successfully!\n\nStep 2 is now marked as complete."
+            )
+            
+            # Close dialog to update UI
+            self.accept()
 
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
+        
+        self.output_text.append("")
+        self.output_text.append(f"❌ Error: {error_msg}")
+        
         self.log_manager.error(error_msg, batch_id=self.batch_id, step=2)
 
     def _get_excel_paths(self):

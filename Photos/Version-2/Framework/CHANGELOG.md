@@ -5,6 +5,44 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7f] - 2026-01-19
+
+### Fixed
+
+- **Step Dialog Output Display** - Restored missing progress messages in Steps 2-8 dialogs.
+  - Fixed `_on_progress()` methods in all step dialogs to display messages in the dialog's output_text widget.
+  - Previously, messages were only being sent to the log manager, making dialogs appear blank during operations.
+  - Steps 2-4: Now display conversion/processing progress in real-time.
+  - Step 5: Now displays metadata embedding progress and file processing status.
+  - Steps 6-8: Now display JPEG conversion, resizing, and watermarking progress.
+  - Users can now see operation status directly in the dialog without having to check the log viewer.
+  - **Files Modified**: `gui/dialogs/step2_dialog.py`, `gui/dialogs/step3_dialog.py`, `gui/dialogs/step4_dialog.py`, `gui/dialogs/step5_dialog.py`, `gui/dialogs/step6_dialog.py`, `gui/dialogs/step7_dialog.py`, `gui/dialogs/step8_dialog.py`
+
+- **Step 4 Dialog** - Fixed corrupted file that was missing large portions of code.
+  - Restored complete `_generate_report()` method with proper exception handling.
+  - Restored entire `Step4Dialog` class definition and all its methods.
+  - File had been truncated at line 211, causing "expected 'except' or 'finally' block" syntax error.
+  - Recovered missing code from git history.
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+- **Step 2 Dialog** - Fixed step status not updating in UI after completion.
+  - Added `self.accept()` call to close dialog and trigger UI refresh.
+  - Shows completion message before closing so users can review the results.
+  - Step now properly shows as "Complete" instead of "Pending" in main window.
+  - **Files Modified**: `gui/dialogs/step2_dialog.py`
+
+### Added
+
+- **Step 4 Directory Memory** - File dialog now remembers the last selected directory.
+  - When copying raw TIFF files, dialog opens in the last directory used.
+  - Directory path is saved in batch configuration at `step_configurations.step4.last_copy_directory`.
+  - Includes validation to ensure saved directory exists before using it.
+  - Falls back to `C:\` if saved directory no longer exists.
+  - Improves workflow for users repeatedly copying from the same source location.
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+---
+
 ## HPM [0.1.7e] - 2026-01-19
 
 ### Changed
