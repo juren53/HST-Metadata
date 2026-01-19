@@ -4,6 +4,18 @@ Batch List Widget
 Displays all registered batches with status, progress, and management actions.
 """
 
+import sys
+from pathlib import Path
+from typing import Dict, Tuple
+import time
+
+# Ensure framework root is in path for imports
+_framework_dir = Path(__file__).parent.parent.parent
+if str(_framework_dir) not in sys.path:
+    sys.path.insert(0, str(_framework_dir))
+
+from __init__ import __version__, __commit_date__
+
 from PyQt6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -19,9 +31,6 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSettings, QTimer
 from PyQt6.QtGui import QColor, QBrush
-from pathlib import Path
-from typing import Dict, Tuple
-import time
 
 # Import utility functions
 from utils.file_utils import FileUtils
@@ -67,7 +76,7 @@ class BatchListWidget(QWidget):
 
         # Version and date/time stamp (right-aligned, 10pt font)
         version_label = QLabel(
-            "<span style='font-size: 10pt;'>v0.1.7c | 2026-01-18 10:30 CST</span>"
+            f"<span style='font-size: 10pt;'>v{__version__} | {__commit_date__}</span>"
         )
         version_label.setAlignment(
             Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter

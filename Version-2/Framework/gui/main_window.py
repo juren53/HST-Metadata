@@ -46,7 +46,7 @@ from utils.log_manager import LogManager
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 from gui.zoom_manager import ZoomManager
-from __init__ import __version__
+from __init__ import __version__, __commit_date__
 
 
 class MainWindow(QMainWindow):
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 
     def _init_ui(self):
         """Initialize the user interface."""
-        self.setWindowTitle("HSTL Photo Framework v0.1.7c")
+        self.setWindowTitle(f"HSTL Photo Framework v{__version__}")
         self.setMinimumSize(800, 600)  # Reduced minimum size for better resizability
         self.resize(1200, 800)  # Default size
 
@@ -699,8 +699,8 @@ class MainWindow(QMainWindow):
         # Main content
         about_html = (
             "<h3>HSTL Photo Metadata Framework [ HPM ]</h3>"
-            f"<p><b>Version:</b> 0.1.7c</p>"
-            f"<p><b>Commit Date:</b> 2026-01-18 10:30 CST</p>"
+            f"<p><b>Version:</b> {__version__}</p>"
+            f"<p><b>Commit Date:</b> {__commit_date__}</p>"
             "<br>"
             "<p>An end-to-end framework for managing photo metadata processing workflows.</p>"
             "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
