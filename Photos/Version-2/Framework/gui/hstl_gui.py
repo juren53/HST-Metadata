@@ -5,8 +5,7 @@ HSTL Photo Framework - PyQt6 GUI Application
 Main entry point for the graphical user interface version of the HSTL Photo Framework.
 Provides a comprehensive visual interface for managing photo metadata processing workflows.
 
-Version: 0.1.7c
-Commit Date: 2026-01-18 10:30 CST
+Version info is centralized in Framework/__init__.py
 
 Usage:
     python hstl_gui.py
@@ -23,13 +22,12 @@ from PyQt6.QtCore import Qt, QLockFile, QDir
 framework_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(framework_dir))
 
+# Import version from central source
+from __init__ import __version__, __commit_date__
+
 from gui.main_window import MainWindow
 from gui.theme_manager import ThemeManager
 from gui.zoom_manager import ZoomManager
-
-# Version information
-__version__ = "0.1.7c"
-__commit_date__ = "2026-01-18 10:30 CST"
 
 
 def main():

@@ -6,7 +6,8 @@ Orchestrates 8 steps of photo metadata processing from Google Spreadsheet prepar
 through final watermarked JPEG creation.
 """
 
-__version__ = "0.1.7c"
+__version__ = "0.1.7d"
+__commit_date__ = "2026-01-18 20:15 CST"
 __author__ = "HSTL Photo Metadata Project"
 __description__ = "Framework for orchestrating HSTL photo metadata processing workflow"
 

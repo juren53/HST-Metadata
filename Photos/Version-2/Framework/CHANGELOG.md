@@ -5,6 +5,25 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7d] - 2026-01-18 20:15 CST
+
+### Changed
+
+- **Centralized Version Management** - Version info now maintained in single location (2026-01-18 20:15 CST)
+  - `__init__.py` is now the single source of truth for `__version__` and `__commit_date__`
+  - All UI components import version at runtime instead of hardcoding
+  - Reduces manual version updates from 11 files to just 4 files
+  - **Files Modified**:
+    - `__init__.py` - Added `__commit_date__` variable
+    - `gui/__init__.py` - Now imports from parent
+    - `gui/hstl_gui.py` - Imports version instead of hardcoding
+    - `gui/main_window.py` - Uses imported variables for title bar and About dialog
+    - `gui/widgets/step_widget.py` - Uses imported variables
+    - `gui/widgets/batch_list_widget.py` - Uses imported variables
+    - `Project_Rules.md` - Updated version checklist
+
+---
+
 ## HPM [0.1.7c] - 2026-01-18 10:30 CST
 
 ### Changed

@@ -24,51 +24,48 @@ Example formats:
 
 ## Version Update Checklist
 
-When updating version information, update **ALL** of the following files:
+Version information is **centralized** in `__init__.py`. All UI components import from there automatically.
 
-### Core Python Modules
-
-| File | Location | Approx Line |
-|------|----------|-------------|
-| `__init__.py` | `__version__` variable | ~9 |
-| `gui/__init__.py` | `__version__` and `__commit_date__` variables | ~7-8 |
-| `gui/hstl_gui.py` | Module docstring (Version/Commit Date) | ~8-9 |
-| `gui/hstl_gui.py` | `__version__` and `__commit_date__` variables | ~31-32 |
-| `gui/main_window.py` | `setWindowTitle()` - Title bar | ~88 |
-| `gui/main_window.py` | About dialog version and commit date | ~702-703 |
-| `gui/widgets/step_widget.py` | Version label (Current Batch tab header) | ~64-65 |
-| `gui/widgets/batch_list_widget.py` | Version label (Batches tab header) | ~69-70 |
-
-### Documentation Files
+### Files Requiring Manual Update (only 4!)
 
 | File | Location | Approx Line |
 |------|----------|-------------|
+| `__init__.py` | `__version__` and `__commit_date__` | ~9-10 |
 | `CHANGELOG.md` | Add new version section at top | ~8 |
 | `docs/GUI_QUICKSTART.md` | Version and Commit Date footer | ~272-273 |
 | `gui/README.md` | Version and Commit Date header | ~3-4 |
 
+### Files That Auto-Update (no manual changes needed)
+
+These files import `__version__` and `__commit_date__` from `__init__.py` at runtime:
+
+- `gui/__init__.py` - imports from parent
+- `gui/hstl_gui.py` - imports and uses variables
+- `gui/main_window.py` - title bar and About dialog
+- `gui/widgets/step_widget.py` - Current Batch tab header
+- `gui/widgets/batch_list_widget.py` - Batches tab header
+
 ### Update Order
 
-1. **CHANGELOG.md first** - Add new version section describing changes
-2. **Core Python modules** - Update all version strings
-3. **Documentation files** - Update footers/headers
+1. **`__init__.py` first** - Update `__version__` and `__commit_date__`
+2. **`CHANGELOG.md`** - Add new version section describing changes
+3. **Documentation files** - Update footers/headers in markdown files
 
 ### Notes
 
 - All timestamps should use format: `YYYY-MM-DD HH:MM CST`
 - **IMPORTANT**: ALWAYS use CST time zone, NOT UTC!!!
 - Version format: `v0.1.X` (with 'v' prefix in UI, without 'v' in code variables)
-- Line numbers are approximate - search for the previous version string if needed
 
 ## Verify Version Updates
 
-After updating, run this command from the Framework directory to confirm all locations show the new version:
+After updating, run this command from the Framework directory to confirm the new version appears:
 
 ```bash
 grep -rn "0\.1\.7c" --include="*.py" --include="*.md" .
 ```
 
-Replace `0\.1\.7c` with your new version number. You should see approximately 12-14 matches across the files listed above.
+Replace `0\.1\.7c` with your new version number. You should see matches in `__init__.py` and the markdown documentation files.
 
 ## Post-Update Testing
 
@@ -205,12 +202,19 @@ After creating the release:
 - Test the "Check for Updates" feature after creating release
 - Release enables automatic update detection for all users
 
-## Future Consideration: Centralized Version
+## Centralized Version Architecture
 
-To reduce manual updates in the future, consider creating a single source of truth for version info:
+Version information is centralized in `Framework/__init__.py`:
 
-1. Have UI components read from `__init__.__version__` at runtime instead of hardcoding strings
-2. Use a build script to update version strings automatically
-3. This would reduce the checklist from 11+ locations to just 2-3
+```python
+__version__ = "0.1.7c"
+__commit_date__ = "2026-01-18 10:30 CST"
+```
 
-This is noted for potential future refactoring but is not required for current workflow.
+All UI components import these values at runtime:
+
+```python
+from __init__ import __version__, __commit_date__
+```
+
+This reduces manual updates from 11+ locations to just 4 files (1 Python + 3 markdown).
