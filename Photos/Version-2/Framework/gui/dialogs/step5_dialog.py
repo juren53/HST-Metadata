@@ -395,6 +395,7 @@ class Step5Dialog(QDialog):
         """Generate a comparison report of CSV records vs TIFF files."""
         try:
             if not self.csv_object_names and not self.tiff_basenames:
+                self.log_manager.warning("No analysis data available. Please run the analysis first.", batch_id=self.batch_id, step=5)
                 QMessageBox.warning(self, "No Data", "No analysis data available. Please run the analysis first.")
                 return
             
@@ -470,14 +471,14 @@ class Step5Dialog(QDialog):
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write(report_content)
             
-            self.output_text.append(f"\n✓ Comparison report generated: {report_path.name}")
+            self.log_manager.success(f"Comparison report generated: {report_path.name}", batch_id=self.batch_id, step=5)
             
             # Show report in dialog
             self._show_report_dialog(report_content, str(report_path))
             
         except Exception as e:
+            self.log_manager.critical(f"Failed to generate report: {str(e)}", batch_id=self.batch_id, step=5)
             QMessageBox.critical(self, "Report Error", f"Failed to generate report:\n\n{str(e)}")
-            self.output_text.append(f"⚠️  Report generation failed: {str(e)}")
     
     def _show_report_dialog(self, report_content, report_path):
         """Display report in a dialog window."""
@@ -519,7 +520,7 @@ class Step5Dialog(QDialog):
         try:
             self.data_directory = self.config_manager.get('project.data_directory', '')
             if not self.data_directory:
-                self.output_text.append("⚠️  Error: Project data directory not set")
+                self.log_manager.warning("Error: Project data directory not set", batch_id=self.batch_id, step=5)
                 return
             
             data_directory = self.data_directory
@@ -532,12 +533,12 @@ class Step5Dialog(QDialog):
             tiff_dir = Path(data_directory) / 'input' / 'tiff'
             
             if not csv_path.exists():
-                self.output_text.append(f"⚠️  CSV file not found: {csv_path}")
+                self.log_manager.warning(f"CSV file not found: {csv_path}", batch_id=self.batch_id, step=5)
                 self.csv_count_label.setText("CSV records: Not found")
                 return
             
             if not tiff_dir.exists():
-                self.output_text.append(f"⚠️  TIFF directory not found: {tiff_dir}")
+                self.log_manager.warning(f"TIFF directory not found: {tiff_dir}", batch_id=self.batch_id, step=5)
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
             
@@ -610,44 +611,47 @@ class Step5Dialog(QDialog):
                 self.comparison_label.setText(f"⚠️  {matched_count} matched, {missing_count} CSV records missing TIFF files")
                 self.comparison_label.setStyleSheet(f"color: {colors.warning};")
             
-            self.output_text.append("File analysis complete.")
-            self.output_text.append(f"CSV records: {csv_count}")
-            self.output_text.append(f"TIFF files: {tiff_count}")
-            self.output_text.append(f"Matched: {matched_count}")
-            self.output_text.append(f"Missing TIFF files: {missing_count}")
+            self.log_manager.info("File analysis complete.", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"CSV records: {csv_count}", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"TIFF files: {tiff_count}", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"Matched: {matched_count}", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"Missing TIFF files: {missing_count}", batch_id=self.batch_id, step=5)
             
             if missing_count > 0:
-                self.output_text.append(f"\nCSV records without TIFF files:")
+                self.log_manager.info("CSV records without TIFF files:", batch_id=self.batch_id, step=5)
                 for name in missing_tiffs[:10]:  # Show first 10
-                    self.output_text.append(f"  - {name}")
+                    self.log_manager.info(f"  - {name}", batch_id=self.batch_id, step=5)
                 if missing_count > 10:
-                    self.output_text.append(f"  ... and {missing_count - 10} more")
+                    self.log_manager.info(f"  ... and {missing_count - 10} more", batch_id=self.batch_id, step=5)
 
                 # Store missing files for reporting
                 self.missing_tiffs = missing_tiffs
             else:
                 self.missing_tiffs = []
             
-            self.output_text.append("\nReady to proceed with metadata embedding.")
+            self.log_manager.info("Ready to proceed with metadata embedding.", batch_id=self.batch_id, step=5)
             
             # Show report button after analysis
             self.report_btn.setVisible(True)
             self.embed_btn.setEnabled(True)
             
         except Exception as e:
-            self.output_text.append(f"⚠️  Error during analysis: {str(e)}")
+            self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=5)
     
     def _start_embedding(self):
         """Start the metadata embedding process."""
+        message = "Are you sure you want to proceed with metadata embedding?\n\n" \
+                  "This will write IPTC metadata tags to all TIFF files listed in the CSV."
+        self.log_manager.info(f"User confirmation requested for embedding: {message}", batch_id=self.batch_id, step=5)
         reply = QMessageBox.question(
             self,
             "Confirm Embedding",
-            "Are you sure you want to proceed with metadata embedding?\n\n"
-            "This will write IPTC metadata tags to all TIFF files listed in the CSV.",
+            message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if reply != QMessageBox.StandardButton.Yes:
+            self.log_manager.info("User cancelled metadata embedding.", batch_id=self.batch_id, step=5)
             return
 
         self.log_manager.step_start(5, "Metadata Embedding", batch_id=self.batch_id)
@@ -670,8 +674,8 @@ class Step5Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
 
-        self.output_text.append("\n" + "="*50)
-        self.output_text.append("Starting metadata embedding...")
+        self.log_manager.info("="*50, batch_id=self.batch_id, step=5)
+        self.log_manager.info("Starting metadata embedding...", batch_id=self.batch_id, step=5)
 
         # Start embedding thread
         self.embedding_thread = MetadataEmbeddingThread(
@@ -684,7 +688,7 @@ class Step5Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.output_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=5)
         
     def _on_finished(self, success, stats):
         """Handle embedding completion."""
@@ -697,15 +701,15 @@ class Step5Dialog(QDialog):
                 f"Metadata embedding complete: {stats['processed']} processed, {stats['missing']} missing",
                 batch_id=self.batch_id, step=5
             )
-            self.output_text.append("\n Metadata embedding completed successfully!")
-            self.output_text.append(f"\nSummary:")
-            self.output_text.append(f"  Processed: {stats['processed']} images")
-            self.output_text.append(f"  Missing: {stats['missing']} images")
+            self.log_manager.success("Metadata embedding completed successfully!", batch_id=self.batch_id, step=5)
+            self.log_manager.info("Summary:", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"  Processed: {stats['processed']} images", batch_id=self.batch_id, step=5)
+            self.log_manager.info(f"  Missing: {stats['missing']} images", batch_id=self.batch_id, step=5)
             
             # Show output directory
             data_directory = self.config_manager.get('project.data_directory', '')
             output_dir = Path(data_directory) / 'output' / 'tiff_processed'
-            self.output_text.append(f"\n✓ Processed TIFFs saved to:\n  {output_dir}")
+            self.log_manager.info(f"Processed TIFFs saved to:\n  {output_dir}", batch_id=self.batch_id, step=5)
             
             # Copy verso TIFF files
             self._copy_verso_files()
@@ -723,20 +727,22 @@ class Step5Dialog(QDialog):
             data_directory = self.config_manager.get('project.data_directory', '')
             output_dir = Path(data_directory) / 'output' / 'tiff_processed'
             
+            message = f"Metadata embedding completed successfully!\n\n" \
+                      f"Processed: {stats['processed']} images\n" \
+                      f"Missing: {stats['missing']} images\n\n" \
+                      f"Processed TIFFs saved to:\n{output_dir}\n\n" \
+                      f"Step 5 is now marked as complete."
+            self.log_manager.success(f"Embedding Complete: {message}", batch_id=self.batch_id, step=5)
             QMessageBox.information(
                 self,
                 "Embedding Complete",
-                f"Metadata embedding completed successfully!\n\n"
-                f"Processed: {stats['processed']} images\n"
-                f"Missing: {stats['missing']} images\n\n"
-                f"Processed TIFFs saved to:\n{output_dir}\n\n"
-                f"Step 5 is now marked as complete."
+                message
             )
             
             self.accept()
         else:
             self.log_manager.step_error(5, "Metadata embedding failed", batch_id=self.batch_id)
-            self.output_text.append("\n Metadata embedding failed.")
+            self.log_manager.error("Metadata embedding failed.", batch_id=self.batch_id, step=5)
             
     def _copy_verso_files(self):
         """Copy verso TIFF files to tiff_processed directory."""
@@ -753,8 +759,8 @@ class Step5Dialog(QDialog):
                 verso_files.extend(glob.glob(str(tiff_dir / pattern)))
             
             if verso_files:
-                self.output_text.append(f"\n--- Copying verso TIFF files ---")
-                self.output_text.append(f"Found {len(verso_files)} verso file(s) to copy...")
+                self.log_manager.info("--- Copying verso TIFF files ---", batch_id=self.batch_id, step=5)
+                self.log_manager.info(f"Found {len(verso_files)} verso file(s) to copy...", batch_id=self.batch_id, step=5)
                 
                 copied_count = 0
                 for src_path in verso_files:
@@ -763,17 +769,17 @@ class Step5Dialog(QDialog):
                     
                     try:
                         shutil.copy2(src, dest)
-                        self.output_text.append(f"  ✓ Copied: {src.name}")
+                        self.log_manager.info(f"Copied: {src.name}", batch_id=self.batch_id, step=5)
                         copied_count += 1
                     except Exception as e:
-                        self.output_text.append(f"  ⚠️  Failed to copy {src.name}: {str(e)}")
+                        self.log_manager.warning(f"Failed to copy {src.name}: {str(e)}", batch_id=self.batch_id, step=5)
                 
-                self.output_text.append(f"\n✓ Copied {copied_count} verso file(s) to tiff_processed directory")
+                self.log_manager.success(f"Copied {copied_count} verso file(s) to tiff_processed directory", batch_id=self.batch_id, step=5)
             else:
-                self.output_text.append(f"\n✓ No verso files found to copy")
+                self.log_manager.info("No verso files found to copy", batch_id=self.batch_id, step=5)
                 
         except Exception as e:
-            self.output_text.append(f"\n⚠️  Error copying verso files: {str(e)}")
+            self.log_manager.error(f"Error copying verso files: {str(e)}", batch_id=self.batch_id, step=5)
     
     def _on_error(self, error_msg):
         """Handle embedding errors."""
@@ -781,10 +787,11 @@ class Step5Dialog(QDialog):
         self.embed_btn.setEnabled(True)
 
         self.log_manager.step_error(5, error_msg, batch_id=self.batch_id, exc_info=True)
-        self.output_text.append(f"\n Error: {error_msg}")
-
+        
+        message = f"Metadata embedding failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Embedding Error: {message}", batch_id=self.batch_id, step=5)
         QMessageBox.critical(
             self,
             "Embedding Error",
-            f"Metadata embedding failed:\n\n{error_msg}"
+            message
         )

@@ -86,8 +86,8 @@ class Pipeline:
                 break
         
         if result.success:
-            self.logger.info("🎉 Pipeline completed successfully")
+            self.logger.success("Pipeline completed successfully")
         else:
-            self.logger.error(f"❌ Pipeline failed: {result.error_message}")
+            self.logger.error(f"Pipeline failed: {result.error_message}")
         
         return result

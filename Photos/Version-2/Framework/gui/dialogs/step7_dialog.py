@@ -352,7 +352,7 @@ class Step7Dialog(QDialog):
         try:
             data_directory = self.config_manager.get('project.data_directory', '')
             if not data_directory:
-                self.output_text.append("⚠️  Error: Project data directory not set")
+                self.log_manager.warning("Error: Project data directory not set", batch_id=self.batch_id, step=7)
                 return
             
             # JPEG source directory
@@ -362,9 +362,9 @@ class Step7Dialog(QDialog):
             resized_dir = Path(data_directory) / 'output' / 'jpeg_resized'
             
             if not jpeg_dir.exists():
-                self.output_text.append(f"⚠️  JPEG directory not found: {jpeg_dir}")
+                self.log_manager.warning(f"JPEG directory not found: {jpeg_dir}", batch_id=self.batch_id, step=7)
                 self.jpeg_count_label.setText("JPEG files: Directory not found")
-                self.output_text.append("⚠️  Have you completed Step 6?")
+                self.log_manager.warning("Have you completed Step 6?", batch_id=self.batch_id, step=7)
                 return
             
             # Count JPEG files
@@ -380,22 +380,22 @@ class Step7Dialog(QDialog):
             self.resized_count_label.setText(f"Existing resized JPEGs: {resized_count}")
             
             if jpeg_count == 0:
-                self.output_text.append("⚠️  No JPEG files found for resizing")
-                self.output_text.append("⚠️  Please complete Step 6 first")
+                self.log_manager.warning("No JPEG files found for resizing", batch_id=self.batch_id, step=7)
+                self.log_manager.warning("Please complete Step 6 first", batch_id=self.batch_id, step=7)
                 return
             
-            self.output_text.append("File analysis complete.")
-            self.output_text.append(f"JPEG files to resize: {jpeg_count}")
+            self.log_manager.info("File analysis complete.", batch_id=self.batch_id, step=7)
+            self.log_manager.info(f"JPEG files to resize: {jpeg_count}", batch_id=self.batch_id, step=7)
             
             if resized_count > 0:
-                self.output_text.append(f"⚠️  Warning: {resized_count} resized JPEG files already exist and will be overwritten")
+                self.log_manager.warning(f"Warning: {resized_count} resized JPEG files already exist and will be overwritten", batch_id=self.batch_id, step=7)
             
-            self.output_text.append("\nReady to proceed with JPEG resizing.")
+            self.log_manager.info("Ready to proceed with JPEG resizing.", batch_id=self.batch_id, step=7)
             
             self.resize_btn.setEnabled(True)
             
         except Exception as e:
-            self.output_text.append(f"⚠️  Error during analysis: {str(e)}")
+            self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=7)
     
     def _start_resizing(self):
         """Start the JPEG resizing process."""
@@ -403,18 +403,21 @@ class Step7Dialog(QDialog):
         max_dim = self.dimension_spinbox.value()
         quality = self.quality_spinbox.value()
 
+        message = f"Are you sure you want to proceed with JPEG resizing?\n\n" \
+                  f"Max dimension: {max_dim}x{max_dim} px\n" \
+                  f"Quality: {quality}%\n" \
+                  "Aspect ratio will be maintained.\n" \
+                  "All metadata will be preserved."
+        self.log_manager.info(f"User confirmation requested for resizing: {message}", batch_id=self.batch_id, step=7)
         reply = QMessageBox.question(
             self,
             "Confirm Resizing",
-            f"Are you sure you want to proceed with JPEG resizing?\n\n"
-            f"Max dimension: {max_dim}x{max_dim} px\n"
-            f"Quality: {quality}%\n"
-            "Aspect ratio will be maintained.\n"
-            "All metadata will be preserved.",
+            message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
         if reply != QMessageBox.StandardButton.Yes:
+            self.log_manager.info("User cancelled JPEG resizing.", batch_id=self.batch_id, step=7)
             return
         
         data_directory = self.config_manager.get('project.data_directory', '')
@@ -439,8 +442,8 @@ class Step7Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
         
-        self.output_text.append("\n" + "="*50)
-        self.output_text.append("Starting JPEG resizing...")
+        self.log_manager.info("="*50, batch_id=self.batch_id, step=7)
+        self.log_manager.info("Starting JPEG resizing...", batch_id=self.batch_id, step=7)
         
         # Start resize thread
         self.resize_thread = JpegResizeThread(
@@ -453,7 +456,7 @@ class Step7Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.output_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=7)
         
     def _on_finished(self, success, stats):
         """Handle resize completion."""
@@ -461,16 +464,16 @@ class Step7Dialog(QDialog):
         self.resize_btn.setEnabled(True)
         
         if success:
-            self.output_text.append("\n✅ JPEG resizing completed successfully!")
-            self.output_text.append(f"\nSummary:")
-            self.output_text.append(f"  Resized: {stats['resized']} files")
-            self.output_text.append(f"  Skipped (already within size): {stats['skipped']} files")
-            self.output_text.append(f"  Failed: {stats['failed']} files")
+            self.log_manager.success("JPEG resizing completed successfully!", batch_id=self.batch_id, step=7)
+            self.log_manager.info("Summary:", batch_id=self.batch_id, step=7)
+            self.log_manager.info(f"  Resized: {stats['resized']} files", batch_id=self.batch_id, step=7)
+            self.log_manager.info(f"  Skipped (already within size): {stats['skipped']} files", batch_id=self.batch_id, step=7)
+            self.log_manager.info(f"  Failed: {stats['failed']} files", batch_id=self.batch_id, step=7)
             
             # Show output directory
             data_directory = self.config_manager.get('project.data_directory', '')
             resized_dir = Path(data_directory) / 'output' / 'jpeg_resized'
-            self.output_text.append(f"\n✓ Resized JPEGs saved to:\n  {resized_dir}")
+            self.log_manager.info(f"Resized JPEGs saved to:\n  {resized_dir}", batch_id=self.batch_id, step=7)
             
             # Mark step 7 as completed
             self.config_manager.update_step_status(7, True)
@@ -488,32 +491,34 @@ class Step7Dialog(QDialog):
                 batch_id=self.batch_id, step=7
             )
 
+            message = f"JPEG resizing completed successfully!\n\n" \
+                      f"Resized: {stats['resized']} files\n" \
+                      f"Skipped: {stats['skipped']} files\n" \
+                      f"Failed: {stats['failed']} files\n\n" \
+                      f"Resized JPEGs saved to:\n{resized_dir}\n\n" \
+                      f"Step 7 is now marked as complete."
+            self.log_manager.success(f"Resizing Complete: {message}", batch_id=self.batch_id, step=7)
             QMessageBox.information(
                 self,
                 "Resizing Complete",
-                f"JPEG resizing completed successfully!\n\n"
-                f"Resized: {stats['resized']} files\n"
-                f"Skipped: {stats['skipped']} files\n"
-                f"Failed: {stats['failed']} files\n\n"
-                f"Resized JPEGs saved to:\n{resized_dir}\n\n"
-                f"Step 7 is now marked as complete."
+                message
             )
 
             self.accept()
         else:
             self.log_manager.step_error(7, "JPEG resizing failed", batch_id=self.batch_id)
-            self.output_text.append("\n❌ JPEG resizing failed.")
-            
+            self.log_manager.error("JPEG resizing failed.", batch_id=self.batch_id, step=7)            
     def _on_error(self, error_msg):
         """Handle resize errors."""
         self.progress_bar.setVisible(False)
         self.resize_btn.setEnabled(True)
 
         self.log_manager.step_error(7, error_msg, batch_id=self.batch_id)
-        self.output_text.append(f"\n❌ Error: {error_msg}")
-
+        
+        message = f"JPEG resizing failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Resizing Error: {message}", batch_id=self.batch_id, step=7)
         QMessageBox.critical(
             self,
             "Resizing Error",
-            f"JPEG resizing failed:\n\n{error_msg}"
+            message
         )

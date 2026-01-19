@@ -170,6 +170,17 @@ def get_logger(name: str = 'hstl_framework') -> logging.Logger:
     """
     return logging.getLogger(name)
 
+
+def add_success_level_to_logger():
+    """Add success level and method to the logging.Logger class."""
+    if not hasattr(logging.Logger, "success"):
+        def success(self, message, *args, **kwargs):
+            if self.isEnabledFor(SUCCESS_LEVEL):
+                self._log(SUCCESS_LEVEL, message, args, **kwargs)
+        setattr(logging.Logger, 'success', success)
+
+add_success_level_to_logger()
+
 def _get_logging_level(level_name: str) -> int:
     """Resolve a logging level name to its integer value."""
     if level_name.upper() == "SUCCESS":

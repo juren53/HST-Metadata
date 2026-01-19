@@ -133,7 +133,7 @@ class StepProcessor(ABC):
             # Update configuration to mark step as completed
             context.config.update_step_status(self.step_number, True)
             
-            self.logger.info(f"✅ Step {self.step_number} completed successfully")
+            self.logger.success(f"Step {self.step_number} completed successfully")
             return result
             
         except Exception as e:

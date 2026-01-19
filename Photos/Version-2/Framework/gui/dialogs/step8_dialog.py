@@ -424,7 +424,7 @@ class Step8Dialog(QDialog):
         try:
             data_directory = self.config_manager.get('project.data_directory', '')
             if not data_directory:
-                self.output_text.append("⚠️  Error: Project data directory not set")
+                self.log_manager.warning("Error: Project data directory not set", batch_id=self.batch_id, step=8)
                 return
             
             # Resized JPEG source directory
@@ -434,9 +434,9 @@ class Step8Dialog(QDialog):
             watermarked_dir = Path(data_directory) / 'output' / 'jpeg_watermarked'
             
             if not jpeg_dir.exists():
-                self.output_text.append(f"⚠️  Resized JPEG directory not found: {jpeg_dir}")
+                self.log_manager.warning(f"Resized JPEG directory not found: {jpeg_dir}", batch_id=self.batch_id, step=8)
                 self.jpeg_count_label.setText("Resized JPEG files: Directory not found")
-                self.output_text.append("⚠️  Have you completed Step 7?")
+                self.log_manager.warning("Have you completed Step 7?", batch_id=self.batch_id, step=8)
                 return
             
             # Count JPEG files
@@ -446,12 +446,12 @@ class Step8Dialog(QDialog):
             self.jpeg_count_label.setText(f"Resized JPEG files: {jpeg_count}")
             
             if jpeg_count == 0:
-                self.output_text.append("⚠️  No resized JPEG files found for watermarking")
-                self.output_text.append("⚠️  Please complete Step 7 first")
+                self.log_manager.warning("No resized JPEG files found for watermarking", batch_id=self.batch_id, step=8)
+                self.log_manager.warning("Please complete Step 7 first", batch_id=self.batch_id, step=8)
                 return
             
             # Check for restricted images
-            self.output_text.append("Analyzing copyright fields...")
+            self.log_manager.info("Analyzing copyright fields...", batch_id=self.batch_id, step=8)
             restricted_count = 0
             restricted_list = []
             
@@ -471,16 +471,16 @@ class Step8Dialog(QDialog):
                         copyright_notice = result.strip() if result else ''
                         
                         # Debug output for all files
-                        self.output_text.append(f"  {filename}: Copyright='{copyright_notice}' (len={len(copyright_notice)})")
+                        self.log_manager.debug(f"  {filename}: Copyright='{copyright_notice}' (len={len(copyright_notice)})", batch_id=self.batch_id, step=8)
                         
                         # Check for 'Restricted' but exclude 'Unrestricted'
                         copyright_lower = copyright_notice.lower()
                         if copyright_notice and 'restricted' in copyright_lower and 'unrestricted' not in copyright_lower:
                             restricted_count += 1
                             restricted_list.append(filename)
-                            self.output_text.append(f"    -> MATCH: This file is restricted!")
+                            self.log_manager.info(f"    -> MATCH: This file is restricted!", batch_id=self.batch_id, step=8)
                     except Exception as e:
-                        self.output_text.append(f"  {Path(jpeg_path).name}: Error reading metadata: {str(e)}")
+                        self.log_manager.error(f"  {Path(jpeg_path).name}: Error reading metadata: {str(e)}", batch_id=self.batch_id, step=8)
             
             self.restricted_count_label.setText(f"Restricted images: {restricted_count}")
             
@@ -490,45 +490,48 @@ class Step8Dialog(QDialog):
             
             self.watermarked_count_label.setText(f"Existing watermarked files: {watermarked_count}")
             
-            self.output_text.append("File analysis complete.")
-            self.output_text.append(f"Total JPEG files: {jpeg_count}")
-            self.output_text.append(f"Restricted images found: {restricted_count}")
+            self.log_manager.info("File analysis complete.", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"Total JPEG files: {jpeg_count}", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"Restricted images found: {restricted_count}", batch_id=self.batch_id, step=8)
             
             if restricted_count > 0:
-                self.output_text.append(f"\nRestricted images to be watermarked:")
+                self.log_manager.info("Restricted images to be watermarked:", batch_id=self.batch_id, step=8)
                 for filename in restricted_list[:10]:  # Show first 10
-                    self.output_text.append(f"  - {filename}")
+                    self.log_manager.info(f"  - {filename}", batch_id=self.batch_id, step=8)
                 if len(restricted_list) > 10:
-                    self.output_text.append(f"  ... and {len(restricted_list) - 10} more")
+                    self.log_manager.info(f"  ... and {len(restricted_list) - 10} more", batch_id=self.batch_id, step=8)
             else:
-                self.output_text.append("⚠️  No restricted images found. All images will be copied without watermarks.")
+                self.log_manager.warning("No restricted images found. All images will be copied without watermarks.", batch_id=self.batch_id, step=8)
             
             if watermarked_count > 0:
-                self.output_text.append(f"\n⚠️  Warning: {watermarked_count} watermarked files already exist and will be overwritten")
+                self.log_manager.warning(f"Warning: {watermarked_count} watermarked files already exist and will be overwritten", batch_id=self.batch_id, step=8)
             
-            self.output_text.append("\nReady to proceed with watermarking.")
+            self.log_manager.info("Ready to proceed with watermarking.", batch_id=self.batch_id, step=8)
             
             self.watermark_btn.setEnabled(True)
             
         except Exception as e:
-            self.output_text.append(f"⚠️  Error during analysis: {str(e)}")
+            self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=8)
     
     def _start_watermarking(self):
         """Start the watermarking process."""
         self.log_manager.step_start(8, "Watermark Addition", batch_id=self.batch_id)
         opacity = self.opacity_slider.value() / 100.0
 
+        message = f"Are you sure you want to proceed with watermarking?\n\n" \
+                  f"Opacity: {self.opacity_slider.value()}%\n\n" \
+                  "Watermarks will be applied only to images with 'Restricted' in the Copyright field.\n" \
+                  "All other images will be copied without watermarks."
+        self.log_manager.info(f"User confirmation requested for watermarking: {message}", batch_id=self.batch_id, step=8)
         reply = QMessageBox.question(
             self,
             "Confirm Watermarking",
-            f"Are you sure you want to proceed with watermarking?\n\n"
-            f"Opacity: {self.opacity_slider.value()}%\n\n"
-            "Watermarks will be applied only to images with 'Restricted' in the Copyright field.\n"
-            "All other images will be copied without watermarks.",
+            message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
         if reply != QMessageBox.StandardButton.Yes:
+            self.log_manager.info("User cancelled watermarking operation.", batch_id=self.batch_id, step=8)
             return
         
         data_directory = self.config_manager.get('project.data_directory', '')
@@ -540,11 +543,12 @@ class Step8Dialog(QDialog):
         watermark_path = Path(__file__).parent.parent / 'Copyright_Watermark.png'
         
         if not watermark_path.exists():
+            message = f"Watermark file not found:\n\n{watermark_path}\n\nPlease ensure the watermark file exists."
+            self.log_manager.critical(f"Watermark Not Found: {message}", batch_id=self.batch_id, step=8)
             QMessageBox.critical(
                 self,
                 "Watermark Not Found",
-                f"Watermark file not found:\n\n{watermark_path}\n\n"
-                "Please ensure the watermark file exists."
+                message
             )
             return
         
@@ -564,8 +568,8 @@ class Step8Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
         
-        self.output_text.append("\n" + "="*50)
-        self.output_text.append("Starting watermark process...")
+        self.log_manager.info("="*50, batch_id=self.batch_id, step=8)
+        self.log_manager.info("Starting watermark process...", batch_id=self.batch_id, step=8)
         
         # Start watermark thread
         self.watermark_thread = WatermarkThread(
@@ -579,7 +583,7 @@ class Step8Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.output_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=8)
         
     def _on_finished(self, success, stats):
         """Handle watermarking completion."""
@@ -587,17 +591,17 @@ class Step8Dialog(QDialog):
         self.watermark_btn.setEnabled(True)
         
         if success:
-            self.output_text.append("\n✅ Watermarking process completed successfully!")
-            self.output_text.append(f"\nSummary:")
-            self.output_text.append(f"  Total files processed: {stats['jpeg_files_found']}")
-            self.output_text.append(f"  Restricted images watermarked: {stats['watermarked']}")
-            self.output_text.append(f"  Unrestricted images copied: {stats['copied_unrestricted']}")
-            self.output_text.append(f"  Failed: {stats['failed']}")
+            self.log_manager.success("Watermarking process completed successfully!", batch_id=self.batch_id, step=8)
+            self.log_manager.info("Summary:", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"  Total files processed: {stats['jpeg_files_found']}", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"  Restricted images watermarked: {stats['watermarked']}", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"  Unrestricted images copied: {stats['copied_unrestricted']}", batch_id=self.batch_id, step=8)
+            self.log_manager.info(f"  Failed: {stats['failed']}", batch_id=self.batch_id, step=8)
             
             # Show output directory
             data_directory = self.config_manager.get('project.data_directory', '')
             watermarked_dir = Path(data_directory) / 'output' / 'jpeg_watermarked'
-            self.output_text.append(f"\n✓ Output saved to:\n  {watermarked_dir}")
+            self.log_manager.info(f"Output saved to:\n  {watermarked_dir}", batch_id=self.batch_id, step=8)
             
             # Mark step 8 as completed
             self.config_manager.update_step_status(8, True)
@@ -615,33 +619,35 @@ class Step8Dialog(QDialog):
                 batch_id=self.batch_id, step=8
             )
 
+            message = f"Watermarking process completed successfully!\n\n" \
+                      f"Total processed: {stats['jpeg_files_found']} files\n" \
+                      f"Watermarked (restricted): {stats['watermarked']} files\n" \
+                      f"Copied (unrestricted): {stats['copied_unrestricted']} files\n" \
+                      f"Failed: {stats['failed']} files\n\n" \
+                      f"Output saved to:\n{watermarked_dir}\n\n" \
+                      f"Step 8 is now marked as complete."
+            self.log_manager.success(f"Watermarking Complete: {message}", batch_id=self.batch_id, step=8)
             QMessageBox.information(
                 self,
                 "Watermarking Complete",
-                f"Watermarking process completed successfully!\n\n"
-                f"Total processed: {stats['jpeg_files_found']} files\n"
-                f"Watermarked (restricted): {stats['watermarked']} files\n"
-                f"Copied (unrestricted): {stats['copied_unrestricted']} files\n"
-                f"Failed: {stats['failed']} files\n\n"
-                f"Output saved to:\n{watermarked_dir}\n\n"
-                f"Step 8 is now marked as complete."
+                message
             )
 
             self.accept()
         else:
             self.log_manager.step_error(8, "Watermarking process failed", batch_id=self.batch_id)
-            self.output_text.append("\n❌ Watermarking process failed.")
-            
+            self.log_manager.error("Watermarking process failed.", batch_id=self.batch_id, step=8)            
     def _on_error(self, error_msg):
         """Handle watermarking errors."""
         self.progress_bar.setVisible(False)
         self.watermark_btn.setEnabled(True)
 
         self.log_manager.step_error(8, error_msg, batch_id=self.batch_id)
-        self.output_text.append(f"\n❌ Error: {error_msg}")
-
+        
+        message = f"Watermarking process failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Watermarking Error: {message}", batch_id=self.batch_id, step=8)
         QMessageBox.critical(
             self,
             "Watermarking Error",
-            f"Watermarking process failed:\n\n{error_msg}"
+            message
         )

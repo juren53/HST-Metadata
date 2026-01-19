@@ -303,7 +303,7 @@ class Step6Dialog(QDialog):
         try:
             data_directory = self.config_manager.get('project.data_directory', '')
             if not data_directory:
-                self.output_text.append("⚠️  Error: Project data directory not set")
+                self.log_manager.warning("Error: Project data directory not set", batch_id=self.batch_id, step=6)
                 return
             
             # TIFF directory (processed)
@@ -313,9 +313,9 @@ class Step6Dialog(QDialog):
             jpeg_dir = Path(data_directory) / 'output' / 'jpeg'
             
             if not tiff_dir.exists():
-                self.output_text.append(f"⚠️  TIFF directory not found: {tiff_dir}")
+                self.log_manager.warning(f"TIFF directory not found: {tiff_dir}", batch_id=self.batch_id, step=6)
                 self.tiff_count_label.setText("TIFF files: Directory not found")
-                self.output_text.append("⚠️  Have you completed Step 5?")
+                self.log_manager.warning("Have you completed Step 5?", batch_id=self.batch_id, step=6)
                 return
             
             # Count TIFF files
@@ -331,36 +331,39 @@ class Step6Dialog(QDialog):
             self.jpeg_count_label.setText(f"Existing JPEGs: {jpeg_count}")
             
             if tiff_count == 0:
-                self.output_text.append("⚠️  No TIFF files found for conversion")
-                self.output_text.append("⚠️  Please complete Step 5 first")
+                self.log_manager.warning("No TIFF files found for conversion", batch_id=self.batch_id, step=6)
+                self.log_manager.warning("Please complete Step 5 first", batch_id=self.batch_id, step=6)
                 return
             
-            self.output_text.append("File analysis complete.")
-            self.output_text.append(f"TIFF files to convert: {tiff_count}")
+            self.log_manager.info("File analysis complete.", batch_id=self.batch_id, step=6)
+            self.log_manager.info(f"TIFF files to convert: {tiff_count}", batch_id=self.batch_id, step=6)
             
             if jpeg_count > 0:
-                self.output_text.append(f"⚠️  Warning: {jpeg_count} JPEG files already exist and will be overwritten")
+                self.log_manager.warning(f"Warning: {jpeg_count} JPEG files already exist and will be overwritten", batch_id=self.batch_id, step=6)
             
-            self.output_text.append("\nReady to proceed with JPEG conversion.")
+            self.log_manager.info("Ready to proceed with JPEG conversion.", batch_id=self.batch_id, step=6)
             
             self.convert_btn.setEnabled(True)
             
         except Exception as e:
-            self.output_text.append(f"⚠️  Error during analysis: {str(e)}")
+            self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=6)
     
     def _start_conversion(self):
         """Start the JPEG conversion process."""
         self.log_manager.step_start(6, "JPEG Conversion", batch_id=self.batch_id)
+        message = f"Are you sure you want to proceed with JPEG conversion?\n\n" \
+                  f"Quality: {self.quality_spinbox.value()}%\n" \
+                  "All metadata will be preserved."
+        self.log_manager.info(f"User confirmation requested for JPEG conversion: {message}", batch_id=self.batch_id, step=6)
         reply = QMessageBox.question(
             self,
             "Confirm Conversion",
-            "Are you sure you want to proceed with JPEG conversion?\n\n"
-            f"Quality: {self.quality_spinbox.value()}%\n"
-            "All metadata will be preserved.",
+            message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
         if reply != QMessageBox.StandardButton.Yes:
+            self.log_manager.info("User cancelled JPEG conversion.", batch_id=self.batch_id, step=6)
             return
         
         data_directory = self.config_manager.get('project.data_directory', '')
@@ -387,8 +390,8 @@ class Step6Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
         
-        self.output_text.append("\n" + "="*50)
-        self.output_text.append("Starting JPEG conversion...")
+        self.log_manager.info("="*50, batch_id=self.batch_id, step=6)
+        self.log_manager.info("Starting JPEG conversion...", batch_id=self.batch_id, step=6)
         
         # Start conversion thread
         self.conversion_thread = JpegConversionThread(
@@ -401,7 +404,7 @@ class Step6Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.output_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=6)
         
     def _on_finished(self, success, stats):
         """Handle conversion completion."""
@@ -409,15 +412,15 @@ class Step6Dialog(QDialog):
         self.convert_btn.setEnabled(True)
         
         if success:
-            self.output_text.append("\n✅ JPEG conversion completed successfully!")
-            self.output_text.append(f"\nSummary:")
-            self.output_text.append(f"  Converted: {stats['converted']} files")
-            self.output_text.append(f"  Failed: {stats['failed']} files")
+            self.log_manager.success("JPEG conversion completed successfully!", batch_id=self.batch_id, step=6)
+            self.log_manager.info("Summary:", batch_id=self.batch_id, step=6)
+            self.log_manager.info(f"  Converted: {stats['converted']} files", batch_id=self.batch_id, step=6)
+            self.log_manager.info(f"  Failed: {stats['failed']} files", batch_id=self.batch_id, step=6)
             
             # Show output directory
             data_directory = self.config_manager.get('project.data_directory', '')
             jpeg_dir = Path(data_directory) / 'output' / 'jpeg'
-            self.output_text.append(f"\n✓ JPEG files saved to:\n  {jpeg_dir}")
+            self.log_manager.info(f"JPEG files saved to:\n  {jpeg_dir}", batch_id=self.batch_id, step=6)
             
             # Mark step 6 as completed
             self.config_manager.update_step_status(6, True)
@@ -435,31 +438,33 @@ class Step6Dialog(QDialog):
                 batch_id=self.batch_id, step=6
             )
 
+            message = f"JPEG conversion completed successfully!\n\n" \
+                      f"Converted: {stats['converted']} files\n" \
+                      f"Failed: {stats['failed']} files\n\n" \
+                      f"JPEG files saved to:\n{jpeg_dir}\n\n" \
+                      f"Step 6 is now marked as complete."
+            self.log_manager.success(f"Conversion Complete: {message}", batch_id=self.batch_id, step=6)
             QMessageBox.information(
                 self,
                 "Conversion Complete",
-                f"JPEG conversion completed successfully!\n\n"
-                f"Converted: {stats['converted']} files\n"
-                f"Failed: {stats['failed']} files\n\n"
-                f"JPEG files saved to:\n{jpeg_dir}\n\n"
-                f"Step 6 is now marked as complete."
+                message
             )
 
             self.accept()
         else:
             self.log_manager.step_error(6, "JPEG conversion failed", batch_id=self.batch_id)
-            self.output_text.append("\n❌ JPEG conversion failed.")
-            
+            self.log_manager.error("JPEG conversion failed.", batch_id=self.batch_id, step=6)            
     def _on_error(self, error_msg):
         """Handle conversion errors."""
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
 
         self.log_manager.step_error(6, error_msg, batch_id=self.batch_id)
-        self.output_text.append(f"\n❌ Error: {error_msg}")
-
+        
+        message = f"JPEG conversion failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Conversion Error: {message}", batch_id=self.batch_id, step=6)
         QMessageBox.critical(
             self,
             "Conversion Error",
-            f"JPEG conversion failed:\n\n{error_msg}"
+            message
         )
