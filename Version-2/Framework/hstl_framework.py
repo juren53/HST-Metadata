@@ -34,8 +34,8 @@ try:
     from steps.base_step import ProcessingContext
     from core.pipeline import Pipeline
 except ImportError as e:
-    print(f"Error importing framework modules: {e}")
-    print(
+    logging.error(f"Error importing framework modules: {e}", exc_info=True)
+    logging.warning(
         "Please ensure all required dependencies are installed: pip install -r requirements.txt"
     )
     sys.exit(1)
@@ -73,15 +73,13 @@ class HSLTFramework:
                 data_directory=self.config_manager.get("project.data_directory"),
             )
 
-            self.logger.info("HSTL Framework initialized successfully")
-            self.log_manager.info("HSTL Framework initialized successfully")
+            self.log_manager.success("HSTL Framework initialized successfully")
             return True
 
         except Exception as e:
             self.log_manager.error(
                 f"Failed to initialize framework: {e}", exc_info=True
             )
-            print(f"Failed to initialize framework: {e}")
             return False
 
     def init_project(self, data_dir: str, project_name: str, force: bool = False):
@@ -92,8 +90,12 @@ class HSLTFramework:
             # Create data directory if it doesn't exist
             if not data_path.exists():
                 self.log_manager.info(f"Creating data directory: {data_dir}")
-                print(f"Creating data directory: {data_dir}")
-                data_path.mkdir(parents=True, exist_ok=True)
+                try:
+                    data_path.mkdir(parents=True, exist_ok=True)
+                except FileNotFoundError:
+                    self.log_manager.error(f"Invalid path: The directory '{data_dir}' could not be created.")
+                    self.log_manager.error("Please check that the drive exists and is accessible.")
+                    raise
 
             # Create project configuration
             project_config = {
@@ -114,8 +116,7 @@ class HSLTFramework:
                 self.log_manager.warning(
                     f"Project configuration already exists: {config_path}"
                 )
-                print(f"Project configuration already exists: {config_path}")
-                print("Use --force to overwrite existing configuration")
+                self.log_manager.info("Use --force to overwrite existing configuration")
                 return False
 
             self.config_manager = ConfigManager()
@@ -130,17 +131,15 @@ class HSLTFramework:
                 project_name, str(data_path.absolute()), str(config_path.absolute())
             )
 
-            self.log_manager.info(f"Project '{project_name}' initialized successfully")
-            print(f"Project '{project_name}' initialized successfully")
-            print(f"Data directory: {data_dir}")
-            print(f"Configuration: {config_path}")
-            print(f"Batch registered in framework registry")
+            self.log_manager.success(f"Project '{project_name}' initialized successfully")
+            self.log_manager.info(f"Data directory: {data_dir}")
+            self.log_manager.info(f"Configuration: {config_path}")
+            self.log_manager.info(f"Batch registered in framework registry")
 
             return True
 
         except Exception as e:
             self.log_manager.error(f"Failed to initialize project: {e}", exc_info=True)
-            print(f"Failed to initialize project: {e}")
             return False
 
     def _create_project_directories(self, data_path: Path):
@@ -164,31 +163,32 @@ class HSLTFramework:
     def show_status(self, verbose: bool = False):
         """Display current project status."""
         if not self.config_manager:
-            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized. Run 'hstl_framework.py init' first.")
             return False
 
-        print("📊 HSTL Framework Status")
-        print("=" * 50)
+        self.log_manager.info("HSTL Framework Status")
+        self.log_manager.info("=" * 50)
 
         # Project information
         project_name = self.config_manager.get("project.name", "Unknown")
         data_dir = self.config_manager.get("project.data_directory", "Not set")
-        print(f"🔹 Project: {project_name}")
-        print(f"🔹 Data Directory: {data_dir}")
-        print()
+        self.log_manager.info(f"Project: {project_name}")
+        self.log_manager.info(f"Data Directory: {data_dir}")
+        self.log_manager.info("")
 
         # Steps status
-        print("📋 Processing Steps:")
+        self.log_manager.info("Processing Steps:")
         for step_num in SUPPORTED_STEPS:
             completed = self.config_manager.get(
                 f"steps_completed.step{step_num}", False
             )
-            status = "✅ Completed" if completed else "⭕ Pending"
+            status_text = "Completed" if completed else "Pending"
+            status_icon = "✅" if completed else "⭕"
             step_name = self._get_step_name(step_num)
-            print(f"  Step {step_num}: {step_name} - {status}")
+            self.log_manager.info(f"  {status_icon} Step {step_num}: {step_name} - {status_text}")
 
         if verbose:
-            print("\n🔧 Configuration Details:")
+            self.log_manager.info("\nConfiguration Details:")
             # Add more detailed configuration info here
 
         return True
@@ -210,64 +210,58 @@ class HSLTFramework:
     def run_steps(self, steps: List[int], dry_run: bool = False):
         """Run specified processing steps."""
         if not self.config_manager:
-            self.log_manager.error("No project initialized")
-            print("No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized. Run 'hstl_framework.py init' first.")
             return False
 
         mode = "Dry run" if dry_run else "Running"
         self.log_manager.info(f"{mode} steps: {steps}")
-        print(f"{mode} steps: {steps}")
 
         for step_num in steps:
             if step_num not in SUPPORTED_STEPS:
                 self.log_manager.error(f"Invalid step number: {step_num}")
-                print(f"Invalid step number: {step_num}")
                 return False
 
             step_name = self._get_step_name(step_num)
             if dry_run:
                 self.log_manager.info(f"Would run Step {step_num}: {step_name}")
-                print(f"Would run Step {step_num}: {step_name}")
             else:
                 self.log_manager.step_start(step_num, step_name)
-                print(f"Running Step {step_num}: {step_name}")
                 # TODO: Implement actual step execution
                 self.log_manager.warning(f"Step {step_num} implementation pending")
-                print(f"Step {step_num} implementation pending")
 
         return True
 
     def validate(self, step: Optional[int] = None, pre_flight: bool = False):
         """Validate project or specific step."""
         if not self.config_manager:
-            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized. Run 'hstl_framework.py init' first.")
             return False
 
         if pre_flight:
-            print("🔍 Running pre-flight validation...")
+            self.log_manager.info("Running pre-flight validation...")
             # TODO: Implement pre-flight checks
-            print("✅ Pre-flight validation completed")
+            self.log_manager.success("Pre-flight validation completed")
             return True
 
         if step:
-            print(f"🔍 Validating Step {step}: {self._get_step_name(step)}")
+            self.log_manager.info(f"Validating Step {step}: {self._get_step_name(step)}")
             # TODO: Implement step-specific validation
-            print(f"✅ Step {step} validation completed")
+            self.log_manager.success(f"Step {step} validation completed")
         else:
-            print("🔍 Validating entire project...")
+            self.log_manager.info("Validating entire project...")
             # TODO: Implement full project validation
-            print("✅ Project validation completed")
+            self.log_manager.success("Project validation completed")
 
         return True
 
     def list_config(self) -> bool:
         """List current configuration."""
         if not self.config_manager:
-            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized. Run 'hstl_framework.py init' first.")
             return False
 
-        print("⚙️  Current Configuration")
-        print("=" * 50)
+        self.log_manager.info("Current Configuration")
+        self.log_manager.info("=" * 50)
 
         config_dict = self.config_manager.to_dict()
 
@@ -275,7 +269,7 @@ class HSLTFramework:
         self._print_config_dict(config_dict, indent=0)
 
         if self.config_manager.config_path:
-            print(f"\n📄 Configuration file: {self.config_manager.config_path}")
+            self.log_manager.info(f"\nConfiguration file: {self.config_manager.config_path}")
 
         return True
 
@@ -289,15 +283,15 @@ class HSLTFramework:
                 continue
 
             if isinstance(value, dict):
-                print(f"{indent_str}🔹 {key}:")
+                self.log_manager.info(f"{indent_str}{key}:")
                 self._print_config_dict(value, indent + 1)
             else:
-                print(f"{indent_str}  {key}: {value}")
+                self.log_manager.info(f"{indent_str}  {key}: {value}")
 
     def set_config(self, key: str, value: str) -> bool:
         """Set configuration value."""
         if not self.config_manager:
-            print("❌ No project initialized. Run 'hstl_framework.py init' first.")
+            self.log_manager.error("No project initialized. Run 'hstl_framework.py init' first.")
             return False
 
         # Convert value to appropriate type
@@ -305,18 +299,18 @@ class HSLTFramework:
 
         # Set the value
         if self.config_manager.set(key, converted_value):
-            print(f"✅ Configuration updated: {key} = {converted_value}")
+            self.log_manager.success(f"Configuration updated: {key} = {converted_value}")
 
             # Save to file if config path exists
             if self.config_manager.config_path:
                 self.config_manager.save_config(
                     self.config_manager.to_dict(), self.config_manager.config_path
                 )
-                print(f"💾 Saved to: {self.config_manager.config_path}")
+                self.log_manager.info(f"Saved to: {self.config_manager.config_path}")
 
             return True
         else:
-            print(f"❌ Failed to set configuration: {key}")
+            self.log_manager.error(f"Failed to set configuration: {key}")
             return False
 
     def _convert_config_value(self, value: str):
@@ -355,14 +349,14 @@ class HSLTFramework:
             title = "Active Batches"
 
         if not batches:
-            print("⚠️  No batches found")
+            self.log_manager.warning("No batches found")
             if not show_all:
-                print("    Use 'batches --all' to see archived batches")
+                self.log_manager.info("Use 'batches --all' to see archived batches")
             return True
 
-        print(f"📋 {title}")
-        print("=" * 80)
-        print()
+        self.log_manager.info(title)
+        self.log_manager.info("=" * 80)
+        self.log_manager.info("")
 
         for batch in batches:
             batch_id = batch["batch_id"]
@@ -372,22 +366,16 @@ class HSLTFramework:
             total = batch.get("total_steps", 8)
             percentage = batch.get("completion_percentage", 0)
 
-            # Status emoji
-            if percentage == 100:
-                status_icon = "✅"
-            elif percentage > 0:
-                status_icon = "🔄"
-            else:
-                status_icon = "⭕"
+            # Status emoji (removed, formatter will add)
+            
+            self.log_manager.info(f"{name} ({batch_id})")
+            self.log_manager.info(f"   Progress: {completed}/{total} steps ({percentage:.0f}%)")
+            self.log_manager.info(f"   Status: {status}")
+            self.log_manager.info(f"   Data Directory: {batch['data_directory']}")
+            self.log_manager.info(f"   Config: {batch['config_path']}")
+            self.log_manager.info("")
 
-            print(f"{status_icon} {name} ({batch_id})")
-            print(f"   Progress: {completed}/{total} steps ({percentage:.0f}%)")
-            print(f"   Status: {status}")
-            print(f"   Data Directory: {batch['data_directory']}")
-            print(f"   Config: {batch['config_path']}")
-            print()
-
-        print(f"Total: {len(batches)} batch(es)")
+        self.log_manager.info(f"Total: {len(batches)} batch(es)")
         return True
 
     def archive_batch(self, batch_id: str) -> bool:
@@ -396,16 +384,16 @@ class HSLTFramework:
         batch = registry.get_batch(batch_id)
 
         if not batch:
-            print(f"❌ Batch not found: {batch_id}")
+            self.log_manager.error(f"Batch not found: {batch_id}")
             return False
 
         if registry.update_batch_status(batch_id, "archived"):
-            print(f"✅ Batch '{batch['name']}' archived successfully")
-            print(f"   Batch ID: {batch_id}")
-            print(f"   Note: Files remain in {batch['data_directory']}")
+            self.log_manager.success(f"Batch '{batch['name']}' archived successfully")
+            self.log_manager.info(f"Batch ID: {batch_id}")
+            self.log_manager.info(f"Note: Files remain in {batch['data_directory']}")
             return True
         else:
-            print(f"❌ Failed to archive batch: {batch_id}")
+            self.log_manager.error(f"Failed to archive batch: {batch_id}")
             return False
 
     def complete_batch(self, batch_id: str) -> bool:
@@ -414,93 +402,90 @@ class HSLTFramework:
         batch = registry.get_batch(batch_id)
 
         if not batch:
-            print(f"❌ Batch not found: {batch_id}")
+            self.log_manager.error(f"Batch not found: {batch_id}")
             return False
 
         if registry.update_batch_status(batch_id, "completed"):
-            print(f"✅ Batch '{batch['name']}' marked as completed")
-            print(f"   Batch ID: {batch_id}")
-            print(f"   Data directory: {batch['data_directory']}")
+            self.log_manager.success(f"Batch '{batch['name']}' marked as completed")
+            self.log_manager.info(f"Batch ID: {batch_id}")
+            self.log_manager.info(f"Data directory: {batch['data_directory']}")
             return True
         else:
-            print(f"❌ Failed to mark batch as completed: {batch_id}")
+            self.log_manager.error(f"Failed to mark batch as completed: {batch_id}")
             return False
-
     def reactivate_batch(self, batch_id: str) -> bool:
         """Reactivate an archived or completed batch."""
         registry = BatchRegistry()
         batch = registry.get_batch(batch_id)
 
         if not batch:
-            print(f"❌ Batch not found: {batch_id}")
+            self.log_manager.error(f"Batch not found: {batch_id}")
             return False
 
         old_status = batch.get("status", "unknown")
         if registry.update_batch_status(batch_id, "active"):
-            print(f"✅ Batch '{batch['name']}' reactivated")
-            print(f"   Previous status: {old_status}")
-            print(f"   New status: active")
+            self.log_manager.success(f"Batch '{batch['name']}' reactivated")
+            self.log_manager.info(f"Previous status: {old_status}")
+            self.log_manager.info(f"New status: active")
             return True
         else:
-            print(f"❌ Failed to reactivate batch: {batch_id}")
+            self.log_manager.error(f"Failed to reactivate batch: {batch_id}")
             return False
-
     def remove_batch(self, batch_id: str, confirm: bool = False) -> bool:
         """Remove a batch from the registry."""
         registry = BatchRegistry()
         batch = registry.get_batch(batch_id)
 
         if not batch:
-            print(f"❌ Batch not found: {batch_id}")
+            self.log_manager.error(f"Batch not found: {batch_id}")
             return False
 
         if not confirm:
-            print(f"⚠️  Remove batch '{batch['name']}' from registry?")
-            print(f"   Batch ID: {batch_id}")
-            print(f"   Data directory: {batch['data_directory']}")
-            print(f"   Config: {batch['config_path']}")
-            print()
-            print("⚠️  This will remove the batch from the registry.")
-            print("   The data directory and all files will NOT be deleted.")
-            print()
-            print("   Run with --confirm to proceed:")
-            print(f"   hstl_framework.py batch remove {batch_id} --confirm")
+            self.log_manager.warning(f"Remove batch '{batch['name']}' from registry?")
+            self.log_manager.info(f"Batch ID: {batch_id}")
+            self.log_manager.info(f"Data directory: {batch['data_directory']}")
+            self.log_manager.info(f"Config: {batch['config_path']}")
+            self.log_manager.info("")
+            self.log_manager.warning("This will remove the batch from the registry.")
+            self.log_manager.info("The data directory and all files will NOT be deleted.")
+            self.log_manager.info("")
+            self.log_manager.info("Run with --confirm to proceed:")
+            self.log_manager.info(f"hstl_framework.py batch remove {batch_id} --confirm")
             return False
 
         if registry.unregister_batch(batch_id):
-            print(f"✅ Batch '{batch['name']}' removed from registry")
-            print(f"   Data directory preserved at: {batch['data_directory']}")
+            self.log_manager.success(f"Batch '{batch['name']}' removed from registry")
+            self.log_manager.info(f"Data directory preserved at: {batch['data_directory']}")
             return True
         else:
-            print(f"❌ Failed to remove batch: {batch_id}")
+            self.log_manager.error(f"Failed to remove batch: {batch_id}")
             return False
-
     def show_batch_info(self, batch_id: str) -> bool:
         """Show detailed information about a batch."""
         registry = BatchRegistry()
         summary = registry.get_batch_summary(batch_id)
 
         if not summary:
-            print(f"❌ Batch not found: {batch_id}")
+            self.log_manager.error(f"Batch not found: {batch_id}")
             return False
 
-        print(f"📋 Batch Information")
-        print("=" * 60)
-        print(f"Name: {summary['name']}")
-        print(f"Batch ID: {batch_id}")
-        print(f"Status: {summary.get('status', 'unknown')}")
-        print()
-        print(f"Created: {summary.get('created', 'unknown')}")
-        print(f"Last Accessed: {summary.get('last_accessed', 'unknown')}")
-        print()
-        print(f"Data Directory: {summary['data_directory']}")
-        print(f"Config File: {summary['config_path']}")
-        print()
-        print(
+        self.log_manager.info("Batch Information")
+        self.log_manager.info("=" * 60)
+        self.log_manager.info(f"Name: {summary['name']}")
+        self.log_manager.info(f"Batch ID: {batch_id}")
+        self.log_manager.info(f"Status: {summary.get('status', 'unknown')}")
+        self.log_manager.info("")
+        self.log_manager.info(f"Created: {summary.get('created', 'unknown')}")
+        self.log_manager.info(f"Last Accessed: {summary.get('last_accessed', 'unknown')}")
+        self.log_manager.info("")
+        self.log_manager.info(f"Data Directory: {summary['data_directory']}")
+        self.log_manager.info(f"Config File: {summary['config_path']}")
+        self.log_manager.info("")
+        self.log_manager.info(
             f"Progress: {summary.get('completed_steps', 0)}/{summary.get('total_steps', 8)} steps ({summary.get('completion_percentage', 0):.0f}%)"
         )
-        print()
-        print("Step Status:")
+        self.log_manager.info("")
+        self.log_manager.info("Step Status:")
 
         if "steps_completed" in summary:
             step_names = {
@@ -517,9 +502,9 @@ class HSLTFramework:
             for step_key in sorted(summary["steps_completed"].keys()):
                 step_num = step_key.replace("step", "")
                 completed = summary["steps_completed"][step_key]
-                status_icon = "✅" if completed else "⭕"
+                status = "Completed" if completed else "Pending" # Text for log_manager, emoji handled by formatter
                 step_name = step_names.get(step_key, step_key)
-                print(f"  {status_icon} Step {step_num}: {step_name}")
+                self.log_manager.info(f"  Step {step_num}: {step_name} - {status}")
 
         return True
 
@@ -808,14 +793,10 @@ def main():
         return 0 if success else 1
 
     except KeyboardInterrupt:
-        print("\n⚠️  Operation cancelled by user")
+        self.log_manager.warning("Operation cancelled by user")
         return 1
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
-        if args.verbose:
-            import traceback
-
-            traceback.print_exc()
+        self.log_manager.critical(f"Unexpected error: {e}", exc_info=True)
         return 1
 
 

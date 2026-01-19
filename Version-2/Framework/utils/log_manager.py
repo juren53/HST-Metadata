@@ -19,13 +19,14 @@ from logging.handlers import RotatingFileHandler
 from PyQt6.QtCore import QObject, pyqtSignal
 
 from utils.console_capture import ConsoleCaptureHandler, ConsoleCaptureContext
-
+from utils.logger import SUCCESS_LEVEL # Import the custom success level
 
 # Verbosity level mappings
 VERBOSITY_LEVELS = {
     'minimal': logging.WARNING,   # Errors and warnings only
     'normal': logging.INFO,       # Key actions (default)
     'detailed': logging.DEBUG,    # All operations including debug
+    'success': SUCCESS_LEVEL,      # Custom success level
 }
 
 
@@ -455,6 +456,10 @@ class LogManager:
         """Log error message."""
         self.log(logging.ERROR, message, batch_id, step, exc_info=exc_info)
 
+    def success(self, message: str, batch_id: Optional[str] = None, step: Optional[int] = None):
+        """Log success message."""
+        self.log(SUCCESS_LEVEL, message, batch_id, step)
+
     def critical(self, message: str, batch_id: Optional[str] = None, step: Optional[int] = None, exc_info: bool = False):
         """Log critical message."""
         self.log(logging.CRITICAL, message, batch_id, step, exc_info=exc_info)
@@ -465,7 +470,7 @@ class LogManager:
 
     def step_complete(self, step: int, step_name: str, batch_id: Optional[str] = None):
         """Log step completion."""
-        self.info(f"Completed Step {step}: {step_name}", batch_id, step)
+        self.success(f"Completed Step {step}: {step_name}", batch_id, step)
 
     def step_error(self, step: int, error: str, batch_id: Optional[str] = None, exc_info: bool = False):
         """Log step error."""
