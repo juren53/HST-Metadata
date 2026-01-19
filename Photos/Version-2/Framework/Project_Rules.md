@@ -11,39 +11,73 @@ This applies to:
 - Any other date/time references in the project
 
 Example formats:
-- Changelog: `Tue 03 Dec 2025 09:20:00 PM CST`
-- Version label: `v0.0.9b 2025-12-03`
+- Changelog: `Sat 18 Jan 2026 10:30:00 AM CST`
+- Version label: `v0.1.7c | 2026-01-18 10:30 CST`
 - Always include timezone indicator (CST or CDT) in full timestamps
-- an make certain time is represented as CST or CDT . . . and NOT GMT!!
+- And make certain time is represented as CST or CDT . . . and NOT GMT!!
 
 ## Version Numbering
-- Format: `v0.0.X` for releases
-- Format: `v0.0.Xa`, `v0.0.Xb`, `v0.0.Xc` for point releases/patches
-- Update version info in the README.md file, UI label, the About dialog and header comment when making releases  Note:  Version info consists of the Version Number, the Date  AND THE TIME!!!  e.g.  v0.2.6  2025-12-22 1125  and time should always be CST/CDT
+- Format: `v0.1.X` for releases
+- Format: `v0.1.Xa`, `v0.1.Xb`, `v0.1.Xc` for point releases/patches
+- Update version info in all locations listed in the checklist below
+- Version info consists of the Version Number, the Date AND THE TIME!!! e.g. `v0.1.7c 2026-01-18 10:30 CST`
 
 ## Version Update Checklist
 
-# When updating version information, update ALL of the following files:
-# Format: file_path | location_description
+When updating version information, update **ALL** of the following files:
 
-# Core Python Modules
-__init__.py | __version__ variable (line ~9)
-gui/__init__.py | __version__ and __commit_date__ variables (lines ~7-8)
-gui/hstl_gui.py | Module docstring Version/Commit Date (lines ~8-9) and __version__/__commit_date__ variables (lines ~27-28)
-gui/main_window.py | Window title in setWindowTitle() (line ~52) and About dialog version and commit date (lines ~500-501)
-gui/widgets/step_widget.py | Version label displayed in UI (line ~55)
+### Core Python Modules
 
-# Documentation Files
-docs/GUI_QUICKSTART.md | Version and Commit Date footer (lines ~272-273)
-docs/USER_GUIDE.md | Version and Commit Date in document
-gui/README.md | Version and Commit Date header (lines ~3-4)
-CHANGELOG.md | Add new version section at top with changes (line ~8)
+| File | Location | Approx Line |
+|------|----------|-------------|
+| `__init__.py` | `__version__` variable | ~9 |
+| `gui/__init__.py` | `__version__` and `__commit_date__` variables | ~7-8 |
+| `gui/hstl_gui.py` | Module docstring (Version/Commit Date) | ~8-9 |
+| `gui/hstl_gui.py` | `__version__` and `__commit_date__` variables | ~31-32 |
+| `gui/main_window.py` | `setWindowTitle()` - Title bar | ~88 |
+| `gui/main_window.py` | About dialog version and commit date | ~702-703 |
+| `gui/widgets/step_widget.py` | Version label (Current Batch tab header) | ~64-65 |
+| `gui/widgets/batch_list_widget.py` | Version label (Batches tab header) | ~69-70 |
 
-# Notes:
-# - Update CHANGELOG.md first with new version section describing changes
-# - All timestamps should use format: YYYY-MM-DD HH:MM in CST (Central Standard Time)
-# - IMPORTANT: ALWAYS use CST time zone, NOT UTC!!!
-# - Version format: v0.0.X (with 'v' prefix in UI, without 'v' in code)
+### Documentation Files
+
+| File | Location | Approx Line |
+|------|----------|-------------|
+| `CHANGELOG.md` | Add new version section at top | ~8 |
+| `docs/GUI_QUICKSTART.md` | Version and Commit Date footer | ~272-273 |
+| `gui/README.md` | Version and Commit Date header | ~3-4 |
+
+### Update Order
+
+1. **CHANGELOG.md first** - Add new version section describing changes
+2. **Core Python modules** - Update all version strings
+3. **Documentation files** - Update footers/headers
+
+### Notes
+
+- All timestamps should use format: `YYYY-MM-DD HH:MM CST`
+- **IMPORTANT**: ALWAYS use CST time zone, NOT UTC!!!
+- Version format: `v0.1.X` (with 'v' prefix in UI, without 'v' in code variables)
+- Line numbers are approximate - search for the previous version string if needed
+
+## Verify Version Updates
+
+After updating, run this command from the Framework directory to confirm all locations show the new version:
+
+```bash
+grep -rn "0\.1\.7c" --include="*.py" --include="*.md" .
+```
+
+Replace `0\.1\.7c` with your new version number. You should see approximately 12-14 matches across the files listed above.
+
+## Post-Update Testing
+
+After updating version info, **launch the application and verify**:
+
+1. **Title bar** shows correct version (e.g., "HSTL Photo Framework v0.1.7c")
+2. **Help > About** dialog shows correct version and commit date
+3. **Batches tab** header (top-right) shows correct version
+4. **Current Batch tab** header (top-right) shows correct version
 
 ## Post-Commit Steps (REQUIRED)
 
@@ -51,13 +85,13 @@ After committing and pushing version changes:
 
 1. **Create Git Tag**:
    ```bash
-   git tag -a v0.0.Xa -m "Release v0.0.Xa: Brief description of changes"
-   git push origin v0.0.Xa
+   git tag -a v0.1.Xa -m "Release v0.1.Xa: Brief description of changes"
+   git push origin v0.1.Xa
    ```
 
 2. **Create GitHub Release** (CRITICAL - required for "Check for Updates" feature):
    ```bash
-   gh release create v0.0.Xa --title "HPM v0.0.Xa - Feature Name" --notes "## Release Notes..."
+   gh release create v0.1.Xa --title "HPM v0.1.Xa - Feature Name" --notes "## Release Notes..."
    ```
    See "GitHub Release Procedure" section below for detailed template and instructions.
 
@@ -88,24 +122,24 @@ After committing and pushing version changes:
 
 2. Create the release from your tag:
    ```bash
-   gh release create v0.0.Xa --title "HPM v0.0.Xa - Feature Name" --notes "Release description..."
+   gh release create v0.1.Xa --title "HPM v0.1.Xa - Feature Name" --notes "Release description..."
    ```
 
 3. Use backtick-n (\`n) for newlines in PowerShell:
    ```powershell
-   gh release create v0.1.5a --title "HPM v0.1.5a - Get Latest Updates Feature" --notes "## Release Notes\`n\`nFeature description...\`n\`n### Changes\`n- Change 1\`n- Change 2"
+   gh release create v0.1.7c --title "HPM v0.1.7c - UI Improvements" --notes "## Release Notes`n`nFeature description...`n`n### Changes`n- Change 1`n- Change 2"
    ```
 
 4. Verify the release was created:
    ```bash
-   gh release view v0.0.Xa
+   gh release view v0.1.Xa
    ```
 
 #### Option 2: Using GitHub Web Interface
 
 1. Navigate to: `https://github.com/juren53/HST-Metadata/releases/new`
 
-2. **Choose a tag**: Select your tag (e.g., `v0.1.5a`) from dropdown
+2. **Choose a tag**: Select your tag (e.g., `v0.1.7c`) from dropdown
 
 3. **Release title**: Format as `HPM vX.X.Xa - Feature Name`
 
@@ -166,8 +200,17 @@ After creating the release:
 ### Important Notes
 
 - Create release IMMEDIATELY after pushing tag
-- Use same version number as tag (v0.0.Xa)
+- Use same version number as tag (v0.1.Xa)
 - Include comprehensive release notes from CHANGELOG.md
 - Test the "Check for Updates" feature after creating release
 - Release enables automatic update detection for all users
 
+## Future Consideration: Centralized Version
+
+To reduce manual updates in the future, consider creating a single source of truth for version info:
+
+1. Have UI components read from `__init__.__version__` at runtime instead of hardcoding strings
+2. Use a build script to update version strings automatically
+3. This would reduce the checklist from 11+ locations to just 2-3
+
+This is noted for potential future refactoring but is not required for current workflow.
