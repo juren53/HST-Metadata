@@ -31,6 +31,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Step now properly shows as "Complete" instead of "Pending" in main window.
   - **Files Modified**: `gui/dialogs/step2_dialog.py`
 
+### Changed
+
+- **Get Latest Updates Dialog** - Simplified language to be more user-friendly.
+  - Removed git-specific terminology ("pull", "commit(s)", "branch") throughout all update dialogs.
+  - Main dialog now shows "An update is available" instead of "Updates are available: X commit(s) available".
+  - Displays both current version and available update version (e.g., "Update available: v0.1.7g").
+  - Changed "pull the latest updates" to "download the latest update".
+  - Progress dialog now says "Downloading latest update" instead of "Pulling latest updates".
+  - Success message changed to "Successfully downloaded and installed" instead of "Successfully pulled".
+  - Simplified statistics display to show only "X file(s) updated" instead of detailed insertions/deletions.
+  - Uncommitted changes warning now says "unsaved changes" instead of "uncommitted changes".
+  - Already up-to-date message no longer mentions branch or repository details.
+  - Added `get_remote_version()` method to fetch version from remote repository.
+  - **Files Modified**: `gui/main_window.py`, `utils/git_updater.py`
+
 ### Added
 
 - **Step 4 Directory Memory** - File dialog now remembers the last selected directory.

@@ -149,6 +149,33 @@ class GitUpdater:
         exit_code, _, _ = self._run_git_command(['fetch', 'origin'])
         return exit_code == 0
     
+    def get_remote_version(self) -> Optional[str]:
+        """
+        Get the version from the remote repository's __init__.py
+        
+        Returns:
+            Version string or None if unable to determine
+        """
+        branch = self.get_current_branch()
+        
+        # Get __init__.py content from remote
+        exit_code, stdout, _ = self._run_git_command(
+            ['show', f'origin/{branch}:__init__.py']
+        )
+        
+        if exit_code == 0:
+            # Parse the __version__ line
+            for line in stdout.split('\n'):
+                if line.strip().startswith('__version__'):
+                    # Extract version from: __version__ = "0.1.7f"
+                    try:
+                        version = line.split('=')[1].strip().strip('"').strip("'")
+                        return version
+                    except (IndexError, AttributeError):
+                        pass
+        
+        return None
+    
     def check_for_updates(self) -> Tuple[bool, str]:
         """
         Check if updates are available from remote
