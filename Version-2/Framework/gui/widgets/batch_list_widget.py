@@ -67,7 +67,7 @@ class BatchListWidget(QWidget):
 
         # Version and date/time stamp (right-aligned, 10pt font)
         version_label = QLabel(
-            "<span style='font-size: 10pt;'>v0.1.5e | 2026-01-15 13:53 CST</span>"
+            "<span style='font-size: 10pt;'>v0.1.7c | 2026-01-18 10:30 CST</span>"
         )
         version_label.setAlignment(
             Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
