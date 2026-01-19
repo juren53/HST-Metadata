@@ -10,6 +10,10 @@ from pathlib import Path
 from typing import Optional
 from logging.handlers import RotatingFileHandler
 
+# Define custom success level
+SUCCESS_LEVEL = 25
+logging.addLevelName(SUCCESS_LEVEL, "SUCCESS")
+
 try:
     import colorama
     from colorama import Fore, Style
@@ -20,24 +24,55 @@ except ImportError:
 
 
 class ColoredFormatter(logging.Formatter):
-    """Custom formatter that adds colors to log levels."""
+    """Custom formatter that adds colors and emojis to log levels."""
     
     COLORS = {
         'DEBUG': Fore.CYAN if HAS_COLORAMA else '',
-        'INFO': Fore.GREEN if HAS_COLORAMA else '',
+        'INFO': Fore.BLUE if HAS_COLORAMA else '', # Changed INFO to blue for better differentiation from SUCCESS
+        'SUCCESS': Fore.GREEN + Style.BRIGHT if HAS_COLORAMA else '', # Brighter green for success
         'WARNING': Fore.YELLOW if HAS_COLORAMA else '',
         'ERROR': Fore.RED if HAS_COLORAMA else '',
         'CRITICAL': Fore.RED + Style.BRIGHT if HAS_COLORAMA else '',
     }
+
+    EMOJIS = {
+        'DEBUG': 'âš¡ï¸ ',    # Zap
+        'INFO': 'ðŸ”¹',     # Blue dot
+        'SUCCESS': 'âœ…',  # Check mark
+        'WARNING': 'âš ï¸ ', # Warning sign
+        'ERROR': 'âŒ',     # Red X
+        'CRITICAL': 'âŒ', # Red X
+    }
     
     def format(self, record):
-        log_color = self.COLORS.get(record.levelname, '')
+        # Store original values
+        original_levelname = record.levelname
+        original_msg = record.msg
+
+        # Prepare component name - use record.name (logger name)
+        # Split by '.' to get the last part of the module name (e.g., 'hstl_framework' from 'hstl_framework.main')
+        component_name = record.name.split('.')[-1] if record.name else ""
+        if component_name == "hstl_framework": # Shorten for main logger
+            component = "[HPM]"
+        elif component_name:
+            component = f"[{component_name.capitalize()}]" # Capitalize for consistency
+        else:
+            component = ""
+
+        # Get emoji and color based on level name
+        emoji = self.EMOJIS.get(original_levelname, '')
+        log_color = self.COLORS.get(original_levelname, '')
         reset = Style.RESET_ALL if HAS_COLORAMA else ''
+
+        # Construct the message with emoji and component, apply color to the whole message
+        if component:
+            record.msg = f"{emoji} {component} {original_msg}"
+        else:
+            record.msg = f"{emoji} {original_msg}" # No component if logger name is empty
         
-        # Apply color to the level name
-        record.levelname = f"{log_color}{record.levelname}{reset}"
-        
-        return super().format(record)
+        # Apply color to the entire message string
+        formatted_message = super().format(record)
+        return f"{log_color}{formatted_message}{reset}"
 
 
 def setup_logger(name: str = 'hstl_framework', 
@@ -49,7 +84,7 @@ def setup_logger(name: str = 'hstl_framework',
     
     Args:
         name: Logger name
-        level: Logging level ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL')
+        level: Logging level ('DEBUG', 'INFO', 'SUCCESS', 'WARNING', 'ERROR', 'CRITICAL')
         log_file: Path to log file (optional)
         format_str: Custom format string (optional)
         
@@ -64,7 +99,7 @@ def setup_logger(name: str = 'hstl_framework',
     from utils.log_manager import LogManager
     log_manager = LogManager.instance()
     if log_manager.enabled:
-        logger.setLevel(getattr(logging, level.upper(), logging.INFO))
+        logger.setLevel(_get_logging_level(level))
     # else: keep the CRITICAL+1 level set by LogManager
 
     # Clear existing handlers EXCEPT LogManager handlers (preserve GUI and batch logging)
@@ -85,7 +120,7 @@ def setup_logger(name: str = 'hstl_framework',
     
     # Console handler with colors
     console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(getattr(logging, level.upper(), logging.INFO))
+    console_handler.setLevel(_get_logging_level(level)) # Use new helper
     
     if HAS_COLORAMA:
         console_formatter = ColoredFormatter(format_str)
@@ -134,6 +169,29 @@ def get_logger(name: str = 'hstl_framework') -> logging.Logger:
         Logger instance
     """
     return logging.getLogger(name)
+
+def _get_logging_level(level_name: str) -> int:
+    """Resolve a logging level name to its integer value."""
+    if level_name.upper() == "SUCCESS":
+        return SUCCESS_LEVEL
+    return getattr(logging, level_name.upper(), logging.INFO)
+
+def setup_logger(name: str = 'hstl_framework', 
+                 level: str = 'INFO',
+                 log_file: Optional[Path] = None,
+                 format_str: Optional[str] = None) -> logging.Logger:
+    """
+    Set up a logger with console and optional file output.
+    
+    Args:
+        name: Logger name
+        level: Logging level ('DEBUG', 'INFO', 'SUCCESS', 'WARNING', 'ERROR', 'CRITICAL')
+        log_file: Path to log file (optional)
+        format_str: Custom format string (optional)
+        
+    Returns:
+        Configured logger instance
+    """
 
 
 class BatchContextAdapter(logging.LoggerAdapter):
