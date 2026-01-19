@@ -56,6 +56,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Improves workflow for users repeatedly copying from the same source location.
   - **Files Modified**: `gui/dialogs/step4_dialog.py`
 
+- **Update Dialog Test Script** - Created test utility for previewing update dialogs.
+  - New `test_update_dialog.py` script allows testing all update dialog scenarios without git operations.
+  - Test buttons for: Update Available, Already Up-to-Date, Uncommitted Changes, Update Complete, Update Failed.
+  - No version modifications or git operations required for testing.
+  - **Files Created**: `test_update_dialog.py`
+
+- **Update Testing Documentation** - Comprehensive guide for testing update features.
+  - Documents 4 different methods for testing update dialogs and flows.
+  - Includes best practices, testing checklist, and troubleshooting tips.
+  - Explains how to test without continuous version releases.
+  - **Files Created**: `notes/TESTING_HPM-update-route.md`
+
 ---
 
 ## HPM [0.1.7e] - 2026-01-19
