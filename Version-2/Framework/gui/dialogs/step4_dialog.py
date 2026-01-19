@@ -329,14 +329,14 @@ class Step4Dialog(QDialog):
         try:
             data_directory = self.config_manager.get("project.data_directory", "")
             if not data_directory:
-                self.output_text.append("⚠️  Error: Project data directory not set")
+                self.log_manager.warning("Error: Project data directory not set", batch_id=self.batch_id, step=4)
                 return
 
             # TIFF directory
             tiff_dir = Path(data_directory) / "input" / "tiff"
 
             if not tiff_dir.exists():
-                self.output_text.append(f"⚠️  TIFF directory not found: {tiff_dir}")
+                self.log_manager.warning(f"TIFF directory not found: {tiff_dir}", batch_id=self.batch_id, step=4)
                 self.tiff_count_label.setText("TIFF files: Directory not found")
                 return
 
@@ -349,7 +349,7 @@ class Step4Dialog(QDialog):
             self.tiff_count_label.setText(f"TIFF files: {tiff_count}")
 
             if tiff_count == 0:
-                self.output_text.append("⚠️  No TIFF files found")
+                self.log_manager.warning("No TIFF files found", batch_id=self.batch_id, step=4)
                 return
 
             # Don't check bit depth during init - it's too slow and blocks the GUI
@@ -358,24 +358,28 @@ class Step4Dialog(QDialog):
                 f"16-bit TIFFs: Click 'Analyze & Convert' to check"
             )
 
-            self.output_text.append("File count complete.")
-            self.output_text.append(f"Total TIFF files: {tiff_count}")
-            self.output_text.append("")
-            self.output_text.append("Click 'Analyze & Convert' to:")
-            self.output_text.append("  1. Analyze TIFF bit depth")
-            self.output_text.append("  2. Identify any 16-bit TIFFs")
-            self.output_text.append(
-                "  3. Convert 16-bit TIFFs to 8-bit (with confirmation)"
+            self.log_manager.info("File count complete.", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"Total TIFF files: {tiff_count}", batch_id=self.batch_id, step=4)
+            self.log_manager.info("", batch_id=self.batch_id, step=4)
+            self.log_manager.info("Click 'Analyze & Convert' to:", batch_id=self.batch_id, step=4)
+            self.log_manager.info("  1. Analyze TIFF bit depth", batch_id=self.batch_id, step=4)
+            self.log_manager.info("  2. Identify any 16-bit TIFFs", batch_id=self.batch_id, step=4)
+            self.log_manager.info(
+                "  3. Convert 16-bit TIFFs to 8-bit (with confirmation)",
+                batch_id=self.batch_id,
+                step=4
             )
-            self.output_text.append("")
-            self.output_text.append(
-                "⚠️  Warning: Conversion will OVERWRITE the original 16-bit files!"
+            self.log_manager.info("", batch_id=self.batch_id, step=4)
+            self.log_manager.warning(
+                "Conversion will OVERWRITE the original 16-bit files!",
+                batch_id=self.batch_id,
+                step=4
             )
 
             self.convert_btn.setEnabled(True)
 
         except Exception as e:
-            self.output_text.append(f"⚠️  Error during analysis: {str(e)}")
+            self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=4)
 
     def _start_conversion(self):
         """Start the bit depth conversion process."""
@@ -384,8 +388,8 @@ class Step4Dialog(QDialog):
         )
         try:
             # First, analyze files to find 16-bit TIFFs
-            self.output_text.append("\n" + "=" * 50)
-            self.output_text.append("Analyzing TIFF bit depth...")
+            self.log_manager.info("=" * 50, batch_id=self.batch_id, step=4)
+            self.log_manager.info("Analyzing TIFF bit depth...", batch_id=self.batch_id, step=4)
             self.convert_btn.setEnabled(False)
 
             data_directory = self.config_manager.get("project.data_directory", "")
@@ -430,17 +434,19 @@ class Step4Dialog(QDialog):
 
             self.bit16_count_label.setText(f"16-bit TIFFs: {bit16_count}")
 
-            self.output_text.append("")
-            self.output_text.append("Analysis complete.")
-            self.output_text.append(f"Total TIFF files: {len(tiff_files)}")
-            self.output_text.append(f"16-bit TIFFs found: {bit16_count}")
+            self.log_manager.info("", batch_id=self.batch_id, step=4)
+            self.log_manager.info("Analysis complete.", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"Total TIFF files: {len(tiff_files)}", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"16-bit TIFFs found: {bit16_count}", batch_id=self.batch_id, step=4)
 
             if bit16_count == 0:
                 # No conversion needed, just mark as complete
-                self.output_text.append(
-                    "\n✓ No 16-bit TIFFs found. All files are already 8-bit or less."
+                self.log_manager.success(
+                    "No 16-bit TIFFs found. All files are already 8-bit or less.",
+                    batch_id=self.batch_id,
+                    step=4,
                 )
-                self.output_text.append("Marking step as complete...")
+                self.log_manager.info("Marking step as complete...", batch_id=self.batch_id, step=4)
 
                 self.config_manager.update_step_status(4, True)
                 if self.config_manager.config_path:
@@ -466,12 +472,12 @@ class Step4Dialog(QDialog):
                 return
 
             # Show list of 16-bit files to be converted
-            self.output_text.append("")
-            self.output_text.append("16-bit TIFFs found (will be converted):")
-            self.output_text.append("-" * 50)
+            self.log_manager.info("", batch_id=self.batch_id, step=4)
+            self.log_manager.info("16-bit TIFFs found (will be converted):", batch_id=self.batch_id, step=4)
+            self.log_manager.info("-" * 50, batch_id=self.batch_id, step=4)
             for filename, bits_per_sample in bit16_list:
-                self.output_text.append(f"  • {filename} ({bits_per_sample})")
-            self.output_text.append("-" * 50)
+                self.log_manager.info(f"  • {filename} ({bits_per_sample})", batch_id=self.batch_id, step=4)
+            self.log_manager.info("-" * 50, batch_id=self.batch_id, step=4)
 
             # Ask for confirmation
             reply = QMessageBox.warning(
@@ -486,7 +492,7 @@ class Step4Dialog(QDialog):
 
             if reply != QMessageBox.StandardButton.Yes:
                 self.convert_btn.setEnabled(True)
-                self.output_text.append("\nConversion cancelled by user.")
+                self.log_manager.info("Conversion cancelled by user.", batch_id=self.batch_id, step=4)
                 return
 
             report_dir = Path(data_directory) / "reports"
@@ -495,8 +501,8 @@ class Step4Dialog(QDialog):
             self.progress_bar.setVisible(True)
             self.progress_bar.setRange(0, 0)  # Indeterminate
 
-            self.output_text.append("")
-            self.output_text.append("Starting bit depth conversion...")
+            self.log_manager.info("", batch_id=self.batch_id, step=4)
+            self.log_manager.info("Starting bit depth conversion...", batch_id=self.batch_id, step=4)
 
             # Start conversion thread
             self.conversion_thread = BitDepthConversionThread(
@@ -508,11 +514,10 @@ class Step4Dialog(QDialog):
             self.conversion_thread.start()
 
         except Exception as e:
-            self.output_text.append(f"\n❌ Error: {str(e)}")
-            self.output_text.append(f"\nTraceback: {e.__class__.__name__}")
+            self.log_manager.critical(f"Error: {str(e)}", batch_id=self.batch_id, step=4)
+            self.log_manager.critical(f"Traceback: {e.__class__.__name__}", batch_id=self.batch_id, step=4)
             import traceback
-
-            self.output_text.append(traceback.format_exc())
+            self.log_manager.critical(traceback.format_exc(), batch_id=self.batch_id, step=4)
             self.convert_btn.setEnabled(True)
 
             QMessageBox.critical(
@@ -521,7 +526,7 @@ class Step4Dialog(QDialog):
 
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.output_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=4)
 
     def _on_finished(self, success, stats):
         """Handle conversion completion."""
@@ -529,12 +534,12 @@ class Step4Dialog(QDialog):
         self.convert_btn.setEnabled(True)
 
         if success:
-            self.output_text.append("\n✅ Bit depth conversion completed successfully!")
-            self.output_text.append(f"\nSummary:")
-            self.output_text.append(f"  Total TIFF files: {stats['tiff_files_found']}")
-            self.output_text.append(f"  16-bit TIFFs found: {stats['bit16_found']}")
-            self.output_text.append(f"  Converted to 8-bit: {stats['converted']}")
-            self.output_text.append(f"  Failed: {stats['failed']}")
+            self.log_manager.success("Bit depth conversion completed successfully!", batch_id=self.batch_id, step=4)
+            self.log_manager.info("Summary:", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"  Total TIFF files: {stats['tiff_files_found']}", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"  16-bit TIFFs found: {stats['bit16_found']}", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"  Converted to 8-bit: {stats['converted']}", batch_id=self.batch_id, step=4)
+            self.log_manager.info(f"  Failed: {stats['failed']}", batch_id=self.batch_id, step=4)
 
             # Mark step 4 as completed
             self.config_manager.update_step_status(4, True)
@@ -554,15 +559,17 @@ class Step4Dialog(QDialog):
                 step=4,
             )
 
+            message = f"Bit depth conversion completed successfully!\n\n" \
+                      f"Total files: {stats['tiff_files_found']}\n" \
+                      f"16-bit TIFFs found: {stats['bit16_found']}\n" \
+                      f"Converted to 8-bit: {stats['converted']}\n" \
+                      f"Failed: {stats['failed']}\n\n" \
+                      f"Step 4 is now marked as complete."
+            self.log_manager.success(f"Conversion Complete: {message}", batch_id=self.batch_id, step=4)
             QMessageBox.information(
                 self,
                 "Conversion Complete",
-                f"Bit depth conversion completed successfully!\n\n"
-                f"Total files: {stats['tiff_files_found']}\n"
-                f"16-bit TIFFs found: {stats['bit16_found']}\n"
-                f"Converted to 8-bit: {stats['converted']}\n"
-                f"Failed: {stats['failed']}\n\n"
-                f"Step 4 is now marked as complete.",
+                message,
             )
 
             self.accept()
@@ -570,7 +577,7 @@ class Step4Dialog(QDialog):
             self.log_manager.step_error(
                 4, "Bit depth conversion failed", batch_id=self.batch_id
             )
-            self.output_text.append("\n❌ Bit depth conversion failed.")
+            self.log_manager.error("Bit depth conversion failed.", batch_id=self.batch_id, step=4)
 
     def _on_error(self, error_msg):
         """Handle conversion errors."""
@@ -578,10 +585,11 @@ class Step4Dialog(QDialog):
         self.convert_btn.setEnabled(True)
 
         self.log_manager.step_error(4, error_msg, batch_id=self.batch_id)
-        self.output_text.append(f"\n❌ Error: {error_msg}")
-
+        
+        message = f"Bit depth conversion failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Conversion Error: {message}", batch_id=self.batch_id, step=4)
         QMessageBox.critical(
-            self, "Conversion Error", f"Bit depth conversion failed:\n\n{error_msg}"
+            self, "Conversion Error", message
         )
 
     def _copy_raw_tiffs(self):
@@ -610,23 +618,25 @@ class Step4Dialog(QDialog):
             tiff_files.extend(source_path.glob(ext))
         
         if not tiff_files:
+            self.log_manager.warning("No TIFF files found in selected directory.", batch_id=self.batch_id, step=4)
             QMessageBox.warning(self, "No TIFF Files", "No TIFF files found in selected directory.")
             return
         
         # Copy with progress feedback in output_text
-        self.output_text.append(f"--- Copying TIFF files from {source_dir} ---")
+        self.log_manager.info(f"--- Copying TIFF files from {source_dir} ---", batch_id=self.batch_id, step=4)
         
         try:
             for tiff_file in tiff_files:
                 dest_file = dest_path / tiff_file.name
                 shutil.copy2(tiff_file, dest_file)  # Overwrites existing files
-                self.output_text.append(f"Copied: {tiff_file.name}")
+                self.log_manager.info(f"Copied: {tiff_file.name}", batch_id=self.batch_id, step=4)
             
-            self.output_text.append(f"--- Copy complete: {len(tiff_files)} files copied ---")
+            self.log_manager.info(f"--- Copy complete: {len(tiff_files)} files copied ---", batch_id=self.batch_id, step=4)
             
             # Refresh the file analysis to show new files
             self._analyze_files()
             
         except Exception as e:
-            self.output_text.append(f"❌ Copy failed: {str(e)}")
-            QMessageBox.critical(self, "Copy Error", f"Failed to copy TIFF files:\n\n{str(e)}")
+            error_message = f"Failed to copy TIFF files:\n\n{str(e)}"
+            self.log_manager.critical(f"Copy Error: {error_message}", batch_id=self.batch_id, step=4)
+            QMessageBox.critical(self, "Copy Error", error_message)

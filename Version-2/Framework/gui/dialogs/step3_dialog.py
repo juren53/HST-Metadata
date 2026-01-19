@@ -221,19 +221,21 @@ class Step3Dialog(QDialog):
         
         main_layout.addLayout(button_layout)
         
-        self.status_text.append("Ready to scan export.csv for mojibake.")
+        self.log_manager.info("Ready to scan export.csv for mojibake.", batch_id=self.batch_id, step=3)
         
     def _start_scan(self):
         """Start the mojibake detection scan."""
         self.log_manager.step_start(3, "Unicode Filtering", batch_id=self.batch_id)
         data_directory = self.config_manager.get('project.data_directory', '')
         if not data_directory:
+            self.log_manager.error("Project data directory not set", batch_id=self.batch_id, step=3)
             QMessageBox.warning(self, "Error", "Project data directory not set")
             return
         
         csv_path = Path(data_directory) / 'output' / 'csv' / 'export.csv'
         
         if not csv_path.exists():
+            self.log_manager.error(f"CSV file not found: {csv_path}", batch_id=self.batch_id, step=3)
             QMessageBox.warning(self, "Error", f"CSV file not found: {csv_path}")
             return
         
@@ -242,8 +244,8 @@ class Step3Dialog(QDialog):
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate
         
-        self.status_text.append("\n" + "="*50)
-        self.status_text.append("Starting mojibake scan...")
+        self.log_manager.info("="*50, batch_id=self.batch_id, step=3)
+        self.log_manager.info("Starting mojibake scan...", batch_id=self.batch_id, step=3)
         
         # Start detection thread
         self.detection_thread = MojibakeDetectionThread(str(csv_path))
@@ -254,7 +256,7 @@ class Step3Dialog(QDialog):
         
     def _on_progress(self, message):
         """Handle progress messages."""
-        self.status_text.append(message)
+        self.log_manager.info(message, batch_id=self.batch_id, step=3)
         
     def _on_scan_finished(self, success, problematic_records):
         """Handle scan completion."""
@@ -267,8 +269,8 @@ class Step3Dialog(QDialog):
         self.problematic_records = problematic_records
         
         if problematic_records:
-            self.status_text.append(f"\nFound {len(problematic_records)} record(s) with mojibake.")
-            self.status_text.append("Review and fix the issues below.")
+            self.log_manager.warning(f"Found {len(problematic_records)} record(s) with mojibake.", batch_id=self.batch_id, step=3)
+            self.log_manager.info("Review and fix the issues below.", batch_id=self.batch_id, step=3)
             
             # Show review section
             self.review_group.setVisible(True)
@@ -278,7 +280,7 @@ class Step3Dialog(QDialog):
             self.current_record_index = 0
             self._display_current_record()
         else:
-            self.status_text.append("\n✅ No mojibake detected! CSV is clean.")
+            self.log_manager.success("No mojibake detected! CSV is clean.", batch_id=self.batch_id, step=3)
             
             # Mark step as complete
             self.config_manager.update_step_status(3, True)
@@ -291,11 +293,13 @@ class Step3Dialog(QDialog):
             self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
             self.log_manager.info("Step 3: No mojibake detected", batch_id=self.batch_id, step=3)
 
+            message = "No mojibake detected in the CSV file.\n\n" \
+                      "Step 3 is now marked as complete."
+            self.log_manager.info(f"Scan Complete: {message}", batch_id=self.batch_id, step=3)
             QMessageBox.information(
                 self,
                 "Scan Complete",
-                "No mojibake detected in the CSV file.\n\n"
-                "Step 3 is now marked as complete."
+                message
             )
 
             self.accept()
@@ -306,9 +310,10 @@ class Step3Dialog(QDialog):
         self.scan_btn.setEnabled(True)
 
         self.log_manager.step_error(3, error_msg, batch_id=self.batch_id)
-        self.status_text.append(f"\n❌ Error: {error_msg}")
-
-        QMessageBox.critical(self, "Scan Error", f"Mojibake scan failed:\n\n{error_msg}")
+        
+        message = f"Mojibake scan failed:\n\n{error_msg}"
+        self.log_manager.critical(f"Scan Error: {message}", batch_id=self.batch_id, step=3)
+        QMessageBox.critical(self, "Scan Error", message)
     
     def _display_current_record(self):
         """Display the current problematic record."""
@@ -390,10 +395,12 @@ class Step3Dialog(QDialog):
             self.edits[row_num] = {}
         self.edits[row_num][field] = suggested_value
         
+        message = f"Suggested fix for '{field}' in row {row_num} will be applied."
+        self.log_manager.info(f"Suggestion Accepted: {message}", batch_id=self.batch_id, step=3)
         QMessageBox.information(
             self,
             "Suggestion Accepted",
-            f"Suggested fix for '{field}' in row {row_num} will be applied."
+            message
         )
     
     def _custom_edit(self, row_num, field, original, suggested):
@@ -412,23 +419,27 @@ class Step3Dialog(QDialog):
                 self.edits[row_num] = {}
             self.edits[row_num][field] = text
             
+            message = f"Your custom fix for '{field}' in row {row_num} will be applied."
+            self.log_manager.info(f"Custom Edit Saved: {message}", batch_id=self.batch_id, step=3)
             QMessageBox.information(
                 self,
                 "Custom Edit Saved",
-                f"Your custom fix for '{field}' in row {row_num} will be applied."
+                message
             )
     
     def _apply_fixes(self):
         """Apply all fixes to the CSV file."""
+        apply_message = f"Apply fixes to {len(self.edits)} record(s)?\n\nThis will update the export.csv file."
+        self.log_manager.info(f"User confirmation requested for applying fixes: {apply_message}", batch_id=self.batch_id, step=3)
         reply = QMessageBox.question(
             self,
             "Apply Fixes",
-            f"Apply fixes to {len(self.edits)} record(s)?\n\n"
-            "This will update the export.csv file.",
+            apply_message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
         if reply != QMessageBox.StandardButton.Yes:
+            self.log_manager.info("User cancelled applying fixes.", batch_id=self.batch_id, step=3)
             return
         
         try:
@@ -469,30 +480,35 @@ class Step3Dialog(QDialog):
             self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
             self.log_manager.info(f"Step 3: Applied {len(self.edits)} mojibake fix(es)", batch_id=self.batch_id, step=3)
 
+            success_message = f"Successfully applied {len(self.edits)} fix(es) to the CSV file.\n\nStep 3 is now marked as complete."
+            self.log_manager.success(f"Fixes Applied: {success_message}", batch_id=self.batch_id, step=3)
             QMessageBox.information(
                 self,
                 "Fixes Applied",
-                f"Successfully applied {len(self.edits)} fix(es) to the CSV file.\n\n"
-                "Step 3 is now marked as complete."
+                success_message
             )
 
             self.accept()
 
         except Exception as e:
             self.log_manager.step_error(3, str(e), batch_id=self.batch_id, exc_info=True)
+            error_message = f"Failed to apply fixes:\n\n{str(e)}"
+            self.log_manager.critical(f"Error applying fixes: {error_message}", batch_id=self.batch_id, step=3)
             QMessageBox.critical(
                 self,
                 "Error",
-                f"Failed to apply fixes:\n\n{str(e)}"
+                error_message
             )
     
     def _skip_fixes(self):
         """Skip fixes and mark step complete."""
+        skip_message = "Skip mojibake fixes and mark step as complete?\n\n" \
+                       "The CSV file will not be modified."
+        self.log_manager.info(f"User confirmation requested for skipping fixes: {skip_message}", batch_id=self.batch_id, step=3)
         reply = QMessageBox.question(
             self,
             "Skip Fixes",
-            "Skip mojibake fixes and mark step as complete?\n\n"
-            "The CSV file will not be modified.",
+            skip_message,
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
@@ -508,6 +524,8 @@ class Step3Dialog(QDialog):
             self.log_manager.step_complete(3, "Unicode Filtering", batch_id=self.batch_id)
             self.log_manager.info("Step 3: Skipped mojibake fixes", batch_id=self.batch_id, step=3)
             self.accept()
+        else:
+            self.log_manager.info("User cancelled skipping fixes.", batch_id=self.batch_id, step=3)
     
     def _generate_report(self):
         """Generate a report of mojibake fixes."""
@@ -547,7 +565,7 @@ class Step3Dialog(QDialog):
                 
                 f.write("\n" + "=" * 70 + "\n")
             
-            self.status_text.append(f"\n✓ Report saved: {report_filename}")
+            self.log_manager.success(f"Report saved: {report_filename}", batch_id=self.batch_id, step=3)
             
         except Exception as e:
-            self.status_text.append(f"\n⚠️  Failed to generate report: {str(e)}")
+            self.log_manager.warning(f"Failed to generate report: {str(e)}", batch_id=self.batch_id, step=3)

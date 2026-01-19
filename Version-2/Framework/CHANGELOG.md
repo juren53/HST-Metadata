@@ -5,6 +5,22 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7e] - 2026-01-19
+
+### Changed
+
+- **Centralized Logging - Phase 2** - Enhanced logging across core components and all step dialogs.
+  - Replaced direct `print()` statements and `QMessageBox` calls with new centralized `log_manager` methods in `hstl_framework.py` and all `gui/dialogs/step*.py` files.
+  - Updated `core/pipeline.py` and `steps/base_step.py` to use the new `success` logging level for completion messages.
+  - The new `ColoredFormatter` now handles emojis, colors, and component names, ensuring consistent log output.
+- **Improved Error Handling** - Added specific `try...except` block for `FileNotFoundError` during project initialization in `hstl_framework.py` to provide a more user-friendly error message.
+
+### Added
+
+- **SUCCESS Logging Level** - Added a custom `SUCCESS` logging level for more semantic logging of successful operations.
+
+---
+
 ## HPM [0.1.7d] - 2026-01-18 20:15 CST
 
 ### Changed
@@ -674,7 +690,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       1. Activate WinPython environment via activate.bat
       2. Navigate to Framework directory using cd
       3. Launch GUI application using python gui\hstl_gui.py
-    - Environment variable usage explained (%USERPROFILE%)
+    - Environment variable usage explained (`%USERPROFILE%`)
     - Single-line command alternative provided for advanced users
   - **Updated References**:
     - Added launcher documentation link to "Need Help?" section
@@ -738,7 +754,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Menu Readability Issue** - Fixed dropdown menu text visibility in Light and Dark themes (Sat 03 Jan 2026 07:15:00 PM CST)
   - **Root Cause**: QMenu and QMenuBar widgets weren't properly styled by existing theme system
-  - **Problem**: 
+  - **Problem**:
     - Light Theme caused white text on white background (unreadable)
     - Dark Theme caused black text on dark background (unreadable)
     - Menus inherited system colors that conflicted with custom theme palettes
@@ -1139,7 +1155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Warning Messages** - Captured Python warnings to system log file
   
-  - Redirects warnings to ~/.hstl_photo_framework/logs/warnings.log
+  - Redirects warnings to `~/.hstl_photo_framework/logs/warnings.log`
   - Keeps console output clean
   - Preserves warnings for debugging
   - UTF-8 encoding with timestamps
@@ -1335,7 +1351,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **Review Button Windows Integration** - Fixed explorer command execution
-  - Added shell=True parameter to subprocess.run() calls
+  - Added `shell=True` parameter to `subprocess.run()` calls
   - Review buttons now properly open directories in Windows File Explorer
   - Fixed for Steps 2, 4, 5, 6, 7, and 8
   - Error handling for non-existent directories

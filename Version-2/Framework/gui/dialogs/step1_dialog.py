@@ -146,38 +146,42 @@ class Step1Dialog(QDialog):
                 batch_id=self.batch_id,
                 step=1,
             )
+            message = "Please select an Excel spreadsheet file."
+            self.log_manager.warning(f"File Required: {message}", batch_id=self.batch_id, step=1)
             QMessageBox.warning(
-                self, "File Required", "Please select an Excel spreadsheet file."
+                self, "File Required", message
             )
             return
 
         # Validate file extension
         if not source_path.lower().endswith((".xlsx", ".xls")):
+            message = "Please select an Excel file with .xlsx or .xls extension."
             self.log_manager.warning(
-                f"Step 1: Invalid file format - {source_path}",
+                f"Step 1: Invalid file format - {source_path}. {message}",
                 batch_id=self.batch_id,
                 step=1,
             )
             QMessageBox.warning(
                 self,
                 "Invalid File Format",
-                "Please select an Excel file with .xlsx or .xls extension.",
+                message,
             )
             return
 
         # Initialize file manager if needed
         if not self.file_manager:
             if not self.config_manager.get('project.data_directory'):
-                self.log_manager.error(
-                    "Step 1: No data directory found", batch_id=self.batch_id, step=1
-                )
-                QMessageBox.critical(
-                    self,
-                    "Configuration Error",
-                    "No project data directory found. Please create or select a project first.",
-                )
-                return
-
+                            self.log_manager.error(
+                                "Step 1: No data directory found", batch_id=self.batch_id, step=1
+                            )
+                            message = "No project data directory found. Please create or select a project first."
+                            self.log_manager.error(f"Configuration Error: {message}", batch_id=self.batch_id, step=1)
+                            QMessageBox.critical(
+                                self,
+                                "Configuration Error",
+                                message,
+                            )
+                            return
             self.file_manager = FileManager(self.config_manager.get('project.data_directory'))
 
         # Show progress
@@ -202,10 +206,12 @@ class Step1Dialog(QDialog):
                     batch_id=self.batch_id,
                     step=1,
                 )
+                error_message = f"The selected Excel file is not valid for HPM processing:\n\n{message}"
+                self.log_manager.error(f"Validation Error: {error_message}", batch_id=self.batch_id, step=1)
                 QMessageBox.critical(
                     self,
                     "Validation Error",
-                    f"The selected Excel file is not valid for HPM processing:\n\n{message}",
+                    error_message,
                 )
                 return
 
@@ -223,8 +229,10 @@ class Step1Dialog(QDialog):
                     batch_id=self.batch_id,
                     step=1,
                 )
+                error_message = f"Failed to copy Excel file:\n\n{message}"
+                self.log_manager.error(f"File Copy Error: {error_message}", batch_id=self.batch_id, step=1)
                 QMessageBox.critical(
-                    self, "File Copy Error", f"Failed to copy Excel file:\n\n{message}"
+                    self, "File Copy Error", error_message
                 )
                 return
 
@@ -262,14 +270,15 @@ class Step1Dialog(QDialog):
                     batch_id=self.batch_id,
                     step=1,
                 )
-
+                message = f"Excel spreadsheet processed successfully!\n\n" \
+                          f"Step 1 is now marked as complete.\n\n" \
+                          f"Source: {source_path}\n" \
+                          f"Target: {target_path}"
+                self.log_manager.success(f"Step 1 Complete: {message}", batch_id=self.batch_id, step=1)
                 QMessageBox.information(
                     self,
                     "Step 1 Complete",
-                    f"Excel spreadsheet processed successfully!\n\n"
-                    f"Step 1 is now marked as complete.\n\n"
-                    f"Source: {source_path}\n"
-                    f"Target: {target_path}",
+                    message,
                 )
 
                 self.accept()
@@ -277,10 +286,12 @@ class Step1Dialog(QDialog):
                 self.log_manager.error(
                     "Step 1: No config file path found", batch_id=self.batch_id, step=1
                 )
+                message = "Could not save configuration: No config file path found."
+                self.log_manager.warning(f"Save Error: {message}", batch_id=self.batch_id, step=1)
                 QMessageBox.warning(
                     self,
                     "Save Error",
-                    "Could not save configuration: No config file path found.",
+                    message,
                 )
 
         except Exception as e:
@@ -288,8 +299,10 @@ class Step1Dialog(QDialog):
             self.log_manager.step_error(
                 1, str(e), batch_id=self.batch_id, exc_info=True
             )
+            error_message = f"Failed to process Excel file:\n{str(e)}"
+            self.log_manager.critical(f"Unhandled Error: {error_message}", batch_id=self.batch_id, step=1)
             QMessageBox.critical(
-                self, "Error", f"Failed to process Excel file:\n{str(e)}"
+                self, "Error", error_message
             )
 
     def get_excel_paths(self):
