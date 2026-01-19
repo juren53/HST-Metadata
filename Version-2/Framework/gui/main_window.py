@@ -955,9 +955,9 @@ class MainWindow(QMainWindow):
         if has_changes:
             reply = QMessageBox.warning(
                 self,
-                "Uncommitted Changes",
-                f"You have uncommitted changes: {changes_desc}\n\n"
-                "Pulling updates may cause conflicts.\n\n"
+                "Uncommitted Changes Detected",
+                f"You have unsaved changes: {changes_desc}\n\n"
+                "Downloading the update may cause conflicts with your changes.\n\n"
                 "Do you want to continue anyway?",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No,
@@ -975,19 +975,28 @@ class MainWindow(QMainWindow):
             QMessageBox.information(
                 self,
                 "Already Up-to-Date",
-                f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
-                f"Current branch: {self.git_updater.get_current_branch()}",
+                f"You are already up to date with v{__version__}.\n\n"
+                "No updates are available at this time.",
             )
             return
 
+        # Get remote version
+        remote_version = self.git_updater.get_remote_version()
+        
+        # Build user-friendly message
+        if remote_version:
+            version_text = f"Current version: v{__version__}\n" \
+                          f"Update available: v{remote_version}\n\n"
+        else:
+            version_text = f"Current version: v{__version__}\n\n"
+        
         # Confirm before pulling
         reply = QMessageBox.question(
             self,
             "Get Latest Updates",
-            f"Updates are available: {message}\n\n"
-            f"Current version: v{__version__}\n"
-            f"Branch: {self.git_updater.get_current_branch()}\n\n"
-            "Do you want to pull the latest updates?",
+            f"An update is available.\n\n"
+            f"{version_text}"
+            "Do you want to download the latest update?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.Yes,
         )
@@ -1001,7 +1010,7 @@ class MainWindow(QMainWindow):
 
         # Show progress dialog
         self.progress_dialog = QProgressDialog(
-            "Pulling latest updates from GitHub...\n\nPlease wait...",
+            "Downloading latest update from GitHub...\n\nPlease wait...",
             "Cancel",
             0,
             0,
@@ -1009,11 +1018,11 @@ class MainWindow(QMainWindow):
         )
         self.progress_dialog.setWindowTitle("Updating HPM")
         self.progress_dialog.setWindowModality(Qt.WindowModality.WindowModal)
-        self.progress_dialog.setCancelButton(None)  # Can't cancel git pull mid-way
+        self.progress_dialog.setCancelButton(None)  # Can't cancel mid-way
         self.progress_dialog.show()
 
         # Update status
-        self.status_bar.showMessage("Pulling updates...")
+        self.status_bar.showMessage("Downloading update...")
 
         # Start background update
         self.git_update_thread = self.GitUpdateThread(self.git_updater)
@@ -1032,7 +1041,7 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(
                 self,
                 "Update Failed",
-                f"Failed to pull updates from GitHub:\n\n{result.error_message}\n\n"
+                f"Failed to download update from GitHub:\n\n{result.error_message}\n\n"
                 "Please resolve any issues and try again.",
             )
         elif result.already_up_to_date:
@@ -1041,8 +1050,8 @@ class MainWindow(QMainWindow):
             QMessageBox.information(
                 self,
                 "Already Up-to-Date",
-                f"You are already up to date with v{__version__} from the GitHub repository.\n\n"
-                f"Current branch: {self.git_updater.get_current_branch()}",
+                f"You are already up to date with v{__version__}.\n\n"
+                "No updates are available at this time.",
             )
         elif result.success:
             # Update successful
@@ -1051,20 +1060,15 @@ class MainWindow(QMainWindow):
             # Build statistics message
             stats = []
             if result.files_changed > 0:
-                stats.append(f"{result.files_changed} file(s) changed")
-            if result.insertions > 0:
-                stats.append(f"{result.insertions} insertion(s)")
-            if result.deletions > 0:
-                stats.append(f"{result.deletions} deletion(s)")
+                stats.append(f"{result.files_changed} file(s) updated")
 
-            stats_text = ", ".join(stats) if stats else "No changes"
+            stats_text = stats[0] if stats else "Update completed"
 
             QMessageBox.information(
                 self,
                 "Update Complete",
-                f"Successfully pulled latest updates from GitHub!\n\n"
-                f"Statistics: {stats_text}\n\n"
-                f"Current branch: {self.git_updater.get_current_branch()}\n\n"
+                f"Successfully downloaded and installed the latest update!\n\n"
+                f"{stats_text}\n\n"
                 "⚠️ Please restart HPM for changes to take effect.",
             )
         else:
