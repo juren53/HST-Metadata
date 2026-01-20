@@ -1,0 +1,59 @@
+================================================================================
+HPM EXIFTOOL SETUP - QUICK INSTRUCTIONS
+================================================================================
+
+IF YOU SEE THE ERROR: "ExifTool not found" or "ExifTool not in PATH"
+
+FOLLOW THESE STEPS:
+
+1. Open PowerShell or Command Prompt
+
+2. Navigate to the HPM Framework folder:
+   cd %USERPROFILE%\Projects\HST-Metadata\Photos\Version-2\Framework
+
+3. Run the setup script:
+   
+   For PowerShell:
+   .\setup_exiftool.ps1
+   
+   For Command Prompt:
+   setup_exiftool.bat
+
+4. RESTART your PowerShell/Command Prompt window
+
+5. Verify it worked:
+   exiftool -ver
+   
+   You should see: 13.27
+
+6. Run HPM again - the error should be gone!
+
+================================================================================
+
+TROUBLESHOOTING:
+
+Problem: "Cannot run scripts" error in PowerShell
+Solution: Run this instead:
+          powershell -ExecutionPolicy Bypass -File .\setup_exiftool.ps1
+
+Problem: Still getting "ExifTool not found" after restarting
+Solution: Make sure you CLOSED and REOPENED your terminal window
+
+Problem: Script can't find exiftool-13.27_64.zip
+Solution: Make sure you're in the Framework directory before running
+
+================================================================================
+
+WHAT THE SCRIPT DOES:
+
+- Extracts ExifTool to: %LOCALAPPDATA%\exiftool
+- Adds that folder to your PATH automatically
+- No admin rights needed
+- Safe for all users
+
+================================================================================
+
+For detailed help, see: EXIFTOOL_SETUP_README.md
+For quick reference, see: QUICKFIX_EXIFTOOL.md
+
+================================================================================

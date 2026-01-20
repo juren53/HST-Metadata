@@ -11,9 +11,17 @@ A comprehensive Python framework for managing the complete HSTL Photo Metadata P
 pip install -r requirements.txt
 
 # Install ExifTool (required for metadata operations)
+# Option 1: Automated setup (recommended)
+.\setup_exiftool.ps1    # PowerShell
+# OR
+setup_exiftool.bat      # Command Prompt
+
+# Option 2: Manual installation
 # Download from: https://exiftool.org/
 # Add to system PATH
 ```
+
+**Quick Fix for "ExifTool not found" errors:** See [QUICKFIX_EXIFTOOL.md](QUICKFIX_EXIFTOOL.md)
 
 See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions.
 
