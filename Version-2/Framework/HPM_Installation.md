@@ -197,6 +197,36 @@ You'll need this path later.
 
 ExifTool is essential for reading and writing metadata in image files.
 
+#### Option 1: Automated Installation (Recommended)
+
+The framework includes an automated setup script:
+
+- [ ] Navigate to the Framework directory in PowerShell or Command Prompt
+- [ ] Run **ONE** of the following:
+  
+  **PowerShell (Recommended):**
+  ```powershell
+  .\setup_exiftool.ps1
+  ```
+  
+  **Batch File:**
+  ```cmd
+  setup_exiftool.bat
+  ```
+
+- [ ] Follow the on-screen prompts
+- [ ] **Restart** your PowerShell/Command Prompt window after installation
+
+**Verify ExifTool Installation:**
+
+- [ ] Open a **new** Command Prompt or PowerShell (to reload PATH)
+- [ ] Run: `exiftool -ver`
+  - Expected output: Version number (e.g., `13.27`)
+
+#### Option 2: Manual Installation
+
+If the automated script doesn't work, you can install manually:
+
 **Download and Install:**
 
 - [ ] Visit [ExifTool Official Site](https://exiftool.org/)
