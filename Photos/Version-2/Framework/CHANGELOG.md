@@ -5,6 +5,31 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7g] - 2026-01-21
+
+### Added
+
+- **ExifTool Portable Version Planning** - Comprehensive planning documents for ExifTool distribution strategy
+  - **PLAN_ExifTool-creating-a-portable-version.md** - Original plan with three approaches:
+    1. Option 1: Use older standalone version (v12.60)
+    2. Option 2: Create custom PAR::Packer build
+    3. Option 3: Enhanced smart installer bundle
+  - Includes review and critique section analyzing each approach
+  - Documents root causes: MOTW issues, dependency shift, path dependencies
+  - **PLAN_ExifTool-creating-a-portable-version-v2.md** - Revised plan tailored for HPM use case
+    - Recommends ExifTool v12.60 standalone as primary solution
+    - HPM-specific analysis: IPTC metadata on historical TIFFs/JPEGs only
+    - Confirms v12.60 has full IPTC encoding support (stable since v6.86)
+    - Character encoding and mojibake handling section with detection scripts
+    - Expanded test plan (9 tests including encoding validation)
+    - Fallback options documented with activation triggers
+    - Annual review checklist for maintenance
+  - **Key Finding**: For HPM's use case, newer ExifTool features (camera RAW, video metadata) are not needed
+  - **Encoding Support**: `-charset iptc=CHARSET` commands fully supported in v12.60 for mojibake fixes
+  - **Files Created**: `notes/PLAN_ExifTool-creating-a-portable-version.md`, `notes/PLAN_ExifTool-creating-a-portable-version-v2.md`
+
+---
+
 ## HPM [0.1.7f] - 2026-01-19
 
 ### Fixed
