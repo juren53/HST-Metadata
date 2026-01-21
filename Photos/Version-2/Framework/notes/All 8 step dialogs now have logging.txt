@@ -1,0 +1,22 @@
+● Done! All 8 step dialogs now have logging. Here's the summary:
+
+  Files Modified:
+  - gui/dialogs/step2_dialog.py - CSV Conversion logging
+  - gui/dialogs/step3_dialog.py - Unicode Filtering logging
+  - gui/dialogs/step4_dialog.py - TIFF Bit Depth Conversion logging
+  - gui/dialogs/step6_dialog.py - JPEG Conversion logging
+  - gui/dialogs/step7_dialog.py - JPEG Resizing logging
+  - gui/dialogs/step8_dialog.py - Watermark Addition logging
+  - gui/widgets/step_widget.py - Pass batch_id to all step dialogs
+  - CHANGELOG.md - Updated with new features
+
+  What Each Step Now Logs:
+  - step_start() when the operation begins
+  - step_complete() on successful completion with summary stats
+  - step_error() on any failures with error details
+  - All logs include batch_id and step number for filtering
+
+  When you run through all 8 steps again, you'll see entries like:
+  [16:30:00] [INFO] [ju_08] [Step 2] Starting Step 2: CSV Conversion
+  [16:30:05] [INFO] [ju_08] [Step 2] Completed Step 2: CSV Conversion
+  [16:30:10] [INFO] [ju_08] [Step 3] Starting Step 3: Unicode Filtering
