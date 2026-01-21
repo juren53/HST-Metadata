@@ -36,9 +36,6 @@ PyExifTool>=0.5.0              # Python wrapper for ExifTool command-line utilit
 # Primary GUI framework
 PyQt6>=6.0.0                   # Main GUI framework for the application
 
-# Optional GUI utilities
-wxPython>=4.1.0                # For csv_record_viewer.py utility (optional)
-
 # ============================================================================
 # EXCEL PROCESSING DEPENDENCIES
 # ============================================================================
@@ -79,7 +76,6 @@ pytest-cov>=4.0.0              # Test coverage reporting
 # 1. Optional dependencies with fallbacks:
 #    - colorama: If not available, logging works without colors
 #    - pywin32: Auto-installed on Windows when creating desktop shortcuts
-#    - wxPython: Only needed for csv_record_viewer.py utility
 #
 # 2. Authentication setup required:
 #    - Google OAuth client secrets file for Google services integration
