@@ -1,6 +1,6 @@
 ## Recent Changes to MS Windows and ExifTool affecting installations
 
-What you’re running into is **not Windows 11 per se**, but a change in **how recent Windows builds and recent ExifTool Windows packages interact**.
+The bizarre problems we encountered with ExifTool installs is due to a change in **recent Windows builds and how recent ExifTool Windows packages interact**.
 
 Short version:
 **Modern ExifTool Windows builds rely on companion files that Windows may block or fail to locate once the package is moved**, whereas older builds were effectively single-file and location-agnostic.
@@ -176,10 +176,6 @@ Modern builds are:
 * More security-restricted
 * Less location-agnostic
 
-If you want, I can:
 
-* Identify the *last truly portable ExifTool Windows version*
-* Show how to create a single-file ExifTool build yourself
-* Help you diagnose exactly which file is blocking execution on your system
 
 
