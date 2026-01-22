@@ -52,8 +52,8 @@ A new directory structure will be created at the location you specified (`C:\Dat
 ```
 [BatchName]/
 ├── input/
-│   ├── tiff/              ← Place your source TIFF images here
-│   └── spreadsheet/       ← Place downloaded Excel file here
+│   ├── tiff/              ← Selected TIFF images placed here
+│   └── spreadsheet/       ← Selected Excel file placed here
 ├── output/
 │   ├── csv/               → Exported CSV (Step 2)
 │   ├── tiff_processed/    → Processed TIFFs (Step 4)
