@@ -153,7 +153,7 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 * **GUI Won't Start:** Ensure you have installed the required packages by running `pip install -r requirements.txt` from the project's root directory.
 * **Step 2 Fails - Excel File Not Found:** Ensure you have downloaded the Google Sheet as Excel (.xlsx) and placed it in the batch's `input\spreadsheet\` folder.
 * **Step 2 Fails - Invalid Format:** Verify the Excel file has the correct column headers and data format. Re-download from Google Sheets if needed. Check the Log Viewer for specific error details.
-* **Step 5 Fails - ExifTool Not Found:** Ensure ExifTool is installed and accessible. Check **Help → About** to verify ExifTool is detected.
+* **Step 2 Fails - ExifTool Not Found:** Ensure ExifTool is installed and accessible. Check **Help → About** to verify ExifTool is detected.
 * **Step Fails:** Check the Log Viewer at the bottom of the main window. It will usually contain a specific error message explaining what went wrong (e.g., "File not found," "Permission denied").
 * **Batch Not Showing:** Click the "Refresh Batches" button (`F5`) in the "Batches" tab. If it's an old batch, make sure the "Show All (including archived)" checkbox is ticked.
 
