@@ -5,6 +5,17 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7i] - 2026-01-22
+
+### Improved
+
+- **Step 4 TIFF Copy Feedback** - Added real-time UI feedback during TIFF file copy operation
+  - Users now see each filename displayed in the dialog as files are copied
+  - Added `QApplication.processEvents()` calls to force UI updates during the blocking copy loop
+  - Improves user experience for large TIFF transfers that take significant time
+
+---
+
 ## HPM [0.1.7h] - 2026-01-21 21:30 CST
 
 ### Added
