@@ -1,0 +1,30 @@
+Test Routines for Post Color Code Enhancements
+
+  1. Launch the GUI:
+   1 python hstl_framework.py gui
+  Once the GUI is running, I recommend testing each of the updated dialogs to ensure the new logging works as
+  expected.
+
+  2. Test the Step Dialogs (Steps 2-8):
+  For each step dialog, from Step 2 to Step 8:
+   * Open the dialog from the GUI.
+   * Observe the initial analysis messages that appear in the console and the GUI's log viewer.
+   * Trigger the main action in the dialog (e.g., "Convert to CSV", "Scan for Mojibake", "Analyze & Convert", etc.).
+   * When prompted for confirmation, test both "Yes" and "No" to see the corresponding log messages.
+   * Observe the progress and completion messages in the log.
+
+  3. Test Specific Scenarios:
+   * Step 3 (Unicode Filtering): If you have a CSV with mojibake, test the "Use Suggested" and "Edit" buttons to see
+     the log messages for accepting or editing fixes.
+   * Step 4 (Bit Depth Conversion): If you have 16-bit TIFFs, test the conversion process. If you don't, observe the
+     message indicating that no conversion is needed.
+   * Step 5 (Metadata Embedding): Test with and without missing TIFF files to see the different log messages for
+     matches and missing files.
+   * Step 8 (Watermark Addition): Test with and without images that have "Restricted" in their copyright field to
+     see the different log messages for watermarking and copying.
+
+  What to look for:
+   * Console Output: You should see the new color-coded and emoji-prefixed messages in your console.
+   * GUI Log Viewer: The log viewer in the GUI should also display the new formatted messages.
+   * No new errors or unexpected behavior: The functionality of the dialogs should not have changed, only the way
+     they report information.
