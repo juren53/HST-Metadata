@@ -693,11 +693,12 @@ class Step4Dialog(QDialog):
         QApplication.processEvents()  # Update UI to show initial message
 
         try:
-            for tiff_file in tiff_files:
+            total_files = len(tiff_files)
+            for i, tiff_file in enumerate(tiff_files, 1):
                 dest_file = dest_path / tiff_file.name
                 shutil.copy2(tiff_file, dest_file)  # Overwrites existing files
-                self.output_text.append(f"Copied: {tiff_file.name}")
-                self.log_manager.info(f"Copied: {tiff_file.name}", batch_id=self.batch_id, step=4)
+                self.output_text.append(f"Copied ({i}/{total_files}): {tiff_file.name}")
+                self.log_manager.info(f"Copied ({i}/{total_files}): {tiff_file.name}", batch_id=self.batch_id, step=4)
                 QApplication.processEvents()  # Update UI after each file
 
             self.output_text.append(f"--- Copy complete: {len(tiff_files)} files copied ---")
