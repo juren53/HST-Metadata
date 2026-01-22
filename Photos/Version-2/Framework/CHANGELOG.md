@@ -5,9 +5,17 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## HPM [0.1.7g] - 2026-01-21
+## HPM [0.1.7g] - 2026-01-21 18:32 CST
 
 ### Added
+
+- **ExifTool Info in Help/About Dialog** - Added ExifTool version and path to About dialog
+  - New `get_exiftool_info()` utility function in `utils/file_utils.py`
+  - Detects ExifTool executable via PATH or common Windows location (%LOCALAPPDATA%\exiftool\)
+  - Displays ExifTool version number and executable path
+  - Shows "Not found in PATH" if ExifTool is not installed
+  - Follows same pattern as existing Python, HPM, and OS information display
+  - **Files Modified**: `utils/file_utils.py`, `gui/main_window.py`
 
 - **ExifTool Portable Version Planning** - Comprehensive planning documents for ExifTool distribution strategy
   - **PLAN_ExifTool-creating-a-portable-version.md** - Original plan with three approaches:

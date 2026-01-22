@@ -5,10 +5,11 @@ Common file operations and utilities.
 """
 
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict
 import shutil
 import os
 import csv
+import subprocess
 
 
 class FileUtils:
@@ -127,3 +128,56 @@ class FileUtils:
             return f"{int(size)} {units[unit_index]}"
         else:
             return f"{size:.1f} {units[unit_index]}"
+
+    @staticmethod
+    def get_exiftool_info() -> Dict[str, Optional[str]]:
+        """
+        Get ExifTool executable path and version information.
+
+        Returns:
+            Dictionary with:
+                - 'path': Path to exiftool executable, or None if not found
+                - 'version': Version string, or None if not available
+                - 'status': Status message ('available', 'not_found', 'error')
+        """
+        result = {
+            'path': None,
+            'version': None,
+            'status': 'not_found'
+        }
+
+        # Try to find exiftool in PATH
+        exiftool_path = shutil.which('exiftool')
+
+        if not exiftool_path:
+            # Check common Windows installation location
+            local_app_data = os.environ.get('LOCALAPPDATA', '')
+            if local_app_data:
+                potential_path = Path(local_app_data) / 'exiftool' / 'exiftool.exe'
+                if potential_path.exists():
+                    exiftool_path = str(potential_path)
+
+        if not exiftool_path:
+            return result
+
+        result['path'] = exiftool_path
+
+        # Get version
+        try:
+            version_result = subprocess.run(
+                [exiftool_path, '-ver'],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if version_result.returncode == 0:
+                result['version'] = version_result.stdout.strip()
+                result['status'] = 'available'
+            else:
+                result['status'] = 'error'
+        except subprocess.TimeoutExpired:
+            result['status'] = 'error'
+        except Exception:
+            result['status'] = 'error'
+
+        return result
