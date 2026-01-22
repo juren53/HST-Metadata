@@ -1,4 +1,4 @@
-# HSTL Photo Framework - User Guide
+# HPM User Guide
 
 ## 1. Introduction
 
