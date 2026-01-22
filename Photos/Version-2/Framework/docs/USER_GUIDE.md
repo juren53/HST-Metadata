@@ -12,19 +12,13 @@ The core workflow involves creating a "batch" for a specific photo collection an
 
 Before you can process a batch, there are a few one-time setup steps.
 
-### 2.1. Google API Credentials (for Step 2)
+### 2.1. ExifTool Installation
 
-Step 2 requires access to Google Sheets to convert metadata records into a CSV file. This requires setting up Google API credentials.
+ExifTool is required for embedding metadata into image files (Step 5).
 
-1. **Obtain `client_secret_*.json` file:** You must have a client secret file provided by the project administrator. It will have a long name like `client_secret_...apps.googleusercontent.com.json`.
-2. **Place the File:** Copy this `client_secret_*.json` file into the same directory as the `HSTL_Photo_Framework_GUI.exe` application.
-3. **First-Time Authentication:**
-   * The first time you run Step 2 on any batch, a web browser window will open.
-   * Follow the prompts to log in to your Google account and grant the application permission.
-   * After you approve it, a file named `token_sheets.pickle` will be created in the application directory.
-   * You will not need to do this again unless the token file is deleted or expires.
-
-> **⚠️ Security Note:** Never share your `client_secret` or `token` files. They provide access to your Google account.
+1. **Download ExifTool:** Get the Windows executable from https://exiftool.org/
+2. **Install:** Extract to a folder in your PATH, or to `%LOCALAPPDATA%\exiftool\`
+3. **Verify:** The application will display ExifTool version in **Help → About** if detected correctly
 
 ### 2.2. Application Settings
 
@@ -71,14 +65,14 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 #### **Step 1: Prepare Google Spreadsheet**
 
 * **Purpose:** Ensures the collaborative Google Spreadsheet is correctly formatted and all required metadata fields (Title, Description, Date, etc.) are completed.
-* **Action:** This step is currently a manual check. [ In the future, it may perform automated validation. ] For now, ensure your Google Sheet is ready before proceeding.
+* **Action:** This step is a manual check. Ensure your Google Sheet contains all required columns and data before proceeding. When ready, download the Google Sheet as an Excel file (.xlsx) and place it in the batch's `input\spreadsheet\` folder.
 
 ---
 
-#### **Step 2: Convert Google WS to CSV**
+#### **Step 2: Convert Excel Spreadsheet to CSV**
 
-* **Purpose:** Fetches the data from the Google Sheet and converts it into a local CSV file, which is used by subsequent steps.
-* **Action:** Click the "Run" button for Step 2. Requires the Google API credentials to be set up correctly.
+* **Purpose:** Converts the downloaded Excel spreadsheet (.xlsx) into a local CSV file, which is used by subsequent steps.
+* **Action:** Click the "Run" button for Step 2. The application reads the Excel file from `input\spreadsheet\` and exports it as CSV.
 * **Output:** A CSV file is created in the `output\csv\` directory.
 * **Validation:** The number of rows in the CSV should match the number of Accession Numbers in your spreadsheet.
 
@@ -140,11 +134,9 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 ## 5. Troubleshooting
 
 * **GUI Won't Start:** Ensure you have installed the required packages by running `pip install -r requirements.txt` from the project's root directory.
-* **Authentication Failed in Step 2:**
-  1. Delete the `token_sheets.pickle` file from the application directory.
-  2. Ensure your `client_secret_*.json` file is present.
-  3. Run Step 2 again to re-trigger the browser authentication.
-* **"Client secret file not found":** Make sure the `client_secret_*.json` file is in the *same folder* as the `.exe` file.
+* **Step 2 Fails - Excel File Not Found:** Ensure you have downloaded the Google Sheet as Excel (.xlsx) and placed it in the batch's `input\spreadsheet\` folder.
+* **Step 2 Fails - Invalid Format:** Verify the Excel file has the correct column headers and data format. Re-download from Google Sheets if needed. Check the Log Viewer for specific error details.
+* **Step 5 Fails - ExifTool Not Found:** Ensure ExifTool is installed and accessible. Check **Help → About** to verify ExifTool is detected.
 * **Step Fails:** Check the Log Viewer at the bottom of the main window. It will usually contain a specific error message explaining what went wrong (e.g., "File not found," "Permission denied").
 * **Batch Not Showing:** Click the "Refresh Batches" button (`F5`) in the "Batches" tab. If it's an old batch, make sure the "Show All (including archived)" checkbox is ticked.
 
@@ -155,4 +147,10 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 * **Metadata:** Information about a photo, such as its title, date, and description.
 * **Pipeline:** The sequence of 8 steps that the application performs to process a batch.
 * **TIFF (Tagged Image File Format):** A high-quality, lossless image format used for archival source images.
-* **Watermark:** A semi-transparent logo or text added to an image to indicate copyright or ownership. 
+* **Watermark:** A semi-transparent logo or text added to an image to indicate copyright or ownership.
+
+---
+
+**Version:** 0.1.7h
+**Commit Date:** 2026-01-21 21:30 CST
+**Last Updated:** January 2026
