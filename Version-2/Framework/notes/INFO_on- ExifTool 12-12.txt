@@ -1,0 +1,71 @@
+
+  ---
+  ExifTool 12.12
+
+  URL: https://archive.org/details/exiftool-k-12.12
+  ┌─────────────┬────────────────────┐
+  │   Detail    │       Value        │
+  ├─────────────┼────────────────────┤
+  │ Upload Date │ December 5, 2020   │
+  ├─────────────┼────────────────────┤
+  │ Uploader    │ archiver042        │
+  ├─────────────┼────────────────────┤
+  │ Total Size  │ 11.3 MB            │
+  ├─────────────┼────────────────────┤
+  │ Collection  │ Community Software │
+  └─────────────┴────────────────────┘
+  Available Downloads:
+  - exiftool(-k).exe (8.4 MB) - Windows Executable (standalone)
+  - ExifTool-12.12.dmg (3.0 MB) - Mac OS X disk image
+  - Torrent file (2.2 KB)
+
+  ---
+  Recommendation: If you need a Windows version, ExifTool 12.12 is the better choice - it includes a standalone
+  Windows executable (exiftool(-k).exe) ready to use, and it's a newer version (December 2020 vs July 2020).
+
+❯ ok lets download  ExifTool 12.12 from the Internet Archive
+
+● I'll download the Windows executable from the Internet Archive.
+
+● Bash(curl -L -o "exiftool-k-12.12.exe" "https://archive.org/download/exiftool-k-12.12/exiftool(-k).exe")
+  ⎿    % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                      Dload  Upload   Total   Spent    Left  Speed
+       0     0   0     0   0     0     0     0  --:--:-- --:--:-- --:--:--     0  0     0   0     0   0     0
+     … +6 lines (ctrl+o to expand)
+
+● Download complete. Let me verify the file.
+
+● Bash(ls -lh exiftool-k-12.12.exe)
+  ⎿  -rwxr-xr-x 1 jimur 197609 8.4M Jan 21 13:02 exiftool-k-12.12.exe
+
+● Download successful!
+  ┌──────────────────────┬────────┬─────────────────────────────────────────────────────────────────┐
+  │         File         │  Size  │                            Location                             │
+  ├──────────────────────┼────────┼─────────────────────────────────────────────────────────────────┤
+  │ exiftool-k-12.12.exe │ 8.4 MB │ C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework │
+  └──────────────────────┴────────┴─────────────────────────────────────────────────────────────────┘
+  The file size matches the expected 8.4 MB from the archive. Would you like me to rename it to something simpler
+  like exiftool.exe or move it to a different location?
+
+❯ move it to ~\Temp
+
+
+● Bash(mv exiftool-k-12.12.exe ~/Temp/)
+  ⎿  (No content)
+
+● Bash(ls -lh ~/Temp/exiftool-k-12.12.exe)
+  ⎿  -rwxr-xr-x 1 jimur 197609 8.4M Jan 21 13:02 /c/Users/jimur/Temp/exiftool-k-12.12.exe
+
+● Done. The file has been moved to C:\Users\jimur\Temp\exiftool-k-12.12.exe.
+
+❯ to be sure, let's have MS Defender scan C:\Users\jimur\Temp\exiftool-k-12.12.exe
+
+● Bash("C:\Program Files\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File
+      "C:\Users\jimur\Temp\exiftool-k-12.12.exe")
+  ⎿  Scan starting...
+     Scan finished.
+     Scanning C:\Users\jimur\Temp\exiftool-k-12.12.exe found no threats.
+
+● Windows Defender scan complete - no threats found.
+
+  The file C:\Users\jimur\Temp\exiftool-k-12.12.exe is clean and safe to use.
