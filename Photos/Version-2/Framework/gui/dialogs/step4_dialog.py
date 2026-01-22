@@ -10,6 +10,7 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 from PyQt6.QtWidgets import (
+    QApplication,
     QDialog,
     QVBoxLayout,
     QHBoxLayout,
@@ -689,14 +690,16 @@ class Step4Dialog(QDialog):
         # Copy with progress feedback in output_text
         self.output_text.append(f"--- Copying TIFF files from {source_dir} ---")
         self.log_manager.info(f"--- Copying TIFF files from {source_dir} ---", batch_id=self.batch_id, step=4)
-        
+        QApplication.processEvents()  # Update UI to show initial message
+
         try:
             for tiff_file in tiff_files:
                 dest_file = dest_path / tiff_file.name
                 shutil.copy2(tiff_file, dest_file)  # Overwrites existing files
                 self.output_text.append(f"Copied: {tiff_file.name}")
                 self.log_manager.info(f"Copied: {tiff_file.name}", batch_id=self.batch_id, step=4)
-            
+                QApplication.processEvents()  # Update UI after each file
+
             self.output_text.append(f"--- Copy complete: {len(tiff_files)} files copied ---")
             self.log_manager.info(f"--- Copy complete: {len(tiff_files)} files copied ---", batch_id=self.batch_id, step=4)
             
