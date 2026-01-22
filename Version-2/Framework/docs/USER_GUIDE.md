@@ -66,13 +66,16 @@ A new directory structure will be created at the location you specified (`C:\Dat
     └── project_config.yaml → Project configuration
 ```
 
-### 4.2. Preparing Your Files
+### 4.2. Preparing Inputs
 
-Before running Step 2, download the Google Sheet as Excel (.xlsx) and place it in the batch's `input\spreadsheet\` folder. Source TIFF images are copied to `input\tiff\` as part of Step 4.
+An Excel Spreadsheet and the corresponding collection of TIFF images are the two inputs the system needs:
+
+- **Excel Spreadsheet:** Selected in Step 1. HPM copies the selected file to the `input/spreadsheet/` directory.
+- **TIFF Images:** Selected in Step 4. HPM copies all images from the selected directory to `input/tiff/`.
 
 ### 4.3. The 8 Processing Steps
 
-Open a batch by double-clicking it in the "Batches" list. This will take you to the "Current Batch" tab where you can run the steps. You can run steps one-by-one, or use "Run All Steps" to execute the entire pipeline.
+Open a batch by double-clicking it in the "Batches" list. This will take you to the "Current Batch" tab where you can run the steps of the workflow. You can run steps one-by-one, or use "Run All Steps" to execute the entire pipeline.
 
 ---
 
