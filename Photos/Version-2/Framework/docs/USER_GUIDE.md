@@ -12,13 +12,15 @@ The core workflow involves creating a "batch" for a specific photo collection an
 
 Before you can process a batch, there are a few one-time setup steps.
 
-### 2.1. ExifTool Installation
+### 2.1. System Check
 
-ExifTool is required for embedding metadata into image files (Step 5).
+Before processing your first batch, perform a quick preflight check:
 
-1. **Download ExifTool:** Get the Windows executable from https://exiftool.org/
-2. **Install:** Extract to a folder in your PATH, or to `%LOCALAPPDATA%\exiftool\`
-3. **Verify:** The application will display ExifTool version in **Help → About** if detected correctly
+1. Launch HPM and go to **Help → About**
+2. Review the system information at the bottom of the dialog
+3. Verify that **ExifTool** shows a version number and path (required for metadata embedding)
+
+If ExifTool shows "Not found," contact your system administrator.
 
 ### 2.2. Application Settings
 
