@@ -43,6 +43,7 @@ from gui.widgets.enhanced_log_widget import EnhancedLogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.log_viewer_dialog import LogViewerDialog
 from utils.log_manager import LogManager
+from utils.file_utils import FileUtils
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 from gui.zoom_manager import ZoomManager
@@ -726,13 +727,28 @@ class MainWindow(QMainWindow):
         # Technical information (subdued, smaller font)
         python_exe = sys.executable
         script_path = Path(__file__).resolve()
-
         os_platform = platform.platform()
+
+        # Get ExifTool information
+        exiftool_info = FileUtils.get_exiftool_info()
+        if exiftool_info['status'] == 'available':
+            exiftool_display = (
+                f"<b>ExifTool:</b> v{exiftool_info['version']}<br>"
+                f"{exiftool_info['path']}"
+            )
+        elif exiftool_info['path']:
+            exiftool_display = (
+                f"<b>ExifTool:</b> Found but version unavailable<br>"
+                f"{exiftool_info['path']}"
+            )
+        else:
+            exiftool_display = "<b>ExifTool:</b> Not found in PATH"
 
         tech_html = (
             f'<p style="font-size: 9pt; color: #666;">'
             f"<b>Python Executable:</b><br>{python_exe}<br><br>"
             f"<b>HPM Code Location:</b><br>{script_path}<br><br>"
+            f"{exiftool_display}<br><br>"
             f"<b>OS:</b> {os_platform}"
             f"</p>"
         )
