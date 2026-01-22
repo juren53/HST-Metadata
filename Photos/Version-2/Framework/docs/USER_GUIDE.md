@@ -47,14 +47,28 @@ Processing a photo collection involves creating a batch and running it through t
 3. Choose where to store the batch data. The default (`C:\Data\HSTL_Batches\\ ) is recommended.
 4. Click **OK**.
 
-A new directory structure will be created at the location you specified   (`C:\Data\HSTL_Batches\\ [BatchName] ), and the batch and directory path will appear in the "Batches" list.
+A new directory structure will be created at the location you specified (`C:\Data\HSTL_Batches\[BatchName]`), and the batch will appear in the "Batches" list.
+
+```
+[BatchName]/
+├── input/
+│   ├── tiff/              ← Place your source TIFF images here
+│   └── spreadsheet/       ← Place downloaded Excel file here
+├── output/
+│   ├── csv/               → Exported CSV (Step 2)
+│   ├── tiff_processed/    → Processed TIFFs (Step 4)
+│   ├── jpeg/              → JPEG conversions (Step 6)
+│   ├── jpeg_resized/      → Resized JPEGs (Step 7)
+│   └── jpeg_watermarked/  → Watermarked JPEGs (Step 8)
+├── reports/               → Validation and processing reports
+├── logs/                  → Processing logs
+└── config/
+    └── project_config.yaml → Project configuration
+```
 
 ### 4.2. Preparing Your Files
 
-Before running the steps, you must place copies of the source files in the correct location.
-
-1. Navigate to the batch directory you just created (e.g., `C:\Data\HSTL_Batches\Truman Home Photos - Jan 2025`).
-2. Place the copies of the source TIFF images into the `input\tiff\` folder.
+Before running Step 2, download the Google Sheet as Excel (.xlsx) and place it in the batch's `input\spreadsheet\` folder. Source TIFF images are copied to `input\tiff\` as part of Step 4.
 
 ### 4.3. The 8 Processing Steps
 
