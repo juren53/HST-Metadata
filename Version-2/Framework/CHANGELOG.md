@@ -5,6 +5,18 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7k] - 2026-01-23 02:07 CST
+
+### Fixed
+
+- **Get Latest Updates Git Error** - Fixed recurring "Need to specify how to reconcile divergent branches" error
+  - Added `--rebase` flag to git pull command in `utils/git_updater.py` (line 231)
+  - Prevents fatal error when using HPM's "Get Latest Updates" feature
+  - Git now uses rebase strategy to reconcile divergent branches automatically
+  - **Files Modified**: `utils/git_updater.py`
+
+---
+
 ## HPM [0.1.7j] - 2026-01-22 17:57 CST
 
 ### Improved

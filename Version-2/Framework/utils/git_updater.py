@@ -228,7 +228,7 @@ class GitUpdater:
         branch = self.get_current_branch()
         
         # Perform git pull
-        exit_code, stdout, stderr = self._run_git_command(['pull', 'origin', branch])
+        exit_code, stdout, stderr = self._run_git_command(['pull', '--rebase', 'origin', branch])
         
         result.output = stdout + stderr
         
