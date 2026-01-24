@@ -5,6 +5,24 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7p] - 2026-01-24 15:30 CST
+
+### Fixed
+
+- **Step 1 Revert Now Deletes Spreadsheet Files** - Revert Step 1 now properly cleans up `input/spreadsheet` directory
+  - Previously, reverting Step 1 would mark the step as pending but leave downloaded Excel files in place
+  - Multiple Excel files could stack up in the directory across re-runs
+  - Now deletes all files from `input/spreadsheet` when reverting Step 1
+  - Confirmation dialog warns user that files will be deleted
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **Step 2 Revert Now Deletes All CSV Files** - Revert Step 2 now deletes all files in `output/csv` directory
+  - Previously only deleted `export.csv`, leaving other files that may have accumulated
+  - Now deletes all files in the directory for consistent cleanup
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+---
+
 ## HPM [0.1.7o] - 2026-01-24 12:48 CST
 
 ### Improved
