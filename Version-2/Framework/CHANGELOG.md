@@ -5,6 +5,28 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7o] - 2026-01-24 12:48 CST
+
+### Improved
+
+- **Get Latest Updates Feature Overhaul** - Smooth, hassle-free updates like modern software
+  - No longer warns about uncommitted changes (local artifacts safely discarded)
+  - Shows clear version comparison: "Current: v0.1.7n → New: v0.1.8a"
+  - Uses `git reset --hard` for reliable updates without merge conflicts
+  - Displays target version in progress dialog and success message
+  - Uses semantic version comparison instead of commit counting
+  - **Files Modified**: `utils/git_updater.py`, `gui/main_window.py`
+
+### Added
+
+- **New git_updater methods**:
+  - `force_update()` - Force update discarding local changes
+  - `get_update_info()` - Get comprehensive version comparison
+  - `_compare_versions()` - Semantic version comparison for HPM format (e.g., "0.1.7n")
+  - `_get_local_version()` - Read version from local `__init__.py`
+
+---
+
 ## HPM [0.1.7n] - 2026-01-24 05:05 CST
 
 ### Added
