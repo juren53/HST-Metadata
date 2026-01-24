@@ -1,90 +1,66 @@
 # HSTL Photo Framework Dependencies
-# Version: 0.1.3d
-# Python Requirement: 3.7+
+# Version: 0.1.7p
+# Python Requirement: 3.9+
 
 # ============================================================================
 # CORE FRAMEWORK DEPENDENCIES
 # ============================================================================
 
-# Configuration and data handling
+# Configuration parsing
 PyYAML>=6.0                    # YAML configuration file parsing
-pandas>=1.5.0                  # Data manipulation and CSV processing
-pydantic>=1.10.0               # Configuration validation and data models
 
-# Text processing and encoding
-ftfy>=6.0.0                    # Text encoding fixes and Unicode normalization
+# Data manipulation and Excel/CSV processing
+pandas>=2.0.0                  # Data manipulation, Excel reading, CSV export
+openpyxl>=3.0.0                # Required by pandas for .xlsx file reading
 
-# Progress tracking and terminal output
-tqdm>=4.64.0                   # Progress bars for CLI operations
-colorama>=0.4.4                # Cross-platform colored terminal output (optional)
+# Text encoding (Step 3: Unicode Filtering)
+ftfy>=6.0.0                    # Mojibake detection and text encoding repair
 
-# Logging enhancements
-structlog>=22.0.0              # Enhanced structured logging
+# GUI framework
+PyQt6>=6.4.0                   # Main GUI framework
 
-# ============================================================================
-# IMAGE PROCESSING DEPENDENCIES
-# ============================================================================
-
-# Core image processing
-Pillow>=9.0.0                  # Image processing and format conversions
-PyExifTool>=0.5.0              # Python wrapper for ExifTool command-line utility
+# Image processing (Step 8: Watermark Addition)
+Pillow>=10.0.0                 # Image manipulation for watermark compositing
+PyExifTool>=0.5.0              # Read/write IPTC metadata, copy metadata to output
 
 # ============================================================================
-# GUI FRAMEWORK DEPENDENCIES
+# OPTIONAL DEPENDENCIES
 # ============================================================================
 
-# Primary GUI framework
-PyQt6>=6.0.0                   # Main GUI framework for the application
+# These are used by auxiliary tools, not the main HPM application
 
-# ============================================================================
-# EXCEL PROCESSING DEPENDENCIES
-# ============================================================================
-
-# Excel file reading and processing
-openpyxl>=3.0.0                # For .xlsx Excel file reading
-xlrd>=2.0.0                    # For legacy .xls Excel file reading
+# wxPython>=4.2.0              # Only needed for csv_record_viewer.py (standalone tool)
 
 # ============================================================================
 # DEVELOPMENT AND TESTING DEPENDENCIES
 # ============================================================================
 
-# Testing framework
-pytest>=7.0.0                  # Unit testing framework
-pytest-cov>=4.0.0              # Test coverage reporting
-
-# ============================================================================
-# PLATFORM-SPECIFIC DEPENDENCIES
-# ============================================================================
-
-# Windows-specific (auto-installed when needed)
-# pywin32 - Windows COM automation for desktop shortcuts
-# Note: This is auto-installed by create_desktop_shortcut.py if needed
-
-# ============================================================================
-# EXTERNAL DEPENDENCIES (Not installable via pip)
-# ============================================================================
-
-# ExifTool - Required for metadata operations (BOTH required):
-# 1. ExifTool command-line tool - Download from: https://exiftool.org/
-#    Must be installed separately and available in system PATH
-# 2. PyExifTool Python wrapper - Included in requirements.txt above
+# Uncomment these for development work
+# pytest>=7.0.0                # Unit testing framework
+# pytest-cov>=4.0.0            # Test coverage reporting
 
 # ============================================================================
 # NOTES
 # ============================================================================
 
-# 1. Optional dependencies with fallbacks:
-#    - colorama: If not available, logging works without colors
-#    - pywin32: Auto-installed on Windows when creating desktop shortcuts
+# 1. Minimum install for HPM GUI:
+#    pip install PyYAML pandas openpyxl ftfy PyQt6 Pillow PyExifTool
 #
-# 2. Authentication setup required:
-#    - Google OAuth client secrets file for Google services integration
-#    - Token pickle files are generated automatically on first use
+# 2. The following packages listed in previous versions are NOT currently used:
+#    - tqdm (progress bars) - Not imported anywhere
+#    - structlog (logging) - Not imported anywhere
+#    - colorama - Not imported anywhere
+#    - pydantic - Not imported anywhere
+#    - xlrd - Not imported anywhere (pandas uses openpyxl for .xlsx)
 #
-# 3. Installation order recommendation:
-#    1. Install core dependencies first (PyYAML, pandas, Pillow)
-#    2. Install GUI framework (PyQt6)
-#    3. Install Google services libraries
-#    4. Install optional dependencies (colorama, structlog, wxPython)
-# 5. Install external tools (ExifTool command-line + PyExifTool wrapper)
-#    6. Set up Google authentication credentials
+# 3. Google API libraries (google-api-python-client, gspread, etc.) are only
+#    used in archived code and are not required for current HPM functionality.
+#
+# 4. ExifTool command-line tool is required (separate install):
+#    PyExifTool is a Python wrapper - the actual ExifTool executable must be
+#    installed separately. Download from: https://exiftool.org/
+#    On Windows, rename exiftool(-k).exe to exiftool.exe and add to PATH.
+#
+# 5. Standard library modules used (no pip install needed):
+#    pathlib, typing, dataclasses, datetime, logging, os, sys, subprocess,
+#    shutil, json, csv, re, threading, time, enum, urllib, glob, platform
