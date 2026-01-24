@@ -71,6 +71,7 @@ Potentially some files with patterns that look like obfuscated code or system ma
 The sheer volume of file access from a "fresh" Python installation
 Possible network activity if the app made API calls
 Block Issued - Once Defender decided the activity was suspicious, it blocked python.exe
+
 Why E: Drive Works:
 
 Fresh, unmonitored location - Defender hasn't built a "suspicious activity profile" there yet
