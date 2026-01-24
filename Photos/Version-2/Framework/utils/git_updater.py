@@ -152,17 +152,20 @@ class GitUpdater:
     def get_remote_version(self) -> Optional[str]:
         """
         Get the version from the remote repository's __init__.py
-        
+
         Returns:
             Version string or None if unable to determine
         """
         branch = self.get_current_branch()
-        
+
+        # The __init__.py is in Photos/Version-2/Framework/ relative to git root
+        init_path = "Photos/Version-2/Framework/__init__.py"
+
         # Get __init__.py content from remote
         exit_code, stdout, _ = self._run_git_command(
-            ['show', f'origin/{branch}:__init__.py']
+            ['show', f'origin/{branch}:{init_path}']
         )
-        
+
         if exit_code == 0:
             # Parse the __version__ line
             for line in stdout.split('\n'):
@@ -173,7 +176,7 @@ class GitUpdater:
                         return version
                     except (IndexError, AttributeError):
                         pass
-        
+
         return None
     
     def check_for_updates(self) -> Tuple[bool, str]:
@@ -288,6 +291,187 @@ class GitUpdater:
         if exit_code == 0:
             return stdout.strip()
         return ""
+
+    def _get_local_version(self) -> Optional[str]:
+        """
+        Get the version from the local __init__.py file
+
+        Returns:
+            Version string or None if unable to determine
+        """
+        try:
+            # The __init__.py is in the Framework directory (parent of utils/)
+            framework_dir = Path(__file__).parent.parent
+            init_path = framework_dir / "__init__.py"
+            if init_path.exists():
+                content = init_path.read_text(encoding='utf-8')
+                for line in content.split('\n'):
+                    if line.strip().startswith('__version__'):
+                        try:
+                            version = line.split('=')[1].strip().strip('"').strip("'")
+                            return version
+                        except (IndexError, AttributeError):
+                            pass
+        except Exception:
+            pass
+        return None
+
+    def _compare_versions(self, v1: str, v2: str) -> int:
+        """
+        Compare two version strings semantically.
+        Handles HPM version format like "0.1.7n" where the letter suffix
+        indicates point releases (a < b < c < ... < z).
+
+        Args:
+            v1: First version string
+            v2: Second version string
+
+        Returns:
+            -1 if v1 < v2, 0 if equal, 1 if v1 > v2
+        """
+        import re
+
+        def parse_version(v: str) -> tuple:
+            # Remove 'v' prefix if present
+            v = v.lstrip('v').strip()
+
+            # Match pattern like "0.1.7n" or "0.1.7"
+            match = re.match(r'^(\d+)\.(\d+)\.(\d+)([a-z])?$', v)
+            if match:
+                major = int(match.group(1))
+                minor = int(match.group(2))
+                patch = int(match.group(3))
+                suffix = match.group(4) or ''  # Empty string if no suffix
+                return (major, minor, patch, suffix)
+
+            # Fallback: try to extract numbers
+            parts = re.findall(r'\d+', v)
+            if len(parts) >= 3:
+                return (int(parts[0]), int(parts[1]), int(parts[2]), '')
+
+            return (0, 0, 0, '')
+
+        v1_parsed = parse_version(v1)
+        v2_parsed = parse_version(v2)
+
+        # Compare major.minor.patch first
+        for i in range(3):
+            if v1_parsed[i] < v2_parsed[i]:
+                return -1
+            elif v1_parsed[i] > v2_parsed[i]:
+                return 1
+
+        # If major.minor.patch are equal, compare suffix
+        # Empty suffix (release) comes after lettered suffix (point release)
+        # So "0.1.8" > "0.1.7z" but "0.1.7a" < "0.1.7b"
+        suffix1, suffix2 = v1_parsed[3], v2_parsed[3]
+
+        if suffix1 == suffix2:
+            return 0
+        elif suffix1 == '':
+            return 1  # No suffix means release version (higher)
+        elif suffix2 == '':
+            return -1  # No suffix means release version (higher)
+        elif suffix1 < suffix2:
+            return -1
+        else:
+            return 1
+
+    def get_update_info(self) -> dict:
+        """
+        Get comprehensive update information.
+
+        Returns:
+            dict with keys:
+                - current_version: Local version string
+                - remote_version: Remote version string
+                - update_available: Boolean
+                - error: Error message if any
+        """
+        info = {
+            'current_version': None,
+            'remote_version': None,
+            'update_available': False,
+            'error': None
+        }
+
+        # Get local version
+        info['current_version'] = self._get_local_version()
+
+        # Fetch from remote
+        if not self.fetch_updates():
+            info['error'] = "Failed to connect to GitHub"
+            return info
+
+        # Get remote version
+        info['remote_version'] = self.get_remote_version()
+
+        if not info['current_version']:
+            info['error'] = "Could not determine current version"
+            return info
+
+        if not info['remote_version']:
+            info['error'] = "Could not determine remote version"
+            return info
+
+        # Compare versions
+        comparison = self._compare_versions(info['current_version'], info['remote_version'])
+        info['update_available'] = comparison < 0  # current < remote
+
+        return info
+
+    def force_update(self) -> GitUpdateResult:
+        """
+        Force update to match remote, discarding all local changes.
+
+        This is the recommended update method for client systems that just
+        want the latest code from GitHub. Local modifications (logs, cache,
+        temp files) are safely discarded.
+
+        Uses: git fetch origin && git reset --hard origin/[branch]
+
+        Returns:
+            GitUpdateResult with operation details
+        """
+        result = GitUpdateResult()
+
+        # Check if we're in a git repository
+        if not self.is_git_repository():
+            result.error_message = "Not a git repository"
+            return result
+
+        # Get current version before update
+        result.current_version = self._get_local_version() or ""
+
+        # Get current branch
+        branch = self.get_current_branch()
+
+        # Fetch latest from remote
+        exit_code, _, stderr = self._run_git_command(['fetch', 'origin'])
+        if exit_code != 0:
+            result.error_message = f"Failed to fetch updates from GitHub:\n{stderr}"
+            return result
+
+        # Force reset to match remote exactly
+        exit_code, stdout, stderr = self._run_git_command(
+            ['reset', '--hard', f'origin/{branch}']
+        )
+
+        result.output = stdout + stderr
+
+        if exit_code == 0:
+            result.success = True
+
+            # Get new version after update
+            result.updated_version = self._get_local_version() or ""
+
+            # Check if versions are the same (already up-to-date)
+            if result.current_version == result.updated_version:
+                result.already_up_to_date = True
+        else:
+            result.error_message = f"Failed to update:\n{stderr}"
+
+        return result
 
 
 def test_git_updater():
