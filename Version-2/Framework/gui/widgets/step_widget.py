@@ -30,6 +30,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, pyqtSignal, QThread, pyqtSlot, QUrl
 from PyQt6.QtGui import QColor, QPalette, QDesktopServices
 
+from utils.log_manager import get_log_manager
+
 
 STEP_NAMES = {
     1: "Excel Spreadsheet Download",
@@ -1101,8 +1103,16 @@ class StepWidget(QWidget):
             )
 
         if reply == QMessageBox.StandardButton.Yes:
+            # Get log manager for system logging
+            log_manager = get_log_manager()
+
             self.output_text.append(
                 f"\n--- Reverting Step {step_num}: {STEP_NAMES[step_num]} ---\n"
+            )
+            log_manager.info(
+                f"Reverting Step {step_num}: {STEP_NAMES[step_num]}",
+                batch_id=self.batch_id,
+                step=step_num
             )
 
             # Special handling for Steps 2, 4, 5, 6, 7, and 8 - delete files in output directories
@@ -1120,9 +1130,19 @@ class StepWidget(QWidget):
                             # Delete the export.csv file
                             csv_file.unlink()
                             self.output_text.append(f"✅ Deleted {csv_file}\n")
+                            log_manager.info(
+                                f"Deleted {csv_file}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting file: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting file: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1150,9 +1170,19 @@ class StepWidget(QWidget):
                             self.output_text.append(
                                 f"✅ Deleted {file_count} files from {tiff_dir}\n"
                             )
+                            log_manager.info(
+                                f"Deleted {file_count} TIFF files from {tiff_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting TIFF files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1182,9 +1212,19 @@ class StepWidget(QWidget):
                             self.output_text.append(
                                 f"✅ Deleted {file_count} files from {tiff_processed_dir}\n"
                             )
+                            log_manager.info(
+                                f"Deleted {file_count} processed TIFF files from {tiff_processed_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting processed TIFF files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1212,9 +1252,19 @@ class StepWidget(QWidget):
                             self.output_text.append(
                                 f"✅ Deleted {file_count} files from {jpeg_dir}\n"
                             )
+                            log_manager.info(
+                                f"Deleted {file_count} JPEG files from {jpeg_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting JPEG files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1242,9 +1292,19 @@ class StepWidget(QWidget):
                             self.output_text.append(
                                 f"✅ Deleted {file_count} files from {resized_jpeg_dir}\n"
                             )
+                            log_manager.info(
+                                f"Deleted {file_count} resized JPEG files from {resized_jpeg_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting resized JPEG files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1274,9 +1334,19 @@ class StepWidget(QWidget):
                             self.output_text.append(
                                 f"✅ Deleted {file_count} files from {watermarked_jpeg_dir}\n"
                             )
+                            log_manager.info(
+                                f"Deleted {file_count} watermarked JPEG files from {watermarked_jpeg_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
                         except Exception as e:
                             self.output_text.append(
                                 f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting watermarked JPEG files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
                             )
                             QMessageBox.warning(
                                 self,
@@ -1299,6 +1369,11 @@ class StepWidget(QWidget):
                 )
 
             self.output_text.append(f"✅ Step {step_num} reverted to Pending\n")
+            log_manager.success(
+                f"Step {step_num} reverted to Pending",
+                batch_id=self.batch_id,
+                step=step_num
+            )
             if step_num not in [2, 4, 5, 6, 7, 8]:
                 self.output_text.append(
                     "Note: Output files were not deleted. Re-run the step to regenerate.\n"
