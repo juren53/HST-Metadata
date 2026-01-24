@@ -985,14 +985,23 @@ class StepWidget(QWidget):
         if not self.framework:
             return
 
-        # Special handling for Steps 2, 4, 5, 6, 7, and 8 - offer to delete files
-        if step_num == 2:
+        # Special handling for Steps 1, 2, 4, 5, 6, 7, and 8 - offer to delete files
+        if step_num == 1:
             reply = QMessageBox.question(
                 self,
                 "Revert Step",
                 f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
-                f"This will mark the step as not completed and DELETE the\n"
-                f"export.csv file in the output/csv directory.",
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the input/spreadsheet directory.",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            )
+        elif step_num == 2:
+            reply = QMessageBox.question(
+                self,
+                "Revert Step",
+                f"Revert Step {step_num}: {STEP_NAMES[step_num]} to Pending?\n\n"
+                f"This will mark the step as not completed and DELETE all files\n"
+                f"in the output/csv directory.",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             )
         elif step_num == 4:
@@ -1065,39 +1074,86 @@ class StepWidget(QWidget):
                 step=step_num
             )
 
-            # Special handling for Steps 2, 4, 5, 6, 7, and 8 - delete files in output directories
-            if step_num == 2:
+            # Special handling for Steps 1, 2, 4, 5, 6, 7, and 8 - delete files in directories
+            if step_num == 1:
                 from pathlib import Path
 
                 data_directory = self.framework.config_manager.get(
                     "project.data_directory", ""
                 )
                 if data_directory:
-                    csv_file = Path(data_directory) / "output" / "csv" / "export.csv"
+                    spreadsheet_dir = Path(data_directory) / "input" / "spreadsheet"
 
-                    if csv_file.exists():
+                    if spreadsheet_dir.exists():
                         try:
-                            # Delete the export.csv file
-                            csv_file.unlink()
-                            self.output_text.append(f"✅ Deleted {csv_file}\n")
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in spreadsheet_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+
+                            self.output_text.append(
+                                f"✅ Deleted {file_count} files from {spreadsheet_dir}\n"
+                            )
                             log_manager.info(
-                                f"Deleted {csv_file}",
+                                f"Deleted {file_count} spreadsheet files from {spreadsheet_dir}",
                                 batch_id=self.batch_id,
                                 step=step_num
                             )
                         except Exception as e:
                             self.output_text.append(
-                                f"⚠️ Error deleting file: {str(e)}\n"
+                                f"⚠️ Error deleting files: {str(e)}\n"
                             )
                             log_manager.error(
-                                f"Error deleting file: {str(e)}",
+                                f"Error deleting spreadsheet files: {str(e)}",
                                 batch_id=self.batch_id,
                                 step=step_num
                             )
                             QMessageBox.warning(
                                 self,
                                 "Delete Error",
-                                f"Failed to delete export.csv:\n\n{str(e)}",
+                                f"Failed to delete spreadsheet files:\n\n{str(e)}",
+                            )
+            elif step_num == 2:
+                from pathlib import Path
+
+                data_directory = self.framework.config_manager.get(
+                    "project.data_directory", ""
+                )
+                if data_directory:
+                    csv_dir = Path(data_directory) / "output" / "csv"
+
+                    if csv_dir.exists():
+                        try:
+                            # Delete all files in the directory
+                            file_count = 0
+                            for file_path in csv_dir.iterdir():
+                                if file_path.is_file():
+                                    file_path.unlink()
+                                    file_count += 1
+
+                            self.output_text.append(
+                                f"✅ Deleted {file_count} files from {csv_dir}\n"
+                            )
+                            log_manager.info(
+                                f"Deleted {file_count} CSV files from {csv_dir}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
+                        except Exception as e:
+                            self.output_text.append(
+                                f"⚠️ Error deleting files: {str(e)}\n"
+                            )
+                            log_manager.error(
+                                f"Error deleting CSV files: {str(e)}",
+                                batch_id=self.batch_id,
+                                step=step_num
+                            )
+                            QMessageBox.warning(
+                                self,
+                                "Delete Error",
+                                f"Failed to delete CSV files:\n\n{str(e)}",
                             )
             elif step_num == 4:
                 from pathlib import Path
