@@ -5,6 +5,19 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [0.1.7n] - 2026-01-24 05:05 CST
+
+### Added
+
+- **DateCreated Fallback Logic** - g2c.py now uses coverageStartDate as fallback when productionDate is empty
+  - Primary source: `productionDateMonth`, `productionDateDay`, `productionDateYear`
+  - Fallback source: `coverageStartDateMonth`, `coverageStartDateDay`, `coverageStartDateYear`
+  - Reports how many dates came from each source in output
+  - Refactored date extraction into reusable helper function
+  - **Files Modified**: `g2c.py`
+
+---
+
 ## HPM [0.1.7m] - 2026-01-24 04:54 CST
 
 ### Fixed
