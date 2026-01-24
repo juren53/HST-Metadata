@@ -83,66 +83,6 @@ def read_excel_file(excel_path=DEFAULT_EXCEL_PATH):
         print(f"Error reading Excel file: {e}")
         raise
 
-        # Check for duplicate headers and make them unique if necessary
-        if len(headers) != len(set(headers)):
-            print(
-                "Warning: Duplicate column names found. Adding suffixes to make them unique."
-            )
-            seen = {}
-            unique_headers = []
-            for header in headers:
-                if header in seen:
-                    seen[header] += 1
-                    unique_headers.append(f"{header}_{seen[header]}")
-                else:
-                    seen[header] = 0
-                    unique_headers.append(header)
-            headers = unique_headers
-
-        # If there are more columns in the data than in the headers, add generic column names
-        if max_cols > len(headers):
-            print(
-                f"Warning: Some rows have more columns ({max_cols}) than the header row ({len(headers)})."
-            )
-            print("Adding generic column names for the extra columns.")
-            for i in range(len(headers), max_cols):
-                headers.append(f"Column_{i + 1}")
-
-        # Create DataFrame, handling rows that might have different column counts than headers
-        padded_data = []
-        for row in data_rows:
-            if len(row) < max_cols:
-                # Pad the row with None values
-                padded_data.append(row + [None] * (max_cols - len(row)))
-            else:
-                padded_data.append(row)
-
-        df = pd.DataFrame(padded_data, columns=headers)
-        return df
-
-    except HttpError as error:
-        error_message = str(error)
-
-        if "This operation is not supported for this document" in error_message:
-            print(
-                "\n❌ This is an Excel Spreadsheet and needs to be saved as a Google Sheet to process HSTL data"
-            )
-            sys.exit(1)
-        else:
-            if "Requested entity was not found" in str(error):
-                print(
-                    "\n❌ This is an Excel Spreadsheet and needs to be saved as a Google Sheet to process HSTL data"
-                )
-                sys.exit(1)
-            else:
-                print(f"HTTP Error: {error}")
-                print(
-                    "This might be due to incorrect spreadsheet ID or permission issues."
-                )
-                return None
-        print(f"An error occurred: {error}")
-        return None
-
 
 def print_dataframe_summary(df):
     """
@@ -548,22 +488,6 @@ Examples:
         help="Export data to CSV file (default filename: export.csv)",
     )
 
-    # Add arguments
-    parser.add_argument(
-        "--excel-file",
-        "-f",
-        default=DEFAULT_EXCEL_PATH,
-        help="Path to the Excel file (default: input/spreadsheet/metadata.xlsx)",
-    )
-
-    parser.add_argument(
-        "--export-csv",
-        "-e",
-        nargs="?",
-        const="export.csv",
-        help="Export data to CSV file (default filename: export.csv)",
-    )
-
     # Parse arguments
     args = parser.parse_args()
 
@@ -585,11 +509,6 @@ Examples:
         sys.exit(1)
     except Exception as e:
         print(f"\nERROR: Error reading Excel file: {e}")
-        print(
-            "Please check the file format and ensure it's a valid .xlsx or .xls file."
-        )
-        sys.exit(1)
-        print(f"\n❌ Error reading Excel file: {e}")
         print(
             "Please check the file format and ensure it's a valid .xlsx or .xls file."
         )

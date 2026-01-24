@@ -5,7 +5,7 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## HPM [0.1.7l] - 2026-01-23 11:45 CST
+## HPM [0.1.7m] - 2026-01-24 04:54 CST
 
 ### Fixed
 
@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Now logs: revert initiation, file deletions (with counts), errors, and completion status
   - Applies to all steps with file deletion (Steps 2, 4, 5, 6, 7, 8)
   - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **Step 5 Review Button** - Now opens File Explorer directly instead of searching for TagWriter
+  - Previously showed "TagWriter Not Found" dialog before offering to open File Explorer
+  - Now behaves consistently with Steps 6-8: opens `output/tiff_processed` directory directly
+  - Removed TagWriter detection and launch logic (~50 lines of unused code)
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **g2c.py Technical Debt Cleanup** - Removed dead code and duplicates identified by consensus code review
+  - Removed ~82 lines (13% reduction) of unreachable/duplicate code
+  - Deleted dead code after `return df` in `read_excel_file()` (~59 lines of legacy Google Sheets artifacts)
+  - Removed duplicate argparse argument definitions (`--excel-file`, `--export-csv` defined twice)
+  - Removed duplicate exception handling block (unreachable code after `sys.exit(1)`)
+  - Eliminated references to undefined variables (`headers`, `data_rows`, `HttpError`)
+  - Core IPTC mapping and encoding cleanup logic unchanged
+  - **Files Modified**: `g2c.py`
 
 ---
 

@@ -617,9 +617,9 @@ class StepWidget(QWidget):
             self._review_step_4_open_directory()
             return
 
-        # Special handling for Step 5 - Launch TagWriter
+        # Special handling for Step 5 - Open processed TIFF directory
         if step_num == 5:
-            self._review_step_5_with_tagwriter()
+            self._review_step_5_open_directory()
             return
 
         # Special handling for Step 6 - Open JPEG directory
@@ -774,12 +774,11 @@ class StepWidget(QWidget):
                 self, "Error", f"Failed to open directory:\n\n{str(e)}"
             )
 
-    def _review_step_5_with_tagwriter(self):
-        """Launch TagWriter to review metadata in processed TIFF files."""
-        import subprocess
+    def _review_step_5_open_directory(self):
+        """Open processed TIFF output directory to review embedded metadata."""
         from pathlib import Path
 
-        # Get the processed TIFF directory
+        # Get the processed TIFF output directory
         data_directory = self.framework.config_manager.get("project.data_directory", "")
         if not data_directory:
             QMessageBox.warning(
@@ -801,71 +800,22 @@ class StepWidget(QWidget):
             )
             return
 
-        # Get TagWriter path from config, or use default
-        tagwriter_path = self.framework.config_manager.get("tools.tagwriter", None)
-
-        # If not configured, try to find TagWriter in common locations
-        if not tagwriter_path:
-            # Common installation locations for TagWriter
-            possible_paths = [
-                Path("C:/Program Files/TagWriter/TagWriter.exe"),
-                Path("C:/Program Files (x86)/TagWriter/TagWriter.exe"),
-                Path("C:/TagWriter/TagWriter.exe"),
-            ]
-
-            for path in possible_paths:
-                if path.exists():
-                    tagwriter_path = str(path)
-                    break
-
-        # If still not found, ask user
-        if not tagwriter_path or not Path(tagwriter_path).exists():
-            reply = QMessageBox.question(
-                self,
-                "TagWriter Not Found",
-                f"TagWriter executable not found.\n\n"
-                f"Would you like to open the processed TIFF directory in File Explorer instead?",
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            )
-
-            if reply == QMessageBox.StandardButton.Yes:
-                # Open directory in File Explorer using QDesktopServices
-                try:
-                    url = QUrl.fromLocalFile(str(tiff_processed_dir))
-                    if QDesktopServices.openUrl(url):
-                        self.output_text.append(
-                            f"✓ Opened directory: {tiff_processed_dir}\n"
-                        )
-                    else:
-                        QMessageBox.warning(
-                            self,
-                            "Failed to Open",
-                            f"Could not open directory:\n\n{tiff_processed_dir}",
-                        )
-                except Exception as e:
-                    QMessageBox.critical(
-                        self, "Error", f"Failed to open directory:\n\n{str(e)}"
-                    )
-            return
-
-        # Launch TagWriter with the processed TIFF directory
+        # Open directory in File Explorer using QDesktopServices
         try:
-            # Launch TagWriter with directory as working directory
-            subprocess.Popen([tagwriter_path], cwd=str(tiff_processed_dir))
-            self.output_text.append(f"✓ Launched TagWriter in: {tiff_processed_dir}\n")
-
-            QMessageBox.information(
-                self,
-                "TagWriter Launched",
-                f"TagWriter has been launched to review metadata tags.\n\n"
-                f"Directory: {tiff_processed_dir}",
-            )
+            url = QUrl.fromLocalFile(str(tiff_processed_dir))
+            if QDesktopServices.openUrl(url):
+                self.output_text.append(
+                    f"✓ Opened processed TIFF directory: {tiff_processed_dir}\n"
+                )
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Failed to Open",
+                    f"Could not open directory:\n\n{tiff_processed_dir}",
+                )
         except Exception as e:
             QMessageBox.critical(
-                self,
-                "Launch Error",
-                f"Failed to launch TagWriter:\n\n{str(e)}\n\n"
-                f"TagWriter path: {tagwriter_path}",
+                self, "Error", f"Failed to open directory:\n\n{str(e)}"
             )
 
     def _review_step_6_open_directory(self):
