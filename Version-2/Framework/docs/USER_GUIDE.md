@@ -1,8 +1,8 @@
-# HPM User Guide
+## HPM User Guide
 
 ## 1. Introduction
 
-Welcome to the HSTL Photo Framework!
+Welcome to the HSTL Photo Metadata Framework!
 
 This application is designed to streamline the process of preparing digital photo collections for use in the HSTL online digital collections. It guides you through an 8-step pipeline that handles everything from metadata processing to image conversion and watermarking.
 
@@ -170,6 +170,6 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 
 ---
 
-**Version:** 0.1.7h
-**Commit Date:** 2026-01-21 21:30 CST
+**Version:** 1.8.0
+**Commit Date:** 2026-01-24 17:30 CST
 **Last Updated:** January 2026
