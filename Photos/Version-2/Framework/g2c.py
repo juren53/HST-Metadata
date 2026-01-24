@@ -320,115 +320,109 @@ def export_to_csv(df, output_file="export.csv"):
                 f"Mapped: '{src_col}' (row 3: '{df.loc[row3_index, src_col]}') -> '{dst_col}'"
             )
 
-        # Add DateCreated column in ISO format (YYYY-MM-DD) from productionDateMonth, productionDateDay, productionDateYear columns
+        # Add DateCreated column in ISO format (YYYY-MM-DD)
+        # Primary source: productionDateMonth, productionDateDay, productionDateYear
+        # Fallback source: coverageStartDateMonth, coverageStartDateDay, coverageStartDateYear
         try:
-            if all(
-                col in df_cleaned.columns
-                for col in [
-                    "productionDateMonth",
-                    "productionDateDay",
-                    "productionDateYear",
-                ]
-            ):
-                print("Creating 'DateCreated' column in ISO format (YYYY-MM-DD)...")
+            # Initialize an empty date column the same length as the DataFrame
+            new_df["DateCreated"] = ""
 
-                # Initialize an empty date column the same length as the DataFrame
-                new_df["DateCreated"] = ""
+            production_cols = ["productionDateMonth", "productionDateDay", "productionDateYear"]
+            coverage_cols = ["coverageStartDateMonth", "coverageStartDateDay", "coverageStartDateYear"]
 
-                # Skip the first 3 rows which contain header information
-                # Start processing from index 3 (4th row) onwards
-                for idx in range(3, len(df_cleaned)):
-                    try:
-                        # Get date components from cleaned DataFrame
-                        month_str = (
-                            str(df_cleaned.loc[idx, "productionDateMonth"]).strip()
-                            if df_cleaned.loc[idx, "productionDateMonth"] is not None
-                            else ""
-                        )
-                        day_str = (
-                            str(df_cleaned.loc[idx, "productionDateDay"]).strip()
-                            if df_cleaned.loc[idx, "productionDateDay"] is not None
-                            else ""
-                        )
-                        year_str = (
-                            str(df_cleaned.loc[idx, "productionDateYear"]).strip()
-                            if df_cleaned.loc[idx, "productionDateYear"] is not None
-                            else ""
-                        )
+            has_production_cols = all(col in df_cleaned.columns for col in production_cols)
+            has_coverage_cols = all(col in df_cleaned.columns for col in coverage_cols)
 
-                        # Replace 'nan', 'None', or 'NaN' strings with empty string
-                        month_str = (
-                            ""
-                            if month_str.lower() in ["nan", "none", "null"]
-                            else month_str
-                        )
-                        day_str = (
-                            ""
-                            if day_str.lower() in ["nan", "none", "null"]
-                            else day_str
-                        )
-                        year_str = (
-                            ""
-                            if year_str.lower() in ["nan", "none", "null"]
-                            else year_str
-                        )
-
-                        # Check if all components are present and look like numbers
-                        if (
-                            month_str
-                            and day_str
-                            and year_str
-                            and month_str.isdigit()
-                            and day_str.isdigit()
-                            and year_str.isdigit()
-                        ):
-                            # Convert to integers to validate and handle leading zeros
-                            year_int = int(year_str)
-                            month_int = int(month_str)
-                            day_int = int(day_str)
-
-                            # Basic date validation
-                            if (
-                                1 <= month_int <= 12
-                                and 1 <= day_int <= 31
-                                and year_int > 0
-                            ):
-                                # Format with leading zeros for month and day
-                                new_df.loc[idx, "DateCreated"] = (
-                                    f"{year_int:04d}-{month_int:02d}-{day_int:02d}"
-                                )
-                            else:
-                                print(
-                                    f"Skipping row {idx}: Date out of valid range: {month_int}/{day_int}/{year_int}"
-                                )
-                        else:
-                            # One or more components missing or not a valid number - skip silently for data rows
-                            if (
-                                idx > 5
-                            ):  # Only log warnings for non-header rows after index 5
-                                print(
-                                    f"Skipping row {idx}: Incomplete or non-numeric date components"
-                                )
-                    except Exception as e:
-                        if idx > 5:  # Only log warnings for non-header rows
-                            print(f"Warning: Error processing date at row {idx}: {e}")
-
-                print(
-                    f"Added 'DateCreated' column with ISO formatted dates (YYYY-MM-DD)"
-                )
+            if has_production_cols:
+                print("Creating 'DateCreated' column from productionDate columns...")
+            elif has_coverage_cols:
+                print("Creating 'DateCreated' column from coverageStartDate columns (productionDate not available)...")
             else:
-                missing_cols = [
-                    col
-                    for col in [
+                print("Warning: Neither productionDate nor coverageStartDate columns found.")
+
+            # Helper function to extract and validate date from columns
+            def get_date_from_columns(idx, month_col, day_col, year_col):
+                """Extract and validate date components, return ISO date string or empty string."""
+                try:
+                    month_str = (
+                        str(df_cleaned.loc[idx, month_col]).strip()
+                        if df_cleaned.loc[idx, month_col] is not None
+                        else ""
+                    )
+                    day_str = (
+                        str(df_cleaned.loc[idx, day_col]).strip()
+                        if df_cleaned.loc[idx, day_col] is not None
+                        else ""
+                    )
+                    year_str = (
+                        str(df_cleaned.loc[idx, year_col]).strip()
+                        if df_cleaned.loc[idx, year_col] is not None
+                        else ""
+                    )
+
+                    # Replace 'nan', 'None', or 'NaN' strings with empty string
+                    month_str = "" if month_str.lower() in ["nan", "none", "null"] else month_str
+                    day_str = "" if day_str.lower() in ["nan", "none", "null"] else day_str
+                    year_str = "" if year_str.lower() in ["nan", "none", "null"] else year_str
+
+                    # Check if all components are present and look like numbers
+                    if (
+                        month_str
+                        and day_str
+                        and year_str
+                        and month_str.isdigit()
+                        and day_str.isdigit()
+                        and year_str.isdigit()
+                    ):
+                        year_int = int(year_str)
+                        month_int = int(month_str)
+                        day_int = int(day_str)
+
+                        # Basic date validation
+                        if 1 <= month_int <= 12 and 1 <= day_int <= 31 and year_int > 0:
+                            return f"{year_int:04d}-{month_int:02d}-{day_int:02d}"
+                except Exception:
+                    pass
+                return ""
+
+            # Skip the first 3 rows which contain header information
+            # Start processing from index 3 (4th row) onwards
+            production_count = 0
+            coverage_count = 0
+
+            for idx in range(3, len(df_cleaned)):
+                date_value = ""
+
+                # Try productionDate columns first
+                if has_production_cols:
+                    date_value = get_date_from_columns(
+                        idx,
                         "productionDateMonth",
                         "productionDateDay",
-                        "productionDateYear",
-                    ]
-                    if col not in df.columns
-                ]
-                print(
-                    f"Warning: Cannot create 'DateCreated' column. Missing required column(s): {', '.join(missing_cols)}"
-                )
+                        "productionDateYear"
+                    )
+                    if date_value:
+                        production_count += 1
+
+                # If still empty, try coverageStartDate columns as fallback
+                if not date_value and has_coverage_cols:
+                    date_value = get_date_from_columns(
+                        idx,
+                        "coverageStartDateMonth",
+                        "coverageStartDateDay",
+                        "coverageStartDateYear"
+                    )
+                    if date_value:
+                        coverage_count += 1
+
+                new_df.loc[idx, "DateCreated"] = date_value
+
+            print(f"Added 'DateCreated' column with ISO formatted dates (YYYY-MM-DD)")
+            if production_count > 0:
+                print(f"  - {production_count} dates from productionDate columns")
+            if coverage_count > 0:
+                print(f"  - {coverage_count} dates from coverageStartDate columns (fallback)")
+
         except Exception as e:
             print(f"Error creating 'DateCreated' column: {str(e)}")
 
