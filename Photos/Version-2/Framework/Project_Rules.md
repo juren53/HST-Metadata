@@ -26,13 +26,14 @@ Example formats:
 
 Version information is **centralized** in `__init__.py`. All UI components import from there automatically.
 
-### Files Requiring Manual Update (only 4!)
+### Files Requiring Manual Update (5 files)
 
 | File | Location | Approx Line |
 |------|----------|-------------|
 | `__init__.py` | `__version__` and `__commit_date__` | ~9-10 |
 | `CHANGELOG.md` | Add new version section at top | ~8 |
 | `docs/GUI_QUICKSTART.md` | Version and Commit Date footer | ~272-273 |
+| `docs/USER_GUIDE.md` | Version and Commit Date footer | ~173-174 |
 | `gui/README.md` | Version and Commit Date header | ~3-4 |
 
 ### Files That Auto-Update (no manual changes needed)
@@ -217,4 +218,4 @@ All UI components import these values at runtime:
 from __init__ import __version__, __commit_date__
 ```
 
-This reduces manual updates from 11+ locations to just 4 files (1 Python + 3 markdown).
+This reduces manual updates from 11+ locations to just 5 files (1 Python + 4 markdown).
