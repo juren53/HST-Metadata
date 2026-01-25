@@ -17,6 +17,7 @@ import logging
 from pathlib import Path
 from PyQt6.QtWidgets import QApplication, QMessageBox
 from PyQt6.QtCore import Qt, QLockFile, QDir
+from PyQt6.QtGui import QIcon
 
 # Add the framework directory to the Python path
 framework_dir = Path(__file__).parent.parent
@@ -58,6 +59,11 @@ def main():
     app.setApplicationName("HSTL Photo Framework")
     app.setApplicationVersion(__version__)
     app.setOrganizationName("HSTL")
+
+    # Set application icon (shows in taskbar/system tray)
+    icon_path = framework_dir / "launcher" / "HPM_icon.png"
+    if icon_path.exists():
+        app.setWindowIcon(QIcon(str(icon_path)))
 
     # Initialize and apply theme
     theme_mgr = ThemeManager.instance()
