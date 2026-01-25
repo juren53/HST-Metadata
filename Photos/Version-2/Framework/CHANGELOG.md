@@ -5,6 +5,23 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.1] - 2026-01-24 23:40 CST
+
+### Added
+
+- **Application Window Icon** - HPM now displays proper icon in system tray/taskbar
+  - Added `QIcon` import and `setWindowIcon()` call in application startup
+  - Created 128x128 PNG icon from existing ICO file
+  - Icon appears in taskbar when application is running
+  - **Files Modified**: `gui/hstl_gui.py`
+
+- **Linux Desktop Integration** - Added desktop file for system menu integration
+  - HPM now appears in application menu under Graphics/Photography
+  - Supports launching from system menu or command line
+  - **Files Added**: `HPM.desktop`, `launcher/HPM_icon.png`
+
+---
+
 ## HPM [1.8.0] - 2026-01-24 17:30 CST
 
 ### Changed
