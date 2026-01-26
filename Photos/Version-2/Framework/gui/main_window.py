@@ -326,6 +326,11 @@ class MainWindow(QMainWindow):
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Ready")
+        
+        # Add permanent version label to right side of status bar
+        version_label = QLabel(f"v{__version__} | {__commit_date__}")
+        version_label.setStyleSheet("QLabel { color: gray; }")
+        self.status_bar.addPermanentWidget(version_label)
 
     def _new_batch(self):
         """Show dialog to create a new batch."""
