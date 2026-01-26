@@ -280,6 +280,16 @@ class MainWindow(QMainWindow):
         settings_action.triggered.connect(self._show_settings)
         tools_menu.addAction(settings_action)
 
+        browse_files_action = QAction('&Browse Files...', self)
+        browse_files_action.setShortcut('Ctrl+B')
+        browse_files_action.triggered.connect(self._browse_files)
+        tools_menu.addAction(browse_files_action)
+
+        batch_summary_action = QAction('Batch &Data Summary...', self)
+        batch_summary_action.setShortcut('Ctrl+D')
+        batch_summary_action.triggered.connect(self._show_batch_data_summary)
+        tools_menu.addAction(batch_summary_action)
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
 
@@ -563,6 +573,74 @@ class MainWindow(QMainWindow):
             )
         else:
             QMessageBox.warning(self, "Validation", "Project validation found issues")
+
+    def _browse_files(self):
+        '''Open file browser for current batch data directory.'''
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+        
+        # Get current batch info
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        data_directory = batch_info.get('data_directory', '')
+        
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                'No Data Directory',
+                'Data directory is not configured for this batch.',
+            )
+            return
+
+        # Convert to Path object
+        target_dir = Path(data_directory)
+        
+        # Check if directory exists
+        if not target_dir.exists():
+            QMessageBox.warning(
+                self,
+                'Directory Not Found',
+                f'Data directory not found:\n\n{target_dir}\n\n'
+                'Please check if the directory exists.',
+            )
+            return
+
+        # Open directory in File Explorer using QDesktopServices
+        try:
+            from PyQt6.QtGui import QDesktopServices
+            from PyQt6.QtCore import QUrl
+            
+            url = QUrl.fromLocalFile(str(target_dir))
+            if QDesktopServices.openUrl(url):
+                self.status_bar.showMessage(f'Opened data directory: {target_dir.name}', 3000)
+            else:
+                QMessageBox.warning(
+                    self, 'Failed to Open', f'Could not open directory:\n\n{target_dir}'
+                )
+        except Exception as e:
+            QMessageBox.critical(
+                self, 'Error', f'Failed to open directory:\n\n{str(e)}'
+            )
+
+    def _show_batch_data_summary(self):
+        """Show batch data directory summary dialog."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+        
+        # Get current batch info
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        
+        if not batch_info:
+            QMessageBox.warning(self, 'Error', 'Could not retrieve batch information')
+            return
+        
+        # Import dialog
+        from gui.dialogs.batch_data_summary_dialog import BatchDataSummaryDialog
+        
+        # Show dialog
+        dialog = BatchDataSummaryDialog(batch_info, self)
+        dialog.exec()
 
     def _set_data_location(self):
         """Show dialog to set default data files location."""
