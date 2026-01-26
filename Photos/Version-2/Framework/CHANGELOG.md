@@ -5,6 +5,31 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.2] - 2026-01-26 15:41 CST
+
+### Added
+
+- **Browse Files Menu Item** - Added "Browse Files..." to Tools menu (Ctrl+B)
+  - Opens system file browser to current batch's data directory root
+  - Provides quick access to batch directory structure
+  - Uses QDesktopServices for cross-platform compatibility
+  - Includes validation for batch selection and directory existence
+  - **Files Modified**: `gui/main_window.py`
+
+- **Batch Data Summary Dialog** - Added "Batch Data Summary..." to Tools menu (Ctrl+D)
+  - Displays comprehensive table of batch directory contents
+  - Shows file counts and sizes for all batch directories:
+    - Input: Spreadsheet, TIFFs
+    - Output: CSV, Processed TIFFs, JPEG variations
+    - Reports, Logs, Config
+  - Calculates and displays totals
+  - Adjustable column widths with persistent user preferences
+  - Column widths saved across sessions using QSettings
+  - **Files Added**: `gui/dialogs/batch_data_summary_dialog.py`
+  - **Files Modified**: `gui/main_window.py`
+
+---
+
 ## HPM [1.8.1] - 2026-01-24 23:45 CST
 
 ### Added
