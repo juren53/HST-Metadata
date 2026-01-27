@@ -99,17 +99,17 @@ HPM is a desktop application for managing photo metadata processing workflows. I
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        External Systems                          │
+│                        External Systems                         │
 ├─────────────────┬─────────────────┬─────────────────────────────┤
 │  Excel Files    │   TIFF Images   │   ExifTool (Binary)         │
 │  (.xlsx/.xls)   │   (16/8-bit)    │   (Metadata R/W)            │
 └────────┬────────┴────────┬────────┴──────────────┬──────────────┘
-         │                 │                        │
-         ▼                 ▼                        ▼
+         │                 │                       │
+         ▼                 ▼                       ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                  HPM Framework Application                       │
+│                  HPM Framework Application                      │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │                    User Interfaces                        │   │
+│  │                    User Interfaces                       │   │
 │  │  ┌─────────────────┐    ┌─────────────────────────────┐  │   │
 │  │  │   CLI (hstl_    │    │   GUI (PyQt6 MainWindow)    │  │   │
 │  │  │   framework.py) │    │   - Batches Tab             │  │   │
@@ -119,14 +119,14 @@ HPM is a desktop application for managing photo metadata processing workflows. I
 │  │  └─────────────────┘    └─────────────────────────────┘  │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │                   Core Processing                         │   │
+│  │                   Core Processing                        │   │
 │  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │   │
 │  │  │   Pipeline   │  │    Steps     │  │   Batch      │    │   │
 │  │  │ Orchestrator │  │   (1-8)      │  │  Registry    │    │   │
 │  │  └──────────────┘  └──────────────┘  └──────────────┘    │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │                   Infrastructure                          │   │
+│  │                   Infrastructure                         │   │
 │  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌─────────────┐  │   │
 │  │  │  Config  │ │   Log    │ │   Path   │ │  Validator  │  │   │
 │  │  │ Manager  │ │ Manager  │ │ Manager  │ │             │  │   │
@@ -136,7 +136,7 @@ HPM is a desktop application for managing photo metadata processing workflows. I
          │                 │                        │
          ▼                 ▼                        ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Output Files                             │
+│                         Output Files                            │
 ├─────────────────┬─────────────────┬─────────────────────────────┤
 │  CSV Exports    │  Processed      │   JPEG Images               │
 │                 │  TIFFs          │   (Full/Resized/Watermarked)│
@@ -162,7 +162,7 @@ The logical view describes the system's functional decomposition.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Presentation Layer                          │
+│                      Presentation Layer                         │
 │  ┌─────────────────────────┐  ┌─────────────────────────────┐   │
 │  │     CLI Interface       │  │      GUI Application        │   │
 │  │   (hstl_framework.py)   │  │    (gui/main_window.py)     │   │
@@ -171,14 +171,14 @@ The logical view describes the system's functional decomposition.
                │                               │
                ▼                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Application Layer                           │
+│                      Application Layer                          │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                  Pipeline Orchestrator                   │    │
-│  │                   (core/pipeline.py)                     │    │
+│  │                  Pipeline Orchestrator                  │    │
+│  │                   (core/pipeline.py)                    │    │
 │  └──────────────────────────┬──────────────────────────────┘    │
-│                             │                                    │
+│                             │                                   │
 │  ┌──────────────────────────┴──────────────────────────────┐    │
-│  │                   Step Processors                        │    │
+│  │                   Step Processors                       │    │
 │  │  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐│    │
 │  │  │ S1 │ │ S2 │ │ S3 │ │ S4 │ │ S5 │ │ S6 │ │ S7 │ │ S8 ││    │
 │  │  └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘ └────┘│    │
@@ -187,7 +187,7 @@ The logical view describes the system's functional decomposition.
                │
                ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Domain Layer                                │
+│                      Domain Layer                               │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐   │
 │  │ ProcessingCo │  │  StepResult  │  │  ValidationResult    │   │
 │  │   ntext      │  │              │  │                      │   │
@@ -196,7 +196,7 @@ The logical view describes the system's functional decomposition.
                │
                ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   Infrastructure Layer                           │
+│                   Infrastructure Layer                          │
 │  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐    │
 │  │  Config    │ │    Log     │ │    Path    │ │   Batch    │    │
 │  │  Manager   │ │  Manager   │ │  Manager   │ │  Registry  │    │
@@ -240,17 +240,17 @@ Application Start
          │
          ▼
 ┌─────────────────┐     ┌─────────────────┐
-│   Load Batch    │────▶│  Load Config    │
+│   Load Batch    │────▶│  Load Config   │
 │   Registry      │     │  (YAML)         │
 └────────┬────────┘     └────────┬────────┘
          │                       │
          ▼                       ▼
 ┌─────────────────────────────────────────┐
-│            Main Event Loop               │
+│            Main Event Loop              │
 │  ┌─────────────────────────────────┐    │
-│  │  User Action                     │    │
-│  │    │                             │    │
-│  │    ▼                             │    │
+│  │  User Action                    │    │
+│  │    │                            │    │
+│  │    ▼                            │    │
 │  │  ┌───────────────────────────┐  │    │
 │  │  │  Execute Step             │  │    │
 │  │  │  - validate_inputs()      │  │    │
@@ -258,9 +258,9 @@ Application Start
 │  │  │  - validate_outputs()     │  │    │
 │  │  │  - update_step_status()   │  │    │
 │  │  └───────────────────────────┘  │    │
-│  │    │                             │    │
-│  │    ▼                             │    │
-│  │  Update UI / Log Results         │    │
+│  │    │                            │    │
+│  │    ▼                            │    │
+│  │  Update UI / Log Results        │    │
 │  └─────────────────────────────────┘    │
 └─────────────────────────────────────────┘
 ```
@@ -288,10 +288,10 @@ StepWidget._run_step(step_num)
 └─────────┬──────────┘
           │
           ▼
-┌────────────────────┐     ┌────────────────────┐
+┌────────────────────┐      ┌────────────────────┐
 │  StepProcessor.run │────▶│  validate_inputs() │
-└─────────┬──────────┘     └─────────┬──────────┘
-          │                          │
+└─────────┬──────────┘      └─────────┬──────────┘
+          │                           │
           │◀─────────────────────────┘
           ▼
 ┌────────────────────┐
@@ -325,18 +325,18 @@ Application Component
          │ log_manager.info("message", batch_id, step)
          ▼
 ┌────────────────────────────────────────────────────────────┐
-│                      LogManager                             │
+│                      LogManager                            │
 │  ┌──────────────────────────────────────────────────────┐  │
-│  │                   Route Log Entry                     │  │
+│  │                   Route Log Entry                    │  │
 │  └──────────────────────────────────────────────────────┘  │
 │         │                    │                    │        │
 │         ▼                    ▼                    ▼        │
-│  ┌────────────┐     ┌────────────────┐    ┌────────────┐  │
-│  │  Session   │     │  Batch File    │    │    GUI     │  │
-│  │  Logger    │     │  Handler       │    │  Handler   │  │
-│  │            │     │  (Rotating)    │    │  (Signal)  │  │
-│  └─────┬──────┘     └───────┬────────┘    └─────┬──────┘  │
-└────────┼────────────────────┼───────────────────┼─────────┘
+│  ┌────────────┐     ┌────────────────┐    ┌────────────┐   │
+│  │  Session   │     │  Batch File    │    │    GUI     │   │
+│  │  Logger    │     │  Handler       │    │  Handler   │   │
+│  │            │     │  (Rotating)    │    │  (Signal)  │   │
+│  └─────┬──────┘     └───────┬────────┘    └─────┬──────┘   │
+└────────┼────────────────────┼───────────────────┼──────────┘
          │                    │                   │
          ▼                    ▼                   ▼
    session.log         batch_XXX.log      EnhancedLogWidget
@@ -436,10 +436,10 @@ Framework/
         ┌────────────────────┼────────────────────┐
         │                    │                    │
         ▼                    ▼                    ▼
-┌───────────────┐   ┌───────────────┐   ┌───────────────┐
-│hstl_framework │   │  gui/hstl_gui │   │ Utility Scripts│
-│    (CLI)      │   │    (GUI)      │   │  (g2c.py etc) │
-└───────┬───────┘   └───────┬───────┘   └───────────────┘
+┌───────────────┐   ┌───────────────┐   ┌─────────────────┐
+│hstl_framework │   │  gui/hstl_gui │   │ Utility Scripts │
+│    (CLI)      │   │    (GUI)      │   │  (g2c.py etc)   │
+└───────┬───────┘   └───────┬───────┘   └─────────────────┘
         │                   │
         │                   ▼
         │           ┌───────────────┐
@@ -457,17 +457,17 @@ Framework/
         │            │
         ▼            ▼
 ┌─────────────────────────────────────────────────────┐
-│                    core/pipeline                     │
+│                    core/pipeline                    │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│                   steps/base_step                    │
+│                   steps/base_step                   │
 └──────────────────────┬──────────────────────────────┘
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│                      utils/                          │
+│                      utils/                         │
 │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐    │
 │  │config_mgr   │ │ log_manager │ │ path_manager│    │
 │  └─────────────┘ └─────────────┘ └─────────────┘    │
@@ -478,8 +478,8 @@ Framework/
                        │
                        ▼
 ┌─────────────────────────────────────────────────────┐
-│                   config/settings                    │
-│              (DEFAULT_SETTINGS dict)                 │
+│                   config/settings                   │
+│              (DEFAULT_SETTINGS dict)                │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -491,54 +491,54 @@ The physical view describes the mapping of software to hardware.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Windows Workstation                           │
-│                                                                  │
+│                    Windows Workstation                          │
+│                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                   HPM Application                        │    │
+│  │                   HPM Application                       │    │
 │  │  ┌─────────────────┐    ┌─────────────────────────────┐ │    │
 │  │  │  Python 3.9+    │    │      PyQt6 Runtime          │ │    │
 │  │  │  Interpreter    │    │                             │ │    │
 │  │  └─────────────────┘    └─────────────────────────────┘ │    │
 │  └─────────────────────────────────────────────────────────┘    │
-│                                                                  │
+│                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                   External Tools                         │    │
+│  │                   External Tools                        │    │
 │  │  ┌─────────────────┐    ┌─────────────────────────────┐ │    │
-│  │  │   ExifTool.exe  │    │  TagWriter (Optional Viewer)  │ │    │
+│  │  │   ExifTool.exe  │    │  TagWriter (Optional Viewer)│ │    │
 │  │  │   (Metadata)    │    │                             │ │    │
 │  │  └─────────────────┘    └─────────────────────────────┘ │    │
 │  └─────────────────────────────────────────────────────────┘    │
-│                                                                  │
+│                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                    File System                           │    │
-│  │                                                          │    │
-│  │  C:\Users\{user}\                                        │    │
-│  │  └── .hstl_photo_framework\     (App data)               │    │
-│  │      ├── logs\                  (Session logs)           │    │
-│  │      └── settings.ini           (User preferences)       │    │
-│  │                                                          │    │
-│  │  {Framework Directory}\                                  │    │
-│  │  └── config\                                             │    │
-│  │      └── batch_registry.yaml    (Batch registry)         │    │
-│  │                                                          │    │
-│  │  {Project Data Directory}\      (Per batch)              │    │
-│  │  ├── input\                                              │    │
-│  │  │   ├── tiff\                  (Source TIFFs)           │    │
-│  │  │   └── spreadsheet\           (Excel files)            │    │
-│  │  ├── output\                                             │    │
-│  │  │   ├── csv\                   (Exported CSVs)          │    │
-│  │  │   ├── tiff_processed\        (Processed TIFFs)        │    │
-│  │  │   ├── jpeg\                  (Converted JPEGs)        │    │
-│  │  │   ├── jpeg_resized\          (Resized JPEGs)          │    │
-│  │  │   └── jpeg_watermarked\      (Watermarked JPEGs)      │    │
-│  │  ├── config\                                             │    │
-│  │  │   └── project_config.yaml    (Batch configuration)    │    │
-│  │  ├── logs\                      (Batch logs)             │    │
-│  │  └── reports\                   (Processing reports)     │    │
+│  │                    File System                          │    │
+│  │                                                         │    │
+│  │  C:\Users\{user}\                                       │    │
+│  │  └── .hstl_photo_framework\     (App data)              │    │
+│  │      ├── logs\                  (Session logs)          │    │
+│  │      └── settings.ini           (User preferences)      │    │
+│  │                                                         │    │
+│  │  {Framework Directory}\                                 │    │
+│  │  └── config\                                            │    │
+│  │      └── batch_registry.yaml    (Batch registry)        │    │
+│  │                                                         │    │
+│  │  {Project Data Directory}\      (Per batch)             │    │
+│  │  ├── input\                                             │    │
+│  │  │   ├── tiff\                  (Source TIFFs)          │    │
+│  │  │   └── spreadsheet\           (Excel files)           │    │
+│  │  ├── output\                                            │    │
+│  │  │   ├── csv\                   (Exported CSVs)         │    │
+│  │  │   ├── tiff_processed\        (Processed TIFFs)       │    │
+│  │  │   ├── jpeg\                  (Converted JPEGs)       │    │
+│  │  │   ├── jpeg_resized\          (Resized JPEGs)         │    │
+│  │  │   └── jpeg_watermarked\      (Watermarked JPEGs)     │    │
+│  │  ├── config\                                            │    │
+│  │  │   └── project_config.yaml    (Batch configuration)   │    │
+│  │  ├── logs\                      (Batch logs)            │    │
+│  │  └── reports\                   (Processing reports)    │    │
 │  └─────────────────────────────────────────────────────────┘    │
-│                                                                  │
+│                                                                 │
 │  ┌─────────────────────────────────────────────────────────┐    │
-│  │                   Network (Optional)                     │    │
+│  │                   Network (Optional)                    │    │
 │  │  ┌─────────────────────────────────────────────────────┐│    │
 │  │  │  GitHub API (api.github.com)                        ││    │
 │  │  │  - Version checking                                 ││    │
@@ -1035,11 +1035,10 @@ with exiftool.ExifTool() as et:
 
 **Required metadata fields**:
 
-- IPTC:Caption-Abstract
-- IPTC:Keywords
-- IPTC:Source
-- EXIF:ImageDescription
-- EXIF:Copyright
+- IPTC:Headline          [Title]
+- IPTC:Caption-Abstract  [Description]
+- IPTC:DateCreated
+- IPTC:CopyrightNotice
 
 ---
 
