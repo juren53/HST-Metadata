@@ -45,11 +45,10 @@ class BatchDataSummaryDialog(QDialog):
         header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         header.setStretchLastSection(False)
         
-        # Set proportional column widths (50% for Category, 25% each for counts and size)
-        total_width = 600  # Base width
-        header.resizeSection(0, int(total_width * 0.50))  # Category: 50%
-        header.resizeSection(1, int(total_width * 0.25))  # Number of Files: 25%
-        header.resizeSection(2, int(total_width * 0.25))  # Size: 25%
+        # Set default column widths
+        header.resizeSection(0, 150)  # Category: 150 pixels
+        header.resizeSection(1, 100)  # Number of Files: 100 pixels
+        header.resizeSection(2, 100)  # Size: 100 pixels
         
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
         self.table.setSelectionMode(QTableWidget.SelectionMode.NoSelection)

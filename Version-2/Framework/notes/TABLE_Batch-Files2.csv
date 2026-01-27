@@ -1,0 +1,18 @@
+,,,
+,,Number of Files,Size
+Input,,,
+,SpreadSheet,1,34KB
+,TIFFs,55,2.6GB
+,,,
+Output,,,
+,Export CSV,3,23KB
+,Processed TIFFs,53,2.6GB
+,JPEG Converted,53,
+,JPEG Resized,53,
+,JPEG  WaterMarked,53,
+,,,
+,Reports,5,
+,Logs,3,
+,Config,1,
+,,,
+,,Total ,

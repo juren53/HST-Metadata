@@ -5,8 +5,8 @@ Standard Directory Structure:
 │ C:\Data\HSTL_Batches\                                                          │
 │ ├── {batch_name}\          # Assigned as batch is created                      │
 │ │   ├── input\                                                                 │
-│ │   │   ├── tiff\          # Place source TIFFs here                           │
-│ │   │   └── spreadsheet\                                                       │
+│ │   │   ├── tiff\          # Step 4 places TIFFs here                          │
+│ │   │   └── spreadsheet\   # Step 1 places Excel Spreadsheet here              │
 │ │   ├── output\                                                                │
 │ │   │   ├── csv\                                                               │
 │ │   │   ├── tiff_processed\                                                    │
@@ -20,3 +20,4 @@ Standard Directory Structure:
 └────────────────────────────────────────────────────────────────────────────────┘
 
 
+Updated: 2026-01-27  0245  JAU
