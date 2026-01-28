@@ -1,0 +1,10 @@
+I would like to create a fail-over for items found in the HPM Help system.  Currently HPM looks for the UserGuide & ChangeLog in the local file system.  I would like to create a fail-over the  UserGuide & ChangeLog to goto the online version at GitHub.  Here are the URLs.
+
+Online HPM User Guide
+https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/docs/USER_GUIDE.md
+
+Online HPM Change Log
+https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/CHANGELOG.md
+
+Online HPM Issue Tracker
+https://github.com/juren53/HST-Metadata/issues
