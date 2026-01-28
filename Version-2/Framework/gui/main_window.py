@@ -675,12 +675,18 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _show_user_guide(self):
-        """Open the User Guide."""
+        """Open the User Guide (local file with GitHub fallback)."""
         import os
         import subprocess
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
 
         # Get path to USER_GUIDE.md
         user_guide_path = Path(__file__).parent.parent / "docs" / "USER_GUIDE.md"
+
+        # GitHub fallback URL
+        github_url = "https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/docs/USER_GUIDE.md"
 
         if user_guide_path.exists():
             # Try to open with default markdown viewer or text editor
@@ -697,25 +703,33 @@ class MainWindow(QMainWindow):
 
                 self.status_bar.showMessage("Opening User Guide...", 2000)
             except Exception as e:
-                QMessageBox.warning(
-                    self,
-                    "Cannot Open File",
-                    f"Could not open User Guide.\n\n"
-                    f"Please open manually:\n{user_guide_path}\n\n"
-                    f"Error: {str(e)}",
+                # Local file exists but couldn't open - try GitHub fallback
+                self._open_url_with_fallback(
+                    github_url,
+                    "User Guide",
+                    f"Could not open local User Guide.\n\nOpening online version..."
                 )
         else:
-            QMessageBox.warning(
-                self, "File Not Found", f"User Guide not found at:\n{user_guide_path}"
+            # Local file not found - use GitHub fallback
+            self._open_url_with_fallback(
+                github_url,
+                "User Guide",
+                "Local User Guide not found.\n\nOpening online version..."
             )
 
     def _show_changelog(self):
-        """Open the Change Log."""
+        """Open the Change Log (local file with GitHub fallback)."""
         import os
         import subprocess
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
 
         # Get path to CHANGELOG.md
         changelog_path = Path(__file__).parent.parent / "CHANGELOG.md"
+
+        # GitHub fallback URL
+        github_url = "https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/CHANGELOG.md"
 
         if changelog_path.exists():
             # Try to open with default markdown viewer or text editor
@@ -732,16 +746,56 @@ class MainWindow(QMainWindow):
 
                 self.status_bar.showMessage("Opening Change Log...", 2000)
             except Exception as e:
-                QMessageBox.warning(
-                    self,
-                    "Cannot Open File",
-                    f"Could not open Change Log.\n\n"
-                    f"Please open manually:\n{changelog_path}\n\n"
-                    f"Error: {str(e)}",
+                # Local file exists but couldn't open - try GitHub fallback
+                self._open_url_with_fallback(
+                    github_url,
+                    "Change Log",
+                    f"Could not open local Change Log.\n\nOpening online version..."
                 )
         else:
+            # Local file not found - use GitHub fallback
+            self._open_url_with_fallback(
+                github_url,
+                "Change Log",
+                "Local Change Log not found.\n\nOpening online version..."
+            )
+
+    def _open_url_with_fallback(self, url: str, doc_name: str, info_message: str = None):
+        """
+        Open a URL in the default web browser with fallback options.
+
+        Args:
+            url: The URL to open
+            doc_name: Name of the document (for status/error messages)
+            info_message: Optional info message to show before opening
+        """
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
+
+        # Show info message if provided
+        if info_message:
+            self.status_bar.showMessage(info_message.replace("\n", " "), 3000)
+
+        try:
+            # Try to open with Qt's QDesktopServices first
+            if QDesktopServices.openUrl(QUrl(url)):
+                self.status_bar.showMessage(f"Opening online {doc_name}...", 2000)
+                return
+        except Exception:
+            pass
+
+        # Fallback to webbrowser module
+        try:
+            webbrowser.open(url)
+            self.status_bar.showMessage(f"Opening online {doc_name}...", 2000)
+        except Exception as e:
             QMessageBox.warning(
-                self, "File Not Found", f"Change Log not found at:\n{changelog_path}"
+                self,
+                f"Cannot Open {doc_name}",
+                f"Could not open online {doc_name} in browser.\n\n"
+                f"Please open manually:\n{url}\n\n"
+                f"Error: {str(e)}",
             )
 
     def _show_issue_tracker(self):

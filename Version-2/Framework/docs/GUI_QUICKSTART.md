@@ -269,6 +269,6 @@ After creating and processing batches:
 
 ---
 
-**Version:** 1.8.1
-**Commit Date:** 2026-01-24 23:45 CST
+**Version:** 1.8.3
+**Commit Date:** 2026-01-28 13:09 CST
 **Last Updated:** January 2026
