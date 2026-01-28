@@ -29,6 +29,27 @@ import sys
 import argparse
 import pandas as pd
 from pathlib import Path
+from dataclasses import dataclass, field
+from typing import List
+
+
+@dataclass
+class NonStandardDateRecord:
+    """Record tracking a non-standard date found during CSV export."""
+    row_num: int
+    object_name: str
+    date_value: str
+    date_type: str  # "partial" or "placeholder"
+    source: str     # "productionDate", "coverageStartDate", or "fallback"
+
+
+@dataclass
+class CSVExportResult:
+    """Result of CSV export operation including non-standard date tracking."""
+    success: bool
+    production_count: int = 0
+    coverage_count: int = 0
+    nonstandard_dates: List[NonStandardDateRecord] = field(default_factory=list)
 
 # === CONFIG ===
 # Default Excel file path for HPM projects
@@ -231,11 +252,11 @@ def export_to_csv(df, output_file="export.csv"):
         output_file: name of the output CSV file
 
     Returns:
-        bool: True if export was successful, False otherwise
+        CSVExportResult: Result object with success status and non-standard date tracking
     """
     if df is None or df.empty:
         print("Error: No data to export.")
-        return False
+        return CSVExportResult(success=False)
 
     try:
         print(f"\n=== Exporting Data to CSV: {output_file} ===")
@@ -302,6 +323,9 @@ def export_to_csv(df, output_file="export.csv"):
             )
             print("Continuing with available mappings...")
 
+        # Track non-standard dates for reporting
+        nonstandard_dates: List[NonStandardDateRecord] = []
+
         # Clean encoding artifacts from the original DataFrame before processing
         print("\nCleaning encoding artifacts...")
         df_cleaned = clean_dataframe_encoding(df)
@@ -342,11 +366,13 @@ def export_to_csv(df, output_file="export.csv"):
 
             # Helper function to extract and validate date from columns
             # Supports partial dates: missing components become "00" (e.g., "1947-00-00" for year-only)
+            # Returns tuple: (date_string, is_partial) where is_partial indicates if any component is "00"
             def get_date_from_columns(idx, month_col, day_col, year_col):
-                """Extract and validate date components, return ISO date string or empty string.
+                """Extract and validate date components, return tuple (ISO date string, is_partial).
 
                 Supports partial dates where missing components are represented as "00".
-                Returns empty string only if any component contains invalid (non-numeric) data.
+                Returns ("", False) only if any component contains invalid (non-numeric) data.
+                is_partial is True if the date has any "00" components (year, month, or day).
                 """
                 try:
                     month_str = (
@@ -370,48 +396,80 @@ def export_to_csv(df, output_file="export.csv"):
                     day_str = "" if day_str.lower() in ["nan", "none", "null"] else day_str
                     year_str = "" if year_str.lower() in ["nan", "none", "null"] else year_str
 
-                    # Validate each component individually - fail-fast on invalid data
-                    if year_str and not year_str.isdigit():
-                        return ""  # Invalid year format
-                    if month_str and not month_str.isdigit():
-                        return ""  # Invalid month format
-                    if day_str and not day_str.isdigit():
-                        return ""  # Invalid day format
+                    # Helper to safely convert string to int, handling float strings (e.g., "1975.0" from Excel)
+                    def safe_int(s):
+                        """Convert string to int, handling float strings. Returns None if invalid."""
+                        if not s:
+                            return 0
+                        try:
+                            # Try direct int conversion first
+                            return int(s)
+                        except ValueError:
+                            try:
+                                # Handle float strings like "1975.0"
+                                return int(float(s))
+                            except (ValueError, TypeError):
+                                return None
 
-                    # Extract numeric values (0 if missing/blank)
-                    year_int = int(year_str) if year_str else 0
-                    month_int = int(month_str) if month_str else 0
-                    day_int = int(day_str) if day_str else 0
+                    # Extract numeric values, returning ("", False) if any component is invalid
+                    year_int = safe_int(year_str)
+                    if year_int is None:
+                        return ("", False)  # Invalid year format
+
+                    month_int = safe_int(month_str)
+                    if month_int is None:
+                        return ("", False)  # Invalid month format
+
+                    day_int = safe_int(day_str)
+                    if day_int is None:
+                        return ("", False)  # Invalid day format
 
                     # If no components present at all, return empty string
                     if year_int == 0 and month_int == 0 and day_int == 0:
-                        return ""
+                        return ("", False)
 
                     # Apply range validation only to present (non-zero) components
                     if year_int != 0 and year_int <= 0:
-                        return ""  # Invalid year value
+                        return ("", False)  # Invalid year value
                     if month_int != 0 and not (1 <= month_int <= 12):
-                        return ""  # Invalid month value
+                        return ("", False)  # Invalid month value
                     if day_int != 0 and not (1 <= day_int <= 31):
-                        return ""  # Invalid day value
+                        return ("", False)  # Invalid day value
+
+                    # Check if this is a partial date (any component is 0/missing)
+                    is_partial = (year_int == 0 or month_int == 0 or day_int == 0)
 
                     # Format with zero-padded components
-                    return f"{year_int:04d}-{month_int:02d}-{day_int:02d}"
+                    return (f"{year_int:04d}-{month_int:02d}-{day_int:02d}", is_partial)
                 except Exception:
                     pass
-                return ""
+                return ("", False)
 
             # Skip the first 3 rows which contain header information
             # Start processing from index 3 (4th row) onwards
             production_count = 0
             coverage_count = 0
 
+            # Find ObjectName column for tracking non-standard dates
+            object_name_col = None
+            for col, export_col in column_to_export_header.items():
+                if export_col == "ObjectName":
+                    object_name_col = col
+                    break
+
             for idx in range(3, len(df_cleaned)):
                 date_value = ""
+                date_source = ""
+                is_partial = False
+
+                # Get ObjectName for this row (for non-standard date reporting)
+                object_name = ""
+                if object_name_col and pd.notna(df_cleaned.loc[idx, object_name_col]):
+                    object_name = str(df_cleaned.loc[idx, object_name_col]).strip()
 
                 # Try productionDate columns first
                 if has_production_cols:
-                    date_value = get_date_from_columns(
+                    date_value, is_partial = get_date_from_columns(
                         idx,
                         "productionDateMonth",
                         "productionDateDay",
@@ -419,10 +477,11 @@ def export_to_csv(df, output_file="export.csv"):
                     )
                     if date_value:
                         production_count += 1
+                        date_source = "productionDate"
 
                 # If still empty, try coverageStartDate columns as fallback
                 if not date_value and has_coverage_cols:
-                    date_value = get_date_from_columns(
+                    date_value, is_partial = get_date_from_columns(
                         idx,
                         "coverageStartDateMonth",
                         "coverageStartDateDay",
@@ -430,12 +489,35 @@ def export_to_csv(df, output_file="export.csv"):
                     )
                     if date_value:
                         coverage_count += 1
+                        date_source = "coverageStartDate"
 
                 # If still no date from either source, use placeholder
                 if not date_value:
                     date_value = "0000-00-00"
+                    date_source = "fallback"
 
                 new_df.loc[idx, "DateCreated"] = date_value
+
+                # Track non-standard dates (partial or placeholder)
+                # Row number is idx + 1 for 1-based display (but idx already accounts for 0-based)
+                # Since idx starts at 3 and represents Excel row, display as idx + 1 for user-friendly numbering
+                row_num = idx + 1  # Convert to 1-based row number
+                if date_value == "0000-00-00":
+                    nonstandard_dates.append(NonStandardDateRecord(
+                        row_num=row_num,
+                        object_name=object_name,
+                        date_value=date_value,
+                        date_type="placeholder",
+                        source=date_source
+                    ))
+                elif is_partial:
+                    nonstandard_dates.append(NonStandardDateRecord(
+                        row_num=row_num,
+                        object_name=object_name,
+                        date_value=date_value,
+                        date_type="partial",
+                        source=date_source
+                    ))
 
             print(f"Added 'DateCreated' column with ISO formatted dates (YYYY-MM-DD)")
             if production_count > 0:
@@ -449,7 +531,7 @@ def export_to_csv(df, output_file="export.csv"):
         # Verify we have data to export
         if new_df.empty:
             print("Error: No columns were successfully mapped!")
-            return False
+            return CSVExportResult(success=False)
 
         print(f"\nSuccessfully mapped {len(renamed_columns)} columns:")
         for mapping in renamed_columns:
@@ -461,11 +543,23 @@ def export_to_csv(df, output_file="export.csv"):
 
         print(f"Conversion completed successfully. Output saved to '{output_file}'")
         print(f"Rows processed: {len(new_df)}")
-        return True
+
+        # Report non-standard dates summary
+        if nonstandard_dates:
+            partial_count = sum(1 for d in nonstandard_dates if d.date_type == "partial")
+            placeholder_count = sum(1 for d in nonstandard_dates if d.date_type == "placeholder")
+            print(f"Non-standard dates found: {len(nonstandard_dates)} total ({partial_count} partial, {placeholder_count} placeholder)")
+
+        return CSVExportResult(
+            success=True,
+            production_count=production_count,
+            coverage_count=coverage_count,
+            nonstandard_dates=nonstandard_dates
+        )
 
     except Exception as e:
         print(f"Error during CSV export: {str(e)}")
-        return False
+        return CSVExportResult(success=False)
 
 
 def main():
@@ -536,9 +630,27 @@ Examples:
         # Export to CSV if requested
         if args.export_csv:
             output_file = args.export_csv
-            export_success = export_to_csv(df, output_file)
-            if not export_success:
+            result = export_to_csv(df, output_file)
+            if not result.success:
                 print(f"Warning: CSV export failed")
+            elif result.nonstandard_dates:
+                # Print detailed non-standard dates report for CLI
+                print("\n" + "=" * 50)
+                print("NON-STANDARD DATES REPORT")
+                print("=" * 50)
+
+                partial_dates = [d for d in result.nonstandard_dates if d.date_type == "partial"]
+                placeholder_dates = [d for d in result.nonstandard_dates if d.date_type == "placeholder"]
+
+                if partial_dates:
+                    print(f"\nPartial Dates ({len(partial_dates)}):")
+                    for d in partial_dates:
+                        print(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\" (from {d.source})")
+
+                if placeholder_dates:
+                    print(f"\nPlaceholder Dates ({len(placeholder_dates)}):")
+                    for d in placeholder_dates:
+                        print(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\"")
 
         # Show success message
         print(f"\nSUCCESS: Excel file processed successfully.")
