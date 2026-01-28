@@ -341,8 +341,13 @@ def export_to_csv(df, output_file="export.csv"):
                 print("Warning: Neither productionDate nor coverageStartDate columns found.")
 
             # Helper function to extract and validate date from columns
+            # Supports partial dates: missing components become "00" (e.g., "1947-00-00" for year-only)
             def get_date_from_columns(idx, month_col, day_col, year_col):
-                """Extract and validate date components, return ISO date string or empty string."""
+                """Extract and validate date components, return ISO date string or empty string.
+
+                Supports partial dates where missing components are represented as "00".
+                Returns empty string only if any component contains invalid (non-numeric) data.
+                """
                 try:
                     month_str = (
                         str(df_cleaned.loc[idx, month_col]).strip()
@@ -365,22 +370,33 @@ def export_to_csv(df, output_file="export.csv"):
                     day_str = "" if day_str.lower() in ["nan", "none", "null"] else day_str
                     year_str = "" if year_str.lower() in ["nan", "none", "null"] else year_str
 
-                    # Check if all components are present and look like numbers
-                    if (
-                        month_str
-                        and day_str
-                        and year_str
-                        and month_str.isdigit()
-                        and day_str.isdigit()
-                        and year_str.isdigit()
-                    ):
-                        year_int = int(year_str)
-                        month_int = int(month_str)
-                        day_int = int(day_str)
+                    # Validate each component individually - fail-fast on invalid data
+                    if year_str and not year_str.isdigit():
+                        return ""  # Invalid year format
+                    if month_str and not month_str.isdigit():
+                        return ""  # Invalid month format
+                    if day_str and not day_str.isdigit():
+                        return ""  # Invalid day format
 
-                        # Basic date validation
-                        if 1 <= month_int <= 12 and 1 <= day_int <= 31 and year_int > 0:
-                            return f"{year_int:04d}-{month_int:02d}-{day_int:02d}"
+                    # Extract numeric values (0 if missing/blank)
+                    year_int = int(year_str) if year_str else 0
+                    month_int = int(month_str) if month_str else 0
+                    day_int = int(day_str) if day_str else 0
+
+                    # If no components present at all, return empty string
+                    if year_int == 0 and month_int == 0 and day_int == 0:
+                        return ""
+
+                    # Apply range validation only to present (non-zero) components
+                    if year_int != 0 and year_int <= 0:
+                        return ""  # Invalid year value
+                    if month_int != 0 and not (1 <= month_int <= 12):
+                        return ""  # Invalid month value
+                    if day_int != 0 and not (1 <= day_int <= 31):
+                        return ""  # Invalid day value
+
+                    # Format with zero-padded components
+                    return f"{year_int:04d}-{month_int:02d}-{day_int:02d}"
                 except Exception:
                     pass
                 return ""
@@ -414,6 +430,10 @@ def export_to_csv(df, output_file="export.csv"):
                     )
                     if date_value:
                         coverage_count += 1
+
+                # If still no date from either source, use placeholder
+                if not date_value:
+                    date_value = "0000-00-00"
 
                 new_df.loc[idx, "DateCreated"] = date_value
 

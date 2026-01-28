@@ -5,6 +5,27 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.3] - 2026-01-28 13:09 CST
+
+### Added
+
+- **GitHub Failover for Help Documents** - User Guide and Change Log now fall back to online versions
+  - If local `docs/USER_GUIDE.md` is missing or cannot be opened, automatically opens GitHub version
+  - If local `CHANGELOG.md` is missing or cannot be opened, automatically opens GitHub version
+  - Added `_open_url_with_fallback()` helper method for reliable URL opening
+  - Uses QDesktopServices with webbrowser module fallback
+  - Status bar shows informative messages during failover
+  - **Files Modified**: `gui/main_window.py`
+
+- **Partial Date Support in DateCreated Field** - Step 2 (g2c.py) now handles incomplete dates
+  - Supports partial dates where only year, month, or day is available
+  - Missing components represented as "00" (e.g., "1947-00-00" for year-only)
+  - Logic: Try productionDate first, fall back to coverageStartDate, then use "0000-00-00" placeholder
+  - Preserves existing behavior for complete dates
+  - **Files Modified**: `g2c.py`
+
+---
+
 ## HPM [1.8.2] - 2026-01-26 09:41 CST
 
 ### Added

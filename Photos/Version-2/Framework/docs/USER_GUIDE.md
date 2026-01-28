@@ -172,6 +172,6 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 
 ---
 
-**Version:** 1.8.2
-**Commit Date:** 2026-01-28 01:45 CST
+**Version:** 1.8.3
+**Commit Date:** 2026-01-28 13:09 CST
 **Last Updated:** January 28, 2026
