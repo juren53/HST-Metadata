@@ -18,9 +18,11 @@ Before processing your first batch, perform a quick preflight check:
 
 1. Launch HPM and go to **Help → About**
 2. Review the system information at the bottom of the dialog
+3. Verify the system is running the right version of Python 
+4. Verify the HPM is running from the correct location
 3. Verify that **ExifTool** shows a version number and path (required for metadata embedding)
 
-If ExifTool shows "Not found," contact your system administrator.
+If ExifTool shows "Not found," before HPM will be able to add metadata tags.
 
 ### 2.2. Application Settings
 
@@ -170,6 +172,6 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 
 ---
 
-**Version:** 1.8.1
-**Commit Date:** 2026-01-24 23:45 CST
-**Last Updated:** January 2026
+**Version:** 1.8.2
+**Commit Date:** 2026-01-28 01:45 CST
+**Last Updated:** January 28, 2026
