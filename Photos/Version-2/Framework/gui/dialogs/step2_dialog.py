@@ -24,7 +24,7 @@ class CSVConversionThread(QThread):
     """Worker thread for CSV conversion."""
 
     progress = pyqtSignal(str)  # Progress messages
-    finished = pyqtSignal(bool)  # Success/failure
+    finished = pyqtSignal(bool, object)  # Success/failure, CSVExportResult
     error = pyqtSignal(str)  # Error messages
 
     def __init__(self, excel_path, output_path):
@@ -80,11 +80,20 @@ class CSVConversionThread(QThread):
 
             # Export to CSV
             self.progress.emit(f"Exporting to {self.output_path}...")
-            success = export_to_csv(df, self.output_path)
+            result = export_to_csv(df, self.output_path)
 
-            if success:
+            if result.success:
                 self.progress.emit("✓ CSV export completed successfully")
-                self.finished.emit(True)
+                # Report date counts
+                if result.production_count > 0:
+                    self.progress.emit(f"  - {result.production_count} dates from productionDate columns")
+                if result.coverage_count > 0:
+                    self.progress.emit(f"  - {result.coverage_count} dates from coverageStartDate columns (fallback)")
+                if result.nonstandard_dates:
+                    partial_count = sum(1 for d in result.nonstandard_dates if d.date_type == "partial")
+                    placeholder_count = sum(1 for d in result.nonstandard_dates if d.date_type == "placeholder")
+                    self.progress.emit(f"  - Non-standard dates: {len(result.nonstandard_dates)} ({partial_count} partial, {placeholder_count} placeholder)")
+                self.finished.emit(True, result)
             else:
                 self.error.emit("CSV export failed")
 
@@ -242,15 +251,20 @@ class Step2Dialog(QDialog):
         self.output_text.append(message)
         self.log_manager.info(message, batch_id=self.batch_id, step=2)
 
-    def _on_finished(self, success):
-        """Handle conversion completion."""
+    def _on_finished(self, success, result=None):
+        """Handle conversion completion.
+
+        Args:
+            success: Whether the conversion was successful
+            result: CSVExportResult object with conversion details
+        """
         self.progress_bar.setVisible(False)
         self.convert_btn.setEnabled(True)
 
         if success:
             self.output_text.append("")
             self.output_text.append("✓ CSV conversion completed successfully!")
-            
+
             self.log_manager.step_complete(2, "CSV Conversion", batch_id=self.batch_id)
             self.config_manager.update_step_status(2, True)
 
@@ -296,16 +310,72 @@ class Step2Dialog(QDialog):
                     batch_id=self.batch_id,
                     step=2,
                 )
-            
+
+            # Display and log non-standard dates if present
+            if result and result.nonstandard_dates:
+                self._display_nonstandard_dates(result.nonstandard_dates)
+                self._log_nonstandard_dates(result.nonstandard_dates)
+
             # Show completion message
             QMessageBox.information(
                 self,
                 "Conversion Complete",
                 "CSV conversion completed successfully!\n\nStep 2 is now marked as complete."
             )
-            
+
             # Close dialog to update UI
             self.accept()
+
+    def _display_nonstandard_dates(self, nonstandard_dates):
+        """Display non-standard dates report in the output text area.
+
+        Args:
+            nonstandard_dates: List of NonStandardDateRecord objects
+        """
+        if not nonstandard_dates:
+            return
+
+        partial_dates = [d for d in nonstandard_dates if d.date_type == "partial"]
+        placeholder_dates = [d for d in nonstandard_dates if d.date_type == "placeholder"]
+
+        self.output_text.append("")
+        self.output_text.append("=" * 50)
+        self.output_text.append("NON-STANDARD DATES REPORT")
+        self.output_text.append("=" * 50)
+
+        if partial_dates:
+            self.output_text.append(f"\nPartial Dates ({len(partial_dates)}):")
+            for d in partial_dates:
+                self.output_text.append(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\" (from {d.source})")
+
+        if placeholder_dates:
+            self.output_text.append(f"\nPlaceholder Dates ({len(placeholder_dates)}):")
+            for d in placeholder_dates:
+                self.output_text.append(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\"")
+
+    def _log_nonstandard_dates(self, nonstandard_dates):
+        """Log non-standard dates to the batch log file.
+
+        Args:
+            nonstandard_dates: List of NonStandardDateRecord objects
+        """
+        if not nonstandard_dates:
+            return
+
+        # Log summary
+        self.log_manager.warning(
+            f"Non-standard dates found: {len(nonstandard_dates)} records",
+            batch_id=self.batch_id,
+            step=2
+        )
+
+        # Log each non-standard date
+        for d in nonstandard_dates:
+            self.log_manager.warning(
+                f"Non-standard date - Row {d.row_num}: {d.object_name} = \"{d.date_value}\" ({d.date_type}, source: {d.source})",
+                batch_id=self.batch_id,
+                step=2
+            )
 
     def _on_error(self, error_msg):
         """Handle conversion errors."""
