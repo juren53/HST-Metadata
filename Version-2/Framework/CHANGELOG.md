@@ -24,6 +24,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Preserves existing behavior for complete dates
   - **Files Modified**: `g2c.py`
 
+- **Non-Standard Date Reporting in Step 2** - Detects and reports partial and placeholder dates during CSV conversion
+  - Added `NonStandardDateRecord` and `CSVExportResult` dataclasses for structured tracking
+  - Tracks partial dates (e.g., "1947-00-00") and placeholder dates ("0000-00-00") with source column info
+  - Displays categorized report in Step 2 dialog UI after conversion completes
+  - Logs each non-standard date as a warning entry in the batch log
+  - CLI mode (`python g2c.py --export-csv`) also prints the report
+  - **Files Modified**: `g2c.py`, `gui/dialogs/step2_dialog.py`
+
+- **Placeholder Date Reason Tracking** - Users can now see why a placeholder date was assigned
+  - Distinguishes "no date data" from "invalid date" with raw spreadsheet values shown
+  - Invalid dates display the actual cell values (e.g., `[invalid date (M=abc D= Y=1975)]`)
+  - Reason displayed in both the Step 2 dialog and batch log
+  - **Files Modified**: `g2c.py`, `gui/dialogs/step2_dialog.py`
+
+- **IPTC/XMP Metadata Analysis** - Documented IPTC IIM field length limits causing truncation in Step 5
+  - Source, By-line, and By-lineTitle limited to 32 bytes by IPTC IIM specification
+  - Identified ExifTool silent truncation as root cause of data loss during TIFF tagging
+  - Documented XMP equivalents with no length limits as recommended fix
+  - **Files Added**: `notes/ANALYSIS_IPTC-standards-and-ExifTool-metadata-tagging.md`
+
+### Fixed
+
+- **Float String Date Parsing** - Fixed Excel numeric values (e.g., "1975.0") failing date validation
+  - Added `safe_int()` helper that handles float-to-int conversion for date components
+  - Fixes coverageStartDate fallback not working when year column contains numeric values
+  - **Files Modified**: `g2c.py`
+
+### Changed
+
+- **Step 2 Dialog Stays Open After Completion** - Popup and dialog close independently
+  - "Conversion Complete" popup no longer auto-closes the Step 2 dialog
+  - Users can review output (including non-standard dates report) before closing
+  - Close button correctly signals success to parent after conversion completes
+  - **Files Modified**: `gui/dialogs/step2_dialog.py`
+
+- **Step 4 Directory Browser Shows TIFF Files** - Improved "Copy Raw Tiffs" file browser
+  - Switched from native Windows directory picker to Qt dialog
+  - TIFF files now visible (greyed-out, non-selectable) alongside directories
+  - Helps users confirm they are selecting the correct source directory
+  - Name filter limits display to `.tif` and `.tiff` files
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
 ---
 
 ## HPM [1.8.2] - 2026-01-26 09:41 CST
