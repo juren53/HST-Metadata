@@ -5,6 +5,185 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.3] - 2026-01-28 13:09 CST
+
+### Added
+
+- **GitHub Failover for Help Documents** - User Guide and Change Log now fall back to online versions
+  - If local `docs/USER_GUIDE.md` is missing or cannot be opened, automatically opens GitHub version
+  - If local `CHANGELOG.md` is missing or cannot be opened, automatically opens GitHub version
+  - Added `_open_url_with_fallback()` helper method for reliable URL opening
+  - Uses QDesktopServices with webbrowser module fallback
+  - Status bar shows informative messages during failover
+  - **Files Modified**: `gui/main_window.py`
+
+- **Partial Date Support in DateCreated Field** - Step 2 (g2c.py) now handles incomplete dates
+  - Supports partial dates where only year, month, or day is available
+  - Missing components represented as "00" (e.g., "1947-00-00" for year-only)
+  - Logic: Try productionDate first, fall back to coverageStartDate, then use "0000-00-00" placeholder
+  - Preserves existing behavior for complete dates
+  - **Files Modified**: `g2c.py`
+
+- **Non-Standard Date Reporting in Step 2** - Detects and reports partial and placeholder dates during CSV conversion
+  - Added `NonStandardDateRecord` and `CSVExportResult` dataclasses for structured tracking
+  - Tracks partial dates (e.g., "1947-00-00") and placeholder dates ("0000-00-00") with source column info
+  - Displays categorized report in Step 2 dialog UI after conversion completes
+  - Logs each non-standard date as a warning entry in the batch log
+  - CLI mode (`python g2c.py --export-csv`) also prints the report
+  - **Files Modified**: `g2c.py`, `gui/dialogs/step2_dialog.py`
+
+- **Placeholder Date Reason Tracking** - Users can now see why a placeholder date was assigned
+  - Distinguishes "no date data" from "invalid date" with raw spreadsheet values shown
+  - Invalid dates display the actual cell values (e.g., `[invalid date (M=abc D= Y=1975)]`)
+  - Reason displayed in both the Step 2 dialog and batch log
+  - **Files Modified**: `g2c.py`, `gui/dialogs/step2_dialog.py`
+
+- **IPTC/XMP Metadata Analysis** - Documented IPTC IIM field length limits causing truncation in Step 5
+  - Source, By-line, and By-lineTitle limited to 32 bytes by IPTC IIM specification
+  - Identified ExifTool silent truncation as root cause of data loss during TIFF tagging
+  - Documented XMP equivalents with no length limits as recommended fix
+  - **Files Added**: `notes/ANALYSIS_IPTC-standards-and-ExifTool-metadata-tagging.md`
+
+### Fixed
+
+- **Float String Date Parsing** - Fixed Excel numeric values (e.g., "1975.0") failing date validation
+  - Added `safe_int()` helper that handles float-to-int conversion for date components
+  - Fixes coverageStartDate fallback not working when year column contains numeric values
+  - **Files Modified**: `g2c.py`
+
+### Changed
+
+- **Step 2 Dialog Stays Open After Completion** - Popup and dialog close independently
+  - "Conversion Complete" popup no longer auto-closes the Step 2 dialog
+  - Users can review output (including non-standard dates report) before closing
+  - Close button correctly signals success to parent after conversion completes
+  - **Files Modified**: `gui/dialogs/step2_dialog.py`
+
+- **Step 4 Directory Browser Shows TIFF Files** - Improved "Copy Raw Tiffs" file browser
+  - Switched from native Windows directory picker to Qt dialog
+  - TIFF files now visible (greyed-out, non-selectable) alongside directories
+  - Helps users confirm they are selecting the correct source directory
+  - Name filter limits display to `.tif` and `.tiff` files
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+---
+
+## HPM [1.8.2] - 2026-01-26 09:41 CST
+
+### Added
+
+- **Browse Files Menu Item** - Added "Browse Files..." to Tools menu (Ctrl+B)
+  - Opens system file browser to current batch's data directory root
+  - Provides quick access to batch directory structure
+  - Uses QDesktopServices for cross-platform compatibility
+  - Includes validation for batch selection and directory existence
+  - **Files Modified**: `gui/main_window.py`
+
+- **Batch Data Summary Dialog** - Added "Batch Data Summary..." to Tools menu (Ctrl+D)
+  - Displays comprehensive table of batch directory contents
+  - Shows file counts and sizes for all batch directories:
+    - Input: Spreadsheet, TIFFs
+    - Output: CSV, Processed TIFFs, JPEG variations
+    - Reports, Logs, Config
+  - Calculates and displays totals
+  - Adjustable column widths with persistent user preferences
+  - Column widths saved across sessions using QSettings
+  - **Files Added**: `gui/dialogs/batch_data_summary_dialog.py`
+  - **Files Modified**: `gui/main_window.py`
+
+---
+
+## HPM [1.8.1] - 2026-01-24 23:45 CST
+
+### Added
+
+- **Application Window Icon** - HPM now displays proper icon in system tray/taskbar
+  - Added `QIcon` import and `setWindowIcon()` call in application startup
+  - Created 128x128 PNG icon from existing ICO file
+  - Icon appears in taskbar when application is running
+  - **Files Modified**: `gui/hstl_gui.py`
+
+- **Linux Desktop Integration** - Added desktop file for system menu integration
+  - HPM now appears in application menu under Graphics/Photography
+  - Supports launching from system menu or command line
+  - **Files Added**: `HPM.desktop`, `launcher/HPM_icon.png`
+
+---
+
+## HPM [1.8.0] - 2026-01-24 17:30 CST
+
+### Changed
+
+- **Major Version Bump** - First stable release candidate
+  - Version numbering changed from 0.1.x to 1.8.0 to reflect production readiness
+  - All 8 processing steps fully functional with GUI support
+
+### Updated
+
+- **requirements.txt Modernized** - Cleaned up and documented actual dependencies
+  - Core dependencies: PyYAML, pandas, openpyxl, ftfy, PyQt6, Pillow, PyExifTool
+  - Removed unused packages: tqdm, structlog, colorama, pydantic, xlrd
+  - Added documentation mapping packages to steps (ftfy→Step 3, Pillow/PyExifTool→Step 8)
+  - Added ExifTool command-line installation note
+  - Updated Python requirement to 3.9+
+  - **Files Modified**: `requirements.txt`
+
+### Fixed
+
+- **Step 1 Revert Now Deletes Spreadsheet Files** - Revert Step 1 now properly cleans up `input/spreadsheet` directory
+  - Previously, reverting Step 1 would mark the step as pending but leave downloaded Excel files in place
+  - Multiple Excel files could stack up in the directory across re-runs
+  - Now deletes all files from `input/spreadsheet` when reverting Step 1
+  - Confirmation dialog warns user that files will be deleted
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **Step 2 Revert Now Deletes All CSV Files** - Revert Step 2 now deletes all files in `output/csv` directory
+  - Previously only deleted `export.csv`, leaving other files that may have accumulated
+  - Now deletes all files in the directory for consistent cleanup
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+---
+
+## HPM [0.1.7p] - 2026-01-24 15:30 CST
+
+### Fixed
+
+- **Step 1 Revert Now Deletes Spreadsheet Files** - Revert Step 1 now properly cleans up `input/spreadsheet` directory
+  - Previously, reverting Step 1 would mark the step as pending but leave downloaded Excel files in place
+  - Multiple Excel files could stack up in the directory across re-runs
+  - Now deletes all files from `input/spreadsheet` when reverting Step 1
+  - Confirmation dialog warns user that files will be deleted
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+- **Step 2 Revert Now Deletes All CSV Files** - Revert Step 2 now deletes all files in `output/csv` directory
+  - Previously only deleted `export.csv`, leaving other files that may have accumulated
+  - Now deletes all files in the directory for consistent cleanup
+  - **Files Modified**: `gui/widgets/step_widget.py`
+
+---
+
+## HPM [0.1.7o] - 2026-01-24 12:48 CST
+
+### Improved
+
+- **Get Latest Updates Feature Overhaul** - Smooth, hassle-free updates like modern software
+  - No longer warns about uncommitted changes (local artifacts safely discarded)
+  - Shows clear version comparison: "Current: v0.1.7n → New: v0.1.8a"
+  - Uses `git reset --hard` for reliable updates without merge conflicts
+  - Displays target version in progress dialog and success message
+  - Uses semantic version comparison instead of commit counting
+  - **Files Modified**: `utils/git_updater.py`, `gui/main_window.py`
+
+### Added
+
+- **New git_updater methods**:
+  - `force_update()` - Force update discarding local changes
+  - `get_update_info()` - Get comprehensive version comparison
+  - `_compare_versions()` - Semantic version comparison for HPM format (e.g., "0.1.7n")
+  - `_get_local_version()` - Read version from local `__init__.py`
+
+---
+
 ## HPM [0.1.7n] - 2026-01-24 05:05 CST
 
 ### Added
