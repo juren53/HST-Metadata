@@ -1,0 +1,1 @@
+   $env:PATH = "C:\Users\jimur\Projects\HST-Metadata\Photos\Version-2\Framework;" + $env:PATH

@@ -1,8 +1,8 @@
-# HPM User Guide
+## HPM User Guide
 
 ## 1. Introduction
 
-Welcome to the HSTL Photo Framework!
+Welcome to the HSTL Photo Metadata Framework!
 
 This application is designed to streamline the process of preparing digital photo collections for use in the HSTL online digital collections. It guides you through an 8-step pipeline that handles everything from metadata processing to image conversion and watermarking.
 
@@ -18,9 +18,11 @@ Before processing your first batch, perform a quick preflight check:
 
 1. Launch HPM and go to **Help → About**
 2. Review the system information at the bottom of the dialog
+3. Verify the system is running the right version of Python 
+4. Verify the HPM is running from the correct location
 3. Verify that **ExifTool** shows a version number and path (required for metadata embedding)
 
-If ExifTool shows "Not found," contact your system administrator.
+If ExifTool shows "Not found," before HPM will be able to add metadata tags.
 
 ### 2.2. Application Settings
 
@@ -170,6 +172,6 @@ Open a batch by double-clicking it in the "Batches" list. This will take you to 
 
 ---
 
-**Version:** 0.1.7h
-**Commit Date:** 2026-01-21 21:30 CST
-**Last Updated:** January 2026
+**Version:** 1.8.3
+**Commit Date:** 2026-01-28 13:09 CST
+**Last Updated:** January 28, 2026

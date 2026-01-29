@@ -280,6 +280,16 @@ class MainWindow(QMainWindow):
         settings_action.triggered.connect(self._show_settings)
         tools_menu.addAction(settings_action)
 
+        browse_files_action = QAction('&Browse Files...', self)
+        browse_files_action.setShortcut('Ctrl+B')
+        browse_files_action.triggered.connect(self._browse_files)
+        tools_menu.addAction(browse_files_action)
+
+        batch_summary_action = QAction('Batch &Data Summary...', self)
+        batch_summary_action.setShortcut('Ctrl+D')
+        batch_summary_action.triggered.connect(self._show_batch_data_summary)
+        tools_menu.addAction(batch_summary_action)
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
 
@@ -316,6 +326,11 @@ class MainWindow(QMainWindow):
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Ready")
+        
+        # Add permanent version label to right side of status bar
+        version_label = QLabel(f"v{__version__} | {__commit_date__}")
+        version_label.setStyleSheet("QLabel { color: gray; }")
+        self.status_bar.addPermanentWidget(version_label)
 
     def _new_batch(self):
         """Show dialog to create a new batch."""
@@ -564,6 +579,74 @@ class MainWindow(QMainWindow):
         else:
             QMessageBox.warning(self, "Validation", "Project validation found issues")
 
+    def _browse_files(self):
+        '''Open file browser for current batch data directory.'''
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+        
+        # Get current batch info
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        data_directory = batch_info.get('data_directory', '')
+        
+        if not data_directory:
+            QMessageBox.warning(
+                self,
+                'No Data Directory',
+                'Data directory is not configured for this batch.',
+            )
+            return
+
+        # Convert to Path object
+        target_dir = Path(data_directory)
+        
+        # Check if directory exists
+        if not target_dir.exists():
+            QMessageBox.warning(
+                self,
+                'Directory Not Found',
+                f'Data directory not found:\n\n{target_dir}\n\n'
+                'Please check if the directory exists.',
+            )
+            return
+
+        # Open directory in File Explorer using QDesktopServices
+        try:
+            from PyQt6.QtGui import QDesktopServices
+            from PyQt6.QtCore import QUrl
+            
+            url = QUrl.fromLocalFile(str(target_dir))
+            if QDesktopServices.openUrl(url):
+                self.status_bar.showMessage(f'Opened data directory: {target_dir.name}', 3000)
+            else:
+                QMessageBox.warning(
+                    self, 'Failed to Open', f'Could not open directory:\n\n{target_dir}'
+                )
+        except Exception as e:
+            QMessageBox.critical(
+                self, 'Error', f'Failed to open directory:\n\n{str(e)}'
+            )
+
+    def _show_batch_data_summary(self):
+        """Show batch data directory summary dialog."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+        
+        # Get current batch info
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        
+        if not batch_info:
+            QMessageBox.warning(self, 'Error', 'Could not retrieve batch information')
+            return
+        
+        # Import dialog
+        from gui.dialogs.batch_data_summary_dialog import BatchDataSummaryDialog
+        
+        # Show dialog
+        dialog = BatchDataSummaryDialog(batch_info, self)
+        dialog.exec()
+
     def _set_data_location(self):
         """Show dialog to set default data files location."""
         dialog = SetDataLocationDialog(self)
@@ -592,12 +675,18 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _show_user_guide(self):
-        """Open the User Guide."""
+        """Open the User Guide (local file with GitHub fallback)."""
         import os
         import subprocess
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
 
         # Get path to USER_GUIDE.md
         user_guide_path = Path(__file__).parent.parent / "docs" / "USER_GUIDE.md"
+
+        # GitHub fallback URL
+        github_url = "https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/docs/USER_GUIDE.md"
 
         if user_guide_path.exists():
             # Try to open with default markdown viewer or text editor
@@ -614,25 +703,33 @@ class MainWindow(QMainWindow):
 
                 self.status_bar.showMessage("Opening User Guide...", 2000)
             except Exception as e:
-                QMessageBox.warning(
-                    self,
-                    "Cannot Open File",
-                    f"Could not open User Guide.\n\n"
-                    f"Please open manually:\n{user_guide_path}\n\n"
-                    f"Error: {str(e)}",
+                # Local file exists but couldn't open - try GitHub fallback
+                self._open_url_with_fallback(
+                    github_url,
+                    "User Guide",
+                    f"Could not open local User Guide.\n\nOpening online version..."
                 )
         else:
-            QMessageBox.warning(
-                self, "File Not Found", f"User Guide not found at:\n{user_guide_path}"
+            # Local file not found - use GitHub fallback
+            self._open_url_with_fallback(
+                github_url,
+                "User Guide",
+                "Local User Guide not found.\n\nOpening online version..."
             )
 
     def _show_changelog(self):
-        """Open the Change Log."""
+        """Open the Change Log (local file with GitHub fallback)."""
         import os
         import subprocess
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
 
         # Get path to CHANGELOG.md
         changelog_path = Path(__file__).parent.parent / "CHANGELOG.md"
+
+        # GitHub fallback URL
+        github_url = "https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Framework/CHANGELOG.md"
 
         if changelog_path.exists():
             # Try to open with default markdown viewer or text editor
@@ -649,16 +746,56 @@ class MainWindow(QMainWindow):
 
                 self.status_bar.showMessage("Opening Change Log...", 2000)
             except Exception as e:
-                QMessageBox.warning(
-                    self,
-                    "Cannot Open File",
-                    f"Could not open Change Log.\n\n"
-                    f"Please open manually:\n{changelog_path}\n\n"
-                    f"Error: {str(e)}",
+                # Local file exists but couldn't open - try GitHub fallback
+                self._open_url_with_fallback(
+                    github_url,
+                    "Change Log",
+                    f"Could not open local Change Log.\n\nOpening online version..."
                 )
         else:
+            # Local file not found - use GitHub fallback
+            self._open_url_with_fallback(
+                github_url,
+                "Change Log",
+                "Local Change Log not found.\n\nOpening online version..."
+            )
+
+    def _open_url_with_fallback(self, url: str, doc_name: str, info_message: str = None):
+        """
+        Open a URL in the default web browser with fallback options.
+
+        Args:
+            url: The URL to open
+            doc_name: Name of the document (for status/error messages)
+            info_message: Optional info message to show before opening
+        """
+        import webbrowser
+        from PyQt6.QtGui import QDesktopServices
+        from PyQt6.QtCore import QUrl
+
+        # Show info message if provided
+        if info_message:
+            self.status_bar.showMessage(info_message.replace("\n", " "), 3000)
+
+        try:
+            # Try to open with Qt's QDesktopServices first
+            if QDesktopServices.openUrl(QUrl(url)):
+                self.status_bar.showMessage(f"Opening online {doc_name}...", 2000)
+                return
+        except Exception:
+            pass
+
+        # Fallback to webbrowser module
+        try:
+            webbrowser.open(url)
+            self.status_bar.showMessage(f"Opening online {doc_name}...", 2000)
+        except Exception as e:
             QMessageBox.warning(
-                self, "File Not Found", f"Change Log not found at:\n{changelog_path}"
+                self,
+                f"Cannot Open {doc_name}",
+                f"Could not open online {doc_name} in browser.\n\n"
+                f"Please open manually:\n{url}\n\n"
+                f"Error: {str(e)}",
             )
 
     def _show_issue_tracker(self):
@@ -942,7 +1079,7 @@ class MainWindow(QMainWindow):
 
     # Git update methods
     class GitUpdateThread(QThread):
-        """Thread for performing git pull in background"""
+        """Thread for performing git update in background"""
 
         result_ready = pyqtSignal(object)
 
@@ -951,90 +1088,98 @@ class MainWindow(QMainWindow):
             self.updater = updater
 
         def run(self):
-            result = self.updater.pull_updates()
+            # Use force_update for clean, reliable updates
+            result = self.updater.force_update()
             self.result_ready.emit(result)
 
     def _on_get_latest_updates(self):
-        """Handle Get Latest Updates menu action"""
+        """
+        Handle Get Latest Updates menu action.
+
+        Simplified flow:
+        1. Check for git repository
+        2. Fetch and compare versions
+        3. Show clear version info and confirm
+        4. Force update (discards local changes automatically)
+        """
         # Check if git updater is available
         if not self.git_updater:
             QMessageBox.warning(
                 self,
                 "Not a Git Repository",
                 "This installation is not in a git repository.\n\n"
-                "To update, please use the standard installation method or download the latest release from GitHub.",
+                "To update, please download the latest release from GitHub:\n"
+                "https://github.com/juren53/HST-Metadata/releases",
             )
             return
 
-        # Check for uncommitted changes first
-        has_changes, changes_desc = self.git_updater.has_uncommitted_changes()
-        if has_changes:
-            reply = QMessageBox.warning(
-                self,
-                "Uncommitted Changes Detected",
-                f"You have unsaved changes: {changes_desc}\n\n"
-                "Downloading the update may cause conflicts with your changes.\n\n"
-                "Do you want to continue anyway?",
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-                QMessageBox.StandardButton.No,
-            )
-            if reply == QMessageBox.StandardButton.No:
-                return
-
-        # Check if updates are available
+        # Check for updates using version comparison
         self.status_bar.showMessage("Checking for updates...")
-        updates_available, message = self.git_updater.check_for_updates()
+        update_info = self.git_updater.get_update_info()
 
-        if not updates_available:
-            # Already up-to-date
+        # Handle errors
+        if update_info['error']:
+            self.status_bar.showMessage("Update check failed")
+            QMessageBox.warning(
+                self,
+                "Update Check Failed",
+                f"Could not check for updates:\n\n{update_info['error']}\n\n"
+                "Please check your internet connection and try again.",
+            )
+            return
+
+        current_version = update_info['current_version']
+        remote_version = update_info['remote_version']
+
+        # No update available
+        if not update_info['update_available']:
             self.status_bar.showMessage("Already up-to-date")
             QMessageBox.information(
                 self,
-                "Already Up-to-Date",
-                f"You are already up to date with v{__version__}.\n\n"
-                "No updates are available at this time.",
+                "Up to Date",
+                f"You have the latest version.\n\n"
+                f"Current version: v{current_version}",
             )
             return
 
-        # Get remote version
-        remote_version = self.git_updater.get_remote_version()
-        
-        # Build user-friendly message
-        if remote_version:
-            version_text = f"Current version: v{__version__}\n" \
-                          f"Update available: v{remote_version}\n\n"
-        else:
-            version_text = f"Current version: v{__version__}\n\n"
-        
-        # Confirm before pulling
+        # Store remote version for use in completion handler
+        self._pending_update_version = remote_version
+
+        # Show update confirmation with clear version info
         reply = QMessageBox.question(
             self,
-            "Get Latest Updates",
-            f"An update is available.\n\n"
-            f"{version_text}"
-            "Do you want to download the latest update?",
+            "Update Available",
+            f"A new version is available!\n\n"
+            f"Current version:  v{current_version}\n"
+            f"New version:      v{remote_version}\n\n"
+            f"Download and install the update?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.Yes,
         )
 
         if reply == QMessageBox.StandardButton.Yes:
-            self._perform_git_pull()
+            self._perform_git_update(remote_version)
 
-    def _perform_git_pull(self):
-        """Perform git pull in background thread"""
+    def _perform_git_update(self, target_version: str = ""):
+        """Perform git update in background thread"""
         from PyQt6.QtWidgets import QProgressDialog
+
+        # Build progress message
+        if target_version:
+            progress_msg = f"Downloading v{target_version} from GitHub...\n\nPlease wait..."
+        else:
+            progress_msg = "Downloading latest update from GitHub...\n\nPlease wait..."
 
         # Show progress dialog
         self.progress_dialog = QProgressDialog(
-            "Downloading latest update from GitHub...\n\nPlease wait...",
-            "Cancel",
+            progress_msg,
+            None,  # No cancel button
             0,
             0,
             self,
         )
         self.progress_dialog.setWindowTitle("Updating HPM")
         self.progress_dialog.setWindowModality(Qt.WindowModality.WindowModal)
-        self.progress_dialog.setCancelButton(None)  # Can't cancel mid-way
         self.progress_dialog.show()
 
         # Update status
@@ -1046,10 +1191,13 @@ class MainWindow(QMainWindow):
         self.git_update_thread.start()
 
     def _on_git_update_complete(self, result: GitUpdateResult):
-        """Handle completion of git pull operation"""
+        """Handle completion of git update operation"""
         # Close progress dialog
         if hasattr(self, "progress_dialog"):
             self.progress_dialog.close()
+
+        # Get the target version we were updating to
+        target_version = getattr(self, '_pending_update_version', None)
 
         if result.error_message:
             # Update failed
@@ -1057,42 +1205,37 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(
                 self,
                 "Update Failed",
-                f"Failed to download update from GitHub:\n\n{result.error_message}\n\n"
-                "Please resolve any issues and try again.",
+                f"Failed to download update from GitHub:\n\n{result.error_message}",
             )
         elif result.already_up_to_date:
-            # Already up-to-date
+            # Already up-to-date (shouldn't happen normally)
             self.status_bar.showMessage("Already up-to-date")
             QMessageBox.information(
                 self,
-                "Already Up-to-Date",
-                f"You are already up to date with v{__version__}.\n\n"
-                "No updates are available at this time.",
+                "Up to Date",
+                f"You already have the latest version (v{result.current_version}).",
             )
         elif result.success:
             # Update successful
-            self.status_bar.showMessage("Update completed successfully")
-
-            # Build statistics message
-            stats = []
-            if result.files_changed > 0:
-                stats.append(f"{result.files_changed} file(s) updated")
-
-            stats_text = stats[0] if stats else "Update completed"
+            new_version = result.updated_version or target_version or "latest"
+            self.status_bar.showMessage(f"Updated to v{new_version}")
 
             QMessageBox.information(
                 self,
                 "Update Complete",
-                f"Successfully downloaded and installed the latest update!\n\n"
-                f"{stats_text}\n\n"
-                "⚠️ Please restart HPM for changes to take effect.",
+                f"Successfully updated to v{new_version}!\n\n"
+                f"Please restart HPM for changes to take effect.",
             )
         else:
             # Unknown result
-            self.status_bar.showMessage("Update completed with unknown status")
+            self.status_bar.showMessage("Update completed")
             QMessageBox.warning(
                 self,
                 "Update Status Unknown",
                 "The update operation completed but the status is unclear.\n\n"
-                "Please check your git status manually.",
+                "Please restart HPM and verify the version.",
             )
+
+        # Clean up
+        if hasattr(self, '_pending_update_version'):
+            del self._pending_update_version

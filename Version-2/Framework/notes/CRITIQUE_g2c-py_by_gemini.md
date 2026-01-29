@@ -1,6 +1,5 @@
 ## CRITIQUE_g2c-py_by_gemini.md
 
-
 This script, `g2c.py`, is a specialized utility designed to bridge the gap between human-managed Excel spreadsheets and automated metadata systems (specifically for IPTC/HPM projects). It converts `.xlsx` or `.xls` files into a standardized CSV format with very specific column mapping and data cleaning.
 
 Here is a walkthrough of how the code functions, step-by-step:
