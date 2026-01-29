@@ -647,12 +647,20 @@ class Step4Dialog(QDialog):
         else:
             self.log_manager.debug(f"Opening file dialog at: {last_dir}", batch_id=self.batch_id, step=4)
         
-        source_dir = QFileDialog.getExistingDirectory(
-            self,
-            "Select directory containing raw TIFF files",
-            last_dir
-        )
-        
+        # Use Qt's own dialog (not native) so TIFF files are visible alongside directories.
+        # Files appear greyed-out / non-selectable; only directories can be chosen.
+        dialog = QFileDialog(self, "Select directory containing raw TIFF files", last_dir)
+        dialog.setFileMode(QFileDialog.FileMode.Directory)
+        dialog.setOption(QFileDialog.Option.DontUseNativeDialog, True)
+        dialog.setOption(QFileDialog.Option.ShowDirsOnly, False)
+        dialog.setNameFilter("TIFF files (*.tif *.tiff)")
+
+        source_dir = ""
+        if dialog.exec():
+            selected = dialog.selectedFiles()
+            if selected:
+                source_dir = selected[0]
+
         if source_dir:
             # Save the selected directory for next time
             self.log_manager.debug(f"Saving directory for next time: {source_dir}", batch_id=self.batch_id, step=4)
