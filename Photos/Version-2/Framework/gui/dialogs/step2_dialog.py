@@ -192,9 +192,9 @@ class Step2Dialog(QDialog):
         self.convert_btn.clicked.connect(self._start_conversion)
         button_layout.addWidget(self.convert_btn)
 
-        close_btn = QPushButton("Close")
-        close_btn.clicked.connect(self.reject)
-        button_layout.addWidget(close_btn)
+        self.close_btn = QPushButton("Close")
+        self.close_btn.clicked.connect(self.reject)
+        button_layout.addWidget(self.close_btn)
 
         button_layout.addStretch()
 
@@ -316,15 +316,16 @@ class Step2Dialog(QDialog):
                 self._display_nonstandard_dates(result.nonstandard_dates)
                 self._log_nonstandard_dates(result.nonstandard_dates)
 
+            # Switch Close button to signal success when the user closes the dialog
+            self.close_btn.disconnect()
+            self.close_btn.clicked.connect(self.accept)
+
             # Show completion message
             QMessageBox.information(
                 self,
                 "Conversion Complete",
                 "CSV conversion completed successfully!\n\nStep 2 is now marked as complete."
             )
-
-            # Close dialog to update UI
-            self.accept()
 
     def _display_nonstandard_dates(self, nonstandard_dates):
         """Display non-standard dates report in the output text area.
@@ -351,7 +352,7 @@ class Step2Dialog(QDialog):
         if placeholder_dates:
             self.output_text.append(f"\nPlaceholder Dates ({len(placeholder_dates)}):")
             for d in placeholder_dates:
-                self.output_text.append(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\"")
+                self.output_text.append(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\" [{d.reason}]")
 
     def _log_nonstandard_dates(self, nonstandard_dates):
         """Log non-standard dates to the batch log file.
@@ -371,11 +372,10 @@ class Step2Dialog(QDialog):
 
         # Log each non-standard date
         for d in nonstandard_dates:
-            self.log_manager.warning(
-                f"Non-standard date - Row {d.row_num}: {d.object_name} = \"{d.date_value}\" ({d.date_type}, source: {d.source})",
-                batch_id=self.batch_id,
-                step=2
-            )
+            msg = f"Non-standard date - Row {d.row_num}: {d.object_name} = \"{d.date_value}\" ({d.date_type}, source: {d.source})"
+            if d.reason:
+                msg += f" [{d.reason}]"
+            self.log_manager.warning(msg, batch_id=self.batch_id, step=2)
 
     def _on_error(self, error_msg):
         """Handle conversion errors."""

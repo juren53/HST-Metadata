@@ -41,6 +41,7 @@ class NonStandardDateRecord:
     date_value: str
     date_type: str  # "partial" or "placeholder"
     source: str     # "productionDate", "coverageStartDate", or "fallback"
+    reason: str = ""  # Why the date is non-standard (for placeholder: "no date data", "invalid: ...")
 
 
 @dataclass
@@ -366,12 +367,13 @@ def export_to_csv(df, output_file="export.csv"):
 
             # Helper function to extract and validate date from columns
             # Supports partial dates: missing components become "00" (e.g., "1947-00-00" for year-only)
-            # Returns tuple: (date_string, is_partial) where is_partial indicates if any component is "00"
+            # Returns tuple: (date_string, is_partial, reject_reason)
+            #   reject_reason is "" on success, or a description of why the date was rejected
             def get_date_from_columns(idx, month_col, day_col, year_col):
-                """Extract and validate date components, return tuple (ISO date string, is_partial).
+                """Extract and validate date components, return tuple (ISO date string, is_partial, reject_reason).
 
                 Supports partial dates where missing components are represented as "00".
-                Returns ("", False) only if any component contains invalid (non-numeric) data.
+                Returns ("", False, reason) if date is missing or invalid.
                 is_partial is True if the date has any "00" components (year, month, or day).
                 """
                 try:
@@ -396,6 +398,14 @@ def export_to_csv(df, output_file="export.csv"):
                     day_str = "" if day_str.lower() in ["nan", "none", "null"] else day_str
                     year_str = "" if year_str.lower() in ["nan", "none", "null"] else year_str
 
+                    # Helper to format raw values for reject reason
+                    def raw_values_str():
+                        parts = []
+                        parts.append(f"M={month_str}" if month_str else "M=")
+                        parts.append(f"D={day_str}" if day_str else "D=")
+                        parts.append(f"Y={year_str}" if year_str else "Y=")
+                        return " ".join(parts)
+
                     # Helper to safely convert string to int, handling float strings (e.g., "1975.0" from Excel)
                     def safe_int(s):
                         """Convert string to int, handling float strings. Returns None if invalid."""
@@ -411,39 +421,39 @@ def export_to_csv(df, output_file="export.csv"):
                             except (ValueError, TypeError):
                                 return None
 
-                    # Extract numeric values, returning ("", False) if any component is invalid
+                    # Extract numeric values, returning rejection reason if any component is invalid
                     year_int = safe_int(year_str)
                     if year_int is None:
-                        return ("", False)  # Invalid year format
+                        return ("", False, f"invalid date ({raw_values_str()})")
 
                     month_int = safe_int(month_str)
                     if month_int is None:
-                        return ("", False)  # Invalid month format
+                        return ("", False, f"invalid date ({raw_values_str()})")
 
                     day_int = safe_int(day_str)
                     if day_int is None:
-                        return ("", False)  # Invalid day format
+                        return ("", False, f"invalid date ({raw_values_str()})")
 
                     # If no components present at all, return empty string
                     if year_int == 0 and month_int == 0 and day_int == 0:
-                        return ("", False)
+                        return ("", False, "no date data")
 
                     # Apply range validation only to present (non-zero) components
                     if year_int != 0 and year_int <= 0:
-                        return ("", False)  # Invalid year value
+                        return ("", False, f"invalid date ({raw_values_str()})")
                     if month_int != 0 and not (1 <= month_int <= 12):
-                        return ("", False)  # Invalid month value
+                        return ("", False, f"invalid date ({raw_values_str()})")
                     if day_int != 0 and not (1 <= day_int <= 31):
-                        return ("", False)  # Invalid day value
+                        return ("", False, f"invalid date ({raw_values_str()})")
 
                     # Check if this is a partial date (any component is 0/missing)
                     is_partial = (year_int == 0 or month_int == 0 or day_int == 0)
 
                     # Format with zero-padded components
-                    return (f"{year_int:04d}-{month_int:02d}-{day_int:02d}", is_partial)
+                    return (f"{year_int:04d}-{month_int:02d}-{day_int:02d}", is_partial, "")
                 except Exception:
                     pass
-                return ("", False)
+                return ("", False, "no date data")
 
             # Skip the first 3 rows which contain header information
             # Start processing from index 3 (4th row) onwards
@@ -461,6 +471,8 @@ def export_to_csv(df, output_file="export.csv"):
                 date_value = ""
                 date_source = ""
                 is_partial = False
+                prod_reason = ""
+                cov_reason = ""
 
                 # Get ObjectName for this row (for non-standard date reporting)
                 object_name = ""
@@ -469,7 +481,7 @@ def export_to_csv(df, output_file="export.csv"):
 
                 # Try productionDate columns first
                 if has_production_cols:
-                    date_value, is_partial = get_date_from_columns(
+                    date_value, is_partial, prod_reason = get_date_from_columns(
                         idx,
                         "productionDateMonth",
                         "productionDateDay",
@@ -481,7 +493,7 @@ def export_to_csv(df, output_file="export.csv"):
 
                 # If still empty, try coverageStartDate columns as fallback
                 if not date_value and has_coverage_cols:
-                    date_value, is_partial = get_date_from_columns(
+                    date_value, is_partial, cov_reason = get_date_from_columns(
                         idx,
                         "coverageStartDateMonth",
                         "coverageStartDateDay",
@@ -499,16 +511,29 @@ def export_to_csv(df, output_file="export.csv"):
                 new_df.loc[idx, "DateCreated"] = date_value
 
                 # Track non-standard dates (partial or placeholder)
-                # Row number is idx + 1 for 1-based display (but idx already accounts for 0-based)
                 # Since idx starts at 3 and represents Excel row, display as idx + 1 for user-friendly numbering
                 row_num = idx + 1  # Convert to 1-based row number
                 if date_value == "0000-00-00":
+                    # Build reason from rejection reasons of both sources
+                    # Use the most informative reason (prefer invalid over no data)
+                    reason = ""
+                    if prod_reason and prod_reason != "no date data":
+                        reason = f"productionDate: {prod_reason}"
+                    if cov_reason and cov_reason != "no date data":
+                        if reason:
+                            reason += f"; coverageStartDate: {cov_reason}"
+                        else:
+                            reason = f"coverageStartDate: {cov_reason}"
+                    if not reason:
+                        reason = "no date data"
+
                     nonstandard_dates.append(NonStandardDateRecord(
                         row_num=row_num,
                         object_name=object_name,
                         date_value=date_value,
                         date_type="placeholder",
-                        source=date_source
+                        source=date_source,
+                        reason=reason
                     ))
                 elif is_partial:
                     nonstandard_dates.append(NonStandardDateRecord(
@@ -650,7 +675,7 @@ Examples:
                 if placeholder_dates:
                     print(f"\nPlaceholder Dates ({len(placeholder_dates)}):")
                     for d in placeholder_dates:
-                        print(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\"")
+                        print(f"  Row {d.row_num}: {d.object_name} - \"{d.date_value}\" [{d.reason}]")
 
         # Show success message
         print(f"\nSUCCESS: Excel file processed successfully.")
