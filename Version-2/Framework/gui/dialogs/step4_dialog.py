@@ -27,6 +27,36 @@ from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from utils.log_manager import get_log_manager
 
 
+def _format_dpi(dpi_tuple):
+    """Format a PIL DPI tuple (x, y) for display.
+
+    Returns a string like '300 DPI' for symmetric, '300x600 DPI' for asymmetric,
+    or 'N/A' when the value is None.
+    """
+    if dpi_tuple is None:
+        return "N/A"
+    try:
+        x, y = dpi_tuple
+        # Round to int when there's no meaningful fractional part
+        x_val = int(round(x))
+        y_val = int(round(y))
+        if x_val == y_val:
+            return f"{x_val} DPI"
+        return f"{x_val}x{y_val} DPI"
+    except (TypeError, ValueError):
+        return "N/A"
+
+
+def _format_resolution(width, height):
+    """Format pixel dimensions as 'WxH px'.
+
+    Returns '?' for any value that is None or not a positive integer.
+    """
+    w = str(width) if width else "?"
+    h = str(height) if height else "?"
+    return f"{w}x{h} px"
+
+
 class BitDepthConversionThread(QThread):
     """Worker thread for bit depth conversion."""
 
@@ -89,16 +119,21 @@ class BitDepthConversionThread(QThread):
                         bits_per_sample = result.strip() if result else ""
 
                         # Check if it's 16-bit
-                        # BitsPerSample can be:
-                        # - "16" (simple)
-                        # - "16 16 16" (RGB)
-                        # - "EXIF 16" (ExifTool format with prefix)
-                        # - "IFD0 16" (alternative format)
                         if "16" in bits_per_sample and "8" not in bits_per_sample:
                             bit16_files.append(tiff_path)
                             stats["bit16_found"] += 1
+
+                            # Read resolution/DPI via PIL (header-only, fast)
+                            img = Image.open(tiff_path)
+                            w, h = img.size
+                            dpi = img.info.get("dpi")
+                            img.close()
+
+                            resolution_str = _format_resolution(w, h)
+                            dpi_str = _format_dpi(dpi)
+
                             self.progress.emit(
-                                f"  Found 16-bit: {filename} (BitsPerSample: {bits_per_sample})"
+                                f"  Found 16-bit: {filename} ({bits_per_sample}) | {resolution_str} | {dpi_str}"
                             )
                     except Exception as e:
                         self.progress.emit(
@@ -125,6 +160,10 @@ class BitDepthConversionThread(QThread):
                     # Open and convert the image
                     # Read the image data and close it before saving
                     img = Image.open(tiff_path)
+
+                    # Capture before dimensions and DPI
+                    before_width, before_height = img.size
+                    before_dpi = img.info.get("dpi")
 
                     # Convert to numpy array for proper scaling
                     img_array = np.array(img)
@@ -154,13 +193,31 @@ class BitDepthConversionThread(QThread):
                         str(tiff_path), format="TIFF", compression="tiff_adobe_deflate"
                     )
 
-                    # Copy all metadata from original using ExifTool
-                    # Note: We need to preserve the original metadata before saving
-                    # This is a simplified approach - metadata should be preserved during PIL save
+                    # Re-open saved file to capture after dimensions and DPI
+                    img_after = Image.open(tiff_path)
+                    after_width, after_height = img_after.size
+                    after_dpi = img_after.info.get("dpi")
+                    img_after.close()
 
                     stats["converted"] += 1
-                    stats["converted_list"].append(filename)
+                    stats["converted_list"].append({
+                        "filename": filename,
+                        "before_width": before_width,
+                        "before_height": before_height,
+                        "before_dpi": before_dpi,
+                        "after_width": after_width,
+                        "after_height": after_height,
+                        "after_dpi": after_dpi,
+                    })
+
+                    before_res = _format_resolution(before_width, before_height)
+                    before_dpi_str = _format_dpi(before_dpi)
+                    after_res = _format_resolution(after_width, after_height)
+                    after_dpi_str = _format_dpi(after_dpi)
+
                     self.progress.emit(f"  ✓ Converted: {filename}")
+                    self.progress.emit(f"      Before: {before_res} | {before_dpi_str}")
+                    self.progress.emit(f"      After:  {after_res} | {after_dpi_str}")
 
                     if stats["converted"] % 10 == 0:
                         self.progress.emit(
@@ -219,8 +276,14 @@ class BitDepthConversionThread(QThread):
                 if stats["converted_list"]:
                     f.write("CONVERTED FILES (16-bit → 8-bit):\n")
                     f.write("-" * 70 + "\n")
-                    for filename in stats["converted_list"]:
-                        f.write(f"  - {filename}\n")
+                    for entry in stats["converted_list"]:
+                        f.write(f"  - {entry['filename']}\n")
+                        before_res = _format_resolution(entry["before_width"], entry["before_height"])
+                        before_dpi_str = _format_dpi(entry["before_dpi"])
+                        after_res = _format_resolution(entry["after_width"], entry["after_height"])
+                        after_dpi_str = _format_dpi(entry["after_dpi"])
+                        f.write(f"      Before: {before_res} | {before_dpi_str}\n")
+                        f.write(f"      After:  {after_res} | {after_dpi_str}\n")
                     f.write("\n")
 
                 if stats["failed_list"]:
@@ -421,7 +484,9 @@ class Step4Dialog(QDialog):
 
             import exiftool
 
-            # Use ExifTool to check BitsPerSample metadata tag
+            # Use ExifTool for BitsPerSample, PIL for resolution/DPI
+            from PIL import Image
+
             with exiftool.ExifTool() as et:
                 for tiff_path in tiff_files:
                     try:
@@ -437,14 +502,19 @@ class Step4Dialog(QDialog):
                         bits_per_sample = result.strip() if result else ""
 
                         # Check if it's 16-bit
-                        # BitsPerSample can be:
-                        # - "16" (simple)
-                        # - "16 16 16" (RGB)
-                        # - "EXIF 16" (ExifTool format with prefix)
-                        # - "IFD0 16" (alternative format)
                         if "16" in bits_per_sample and "8" not in bits_per_sample:
                             bit16_count += 1
-                            bit16_list.append((filename, bits_per_sample))
+
+                            # Read resolution/DPI via PIL (header-only, fast)
+                            img = Image.open(tiff_path)
+                            w, h = img.size
+                            dpi = img.info.get("dpi")
+                            img.close()
+
+                            resolution_str = _format_resolution(w, h)
+                            dpi_str = _format_dpi(dpi)
+
+                            bit16_list.append((filename, bits_per_sample, resolution_str, dpi_str))
                     except Exception as e:
                         pass
 
@@ -496,15 +566,15 @@ class Step4Dialog(QDialog):
             self.output_text.append("")
             self.output_text.append("16-bit TIFFs found (will be converted):")
             self.output_text.append("-" * 50)
-            for filename, bits_per_sample in bit16_list:
-                self.output_text.append(f"  • {filename} ({bits_per_sample})")
+            for filename, bits_per_sample, resolution_str, dpi_str in bit16_list:
+                self.output_text.append(f"  • {filename} ({bits_per_sample}) | {resolution_str} | {dpi_str}")
             self.output_text.append("-" * 50)
-            
+
             self.log_manager.info("", batch_id=self.batch_id, step=4)
             self.log_manager.info("16-bit TIFFs found (will be converted):", batch_id=self.batch_id, step=4)
             self.log_manager.info("-" * 50, batch_id=self.batch_id, step=4)
-            for filename, bits_per_sample in bit16_list:
-                self.log_manager.info(f"  • {filename} ({bits_per_sample})", batch_id=self.batch_id, step=4)
+            for filename, bits_per_sample, resolution_str, dpi_str in bit16_list:
+                self.log_manager.info(f"  • {filename} ({bits_per_sample}) | {resolution_str} | {dpi_str}", batch_id=self.batch_id, step=4)
             self.log_manager.info("-" * 50, batch_id=self.batch_id, step=4)
 
             # Ask for confirmation
@@ -608,8 +678,6 @@ class Step4Dialog(QDialog):
                 "Conversion Complete",
                 message,
             )
-
-            self.accept()
         else:
             self.log_manager.step_error(
                 4, "Bit depth conversion failed", batch_id=self.batch_id

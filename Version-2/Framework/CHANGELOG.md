@@ -5,6 +5,29 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.4] - 2026-01-31 16:00 CST
+
+### Added
+
+- **Before/After Resolution & DPI in Step 4** - 16-bit conversion now shows image dimensions and DPI
+  - Detection pass displays resolution and DPI for each 16-bit TIFF found
+  - Conversion progress shows before/after resolution and DPI per file
+  - Conversion report includes before/after metadata for each converted file
+  - Uses PIL for reliable resolution/DPI reads (ExifTool for BitsPerSample detection only)
+  - Handles edge cases: missing DPI (shows "N/A"), asymmetric DPI (e.g., "300x600 DPI"), float rounding
+  - Added `_format_dpi()` and `_format_resolution()` helper functions
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+### Changed
+
+- **Step 4 Dialog Stays Open After Conversion** - Dialog no longer auto-closes on completion
+  - "Conversion Complete" popup no longer closes the Step 4 dialog
+  - Users can review output and before/after metadata before closing manually
+  - Matches Step 2 dialog behavior
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+---
+
 ## HPM [1.8.3] - 2026-01-28 13:09 CST
 
 ### Added
