@@ -1,4 +1,6 @@
 import sys
+import os
+import argparse
 from PIL import Image
 from exiftool import ExifToolHelper
 
@@ -28,24 +30,46 @@ def verify_dimensions(image_path):
             else:
                 exif_width, exif_height = None, None
 
+        GREEN = "\033[92m"
+        RED = "\033[91m"
+        RESET = "\033[0m"
+
         print(f"Analyzing: {image_path}")
-        print(f"  Actual Dimensions (PIL): {actual_width}x{actual_height}")
-        print(f"  EXIF Dimensions (ExifTool): {exif_width}x{exif_height}")
+        print(f"  {'Actual Dimensions (PIL):':<28} {actual_width:<4}x{actual_height:<4}")
+        print(f"  {'EXIF Dimensions (ExifTool):':<28} {exif_width:<4}x{exif_height:<4}")
 
         if actual_width == exif_width and actual_height == exif_height:
-            print("  Dimensions match.")
+            print(f"  {GREEN}Dimensions match.{RESET}")
         else:
-            print("  Dimensions do NOT match.")
+            print(f"  {RED}Dimensions do NOT match.{RESET}")
 
     except FileNotFoundError:
         print(f"Error: Image file not found at '{image_path}'")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred with {image_path}: {e}")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python verify_tiff_dimensions.py <path_to_tiff_image>")
+    parser = argparse.ArgumentParser(description="Verify TIFF image dimensions against EXIF metadata.")
+    parser.add_argument("path", nargs="?", help="Path to a single TIFF image file or a directory containing TIFF images.")
+
+    args = parser.parse_args()
+
+    if not args.path:
+        parser.print_help()
         sys.exit(1)
 
-    image_file = sys.argv[1]
-    verify_dimensions(image_file)
+    if os.path.isfile(args.path):
+        if args.path.lower().endswith(('.tif', '.tiff')):
+            verify_dimensions(args.path)
+        else:
+            print(f"Error: '{args.path}' is not a TIFF image file.")
+            sys.exit(1)
+    elif os.path.isdir(args.path):
+        for root, _, files in os.walk(args.path):
+            for file in files:
+                if file.lower().endswith(('.tif', '.tiff')):
+                    image_path = os.path.join(root, file)
+                    verify_dimensions(image_path)
+    else:
+        print(f"Error: '{args.path}' is not a valid file or directory.")
+        sys.exit(1)
