@@ -5,6 +5,26 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.4a] - 2026-02-03 0830 CST
+
+### Changed
+- **Project housekeeping** — moved 12 plan, setup, and reference files into `notes/` directory for a cleaner project root
+- **WARP.ini** — renamed to `AGENTS.ini` and updated header to address AI coding assistants generally
+- **Utility scripts** — moved `cleanup_google_auth.py`, `csv_record_viewer.py`, `file_manager.py` to `tools/`; moved `excel_validator.py` to `testing/`
+- **Setup scripts** — moved `setup_exiftool.bat` and `setup_exiftool.ps1` to `tools/`
+- **Binaries** — moved `CSV_Record_Viewer.exe` and `exiftool.exe` to `tools/`
+- **Old spec file** — moved `HSTL_Photo_Framework_GUI.spec` to `archive/` (superseded by `HPM.spec`)
+- **Migration doc** — moved `README_Excel-Migration.md` to `notes/`
+
+### Removed
+- `GEMINI.md` — empty file
+- `NUL`, `1.5.0` — accidental artifacts
+
+### Other
+- Added `.claude/settings.local.json` to `.gitignore`
+
+---
+
 ## HPM [1.8.4] - 2026-01-31 16:00 CST
 
 ### Added
