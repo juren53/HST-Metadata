@@ -26,11 +26,12 @@ pytest.ini
 run_tests.py
 hpm
 
-# IDE
+# IDE and AI assistants
 .vscode/
 .idea/
 *.swp
 *.swo
+.claude/settings.local.json
 
 # Logs and temp files
 *.log
