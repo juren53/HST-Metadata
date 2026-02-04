@@ -5,6 +5,17 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.4b] - 2026-02-03 2200 CST
+
+### Changed
+- **About dialog** — Replaced 82-line inline dialog with the [pyqt-app-info](https://github.com/juren53/pyqt-app-info) package. The new dialog adds execution mode (Python source vs compiled executable) alongside existing version, tool, and OS info.
+- **Dependencies** — Added `pyqt-app-info>=0.1.0` to `pyproject.toml`; removed unused `platform` and `FileUtils` imports from `main_window.py`
+
+### Fixed
+- **Import path** — Fixed `file_manager` import broken by move to `tools/` in v1.8.4a
+
+---
+
 ## HPM [1.8.4a] - 2026-02-03 0830 CST
 
 ### Changed
