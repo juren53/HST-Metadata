@@ -4,7 +4,6 @@ Main Window for HSTL Photo Framework GUI
 Provides the primary interface for batch management, step execution, and configuration.
 """
 
-import platform
 import sys
 from pathlib import Path
 from PyQt6.QtWidgets import (
@@ -43,7 +42,8 @@ from gui.widgets.enhanced_log_widget import EnhancedLogWidget
 from gui.dialogs.new_batch_dialog import NewBatchDialog
 from gui.dialogs.log_viewer_dialog import LogViewerDialog
 from utils.log_manager import LogManager
-from utils.file_utils import FileUtils
+from pyqt_app_info import AppIdentity, ToolSpec, ToolRegistry, gather_info
+from pyqt_app_info.qt import AboutDialog
 from gui.dialogs.settings_dialog import SettingsDialog
 from gui.dialogs.set_data_location_dialog import SetDataLocationDialog
 from gui.zoom_manager import ZoomManager
@@ -827,86 +827,31 @@ class MainWindow(QMainWindow):
 
     def _show_about(self):
         """Show about dialog."""
-        # Create custom dialog for better control over formatting
-        dialog = QDialog(self)
-        dialog.setWindowTitle("About HSTL Photo Metadata Framework [ HPM ]")
-        dialog.resize(600, 500)
-
-        layout = QVBoxLayout(dialog)
-
-        # Main content
-        about_html = (
-            "<h3>HSTL Photo Metadata Framework [ HPM ]</h3>"
-            f"<p><b>Version:</b> {__version__}</p>"
-            f"<p><b>Commit Date:</b> {__commit_date__}</p>"
-            "<br>"
-            "<p>An end-to-end framework for managing photo metadata processing workflows.</p>"
-            "<p>Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
-            "preparation through final watermarked JPEG creation.</p>"
-            "<br>"
-            "<p><b>Features:</b></p>"
-            "<ul>"
-            "<li>Multi-batch management with progress tracking</li>"
-            "<li>Visual step execution interface</li>"
-            "<li>Configuration management</li>"
-            "<li>Step revert capability</li>"
-            "</ul>"
+        identity = AppIdentity(
+            name="HSTL Photo Metadata Framework",
+            short_name="HPM",
+            version=__version__,
+            commit_date=__commit_date__,
+            description=(
+                "An end-to-end framework for managing photo metadata processing workflows. "
+                "Orchestrates 8 steps of photo metadata processing from Excel Spreadsheet "
+                "preparation through final watermarked JPEG creation."
+            ),
+            features=[
+                "Multi-batch management with progress tracking",
+                "Visual step execution interface",
+                "Configuration management",
+                "Step revert capability",
+            ],
         )
 
-        about_label = QLabel(about_html)
-        about_label.setTextFormat(Qt.TextFormat.RichText)
-        about_label.setWordWrap(True)
-        layout.addWidget(about_label)
+        registry = ToolRegistry()
+        registry.register(ToolSpec(
+            name="ExifTool", command="exiftool", version_flag="-ver",
+        ))
 
-        # Add separator
-        layout.addSpacing(10)
-
-        # Technical information (subdued, smaller font)
-        python_exe = sys.executable
-        script_path = Path(__file__).resolve()
-        os_platform = platform.platform()
-
-        # Get ExifTool information
-        exiftool_info = FileUtils.get_exiftool_info()
-        if exiftool_info['status'] == 'available':
-            exiftool_display = (
-                f"<b>ExifTool:</b> v{exiftool_info['version']}<br>"
-                f"{exiftool_info['path']}"
-            )
-        elif exiftool_info['path']:
-            exiftool_display = (
-                f"<b>ExifTool:</b> Found but version unavailable<br>"
-                f"{exiftool_info['path']}"
-            )
-        else:
-            exiftool_display = "<b>ExifTool:</b> Not found in PATH"
-
-        tech_html = (
-            f'<p style="font-size: 9pt; color: #666;">'
-            f"<b>Python Executable:</b><br>{python_exe}<br><br>"
-            f"<b>HPM Code Location:</b><br>{script_path}<br><br>"
-            f"{exiftool_display}<br><br>"
-            f"<b>OS:</b> {os_platform}"
-            f"</p>"
-        )
-
-        tech_label = QLabel(tech_html)
-        tech_label.setTextFormat(Qt.TextFormat.RichText)
-        tech_label.setWordWrap(True)
-        tech_label.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        layout.addWidget(tech_label)
-
-        # OK button
-        button_layout = QHBoxLayout()
-        button_layout.addStretch()
-        ok_btn = QPushButton("OK")
-        ok_btn.clicked.connect(dialog.accept)
-        ok_btn.setDefault(True)
-        ok_btn.setMinimumWidth(80)
-        button_layout.addWidget(ok_btn)
-        layout.addLayout(button_layout)
-
-        dialog.exec()
+        info = gather_info(identity, registry=registry, caller_file=__file__)
+        AboutDialog(info, parent=self).exec()
 
     def _load_current_batch(self, config_path: Path):
         """Load current batch from config path."""
