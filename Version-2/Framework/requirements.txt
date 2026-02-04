@@ -18,6 +18,7 @@ ftfy>=6.0.0                    # Mojibake detection and text encoding repair
 
 # GUI framework
 PyQt6>=6.4.0                   # Main GUI framework
+pyqt-app-info>=0.1.0           # Reusable About dialog and app info gathering
 
 # Image processing (Step 8: Watermark Addition)
 Pillow>=10.0.0                 # Image manipulation for watermark compositing
