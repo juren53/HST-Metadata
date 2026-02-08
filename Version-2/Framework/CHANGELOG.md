@@ -5,6 +5,33 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.4c] - 2026-02-07 0945 CST
+
+### Added
+- **Icon Manager Module Integration** — Integrated [Icon_Manager_Module](https://github.com/juren53/Icon_Manager_Module) for proper cross-platform icon display
+  - Added `icon_loader.py` with `IconLoader` class for unified icon management
+  - Generated all icon assets from `ICON_HSTL.png` via `generate_icons.py` (app.ico, app.icns, multi-resolution PNGs)
+  - Application icon now displays correctly in window title bar, taskbar, and Alt-Tab switcher
+  - Windows taskbar fix via `set_taskbar_icon()` — no more generic Python icon
+  - Frozen-aware path resolution uses `sys._MEIPASS` for PyInstaller builds
+  - **Files Added**: `icon_loader.py`, `icons/app.ico`, `icons/app.icns`, `icons/app.png`, `icons/app_16x16.png` through `icons/app_256x256.png`
+  - **Files Modified**: `gui/hstl_gui.py`, `HPM.spec`
+
+### Fixed
+- **Step 2 crash in compiled executable** — Fixed `'NoneType' object has no attribute 'write'` error during CSV conversion
+  - **Root cause**: PyInstaller `console=False` sets `sys.stdout` and `sys.stderr` to `None` on Windows; all `print()` calls in `g2c.py` then fail with `None.write(...)`
+  - Added `sys.stdout`/`sys.stderr` → `os.devnull` redirect guards in three locations:
+    1. `gui/hstl_gui.py` — app entry point, catches everything at startup
+    2. `gui/dialogs/step2_dialog.py` — inside `CSVConversionThread.run()` (QThread context)
+    3. `g2c.py` — self-protecting module-level guard
+  - Step 2 now works identically in both Python source and compiled `.exe` modes
+  - **Files Modified**: `gui/hstl_gui.py`, `gui/dialogs/step2_dialog.py`, `g2c.py`
+
+### Changed
+- **HPM.spec** — Updated PyInstaller spec to bundle `icons/` directory and use `icons/app.ico` as the executable icon (replaces `launcher/HPM_icon.png`)
+
+---
+
 ## HPM [1.8.4b] - 2026-02-03 2200 CST
 
 ### Changed
