@@ -6,6 +6,7 @@ block_cipher = None
 datas = [
     ('__init__.py', '.'),
     ('launcher/HPM_icon.png', 'launcher'),
+    ('icons', 'icons'),
 ]
 
 # Hidden imports - include all our packages and third-party libraries
@@ -75,5 +76,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='launcher\\HPM_icon.png',
+    icon='icons\\app.ico',
 )
