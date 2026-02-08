@@ -12,16 +12,33 @@ Usage:
 """
 
 import sys
+import os
 import warnings
 import logging
 from pathlib import Path
+
+# When running as a PyInstaller frozen executable with console=False,
+# sys.stdout and sys.stderr are None on Windows. Redirect to devnull
+# to prevent "'NoneType' object has no attribute 'write'" errors from print().
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, "w")
+if sys.stderr is None:
+    sys.stderr = open(os.devnull, "w")
+
 from PyQt6.QtWidgets import QApplication, QMessageBox
 from PyQt6.QtCore import Qt, QLockFile, QDir
-from PyQt6.QtGui import QIcon
 
 # Add the framework directory to the Python path
 framework_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(framework_dir))
+
+# Icon Manager Module - cross-platform icon loading
+from icon_loader import IconLoader
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    _icons_path = Path(sys._MEIPASS) / "icons"
+else:
+    _icons_path = framework_dir / "icons"
+icons = IconLoader(base_path=_icons_path)
 
 # Import version from central source
 from __init__ import __version__, __commit_date__
@@ -59,11 +76,10 @@ def main():
     app.setApplicationName("HSTL Photo Framework")
     app.setApplicationVersion(__version__)
     app.setOrganizationName("HSTL")
+    app.setDesktopFileName("HPM")  # matches HPM.desktop
 
-    # Set application icon (shows in taskbar/system tray)
-    icon_path = framework_dir / "launcher" / "HPM_icon.png"
-    if icon_path.exists():
-        app.setWindowIcon(QIcon(str(icon_path)))
+    # Set application icon via Icon Manager Module
+    app.setWindowIcon(icons.app_icon())
 
     # Initialize and apply theme
     theme_mgr = ThemeManager.instance()
@@ -90,7 +106,11 @@ def main():
 
     # Create and show main window
     window = MainWindow()
+    window.setWindowIcon(icons.app_icon())
     window.show()
+
+    # Fix Windows taskbar icon (no-op on other platforms)
+    icons.set_taskbar_icon(window, app_id="com.hstl.hpm")
 
     # Start event loop
     sys.exit(app.exec())
