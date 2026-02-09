@@ -5,7 +5,7 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## HPM [1.8.5] - 2026-02-07 1015 CST
+## HPM [1.8.5] - 2026-02-07 1030 CST
 
 ### Fixed
 - **Batch registry lost on relaunch in compiled mode** — Batches created in the compiled `.exe` were not found on subsequent launches
@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Automatic one-time migration copies existing registry from old framework-relative location on first run
   - Consistent with existing pattern (logs already stored in `~/.hstl_photo_framework/logs/`)
   - **Files Modified**: `utils/batch_registry.py`
+
+- **Step 8 watermark file not found in compiled mode** — Watermark image could not be loaded in the compiled `.exe`
+  - **Root cause**: `Path(__file__).parent.parent` resolves outside `_MEIPASS`; watermark file also not bundled in `.spec`
+  - Added `_get_watermark_path()` helper with frozen-aware path resolution
+  - Added `gui/Copyright_Watermark.png` to `HPM.spec` datas list
+  - **Files Modified**: `gui/dialogs/step8_dialog.py`, `HPM.spec`
 
 ---
 

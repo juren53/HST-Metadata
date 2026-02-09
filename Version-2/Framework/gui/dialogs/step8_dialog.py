@@ -5,6 +5,7 @@ Adds copyright watermark to JPEG files that contain 'Restricted' in their Copyri
 """
 
 import os
+import sys
 import glob
 from pathlib import Path
 from datetime import datetime
@@ -356,7 +357,7 @@ class Step8Dialog(QDialog):
         settings_layout.addLayout(opacity_layout)
         
         # Watermark file info
-        watermark_path = Path(__file__).parent.parent / 'Copyright_Watermark.png'
+        watermark_path = self._get_watermark_path()
         watermark_info = QLabel(f"<i>Watermark file: {watermark_path.name}</i>")
         settings_layout.addWidget(watermark_info)
         
@@ -513,6 +514,12 @@ class Step8Dialog(QDialog):
         except Exception as e:
             self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=8)
     
+    def _get_watermark_path(self):
+        """Get the watermark file path, handling both source and frozen environments."""
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            return Path(sys._MEIPASS) / 'gui' / 'Copyright_Watermark.png'
+        return Path(__file__).parent.parent / 'Copyright_Watermark.png'
+
     def _start_watermarking(self):
         """Start the watermarking process."""
         self.log_manager.step_start(8, "Watermark Addition", batch_id=self.batch_id)
@@ -540,7 +547,7 @@ class Step8Dialog(QDialog):
         report_dir = Path(data_directory) / 'reports'
         
         # Watermark file path
-        watermark_path = Path(__file__).parent.parent / 'Copyright_Watermark.png'
+        watermark_path = self._get_watermark_path()
         
         if not watermark_path.exists():
             message = f"Watermark file not found:\n\n{watermark_path}\n\nPlease ensure the watermark file exists."
