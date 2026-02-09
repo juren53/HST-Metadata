@@ -21,6 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `gui/Copyright_Watermark.png` to `HPM.spec` datas list
   - **Files Modified**: `gui/dialogs/step8_dialog.py`, `HPM.spec`
 
+- **ExifTool not found in compiled mode on clean machines** — Steps 4-8 called `exiftool.ExifTool()` without specifying the executable path, relying on system PATH
+  - Bundled portable ExifTool v12.60 (`tools/exiftool.exe`) inside `HPM.exe` via PyInstaller datas
+  - Created `get_exiftool_path()` helper in `utils/file_utils.py` with frozen-aware resolution
+  - Updated all 7 `ExifTool()` calls across Steps 4-8 to use `executable=get_exiftool_path()`
+  - Updated About dialog to report bundled ExifTool instead of system-installed version
+  - HPM.exe is now fully self-contained — no external dependencies required on client machines
+  - **Files Modified**: `utils/file_utils.py`, `gui/main_window.py`, `gui/dialogs/step4_dialog.py`, `gui/dialogs/step5_dialog.py`, `gui/dialogs/step6_dialog.py`, `gui/dialogs/step7_dialog.py`, `gui/dialogs/step8_dialog.py`, `HPM.spec`
+
 ---
 
 ## HPM [1.8.4c] - 2026-02-07 0945 CST
