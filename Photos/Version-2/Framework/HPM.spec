@@ -7,6 +7,7 @@ datas = [
     ('__init__.py', '.'),
     ('launcher/HPM_icon.png', 'launcher'),
     ('icons', 'icons'),
+    ('gui/Copyright_Watermark.png', 'gui'),
 ]
 
 # Hidden imports - include all our packages and third-party libraries
