@@ -39,6 +39,7 @@ class MetadataEmbeddingThread(QThread):
             import re
             import datetime as dt
             import shutil
+            from utils.file_utils import get_exiftool_path
             
             stats = {
                 'csv_records': 0,
@@ -152,7 +153,7 @@ class MetadataEmbeddingThread(QThread):
                         return
                 
                 # Create ExifTool instance with UTF-8 encoding to prevent mojibake
-                with exiftool.ExifTool(encoding='utf-8') as et:
+                with exiftool.ExifTool(executable=get_exiftool_path(), encoding='utf-8') as et:
                     for row in reader:
                         obj_name = row.get('ObjectName', '').strip()
                         

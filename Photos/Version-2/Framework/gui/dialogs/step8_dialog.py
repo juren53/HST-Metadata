@@ -38,6 +38,7 @@ class WatermarkThread(QThread):
         try:
             from PIL import Image
             import exiftool
+            from utils.file_utils import get_exiftool_path
             
             stats = {
                 'jpeg_files_found': 0,
@@ -80,7 +81,7 @@ class WatermarkThread(QThread):
             self.progress.emit("Checking Copyright fields...")
             
             # Process each JPEG file
-            with exiftool.ExifTool() as et:
+            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
                 for jpeg_path in jpeg_files:
                     jpeg_path = Path(jpeg_path)
                     output_filename = jpeg_path.name
@@ -457,7 +458,8 @@ class Step8Dialog(QDialog):
             restricted_list = []
             
             import exiftool
-            with exiftool.ExifTool() as et:
+            from utils.file_utils import get_exiftool_path
+            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
                 for jpeg_path in jpeg_files:
                     try:
                         filename = Path(jpeg_path).name

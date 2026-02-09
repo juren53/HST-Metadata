@@ -845,9 +845,10 @@ class MainWindow(QMainWindow):
             ],
         )
 
+        from utils.file_utils import get_exiftool_path
         registry = ToolRegistry()
         registry.register(ToolSpec(
-            name="ExifTool", command="exiftool", version_flag="-ver",
+            name="ExifTool", command=get_exiftool_path(), version_flag="-ver",
         ))
 
         info = gather_info(identity, registry=registry, caller_file=__file__)
