@@ -4,12 +4,31 @@ File utilities for HSTL Photo Framework
 Common file operations and utilities.
 """
 
+import sys
 from pathlib import Path
 from typing import List, Optional, Dict
 import shutil
 import os
 import csv
 import subprocess
+
+
+def get_exiftool_path() -> str:
+    """Get the path to the exiftool executable.
+    
+    In frozen PyInstaller builds, returns the bundled copy in tools/.
+    Otherwise, returns 'exiftool' to use the system PATH.
+    """
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        bundled = Path(sys._MEIPASS) / 'tools' / 'exiftool.exe'
+        if bundled.exists():
+            return str(bundled)
+    # Check framework tools/ directory (source mode)
+    framework_tools = Path(__file__).parent.parent / 'tools' / 'exiftool.exe'
+    if framework_tools.exists():
+        return str(framework_tools)
+    # Fall back to system PATH
+    return 'exiftool'
 
 
 class FileUtils:
@@ -146,8 +165,12 @@ class FileUtils:
             'status': 'not_found'
         }
 
-        # Try to find exiftool in PATH
-        exiftool_path = shutil.which('exiftool')
+        # Try to find exiftool - use bundled version first, then PATH
+        exiftool_path = get_exiftool_path()
+        
+        # If we got the default 'exiftool' string, resolve it via PATH
+        if exiftool_path == 'exiftool':
+            exiftool_path = shutil.which('exiftool')
 
         if not exiftool_path:
             # Check common Windows installation location

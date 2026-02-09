@@ -111,7 +111,8 @@ class JpegConversionThread(QThread):
                     # Use exiftool to copy all metadata tags from TIFF to JPEG
                     # This ensures IPTC and XMP metadata are preserved
                     import exiftool
-                    with exiftool.ExifTool() as et:
+                    from utils.file_utils import get_exiftool_path
+                    with exiftool.ExifTool(executable=get_exiftool_path()) as et:
                         # Copy all tags from source TIFF to destination JPEG
                         et.execute(
                             b"-TagsFromFile",

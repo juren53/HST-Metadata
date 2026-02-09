@@ -8,6 +8,7 @@ datas = [
     ('launcher/HPM_icon.png', 'launcher'),
     ('icons', 'icons'),
     ('gui/Copyright_Watermark.png', 'gui'),
+    ('tools/exiftool.exe', 'tools'),
 ]
 
 # Hidden imports - include all our packages and third-party libraries
