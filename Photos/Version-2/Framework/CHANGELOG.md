@@ -5,6 +5,18 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.5] - 2026-02-07 1015 CST
+
+### Fixed
+- **Batch registry lost on relaunch in compiled mode** — Batches created in the compiled `.exe` were not found on subsequent launches
+  - **Root cause**: `BatchRegistry` stored `batch_registry.yaml` relative to `Path(__file__).parent.parent`, which in PyInstaller resolves to a temporary `_MEIPASS` directory that is deleted when the app exits
+  - Moved registry to persistent location: `~/.hstl_photo_framework/config/batch_registry.yaml`
+  - Automatic one-time migration copies existing registry from old framework-relative location on first run
+  - Consistent with existing pattern (logs already stored in `~/.hstl_photo_framework/logs/`)
+  - **Files Modified**: `utils/batch_registry.py`
+
+---
+
 ## HPM [1.8.4c] - 2026-02-07 0945 CST
 
 ### Added
