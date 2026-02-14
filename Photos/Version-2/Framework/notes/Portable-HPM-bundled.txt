@@ -1,0 +1,13 @@
+Compiled HPM.exe v1.8.5 is now a fully self-contained 129 MB executable with everything bundled:
+
+ ┌─────────────────────┬──────────────────────────────────────────────┐
+ │ Asset               │ Location in exe                              │
+ ├─────────────────────┼──────────────────────────────────────────────┤
+ │ App icon            │ _MEI.../icons/app.ico + PNGs                 │
+ ├─────────────────────┼──────────────────────────────────────────────┤
+ │ Copyright watermark │ _MEI.../gui/Copyright_Watermark.png          │
+ ├─────────────────────┼──────────────────────────────────────────────┤
+ │ ExifTool v12.60     │ _MEI.../tools/exiftool.exe                   │
+ ├─────────────────────┼──────────────────────────────────────────────┤
+ │ Batch registry      │ ~/.hstl_photo_framework/config/ (persistent) │
+ └─────────────────────┴──────────────────────────────────────────────┘
