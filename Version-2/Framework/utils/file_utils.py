@@ -12,6 +12,14 @@ import os
 import csv
 import subprocess
 
+# Windows console window hiding constants
+if sys.platform.startswith('win'):
+    CREATE_NO_WINDOW = 0x08000000
+    SW_HIDE = 0
+else:
+    CREATE_NO_WINDOW = 0
+    SW_HIDE = 0
+
 
 def get_exiftool_path() -> str:
     """Get the path to the exiftool executable.
@@ -29,6 +37,70 @@ def get_exiftool_path() -> str:
         return str(framework_tools)
     # Fall back to system PATH
     return 'exiftool'
+
+
+def create_exiftool_instance(executable=None):
+    """Create an ExifTool instance with Windows console window properly hidden.
+
+    On Windows, overrides the run() method to use CREATE_NO_WINDOW and
+    STARTF_USESHOWWINDOW flags, preventing console window flashes when
+    ExifTool is launched.
+    """
+    import exiftool
+
+    if executable is None:
+        executable = get_exiftool_path()
+
+    if sys.platform.startswith('win'):
+        class WindowsExifTool(exiftool.ExifTool):
+            def run(self):
+                """Override run method to hide console windows on Windows."""
+                if self.running:
+                    import warnings
+                    warnings.warn("ExifTool already running; doing nothing.", UserWarning)
+                    return
+
+                proc_args = [self._executable]
+
+                if hasattr(self, '_config_file') and self._config_file is not None:
+                    proc_args.extend(["-config", self._config_file])
+
+                proc_args.extend(["-stay_open", "True", "-@", "-"])
+
+                if hasattr(self, '_common_args') and self._common_args:
+                    proc_args.append("-common_args")
+                    proc_args.extend(self._common_args)
+
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = SW_HIDE
+
+                self._process = subprocess.Popen(
+                    proc_args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    startupinfo=startupinfo,
+                    creationflags=CREATE_NO_WINDOW
+                )
+
+                if self._process.poll() is not None:
+                    self._process = None
+                    raise RuntimeError("exiftool did not execute successfully")
+
+                self._running = True
+
+                try:
+                    if hasattr(self, '_parse_ver'):
+                        self._ver = self._parse_ver()
+                    else:
+                        self._ver = "unknown"
+                except Exception:
+                    self._ver = "unknown"
+
+        return WindowsExifTool(executable=executable, encoding='utf-8')
+    else:
+        return exiftool.ExifTool(executable=executable, encoding='utf-8')
 
 
 class FileUtils:
@@ -187,11 +259,20 @@ class FileUtils:
 
         # Get version
         try:
+            run_kwargs = {
+                'capture_output': True,
+                'text': True,
+                'timeout': 5,
+            }
+            if sys.platform.startswith('win'):
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = SW_HIDE
+                run_kwargs['startupinfo'] = startupinfo
+                run_kwargs['creationflags'] = CREATE_NO_WINDOW
             version_result = subprocess.run(
                 [exiftool_path, '-ver'],
-                capture_output=True,
-                text=True,
-                timeout=5
+                **run_kwargs
             )
             if version_result.returncode == 0:
                 result['version'] = version_result.stdout.strip()

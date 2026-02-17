@@ -74,8 +74,7 @@ class BitDepthConversionThread(QThread):
         try:
             from PIL import Image
             import numpy as np
-            from utils.file_utils import get_exiftool_path
-            import exiftool
+            from utils.file_utils import create_exiftool_instance
 
             stats = {
                 "tiff_files_found": 0,
@@ -105,7 +104,7 @@ class BitDepthConversionThread(QThread):
 
             # First pass: identify 16-bit TIFFs using ExifTool
             bit16_files = []
-            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
+            with create_exiftool_instance() as et:
                 for tiff_path in tiff_files:
                     try:
                         filename = Path(tiff_path).name
@@ -483,13 +482,12 @@ class Step4Dialog(QDialog):
             bit16_count = 0
             bit16_list = []
 
-            import exiftool
-            from utils.file_utils import get_exiftool_path
+            from utils.file_utils import create_exiftool_instance
 
             # Use ExifTool for BitsPerSample, PIL for resolution/DPI
             from PIL import Image
 
-            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
+            with create_exiftool_instance() as et:
                 for tiff_path in tiff_files:
                     try:
                         filename = Path(tiff_path).name
