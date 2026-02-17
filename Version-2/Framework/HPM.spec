@@ -23,6 +23,8 @@ hiddenimports = [
     'ftfy',
     'PIL',
     'exiftool',
+    'pyqt_app_info',
+    'pyqt_app_info.qt',
     '__init__',
     'gui',
     'gui.main_window',
