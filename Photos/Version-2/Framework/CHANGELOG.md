@@ -5,6 +5,19 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.6] - 2026-02-17 CST
+
+### Fixed
+- **Console window flash on Windows** — ExifTool process spawned a visible console window on every invocation in Steps 4-8
+  - **Root cause**: PyExifTool library does not hide console windows on Windows by default; every `exiftool.ExifTool()` context manager spawned a visible `cmd.exe` process
+  - Added `create_exiftool_instance()` helper to `utils/file_utils.py` with `WindowsExifTool` subclass that overrides `run()` to use `CREATE_NO_WINDOW` and `STARTF_USESHOWWINDOW` flags
+  - Replaced all 7 `exiftool.ExifTool()` calls across Steps 4-8 with `create_exiftool_instance()`
+  - Also fixed `get_exiftool_info()` version detection to use `CREATE_NO_WINDOW` in its `subprocess.run()` call
+  - Same fix previously applied to TagWriter — ported from `tag_writer/exiftool_utils.py`
+  - **Files Modified**: `utils/file_utils.py`, `gui/dialogs/step4_dialog.py`, `gui/dialogs/step5_dialog.py`, `gui/dialogs/step6_dialog.py`, `gui/dialogs/step7_dialog.py`, `gui/dialogs/step8_dialog.py`
+
+---
+
 ## HPM [1.8.5] - 2026-02-07 1030 CST
 
 ### Fixed

@@ -37,9 +37,8 @@ class WatermarkThread(QThread):
         """Run the watermarking process."""
         try:
             from PIL import Image
-            import exiftool
-            from utils.file_utils import get_exiftool_path
-            
+            from utils.file_utils import create_exiftool_instance
+
             stats = {
                 'jpeg_files_found': 0,
                 'restricted_found': 0,
@@ -49,7 +48,7 @@ class WatermarkThread(QThread):
                 'failed_list': [],
                 'restricted_list': []
             }
-            
+
             self.progress.emit("Starting watermark process...")
             self.progress.emit(f"Source directory: {self.jpeg_dir}")
             self.progress.emit(f"Output directory: {self.output_dir}")
@@ -81,12 +80,12 @@ class WatermarkThread(QThread):
             self.progress.emit("Checking Copyright fields...")
             
             # Process each JPEG file
-            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
+            with create_exiftool_instance() as et:
                 for jpeg_path in jpeg_files:
                     jpeg_path = Path(jpeg_path)
                     output_filename = jpeg_path.name
                     output_path = Path(self.output_dir) / output_filename
-                    
+
                     try:
                         # Read copyright metadata using exiftool
                         # Get the raw tag value for IPTC:CopyrightNotice
@@ -457,13 +456,12 @@ class Step8Dialog(QDialog):
             restricted_count = 0
             restricted_list = []
             
-            import exiftool
-            from utils.file_utils import get_exiftool_path
-            with exiftool.ExifTool(executable=get_exiftool_path()) as et:
+            from utils.file_utils import create_exiftool_instance
+            with create_exiftool_instance() as et:
                 for jpeg_path in jpeg_files:
                     try:
                         filename = Path(jpeg_path).name
-                        
+
                         # Get copyright notice
                         result = et.execute(
                             b"-IPTC:CopyrightNotice",

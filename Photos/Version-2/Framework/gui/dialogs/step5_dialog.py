@@ -35,11 +35,10 @@ class MetadataEmbeddingThread(QThread):
     def run(self):
         """Run the metadata embedding process."""
         try:
-            import exiftool
             import re
             import datetime as dt
             import shutil
-            from utils.file_utils import get_exiftool_path
+            from utils.file_utils import create_exiftool_instance
             
             stats = {
                 'csv_records': 0,
@@ -153,7 +152,7 @@ class MetadataEmbeddingThread(QThread):
                         return
                 
                 # Create ExifTool instance with UTF-8 encoding to prevent mojibake
-                with exiftool.ExifTool(executable=get_exiftool_path(), encoding='utf-8') as et:
+                with create_exiftool_instance() as et:
                     for row in reader:
                         obj_name = row.get('ObjectName', '').strip()
                         

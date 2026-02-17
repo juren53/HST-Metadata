@@ -37,8 +37,7 @@ class JpegResizeThread(QThread):
         """Run the JPEG resizing process."""
         try:
             from PIL import Image
-            import exiftool
-            from utils.file_utils import get_exiftool_path
+            from utils.file_utils import create_exiftool_instance
             
             stats = {
                 'jpeg_files_found': 0,
@@ -142,7 +141,7 @@ class JpegResizeThread(QThread):
                     
                     # Use exiftool to copy all metadata tags from source to destination
                     # This ensures IPTC and XMP metadata are fully preserved
-                    with exiftool.ExifTool(executable=get_exiftool_path()) as et:
+                    with create_exiftool_instance() as et:
                         et.execute(
                             b"-TagsFromFile",
                             str(jpeg_path).encode('utf-8'),
