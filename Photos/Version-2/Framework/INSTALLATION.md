@@ -12,6 +12,19 @@ The HSTL Photo Metadata Framework requires several dependencies to function prop
 
 ## Quick Installation
 
+**Linux / macOS / Git Bash:**
+```bash
+./run.sh
+```
+
+**Windows (PowerShell):**
+```powershell
+.\run.ps1
+```
+
+Both launchers auto-create a `.venv` virtual environment, install all dependencies from `requirements.txt`, and launch the GUI. If PowerShell blocks `run.ps1`, run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` once first.
+
+**Manual setup:**
 ```bash
 # Clone or download the framework
 cd HSTL-Photo-Framework
