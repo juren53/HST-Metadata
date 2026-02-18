@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## HPM [1.8.6] - 2026-02-17 CST
 
+### Added
+- **`run.sh`**: Linux/macOS/Git Bash launcher — auto-creates `.venv`, installs dependencies, and launches `gui/hstl_gui.py`
+- **`run.ps1`**: Windows PowerShell launcher — equivalent to `run.sh` for native Windows users
+- Both launchers use marker-based dependency tracking (only reinstalls when `requirements.txt` changes)
+
+### Documentation
+- **`README.md`**: Installation section updated with Quick Start for `run.sh` and `run.ps1`
+- **`INSTALLATION.md`**: Quick Installation section updated with launcher instructions
+
 ### Fixed
 - **Console window flash on Windows** — ExifTool process spawned a visible console window on every invocation in Steps 4-8
   - **Root cause**: PyExifTool library does not hide console windows on Windows by default; every `exiftool.ExifTool()` context manager spawned a visible `cmd.exe` process
