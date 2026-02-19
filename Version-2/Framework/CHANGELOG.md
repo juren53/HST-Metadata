@@ -13,6 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed by scaling the watermark proportionally to cover the image's larger dimension, then cropping to the exact image size — text proportions are now preserved regardless of image shape
   - **Files Modified**: `gui/dialogs/step8_dialog.py`
 
+### Testing
+- **EXE acceptance test suite added** (`tests/acceptance/`) — 67 tests treating `HPM.exe` as a black box; all passing
+  - `test_exe_artifact.py` — EXE file validity, size, version/changelog consistency, `HPM.spec` correctness
+  - `test_exe_launch.py` — subprocess smoke tests: EXE launches, stays alive, terminates cleanly
+  - `test_watermark_processing.py` — aspect-ratio regression tests (issue #49), copyright detection logic, opacity, output format
+  - `test_jpeg_resize.py` — Step 7 resize algorithm: aspect ratio, no upscaling, bounds across 5 parametrized shapes
+  - `test_asset_bundling.py` — all `HPM.spec` datas sources present on disk; `exiftool -ver` verified
+  - Added `acceptance` pytest marker to `pyproject.toml`
+  - 64 fast tests complete in < 1 second; 3 launch smoke tests complete in ~5 seconds
+  - **Files Added**: `tests/acceptance/__init__.py`, `tests/acceptance/conftest.py`, `tests/acceptance/test_exe_artifact.py`, `tests/acceptance/test_exe_launch.py`, `tests/acceptance/test_watermark_processing.py`, `tests/acceptance/test_jpeg_resize.py`, `tests/acceptance/test_asset_bundling.py`
+  - **Files Modified**: `pyproject.toml`
+
 ---
 
 ## HPM [1.8.6] - 2026-02-17 CST
