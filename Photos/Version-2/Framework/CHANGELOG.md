@@ -5,6 +5,16 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## HPM [1.8.7] - 2026-02-19 CST
+
+### Fixed
+- **Copyright watermark aspect ratio distortion** — Watermark text was stretched on non-square JPEG images
+  - **Root cause**: `watermark.resize((img_width, img_height), ...)` scaled the 800×800 PNG to the exact image dimensions, distorting the "COPYRIGHT" text on landscape and portrait images
+  - Fixed by scaling the watermark proportionally to cover the image's larger dimension, then cropping to the exact image size — text proportions are now preserved regardless of image shape
+  - **Files Modified**: `gui/dialogs/step8_dialog.py`
+
+---
+
 ## HPM [1.8.6] - 2026-02-17 CST
 
 ### Added

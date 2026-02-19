@@ -124,11 +124,17 @@ class WatermarkThread(QThread):
                                 img_width, img_height = img.size
                                 dimensions = f"{img_width}x{img_height}"
                                 
-                                # Scale watermark to match image size exactly
-                                watermark_resized = watermark.resize(
-                                    (img_width, img_height),
+                                # Scale watermark proportionally to cover the image (no stretching),
+                                # then crop to the exact image dimensions. This preserves the
+                                # aspect ratio of the watermark text on non-square images.
+                                wm_w, wm_h = watermark.size
+                                scale = max(img_width, img_height) / max(wm_w, wm_h)
+                                scaled_wm = watermark.resize(
+                                    (max(img_width, int(wm_w * scale)),
+                                     max(img_height, int(wm_h * scale))),
                                     Image.Resampling.LANCZOS
                                 )
+                                watermark_resized = scaled_wm.crop((0, 0, img_width, img_height))
                                 
                                 # Adjust watermark opacity
                                 watermark_with_opacity = watermark_resized.copy()
