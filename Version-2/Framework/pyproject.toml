@@ -77,6 +77,7 @@ markers = [
     "slow: Slow tests (> 1 second)",
     "network: Tests requiring network access",
     "exiftool: Tests requiring ExifTool installed",
+    "acceptance: EXE acceptance tests (treat HPM.exe as black box)",
 ]
 addopts = "-v --tb=short -ra"
 filterwarnings = [
