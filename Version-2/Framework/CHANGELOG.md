@@ -5,6 +5,21 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Planned] - Delivery Feature
+
+### Planned
+- **Final Product Delivery Plan** — Comprehensive plan for packaging batch delivery
+  - New `delivery/` directory with `tiff_delivery/` and `jpeg_delivery/` subdirectories
+  - New `trash/` directory for disposable workflow artifacts (converted JPEGs, resized JPEGs)
+  - Added delivery menu items to existing Batch menu: Create Delivery Package, Open Delivery Directory, Open Trash Directory, Empty Trash
+  - Retained artifacts: Excel file, CSV export, reports, logs
+  - Delivery products: Final TIFFs from `output/tiff_processed/`, Final JPEGs from `output/jpeg_watermarked/`
+  - Disposable artifacts moved to trash: `output/jpeg/`, `output/jpeg_resized/`
+  - Delivery only available after all 8 steps completed
+  - **Files Added**: `docs/PLAN_HPM-Final-Product-Delivery-oc.md`
+
+---
+
 ## HPM [1.8.7] - 2026-02-19 CST
 
 ### Fixed
