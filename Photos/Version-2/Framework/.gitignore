@@ -25,6 +25,7 @@ pip-delete-this-directory.txt
 pytest.ini
 run_tests.py
 hpm
+.pytest_cache/
 
 # IDE and AI assistants
 .vscode/
