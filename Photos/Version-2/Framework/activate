@@ -1,0 +1,3 @@
+#!/bin/bash
+# Activate the virtual environment for HSTL Photo Framework
+source venv/bin/activate
