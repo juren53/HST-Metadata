@@ -74,6 +74,7 @@ testing-data/
 *~
 
 # Framework specific
+Photos/Version-2/Framework/fix-repo-for-update.sh
 Photos/Version-2/testing-data/
 Photos/Version-2/small-testset/
 Photos/Version-2/tests/resulsts/
