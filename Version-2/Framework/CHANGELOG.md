@@ -20,6 +20,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## HPM [1.8.8] - 2026-02-24 CST
+
+### Fixed
+- **ftfy library missing from HPM.exe** — Step 3 (Mojibake Detection) failed with "ftfy library not found" in compiled EXE
+  - **Root cause 1**: `pyinstaller` was invoked via the system Python, which does not have `ftfy` installed; the project venv (which has `ftfy`) was invisible to the build
+  - **Root cause 2**: `hiddenimports=['ftfy']` only captures the top-level module; `ftfy` has a `bad_codecs/` subpackage and several submodules (`chardata`, `fixes`, `badness`, `formatting`) that were silently omitted
+  - Fixed by (a) installing PyInstaller into the project venv and compiling with `.venv/Scripts/python.exe -m PyInstaller`, and (b) replacing the bare hidden import with `collect_all('ftfy')` in `HPM.spec` to bundle all submodules and data files
+  - **Files Modified**: `HPM.spec`
+
+---
+
 ## HPM [1.8.7] - 2026-02-19 CST
 
 ### Fixed
