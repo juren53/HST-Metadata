@@ -1,6 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_all
 
 block_cipher = None
+
+# Collect ftfy completely (subpackages like bad_codecs, chardata, fixes, etc.)
+ftfy_datas, ftfy_binaries, ftfy_hiddenimports = collect_all('ftfy')
 
 # Collect all data files
 datas = [
@@ -9,7 +13,7 @@ datas = [
     ('icons', 'icons'),
     ('gui/Copyright_Watermark.png', 'gui'),
     ('tools/exiftool.exe', 'tools'),
-]
+] + ftfy_datas
 
 # Hidden imports - include all our packages and third-party libraries
 hiddenimports = [
@@ -40,12 +44,12 @@ hiddenimports = [
     'config',
     'config.config_manager',
     'config.settings',
-]
+] + ftfy_hiddenimports
 
 a = Analysis(
     ['gui\\hstl_gui.py'],
     pathex=['.'],
-    binaries=[],
+    binaries=[] + ftfy_binaries,
     datas=datas,
     hiddenimports=hiddenimports,
     hookspath=[],
