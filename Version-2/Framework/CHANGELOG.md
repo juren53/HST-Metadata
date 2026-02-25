@@ -20,6 +20,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## HPM [1.8.9] - 2026-02-24 CST
+
+### Added
+- **Four new UI themes** — extended `ThemeManager` with Dracula, GitHub, Solarized Light, and Solarized Dark alongside the existing System/Light/Dark modes. All new themes include complete `ThemeColors` palettes with HPM-specific batch-status colors (`active_bg`, `completed_bg`, `archived_bg`).
+- **Accent Themes group in Theme Selection dialog** — `ThemeDialog` now organises themes into two `QGroupBox` sections: *Standard* (System Default, Light, Dark) and *Accent Themes* (Dracula, GitHub, Solarized Light, Solarized Dark). Previously saved theme preferences for new modes are restored correctly on startup.
+  - **Files Modified**: `gui/theme_manager.py`, `gui/dialogs/theme_dialog.py`
+
+---
+
 ## HPM [1.8.8] - 2026-02-24 CST
 
 ### Fixed
