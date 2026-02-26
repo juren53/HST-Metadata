@@ -22,7 +22,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 
 from utils.log_manager import get_log_manager
-from file_manager import FileManager
+from tools.file_manager import FileManager
 
 
 class Step1Dialog(QDialog):

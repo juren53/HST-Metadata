@@ -35,6 +35,15 @@ class CSVConversionThread(QThread):
     def run(self):
         """Run the CSV conversion."""
         import os
+        import sys
+
+        # When running as a PyInstaller frozen executable with console=False,
+        # sys.stdout and sys.stderr are None on Windows. Redirect to devnull
+        # to prevent "'NoneType' object has no attribute 'write'" errors.
+        if sys.stdout is None:
+            sys.stdout = open(os.devnull, "w")
+        if sys.stderr is None:
+            sys.stderr = open(os.devnull, "w")
 
         original_dir = os.getcwd()
 

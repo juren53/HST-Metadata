@@ -5,7 +5,7 @@ Allows users to choose between Light, Dark, and System Default themes.
 
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QRadioButton,
-    QButtonGroup, QDialogButtonBox, QWidget, QFrame, QPushButton
+    QButtonGroup, QDialogButtonBox, QWidget, QFrame, QPushButton, QGroupBox
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPalette, QColor
@@ -19,7 +19,7 @@ class ThemeDialog(QDialog):
         super().__init__(parent)
 
         self.setWindowTitle("Theme Selection")
-        self.setMinimumWidth(450)
+        self.setMinimumWidth(500)
 
         # Get current theme
         self.theme_manager = ThemeManager.instance()
@@ -31,64 +31,98 @@ class ThemeDialog(QDialog):
         """Initialize the dialog UI."""
         layout = QVBoxLayout(self)
 
-        # Title
         title = QLabel("<h2>Choose Theme</h2>")
         layout.addWidget(title)
-
         description = QLabel("Select your preferred visual theme for the application:")
         layout.addWidget(description)
-
         layout.addSpacing(10)
 
-        # Radio buttons for theme selection
         self.button_group = QButtonGroup(self)
 
-        # System Default option
+        # ── Standard themes ───────────────────────────────────────
+        standard_box = QGroupBox("Standard")
+        standard_layout = QVBoxLayout(standard_box)
+        standard_layout.setSpacing(2)
+
         self.system_radio = QRadioButton("System Default")
         self.system_radio.setToolTip("Automatically match your operating system's theme")
         self.button_group.addButton(self.system_radio, 0)
-        layout.addWidget(self.system_radio)
+        standard_layout.addWidget(self.system_radio)
+        _d = QLabel("  Automatically matches your operating system theme")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        standard_layout.addWidget(_d)
+        standard_layout.addSpacing(4)
 
-        system_desc = QLabel("  Automatically matches your operating system theme")
-        system_desc.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
-        layout.addWidget(system_desc)
-
-        layout.addSpacing(8)
-
-        # Light Theme option
         self.light_radio = QRadioButton("Light Theme")
         self.light_radio.setToolTip("Use light colors with dark text")
         self.button_group.addButton(self.light_radio, 1)
-        layout.addWidget(self.light_radio)
+        standard_layout.addWidget(self.light_radio)
+        _d = QLabel("  Light background with dark text")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        standard_layout.addWidget(_d)
+        standard_layout.addSpacing(4)
 
-        light_desc = QLabel("  Light background with dark text")
-        light_desc.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
-        layout.addWidget(light_desc)
-
-        layout.addSpacing(8)
-
-        # Dark Theme option
         self.dark_radio = QRadioButton("Dark Theme")
         self.dark_radio.setToolTip("Use dark colors with light text")
         self.button_group.addButton(self.dark_radio, 2)
-        layout.addWidget(self.dark_radio)
+        standard_layout.addWidget(self.dark_radio)
+        _d = QLabel("  Dark background with light text")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        standard_layout.addWidget(_d)
 
-        dark_desc = QLabel("  Dark background with light text")
-        dark_desc.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
-        layout.addWidget(dark_desc)
+        layout.addWidget(standard_box)
+        layout.addSpacing(8)
 
+        # ── Accent themes ─────────────────────────────────────────
+        accent_box = QGroupBox("Accent Themes")
+        accent_layout = QVBoxLayout(accent_box)
+        accent_layout.setSpacing(2)
+
+        self.dracula_radio = QRadioButton("Dracula")
+        self.dracula_radio.setToolTip("Vibrant purple dark theme")
+        self.button_group.addButton(self.dracula_radio, 3)
+        accent_layout.addWidget(self.dracula_radio)
+        _d = QLabel("  Vibrant purple dark theme")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        accent_layout.addWidget(_d)
+        accent_layout.addSpacing(4)
+
+        self.github_radio = QRadioButton("GitHub")
+        self.github_radio.setToolTip("GitHub's clean light interface colors")
+        self.button_group.addButton(self.github_radio, 4)
+        accent_layout.addWidget(self.github_radio)
+        _d = QLabel("  GitHub's clean light interface colors")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        accent_layout.addWidget(_d)
+        accent_layout.addSpacing(4)
+
+        self.solarized_light_radio = QRadioButton("Solarized Light")
+        self.solarized_light_radio.setToolTip("Warm, low-contrast light theme")
+        self.button_group.addButton(self.solarized_light_radio, 5)
+        accent_layout.addWidget(self.solarized_light_radio)
+        _d = QLabel("  Warm, low-contrast light theme")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        accent_layout.addWidget(_d)
+        accent_layout.addSpacing(4)
+
+        self.solarized_dark_radio = QRadioButton("Solarized Dark")
+        self.solarized_dark_radio.setToolTip("Cool, low-contrast dark theme")
+        self.button_group.addButton(self.solarized_dark_radio, 6)
+        accent_layout.addWidget(self.solarized_dark_radio)
+        _d = QLabel("  Cool, low-contrast dark theme")
+        _d.setStyleSheet("color: gray; font-size: 9pt; margin-left: 20px;")
+        accent_layout.addWidget(_d)
+
+        layout.addWidget(accent_box)
         layout.addSpacing(15)
 
-        # Preview section
-        preview_label = QLabel("<b>Preview:</b>")
-        layout.addWidget(preview_label)
-
+        # ── Preview ───────────────────────────────────────────────
+        layout.addWidget(QLabel("<b>Preview:</b>"))
         self.preview_widget = self._create_preview_widget()
         layout.addWidget(self.preview_widget)
-
         layout.addSpacing(15)
 
-        # OK/Cancel buttons
+        # ── OK / Cancel ───────────────────────────────────────────
         button_box = QDialogButtonBox(
             QDialogButtonBox.StandardButton.Ok |
             QDialogButtonBox.StandardButton.Cancel
@@ -97,20 +131,22 @@ class ThemeDialog(QDialog):
         button_box.rejected.connect(self.reject)
         layout.addWidget(button_box)
 
-        # Set current theme selected
-        if self.selected_mode == ThemeMode.SYSTEM:
-            self.system_radio.setChecked(True)
-        elif self.selected_mode == ThemeMode.LIGHT:
-            self.light_radio.setChecked(True)
-        else:
-            self.dark_radio.setChecked(True)
+        # Set initial selection
+        _radio_for_mode = {
+            ThemeMode.SYSTEM:          self.system_radio,
+            ThemeMode.LIGHT:           self.light_radio,
+            ThemeMode.DARK:            self.dark_radio,
+            ThemeMode.DRACULA:         self.dracula_radio,
+            ThemeMode.GITHUB:          self.github_radio,
+            ThemeMode.SOLARIZED_LIGHT: self.solarized_light_radio,
+            ThemeMode.SOLARIZED_DARK:  self.solarized_dark_radio,
+        }
+        _radio_for_mode.get(self.selected_mode, self.system_radio).setChecked(True)
 
-        # Connect radio button signals
-        self.system_radio.toggled.connect(self._on_theme_selected)
-        self.light_radio.toggled.connect(self._on_theme_selected)
-        self.dark_radio.toggled.connect(self._on_theme_selected)
+        # Connect signals
+        for _btn in _radio_for_mode.values():
+            _btn.toggled.connect(self._on_theme_selected)
 
-        # Initial preview update
         self._update_preview()
 
     def _create_preview_widget(self) -> QWidget:
@@ -171,13 +207,19 @@ class ThemeDialog(QDialog):
 
     def _on_theme_selected(self):
         """Handle theme radio button selection."""
-        if self.system_radio.isChecked():
-            self.selected_mode = ThemeMode.SYSTEM
-        elif self.light_radio.isChecked():
-            self.selected_mode = ThemeMode.LIGHT
-        else:
-            self.selected_mode = ThemeMode.DARK
-
+        _checked_map = [
+            (self.system_radio,          ThemeMode.SYSTEM),
+            (self.light_radio,           ThemeMode.LIGHT),
+            (self.dark_radio,            ThemeMode.DARK),
+            (self.dracula_radio,         ThemeMode.DRACULA),
+            (self.github_radio,          ThemeMode.GITHUB),
+            (self.solarized_light_radio, ThemeMode.SOLARIZED_LIGHT),
+            (self.solarized_dark_radio,  ThemeMode.SOLARIZED_DARK),
+        ]
+        for radio, mode in _checked_map:
+            if radio.isChecked():
+                self.selected_mode = mode
+                break
         self._update_preview()
 
     def _update_preview(self):

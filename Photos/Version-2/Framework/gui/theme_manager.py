@@ -15,6 +15,10 @@ class ThemeMode(Enum):
     LIGHT = "light"
     DARK = "dark"
     SYSTEM = "system"
+    DRACULA = "dracula"
+    SOLARIZED_LIGHT = "solarized_light"
+    SOLARIZED_DARK = "solarized_dark"
+    GITHUB = "github"
 
 
 @dataclass
@@ -264,10 +268,14 @@ class ThemeManager(QObject):
         if mode is None:
             mode = self._current_resolved_mode
 
-        if mode == ThemeMode.DARK:
-            return self._get_dark_colors()
-        else:
-            return self._get_light_colors()
+        _dispatch = {
+            ThemeMode.DARK:            self._get_dark_colors,
+            ThemeMode.DRACULA:         self._get_dracula_colors,
+            ThemeMode.SOLARIZED_LIGHT: self._get_solarized_light_colors,
+            ThemeMode.SOLARIZED_DARK:  self._get_solarized_dark_colors,
+            ThemeMode.GITHUB:          self._get_github_colors,
+        }
+        return _dispatch.get(mode, self._get_light_colors)()
 
     def get_current_colors(self) -> ThemeColors:
         """Get current theme's color definitions.
@@ -337,4 +345,92 @@ class ThemeManager(QObject):
             active_bg="#00CED1",      # Darker cyan for dark background
             completed_bg="#4682B4",   # Steel blue
             archived_bg="#696969"     # Dim gray
+        )
+
+    def _get_dracula_colors(self) -> ThemeColors:
+        """Get color definitions for Dracula theme."""
+        return ThemeColors(
+            window_bg="#282A36",
+            base_bg="#1E1F29",
+            alt_base_bg="#44475A",
+            text="#F8F8F2",
+            button_bg="#44475A",
+            button_text="#F8F8F2",
+            highlight="#BD93F9",
+            highlighted_text="#282A36",
+            link="#8BE9FD",
+            disabled_text="#6272A4",
+            success="#50FA7B",
+            warning="#FFB86C",
+            error="#FF5555",
+            info="#8BE9FD",
+            active_bg="#006272",
+            completed_bg="#1E6B2E",
+            archived_bg="#44475A",
+        )
+
+    def _get_solarized_light_colors(self) -> ThemeColors:
+        """Get color definitions for Solarized Light theme."""
+        return ThemeColors(
+            window_bg="#FDF6E3",
+            base_bg="#EEE8D5",
+            alt_base_bg="#FDF6E3",
+            text="#657B83",
+            button_bg="#EEE8D5",
+            button_text="#586E75",
+            highlight="#268BD2",
+            highlighted_text="#FDF6E3",
+            link="#268BD2",
+            disabled_text="#93A1A1",
+            success="#859900",
+            warning="#B58900",
+            error="#DC322F",
+            info="#268BD2",
+            active_bg="#C9DFF5",
+            completed_bg="#D5E8C8",
+            archived_bg="#E8DFCC",
+        )
+
+    def _get_solarized_dark_colors(self) -> ThemeColors:
+        """Get color definitions for Solarized Dark theme."""
+        return ThemeColors(
+            window_bg="#002B36",
+            base_bg="#073642",
+            alt_base_bg="#002B36",
+            text="#839496",
+            button_bg="#073642",
+            button_text="#93A1A1",
+            highlight="#268BD2",
+            highlighted_text="#002B36",
+            link="#268BD2",
+            disabled_text="#586E75",
+            success="#859900",
+            warning="#B58900",
+            error="#DC322F",
+            info="#268BD2",
+            active_bg="#1B5C6B",
+            completed_bg="#2F6B2F",
+            archived_bg="#3D4E53",
+        )
+
+    def _get_github_colors(self) -> ThemeColors:
+        """Get color definitions for GitHub theme."""
+        return ThemeColors(
+            window_bg="#FFFFFF",
+            base_bg="#F6F8FA",
+            alt_base_bg="#FFFFFF",
+            text="#24292F",
+            button_bg="#F6F8FA",
+            button_text="#24292F",
+            highlight="#0969DA",
+            highlighted_text="#FFFFFF",
+            link="#0969DA",
+            disabled_text="#8C959F",
+            success="#1A7F37",
+            warning="#9A6700",
+            error="#CF222E",
+            info="#0550AE",
+            active_bg="#DDF4FF",
+            completed_bg="#DAFBE1",
+            archived_bg="#EAEEF2",
         )

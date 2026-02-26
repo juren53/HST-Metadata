@@ -5,6 +5,7 @@ Adds copyright watermark to JPEG files that contain 'Restricted' in their Copyri
 """
 
 import os
+import sys
 import glob
 from pathlib import Path
 from datetime import datetime
@@ -36,8 +37,8 @@ class WatermarkThread(QThread):
         """Run the watermarking process."""
         try:
             from PIL import Image
-            import exiftool
-            
+            from utils.file_utils import create_exiftool_instance
+
             stats = {
                 'jpeg_files_found': 0,
                 'restricted_found': 0,
@@ -47,7 +48,7 @@ class WatermarkThread(QThread):
                 'failed_list': [],
                 'restricted_list': []
             }
-            
+
             self.progress.emit("Starting watermark process...")
             self.progress.emit(f"Source directory: {self.jpeg_dir}")
             self.progress.emit(f"Output directory: {self.output_dir}")
@@ -79,12 +80,12 @@ class WatermarkThread(QThread):
             self.progress.emit("Checking Copyright fields...")
             
             # Process each JPEG file
-            with exiftool.ExifTool() as et:
+            with create_exiftool_instance() as et:
                 for jpeg_path in jpeg_files:
                     jpeg_path = Path(jpeg_path)
                     output_filename = jpeg_path.name
                     output_path = Path(self.output_dir) / output_filename
-                    
+
                     try:
                         # Read copyright metadata using exiftool
                         # Get the raw tag value for IPTC:CopyrightNotice
@@ -123,11 +124,17 @@ class WatermarkThread(QThread):
                                 img_width, img_height = img.size
                                 dimensions = f"{img_width}x{img_height}"
                                 
-                                # Scale watermark to match image size exactly
-                                watermark_resized = watermark.resize(
-                                    (img_width, img_height),
+                                # Scale watermark proportionally to cover the image (no stretching),
+                                # then crop to the exact image dimensions. This preserves the
+                                # aspect ratio of the watermark text on non-square images.
+                                wm_w, wm_h = watermark.size
+                                scale = max(img_width, img_height) / max(wm_w, wm_h)
+                                scaled_wm = watermark.resize(
+                                    (max(img_width, int(wm_w * scale)),
+                                     max(img_height, int(wm_h * scale))),
                                     Image.Resampling.LANCZOS
                                 )
+                                watermark_resized = scaled_wm.crop((0, 0, img_width, img_height))
                                 
                                 # Adjust watermark opacity
                                 watermark_with_opacity = watermark_resized.copy()
@@ -356,7 +363,7 @@ class Step8Dialog(QDialog):
         settings_layout.addLayout(opacity_layout)
         
         # Watermark file info
-        watermark_path = Path(__file__).parent.parent / 'Copyright_Watermark.png'
+        watermark_path = self._get_watermark_path()
         watermark_info = QLabel(f"<i>Watermark file: {watermark_path.name}</i>")
         settings_layout.addWidget(watermark_info)
         
@@ -455,12 +462,12 @@ class Step8Dialog(QDialog):
             restricted_count = 0
             restricted_list = []
             
-            import exiftool
-            with exiftool.ExifTool() as et:
+            from utils.file_utils import create_exiftool_instance
+            with create_exiftool_instance() as et:
                 for jpeg_path in jpeg_files:
                     try:
                         filename = Path(jpeg_path).name
-                        
+
                         # Get copyright notice
                         result = et.execute(
                             b"-IPTC:CopyrightNotice",
@@ -513,6 +520,12 @@ class Step8Dialog(QDialog):
         except Exception as e:
             self.log_manager.error(f"Error during analysis: {str(e)}", batch_id=self.batch_id, step=8)
     
+    def _get_watermark_path(self):
+        """Get the watermark file path, handling both source and frozen environments."""
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            return Path(sys._MEIPASS) / 'gui' / 'Copyright_Watermark.png'
+        return Path(__file__).parent.parent / 'Copyright_Watermark.png'
+
     def _start_watermarking(self):
         """Start the watermarking process."""
         self.log_manager.step_start(8, "Watermark Addition", batch_id=self.batch_id)
@@ -540,7 +553,7 @@ class Step8Dialog(QDialog):
         report_dir = Path(data_directory) / 'reports'
         
         # Watermark file path
-        watermark_path = Path(__file__).parent.parent / 'Copyright_Watermark.png'
+        watermark_path = self._get_watermark_path()
         
         if not watermark_path.exists():
             message = f"Watermark file not found:\n\n{watermark_path}\n\nPlease ensure the watermark file exists."
