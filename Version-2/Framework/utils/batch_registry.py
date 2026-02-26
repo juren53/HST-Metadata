@@ -23,9 +23,25 @@ class BatchRegistry:
                           in user's home directory.
         """
         if registry_path is None:
-            # Store registry in framework directory
-            framework_dir = Path(__file__).parent.parent
-            registry_path = framework_dir / 'config' / 'batch_registry.yaml'
+            # Store registry in user's home directory (persistent location).
+            # This is critical for PyInstaller frozen builds where Path(__file__)
+            # resolves to a temporary _MEIPASS directory that is deleted on exit.
+            home_registry = Path.home() / '.hstl_photo_framework' / 'config' / 'batch_registry.yaml'
+            
+            # Migrate from old location (framework_dir/config/) if needed
+            if not home_registry.exists():
+                import sys
+                if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+                    old_framework_dir = Path(sys._MEIPASS)
+                else:
+                    old_framework_dir = Path(__file__).parent.parent
+                old_registry = old_framework_dir / 'config' / 'batch_registry.yaml'
+                if old_registry.exists():
+                    home_registry.parent.mkdir(parents=True, exist_ok=True)
+                    import shutil
+                    shutil.copy2(old_registry, home_registry)
+            
+            registry_path = home_registry
         
         self.registry_path = Path(registry_path)
         self.batches = self._load_registry()

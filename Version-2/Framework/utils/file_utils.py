@@ -4,12 +4,103 @@ File utilities for HSTL Photo Framework
 Common file operations and utilities.
 """
 
+import sys
 from pathlib import Path
 from typing import List, Optional, Dict
 import shutil
 import os
 import csv
 import subprocess
+
+# Windows console window hiding constants
+if sys.platform.startswith('win'):
+    CREATE_NO_WINDOW = 0x08000000
+    SW_HIDE = 0
+else:
+    CREATE_NO_WINDOW = 0
+    SW_HIDE = 0
+
+
+def get_exiftool_path() -> str:
+    """Get the path to the exiftool executable.
+    
+    In frozen PyInstaller builds, returns the bundled copy in tools/.
+    Otherwise, returns 'exiftool' to use the system PATH.
+    """
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        bundled = Path(sys._MEIPASS) / 'tools' / 'exiftool.exe'
+        if bundled.exists():
+            return str(bundled)
+    # Check framework tools/ directory (source mode)
+    framework_tools = Path(__file__).parent.parent / 'tools' / 'exiftool.exe'
+    if framework_tools.exists():
+        return str(framework_tools)
+    # Fall back to system PATH
+    return 'exiftool'
+
+
+def create_exiftool_instance(executable=None):
+    """Create an ExifTool instance with Windows console window properly hidden.
+
+    On Windows, overrides the run() method to use CREATE_NO_WINDOW and
+    STARTF_USESHOWWINDOW flags, preventing console window flashes when
+    ExifTool is launched.
+    """
+    import exiftool
+
+    if executable is None:
+        executable = get_exiftool_path()
+
+    if sys.platform.startswith('win'):
+        class WindowsExifTool(exiftool.ExifTool):
+            def run(self):
+                """Override run method to hide console windows on Windows."""
+                if self.running:
+                    import warnings
+                    warnings.warn("ExifTool already running; doing nothing.", UserWarning)
+                    return
+
+                proc_args = [self._executable]
+
+                if hasattr(self, '_config_file') and self._config_file is not None:
+                    proc_args.extend(["-config", self._config_file])
+
+                proc_args.extend(["-stay_open", "True", "-@", "-"])
+
+                if hasattr(self, '_common_args') and self._common_args:
+                    proc_args.append("-common_args")
+                    proc_args.extend(self._common_args)
+
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = SW_HIDE
+
+                self._process = subprocess.Popen(
+                    proc_args,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    startupinfo=startupinfo,
+                    creationflags=CREATE_NO_WINDOW
+                )
+
+                if self._process.poll() is not None:
+                    self._process = None
+                    raise RuntimeError("exiftool did not execute successfully")
+
+                self._running = True
+
+                try:
+                    if hasattr(self, '_parse_ver'):
+                        self._ver = self._parse_ver()
+                    else:
+                        self._ver = "unknown"
+                except Exception:
+                    self._ver = "unknown"
+
+        return WindowsExifTool(executable=executable, encoding='utf-8')
+    else:
+        return exiftool.ExifTool(executable=executable, encoding='utf-8')
 
 
 class FileUtils:
@@ -146,8 +237,12 @@ class FileUtils:
             'status': 'not_found'
         }
 
-        # Try to find exiftool in PATH
-        exiftool_path = shutil.which('exiftool')
+        # Try to find exiftool - use bundled version first, then PATH
+        exiftool_path = get_exiftool_path()
+        
+        # If we got the default 'exiftool' string, resolve it via PATH
+        if exiftool_path == 'exiftool':
+            exiftool_path = shutil.which('exiftool')
 
         if not exiftool_path:
             # Check common Windows installation location
@@ -164,11 +259,20 @@ class FileUtils:
 
         # Get version
         try:
+            run_kwargs = {
+                'capture_output': True,
+                'text': True,
+                'timeout': 5,
+            }
+            if sys.platform.startswith('win'):
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = SW_HIDE
+                run_kwargs['startupinfo'] = startupinfo
+                run_kwargs['creationflags'] = CREATE_NO_WINDOW
             version_result = subprocess.run(
                 [exiftool_path, '-ver'],
-                capture_output=True,
-                text=True,
-                timeout=5
+                **run_kwargs
             )
             if version_result.returncode == 0:
                 result['version'] = version_result.stdout.strip()

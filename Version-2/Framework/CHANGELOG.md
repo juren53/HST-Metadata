@@ -5,6 +5,192 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Planned] - Delivery Feature
+
+### Planned
+- **Final Product Delivery Plan** — Comprehensive plan for packaging batch delivery
+  - New `delivery/` directory with `tiff_delivery/` and `jpeg_delivery/` subdirectories
+  - New `trash/` directory for disposable workflow artifacts (converted JPEGs, resized JPEGs)
+  - Added delivery menu items to existing Batch menu: Create Delivery Package, Open Delivery Directory, Open Trash Directory, Empty Trash
+  - Retained artifacts: Excel file, CSV export, reports, logs
+  - Delivery products: Final TIFFs from `output/tiff_processed/`, Final JPEGs from `output/jpeg_watermarked/`
+  - Disposable artifacts moved to trash: `output/jpeg/`, `output/jpeg_resized/`
+  - Delivery only available after all 8 steps completed
+  - **Files Added**: `docs/PLAN_HPM-Final-Product-Delivery-oc.md`
+
+---
+
+## HPM [1.8.9] - 2026-02-24 CST
+
+### Added
+- **Four new UI themes** — extended `ThemeManager` with Dracula, GitHub, Solarized Light, and Solarized Dark alongside the existing System/Light/Dark modes. All new themes include complete `ThemeColors` palettes with HPM-specific batch-status colors (`active_bg`, `completed_bg`, `archived_bg`).
+- **Accent Themes group in Theme Selection dialog** — `ThemeDialog` now organises themes into two `QGroupBox` sections: *Standard* (System Default, Light, Dark) and *Accent Themes* (Dracula, GitHub, Solarized Light, Solarized Dark). Previously saved theme preferences for new modes are restored correctly on startup.
+  - **Files Modified**: `gui/theme_manager.py`, `gui/dialogs/theme_dialog.py`
+
+---
+
+## HPM [1.8.8] - 2026-02-24 CST
+
+### Fixed
+- **ftfy library missing from HPM.exe** — Step 3 (Mojibake Detection) failed with "ftfy library not found" in compiled EXE
+  - **Root cause 1**: `pyinstaller` was invoked via the system Python, which does not have `ftfy` installed; the project venv (which has `ftfy`) was invisible to the build
+  - **Root cause 2**: `hiddenimports=['ftfy']` only captures the top-level module; `ftfy` has a `bad_codecs/` subpackage and several submodules (`chardata`, `fixes`, `badness`, `formatting`) that were silently omitted
+  - Fixed by (a) installing PyInstaller into the project venv and compiling with `.venv/Scripts/python.exe -m PyInstaller`, and (b) replacing the bare hidden import with `collect_all('ftfy')` in `HPM.spec` to bundle all submodules and data files
+  - **Files Modified**: `HPM.spec`
+
+---
+
+## HPM [1.8.7] - 2026-02-19 CST
+
+### Fixed
+- **Copyright watermark aspect ratio distortion** — Watermark text was stretched on non-square JPEG images
+  - **Root cause**: `watermark.resize((img_width, img_height), ...)` scaled the 800×800 PNG to the exact image dimensions, distorting the "COPYRIGHT" text on landscape and portrait images
+  - Fixed by scaling the watermark proportionally to cover the image's larger dimension, then cropping to the exact image size — text proportions are now preserved regardless of image shape
+  - **Files Modified**: `gui/dialogs/step8_dialog.py`
+
+### Testing
+- **EXE acceptance test suite added** (`tests/acceptance/`) — 67 tests treating `HPM.exe` as a black box; all passing
+  - `test_exe_artifact.py` — EXE file validity, size, version/changelog consistency, `HPM.spec` correctness
+  - `test_exe_launch.py` — subprocess smoke tests: EXE launches, stays alive, terminates cleanly
+  - `test_watermark_processing.py` — aspect-ratio regression tests (issue #49), copyright detection logic, opacity, output format
+  - `test_jpeg_resize.py` — Step 7 resize algorithm: aspect ratio, no upscaling, bounds across 5 parametrized shapes
+  - `test_asset_bundling.py` — all `HPM.spec` datas sources present on disk; `exiftool -ver` verified
+  - Added `acceptance` pytest marker to `pyproject.toml`
+  - 64 fast tests complete in < 1 second; 3 launch smoke tests complete in ~5 seconds
+  - **Files Added**: `tests/acceptance/__init__.py`, `tests/acceptance/conftest.py`, `tests/acceptance/test_exe_artifact.py`, `tests/acceptance/test_exe_launch.py`, `tests/acceptance/test_watermark_processing.py`, `tests/acceptance/test_jpeg_resize.py`, `tests/acceptance/test_asset_bundling.py`
+  - **Files Modified**: `pyproject.toml`
+
+---
+
+## HPM [1.8.6] - 2026-02-17 CST
+
+### Added
+- **`run.sh`**: Linux/macOS/Git Bash launcher — auto-creates `.venv`, installs dependencies, and launches `gui/hstl_gui.py`
+- **`run.ps1`**: Windows PowerShell launcher — equivalent to `run.sh` for native Windows users
+- Both launchers use marker-based dependency tracking (only reinstalls when `requirements.txt` changes)
+
+### Documentation
+- **`README.md`**: Installation section updated with Quick Start for `run.sh` and `run.ps1`
+- **`INSTALLATION.md`**: Quick Installation section updated with launcher instructions
+
+### Fixed
+- **Console window flash on Windows** — ExifTool process spawned a visible console window on every invocation in Steps 4-8
+  - **Root cause**: PyExifTool library does not hide console windows on Windows by default; every `exiftool.ExifTool()` context manager spawned a visible `cmd.exe` process
+  - Added `create_exiftool_instance()` helper to `utils/file_utils.py` with `WindowsExifTool` subclass that overrides `run()` to use `CREATE_NO_WINDOW` and `STARTF_USESHOWWINDOW` flags
+  - Replaced all 7 `exiftool.ExifTool()` calls across Steps 4-8 with `create_exiftool_instance()`
+  - Also fixed `get_exiftool_info()` version detection to use `CREATE_NO_WINDOW` in its `subprocess.run()` call
+  - Same fix previously applied to TagWriter — ported from `tag_writer/exiftool_utils.py`
+  - **Files Modified**: `utils/file_utils.py`, `gui/dialogs/step4_dialog.py`, `gui/dialogs/step5_dialog.py`, `gui/dialogs/step6_dialog.py`, `gui/dialogs/step7_dialog.py`, `gui/dialogs/step8_dialog.py`
+
+---
+
+## HPM [1.8.5] - 2026-02-07 1030 CST
+
+### Fixed
+- **Batch registry lost on relaunch in compiled mode** — Batches created in the compiled `.exe` were not found on subsequent launches
+  - **Root cause**: `BatchRegistry` stored `batch_registry.yaml` relative to `Path(__file__).parent.parent`, which in PyInstaller resolves to a temporary `_MEIPASS` directory that is deleted when the app exits
+  - Moved registry to persistent location: `~/.hstl_photo_framework/config/batch_registry.yaml`
+  - Automatic one-time migration copies existing registry from old framework-relative location on first run
+  - Consistent with existing pattern (logs already stored in `~/.hstl_photo_framework/logs/`)
+  - **Files Modified**: `utils/batch_registry.py`
+
+- **Step 8 watermark file not found in compiled mode** — Watermark image could not be loaded in the compiled `.exe`
+  - **Root cause**: `Path(__file__).parent.parent` resolves outside `_MEIPASS`; watermark file also not bundled in `.spec`
+  - Added `_get_watermark_path()` helper with frozen-aware path resolution
+  - Added `gui/Copyright_Watermark.png` to `HPM.spec` datas list
+  - **Files Modified**: `gui/dialogs/step8_dialog.py`, `HPM.spec`
+
+- **ExifTool not found in compiled mode on clean machines** — Steps 4-8 called `exiftool.ExifTool()` without specifying the executable path, relying on system PATH
+  - Bundled portable ExifTool v12.60 (`tools/exiftool.exe`) inside `HPM.exe` via PyInstaller datas
+  - Created `get_exiftool_path()` helper in `utils/file_utils.py` with frozen-aware resolution
+  - Updated all 7 `ExifTool()` calls across Steps 4-8 to use `executable=get_exiftool_path()`
+  - Updated About dialog to report bundled ExifTool instead of system-installed version
+  - HPM.exe is now fully self-contained — no external dependencies required on client machines
+  - **Files Modified**: `utils/file_utils.py`, `gui/main_window.py`, `gui/dialogs/step4_dialog.py`, `gui/dialogs/step5_dialog.py`, `gui/dialogs/step6_dialog.py`, `gui/dialogs/step7_dialog.py`, `gui/dialogs/step8_dialog.py`, `HPM.spec`
+
+---
+
+## HPM [1.8.4c] - 2026-02-07 0945 CST
+
+### Added
+- **Icon Manager Module Integration** — Integrated [Icon_Manager_Module](https://github.com/juren53/Icon_Manager_Module) for proper cross-platform icon display
+  - Added `icon_loader.py` with `IconLoader` class for unified icon management
+  - Generated all icon assets from `ICON_HSTL.png` via `generate_icons.py` (app.ico, app.icns, multi-resolution PNGs)
+  - Application icon now displays correctly in window title bar, taskbar, and Alt-Tab switcher
+  - Windows taskbar fix via `set_taskbar_icon()` — no more generic Python icon
+  - Frozen-aware path resolution uses `sys._MEIPASS` for PyInstaller builds
+  - **Files Added**: `icon_loader.py`, `icons/app.ico`, `icons/app.icns`, `icons/app.png`, `icons/app_16x16.png` through `icons/app_256x256.png`
+  - **Files Modified**: `gui/hstl_gui.py`, `HPM.spec`
+
+### Fixed
+- **Step 2 crash in compiled executable** — Fixed `'NoneType' object has no attribute 'write'` error during CSV conversion
+  - **Root cause**: PyInstaller `console=False` sets `sys.stdout` and `sys.stderr` to `None` on Windows; all `print()` calls in `g2c.py` then fail with `None.write(...)`
+  - Added `sys.stdout`/`sys.stderr` → `os.devnull` redirect guards in three locations:
+    1. `gui/hstl_gui.py` — app entry point, catches everything at startup
+    2. `gui/dialogs/step2_dialog.py` — inside `CSVConversionThread.run()` (QThread context)
+    3. `g2c.py` — self-protecting module-level guard
+  - Step 2 now works identically in both Python source and compiled `.exe` modes
+  - **Files Modified**: `gui/hstl_gui.py`, `gui/dialogs/step2_dialog.py`, `g2c.py`
+
+### Changed
+- **HPM.spec** — Updated PyInstaller spec to bundle `icons/` directory and use `icons/app.ico` as the executable icon (replaces `launcher/HPM_icon.png`)
+
+---
+
+## HPM [1.8.4b] - 2026-02-03 2200 CST
+
+### Changed
+- **About dialog** — Replaced 82-line inline dialog with the [pyqt-app-info](https://github.com/juren53/pyqt-app-info) package. The new dialog adds execution mode (Python source vs compiled executable) alongside existing version, tool, and OS info.
+- **Dependencies** — Added `pyqt-app-info>=0.1.0` to `pyproject.toml`; removed unused `platform` and `FileUtils` imports from `main_window.py`
+
+### Fixed
+- **Import path** — Fixed `file_manager` import broken by move to `tools/` in v1.8.4a
+
+---
+
+## HPM [1.8.4a] - 2026-02-03 0830 CST
+
+### Changed
+- **Project housekeeping** — moved 12 plan, setup, and reference files into `notes/` directory for a cleaner project root
+- **WARP.ini** — renamed to `AGENTS.ini` and updated header to address AI coding assistants generally
+- **Utility scripts** — moved `cleanup_google_auth.py`, `csv_record_viewer.py`, `file_manager.py` to `tools/`; moved `excel_validator.py` to `testing/`
+- **Setup scripts** — moved `setup_exiftool.bat` and `setup_exiftool.ps1` to `tools/`
+- **Binaries** — moved `CSV_Record_Viewer.exe` and `exiftool.exe` to `tools/`
+- **Old spec file** — moved `HSTL_Photo_Framework_GUI.spec` to `archive/` (superseded by `HPM.spec`)
+- **Migration doc** — moved `README_Excel-Migration.md` to `notes/`
+
+### Removed
+- `GEMINI.md` — empty file
+- `NUL`, `1.5.0` — accidental artifacts
+
+### Other
+- Added `.claude/settings.local.json` to `.gitignore`
+
+---
+
+## HPM [1.8.4] - 2026-01-31 16:00 CST
+
+### Added
+
+- **Before/After Resolution & DPI in Step 4** - 16-bit conversion now shows image dimensions and DPI
+  - Detection pass displays resolution and DPI for each 16-bit TIFF found
+  - Conversion progress shows before/after resolution and DPI per file
+  - Conversion report includes before/after metadata for each converted file
+  - Uses PIL for reliable resolution/DPI reads (ExifTool for BitsPerSample detection only)
+  - Handles edge cases: missing DPI (shows "N/A"), asymmetric DPI (e.g., "300x600 DPI"), float rounding
+  - Added `_format_dpi()` and `_format_resolution()` helper functions
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+### Changed
+
+- **Step 4 Dialog Stays Open After Conversion** - Dialog no longer auto-closes on completion
+  - "Conversion Complete" popup no longer closes the Step 4 dialog
+  - Users can review output and before/after metadata before closing manually
+  - Matches Step 2 dialog behavior
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+---
+
 ## HPM [1.8.3] - 2026-01-28 13:09 CST
 
 ### Added

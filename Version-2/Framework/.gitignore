@@ -25,12 +25,14 @@ pip-delete-this-directory.txt
 pytest.ini
 run_tests.py
 hpm
+.pytest_cache/
 
-# IDE
+# IDE and AI assistants
 .vscode/
 .idea/
 *.swp
 *.swo
+.claude/settings.local.json
 
 # Logs and temp files
 *.log

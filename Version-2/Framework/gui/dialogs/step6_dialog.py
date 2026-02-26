@@ -35,8 +35,7 @@ class JpegConversionThread(QThread):
         """Run the JPEG conversion process."""
         try:
             from PIL import Image
-            import exiftool
-            
+
             stats = {
                 'tiff_files_found': 0,
                 'converted': 0,
@@ -110,8 +109,8 @@ class JpegConversionThread(QThread):
                     
                     # Use exiftool to copy all metadata tags from TIFF to JPEG
                     # This ensures IPTC and XMP metadata are preserved
-                    import exiftool
-                    with exiftool.ExifTool() as et:
+                    from utils.file_utils import create_exiftool_instance
+                    with create_exiftool_instance() as et:
                         # Copy all tags from source TIFF to destination JPEG
                         et.execute(
                             b"-TagsFromFile",

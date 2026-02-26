@@ -1,0 +1,4 @@
+Mojibake scan failed:
+
+ftfy library not found.  Install with:
+pip install ftfy

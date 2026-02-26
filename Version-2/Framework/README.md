@@ -4,13 +4,23 @@ A comprehensive Python framework for managing the complete HSTL Photo Metadata P
 
 ## Installation
 
-**Before starting, install all dependencies:**
+### Quick Start
 
+**Linux / macOS / Git Bash:**
 ```bash
-# Install Python packages
-pip install -r requirements.txt
+./run.sh
+```
 
-# Install ExifTool (required for metadata operations)
+**Windows (PowerShell):**
+```powershell
+.\run.ps1
+```
+
+Both launchers auto-create a `.venv` virtual environment, install all dependencies from `requirements.txt`, and launch the GUI. If PowerShell blocks `run.ps1`, run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` once first.
+
+### ExifTool (required for metadata operations)
+
+```powershell
 # Option 1: Automated setup (recommended)
 .\setup_exiftool.ps1    # PowerShell
 # OR
@@ -22,6 +32,12 @@ setup_exiftool.bat      # Command Prompt
 ```
 
 **Quick Fix for "ExifTool not found" errors:** See [QUICKFIX_EXIFTOOL.md](QUICKFIX_EXIFTOOL.md)
+
+### Manual Setup
+```bash
+pip install -r requirements.txt
+python gui/hstl_gui.py
+```
 
 See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions.
 
