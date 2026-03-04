@@ -59,10 +59,9 @@ class Step1Dialog(QDialog):
             "<p><b>Requirements:</b></p>"
             "<ul>"
             "<li>The spreadsheet must be in .xlsx or .xls format</li>"
-            "<li>Row 1: Data headers</li>"
-            "<li>Row 2: Batch title</li>"
-            "<li>Row 3: Required mapping headers (Title, Accession Number, Restrictions, Scopenote, Related Collection, Source Photographer, Institutional Creator)</li>"
-            "<li>Row 4+: Metadata data</li>"
+            "<li>One row (within the first 5) must begin with <b>HST - DRUPAL FIELDS</b> — this row defines the column mapping</li>"
+            "<li>That row must contain the required mapping headers: Title, Accession Number, Restrictions, Scopenote, Related Collection, Source Photographer, Institutional Creator</li>"
+            "<li>All rows after the mapping row are treated as metadata data</li>"
             "</ul>"
         )
         desc_label.setWordWrap(True)
