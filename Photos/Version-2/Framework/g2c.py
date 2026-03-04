@@ -270,7 +270,7 @@ def export_to_csv(df, output_file="export.csv"):
     try:
         print(f"\n=== Exporting Data to CSV: {output_file} ===")
 
-        # Define the row 3 content to export header mapping
+        # Define the "HST - DRUPAL FIELDS" row content to export header mapping
         row3_mapping = {
             "Title": "Headline",
             "Accession Number": "ObjectName",
@@ -281,20 +281,30 @@ def export_to_csv(df, output_file="export.csv"):
             "Institutional Creator": "By-lineTitle",
         }
 
-        # Create a mapping from column names to export headers based on row 3 content
-        # Row 3 is at index 2 (0-based indexing)
-        row3_index = 2
+        # Find the mapping row by searching rows 0-4 for "HST - DRUPAL FIELDS" in the first cell
+        row3_index = None
+        for search_idx in range(min(5, len(df))):
+            first_cell = str(df.iloc[search_idx, 0]).strip() if pd.notna(df.iloc[search_idx, 0]) else ""
+            if "HST - DRUPAL FIELDS" in first_cell:
+                row3_index = search_idx
+                print(f"Found mapping row at index {row3_index} (row {row3_index + 1}): '{first_cell}'")
+                break
+
+        if row3_index is None:
+            print("Error: Could not find a row containing 'HST - DRUPAL FIELDS' in rows 1-5.")
+            return CSVExportResult(success=False)
+
         column_to_export_header = {}
 
-        # Only proceed if we have enough rows
-        if len(df) <= row3_index:
+        # Only proceed if we have enough rows (need at least one data row after mapping row)
+        if len(df) <= row3_index + 1:
             print(
-                f"Error: DataFrame has only {len(df)} rows, but we need at least {row3_index + 1} rows."
+                f"Error: DataFrame has only {len(df)} rows, but we need at least {row3_index + 2} rows (mapping row + data)."
             )
-            return False
+            return CSVExportResult(success=False)
 
-        # Find which columns have the values we're looking for in row 3
-        print("\nDebug - Row 3 cell values:")
+        # Find which columns have the values we're looking for in the mapping row
+        print(f"\nDebug - Mapping row (index {row3_index}) cell values:")
         for col in df.columns:
             cell_value = (
                 str(df.loc[row3_index, col]).strip()
@@ -316,7 +326,7 @@ def export_to_csv(df, output_file="export.csv"):
                 column_to_export_header[col] = "Source"
                 print(f"Mapping '{cell_value}' to 'Source'")
 
-        # Report which row 3 values we couldn't find
+        # Report which mapping row values we couldn't find
         found_values = [
             val for col, val in df.iloc[row3_index].items() if val in row3_mapping
         ]
@@ -324,10 +334,10 @@ def export_to_csv(df, output_file="export.csv"):
 
         if missing_values:
             print(
-                f"Warning: The following row 3 values were not found in the data: {', '.join(missing_values)}"
+                f"Warning: The following mapping headers were not found: {', '.join(missing_values)}"
             )
             print(
-                "Available row 3 values:",
+                "Available mapping row values:",
                 ", ".join([str(val) for val in df.iloc[row3_index] if pd.notna(val)]),
             )
             print("Continuing with available mappings...")
@@ -347,7 +357,7 @@ def export_to_csv(df, output_file="export.csv"):
             # Copy the column data from cleaned DataFrame
             new_df[dst_col] = df_cleaned[src_col]
             renamed_columns.append(
-                f"'{src_col}' (row 3: '{df.loc[row3_index, src_col]}') -> '{dst_col}'"
+                f"'{src_col}' (mapping row: '{df.loc[row3_index, src_col]}') -> '{dst_col}'"
             )
             print(
                 f"Mapped: '{src_col}' (row 3: '{df.loc[row3_index, src_col]}') -> '{dst_col}'"
@@ -463,8 +473,8 @@ def export_to_csv(df, output_file="export.csv"):
                     pass
                 return ("", False, "no date data")
 
-            # Skip the first 3 rows which contain header information
-            # Start processing from index 3 (4th row) onwards
+            # Start processing from the row after the mapping row
+            data_start_index = row3_index + 1
             production_count = 0
             coverage_count = 0
 
@@ -475,7 +485,7 @@ def export_to_csv(df, output_file="export.csv"):
                     object_name_col = col
                     break
 
-            for idx in range(3, len(df_cleaned)):
+            for idx in range(data_start_index, len(df_cleaned)):
                 date_value = ""
                 date_source = ""
                 is_partial = False

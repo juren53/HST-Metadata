@@ -176,14 +176,35 @@ class FileManager:
             except Exception as e:
                 return False, f"Cannot read Excel file: {str(e)}"
 
-            # Check minimum required rows
-            if len(df) < 4:
+            # Check minimum required rows (need at least the mapping row + 1 data row)
+            if len(df) < 2:
                 return (
                     False,
-                    f"Excel file has insufficient rows. Expected at least 4 rows, found {len(df)}. Required: Row 1 (headers), Row 2 (batch title), Row 3 (mapping), Row 4+ (data)",
+                    f"Excel file has insufficient rows. Found {len(df)} rows.",
                 )
 
-            # Validate Row 3 mapping headers (index 2)
+            # Find the mapping row by scanning rows 0-4 for "HST - DRUPAL FIELDS" in the first cell
+            mapping_row_index = None
+            for search_idx in range(min(5, len(df))):
+                first_cell = str(df.iloc[search_idx, 0]).strip() if pd.notna(df.iloc[search_idx, 0]) else ""
+                if "HST - DRUPAL FIELDS" in first_cell:
+                    mapping_row_index = search_idx
+                    break
+
+            if mapping_row_index is None:
+                return (
+                    False,
+                    "Could not find a row containing 'HST - DRUPAL FIELDS' in the first 5 rows. "
+                    "This row is required to identify the column mapping headers.",
+                )
+
+            if len(df) <= mapping_row_index + 1:
+                return (
+                    False,
+                    f"No data rows found after the 'HST - DRUPAL FIELDS' mapping row (row {mapping_row_index + 1}).",
+                )
+
+            # Validate mapping row headers
             required_mapping_headers = [
                 "Title",
                 "Accession Number",
@@ -195,40 +216,37 @@ class FileManager:
             ]
 
             try:
-                # Get Row 3 headers and clean them
-                row3_headers = df.iloc[2].fillna("").astype(str).str.strip().tolist()
+                mapping_row_headers = df.iloc[mapping_row_index].fillna("").astype(str).str.strip().tolist()
 
                 # Check for required headers (case-insensitive)
                 missing_headers = []
                 for required_header in required_mapping_headers:
                     if not any(
                         required_header.lower() == header.lower()
-                        for header in row3_headers
+                        for header in mapping_row_headers
                     ):
                         missing_headers.append(required_header)
 
                 if missing_headers:
                     return False, (
-                        f"Missing required Row 3 headers: {', '.join(missing_headers)}\\n"
-                        f"Found headers: {', '.join(row3_headers)}\\n"
+                        f"Missing required mapping headers in row {mapping_row_index + 1}: {', '.join(missing_headers)}\\n"
+                        f"Found headers: {', '.join(mapping_row_headers)}\\n"
                         f"Required headers: {', '.join(required_mapping_headers)}"
                     )
 
             except Exception as e:
-                return False, f"Error validating Row 3 structure: {str(e)}"
+                return False, f"Error validating mapping row structure: {str(e)}"
 
-            # Basic data validation on first few data rows
+            # Basic data validation: check first data row has some content
             try:
-                if len(df) >= 4:
-                    # Check if data rows have some content
-                    first_data_row = df.iloc[3].fillna("").astype(str).tolist()
-                    if not any(val.strip() for val in first_data_row):
-                        return (
-                            False,
-                            "No data found in Row 4. Expected metadata data starting from Row 4.",
-                        )
+                first_data_row = df.iloc[mapping_row_index + 1].fillna("").astype(str).tolist()
+                if not any(val.strip() for val in first_data_row):
+                    return (
+                        False,
+                        f"No data found in row {mapping_row_index + 2}. Expected metadata data after the mapping row.",
+                    )
             except Exception:
-                pass  # This is not critical, so we don't fail on this validation
+                pass  # Not critical
 
             logger.info(f"Excel file structure validation passed: {excel_path}")
             return True, "Excel file structure is valid for HPM processing"

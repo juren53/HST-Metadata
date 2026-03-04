@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## HPM [1.9.0] - 2026-03-04 CST
+
+### Changed
+- **Dynamic mapping-row detection in Excel-to-CSV conversion** — `g2c.py` and `tools/file_manager.py` no longer assume the IPTC column-mapping headers are always on row 3. Both now scan rows 1–5 looking for a row whose first cell contains `"HST - DRUPAL FIELDS"` and use that row as the mapping row. All rows after it are treated as data. This makes the converter resilient to spreadsheets that have a different number of preamble rows.
+  - **Files Modified**: `g2c.py`, `tools/file_manager.py`, `gui/dialogs/step1_dialog.py`
+
+---
+
 ## HPM [1.8.9] - 2026-02-24 CST
 
 ### Added
