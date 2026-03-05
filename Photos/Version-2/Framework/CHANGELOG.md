@@ -20,6 +20,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## HPM [1.9.0] - 2026-03-05 CST
+
+### Documentation
+- **README.md rewritten** — Updated to reflect current v1.9.0 state: GUI-first framing, HPM.exe download instructions with GitHub Releases URL, accurate step names (Excel not Google Spreadsheet), correct Python requirement (3.9+), and removed stale "Currently in Development" content
+- **INSTALLATION.md rewritten** — Now serves as the source-code installation guide: how to get the source (ZIP download or git clone), launch via `run.ps1`/`run.sh`, WinPython launcher, ExifTool setup, and accurate dependency table (removed obsolete Google API, pydantic, tqdm, structlog references)
+- **docs/CLI_REFERENCE.md added** — New document consolidating all `hstl_framework.py` CLI commands (`init`, `status`, `run`, `config`, `batches`, `batch`, `gui`) with usage examples and configuration key reference
+  - **Files Modified**: `README.md`, `INSTALLATION.md`
+  - **Files Added**: `docs/CLI_REFERENCE.md`
+
+---
+
 ## HPM [1.9.0] - 2026-03-04 CST
 
 ### Changed
