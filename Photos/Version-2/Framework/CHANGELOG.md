@@ -26,6 +26,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dynamic mapping-row detection in Excel-to-CSV conversion** — `g2c.py` and `tools/file_manager.py` no longer assume the IPTC column-mapping headers are always on row 3. Both now scan rows 1–5 looking for a row whose first cell contains `"HST - DRUPAL FIELDS"` and use that row as the mapping row. All rows after it are treated as data. This makes the converter resilient to spreadsheets that have a different number of preamble rows.
   - **Files Modified**: `g2c.py`, `tools/file_manager.py`, `gui/dialogs/step1_dialog.py`
 
+### Testing
+- **Acceptance test suite expanded to cover all 8 pipeline steps** — 270 new tests across 6 new test files, filling gaps in Steps 1, 2, 4, 5, 6, and 8. All algorithms are mirrored as pure functions in `conftest.py` and tested without launching the GUI. Suite now totals 322 tests, all passing in under 10 seconds.
+  - **Step 1** (`test_step1_excel_validation.py`, 27 tests) — `find_mapping_row` sentinel detection in rows 0–4; `missing_mapping_headers` required-header validation; full flow integration
+  - **Step 2** (`test_step2_csv_conversion.py`, 32 tests) — `build_date_from_parts`: full dates, partial dates, Excel float strings, nan/None/null handling, invalid range rejection; IPTC column map completeness
+  - **Step 4** (`test_step4_bit_depth.py`, 31 tests) — `is_16bit_tiff` BitsPerSample detection; `scale_16bit_to_8bit` pixel-scaling formula (÷256, uint8 output, boundary values); `detect_converted_mode` shape→mode mapping
+  - **Step 5** (`test_step5_metadata.py`, 69 tests) — `convert_date_step5`: all 8 date patterns (year range, short year, circa, year-only, day-name full, Month YYYY, Month DD YYYY, unknown passthrough); `is_artifact_record` all 13 artifact strings; `is_verso_filename` both case variants and wrong-extension exclusions
+  - **Step 6** (`test_step6_jpeg_conversion.py`, 19 tests) — `convert_mode_for_jpeg`: RGBA/LA/P→RGB via white-background composite; L/RGB→RGB direct; output always RGB; dimensions preserved; transparent pixels become white
+  - **Step 8** (`test_step8_watermark_compositing.py`, 23 tests) — `is_restricted` all cases (restricted, unrestricted override, empty/None); `apply_watermark` compositing: pixels change, zero opacity = no change, higher opacity = greater effect, landscape/portrait coverage
+  - **Step 3** (`test_mojibake_detection.py`, 52 tests) — added in v1.9.0 release; ftfy bundling, all 6 scanned fields, row numbering, fix idempotency, CSV round-trip
+  - **Files Added**: `tests/acceptance/test_step1_excel_validation.py`, `test_step2_csv_conversion.py`, `test_step4_bit_depth.py`, `test_step5_metadata.py`, `test_step6_jpeg_conversion.py`, `test_step8_watermark_compositing.py`
+  - **Files Modified**: `tests/acceptance/conftest.py`
+
 ---
 
 ## HPM [1.8.9] - 2026-02-24 CST
