@@ -5,6 +5,10 @@ All notable changes to the HSTL Photo Framework will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+> **Note for maintainers:** Every version header **must** include a date, a 4-digit 24-hour time, and the `CST` timezone label.
+> Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
+> Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
+
 ## [Planned] - Delivery Feature
 
 ### Planned
@@ -20,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.9.0] - 2026-03-05 CST
+## HPM [1.9.0] - 2026-03-05 0514 CST
 
 ### Documentation
 - **README.md rewritten** — Updated to reflect current v1.9.0 state: GUI-first framing, HPM.exe download instructions with GitHub Releases URL, accurate step names (Excel not Google Spreadsheet), correct Python requirement (3.9+), and removed stale "Currently in Development" content
@@ -31,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.9.0] - 2026-03-04 CST
+## HPM [1.9.0] - 2026-03-04 1346 CST
 
 ### Changed
 - **Dynamic mapping-row detection in Excel-to-CSV conversion** — `g2c.py` and `tools/file_manager.py` no longer assume the IPTC column-mapping headers are always on row 3. Both now scan rows 1–5 looking for a row whose first cell contains `"HST - DRUPAL FIELDS"` and use that row as the mapping row. All rows after it are treated as data. This makes the converter resilient to spreadsheets that have a different number of preamble rows.
@@ -51,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.8.9] - 2026-02-24 CST
+## HPM [1.8.9] - 2026-02-24 2112 CST
 
 ### Added
 - **Four new UI themes** — extended `ThemeManager` with Dracula, GitHub, Solarized Light, and Solarized Dark alongside the existing System/Light/Dark modes. All new themes include complete `ThemeColors` palettes with HPM-specific batch-status colors (`active_bg`, `completed_bg`, `archived_bg`).
@@ -60,7 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.8.8] - 2026-02-24 CST
+## HPM [1.8.8] - 2026-02-24 1119 CST
 
 ### Fixed
 - **ftfy library missing from HPM.exe** — Step 3 (Mojibake Detection) failed with "ftfy library not found" in compiled EXE
@@ -71,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.8.7] - 2026-02-19 CST
+## HPM [1.8.7] - 2026-02-19 1209 CST
 
 ### Fixed
 - **Copyright watermark aspect ratio distortion** — Watermark text was stretched on non-square JPEG images
@@ -93,7 +97,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## HPM [1.8.6] - 2026-02-17 CST
+## HPM [1.8.6] - 2026-02-17 1928 CST
 
 ### Added
 - **`run.sh`**: Linux/macOS/Git Bash launcher — auto-creates `.venv`, installs dependencies, and launches `gui/hstl_gui.py`
