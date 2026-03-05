@@ -1,253 +1,153 @@
-# HSTL Photo Framework - Installation Guide
+# HPM - Installation Guide (Running from Source)
 
-## Overview
-
-The HSTL Photo Metadata Framework requires several dependencies to function properly. This guide covers both Python package installation and external tool requirements.
+This guide covers how to download and run HPM from the Python source code. If you just want to run the application on Windows, download `HPM.exe` from the [GitHub Releases page](https://github.com/juren53/HST-Metadata/releases) instead — no Python required.
 
 ## Prerequisites
 
-- Python 3.7 or higher
+- Python 3.9 or higher
 - pip (Python package installer)
 - Internet connection for package downloads
 
-## Quick Installation
+## Step 1: Get the Source Code
 
-**Linux / macOS / Git Bash:**
-```bash
-./run.sh
+### Option A: Download a ZIP (no Git required)
+
+1. Go to [https://github.com/juren53/HST-Metadata/releases](https://github.com/juren53/HST-Metadata/releases)
+2. Under the latest release, click **Source code (zip)**
+3. Extract the archive to your preferred location
+4. Navigate into the Framework folder:
+
+```powershell
+cd HST-Metadata-<version>\Photos\Version-2\Framework
 ```
 
-**Windows (PowerShell):**
+### Option B: Clone with Git
+
+```powershell
+git clone https://github.com/juren53/HST-Metadata.git
+cd HST-Metadata\Photos\Version-2\Framework
+```
+
+## Step 2: Launch HPM
+
+### Windows (PowerShell) — Recommended
+
 ```powershell
 .\run.ps1
 ```
 
-Both launchers auto-create a `.venv` virtual environment, install all dependencies from `requirements.txt`, and launch the GUI. If PowerShell blocks `run.ps1`, run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` once first.
+`run.ps1` automatically:
+- Creates a `.venv` virtual environment (first run only)
+- Installs all dependencies from `requirements.txt` if needed
+- Launches the HPM GUI
 
-**Manual setup:**
-```bash
-# Clone or download the framework
-cd HSTL-Photo-Framework
-
-# Install all Python dependencies
-pip install -r requirements.txt
+If PowerShell blocks the script, run this once first:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-## Detailed Installation Steps
+### Linux / macOS / Git Bash
 
-### 1. Python Dependencies
+```bash
+./run.sh
+```
 
-All Python dependencies are specified in `requirements.txt`. The file is organized into categories:
+### WinPython Environments
 
-#### Core Framework Dependencies
-- **PyYAML** >= 6.0 - YAML configuration file parsing
-- **pandas** >= 1.5.0 - Data manipulation and CSV processing
-- **pydantic** >= 1.10.0 - Configuration validation and data models
-- **ftfy** >= 6.0.0 - Text encoding fixes and Unicode normalization
-- **tqdm** >= 4.64.0 - Progress bars for CLI operations
-- **colorama** >= 0.4.4 - Cross-platform colored terminal output (optional)
-- **structlog** >= 22.0.0 - Enhanced structured logging
+If you use WinPython instead of a standard Python installation, use the HPM Launcher, which handles WinPython environment activation automatically:
 
-#### Image Processing Dependencies
-- **Pillow** >= 9.0.0 - Image processing and format conversions
-- **PyExifTool** >= 0.5.0 - Python wrapper for ExifTool command-line utility
+```powershell
+python launcher\launcher.py
+```
 
-#### GUI Framework Dependencies
-- **PyQt6** >= 6.0.0 - Main GUI framework for the application
-- **wxPython** >= 4.1.0 - Optional GUI utility (for csv_record_viewer.py)
+Configure the launcher via `launcher\launcher_config.json`. See [`launcher/LAUNCHER_README.md`](launcher/LAUNCHER_README.md) for details.
 
-#### Google Services Integration
-- **google-auth** >= 2.0.0 - Google authentication library
-- **google-auth-oauthlib** >= 0.5.0 - OAuth 2.0 flow for Google services
-- **google-auth-httplib2** >= 0.1.0 - HTTP transport for Google authentication
-- **google-api-python-client** >= 2.0.0 - Google API client library
-- **gspread** >= 5.0.0 - Google Sheets API wrapper
+### Manual Launch
 
-#### Development and Testing Dependencies
-- **pytest** >= 7.0.0 - Unit testing framework
-- **pytest-cov** >= 4.0.0 - Test coverage reporting
+```powershell
+pip install -r requirements.txt
+python gui\hstl_gui.py
+```
 
-### 2. External Tool Requirements
+## Step 3: Install ExifTool
 
-#### ExifTool (Required - Both Components Needed)
+ExifTool is required for Step 5 (metadata embedding) and must be installed separately. It is **not** installed by `run.ps1`.
 
-**ExifTool is essential for metadata operations** and requires TWO components:
+### Automated Setup (Windows)
 
-1. **ExifTool Command-Line Tool** - Must be installed separately
-2. **PyExifTool Python Wrapper** - Installed via requirements.txt
+```powershell
+.\tools\setup_exiftool.ps1    # PowerShell
+tools\setup_exiftool.bat      # Command Prompt
+```
 
-**Windows:**
-1. Download from: https://exiftool.org/
-2. Extract to a permanent location (e.g., `C:\ExifTool`)
-3. Add the directory to your system PATH
-4. Verify installation by running: `exiftool -ver`
+### Manual Setup
+
+1. Download from [https://exiftool.org/](https://exiftool.org/)
+2. On Windows: rename `exiftool(-k).exe` to `exiftool.exe` and place it in a directory on your system PATH
+3. Verify with: `exiftool -ver`
 
 **macOS:**
 ```bash
-# Using Homebrew
 brew install exiftool
-
-# Or download directly from https://exiftool.org/
 ```
 
-**Linux:**
+**Linux (Ubuntu/Debian):**
 ```bash
-# Ubuntu/Debian
-sudo apt-get install exiftool
-
-# Or download directly from https://exiftool.org/
+sudo apt-get install libimage-exiftool-perl
 ```
 
-### 3. Platform-Specific Dependencies
+See [notes/QUICKFIX_EXIFTOOL.md](notes/QUICKFIX_EXIFTOOL.md) for troubleshooting "ExifTool not found" errors.
 
-#### Windows-Specific
-- **pywin32** - Auto-installed when needed for desktop shortcuts
-  - The framework will automatically install this if you try to create desktop shortcuts
-  - Manual installation: `pip install pywin32`
+## Python Dependencies
 
-### 4. Google Services Setup
+All dependencies are installed automatically by `run.ps1`. For reference, the key packages are:
 
-To use Google Sheets integration:
-
-1. **Create Google Cloud Project:**
-   - Go to Google Cloud Console
-   - Create a new project
-   - Enable Google Sheets API and Google Drive API
-
-2. **Create Credentials:**
-   - Go to "Credentials" -> "Create Credentials" -> "OAuth client ID"
-   - Select "Desktop application"
-   - Download the JSON file and rename it to `client_secret.json`
-   - Place it in your project directory or specify the path in configuration
-
-3. **First-Time Authentication:**
-   - Run the framework once with Google features
-   - A browser window will open for Google authentication
-   - Grant permissions to access Sheets and Drive
-   - Authentication tokens will be saved automatically
-
-## Installation Verification
-
-After installation, verify everything works:
-
-```bash
-# Test all dependencies
-python -c "
-import yaml, pandas, pydantic, ftfy, tqdm, colorama, structlog
-from PIL import Image
-from PyQt6.QtWidgets import QApplication
-import wx, google.auth, google_auth_oauthlib, googleapiclient, gspread
-import exiftool  # PyExifTool wrapper
-import pytest, pytest_cov
-print('✅ All dependencies imported successfully!')
-"
-
-# Test external command-line tool
-exiftool -ver
-```
+| Package | Purpose |
+|---------|---------|
+| PyQt6 | GUI framework |
+| pandas, openpyxl | Excel/CSV processing (Steps 1–2) |
+| ftfy | Unicode/mojibake repair (Step 3) |
+| Pillow | Image processing (Step 8 watermarking) |
+| PyExifTool | Python wrapper for ExifTool (Step 5) |
+| PyYAML | Configuration file parsing |
+| pyqt-app-info | About dialog and app info |
 
 ## Troubleshooting
 
-### Common Issues
-
-#### 1. ModuleNotFoundError
-```bash
-# Solution: Install missing dependencies
+### ModuleNotFoundError
+```powershell
 pip install -r requirements.txt
 ```
 
-#### 2. ExifTool not found
-```bash
-# Solution: Ensure ExifTool is in PATH
-where exiftool  # Windows
-which exiftool  # macOS/Linux
+### ExifTool not found
+```powershell
+where exiftool    # Windows
+which exiftool    # macOS/Linux
 ```
+If not found, follow Step 3 above or see [notes/QUICKFIX_EXIFTOOL.md](notes/QUICKFIX_EXIFTOOL.md).
 
-#### 3. Google Authentication Issues
-```bash
-# Solution: Clear cached credentials
-# Delete token files in your project directory
-# Re-run authentication process
-```
+### PyQt6 installation issues
+- **Windows**: usually works without extra steps
+- **macOS**: `brew install qt` may be needed
+- **Linux (Ubuntu/Debian)**: `sudo apt-get install python3-pyqt6`
 
-#### 4. PyQt6 Installation Issues
-```bash
-# On some systems, PyQt6 may need additional system libraries
-# Windows: Usually works out-of-the-box
-# macOS: `brew install qt` may be needed
-# Linux: `sudo apt-get install python3-pyqt6` (Ubuntu/Debian)
-```
-
-### Dependency Conflicts
-
-If you encounter dependency conflicts:
-
-```bash
-# Create a virtual environment (recommended)
-python -m venv hstl_env
-source hstl_env/bin/activate  # macOS/Linux
-# or
-hstl_env\Scripts\activate     # Windows
-
-# Then install requirements
+### Dependency conflicts
+Use a virtual environment (which `run.ps1` creates automatically):
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python gui\hstl_gui.py
 ```
 
-## Optional Components
+## Updating to a Newer Version
 
-### GUI Applications
-
-The framework includes optional GUI components:
-- Main GUI application (`python gui/hstl_gui.py`)
-- CSV Record Viewer (`python csv_record_viewer.py`) - requires wxPython
-
-### Development Tools
-
-For development and testing:
-```bash
-# Run tests
-pytest
-
-# Run tests with coverage
-pytest --cov
+If you cloned with Git:
+```powershell
+git pull
+.\run.ps1
 ```
 
-## Upgrade Instructions
+Or use the built-in **Help → Check for Updates** menu in the HPM application.
 
-To upgrade dependencies:
-
-```bash
-# Update all packages to latest compatible versions
-pip install --upgrade -r requirements.txt
-
-# Check for any conflicts
-pip check
-```
-
-## Support
-
-If you encounter issues not covered in this guide:
-
-1. Check the main documentation files:
-   - `README.md` - General information
-   - `QUICKSTART.md` - Quick start guide
-   - `USER_GUIDE.md` - Detailed usage guide
-
-2. Verify your Python version: `python --version`
-3. Check for system-specific requirements
-4. Ensure all external tools are properly installed
-
-## File Structure
-
-```
-HSTL-Photo-Framework/
-├── requirements.txt              # Python dependencies
-├── client_secret.json           # Google OAuth credentials (create this)
-├── hstl_framework.py            # Main CLI entry point
-├── gui/                         # GUI application files
-├── Google_form/                 # Google Sheets integration
-├── csv_record_viewer.py         # Optional CSV viewer utility
-└── docs/                        # Documentation files
-```
-
-This completes the installation setup for the HSTL Photo Metadata Framework.
+To download a specific older version, see [`docs/PROCEDURE_HPM-download-specific-version.md`](docs/PROCEDURE_HPM-download-specific-version.md).
