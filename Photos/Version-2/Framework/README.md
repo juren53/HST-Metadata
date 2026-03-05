@@ -1,243 +1,89 @@
-# HSTL Photo Framework
+# HPM - HSTL Photo Metadata Framework
 
-A comprehensive Python framework for managing the complete HSTL Photo Metadata Project workflow.
+A Python/PyQt6 GUI application for managing the complete HSTL Photo Metadata Project workflow. HPM orchestrates an 8-step pipeline that transforms raw TIFF images and Excel metadata spreadsheets into watermarked, metadata-embedded JPEG deliverables.
 
-## Installation
+**Current version: 1.9.0**
 
-### Quick Start
+## Getting HPM
 
-**Linux / macOS / Git Bash:**
-```bash
-./run.sh
+### Option 1: Download HPM.exe (Recommended)
+
+Download the latest pre-built Windows executable from the GitHub Releases page:
+
+```
+https://github.com/juren53/HST-Metadata/releases
 ```
 
-**Windows (PowerShell):**
-```powershell
-.\run.ps1
-```
+Download `HPM.exe` from the latest release, place it where you want to run it from, and double-click to launch. No Python installation required.
 
-Both launchers auto-create a `.venv` virtual environment, install all dependencies from `requirements.txt`, and launch the GUI. If PowerShell blocks `run.ps1`, run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` once first.
+### Option 2: Run from Source (Python)
 
-### ExifTool (required for metadata operations)
+For developers or users who prefer to run the Python source code directly. See [`INSTALLATION.md`](INSTALLATION.md) for full instructions.
 
-```powershell
-# Option 1: Automated setup (recommended)
-.\setup_exiftool.ps1    # PowerShell
-# OR
-setup_exiftool.bat      # Command Prompt
+## Using the Application
 
-# Option 2: Manual installation
-# Download from: https://exiftool.org/
-# Add to system PATH
-```
+Launch `HPM.exe` from anywhere on your C: drive. It is recommended you move it to a directory that is in your PATH.
 
-**Quick Fix for "ExifTool not found" errors:** See [QUICKFIX_EXIFTOOL.md](QUICKFIX_EXIFTOOL.md)
+The main window has four areas:
 
-### Manual Setup
-```bash
-pip install -r requirements.txt
-python gui/hstl_gui.py
-```
+- **Batches Tab** - Lists all batch projects with status and progress
+- **Current Batch Tab** - Shows the 8 processing steps for the selected batch
+- **Configuration Tab** - Displays the current batch configuration
+- **Log Viewer** - Real-time log messages and processing output
 
-See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions.
-
-## Quick Start
-
-```bash
-# Initialize a new project (ultra-simple - just provide the name!)
-python hstl_framework.py init "January 2025 Batch"
-
-# Or with custom base directory
-python hstl_framework.py init "January 2025" --base-dir "D:\MyBatches"
-
-# Or with full custom path
-python hstl_framework.py init "January 2025" --data-dir "C:\Custom\Path"
-
-# View current configuration
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" config --list
-
-# Update configuration
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" config --set project.data_directory "C:\new\path"
-
-# Run the complete workflow
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" run --all
-
-# Run specific steps
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" run --step 2
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" run --steps 2-5
-
-# Check project status
-python hstl_framework.py --config "C:\path\to\images\config\project_config.yaml" status
-```
+See [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) for a complete walkthrough.
 
 ## Processing Steps
 
-This framework orchestrates 8 steps of photo metadata processing:
+HPM orchestrates 8 steps of photo metadata processing:
 
-1. **Excel Spreadsheet Preparation** - Select and validate Excel spreadsheet files
-2. **CSV Conversion** - Excel spreadsheet to CSV conversion
-3. **Unicode Filtering** - Text encoding cleanup and validation
-4. **TIFF Conversion** - 16-bit to 8-bit TIFF conversion
-5. **Metadata Embedding** - Embed metadata into TIFF images
-6. **JPEG Conversion** - Convert TIFFs to JPEGs
-7. **JPEG Resizing** - Resize JPEGs to 800x800 pixel constraint
-8. **Watermarking** - Add watermarks to restricted images
+| Step | Name | Description |
+|------|------|-------------|
+| 1 | Excel Spreadsheet Preparation | Select and validate an Excel (.xlsx) metadata spreadsheet |
+| 2 | CSV Conversion | Convert Excel spreadsheet to CSV format |
+| 3 | Unicode Filtering | Text encoding cleanup and mojibake repair |
+| 4 | TIFF Conversion | Select TIFF source images; convert 16-bit to 8-bit if needed |
+| 5 | Metadata Embedding | Embed IPTC/EXIF metadata into TIFF images using ExifTool |
+| 6 | JPEG Conversion | Convert processed TIFFs to JPEG |
+| 7 | JPEG Resizing | Resize JPEGs to 800x800 pixel maximum dimension |
+| 8 | Watermarking | Add watermarks to images flagged as restricted |
 
 ## Project Directory Structure
 
-When you initialize a project with `hstl_framework.py init`, the following directory structure is automatically created:
+When you create a new batch, HPM generates this directory structure automatically:
 
 ```
-Project Data Directory/
+[BatchName]/
 ├── input/
-│   ├── tiff/              # Original TIFF files (your source images)
-│   └── spreadsheet/       # Excel spreadsheets (copied from user selection)
+│   ├── tiff/              <- Source TIFF images (selected in Step 4)
+│   └── spreadsheet/       <- Excel metadata file (selected in Step 1)
 ├── output/
-│   ├── csv/               # Processed CSV files (Step 2)
-│   ├── tiff_processed/    # Processed TIFF files (Step 4)
-│   ├── jpeg/              # Converted JPEG files (Step 6)
-│   ├── jpeg_resized/      # Resized JPEG files (Step 7)
-│   └── jpeg_watermarked/  # Watermarked JPEG files (Step 8)
-├── reports/               # Validation and summary reports
-├── logs/                  # Processing logs
+│   ├── csv/               -> Exported CSV (Step 2)
+│   ├── tiff_processed/    -> Processed TIFFs (Step 4)
+│   ├── jpeg/              -> JPEG conversions (Step 6)
+│   ├── jpeg_resized/      -> Resized JPEGs (Step 7)
+│   └── jpeg_watermarked/  -> Watermarked JPEGs (Step 8)
+├── reports/               -> Validation and processing reports
+├── logs/                  -> Processing logs
 └── config/
-    └── project_config.yaml  # Project configuration file
+    └── project_config.yaml  <- Batch configuration file
 ```
-
-### Usage Notes
-
-- Place your original TIFF images in `input/tiff/`
-- Place Google Spreadsheet exports in `input/spreadsheet/`
-- Processed outputs will be placed in their respective `output/` subdirectories
-- All configuration is managed through `config/project_config.yaml`
-
-## Configuration Management
-
-The framework uses a YAML configuration file to manage project settings. This allows you to:
-
-- Track which steps have been completed
-- Configure step-specific parameters (quality, dimensions, etc.)
-- Manage paths and validation settings
-- Store processing history and metadata
-
-### Viewing Configuration
-
-```bash
-python hstl_framework.py --config "path/to/project_config.yaml" config --list
-```
-
-### Updating Configuration
-
-You can update any configuration value using dot notation:
-
-```bash
-# Update data directory path
-python hstl_framework.py --config "path/to/project_config.yaml" config --set project.data_directory "C:\new\path"
-
-# Update step-specific settings
-python hstl_framework.py --config "path/to/project_config.yaml" config --set step_configurations.step7.max_dimension 1024
-
-# Update validation settings
-python hstl_framework.py --config "path/to/project_config.yaml" config --set validation.strict_mode false
-```
-
-### Important Configuration Keys
-
-- `project.name` - Name of your batch/project
-- `project.data_directory` - Root path to your data directory
-- `steps_completed.stepN` - Boolean flag for each step (1-8)
-- `step_configurations.stepN.*` - Step-specific parameters
-- `validation.strict_mode` - Enable/disable strict validation
-
-## Multi-Batch Management
-
-The framework supports managing multiple batch projects simultaneously. This is essential for production environments where multiple photo collections are processed in parallel.
-
-### List All Batches
-
-```bash
-# Show active batches
-python hstl_framework.py batches
-
-# Show all batches (including completed/archived)
-python hstl_framework.py batches --all
-```
-
-### Batch Lifecycle Commands
-
-```bash
-# Get detailed information about a batch
-python hstl_framework.py batch info <batch_id>
-
-# Mark batch as completed (removes from active list)
-python hstl_framework.py batch complete <batch_id>
-
-# Archive a batch for long-term storage
-python hstl_framework.py batch archive <batch_id>
-
-# Reactivate a completed or archived batch
-python hstl_framework.py batch reactivate <batch_id>
-
-# Remove batch from registry (preserves all files)
-python hstl_framework.py batch remove <batch_id> --confirm
-```
-
-### Batch Status States
-
-- **active** - Currently being processed (shown in `batches` list)
-- **completed** - All processing finished (shown only in `batches --all`)
-- **archived** - Long-term storage (shown only in `batches --all`)
-
-### Retirement Workflow
-
-When you finish processing a batch:
-
-1. Mark as completed: `python hstl_framework.py batch complete january2024`
-2. Later, archive: `python hstl_framework.py batch archive january2024`
-3. Eventually, remove from tracking: `python hstl_framework.py batch remove january2024 --confirm`
-4. Manually delete files if no longer needed
-
-**Note**: Status changes never delete files. Your data is always preserved until you manually delete the directory.
-
-## Development Status
-
-🚧 **Currently in Development** - CLI Phase
-
-### Completed
-- ✅ Development plan created
-- ✅ Project structure creation
-- ✅ Basic CLI interface
-- ✅ Configuration management (`init`, `config --list`, `config --set`)
-- ✅ Multi-batch registry and tracking
-- ✅ Batch lifecycle management (complete, archive, reactivate, remove)
-- ✅ Logging system
-
-### In Progress
-- ⏳ Step module integration
-- ⏳ Validation framework
-- ⏳ Pipeline orchestration
-
-### Planned
-- 📋 Step implementations (Steps 1-8)
-- 📋 Report generation
-- 📋 GUI implementation (Phase 2)
-
-## Documentation
-
-- [`INSTALLATION.md`](INSTALLATION.md) - Complete installation guide with all dependencies
-- [`docs/DEVELOPMENT_PLAN.md`](docs/DEVELOPMENT_PLAN.md) - Comprehensive development roadmap
-- [`docs/GLOSSARY.md`](docs/GLOSSARY.md) - Complete glossary of framework terminology and concepts
-- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) - Step-by-step user guide for the GUI application
-- [`docs/GLOSSARY_PLAN.md`](docs/GLOSSARY_PLAN.md) - Development plan for the glossary
-- Integration strategy for existing Version-2 applications
 
 ## Environment
 
-- **Platform**: Windows (PowerShell)
-- **Python**: 3.8+
-- **Framework Location**: `C:\Users\jimur\Projects\HST-Metadata\Photo\Version-2\Framework\`
-- **Data Directories**: Configurable, separate from framework location
+- **Platform**: Windows 11 (the target envirnoment) 
+
+## Documentation
+
+- [`INSTALLATION.md`](INSTALLATION.md) - Complete installation guide
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) - Step-by-step user guide for the GUI
+- [`docs/QUICKSTART.md`](docs/QUICKSTART.md) - Quick start reference
+- [`docs/CLI_REFERENCE.md`](docs/CLI_REFERENCE.md) - Command-line interface reference
+- [`docs/GLOSSARY.md`](docs/GLOSSARY.md) - Glossary of framework terminology
+- [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md) - Data dictionary for metadata fields
+- [`docs/PROCEDURE_HPM-download-specific-version.md`](docs/PROCEDURE_HPM-download-specific-version.md) - How to download a specific version
+- [`launcher/LAUNCHER_README.md`](launcher/LAUNCHER_README.md) - HPM Launcher documentation (WinPython)
 
 ---
 
-*This project integrates and orchestrates existing HSTL photo processing applications into a unified workflow management system.*
+*HPM integrates and orchestrates the HSTL photo processing pipeline into a unified workflow management application.*
