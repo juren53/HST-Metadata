@@ -1,0 +1,10 @@
+
+Using exiftool cli, list the following tags
+
+EXIF:BitPerSample
+XMP:BitPerSample 
+
+for all TIFFs in 
+
+~/Temp/HSTL_raw-tiffs/
+
