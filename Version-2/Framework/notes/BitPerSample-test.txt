@@ -8,3 +8,6 @@ for all TIFFs in
 
 ~/Temp/HSTL_raw-tiffs/
 
+and report how man tiffs you find
+
+
