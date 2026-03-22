@@ -32,6 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Files Added**: `tests/unit/core/test_delivery_service.py`, `tests/integration/test_delivery_workflow.py`
   - **Files Modified**: `tests/conftest.py`, `tests/unit/utils/test_path_manager.py`, `tests/gui/test_dialogs.py`
 
+- **Windows EXE version metadata** — `HPM.exe` Properties › Details tab now displays embedded version information
+  - Product name: HSTL Photo Metadata (HPM)
+  - Product version / File version: 1.9.1
+  - Copyright: Copyright (c) 2026 SynchroSoft
+  - Company: SynchroSoft
+  - File description: HSTL Photo Metadata
+  - Implemented via PyInstaller `VSVersionInfo` format; `generate_version_info.py` reads `__init__.py` and writes `version_info.txt` before each build; both `build_exe.ps1` and `release.bat` run the generator automatically
+  - **Files Added**: `generate_version_info.py`, `version_info.txt`
+  - **Files Modified**: `HPM.spec`, `build_exe.ps1`, `release.bat`
+
 ---
 
 ## HPM [1.9.0] - 2026-03-05 0514 CST
