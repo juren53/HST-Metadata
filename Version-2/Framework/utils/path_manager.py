@@ -46,6 +46,22 @@ class PathManager:
     def get_reports_dir(self) -> Optional[Path]:
         """Get reports directory."""
         return self.get_data_path("reports")
+
+    def get_delivery_tiff_dir(self) -> Optional[Path]:
+        """Get delivery TIFF directory."""
+        return self.get_data_path("delivery/tiff_delivery")
+
+    def get_delivery_jpeg_dir(self) -> Optional[Path]:
+        """Get delivery JPEG directory."""
+        return self.get_data_path("delivery/jpeg_delivery")
+
+    def get_trash_jpeg_converted_dir(self) -> Optional[Path]:
+        """Get trash directory for converted JPEGs (from output/jpeg)."""
+        return self.get_data_path("trash/jpeg_converted")
+
+    def get_trash_jpeg_resized_dir(self) -> Optional[Path]:
+        """Get trash directory for resized JPEGs (from output/jpeg_resized)."""
+        return self.get_data_path("trash/jpeg_resized")
     
     def validate_paths(self) -> tuple[bool, list]:
         """Validate that required paths exist."""

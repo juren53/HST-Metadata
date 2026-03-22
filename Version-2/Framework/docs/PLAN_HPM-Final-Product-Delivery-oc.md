@@ -1,8 +1,9 @@
 # HPM Final Product Delivery Plan
 
 **HSTL Photo Metadata (HPM) Project**
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 2026-02-21
+**Revised:** 2026-03-22
 
 ---
 
@@ -73,34 +74,33 @@ This document describes the Delivery Plan for the HSTL Photo Metadata (HPM) work
 
 ### 4.1 Menu Structure
 
-The delivery menu items will be added to the **existing Batch menu** (currently between View and Tools):
+Delivery actions are added to the **existing Tools menu** as the last items, after a separator:
 
 ```
 Menu Bar:
 ├── File
 ├── Edit
 ├── View
-├── Batch          ← EXISTING MENU - ADD DELIVERY ITEMS HERE
-│   ├── Refresh Batches
-│   ├── Mark as Complete
-│   ├── Archive
-│   ├── Reactivate
-│   ├── ───────────────────  ← ADD SEPARATOR
+├── Batch
+├── Tools
+│   ├── [existing Tools items]
+│   ├── ───────────────────       ← ADD SEPARATOR
 │   ├── Create Delivery Package...    ← NEW
 │   ├── Open Delivery Directory      ← NEW
 │   ├── Open Trash Directory         ← NEW
 │   └── Empty Trash...               ← NEW
-├── Tools
 └── Help
 ```
 
+The Batch menu is **not modified**. The main window layout and `StepWidget` panel are **not modified**.
+
 ### 4.2 New Menu Items
 
-The following items will be added to the existing Batch menu:
+The following items are added to the existing Tools menu:
 
 | Menu Item | Description |
 |-----------|-------------|
-| **Create Delivery Package...** | Executes the delivery process |
+| **Create Delivery Package...** | Opens delivery dialog and executes the delivery process |
 | **Open Delivery Directory** | Opens `delivery/` in file explorer |
 | **Open Trash Directory** | Opens `trash/` in file explorer |
 | **Empty Trash...** | Permanently deletes trash contents |
@@ -159,8 +159,8 @@ Operations performed in sequence:
 
 | Component | File | Description |
 |-----------|------|-------------|
-| Menu update | `gui/main_window.py` | Add delivery items to existing Batch menu |
-| Delivery dialog | `gui/dialogs/delivery_dialog.py` | NEW — Confirmation and progress UI |
+| Menu update | `gui/main_window.py` | Add delivery items to end of existing Tools menu |
+| Delivery dialog | `gui/dialogs/delivery_dialog.py` | NEW — Step-pattern dialog (Run / status / log display) |
 | Delivery service | `core/delivery_service.py` | NEW — Business logic for packaging |
 | Path updates | `utils/path_manager.py` | Add delivery/trash path methods |
 | Documentation | `docs/Standard Directory Structure.txt` | Update directory diagram |
@@ -203,3 +203,65 @@ The Delivery Plan provides a complete solution for packaging HPM workflow result
 
 *Document prepared for client review*
 *Implementation to follow upon approval*
+
+---
+
+## 10. Plan Review — Issue Resolutions
+
+Raised during pre-implementation review (2026-03-22). All five issues resolved before coding begins.
+
+---
+
+### Issue 1 — `output/jpeg` vs `trash/jpeg_converted` naming mismatch
+
+**Resolution: Accepted as-is.**
+
+The source directory is `output/jpeg` but the trash destination is `trash/jpeg_converted`. The naming difference is intentional — it reflects what the files *are* (converted JPEGs) rather than mirroring the source folder name. Changing `output/jpeg` to `output/jpeg_converted` would touch parts of the system already in production. The asymmetric naming is documented here as a known design compromise.
+
+---
+
+### Issue 2 — Copy vs. Move for final TIFFs
+
+**Resolution: COPY from `output/tiff_processed` to `delivery/tiff_delivery`.**
+
+The originals remain in `output/tiff_processed` after delivery. This is deliberate — `tiff_processed` is a workflow artifact and is intentionally preserved alongside the delivery package. Disk usage increases accordingly; this is acceptable given typical batch sizes.
+
+---
+
+### Issue 3 — Delivery dialog pattern
+
+**Resolution: Triggered from the Tools menu — no main UI change.**
+
+The delivery dialog is implemented following the same internal structure and pattern as the existing step dialogs (`step1_dialog.py` through `step8_dialog.py`) — Run / status / log-display — but it is **not** added to the `StepWidget` panel. The `StepWidget` and the main window layout are unchanged.
+
+Entry point:
+
+- Added as the **last item in the Tools pull-down menu** (after existing Tools items)
+- `delivery_dialog.py` lives in `gui/dialogs/` alongside the step dialogs
+- Follows step-dialog conventions internally (same Qt patterns, same log widget usage)
+- Enabled only when a batch is selected and all 8 steps are complete
+
+The previously described Batch menu additions (`Create Delivery Package...`, `Open Delivery Directory`, `Open Trash Directory`, `Empty Trash...`) in §4.1 are **superseded** by this decision. All delivery actions are consolidated under Tools.
+
+---
+
+### Issue 4 — Delivery package already exists
+
+**Resolution: Prompt to overwrite.**
+
+If `delivery/` already exists when the user triggers Create Delivery Package, display a confirmation dialog:
+
+> "A delivery package already exists for this batch. Overwrite it?"
+
+- **Yes**: Delete existing `delivery/` contents and re-run the full delivery process.
+- **No / Cancel**: Abort. Leave existing delivery untouched.
+
+No silent overwrite. No skip-and-append.
+
+---
+
+### Issue 5 — `output/jpeg` source naming
+
+**Resolution: Not an issue — confirmed consistent.**
+
+This was flagged as a cross-check during review. The plan's artifact table (§3.2) lists the source as `output/jpeg/`, and `config/settings.py` defines `"jpeg": "output/jpeg"`. These are consistent. No action required.

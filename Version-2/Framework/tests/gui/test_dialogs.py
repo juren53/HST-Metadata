@@ -261,6 +261,112 @@ class TestStepDialogs:
         assert dialog is not None
 
 
+class TestDeliveryDialogImport:
+    """Tests that DeliveryDialog can be imported and instantiated."""
+
+    @pytest.mark.gui
+    def test_import_delivery_dialog(self):
+        """DeliveryDialog can be imported."""
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+        assert DeliveryDialog is not None
+
+    @pytest.mark.gui
+    def test_delivery_dialog_init_complete_batch(self, qtbot, completed_batch):
+        """DeliveryDialog can be instantiated with a fully completed batch."""
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+
+        batch_info = {
+            "id": completed_batch["batch_id"],
+            "name": completed_batch["name"],
+            "data_directory": str(completed_batch["data_dir"]),
+        }
+        dialog = DeliveryDialog(batch_info)
+        qtbot.addWidget(dialog)
+
+        assert dialog is not None
+        assert isinstance(dialog, QDialog)
+
+    @pytest.mark.gui
+    def test_delivery_dialog_deliver_btn_enabled_for_complete_batch(self, qtbot, completed_batch):
+        """deliver_btn is enabled when all 8 steps are complete and source dirs populated."""
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+
+        batch_info = {
+            "id": completed_batch["batch_id"],
+            "name": completed_batch["name"],
+            "data_directory": str(completed_batch["data_dir"]),
+        }
+        dialog = DeliveryDialog(batch_info)
+        qtbot.addWidget(dialog)
+
+        assert dialog.deliver_btn.isEnabled() is True
+
+    @pytest.mark.gui
+    def test_delivery_dialog_deliver_btn_disabled_for_incomplete_batch(self, qtbot, temp_dir):
+        """deliver_btn is disabled when steps are not all complete."""
+        import yaml
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+
+        # Build a minimal incomplete batch directory
+        data_dir = temp_dir / "incomplete"
+        (data_dir / "config").mkdir(parents=True)
+        (data_dir / "output" / "tiff_processed").mkdir(parents=True)
+        (data_dir / "output" / "jpeg_watermarked").mkdir(parents=True)
+        (data_dir / "output" / "tiff_processed" / "IMG_001.tif").write_bytes(b"x")
+        (data_dir / "output" / "jpeg_watermarked" / "IMG_001.jpg").write_bytes(b"x")
+
+        config_path = data_dir / "config" / "project_config.yaml"
+        with open(config_path, "w") as f:
+            yaml.dump(
+                {"steps_completed": {f"step{i}": False for i in range(1, 9)}}, f
+            )
+
+        batch_info = {
+            "id": "incomplete",
+            "name": "Incomplete Batch",
+            "data_directory": str(data_dir),
+        }
+        dialog = DeliveryDialog(batch_info)
+        qtbot.addWidget(dialog)
+
+        assert dialog.deliver_btn.isEnabled() is False
+
+    @pytest.mark.gui
+    def test_delivery_dialog_button_text_changes_when_delivery_exists(self, qtbot, completed_batch):
+        """deliver_btn text changes to 'Overwrite...' when delivery package already exists."""
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+        from core.delivery_service import DeliveryService
+
+        # Create the delivery package before opening the dialog
+        DeliveryService(completed_batch["data_dir"]).create_package()
+
+        batch_info = {
+            "id": completed_batch["batch_id"],
+            "name": completed_batch["name"],
+            "data_directory": str(completed_batch["data_dir"]),
+        }
+        dialog = DeliveryDialog(batch_info)
+        qtbot.addWidget(dialog)
+
+        assert "overwrite" in dialog.deliver_btn.text().lower()
+
+    @pytest.mark.gui
+    def test_delivery_dialog_has_output_text_widget(self, qtbot, completed_batch):
+        """DeliveryDialog has a read-only output/log text area."""
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+
+        batch_info = {
+            "id": completed_batch["batch_id"],
+            "name": completed_batch["name"],
+            "data_directory": str(completed_batch["data_dir"]),
+        }
+        dialog = DeliveryDialog(batch_info)
+        qtbot.addWidget(dialog)
+
+        assert hasattr(dialog, "output_text")
+        assert dialog.output_text.isReadOnly() is True
+
+
 class TestDialogAcceptReject:
     """Tests for dialog accept/reject behavior."""
 

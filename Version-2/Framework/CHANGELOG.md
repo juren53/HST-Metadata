@@ -9,18 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
 > Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
 
-## [Planned] - Delivery Feature
+## HPM [1.9.1] - 2026-03-22 0000 CST
 
-### Planned
-- **Final Product Delivery Plan** — Comprehensive plan for packaging batch delivery
-  - New `delivery/` directory with `tiff_delivery/` and `jpeg_delivery/` subdirectories
-  - New `trash/` directory for disposable workflow artifacts (converted JPEGs, resized JPEGs)
-  - Added delivery menu items to existing Batch menu: Create Delivery Package, Open Delivery Directory, Open Trash Directory, Empty Trash
-  - Retained artifacts: Excel file, CSV export, reports, logs
-  - Delivery products: Final TIFFs from `output/tiff_processed/`, Final JPEGs from `output/jpeg_watermarked/`
-  - Disposable artifacts moved to trash: `output/jpeg/`, `output/jpeg_resized/`
-  - Delivery only available after all 8 steps completed
-  - **Files Added**: `docs/PLAN_HPM-Final-Product-Delivery-oc.md`
+### Added
+- **Final Product Delivery** — Creates a finalized delivery package at completion of the 8-step workflow
+  - New `delivery/tiff_delivery/` directory — final TIFFs copied from `output/tiff_processed/`
+  - New `delivery/jpeg_delivery/` directory — final JPEGs copied from `output/jpeg_watermarked/`
+  - New `trash/` directory — intermediate files moved from `output/jpeg/` and `output/jpeg_resized/`
+  - Delivery available only after all 8 steps are complete; prompts to overwrite if package already exists
+  - Four new items added to the **Tools menu** (after separator): Create Delivery Package..., Open Delivery Directory, Open Trash Directory, Empty Trash...
+  - **Files Added**: `core/delivery_service.py`, `gui/dialogs/delivery_dialog.py`
+  - **Files Modified**: `utils/path_manager.py`, `gui/main_window.py`, `__init__.py`
+  - **Docs Added**: `docs/PLAN_HPM-Final-Product-Delivery-oc.md`, `docs/PLAN_HPM-Final-Product-Delivery-Test-Suite.md`
+
+- **Delivery Test Suite** — 63 tests across three layers; all passing (1.42s)
+  - `completed_batch` shared fixture added to `tests/conftest.py`
+  - 7 unit tests: `TestPathManagerDeliveryPaths` — new delivery/trash path methods
+  - 28 unit tests: `tests/unit/core/test_delivery_service.py` — validation, execution, state queries, edge cases
+  - 17 integration tests: `tests/integration/test_delivery_workflow.py` — real filesystem, no mocking
+  - 6 GUI tests: `TestDeliveryDialogImport` in `tests/gui/test_dialogs.py` — import, instantiation, button states
+  - `pytest-qt` added to venv (required for GUI test layer)
+  - **Files Added**: `tests/unit/core/test_delivery_service.py`, `tests/integration/test_delivery_workflow.py`
+  - **Files Modified**: `tests/conftest.py`, `tests/unit/utils/test_path_manager.py`, `tests/gui/test_dialogs.py`
 
 ---
 

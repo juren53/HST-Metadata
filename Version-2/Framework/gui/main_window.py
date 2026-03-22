@@ -290,6 +290,24 @@ class MainWindow(QMainWindow):
         batch_summary_action.triggered.connect(self._show_batch_data_summary)
         tools_menu.addAction(batch_summary_action)
 
+        tools_menu.addSeparator()
+
+        delivery_action = QAction('Create &Delivery Package...', self)
+        delivery_action.triggered.connect(self._show_delivery_dialog)
+        tools_menu.addAction(delivery_action)
+
+        open_delivery_action = QAction('Open De&livery Directory', self)
+        open_delivery_action.triggered.connect(self._open_delivery_directory)
+        tools_menu.addAction(open_delivery_action)
+
+        open_trash_action = QAction('Open &Trash Directory', self)
+        open_trash_action.triggered.connect(self._open_trash_directory)
+        tools_menu.addAction(open_trash_action)
+
+        empty_trash_action = QAction('&Empty Trash...', self)
+        empty_trash_action.triggered.connect(self._empty_trash)
+        tools_menu.addAction(empty_trash_action)
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
 
@@ -646,6 +664,116 @@ class MainWindow(QMainWindow):
         # Show dialog
         dialog = BatchDataSummaryDialog(batch_info, self)
         dialog.exec()
+
+    def _show_delivery_dialog(self):
+        """Open the Final Product Delivery dialog."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        if not batch_info:
+            QMessageBox.warning(self, 'Error', 'Could not retrieve batch information')
+            return
+
+        from gui.dialogs.delivery_dialog import DeliveryDialog
+        dialog = DeliveryDialog(batch_info, self)
+        dialog.exec()
+
+    def _open_delivery_directory(self):
+        """Open the delivery/ directory in the file explorer."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        data_directory = batch_info.get('data_directory', '') if batch_info else ''
+        if not data_directory:
+            QMessageBox.warning(self, 'No Data Directory', 'Data directory is not configured for this batch.')
+            return
+
+        target_dir = Path(data_directory) / 'delivery'
+        if not target_dir.exists():
+            QMessageBox.information(
+                self, 'No Delivery Package',
+                'No delivery package found for this batch.\n\n'
+                'Use Tools → Create Delivery Package... to create one.'
+            )
+            return
+
+        try:
+            from PyQt6.QtGui import QDesktopServices
+            from PyQt6.QtCore import QUrl
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(target_dir)))
+            self.status_bar.showMessage('Opened delivery directory', 3000)
+        except Exception as e:
+            QMessageBox.critical(self, 'Error', f'Failed to open directory:\n\n{str(e)}')
+
+    def _open_trash_directory(self):
+        """Open the trash/ directory in the file explorer."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        data_directory = batch_info.get('data_directory', '') if batch_info else ''
+        if not data_directory:
+            QMessageBox.warning(self, 'No Data Directory', 'Data directory is not configured for this batch.')
+            return
+
+        target_dir = Path(data_directory) / 'trash'
+        if not target_dir.exists():
+            QMessageBox.information(
+                self, 'No Trash',
+                'No trash directory found for this batch.\n\n'
+                'Intermediate files are moved to trash when a delivery package is created.'
+            )
+            return
+
+        try:
+            from PyQt6.QtGui import QDesktopServices
+            from PyQt6.QtCore import QUrl
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(target_dir)))
+            self.status_bar.showMessage('Opened trash directory', 3000)
+        except Exception as e:
+            QMessageBox.critical(self, 'Error', f'Failed to open directory:\n\n{str(e)}')
+
+    def _empty_trash(self):
+        """Permanently delete all files in the trash/ directory."""
+        if not self.current_batch_id:
+            QMessageBox.information(self, 'No Batch', 'Please select a batch first')
+            return
+
+        batch_info = self.registry.get_batch(self.current_batch_id)
+        data_directory = batch_info.get('data_directory', '') if batch_info else ''
+        if not data_directory:
+            QMessageBox.warning(self, 'No Data Directory', 'Data directory is not configured for this batch.')
+            return
+
+        from core.delivery_service import DeliveryService
+        service = DeliveryService(Path(data_directory), self.log_manager)
+
+        if not service.trash_has_files():
+            QMessageBox.information(self, 'Trash Empty', 'The trash directory is already empty.')
+            return
+
+        reply = QMessageBox.warning(
+            self,
+            'Empty Trash',
+            'This will permanently delete all files in the trash folder.\n\n'
+            'This action cannot be undone. Continue?',
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel,
+            QMessageBox.StandardButton.Cancel,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            return
+
+        success, message = service.empty_trash()
+        if success:
+            self.status_bar.showMessage('Trash emptied', 3000)
+            QMessageBox.information(self, 'Trash Emptied', message)
+        else:
+            QMessageBox.critical(self, 'Error', message)
 
     def _set_data_location(self):
         """Show dialog to set default data files location."""

@@ -206,3 +206,59 @@ class TestPathManagerEdgeCases:
         assert pm.get_output_csv_dir() is None
         assert pm.get_logs_dir() is None
         assert pm.get_reports_dir() is None
+
+
+class TestPathManagerDeliveryPaths:
+    """Tests for delivery and trash path methods added in v1.9.1."""
+
+    @pytest.mark.unit
+    def test_get_delivery_tiff_dir(self, temp_dir):
+        """Returns delivery/tiff_delivery path."""
+        pm = PathManager(framework_root=temp_dir, data_directory=str(temp_dir / "data"))
+        assert pm.get_delivery_tiff_dir() == temp_dir / "data" / "delivery" / "tiff_delivery"
+
+    @pytest.mark.unit
+    def test_get_delivery_jpeg_dir(self, temp_dir):
+        """Returns delivery/jpeg_delivery path."""
+        pm = PathManager(framework_root=temp_dir, data_directory=str(temp_dir / "data"))
+        assert pm.get_delivery_jpeg_dir() == temp_dir / "data" / "delivery" / "jpeg_delivery"
+
+    @pytest.mark.unit
+    def test_get_trash_jpeg_converted_dir(self, temp_dir):
+        """Returns trash/jpeg_converted path."""
+        pm = PathManager(framework_root=temp_dir, data_directory=str(temp_dir / "data"))
+        assert pm.get_trash_jpeg_converted_dir() == temp_dir / "data" / "trash" / "jpeg_converted"
+
+    @pytest.mark.unit
+    def test_get_trash_jpeg_resized_dir(self, temp_dir):
+        """Returns trash/jpeg_resized path."""
+        pm = PathManager(framework_root=temp_dir, data_directory=str(temp_dir / "data"))
+        assert pm.get_trash_jpeg_resized_dir() == temp_dir / "data" / "trash" / "jpeg_resized"
+
+    @pytest.mark.unit
+    def test_delivery_paths_return_none_without_data_dir(self, temp_dir):
+        """All four delivery/trash methods return None when no data directory is set."""
+        pm = PathManager(framework_root=temp_dir)
+        assert pm.get_delivery_tiff_dir() is None
+        assert pm.get_delivery_jpeg_dir() is None
+        assert pm.get_trash_jpeg_converted_dir() is None
+        assert pm.get_trash_jpeg_resized_dir() is None
+
+    @pytest.mark.unit
+    def test_delivery_paths_are_path_objects(self, temp_dir):
+        """Delivery path methods return Path objects."""
+        pm = PathManager(framework_root=temp_dir, data_directory=str(temp_dir / "data"))
+        assert isinstance(pm.get_delivery_tiff_dir(), Path)
+        assert isinstance(pm.get_delivery_jpeg_dir(), Path)
+        assert isinstance(pm.get_trash_jpeg_converted_dir(), Path)
+        assert isinstance(pm.get_trash_jpeg_resized_dir(), Path)
+
+    @pytest.mark.unit
+    def test_delivery_paths_nested_under_data_dir(self, temp_dir):
+        """All delivery/trash paths are children of the data directory."""
+        data_dir = temp_dir / "my_batch"
+        pm = PathManager(framework_root=temp_dir, data_directory=str(data_dir))
+        assert str(data_dir) in str(pm.get_delivery_tiff_dir())
+        assert str(data_dir) in str(pm.get_delivery_jpeg_dir())
+        assert str(data_dir) in str(pm.get_trash_jpeg_converted_dir())
+        assert str(data_dir) in str(pm.get_trash_jpeg_resized_dir())

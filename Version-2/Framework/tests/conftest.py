@@ -8,6 +8,7 @@ import pytest
 import tempfile
 import shutil
 import sys
+import yaml
 from pathlib import Path
 from typing import Generator, Dict, Any
 
@@ -189,6 +190,69 @@ def invalid_yaml_file(temp_dir: Path) -> Path:
     config_path = temp_dir / "invalid.yaml"
     config_path.write_text("invalid: yaml: content: [unclosed")
     return config_path
+
+
+# ============================================================================
+# DELIVERY FIXTURES
+# ============================================================================
+
+@pytest.fixture
+def completed_batch(temp_dir: Path) -> dict:
+    """
+    Create a batch directory with all 8 steps complete and output dirs populated.
+
+    Provides the minimum filesystem state needed to run DeliveryService:
+      - Standard HPM directory tree
+      - Dummy files in tiff_processed, jpeg_watermarked, jpeg, jpeg_resized
+      - project_config.yaml with all steps_completed: True
+
+    Returns:
+        Dict with keys: name, data_dir, config_path, batch_id
+    """
+    batch_name = "Completed Batch"
+    data_dir = temp_dir / "completed_batch_data"
+
+    dirs = [
+        "input/tiff",
+        "input/spreadsheet",
+        "output/csv",
+        "output/tiff_processed",
+        "output/jpeg",
+        "output/jpeg_resized",
+        "output/jpeg_watermarked",
+        "config",
+        "logs",
+        "reports",
+    ]
+    for d in dirs:
+        (data_dir / d).mkdir(parents=True, exist_ok=True)
+
+    # Populate with dummy files
+    (data_dir / "output/tiff_processed/IMG_001.tif").write_bytes(b"fake tiff 1")
+    (data_dir / "output/tiff_processed/IMG_002.tif").write_bytes(b"fake tiff 2")
+    (data_dir / "output/jpeg_watermarked/IMG_001.jpg").write_bytes(b"fake jpeg watermarked")
+    (data_dir / "output/jpeg/IMG_001.jpg").write_bytes(b"fake jpeg converted")
+    (data_dir / "output/jpeg_resized/IMG_001.jpg").write_bytes(b"fake jpeg resized")
+
+    # Retained artifacts
+    (data_dir / "input/spreadsheet/source.xlsx").write_bytes(b"fake excel")
+    (data_dir / "output/csv/export.csv").write_text("filename,title\nIMG_001.tif,Test\n")
+
+    # Config with all 8 steps complete
+    config_path = data_dir / "config" / "project_config.yaml"
+    config = {
+        "project": {"name": batch_name, "data_directory": str(data_dir)},
+        "steps_completed": {f"step{i}": True for i in range(1, 9)},
+    }
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.dump(config, f)
+
+    return {
+        "name": batch_name,
+        "data_dir": data_dir,
+        "config_path": config_path,
+        "batch_id": "completed_batch",
+    }
 
 
 # ============================================================================
