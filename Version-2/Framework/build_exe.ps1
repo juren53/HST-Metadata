@@ -33,6 +33,15 @@ if (Test-Path "dist") {
 Write-Host "Clean complete" -ForegroundColor Green
 Write-Host ""
 
+# Generate version_info.txt from __init__.py
+Write-Host "Generating version_info.txt..." -ForegroundColor Yellow
+& python generate_version_info.py
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Failed to generate version_info.txt. Exiting." -ForegroundColor Red
+    exit 1
+}
+Write-Host ""
+
 # Build the executable
 Write-Host "Building HPM executable..." -ForegroundColor Yellow
 Write-Host "This may take several minutes..." -ForegroundColor Yellow

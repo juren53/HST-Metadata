@@ -41,6 +41,7 @@ echo.
 
 REM --- Step 4: Build the executable ---
 echo [4/7] Building executable with PyInstaller...
+python generate_version_info.py
 if exist build rmdir /s /q build
 if exist dist\HPM.exe del /f dist\HPM.exe
 pyinstaller --clean HPM.spec
