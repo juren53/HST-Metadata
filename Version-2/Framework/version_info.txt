@@ -15,11 +15,11 @@ VSVersionInfo(
     StringFileInfo([
       StringTable(
         u'040904B0',
-        [StringStruct(u'CompanyName', u'HSTL Photo Metadata Project'),
+        [StringStruct(u'CompanyName', u'SynchroSoft'),
          StringStruct(u'FileDescription', u'HSTL Photo Metadata'),
          StringStruct(u'FileVersion', u'1.9.1'),
          StringStruct(u'InternalName', u'HPM'),
-         StringStruct(u'LegalCopyright', u'Copyright (c) 2026 HSTL Photo Metadata Project'),
+         StringStruct(u'LegalCopyright', u'Copyright (c) 2026 SynchroSoft'),
          StringStruct(u'OriginalFilename', u'HPM.exe'),
          StringStruct(u'ProductName', u'HSTL Photo Metadata (HPM)'),
          StringStruct(u'ProductVersion', u'1.9.1')])
