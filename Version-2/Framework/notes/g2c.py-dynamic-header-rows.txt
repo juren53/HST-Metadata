@@ -1,0 +1,12 @@
+we need to modify Step 1 of HPM and g2c.py that converts an Excel file to export.csv.  
+The modification needs to adjust to the fact that the row used for columning mapping may not be Row 3.  
+
+We need  to look for a row that begins with "HST - DRUPAL FIELDS" and this might be any row between 1 and 5.  All rows after that contain data that goes int export.csv
+
+https://github.com/juren53/HST-Metadata/releases/tag/v1.9.0
+
+
+a) Column mapping via Row 3
+  Row 3 (index 2) of the spreadsheet contains human-readable field labels. The script matches those labels to IPTC field names:
+  
+  
