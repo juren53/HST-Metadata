@@ -1,0 +1,8 @@
+
+
+ ProductName     : HSTL Photo Metadata (HPM)
+     ProductVersion  : 1.9.1
+     FileVersion     : 1.9.1
+     LegalCopyright  : Copyright (c) 2026 SynchroSoft
+     FileDescription : HSTL Photo Metadata
+     CompanyName     : SynchroSoft
