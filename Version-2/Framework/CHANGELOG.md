@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
 > Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
 
+## HPM [1.9.2] - 2026-04-06 0000 CST
+
+### Fixed
+- **Step 4 DPI metadata preservation** — 16-bit to 8-bit TIFF conversion now retains the original DPI (e.g. 1200 DPI) instead of defaulting to 1 DPI
+  - Root cause: `img_converted.save()` was called without forwarding the `dpi` value captured from the source image, so Pillow wrote no resolution tags
+  - Fix: original DPI tuple is now passed as the `dpi` keyword argument to `save()`, causing Pillow's TIFF writer to emit the correct `XResolution`, `YResolution`, and `ResolutionUnit` tags
+  - Physical dimensions (inches) displayed by viewers are now consistent before and after conversion
+  - Resolves [GitHub Issue #36](https://github.com/juren53/HST-Metadata/issues/36)
+  - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+---
+
 ## HPM [1.9.1] - 2026-03-22 0000 CST
 
 ### Added

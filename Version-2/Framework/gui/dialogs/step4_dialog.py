@@ -189,9 +189,11 @@ class BitDepthConversionThread(QThread):
                         img_converted = Image.fromarray(img_8bit)
 
                     # Save as 8-bit TIFF, overwriting the original
-                    img_converted.save(
-                        str(tiff_path), format="TIFF", compression="tiff_adobe_deflate"
-                    )
+                    # Preserve the original DPI metadata so physical dimensions are unchanged
+                    save_kwargs = {"format": "TIFF", "compression": "tiff_adobe_deflate"}
+                    if before_dpi is not None:
+                        save_kwargs["dpi"] = before_dpi
+                    img_converted.save(str(tiff_path), **save_kwargs)
 
                     # Re-open saved file to capture after dimensions and DPI
                     img_after = Image.open(tiff_path)
