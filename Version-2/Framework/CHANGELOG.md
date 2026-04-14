@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
 > Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
 
+## HPM [1.9.3] - 2026-04-14 1030 CST
+
+### Changed
+- **Help menu: "Get Latest Updates" → "Show Latest Version"** — replaced the git-pull update mechanism with a lightweight informational dialog
+  - New dialog fetches the latest release from the HPM GitHub repository and displays installed version, latest GitHub release version, release date, and an up-to-date / newer-version status indicator
+  - Includes a clickable link to the GitHub releases page
+  - No longer attempts a `git pull` — the EXE is a compiled artifact and cannot self-update via git
+  - **Files Modified**: `gui/main_window.py`
+
+---
+
 ## HPM [1.9.2] - 2026-04-14 0000 CST
 
 ### Fixed

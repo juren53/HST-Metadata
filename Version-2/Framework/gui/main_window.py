@@ -328,10 +328,10 @@ class MainWindow(QMainWindow):
 
         help_menu.addSeparator()
 
-        # Get latest updates menu item
-        get_updates_action = QAction("Get &Latest Updates", self)
-        get_updates_action.triggered.connect(self._on_get_latest_updates)
-        help_menu.addAction(get_updates_action)
+        # Show latest version menu item
+        show_latest_action = QAction("Show &Latest Version", self)
+        show_latest_action.triggered.connect(self._on_show_latest_version)
+        help_menu.addAction(show_latest_action)
 
         help_menu.addSeparator()
 
@@ -1049,6 +1049,71 @@ class MainWindow(QMainWindow):
         def run(self):
             result = self.checker.get_latest_version()
             self.result_ready.emit(result)
+
+    def _on_show_latest_version(self):
+        """Handle Show Latest Version menu action — fetches latest release from GitHub
+        and displays an informational dialog with the current and latest versions."""
+        self.status_bar.showMessage("Checking latest version on GitHub...")
+        self.show_latest_thread = self.UpdateCheckThread(self.version_checker)
+        self.show_latest_thread.result_ready.connect(self._on_show_latest_version_complete)
+        self.show_latest_thread.start()
+
+    def _on_show_latest_version_complete(self, result):
+        """Display the Show Latest Version dialog once the GitHub check returns."""
+        if result.error_message:
+            self.status_bar.showMessage("Version check failed")
+            QMessageBox.warning(
+                self,
+                "Version Check Failed",
+                f"Could not retrieve version information from GitHub:\n\n{result.error_message}\n\n"
+                "Please check your internet connection and try again.",
+            )
+            return
+
+        self.status_bar.showMessage("Version check complete")
+
+        current = result.current_version
+        latest = result.latest_version
+        pub_date = result.published_date[:10] if result.published_date else "unknown"
+        releases_url = f"https://github.com/{self.version_checker.repo_url}/releases"
+
+        if result.has_update:
+            status_line = f"<p style='color:#c0392b;'><b>A newer version is available: v{latest}</b></p>"
+        else:
+            status_line = f"<p style='color:#27ae60;'><b>You are running the latest version.</b></p>"
+
+        body = (
+            f"<h3>HPM Version Information</h3>"
+            f"<table cellspacing='4'>"
+            f"<tr><td><b>Installed version:</b></td><td>v{current}</td></tr>"
+            f"<tr><td><b>Latest GitHub release:</b></td><td>v{latest}</td></tr>"
+            f"<tr><td><b>Release date:</b></td><td>{pub_date}</td></tr>"
+            f"</table>"
+            f"{status_line}"
+            f"<p><a href='{releases_url}'>View all releases on GitHub</a></p>"
+        )
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Latest Version")
+        dialog.setMinimumWidth(380)
+
+        layout = QVBoxLayout(dialog)
+
+        label = QLabel(body)
+        label.setOpenExternalLinks(True)
+        label.setTextFormat(Qt.TextFormat.RichText)
+        label.setWordWrap(True)
+        layout.addWidget(label)
+
+        close_btn = QPushButton("Close")
+        close_btn.setDefault(True)
+        close_btn.clicked.connect(dialog.accept)
+        btn_row = QHBoxLayout()
+        btn_row.addStretch()
+        btn_row.addWidget(close_btn)
+        layout.addLayout(btn_row)
+
+        dialog.exec()
 
     def _on_check_for_updates(self):
         """Handle Check for Updates menu action"""
