@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
 > Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
 
-## HPM [1.9.2] - 2026-04-06 0000 CST
+## HPM [1.9.2] - 2026-04-14 0000 CST
 
 ### Fixed
 - **Step 4 DPI metadata preservation** — 16-bit to 8-bit TIFF conversion now retains the original DPI (e.g. 1200 DPI) instead of defaulting to 1 DPI
@@ -18,6 +18,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Physical dimensions (inches) displayed by viewers are now consistent before and after conversion
   - Resolves [GitHub Issue #36](https://github.com/juren53/HST-Metadata/issues/36)
   - **Files Modified**: `gui/dialogs/step4_dialog.py`
+
+- **Step 3 ftfy missing from HPM.exe** — Mojibake scan failed at runtime with "ftfy library not found" in the compiled EXE
+  - Root cause: `build_exe.ps1` invoked bare `python` and `pyinstaller` commands, picking up the system Python which lacks `ftfy`; the project venv (which has `ftfy`) was invisible to PyInstaller
+  - Fix: `build_exe.ps1` now resolves `.venv\Scripts\python.exe` explicitly and aborts if the venv is missing; all build steps (`generate_version_info.py`, PyInstaller) run via the venv Python
+  - **Files Modified**: `build_exe.ps1`
+
+- **Acceptance test false positive** — `TestVersionConsistency::test_changelog_entry_is_at_top` failed with `assert 11 < 9` on every v1.9.2 run
+  - Root cause: the maintainer note block contains an example (`## HPM [1.9.1] - ...`) that matched the version-header regex, making an older version appear before the current one
+  - Fix: `older_positions` search now skips lines starting with `>` (blockquote lines)
+  - **Files Modified**: `tests/acceptance/test_exe_artifact.py`
+
+### Tests
+- **New: `TestExeBundledModules`** — two tests added to `test_exe_artifact.py` that scan the raw EXE binary for `ftfy` and `ftfy.fixes`/`ftfy.chardata` byte strings; catches missing bundling before the EXE is ever launched
+- **Updated: `TestFtfyAvailability` docstring** — corrected misleading claim that the venv import test confirms EXE bundling; it does not
+  - **Files Modified**: `tests/acceptance/test_exe_artifact.py`, `tests/acceptance/test_mojibake_detection.py`
 
 ---
 

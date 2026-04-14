@@ -1,17 +1,29 @@
 # HPM Build Script
 # Compiles the HSTL Photo Framework into a standalone executable
+#
+# IMPORTANT: always builds with the project venv Python so that all
+# dependencies (ftfy, pandas, etc.) are visible to PyInstaller.
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "HPM Build Script" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-# Check if PyInstaller is installed
-Write-Host "Checking for PyInstaller..." -ForegroundColor Yellow
-$pyinstallerCheck = & python -c "import PyInstaller; print(PyInstaller.__version__)" 2>&1
+# Resolve venv Python — abort if the venv doesn't exist
+$venvPython = ".venv\Scripts\python.exe"
+if (-not (Test-Path $venvPython)) {
+    Write-Host "ERROR: venv not found at $venvPython" -ForegroundColor Red
+    Write-Host "Create it with: python -m venv .venv && .venv\Scripts\pip install -r requirements.txt" -ForegroundColor Yellow
+    exit 1
+}
+Write-Host "Using venv Python: $venvPython" -ForegroundColor Green
+
+# Check if PyInstaller is installed in the venv
+Write-Host "Checking for PyInstaller in venv..." -ForegroundColor Yellow
+$pyinstallerCheck = & $venvPython -c "import PyInstaller; print(PyInstaller.__version__)" 2>&1
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "PyInstaller not found. Installing..." -ForegroundColor Yellow
-    & python -m pip install pyinstaller
+    Write-Host "PyInstaller not found in venv. Installing..." -ForegroundColor Yellow
+    & $venvPython -m pip install pyinstaller
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Failed to install PyInstaller. Exiting." -ForegroundColor Red
         exit 1
@@ -35,19 +47,19 @@ Write-Host ""
 
 # Generate version_info.txt from __init__.py
 Write-Host "Generating version_info.txt..." -ForegroundColor Yellow
-& python generate_version_info.py
+& $venvPython generate_version_info.py
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Failed to generate version_info.txt. Exiting." -ForegroundColor Red
     exit 1
 }
 Write-Host ""
 
-# Build the executable
+# Build the executable using the venv Python so all packages are visible
 Write-Host "Building HPM executable..." -ForegroundColor Yellow
 Write-Host "This may take several minutes..." -ForegroundColor Yellow
 Write-Host ""
 
-& pyinstaller HPM.spec --clean
+& $venvPython -m PyInstaller HPM.spec --clean
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""

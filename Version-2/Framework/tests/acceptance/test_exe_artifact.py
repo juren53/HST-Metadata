@@ -76,12 +76,40 @@ class TestVersionConsistency:
             i for i, line in enumerate(lines)
             if re.search(r'##\s+HPM\s+\[\d+\.\d+\.\d+', line)
             and version not in line
+            and not line.lstrip().startswith('>')
         ]
 
         assert version_positions, f"Version {version} not found in CHANGELOG"
         if older_positions:
             assert min(version_positions) < min(older_positions), \
                 f"Version {version} entry is not at the top of the CHANGELOG"
+
+
+@pytest.mark.acceptance
+class TestExeBundledModules:
+    """Critical third-party modules are present in the compiled EXE binary.
+
+    Reads the raw EXE bytes and checks for module name strings that PyInstaller
+    embeds when a package is correctly collected.  A missing string means the
+    module was not bundled and will raise ImportError at runtime.
+    """
+
+    def test_ftfy_bundled(self, exe_path):
+        """ftfy top-level module is embedded in HPM.exe."""
+        data = exe_path.read_bytes()
+        assert b'ftfy' in data, (
+            "ftfy is not bundled in HPM.exe — rebuild using "
+            "'.venv/Scripts/python.exe -m PyInstaller HPM.spec'"
+        )
+
+    def test_ftfy_submodules_bundled(self, exe_path):
+        """ftfy submodules (fixes, chardata) are embedded — guards against bare hiddenimport."""
+        data = exe_path.read_bytes()
+        missing = [m for m in (b'ftfy.fixes', b'ftfy.chardata') if m not in data]
+        assert not missing, (
+            f"ftfy submodules missing from HPM.exe: {[m.decode() for m in missing]}. "
+            "HPM.spec must use collect_all('ftfy'), not just hiddenimports=['ftfy']"
+        )
 
 
 @pytest.mark.acceptance

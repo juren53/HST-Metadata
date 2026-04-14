@@ -57,7 +57,9 @@ def _make_row(**kwargs) -> dict:
 # ---------------------------------------------------------------------------
 
 class TestFtfyAvailability:
-    """ftfy must be importable — confirms it is bundled correctly in HPM.exe."""
+    """ftfy must be importable in the venv. NOTE: this does NOT verify EXE bundling —
+    it only confirms the dev environment has ftfy installed. EXE bundling is verified
+    separately in test_exe_artifact.py::TestExeFile."""
 
     def test_ftfy_importable(self):
         import ftfy  # noqa: F401  — just verifying it doesn't raise
