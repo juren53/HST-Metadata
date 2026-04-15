@@ -13,10 +13,186 @@ for this suite. Output-file verification is the primary testing strategy.
 
 import tempfile
 import shutil
+import time
+from datetime import datetime
 from pathlib import Path
 
 import pytest
 from PIL import Image
+
+
+# ---------------------------------------------------------------------------
+# Report generation hooks
+# ---------------------------------------------------------------------------
+
+def pytest_configure(config):
+    """Initialise report-collection state on the config object."""
+    config._acceptance_results = []
+    config._acceptance_start   = time.monotonic()
+
+
+def pytest_runtest_logreport(report):
+    """Collect per-test outcomes for acceptance tests only."""
+    if report.when != "call":
+        return
+    # Only track tests that carry the 'acceptance' marker
+    if not hasattr(report, "keywords") or "acceptance" not in report.keywords:
+        return
+
+    config = report.config if hasattr(report, "config") else None
+    # Access via the pytest plugin manager's config
+    import _pytest.config as _cfg
+    cfg = _cfg.get_plugin_manager().get_plugin("config") if False else None
+    # Simpler: stash on the global pytest config via the worker hook
+    # We'll collect via a session-scoped list instead (see below).
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _acceptance_report_collector(request):
+    """
+    Session-scoped fixture that hooks into the test run and writes a
+    timestamped markdown report to tests/acceptance/ when it tears down.
+    """
+    results   = []          # list of (nodeid, outcome, duration_s, longrepr)
+    timings   = {}          # nodeid → start time
+
+    # ---- collect results ----
+    class _Plugin:
+        @staticmethod
+        def pytest_runtest_logreport(report):
+            if report.when == "setup" and report.outcome != "skipped":
+                timings[report.nodeid] = time.monotonic()
+            if report.when != "call":
+                return
+            if "acceptance" not in report.keywords:
+                return
+            duration = time.monotonic() - timings.get(report.nodeid, time.monotonic())
+            longrepr = ""
+            if report.failed and report.longrepr:
+                longrepr = str(report.longrepr)
+            results.append({
+                "nodeid":   report.nodeid,
+                "outcome":  report.outcome,  # "passed" / "failed" / "skipped"
+                "duration": duration,
+                "longrepr": longrepr,
+            })
+
+    plugin = _Plugin()
+    request.config.pluginmanager.register(plugin, "_acceptance_collector")
+
+    suite_start = time.monotonic()
+    yield                   # ← tests run here
+
+    request.config.pluginmanager.unregister(plugin)
+
+    if not results:
+        return              # nothing to report (no acceptance tests were run)
+
+    _write_report(results, suite_start)
+
+
+def _write_report(results: list, suite_start: float) -> None:
+    """Write a timestamped markdown report to tests/acceptance/."""
+    report_dir  = Path(__file__).parent
+    version_str = _read_version()
+    now         = datetime.now()
+    date_str    = now.strftime("%Y-%m-%d")
+    time_str    = now.strftime("%H:%M:%S")
+    elapsed     = time.monotonic() - suite_start
+
+    passed  = [r for r in results if r["outcome"] == "passed"]
+    failed  = [r for r in results if r["outcome"] == "failed"]
+    skipped = [r for r in results if r["outcome"] == "skipped"]
+    total   = len(results)
+    status  = "ALL PASSING" if not failed else f"{len(failed)} FAILING"
+
+    filename = report_dir / f"REPORT_HPM-Acceptance-Test-v{version_str}-{date_str}.md"
+
+    lines = [
+        f"# HPM Acceptance Test Report — v{version_str}",
+        "",
+        f"**Date:** {date_str}  ",
+        f"**Time:** {time_str}  ",
+        f"**Status:** {status}  ",
+        f"**Total Tests:** {total} ({len(passed)} passed, {len(failed)} failed,"
+        f" {len(skipped)} skipped)  ",
+        f"**Execution Time:** {elapsed:.1f}s  ",
+        "",
+        "---",
+        "",
+        "## Results by Module",
+        "",
+    ]
+
+    # Group by module
+    modules: dict[str, list] = {}
+    for r in results:
+        # nodeid format: tests/acceptance/test_foo.py::Class::method
+        parts  = r["nodeid"].split("::")
+        module = parts[0].replace("\\", "/").split("/")[-1]  # test_foo.py
+        modules.setdefault(module, []).append(r)
+
+    for module, mod_results in sorted(modules.items()):
+        mod_passed  = sum(1 for r in mod_results if r["outcome"] == "passed")
+        mod_failed  = sum(1 for r in mod_results if r["outcome"] == "failed")
+        mod_skipped = sum(1 for r in mod_results if r["outcome"] == "skipped")
+        lines += [
+            f"### `{module}` — {len(mod_results)} tests"
+            f"  ({mod_passed} passed, {mod_failed} failed, {mod_skipped} skipped)",
+            "",
+            "| Result | Test | Duration |",
+            "|--------|------|----------|",
+        ]
+        for r in mod_results:
+            icon = {"passed": "PASS", "failed": "FAIL", "skipped": "SKIP"}.get(
+                r["outcome"], r["outcome"].upper()
+            )
+            short_id = "::".join(r["nodeid"].split("::")[1:])  # strip module path
+            lines.append(
+                f"| {icon} | `{short_id}` | {r['duration']:.2f}s |"
+            )
+        lines.append("")
+
+    # Failures detail
+    if failed:
+        lines += [
+            "---",
+            "",
+            "## Failure Details",
+            "",
+        ]
+        for r in failed:
+            lines += [
+                f"### `{r['nodeid']}`",
+                "",
+                "```",
+                r["longrepr"][:2000],   # cap at 2 000 chars to keep file tidy
+                "```",
+                "",
+            ]
+
+    lines += [
+        "---",
+        "",
+        f"*Generated automatically by `tests/acceptance/conftest.py` on {date_str} at {time_str}.*",
+        "",
+    ]
+
+    filename.write_text("\n".join(lines), encoding="utf-8")
+    # Print path so it's visible in the pytest summary
+    print(f"\n[acceptance] Report saved → {filename}")
+
+
+def _read_version() -> str:
+    """Read __version__ from the top-level __init__.py."""
+    init_py = Path(__file__).parent.parent.parent / "__init__.py"
+    if not init_py.exists():
+        return "unknown"
+    for line in init_py.read_text(encoding="utf-8").splitlines():
+        if line.startswith("__version__"):
+            # __version__ = "1.9.3"
+            return line.split("=")[1].strip().strip('"').strip("'")
+    return "unknown"
 
 # ---------------------------------------------------------------------------
 # Repository paths
