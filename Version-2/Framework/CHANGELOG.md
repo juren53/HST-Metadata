@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Correct format: `## HPM [X.Y.Z] - YYYY-MM-DD HHMM CST`
 > Example: `## HPM [1.9.1] - 2026-03-10 1430 CST`
 
-## HPM [1.9.3] - 2026-04-14 1030 CST
+## HPM [1.9.3] - 2026-04-15 0338 CST
+
+### Tests
+- **Auto-generated acceptance test reports** — acceptance test runs now write a timestamped markdown report to `tests/acceptance/REPORT_HPM-Acceptance-Test-v{version}-{date}.md`
+  - Implemented via a session-scoped pytest fixture in `conftest.py`
+  - **Files Modified**: `tests/acceptance/conftest.py`
 
 ### Changed
 - **Help menu: "Get Latest Updates" → "Show Latest Version"** — replaced the git-pull update mechanism with a lightweight informational dialog
