@@ -1,0 +1,11 @@
+
+
+
+
+'title': 'Headline',
+'localIdentifier': 'ObjectName',
+'useRestrictionStatus': 'CopyrightNotice',
+'scopeAndContentNote': 'Caption-Abstract',
+'specificMediaType': 'Source',
+'personalContributorName': 'By-line',
+'copyStatus': 'By-lineTitle'

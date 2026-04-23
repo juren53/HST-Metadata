@@ -1,0 +1,17 @@
+# Credentials and auth tokens
+Version-2/Framework/credentials/
+Version-2/Framework/archive/Google_form/*.pickle
+
+# Build output
+Version-2/Framework/dist/
+Version-2/Framework/gui/build/
+
+# Large binaries
+Version-2/Framework/portable/
+Version-2/Framework/tools/*.exe
+
+# Legacy version (too large for GitHub)
+Version-1/
+
+# Nested git repo (test artifact)
+Version-2/Framework/tools/test-init/

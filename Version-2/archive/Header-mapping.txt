@@ -1,0 +1,13 @@
+
+New Header for Export    Row 4 Google Worksheet Header 
+
+Headline                 Title
+ObjectName               Accession Number
+CopyrightNotice          Restrictions
+Caption-Abstract         Scopenote
+Source                   Related Collection
+By-line                  Source Photographer
+By-lineTitle             Institutional Creator
+      
+
+

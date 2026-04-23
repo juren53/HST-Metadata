@@ -1,0 +1,9 @@
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\2023-1743.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\2023-1742.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\2020-1744.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\2020-1732.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\74-270.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\74-269.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\74-268.tif
+C:/Users/jimur/Projects/HST-Metadata/Photo/Version-2/testing-data/Test-4-Files/U'Ren 7-1-25\74-267.tifv
+

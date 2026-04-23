@@ -1,0 +1,25 @@
+Write some Python code that processes the XLSX Excel file and converts it to a CSV file named export.csv
+   
+Read TestMetadataForJim.xlsx into a Pandas data frame  
+   
+Delete the first 3 rows of the data frame.  The row starting with "HST - DRUPAL FIELDS" is now the the Header Row
+	
+Replace Old Header Labels with New Header Labels 
+    	
+New Header Label              Old Head Label
+----------------              --------------
+Headline                      Title
+ObjectName                    localIdentifier 
+CopyrightNotice               Restrictions
+Caption-Abstract              Scopenote
+Source                        Related Collection
+By-line                       Source Photographer
+By-lineTitle                  Institutional Creator
+
+      Save directly to export.csv in UTF8 format
+	  
+	  
+	  
+	  
+	  
+	  

@@ -1,0 +1,19 @@
+I would like to develop a Python 3 module that detects the type of Google Sheets  (whether it's a native Google Sheet or an Excel file being viewed in Google Sheets) by leveraging the Google Drive API. This is done by inspecting the mimeType of the file associated with the URL.
+
+Native Google Sheets have a mimeType of application/vnd.google-apps.spreadsheet. Excel files, even when uploaded to Google Drive and opened with Google Sheets, retain their original mimeType (e.g., application/vnd.openxmlformats-officedocument.spreadsheetml.sheet for .xlsx files).
+
+Assume the user / program already has the Google credentials to access the Google Sheet.
+
+There should be a clear module layout with logical separation of concerns. Create separate functions for detection, conversion, and utility operations rather than cramming everything into one large function. Use descriptive names like detect_sheet_type(), convert_spreadsheet_to_sheet(), and validate_sheet_access().
+
+
+A program that will use this module is https://github.com/juren53/HST-Metadata/blob/master/Photos/Version-2/Code/google-to-csv.py
+
+This code requires a native Google Sheet URL and breaks if feed a Google SPreadsheet URL
+
+
+
+add the code to google-to-csv.py that will detect the type of Google Sheets  (whether it's a native Google Sheet or an Excel file being viewed in Google Sheets) by leveraging the Google Drive API. This is done by inspecting the mimeType of the file associated with the URL.  Report which type is detected from the URL that is provided.
+
+If a  Google Spreadshet is found convert to a Google Sheet and let the program proceed.
+
